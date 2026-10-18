@@ -38,9 +38,11 @@ export interface BoardProps {
   queue?: IntentQueue;
   /** Called once per rendered frame, after drawing. */
   onFrame?(): void;
+  /** Read every frame: true holds the sim still (the resume countdown, P14). */
+  isPaused?(): boolean;
 }
 
-export function Board({ scene, scale: forcedScale, queue, onFrame }: BoardProps) {
+export function Board({ scene, scale: forcedScale, queue, onFrame, isPaused }: BoardProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const ownScale = useBoardScale();
   const scale = forcedScale ?? ownScale;
@@ -50,9 +52,11 @@ export function Board({ scene, scale: forcedScale, queue, onFrame }: BoardProps)
     scaleRef.current = scale;
   }, [scale]);
   const onFrameRef = useRef(onFrame);
+  const isPausedRef = useRef(isPaused);
   useEffect(() => {
     onFrameRef.current = onFrame;
-  }, [onFrame]);
+    isPausedRef.current = isPaused;
+  }, [onFrame, isPaused]);
 
   useEffect(() => {
     const ctx = canvasRef.current?.getContext("2d");
@@ -78,6 +82,7 @@ export function Board({ scene, scale: forcedScale, queue, onFrame }: BoardProps)
 
     let last = performance.now();
     let frame = requestAnimationFrame(function tick(now) {
+      driver.setPaused(isPausedRef.current?.() ?? false);
       driver.advance(now - last);
       last = now;
       ctx.save();

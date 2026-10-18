@@ -277,6 +277,8 @@ export interface HudProps {
   countdown: number | null;
   /** The board canvas, laid out under the placement overlay. */
   children?: ReactNode;
+  /** Ends the round as a loss after the player confirms (1.32). */
+  onAbandon?(): void;
 }
 
 /**
@@ -284,13 +286,14 @@ export interface HudProps {
  * speed on top; life and wave progress below; the loot ticker's container
  * on the right; and placement input over the board.
  */
-export function Hud({ store, enqueue, scale, countdown, children }: HudProps) {
+export function Hud({ store, enqueue, scale, countdown, children, onAbandon }: HudProps) {
   const { round, view } = useRound(store);
   const [picked, setPicked] = useState<Picked>(null);
   const [denied, setDenied] = useState<{ cardId: string; at: number }>({
     cardId: "",
     at: -Infinity,
   });
+  const [confirming, setConfirming] = useState(false);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setPicked(null);
@@ -366,6 +369,11 @@ export function Hud({ store, enqueue, scale, countdown, children }: HudProps) {
         >
           ⛏ Shovel
         </button>
+        {onAbandon && (
+          <button type="button" style={button} onClick={() => setConfirming(true)}>
+            Abandon round
+          </button>
+        )}
         {([1, 2] as const).map((speed) => (
           <button
             key={speed}
@@ -389,6 +397,44 @@ export function Hud({ store, enqueue, scale, countdown, children }: HudProps) {
           data-testid="loot-ticker"
           style={{ position: "absolute", top: 8, right: 8, width: 200, pointerEvents: "none" }}
         />
+        {confirming && onAbandon && (
+          <div
+            role="dialog"
+            aria-label="Abandon round"
+            style={{
+              position: "absolute",
+              inset: 0,
+              display: "grid",
+              placeItems: "center",
+              background: "rgba(0,0,0,0.55)",
+            }}
+          >
+            <div
+              style={{
+                padding: 16,
+                background: COLORS.bar,
+                border: `1px solid ${COLORS.cardEdge}`,
+                borderRadius: 6,
+                textAlign: "center",
+              }}
+            >
+              <p style={{ margin: "0 0 12px" }}>Abandon this round? Loot already found is kept.</p>
+              <button
+                type="button"
+                style={{ ...button, marginRight: 8, borderColor: COLORS.deny }}
+                onClick={() => {
+                  setConfirming(false);
+                  onAbandon();
+                }}
+              >
+                Abandon
+              </button>
+              <button type="button" style={button} onClick={() => setConfirming(false)}>
+                Keep playing
+              </button>
+            </div>
+          </div>
+        )}
         {countdown !== null && (
           <div
             data-testid="countdown"

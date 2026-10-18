@@ -90,3 +90,23 @@ describe("the HUD", () => {
     expect(screen.getByTestId("countdown").textContent).toBe("3");
   });
 });
+
+test("abandoning asks for confirmation first", () => {
+  const round = createRound({ seed: 1, lanes: [2], mana: 0 });
+  const onAbandon = vi.fn();
+  render(
+    <Hud
+      store={createRoundStore(round)}
+      enqueue={() => {}}
+      scale={1}
+      countdown={null}
+      onAbandon={onAbandon}
+    />,
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Abandon round" }));
+  fireEvent.click(screen.getByRole("button", { name: "Keep playing" }));
+  expect(onAbandon).not.toHaveBeenCalled();
+  fireEvent.click(screen.getByRole("button", { name: "Abandon round" }));
+  fireEvent.click(screen.getByRole("button", { name: "Abandon" }));
+  expect(onAbandon).toHaveBeenCalledOnce();
+});

@@ -88,8 +88,8 @@ function collect(ctx: StepContext, now: number): void {
 }
 
 /**
- * The board economy (GDD §6.2–§6.3): applies place, shovel and setSpeed
- * intents, drops sky mana on PvZ's schedule, auto-collects orbs, and
+ * The board economy (GDD §6.2–§6.3): applies place, shovel, setSpeed and
+ * abandon intents, drops sky mana on PvZ's schedule, auto-collects orbs, and
  * recharges cards.
  */
 export const economySystem: System = {
@@ -104,6 +104,11 @@ export const economySystem: System = {
       if (intent.type === "place") place(ctx, intent);
       else if (intent.type === "shovel") shovel(ctx, intent);
       else if (intent.type === "setSpeed") state.speed = intent.speed;
+      else if (intent.type === "abandon" && state.result === null) {
+        state.result = "lost";
+        ctx.emit({ type: "levelEnd", result: "lost" });
+        return;
+      }
     }
     sky(ctx, now);
     collect(ctx, now);

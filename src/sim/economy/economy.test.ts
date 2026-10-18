@@ -155,3 +155,19 @@ describe("placement rules (GDD §6.3)", () => {
     expect(state.speed).toBe(2);
   });
 });
+
+describe("abandoning a round (1.32)", () => {
+  test("ends the level as a loss and keeps what was credited", () => {
+    const state = level1(1);
+    state.earned.push({
+      dropId: "d",
+      monsterId: "m" as never,
+      tick: 0,
+      drop: { kind: "gold", amount: 5 },
+    });
+    const events = runTo(state, 1 / 60, [{ type: "abandon" }]);
+    expect(events).toContainEqual({ type: "levelEnd", result: "lost" });
+    expect(state.result).toBe("lost");
+    expect(state.earned).toHaveLength(1);
+  });
+});

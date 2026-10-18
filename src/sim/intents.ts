@@ -6,7 +6,9 @@ export type Intent =
   | { type: "place"; cardId: string; lane: number; column: number }
   | { type: "shovel"; lane: number; column: number }
   | { type: "cast"; spellId: string; lane: number; x: number }
-  | { type: "setSpeed"; speed: 1 | 2 };
+  | { type: "setSpeed"; speed: 1 | 2 }
+  /** Ends the level as a loss, keeping everything credited (1.32). */
+  | { type: "abandon" };
 
 export interface IntentQueue {
   pending: Intent[];
