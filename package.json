@@ -13,7 +13,8 @@
     "format:check": "prettier --check .",
     "review": "npm run format:check && npm run lint && npm run typecheck && npm run test",
     "knip": "knip",
-    "import:poe2": "tsx scripts/import-poe2/index.ts"
+    "import:poe2": "tsx scripts/import-poe2/index.ts",
+    "sim": "tsx scripts/sim/index.ts"
   },
   "dependencies": {
     "react": "^19.3.1",
