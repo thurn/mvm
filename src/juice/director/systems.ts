@@ -5,6 +5,7 @@ import { killSystem } from "../kills/system";
 import { lootSystem } from "../loot/system";
 import { manaSystem } from "../mana/system";
 import { vfxSystem } from "../vfx/system";
+import { ailmentSystem } from "../ailments/system";
 import { tierSystem } from "../tiers/system";
 import { musicSystem } from "../../audio/music/system";
 import type { SettingsStore } from "../core/settings";
@@ -36,6 +37,7 @@ export const PRESENTATION_SYSTEMS: PresentationFactory[] = [
   lootSystem,
   manaSystem,
   vfxSystem,
+  ailmentSystem,
 ];
 
 export interface PresentationOptions {

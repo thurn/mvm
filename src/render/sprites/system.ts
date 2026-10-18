@@ -6,7 +6,9 @@ import type { Rarity, RoundState } from "../../sim/state";
 import { STEP_SECONDS } from "../../sim/time";
 import { SIM_TUNING } from "../../tuning/sim";
 import { SPRITE_TUNING as T } from "../../tuning/sprites";
-import { HIT_TUNING } from "../../tuning/juice";
+import { AILMENT_JUICE, HIT_TUNING } from "../../tuning/juice";
+import { activeAilments, topTint } from "../../juice/ailments/overlay";
+import type { AilmentState } from "../../combat/ailments";
 import { bandEffects } from "../../juice/hits/bands";
 import { placementPose, shovelPose } from "../../juice/mana/timeline";
 import type { Band } from "../../juice/core/significance";
@@ -46,6 +48,7 @@ interface Actor {
   life: number;
   maxLife: number;
   rarity: Rarity | null;
+  ailments: AilmentState;
 }
 
 interface Corpse {
@@ -73,6 +76,7 @@ function actorsOf(state: RoundState, frame: Frame, sprites: Record<string, Sprit
       entry: (recipe && sprites[recipe]) || null,
       color: CAPSULE.hero,
       life: hero.actor.life,
+      ailments: hero.actor.ailments,
       maxLife: hero.actor.maxLife,
       rarity: null,
     });
@@ -86,6 +90,7 @@ function actorsOf(state: RoundState, frame: Frame, sprites: Record<string, Sprit
       entry: null,
       color: CAPSULE.scripted,
       life: scripted.actor.life,
+      ailments: scripted.actor.ailments,
       maxLife: scripted.actor.maxLife,
       rarity: null,
     });
@@ -101,6 +106,7 @@ function actorsOf(state: RoundState, frame: Frame, sprites: Record<string, Sprit
       entry: (recipe && sprites[recipe]) || null,
       color: CAPSULE.monster,
       life: monster.actor.life,
+      ailments: monster.actor.ailments,
       maxLife: monster.actor.maxLife,
       rarity: monster.rarity,
     });
@@ -207,8 +213,11 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
     flash: number,
   ) {
     const rect = assets?.atlas && actor.entry ? chooseFrame(actor.entry, p, index, cx, cy) : null;
+    // The top ailment's tint (H §8): one tint only, never over 45% alpha.
+    const tint = topTint(activeAilments(actor.ailments));
     if (!rect || !assets?.atlas) {
       drawCapsule(ctx, cx, cy, actor.entry?.placeholderColor ?? actor.color, alpha);
+      if (tint) drawCapsule(ctx, cx, cy, tint.color, alpha * tint.alpha);
       if (flash > 0) drawCapsule(ctx, cx, cy, "#ffffff", alpha * flash);
       return;
     }
@@ -238,6 +247,11 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
       ] as const)
         blit(outline, ox, oy);
     blit(assets.atlas);
+    const tinted = tint ? assets.silhouettes.get(tint.color) : undefined;
+    if (tint && tinted) {
+      ctx.globalAlpha = alpha * tint.alpha;
+      blit(tinted);
+    }
     const white = assets.silhouettes.get("#ffffff");
     if (flash > 0 && white) {
       ctx.globalAlpha = alpha * flash;
@@ -300,8 +314,11 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
     for (const actor of actors) {
       const v = view(actor.id, now, firstFrame);
       const frozen = director.frozen(now) || director.actorFrozen(actor.id, now);
-      v.clock.advance(dt, frozen);
-      if (!frozen) Object.assign(v, pose(state, frame, actor, v));
+      // Freeze stops the animation; chill slows it 30% (H §8).
+      const iced = actor.ailments.frozenSeconds > 0;
+      const chill = actor.ailments.chill ? AILMENT_JUICE.chillAnimationScale : 1;
+      v.clock.advance(dt * chill, frozen || iced);
+      if (!frozen && !iced) Object.assign(v, pose(state, frame, actor, v));
       const sinceHit = now - v.hitAt;
       const flash = sinceHit < T.flashMs ? 1 - sinceHit / T.flashMs : 0;
       let cx = boardX(actor.x);

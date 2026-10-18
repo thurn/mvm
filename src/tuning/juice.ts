@@ -423,3 +423,31 @@ export const VFX_TUNING = {
   ring: { aspect: 0.5, fromScale: 0.3, expandMs: 120, fadeMs: 200, stroke: 2 },
   muzzleParticles: 2,
 };
+
+/** Ailment feedback (H §8, G §1.4). Overlay alphas stay at or under 45% (H §1.1). */
+export const AILMENT_JUICE = {
+  maxOverlayAlpha: 0.45,
+  /** Only the top tint shows, in this order (H §8 rules). */
+  priority: ["freeze", "shock", "chill", "ignite"] as const,
+  tints: {
+    freeze: { color: "#BFE9FF", alpha: 0.45 },
+    shock: { color: "#FFE14D", alpha: 0.35 },
+    chill: { color: "#7FD4FF", alpha: 0.35 },
+    ignite: { color: "#FF6A1A", alpha: 0.3 },
+  },
+  /** Particles while active: preset and ms between emits. */
+  particles: {
+    ignite: { preset: "embers", everyMs: 500 },
+    shock: { preset: "sparks", everyMs: 400 },
+    freeze: { preset: "frost", everyMs: 300 },
+    chill: { preset: "frost", everyMs: 900 },
+  },
+  /** At this many active ailments, particles emit at half rate. */
+  crowdedCount: 3,
+  applySoundGapMs: 80,
+  chillAnimationScale: 0.7,
+  thawDrops: 4,
+  pipColor: { broken: "#B8C4D0", stunned: "#FFFFFF" },
+  meter: { color: "#7FD4FF", back: "#123040" },
+};
+export type OverlayAilment = (typeof AILMENT_JUICE.priority)[number];

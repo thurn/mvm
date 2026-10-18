@@ -251,14 +251,33 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
     ],
   }),
   // Ailment events carry no position; their visuals are 1.30's ailment layer.
+  // The ailments system draws the apply flash, overlays and particles from these (H §8).
   ailmentApplied: (event) => ({
     tier: event.ailment === "freeze" || event.ailment === "fullyBroken" ? 2 : 1,
-    cues: [{ kind: "sound", id: `ailment_${event.ailment}`, bus: "sfx" }],
+    cues: [
+      { kind: "ailment", targetId: event.targetId, ailment: event.ailment, phase: "apply" },
+      { kind: "sound", id: `ailment_${event.ailment}`, bus: "sfx" },
+    ],
   }),
-  ailmentExpired: () => ({ tier: 0, cues: [] }),
+  ailmentExpired: (event) => ({
+    tier: 0,
+    cues: [{ kind: "ailment", targetId: event.targetId, ailment: event.ailment, phase: "expire" }],
+  }),
   stun: (event) => ({
     tier: event.kind === "heavy" ? 3 : 1,
-    cues: [{ kind: "sound", id: `stun_${event.kind}`, bus: "sfx" }],
+    cues: [
+      ...(event.kind === "heavy"
+        ? [
+            {
+              kind: "ailment",
+              targetId: event.targetId,
+              ailment: "heavyStun",
+              phase: "apply",
+            } as const,
+          ]
+        : []),
+      { kind: "sound", id: `stun_${event.kind}`, bus: "sfx" },
+    ],
   }),
 };
 

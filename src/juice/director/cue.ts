@@ -41,6 +41,8 @@ export type Cue =
       dot?: boolean;
     }
   | { kind: "flash"; targetId: string; crit: boolean; band: Band }
+  /** An ailment applied to or expired from an actor (H §8). */
+  | { kind: "ailment"; targetId: string; ailment: string; phase: "apply" | "expire" }
   /** Someone died at (lane, x); rarity is null for heroes. */
   | {
       kind: "death";

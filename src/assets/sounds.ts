@@ -105,6 +105,7 @@ export const SOUNDS = {
     variants: ["kenney-digital-audio/Audio/zap#.ogg", "kenney-digital-audio/Audio/zapTwoTone.ogg"],
   },
   ailment_chill: { variants: ["bart-ice-spells/coldsnap.wav"] },
+  shatter: { variants: [`${BREAK}/bfh1_glass_breaking_0#.ogg`] },
   ailment_freeze: {
     variants: ["bart-ice-spells/ice.wav"],
     layers: [`${IMPACT}/impactGlass_medium_000.ogg`],

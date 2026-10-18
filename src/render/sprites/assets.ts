@@ -1,5 +1,6 @@
 import { MANIFEST_URL, placeholderManifest, type AssetManifest } from "../../assets/manifest";
 import { SPRITE_TUNING } from "../../tuning/sprites";
+import { AILMENT_JUICE } from "../../tuning/juice";
 
 export interface SpriteAssets {
   manifest: AssetManifest;
@@ -38,7 +39,8 @@ async function load(): Promise<SpriteAssets> {
     atlas.src = manifest.atlas.url;
     await atlas.decode();
     const silhouettes = new Map<string, CanvasImageSource>();
-    for (const color of ["#ffffff", ...Object.values(SPRITE_TUNING.outline)]) {
+    const ailmentColors = Object.values(AILMENT_JUICE.tints).map((t) => t.color);
+    for (const color of ["#ffffff", ...Object.values(SPRITE_TUNING.outline), ...ailmentColors]) {
       const tinted = silhouette(atlas, color);
       if (tinted) silhouettes.set(color, tinted);
     }
