@@ -57,7 +57,7 @@ describe("the cue table (H §1.3, §2.6)", () => {
       "a placement",
       { type: "placed", heroId: "h", lane: 2, column: 3 } as SimEvent,
       2,
-      ["particles", "sound"],
+      ["particles", "shake", "sound"],
     ],
     [
       "a flag warning",

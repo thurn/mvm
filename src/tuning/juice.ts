@@ -208,7 +208,8 @@ export const HIT_TUNING = {
 export const KILL_TUNING = {
   /** The soul puff rises on the fall's last frame (6 hurt frames × 100 ms). */
   soulDelayMs: 600,
-  heroTileFlashMs: 300,
+  /** Under the 250 ms lane cover budget (H §1.1); 300 ms held the tile past it. */
+  heroTileFlashMs: 200,
   heroTileFlashAlpha: 0.45,
   killLadderWindowMs: 500,
   killLadderMaxSteps: 5,
@@ -494,3 +495,18 @@ export const HIDEOUT_TUNING = {
   /** A refused drop shakes the target this long. */
   denyMs: 300,
 } as const;
+
+/** Level 1 feel pass (1.38): cue rows tuned by playing, with why in the bead's feel log. */
+export const CUE_FEEL = {
+  /** A placement lands with a bigger dust puff and about 1 px of shake (6 × 0.35²). */
+  placement: { dustScale: 1.5, trauma: 0.35 },
+  /** Each spell part's particles on every tile it lands on, and its tier; finishers hit at T4. */
+  spellParts: {
+    impact: { preset: "dust", tier: 3 },
+    aftershock: { preset: "dust", tier: 4 },
+    explosion: { preset: "embers", tier: 4 },
+    comet: { preset: "frost", tier: 4 },
+  } as Readonly<Record<string, { preset: PresetName; tier: Tier }>>,
+  /** Three times a preset's count per tile, so a 3×3 reads as one burst (a few motes per tile vanished). */
+  spellParticleScale: 3,
+};

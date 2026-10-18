@@ -1,6 +1,6 @@
 import { DAMAGE_TYPES, type DamageType } from "../combat/stats";
 import type { SimEvent, SimEventOf } from "../sim/events";
-import { JUICE_TUNING, type PresetName, type Tier } from "../tuning/juice";
+import { CUE_FEEL, JUICE_TUNING, type PresetName, type Tier } from "../tuning/juice";
 import { significance } from "./core/significance";
 import type { JuiceSettings } from "./core/settings";
 import type { Cue, CueBatch } from "./director/cue";
@@ -105,9 +105,8 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
         gainDb: bandEffects(band).gainDb,
       },
     ];
-    // Big hits add a low thump under the heavy variant (H §2.6).
-    if (bandEffects(band).thump)
-      cues.push({ kind: "sound", id: "hit_thump", bus: "sfx", x: event.x });
+    // Big hits add a low thump under the heavy variant (H §2.6): the 90 Hz ZzFX thud.
+    if (bandEffects(band).thump) cues.push({ kind: "sound", id: "thud", bus: "sfx", x: event.x });
     const ms = hitstopMs(band, event.crit);
     if (ms > 0)
       cues.push({
@@ -195,7 +194,14 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
   placed: (event) => ({
     tier: 2,
     cues: [
-      { kind: "particles", preset: "dust", lane: event.lane, x: event.column },
+      {
+        kind: "particles",
+        preset: "dust",
+        lane: event.lane,
+        x: event.column,
+        scale: CUE_FEEL.placement.dustScale,
+      },
+      { kind: "shake", trauma: CUE_FEEL.placement.trauma },
       { kind: "sound", id: "place_thunk", bus: "sfx", x: event.column },
     ],
   }),
@@ -216,19 +222,22 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
   }),
   cast: () => ({ tier: 2, cues: [{ kind: "sound", id: "cast", bus: "sfx" }] }),
   castRefused: () => ({ tier: 0, cues: [{ kind: "sound", id: "ui_deny", bus: "ui" }] }),
-  spellImpact: (event) => ({
-    tier: 3,
-    cues: [
-      ...event.tiles.map((tile): Cue => ({
-        kind: "particles",
-        preset: "dust",
-        lane: tile.lane,
-        x: tile.column,
-        scale: 0.5,
-      })),
-      { kind: "sound", id: `spell_${event.part}`, bus: "sfx" },
-    ],
-  }),
+  spellImpact: (event) => {
+    const part = CUE_FEEL.spellParts[event.part] ?? { preset: "dust", tier: 3 };
+    return {
+      tier: part.tier,
+      cues: [
+        ...event.tiles.map((tile): Cue => ({
+          kind: "particles",
+          preset: part.preset,
+          lane: tile.lane,
+          x: tile.column,
+          scale: CUE_FEEL.spellParticleScale,
+        })),
+        { kind: "sound", id: `spell_${event.part}`, bus: "sfx" },
+      ],
+    };
+  },
   waveStart: (event) => ({
     tier: event.flag ? 3 : 1,
     cues: [
