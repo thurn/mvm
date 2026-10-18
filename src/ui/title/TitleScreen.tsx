@@ -4,11 +4,14 @@ import { MenuButton, MenuScreen, MENU } from "./layout";
 /** The title (GDD §15): Continue when there is a save, New game without an account, and Credits. */
 export function TitleScreen({
   save,
+  continuing,
   onNewGame,
   onContinue,
   onCredits,
 }: {
   save: SaveState;
+  /** Who Continue continues: the focus and player level. */
+  continuing?: string;
   onNewGame(): void;
   onContinue(): void;
   onCredits(): void;
@@ -24,6 +27,7 @@ export function TitleScreen({
         {options.continue && (
           <MenuButton primary onClick={onContinue}>
             {save.hasRound ? "Continue level" : "Continue"}
+            {continuing && <div style={{ fontSize: 12, color: MENU.dim }}>{continuing}</div>}
           </MenuButton>
         )}
         {options.newGame && (

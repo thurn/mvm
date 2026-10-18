@@ -245,6 +245,11 @@ export function Game() {
       title: (
         <TitleScreen
           save={save}
+          {...(phase.account?.focus
+            ? {
+                continuing: `${phase.account.focus[0]!.toUpperCase()}${phase.account.focus.slice(1)}, level ${phase.account.player.level}`,
+              }
+            : {})}
           onNewGame={() => go("newGame")}
           onContinue={() => go("continue")}
           onCredits={() => go("credits")}

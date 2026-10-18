@@ -42,7 +42,12 @@ export function Credits({ onBack }: { onBack(): void }) {
             ) : (
               pack.text && (
                 <pre style={{ whiteSpace: "pre-wrap", margin: 0, color: MENU.dim }}>
-                  {pack.text.slice(0, 600)}
+                  {/* Prose credit files can be long; the first lines name the authors. */}
+                  {pack.text
+                    .split("\n")
+                    .filter((line) => line.trim())
+                    .slice(0, 4)
+                    .join("\n")}
                 </pre>
               )
             )}

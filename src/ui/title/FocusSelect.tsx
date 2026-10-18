@@ -44,6 +44,10 @@ export function FocusSelect({
               borderRadius: 8,
               padding: 12,
               width: 330,
+              // A column, so every Choose button sits on the same baseline.
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
             <h3 style={{ margin: "0 0 2px" }}>{kit.name}</h3>
@@ -62,6 +66,7 @@ export function FocusSelect({
                 <HeroCard key={card.hero.id} card={card} />
               ))}
             </div>
+            <div style={{ flex: 1 }} />
             <MenuButton primary onClick={() => onChoose(kit.id)}>
               Choose {kit.name}
             </MenuButton>
