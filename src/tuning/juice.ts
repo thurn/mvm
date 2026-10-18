@@ -35,6 +35,20 @@ export const JUICE_TUNING = {
   bigHitstopBonusMs: 30,
   globalHitstopCooldownMs: 1000,
   slowmoCooldownMs: 4000,
+  /** Full-screen effects by tier (H §1.3, §1.4 layer 11); alphas before "reduce flashing". */
+  screen: {
+    4: { vignette: { alpha: 0.35, ms: 300 } },
+    5: { flash: { alpha: 0.6, ms: 150 }, vignette: { alpha: 0.5, ms: 600 } },
+  } as Partial<
+    Record<
+      Tier,
+      { flash?: { alpha: number; ms: number }; vignette?: { alpha: number; ms: number } }
+    >
+  >,
+  /** "Reduce flashing" caps white flashes at this alpha (H §13 accessibility). */
+  reduceFlashingMaxAlpha: 0.4,
+  /** The sfx bus also ducks at T5 (H §10.2). */
+  sfxDuckT5: { db: -6, seconds: 1 },
   traumaDecayPerSecond: 1.6,
   /** Shake noise frequency: two out-of-phase sines sampled at t × 30 (H §2.2). */
   shakeFrequency: 30,

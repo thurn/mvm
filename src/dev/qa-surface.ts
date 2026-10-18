@@ -1,3 +1,4 @@
+import type { Tier } from "../tuning/juice";
 import type { CueBatch } from "../juice/director/cue";
 import type { SimEvent } from "../sim/events";
 import { installSaveDebug } from "./save-debug";
@@ -17,6 +18,8 @@ export interface QaSurface {
   audioLog: unknown[];
   /** Caught errors and console errors; must be empty at the end of every QA run. */
   caps: string[];
+  /** Fires a tier's global effects on the running board (`?scene=tiers`). */
+  fireTier?: (tier: Tier) => void;
 }
 
 declare global {

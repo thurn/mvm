@@ -203,7 +203,7 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
 };
 
 /** The tier's own global effects (H §1.3): shake, global hitstop, slow-mo and music duck. */
-function tierCues(tier: Tier): Cue[] {
+export function tierCues(tier: Tier): Cue[] {
   const row = JUICE_TUNING.tiers[tier];
   const cues: Cue[] = [];
   if (row.trauma > 0) cues.push({ kind: "shake", trauma: row.trauma });

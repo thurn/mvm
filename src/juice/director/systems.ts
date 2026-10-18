@@ -1,5 +1,6 @@
 import type { LayerStack } from "../../render/layers";
 import { spriteSystem } from "../../render/sprites/system";
+import { tierSystem } from "../tiers/system";
 import type { SettingsStore } from "../core/settings";
 import { createDirector, type PresentationSystem } from "./director";
 
@@ -20,7 +21,7 @@ export type PresentationFactory = (context: PresentationContext) => Presentation
  * on the stack and returns the system that consumes cues.
  * @public
  */
-export const PRESENTATION_SYSTEMS: PresentationFactory[] = [spriteSystem];
+export const PRESENTATION_SYSTEMS: PresentationFactory[] = [spriteSystem, tierSystem];
 
 export interface PresentationOptions {
   stack: LayerStack;
