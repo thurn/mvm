@@ -1,5 +1,6 @@
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, test, vi } from "vitest";
+import { heroDescription } from "../../heroes/model/descriptions";
 import { starterCard } from "../../heroes/model/starter";
 import { lockRoster } from "../../sim/economy/roster";
 import type { Intent } from "../../sim/intents";
@@ -72,6 +73,28 @@ describe("the HUD", () => {
     slot.rechargeLeft = 0;
     act(() => store.notify());
     expect(Number(screen.getByTestId("card-arrow").dataset.recharge)).toBe(1);
+  });
+
+  test("hovering a roster card shows its gem-style tooltip: description, stat lines and level", () => {
+    setup(500);
+    expect(screen.queryByTestId("hero-tooltip")).toBeNull();
+    fireEvent.mouseEnter(screen.getByTestId("card-arrow"));
+    const tooltip = screen.getByTestId("hero-tooltip");
+    expect(tooltip.textContent).toContain(heroDescription(LIGHTNING_ARROW).text);
+    expect(tooltip.textContent).toContain(heroDescription(LIGHTNING_ARROW).tags.join(", "));
+    for (const line of [
+      "Level: 1",
+      "Cost: 100 mana",
+      "Damage per hit",
+      "Attacks per second",
+      "Range",
+      "DPS",
+      "EHP",
+    ])
+      expect(tooltip.textContent).toContain(line);
+    expect(screen.getByTestId("card-arrow").getAttribute("title")).toBeNull();
+    fireEvent.mouseLeave(screen.getByTestId("card-arrow"));
+    expect(screen.queryByTestId("hero-tooltip")).toBeNull();
   });
 
   test("the shovel and speed toggle send their intents", () => {

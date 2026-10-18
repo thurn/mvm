@@ -1,6 +1,7 @@
 import { heroGems, spellGems, supportGems } from "../../data";
 import { catalogEntry } from "../../heroes/model/catalog";
 import { cardCost, rechargeSeconds } from "../../heroes/model/card";
+import { heroDescription } from "../../heroes/model/descriptions";
 import type { Card } from "../../heroes/model/hero";
 import { ELEMENT_COLOR, Panel, RARITY_COLOR, Separator, TEXT, UpgradeTag } from "./parts";
 import { cardSummary } from "./summary";
@@ -69,6 +70,9 @@ export function HeroCard({
       </div>
       <div style={{ color: TEXT.dim, fontSize: 9 }}>
         {spell ? "Spell" : `${entry.role} · ${entry.weapon ?? "—"}`}
+      </div>
+      <div data-testid="description" style={{ color: "#D8C8A0", fontSize: 10, margin: "3px 0" }}>
+        {heroDescription(hero.skillId).text}
       </div>
       <div
         data-testid="sockets"

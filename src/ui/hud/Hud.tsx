@@ -1,3 +1,4 @@
+import { HeroTooltip } from "../cards/HeroTooltip";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { audioEngine } from "../../audio";
 import { heroGems, spellGems } from "../../data";
@@ -109,74 +110,96 @@ function RosterCard({
   const shine = Math.max(0, Math.min(1, (now - readyAt) / SHINE_MS));
   // Unaffordable (H §5.2): ±3 px, three times over 200 ms.
   const shake = denied ? 3 * Math.sin((2 * Math.PI * 3 * (now - deniedAt)) / DENY_SHAKE_MS) : 0;
+  // The PoE2 gem-style tooltip opens below the bar on hover or keyboard focus.
+  const [hovered, setHovered] = useState(false);
   return (
-    <button
-      type="button"
-      data-testid={`card-${slot.cardId}`}
-      data-state={state}
-      data-recharge={String(Math.max(0, Math.min(1, progress)))}
-      title={name}
-      onClick={onPick}
-      style={{
-        position: "relative",
-        width: 64,
-        height: 48,
-        padding: 2,
-        border: `1px solid ${picked ? COLORS.picked : COLORS.cardEdge}`,
-        borderRadius: 4,
-        background: COLORS.card,
-        color: COLORS.text,
-        fontSize: 9,
-        lineHeight: 1.1,
-        overflow: "hidden",
-        cursor: "pointer",
-        transform: picked
-          ? "translateY(-4px)"
-          : now - deniedAt < DENY_SHAKE_MS
-            ? `translateX(${Math.round(shake)}px)`
-            : "none",
-        opacity: ready && affordable ? 1 : 0.6,
-      }}
-    >
-      <span
+    <div style={{ position: "relative" }}>
+      <button
+        type="button"
+        data-testid={`card-${slot.cardId}`}
+        data-state={state}
+        data-recharge={String(Math.max(0, Math.min(1, progress)))}
+        aria-label={name}
+        onClick={onPick}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        onFocus={() => setHovered(true)}
+        onBlur={() => setHovered(false)}
         style={{
-          position: "absolute",
-          top: 2,
-          right: 3,
-          fontWeight: 700,
-          color: affordable ? COLORS.text : COLORS.deny,
+          position: "relative",
+          width: 64,
+          height: 48,
+          padding: 2,
+          border: `1px solid ${picked ? COLORS.picked : COLORS.cardEdge}`,
+          borderRadius: 4,
+          background: COLORS.card,
+          color: COLORS.text,
+          fontSize: 9,
+          lineHeight: 1.1,
+          overflow: "hidden",
+          cursor: "pointer",
+          transform: picked
+            ? "translateY(-4px)"
+            : now - deniedAt < DENY_SHAKE_MS
+              ? `translateX(${Math.round(shake)}px)`
+              : "none",
+          opacity: ready && affordable ? 1 : 0.6,
         }}
       >
-        {slot.cost}
-      </span>
-      <span style={{ position: "absolute", bottom: 2, left: 3, right: 3, textAlign: "left" }}>
-        {name}
-      </span>
-      {slot.kind === "spell" && (
-        <span style={{ position: "absolute", top: 2, left: 3, color: COLORS.mana }}>✦</span>
-      )}
-      {shine > 0 && shine < 1 && (
         <span
-          aria-hidden
-          data-testid="card-shine"
           style={{
             position: "absolute",
-            inset: 0,
-            background: `linear-gradient(120deg, transparent ${shine * 100 - 30}%, rgba(255,255,255,0.7) ${shine * 100}%, transparent ${shine * 100 + 30}%)`,
+            top: 2,
+            right: 3,
+            fontWeight: 700,
+            color: affordable ? COLORS.text : COLORS.deny,
           }}
-        />
-      )}
-      {!ready && (
-        <span
-          aria-hidden
+        >
+          {slot.cost}
+        </span>
+        <span style={{ position: "absolute", bottom: 2, left: 3, right: 3, textAlign: "left" }}>
+          {name}
+        </span>
+        {slot.kind === "spell" && (
+          <span style={{ position: "absolute", top: 2, left: 3, color: COLORS.mana }}>✦</span>
+        )}
+        {shine > 0 && shine < 1 && (
+          <span
+            aria-hidden
+            data-testid="card-shine"
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: `linear-gradient(120deg, transparent ${shine * 100 - 30}%, rgba(255,255,255,0.7) ${shine * 100}%, transparent ${shine * 100 + 30}%)`,
+            }}
+          />
+        )}
+        {!ready && (
+          <span
+            aria-hidden
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: `conic-gradient(rgba(0,0,0,0) ${progress * 360}deg, rgba(0,0,0,0.6) 0)`,
+            }}
+          />
+        )}
+      </button>
+      {hovered && (
+        <div
           style={{
             position: "absolute",
-            inset: 0,
-            background: `conic-gradient(rgba(0,0,0,0) ${progress * 360}deg, rgba(0,0,0,0.6) 0)`,
+            top: "100%",
+            left: 0,
+            marginTop: 6,
+            zIndex: 20,
+            pointerEvents: "none",
           }}
-        />
+        >
+          <HeroTooltip card={slot.card} />
+        </div>
       )}
-    </button>
+    </div>
   );
 }
 

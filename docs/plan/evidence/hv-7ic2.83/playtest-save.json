@@ -1,0 +1,199 @@
+{
+ "format": 1,
+ "savedAt": "2026-10-18T21:43:13.374Z",
+ "build": "dev",
+ "account": {
+  "schemaVersion": 1,
+  "data": {
+   "focus": "warrior",
+   "roster": {
+    "slots": [
+     {
+      "hero": {
+       "id": "warrior-0-MvM/Heroes/EzomyteAcolyte",
+       "skillId": "MvM/Heroes/EzomyteAcolyte",
+       "level": 3,
+       "xp": 2550,
+       "rarity": "normal",
+       "supports": [],
+       "quality": 0
+      },
+      "weapon": {
+       "id": "warrior-0-MvM/Heroes/EzomyteAcolyte-weapon",
+       "baseId": "Metadata/Items/Weapons/OneHandWeapons/Sceptres/FourSceptre1",
+       "rarity": "normal",
+       "itemLevel": 1,
+       "quality": 0,
+       "mods": [],
+       "implicits": []
+      },
+      "armour": null,
+      "accessory": null
+     },
+     {
+      "hero": {
+       "id": "warrior-1-Metadata/Items/Gems/SkillGemRollingSlam",
+       "skillId": "Metadata/Items/Gems/SkillGemRollingSlam",
+       "level": 3,
+       "xp": 2550,
+       "rarity": "normal",
+       "supports": [],
+       "quality": 0
+      },
+      "weapon": {
+       "id": "warrior-1-Metadata/Items/Gems/SkillGemRollingSlam-weapon",
+       "baseId": "Metadata/Items/Weapons/TwoHandWeapons/TwoHandMaces/FourTwoHandMace1",
+       "rarity": "normal",
+       "itemLevel": 1,
+       "quality": 0,
+       "mods": [],
+       "implicits": []
+      },
+      "armour": null,
+      "accessory": null
+     },
+     {
+      "hero": {
+       "id": "warrior-2-Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+       "skillId": "Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+       "level": 3,
+       "xp": 2550,
+       "rarity": "normal",
+       "supports": [],
+       "quality": 0
+      },
+      "weapon": {
+       "id": "warrior-2-Metadata/Items/Gem/SkillGemArmourPiercingRounds-weapon",
+       "baseId": "Metadata/Items/Weapons/TwoHandWeapons/Crossbows/FourCrossbow1",
+       "rarity": "normal",
+       "itemLevel": 1,
+       "quality": 0,
+       "mods": [],
+       "implicits": []
+      },
+      "armour": null,
+      "accessory": null
+     },
+     null,
+     null,
+     null
+    ],
+    "unlocked": 4,
+    "spell": {
+     "hero": {
+      "id": "warrior-3-Metadata/Items/Gems/SkillGemEarthquake",
+      "skillId": "Metadata/Items/Gems/SkillGemEarthquake",
+      "level": 3,
+      "xp": 2550,
+      "rarity": "normal",
+      "supports": [],
+      "quality": 0
+     },
+     "weapon": null,
+     "armour": null,
+     "accessory": null
+    }
+   },
+   "stash": {
+    "items": [
+     {
+      "id": "f184f02b-ac63-421d-8d15-ddeff4e2bf27",
+      "baseId": "Metadata/Items/Rings/FourRing1",
+      "rarity": "rare",
+      "itemLevel": 1,
+      "quality": 0,
+      "mods": [
+       {
+        "modId": "LifeRegeneration1",
+        "values": [
+         108
+        ]
+       },
+       {
+        "modId": "Strength1",
+        "values": [
+         7
+        ]
+       },
+       {
+        "modId": "ColdResist1",
+        "values": [
+         8
+        ]
+       },
+       {
+        "modId": "AddedColdDamage1",
+        "values": [
+         1,
+         2
+        ]
+       }
+      ],
+      "implicits": [
+       {
+        "modId": "RingImplicitPhysicalDamage1",
+        "values": [
+         1,
+         4
+        ]
+       }
+      ]
+     },
+     {
+      "id": "3e228d0b-e278-44b7-bb5a-bf9b7d4bdc59",
+      "baseId": "Metadata/Items/Weapons/TwoHandWeapons/Crossbows/FourCrossbow1",
+      "rarity": "normal",
+      "itemLevel": 1,
+      "quality": 0,
+      "mods": [],
+      "implicits": []
+     },
+     {
+      "id": "de7d4e71-6335-4cc9-aa2d-4db9d88b1f63",
+      "baseId": "Metadata/Items/Rings/FourRing1",
+      "rarity": "normal",
+      "itemLevel": 1,
+      "quality": 0,
+      "mods": [],
+      "implicits": [
+       {
+        "modId": "RingImplicitPhysicalDamage1",
+        "values": [
+         1,
+         4
+        ]
+       }
+      ]
+     }
+    ],
+    "heroes": [
+     {
+      "id": "2a874369-f92a-4db3-aa6d-505a09a0cc02",
+      "skillId": "Metadata/Items/Gems/SkillGemLightningArrow",
+      "level": 3,
+      "xp": 0,
+      "rarity": "normal",
+      "supports": [],
+      "quality": 0
+     }
+    ],
+    "unrolled": []
+   },
+   "gold": 20,
+   "currency": {
+    "Metadata/Items/Currency/CurrencyUpgradeToMagic": 1
+   },
+   "player": {
+    "level": 3,
+    "xp": 2550
+   },
+   "firstClears": [
+    "level-1"
+   ],
+   "pendingChoices": [],
+   "activeRun": null,
+   "nextSeed": 2
+  }
+ },
+ "round": null
+}

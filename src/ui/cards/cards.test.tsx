@@ -6,6 +6,7 @@ import { HeroCard } from "./HeroCard";
 import { ItemCard, itemName } from "./ItemCard";
 import { currencies, mods } from "../../data";
 import { newHero, type Card } from "../../heroes/model/hero";
+import { heroDescription } from "../../heroes/model/descriptions";
 import { starterCard } from "../../heroes/model/starter";
 import { id } from "../../types/ids";
 import { affixHeader, affixLines, modTier } from "./affixes";
@@ -153,6 +154,12 @@ describe("card components (H §4.1, §5.1)", () => {
     );
     cleanup();
     expect(render(<ItemCard item={item} />).queryAllByTestId("upgrade-tag")).toHaveLength(0);
+  });
+
+  test("a hero card says what the hero does", () => {
+    const skillId = "Metadata/Items/Gems/SkillGemSpark";
+    const { container } = render(<HeroCard card={starterCard(id<"Gem">(skillId), 1)} />);
+    expect(container.textContent).toContain(heroDescription(skillId).text);
   });
 
   test("a hero card shows cost, DPS on this card, EHP and its element strip", () => {

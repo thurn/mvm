@@ -11,6 +11,10 @@ export interface CardSummary {
   dps: number;
   /** Effective hit points: life plus energy shield. */
   ehp: number;
+  /** The main hit's expected damage, crits included; 0 for heroes that don't hit. */
+  perHit: number;
+  /** Actions (attacks or casts) per second; 0 for heroes that don't hit. */
+  actionsPerSecond: number;
   /** The main hit's damage mix after conversion and gained-as-extra, as shares summing to 1. */
   mix: Partial<Record<DamageType, number>>;
 }
@@ -26,7 +30,8 @@ export function cardSummary(card: Card): CardSummary {
   const kit = buildKit(card.hero.skillId, { sheet, gem });
   const ehp = sheet.actor.maxLife + sheet.actor.maxEs;
   const hit = kit ? Object.values(kit.hits)[0] : undefined;
-  if (!kit || !hit || kit.actionSeconds <= 0) return { dps: 0, ehp, mix: {} };
+  if (!kit || !hit || kit.actionSeconds <= 0)
+    return { dps: 0, ehp, perHit: 0, actionsPerSecond: 0, mix: {} };
   const stats = sheet.actor.stats;
   const average = damageMap();
   for (const type of DAMAGE_TYPES) {
@@ -40,5 +45,11 @@ export function cardSummary(card: Card): CardSummary {
   const mix: Partial<Record<DamageType, number>> = {};
   for (const type of DAMAGE_TYPES)
     if (scaled[type] > 0) mix[type] = scaled[type] / Math.max(1e-9, total);
-  return { dps: perHit / kit.actionSeconds, ehp, mix };
+  return {
+    dps: perHit / kit.actionSeconds,
+    ehp,
+    perHit,
+    actionsPerSecond: 1 / kit.actionSeconds,
+    mix,
+  };
 }
