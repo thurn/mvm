@@ -38,10 +38,13 @@ export function HeroCard({
   card,
   affordable = true,
   upgrade = false,
+  shown,
 }: {
   card: Card;
   affordable?: boolean;
   upgrade?: boolean;
+  /** DPS and EHP to display while they roll to new values (the hideout, H §4.5). */
+  shown?: { dps: number; ehp: number };
 }) {
   const { hero } = card;
   const entry = catalogEntry(hero.skillId);
@@ -102,9 +105,9 @@ export function HeroCard({
         <>
           {/* Heroes that deal no damage (acolytes) show a dash, not a zero that reads as a bug. */}
           <div data-testid="dps">
-            DPS on this card: {summary.dps > 0 ? summary.dps.toFixed(1) : "—"}
+            DPS on this card: {summary.dps > 0 ? (shown?.dps ?? summary.dps).toFixed(1) : "—"}
           </div>
-          <div data-testid="ehp">EHP: {Math.round(summary.ehp)}</div>
+          <div data-testid="ehp">EHP: {Math.round(shown?.ehp ?? summary.ehp)}</div>
           <div style={{ color: TEXT.dim }}>
             Recharge {rechargeSeconds(hero.skillId).toFixed(1)}s
           </div>

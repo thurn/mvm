@@ -32,12 +32,14 @@ import { ResumeHud } from "../ui/resume/ResumeHud";
 import { Campaign } from "../ui/title/Campaign";
 import { Credits } from "../ui/title/Credits";
 import { FocusSelect } from "../ui/title/FocusSelect";
-import { MenuButton, MenuScreen } from "../ui/title/layout";
+import { MenuScreen } from "../ui/title/layout";
 import { TitleScreen } from "../ui/title/TitleScreen";
 import { route, type RouteAction, type Screen } from "./router";
 import { acceptsIntent, bootDecision, countdownAt } from "./boot";
 import { Board, useBoardScale, type BoardSource } from "./Board";
 import { DevMenu } from "../ui/dev/DevMenu";
+import { Hideout } from "../ui/hideout/Hideout";
+import { rollUnrolled } from "../ui/hideout/model";
 import { LevelEnd, xpSnapshot, type XpSnapshot } from "../ui/level-end/LevelEnd";
 
 const BUILD = import.meta.env.DEV ? "dev" : "build";
@@ -241,7 +243,12 @@ export function Game() {
       hasRound: false,
     });
     if (next === "level") play(phase.account);
-    else setPhase({ ...phase, screen: next });
+    else {
+      // Hero and spell drops wait unrolled in the stash until the hideout opens (1.18).
+      if (next === "hideout" && phase.account && rollUnrolled(phase.account) > 0 && services)
+        persist(services, phase.account, null);
+      setPhase({ ...phase, screen: next });
+    }
   };
 
   // The dev menu (GDD §15), in dev builds only; backquote opens it.
@@ -302,15 +309,14 @@ export function Game() {
       ) : (
         <MenuScreen music="hideout">No level to summarise.</MenuScreen>
       ),
-      // Until 1.36's hideout: back into Level 1.
-      hideout: (
-        <MenuScreen music="hideout">
-          <h2>Hideout</h2>
-          <p style={{ color: "#8a8f99" }}>The roster and stash arrive with the hideout (1.36).</p>
-          <MenuButton primary onClick={() => go("playLevel")}>
-            Play Level 1
-          </MenuButton>
-        </MenuScreen>
+      hideout: phase.account ? (
+        <Hideout
+          account={phase.account}
+          onSave={() => services && phase.account && persist(services, phase.account, null)}
+          onPlay={() => go("playLevel")}
+        />
+      ) : (
+        <MenuScreen music="hideout">No account yet.</MenuScreen>
       ),
     };
     return (

@@ -114,6 +114,8 @@ interface DropSource {
   highestUnlocked: number;
   /** The source's rarity bonus as a fraction (+100% is 1). */
   rarityBonus: number;
+  /** A rarity the drop already rolled (an unrolled stash drop); otherwise rolled here. */
+  rarity?: Rarity;
   rng: Rng;
   id: string;
 }
@@ -122,7 +124,13 @@ interface DropSource {
 export function generateHero(source: DropSource & { roster: readonly string[] }): HeroInstance {
   const skillId = chooseHeroSkill(source.areaLevel, source.roster, source.rng);
   const level = rollLevel(source.areaLevel, source.highestUnlocked, source.rng);
-  return build(skillId, level, rollRarity(source.rarityBonus, source.rng), source.rng, source.id);
+  return build(
+    skillId,
+    level,
+    source.rarity ?? rollRarity(source.rarityBonus, source.rng),
+    source.rng,
+    source.id,
+  );
 }
 
 /** A spell drop: unshaped over unlocked spells (B §7.4). */
@@ -130,7 +138,13 @@ export function generateSpell(source: DropSource): HeroInstance {
   const unlocked = spellPool().filter((id) => unlockAreaLevel(id) <= source.areaLevel);
   const skillId = pickUniform(unlocked, source.rng);
   const level = rollLevel(source.areaLevel, source.highestUnlocked, source.rng);
-  return build(skillId, level, rollRarity(source.rarityBonus, source.rng), source.rng, source.id);
+  return build(
+    skillId,
+    level,
+    source.rarity ?? rollRarity(source.rarityBonus, source.rng),
+    source.rng,
+    source.id,
+  );
 }
 
 /**

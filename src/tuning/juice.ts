@@ -474,3 +474,21 @@ export const LEVEL_END_TUNING = {
   /** The first-clear reward reveals this long after the XP has filled. */
   firstClearDelayMs: 300,
 } as const;
+
+/** Hideout equip feedback (Appendix H §4.5). */
+export const HIDEOUT_TUNING = {
+  /** A dragged card lifts by this scale with a 4 px shadow. */
+  liftScale: 1.1,
+  /** The slot "click" on a drop: scale 0.9 → 1 with `outBack`. */
+  clickMs: 180,
+  /** DPS and EHP roll to their new values over this long. */
+  rollMs: 300,
+  /** Green or red floating deltas rise and fade over this long. */
+  deltaMs: 900,
+  /** The card flashes white for two frames. */
+  flashMs: 33,
+  /** A burst in the new element's colour when the dominant damage type changes. */
+  elementBurstMs: 400,
+  /** A refused drop shakes the target this long. */
+  denyMs: 300,
+} as const;
