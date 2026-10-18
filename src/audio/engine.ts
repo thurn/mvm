@@ -47,14 +47,11 @@ interface EngineOptions {
 }
 
 /** One played or dropped sound, with its bus and the wall-clock ms it happened at. */
-export interface AudioLogEntry {
-  kind: "played" | "dropped";
-  id: string;
-  bus: Bus;
-  at: number;
-  /** Why a dropped sound was dropped. */
-  reason?: string;
-}
+export type AudioLogEntry = { id: string; bus: Bus; at: number } & (
+  | { kind: "played" }
+  /** A dropped sound always says why: a cap, or a sample that failed to load. */
+  | { kind: "dropped"; reason: string }
+);
 
 const dbToGain = (db: number) => 10 ** (db / 20);
 const priority = (category: Category) => CATEGORIES.indexOf(category);
