@@ -31,3 +31,43 @@ export const COMBAT_RULES = {
   /** Chaos damage removes this much more energy shield (§5.4). */
   chaosEsMultiplier: 2,
 } as const;
+
+/** Ailment, stun and debuff tunables (Appendix A §6). */
+export const AILMENT_TUNING = {
+  /** Shock: 1% chance per 4% of the ailment threshold dealt as lightning; 20% increased damage taken. */
+  shockChancePerThreshold: 0.25,
+  shockMagnitude: 20,
+  shockSeconds: { monster: 8, hero: 4 },
+  /** Chill: magnitude = this × (cold dealt / threshold, in %), ignored under the minimum, capped (MvM reading of §6.2). */
+  chillMagnitudePerThresholdPercent: 5,
+  chillMinimum: 30,
+  chillMaximum: 50,
+  chillSeconds: { monster: 8, hero: 2 },
+  /** Slows have less effect on tougher monsters, and never go below a floor (A §3.2). */
+  slowReductionByRarity: { normal: 0, magic: 0.15, rare: 0.3, unique: 0.5, boss: 0.5 },
+  slowFloor: 0.25,
+  /** Freeze: a 0→1 meter of cold dealt / threshold; freezes at 1 for 4 s; decays after 2 s idle. */
+  freezeSeconds: 4,
+  freezeDecayDelaySeconds: 2,
+  freezeDecayPerSecond: 0.5,
+  uniqueFreezeBuildupMultiplier: 0.5,
+  /** Ignite: 1% chance per 5% of threshold dealt as fire (Flammability); 20% of the hit's fire per second for 4 s. */
+  flammabilityPerThreshold: 0.2,
+  igniteDpsFraction: 0.2,
+  igniteSeconds: 4,
+  /** Light stun: damage / max life, physical 1.5×, hero melee 1.5× again; chances under 15% are 0. */
+  stunPhysicalMultiplier: 1.5,
+  stunHeroMeleeMultiplier: 1.5,
+  lightStunMinimum: 0.15,
+  /** A light-stunned monster's next attack waits this much longer. */
+  lightStunAttackDelaySeconds: 0.3,
+  heavyStunSeconds: 3,
+  heavyStunRecoverySeconds: 4,
+  heavyStunRecoveryBuildupMultiplier: 0.5,
+  primedThreshold: { normal: 0.4, magic: 0.5, rare: 0.6, unique: 0.7, boss: 0.7 },
+  /** Armour Break: heroes break 3× against normal and 2× against magic monsters; Fully Broken lasts 12 s. */
+  heroArmourBreakVsNormal: 3,
+  heroArmourBreakVsMagic: 2,
+  fullyBrokenSeconds: 12,
+  fullyBrokenPhysicalTaken: 20,
+} as const;

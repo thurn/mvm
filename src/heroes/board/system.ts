@@ -1,3 +1,4 @@
+import { effectiveSpeed } from "../../combat/ailments";
 import type { SkillHit } from "../../combat/hit";
 import { dealHit } from "../../sim/combat";
 import {
@@ -215,7 +216,9 @@ export const heroSystem: System = {
         acolyte(ctx, hero, kit);
         continue;
       }
-      kit.counters.actionTimer = (kit.counters.actionTimer ?? 0) - STEP_SECONDS;
+      const speed = effectiveSpeed(hero.actor, "normal");
+      if (speed <= 0) continue;
+      kit.counters.actionTimer = (kit.counters.actionTimer ?? 0) - STEP_SECONDS * speed;
       if (kit.counters.actionTimer > 1e-9) continue;
       const next = ACTIONS[kit.behavior]?.(ctx, hero, kit);
       kit.counters.actionTimer =

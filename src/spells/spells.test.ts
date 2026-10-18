@@ -120,7 +120,12 @@ describe("each spell hits exactly its tiles", () => {
 
   test("Earthquake hits the whole column on impact and again with its Aftershock 4 s later", () => {
     const state = round(STARTER_SPELLS.earthquake);
-    const column = ALL_LANES.map((lane) => shamblerAt(state, lane, 6));
+    // Sturdy targets, so an impact crit never kills one before its Aftershock.
+    const column = ALL_LANES.map((lane) => {
+      const m = shamblerAt(state, lane, 6);
+      m.actor.maxLife = m.actor.life = 10_000;
+      return m;
+    });
     const neighbour = shamblerAt(state, 2, 7);
     const impact = run(state, 0.1, [cast(2, 6)]).filter((e) => e.type === "hit");
     expect(impact.map((e) => e.type === "hit" && e.targetId).sort()).toEqual(

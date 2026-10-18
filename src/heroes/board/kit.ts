@@ -120,10 +120,11 @@ const BUILDERS: Record<Behavior, (inputs: KitInputs, skills: SkillData[]) => Her
     const clip = ammo
       ? setAt(ammo, 0, Math.floor(sheet.gemLevel)).stats["base_number_of_crossbow_bolts"]
       : 1;
+    const armourBreak = bolt.stats["apply_X_armour_break_on_hit"] ?? 0;
     return {
       behavior: "armourPiercingRounds",
       actionSeconds: attackSeconds(sheet, skillStatic(shot).attack_speed_multiplier ?? 0) / K,
-      hits: { main: attackHit(sheet, bolt, ["projectile"]) },
+      hits: { main: { ...attackHit(sheet, bolt, ["projectile"]), armourBreak } },
       numbers: {
         ...projectileNumbers(sheet),
         clip: clip ?? 1,

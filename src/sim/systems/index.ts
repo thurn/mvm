@@ -1,3 +1,4 @@
+import { ailmentSystem } from "../../combat/ailments/system";
 import { projectileSystem } from "../../heroes/board/projectiles";
 import { heroSystem } from "../../heroes/board/system";
 import { waveSystem } from "../../monsters/waves";
@@ -19,4 +20,5 @@ export const SYSTEMS: readonly System[] = [
   heroSystem,
   projectileSystem,
   locomotionSystem,
+  ailmentSystem,
 ];

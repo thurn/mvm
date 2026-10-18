@@ -1,3 +1,4 @@
+import { effectiveSpeed } from "../../combat/ailments";
 import { COMBAT_KNOBS } from "../../tuning/combat";
 import { SIM_TUNING } from "../../tuning/sim";
 import { dealHit } from "../combat";
@@ -32,15 +33,18 @@ export const locomotionSystem: System = {
     const stepTiles = STEP_SECONDS / COMBAT_KNOBS.walkSecondsPerTile;
     const leaked: MonsterState[] = [];
     for (const monster of [...state.monsters]) {
+      if (!state.monsters.includes(monster)) continue;
+      const speed = effectiveSpeed(monster.actor, monster.rarity);
+      if (speed <= 0) continue;
       const blocker = blockerOf(state, monster);
       if (!blocker) {
-        monster.x -= stepTiles * monster.moveSpeed;
+        monster.x -= stepTiles * monster.moveSpeed * speed;
         if (monster.x < SIM_TUNING.leakX) leaked.push(monster);
         continue;
       }
       const attack = monster.attack;
       if (!attack || blocker.kind !== "hero") continue;
-      attack.timer -= STEP_SECONDS;
+      attack.timer -= STEP_SECONDS * speed;
       if (attack.timer > 0) continue;
       attack.timer = attack.seconds;
       dealHit(ctx, monster, { kind: "hero", entity: blocker.hero }, attack.hit);

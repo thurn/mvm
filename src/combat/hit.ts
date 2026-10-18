@@ -46,6 +46,8 @@ export interface SkillHit {
   more?: readonly MoreModifier[];
   /** Boss attacks flagged unblockable (§5.1). */
   unblockable?: boolean;
+  /** Armour this hit breaks (§6.4), before hero multipliers. */
+  armourBreak?: number;
 }
 
 function addRanges(
