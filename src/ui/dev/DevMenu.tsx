@@ -1,7 +1,8 @@
+import type { AccountStore } from "../../account/store";
+import { useAccount } from "../account";
 import { id } from "../../types/ids";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { saveDocument } from "../../account/lifecycle";
-import type { AccountState } from "../../account/state";
 import { audioEngine } from "../../audio";
 import { baseItems, currencies } from "../../data";
 import type { Logger } from "../../dev/log";
@@ -27,12 +28,11 @@ const FIXTURES = import.meta.glob<{ schemaVersion: number; data: unknown }>(
 );
 
 interface DevMenuProps {
-  account: AccountState | null;
+  /** The account; grants change and save it through the store, so open screens show them. */
+  accountStore: AccountStore | null;
   round: RoundState | null;
   store: SaveStore | null;
   logger: Logger | null;
-  /** Persists the account (and round) after a grant. */
-  save(): void;
 }
 
 function download(name: string, text: string, type: string) {
@@ -55,7 +55,8 @@ const box = {
  * builds: grants, player level and level skip, every knob and overlay, save
  * tools and log export.
  */
-export function DevMenu({ account, round, store, logger, save }: DevMenuProps) {
+export function DevMenu({ accountStore, round, store, logger }: DevMenuProps) {
+  const account = useAccount(accountStore);
   const [open, setOpen] = useState(false);
   const settingsStore = sharedSettings();
   const settings = useSyncExternalStore(settingsStore.subscribe, settingsStore.get);
@@ -91,28 +92,29 @@ export function DevMenu({ account, round, store, logger, save }: DevMenuProps) {
   if (!open) return null;
   const raw = () => `dev-${Date.now().toString(36)}-${Math.floor(rng() * 1e6)}`;
   const doGrant = () => {
-    if (!account) return setStatus("no account yet: press Play first");
-    if (grant.kind === "item")
-      grantItem(
-        account,
-        {
-          level: grant.level,
-          rarity: grant.rarity as "normal",
-          ...(grant.itemClass ? { itemClass: grant.itemClass } : {}),
-        },
-        rng,
-        () => id<"Item">(raw()),
-      );
-    else if (grant.kind === "hero" || grant.kind === "spell")
-      grantHero(
-        account,
-        { kind: grant.kind, level: grant.level, rarity: grant.rarity as "normal" },
-        rng,
-        () => id<"OwnedHero">(raw()),
-      );
-    else if (grant.kind === "currency") grantCurrency(account, grant.currencyId, grant.amount);
-    else grantGold(account, grant.amount);
-    save();
+    if (!accountStore) return setStatus("no account yet: press Play first");
+    accountStore.update((account) => {
+      if (grant.kind === "item")
+        grantItem(
+          account,
+          {
+            level: grant.level,
+            rarity: grant.rarity as "normal",
+            ...(grant.itemClass ? { itemClass: grant.itemClass } : {}),
+          },
+          rng,
+          () => id<"Item">(raw()),
+        );
+      else if (grant.kind === "hero" || grant.kind === "spell")
+        grantHero(
+          account,
+          { kind: grant.kind, level: grant.level, rarity: grant.rarity as "normal" },
+          rng,
+          () => id<"OwnedHero">(raw()),
+        );
+      else if (grant.kind === "currency") grantCurrency(account, grant.currencyId, grant.amount);
+      else grantGold(account, grant.amount);
+    });
     setStatus(`granted ${grant.kind}`);
   };
   const restore = async (doc: SaveDocument | null, what: string) => {
@@ -255,10 +257,10 @@ export function DevMenu({ account, round, store, logger, save }: DevMenuProps) {
             defaultValue={account?.player.level ?? 1}
             style={{ width: 40 }}
             onKeyDown={(e) => {
-              if (e.key !== "Enter" || !account) return;
-              setPlayerLevel(account, Number((e.target as HTMLInputElement).value));
-              save();
-              setStatus(`player level ${account.player.level}`);
+              if (e.key !== "Enter" || !accountStore) return;
+              const level = Number((e.target as HTMLInputElement).value);
+              accountStore.update((account) => setPlayerLevel(account, level));
+              setStatus(`player level ${accountStore.get().player.level}`);
             }}
           />{" "}
           (Enter to set) · skip to end:{" "}

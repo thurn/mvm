@@ -32,7 +32,6 @@ import { ResumeHud } from "../ui/resume/ResumeHud";
 import { Campaign } from "../ui/title/Campaign";
 import { Credits } from "../ui/title/Credits";
 import { FocusSelect } from "../ui/title/FocusSelect";
-import { MenuScreen } from "../ui/title/layout";
 import { TitleScreen } from "../ui/title/TitleScreen";
 import { route, type RouteAction, type Screen } from "./router";
 import { acceptsIntent, bootDecision, countdownAt } from "./boot";
@@ -40,6 +39,7 @@ import { Board, useBoardScale, type BoardSource } from "./Board";
 import { DevMenu } from "../ui/dev/DevMenu";
 import { Hideout } from "../ui/hideout/Hideout";
 import { rollUnrolled } from "../account/stash";
+import { createAccountStore } from "../account/store";
 import { LevelEnd, xpSnapshot, type XpSnapshot } from "../ui/level-end/LevelEnd";
 
 const BUILD = import.meta.env.DEV ? "dev" : "build";
@@ -62,17 +62,30 @@ interface Playing {
   banner: string | null;
 }
 
-type Phase =
-  | { kind: "loading" }
+/** Menu screens that need an account; the router only reaches them with one. */
+type AccountScreen = "campaign" | "levelEnd" | "hideout";
+
+type MenuPhase =
+  | { kind: "menu"; screen: Exclude<Screen, "level" | AccountScreen>; account: AccountState | null }
+  | { kind: "menu"; screen: "campaign" | "hideout"; account: AccountState }
   | {
       kind: "menu";
-      screen: Exclude<Screen, "level">;
-      account: AccountState | null;
+      screen: "levelEnd";
+      account: AccountState;
       /** The last level's summary; none after a reload with a hero pick pending. */
       summary?: LevelSummary;
       before?: XpSnapshot;
-    }
-  | ({ kind: "playing" } & Playing);
+    };
+
+type Phase = { kind: "loading" } | MenuPhase | ({ kind: "playing" } & Playing);
+
+/** A menu phase for a screen, checking at the transition that account screens have an account. */
+function menuPhase(screen: Exclude<Screen, "level">, account: AccountState | null): MenuPhase {
+  if (screen === "title" || screen === "focus" || screen === "credits")
+    return { kind: "menu", screen, account };
+  if (!account) throw new Error(`the ${screen} screen needs an account`);
+  return { kind: "menu", screen, account };
+}
 
 function persist(services: Services, account: AccountState, round: RoundState | null): void {
   const doc = saveDocument(account, round, BUILD, new Date().toISOString());
@@ -138,11 +151,9 @@ export function Game() {
       setServices({ store, mirror, logger });
       const decision = bootDecision(resumed);
       if (decision.kind === "title" || decision.kind === "pick" || !resumed?.round) {
-        setPhase({
-          kind: "menu",
-          screen: decision.kind === "pick" ? "levelEnd" : "title",
-          account: resumed?.account ?? null,
-        });
+        setPhase(
+          menuPhase(decision.kind === "pick" ? "levelEnd" : "title", resumed?.account ?? null),
+        );
       } else {
         logger.log("resume", { decision: decision.kind, tick: resumed.round.tick });
         setPhase({
@@ -173,6 +184,17 @@ export function Game() {
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, [playing, services]);
+
+  // One store per account: screens and the dev menu change, save and re-render through it.
+  const account = phase.kind === "menu" ? phase.account : (playing?.account ?? null);
+  const round = playing?.round ?? null;
+  const accountStore = useMemo(
+    () =>
+      account && services
+        ? createAccountStore(account, (changed) => persist(services, changed, round))
+        : null,
+    [account, services, round],
+  );
 
   const queue = useMemo(() => createIntentQueue(), []);
   const scale = useBoardScale(HUD_TOP + HUD_BOTTOM);
@@ -245,83 +267,83 @@ export function Game() {
     if (next === "level") play(phase.account);
     else {
       // Hero and spell drops wait unrolled in the stash until the hideout opens (1.18).
-      if (next === "hideout" && phase.account && rollUnrolled(phase.account) > 0 && services)
-        persist(services, phase.account, null);
-      setPhase({ ...phase, screen: next });
+      if (next === "hideout") accountStore?.update((a) => rollUnrolled(a) > 0);
+      setPhase(menuPhase(next, phase.account));
     }
   };
 
   // The dev menu (GDD §15), in dev builds only; backquote opens it.
-  const devAccount = phase.kind === "menu" ? phase.account : (playing?.account ?? null);
   const devMenu = import.meta.env.DEV ? (
     <DevMenu
-      account={devAccount}
-      round={playing?.round ?? null}
+      accountStore={accountStore}
+      round={round}
       store={services?.store ?? null}
       logger={services?.logger ?? null}
-      save={() => services && devAccount && persist(services, devAccount, playing?.round ?? null)}
     />
   ) : null;
   if (phase.kind === "loading") return <p>Loading…</p>;
   if (phase.kind === "menu") {
     const save = { hasAccount: phase.account !== null, hasRound: false };
-    const screens: Record<Exclude<Screen, "level">, ReactElement> = {
-      title: (
-        <TitleScreen
-          save={save}
-          {...(phase.account?.focus
-            ? {
-                continuing: `${phase.account.focus[0]!.toUpperCase()}${phase.account.focus.slice(1)}, level ${phase.account.player.level}`,
-              }
-            : {})}
-          onNewGame={() => go("newGame")}
-          onContinue={() => go("continue")}
-          onCredits={() => go("credits")}
-        />
-      ),
-      focus: (
-        <FocusSelect
-          onBack={() => go("back")}
-          onChoose={(focus) => {
-            const account = newAccount(focus);
-            if (services) persist(services, account, null);
-            setPhase({ kind: "menu", screen: "campaign", account });
-          }}
-        />
-      ),
-      campaign: (
-        <Campaign
-          cleared={phase.account?.firstClears.includes(LEVEL_1.id) ?? false}
-          onPlay={() => go("playLevel")}
-          onHideout={() => go("hideout")}
-        />
-      ),
-      credits: <Credits onBack={() => go("back")} />,
-      levelEnd: phase.account ? (
-        <LevelEnd
-          account={phase.account}
-          summary={phase.summary ?? null}
-          before={phase.before ?? null}
-          onSave={() => services && phase.account && persist(services, phase.account, null)}
-          onReplay={() => go("replay")}
-          onHideout={() => go("hideout")}
-        />
-      ) : (
-        <MenuScreen music="hideout">No level to summarise.</MenuScreen>
-      ),
-      hideout: phase.account ? (
-        <Hideout
-          account={phase.account}
-          onSave={() => services && phase.account && persist(services, phase.account, null)}
-          onPlay={() => go("playLevel")}
-        />
-      ) : (
-        <MenuScreen music="hideout">No account yet.</MenuScreen>
-      ),
+    const screen = (): ReactElement => {
+      switch (phase.screen) {
+        case "title":
+          return (
+            <TitleScreen
+              save={save}
+              {...(phase.account?.focus
+                ? {
+                    continuing: `${phase.account.focus[0]!.toUpperCase()}${phase.account.focus.slice(1)}, level ${phase.account.player.level}`,
+                  }
+                : {})}
+              onNewGame={() => go("newGame")}
+              onContinue={() => go("continue")}
+              onCredits={() => go("credits")}
+            />
+          );
+        case "focus":
+          return (
+            <FocusSelect
+              onBack={() => go("back")}
+              onChoose={(focus) => {
+                const account = newAccount(focus);
+                if (services) persist(services, account, null);
+                setPhase(menuPhase("campaign", account));
+              }}
+            />
+          );
+        case "credits":
+          return <Credits onBack={() => go("back")} />;
+        case "campaign":
+          return (
+            <Campaign
+              cleared={phase.account.firstClears.includes(LEVEL_1.id)}
+              onPlay={() => go("playLevel")}
+              onHideout={() => go("hideout")}
+            />
+          );
+        case "levelEnd":
+          return accountStore ? (
+            <LevelEnd
+              store={accountStore}
+              summary={phase.summary ?? null}
+              before={phase.before ?? null}
+              onReplay={() => go("replay")}
+              onHideout={() => go("hideout")}
+            />
+          ) : (
+            <p>Loading…</p>
+          );
+        case "hideout":
+          return accountStore ? (
+            <Hideout store={accountStore} onPlay={() => go("playLevel")} />
+          ) : (
+            <p>Loading…</p>
+          );
+      }
     };
     return (
       <>
-        {screens[phase.screen]}
+        {screen()}
         {devMenu}
       </>
     );

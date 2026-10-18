@@ -11,6 +11,7 @@ import { DEFAULT_SETTINGS, sharedSettings, type JuiceSettings } from "../../juic
 import { JUICE_TUNING } from "../../tuning/juice";
 import { skillName } from "../cards/HeroCard";
 import { chooseHero } from "../../account/stash";
+import { createAccountStore } from "../../account/store";
 import { LevelEnd } from "./LevelEnd";
 import { sortDrops, type CardDrop } from "./sort";
 
@@ -100,10 +101,9 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
       const saved = vi.fn();
       render(
         <LevelEnd
-          account={account}
+          store={createAccountStore(account, saved)}
           summary={null}
           before={null}
-          onSave={saved}
           onReplay={() => {}}
           onHideout={() => {}}
         />,
@@ -129,7 +129,7 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
       const rare = item("rare");
       render(
         <LevelEnd
-          account={account}
+          store={createAccountStore(account, () => {})}
           summary={{
             result: "won",
             xpGained: 40,
@@ -140,7 +140,6 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
             ],
           }}
           before={{ player: { level: 1, xp: 0 }, heroes: {} }}
-          onSave={() => {}}
           onReplay={() => {}}
           onHideout={() => {}}
         />,
@@ -168,10 +167,9 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
         account.player.xp = 600;
         render(
           <LevelEnd
-            account={account}
+            store={createAccountStore(account, () => {})}
             summary={{ result: "won", xpGained: 600, firstClear: true, drops: [] }}
             before={{ player: { level: 1, xp: 0 }, heroes: {} }}
-            onSave={() => {}}
             onReplay={() => {}}
             onHideout={() => {}}
           />,
@@ -199,10 +197,9 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
       const account = withChoice();
       render(
         <LevelEnd
-          account={account}
+          store={createAccountStore(account, () => {})}
           summary={null}
           before={null}
-          onSave={() => {}}
           onReplay={() => {}}
           onHideout={() => {}}
         />,
@@ -217,10 +214,9 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
       const account = newAccount("warrior");
       render(
         <LevelEnd
-          account={account}
+          store={createAccountStore(account, () => {})}
           summary={{ result: "lost", xpGained: 3, firstClear: false, drops: [] }}
           before={null}
-          onSave={() => {}}
           onReplay={() => {}}
           onHideout={() => {}}
         />,

@@ -14,6 +14,8 @@ import { ItemCard } from "../cards/ItemCard";
 import { Panel, RARITY_COLOR } from "../cards/parts";
 import { MenuButton, MenuScreen, MENU } from "../title/layout";
 import { chooseHero } from "../../account/stash";
+import type { AccountStore } from "../../account/store";
+import { useAccount } from "../account";
 import { dropRarity, sortDrops, type CardDrop } from "./sort";
 import { fillProgress, revealTimes } from "./timeline";
 
@@ -190,28 +192,26 @@ function asCard(hero: HeroInstance): Card {
  * before the pick) it shows only the pending choice.
  */
 export function LevelEnd({
-  account,
+  store,
   summary,
   before,
-  onSave,
   onReplay,
   onHideout,
 }: {
-  account: AccountState;
+  /** The account; the pick changes and saves it through the store. */
+  store: AccountStore;
   summary: LevelSummary | null;
   before: XpSnapshot | null;
-  /** Called after the account changes, to persist it. */
-  onSave(): void;
   onReplay(): void;
   onHideout(): void;
 }) {
+  const account = useAccount(store);
   const elapsed = useElapsed();
   const settingsStore = sharedSettings();
   const settings = useSyncExternalStore(settingsStore.subscribe, settingsStore.get);
   // The juice A/B and accessibility settings scale the particles and the flash (H §1.1, §14).
   const particles = Math.round(T.burstParticles * Math.min(1, settings.juice));
   const flash = flashAlpha(T.flashAlpha, settings);
-  const [, setPicked] = useState(0);
   const loot = sortDrops(summary?.drops ?? []);
   const choice = account.pendingChoices[0];
   // A reload before the pick has no summary; the pending choice names the level, kept past the pick.
@@ -265,10 +265,7 @@ export function LevelEnd({
   useCues(elapsed, cues);
 
   const pick = (heroId: OwnedHeroId) => {
-    if (!choice || !chooseHero(account, choice.levelId, heroId)) return;
-    onSave();
-    play("ui_click");
-    setPicked((n) => n + 1);
+    if (choice && store.update((a) => chooseHero(a, choice.levelId, heroId))) play("ui_click");
   };
 
   const currencyNames = new Map(currencies().map((c) => [c.id as string, c.name]));

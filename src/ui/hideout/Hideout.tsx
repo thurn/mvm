@@ -23,6 +23,8 @@ import {
   unequip,
   type RosterTarget,
 } from "../../account/stash";
+import type { AccountStore } from "../../account/store";
+import { useAccount } from "../account";
 import { StashPanel } from "./StashPanel";
 
 /** What is being dragged, and from where. */
@@ -432,14 +434,14 @@ function TabButton({
  * shown disabled. Every change autosaves.
  */
 export function Hideout({
-  account,
-  onSave,
+  store,
   onPlay,
 }: {
-  account: AccountState;
-  onSave(): void;
+  /** The account; every change goes through the store, which saves it and re-renders. */
+  store: AccountStore;
   onPlay(): void;
 }) {
+  const account = useAccount(store);
   const [tab, setTab] = useState<Tab>("roster");
   const settingsStore = sharedSettings();
   const settings = useSyncExternalStore(settingsStore.subscribe, settingsStore.get);
@@ -448,11 +450,10 @@ export function Hideout({
   const [pulse, setPulse] = useState<Pulse | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [reaction, setReaction] = useState<Reaction | null>(null);
-  const [, setVersion] = useState(0);
 
   const cardAt = (target: RosterTarget) =>
     target === "spell" ? account.roster.spell : (account.roster.slots[target] ?? null);
-  /** Runs a change, then saves, sounds and pulses the zone, and lets the card react. */
+  /** Runs a change through the store (which saves it), then sounds and pulses the zone, and lets the card react. */
   const change = (
     zone: string,
     sound: string,
@@ -460,14 +461,12 @@ export function Hideout({
     action: () => boolean,
   ) => {
     const before = target === null ? null : snapshot(cardAt(target));
-    if (!action()) return false;
+    if (!store.update(action)) return false;
     const seq = (pulse?.seq ?? 0) + 1;
-    onSave();
     playUi(sound);
     setPulse({ zone, kind: "click", seq });
     setStatus(null);
     if (target !== null) setReaction(react(target, seq, before, snapshot(cardAt(target))));
-    setVersion((v) => v + 1);
     return true;
   };
   const refuse = (zone: string, reason: string) => {

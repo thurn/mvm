@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { newAccount } from "../../account/lifecycle";
 import type { AccountState } from "../../account/state";
@@ -9,6 +9,8 @@ import { createStreams, streamRng } from "../../sim/rng";
 import { id } from "../../types/ids";
 import { DEFAULT_SETTINGS, sharedSettings, type JuiceSettings } from "../../juice/core/settings";
 import { JUICE_TUNING } from "../../tuning/juice";
+import { createAccountStore } from "../../account/store";
+import { grantHero } from "../dev/grants";
 import { Hideout } from "./Hideout";
 import { isSpell, rollUnrolled } from "../../account/stash";
 import { stashView } from "./model";
@@ -32,7 +34,7 @@ function warrior(): AccountState {
 
 function setup(account: AccountState) {
   const onSave = vi.fn();
-  render(<Hideout account={account} onSave={onSave} onPlay={() => {}} />);
+  render(<Hideout store={createAccountStore(account, onSave)} onPlay={() => {}} />);
   return onSave;
 }
 
@@ -271,5 +273,35 @@ describe("review fixes (hv-7ic2.72)", () => {
     setup(warrior());
     drag(screen.getByTestId("roster-hero-1"), screen.getByTestId("roster-spell"));
     expect(screen.getByTestId("hideout-status").textContent).toContain("spell slot");
+  });
+});
+
+describe("the account store (mason hv-7ic2.98)", () => {
+  test("a change made outside an open hideout shows at once and saves once", () => {
+    const account = warrior();
+    const onSave = vi.fn();
+    const store = createAccountStore(account, onSave);
+    render(<Hideout store={store} onPlay={() => {}} />);
+    let hero!: { id: string };
+    act(() => {
+      hero = store.update((a) =>
+        grantHero(
+          a,
+          { kind: "hero", level: 2, rarity: "normal" },
+          streamRng(createStreams(9), "heroGen"),
+          () => id<"OwnedHero">("granted"),
+        ),
+      );
+    });
+    expect(screen.getByTestId(`stash-hero-${hero.id}`)).toBeTruthy();
+    expect(onSave).toHaveBeenCalledTimes(1);
+  });
+
+  test("a refused change neither saves nor re-renders", () => {
+    const onSave = vi.fn();
+    const store = createAccountStore(warrior(), onSave);
+    expect(store.update(() => false)).toBe(false);
+    expect(onSave).not.toHaveBeenCalled();
+    expect(store.version()).toBe(0);
   });
 });
