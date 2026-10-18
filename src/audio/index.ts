@@ -1,4 +1,5 @@
 import { loadSpriteAssets } from "../render/sprites/assets";
+import { recordAudio } from "../dev/qa-surface";
 import { createAudioEngine, type AudioEngine } from "./engine";
 import { createMusicPlayer, type MusicPlayer } from "./music/player";
 
@@ -15,7 +16,12 @@ export function audioEngine(): AudioEngine | null {
   if (engine) return engine;
   if (typeof AudioContext === "undefined") return null;
   const context = new AudioContext();
-  engine = createAudioEngine({ context });
+  engine = createAudioEngine({
+    context,
+    onLog: (entry) => {
+      if (window.__mvm) recordAudio(window.__mvm, entry);
+    },
+  });
   const created = engine;
   void loadSpriteAssets().then(({ manifest }) => {
     musicUrls = manifest.music;

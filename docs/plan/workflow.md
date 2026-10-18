@@ -339,6 +339,10 @@ A review/QA bead:
   and vignette) and starts over; `fx.live()` is the live particle count. Call
   `peaks()` once to reset, play the moment, call it again. At `juice=0` the
   particles, shake and flash read zero.
+- **Hearing sounds.** `window.__mvm.audioLog` holds the last 200 sounds the
+  engine played or dropped, as `{ kind, id, bus, at, reason? }` with `at` in
+  wall-clock ms; assert a cue's sound reached the mixer there (for example
+  `place_thunk` after a placement), not through the speakers.
 - **Screenshots.** Captures go to the primary checkout's gitignored
   `/Users/dthurn/mvm/artifacts/qa/<bead-id>/` and are referenced by filename
   only. Never commit them.

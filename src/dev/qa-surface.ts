@@ -1,5 +1,6 @@
 import { fxProbe, type FxReading } from "../juice/core/probe";
 import type { Tier } from "../tuning/juice";
+import type { AudioLogEntry } from "../audio/engine";
 import type { CueBatch } from "../juice/director/cue";
 import type { SimEvent } from "../sim/events";
 import { installSaveDebug } from "./save-debug";
@@ -16,7 +17,8 @@ export interface QaSurface {
   /** The last 200 juice cue batches (1.15). */
   cues: CueBatch[];
   tierLog: unknown[];
-  audioLog: unknown[];
+  /** The last 200 played and dropped sounds, with bus and wall time (hv-7ic2.112). */
+  audioLog: AudioLogEntry[];
   /** Juice measurements: live particles, and everything started since the last peaks() (mason hv-7ic2.108). */
   fx: { live(): number; peaks(): FxReading };
   /** Caught errors and console errors; must be empty at the end of every QA run. */
@@ -80,6 +82,12 @@ export function recordCues(qa: QaSurface, batch: CueBatch, tierLog: boolean): vo
     qa.tierLog.push({ event: batch.event, tier: batch.tier });
     if (qa.tierLog.length > HISTORY) qa.tierLog.splice(0, qa.tierLog.length - HISTORY);
   }
+}
+
+/** Records a played or dropped sound from the audio engine. */
+export function recordAudio(qa: QaSurface, entry: AudioLogEntry): void {
+  qa.audioLog.push(entry);
+  if (qa.audioLog.length > HISTORY) qa.audioLog.splice(0, qa.audioLog.length - HISTORY);
 }
 
 export function recordEvents(qa: QaSurface, events: readonly SimEvent[]): void {

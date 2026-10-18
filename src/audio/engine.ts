@@ -42,6 +42,18 @@ interface EngineOptions {
   random?: () => number;
   /** Game speed: at 2× the retrigger guard halves (H §10.3). */
   speed?: () => number;
+  /** Hears every played and dropped sound (the QA surface's audioLog). */
+  onLog?: (entry: AudioLogEntry) => void;
+}
+
+/** One played or dropped sound, with its bus and the wall-clock ms it happened at. */
+export interface AudioLogEntry {
+  kind: "played" | "dropped";
+  id: string;
+  bus: Bus;
+  at: number;
+  /** Why a dropped sound was dropped. */
+  reason?: string;
 }
 
 const dbToGain = (db: number) => 10 ** (db / 20);
@@ -104,6 +116,14 @@ export function createAudioEngine(options: EngineOptions) {
     list.push(entry);
     if (list.length > AUDIO_TUNING.logSize) list.shift();
   };
+  const played = (id: string) => {
+    remember(log.played, id);
+    options.onLog?.({ kind: "played", id, bus: soundClass(id).bus, at: now() });
+  };
+  const dropped = (id: string, reason: string) => {
+    remember(log.dropped, `${id} (${reason})`);
+    options.onLog?.({ kind: "dropped", id, bus: soundClass(id).bus, at: now(), reason });
+  };
 
   function sketch(id: string): AudioBuffer {
     let buffer = sketches.get(id);
@@ -127,7 +147,7 @@ export function createAudioEngine(options: EngineOptions) {
   }
 
   function drop(voice: Voice, reason: string) {
-    remember(log.dropped, `${voice.id} (${reason})`);
+    dropped(voice.id, reason);
     voice.stop();
   }
 
@@ -181,7 +201,7 @@ export function createAudioEngine(options: EngineOptions) {
           null,
         );
         if (!lowest || priority(lowest.category) > priority(category)) {
-          remember(log.dropped, `${id} (global cap)`);
+          dropped(id, "global cap");
           return null;
         }
         drop(lowest, "global cap");
@@ -245,7 +265,7 @@ export function createAudioEngine(options: EngineOptions) {
       for (const layer of extras) layer.onended = ended;
       voices.push(voice);
       lastStart.set(id, t);
-      remember(log.played, id);
+      played(id);
       source.start();
       for (const layer of extras) layer.start();
       return voice;
@@ -283,7 +303,7 @@ export function createAudioEngine(options: EngineOptions) {
               try {
                 buffers.push(await decode(await (await fetch(url)).arrayBuffer()));
               } catch {
-                remember(log.dropped, `${id} (no sample ${url})`);
+                dropped(id, `no sample ${url}`);
               }
             }
             return buffers;

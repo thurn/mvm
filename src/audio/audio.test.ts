@@ -1,6 +1,13 @@
 import { describe, expect, test } from "vitest";
 import { AUDIO_TUNING } from "../tuning/audio";
-import { createAudioEngine, panFor, type AudioContextLike, type Sound } from "./engine";
+import { recordAudio, type QaSurface } from "../dev/qa-surface";
+import {
+  createAudioEngine,
+  panFor,
+  type AudioContextLike,
+  type AudioLogEntry,
+  type Sound,
+} from "./engine";
 import { SFX, zzfxSamples } from "./zzfx";
 
 interface FakeParam {
@@ -80,13 +87,14 @@ function fakeContext() {
   return { ctx: ctx as unknown as AudioContextLike, sources };
 }
 
-function setup() {
+function setup(onLog?: (entry: AudioLogEntry) => void) {
   const { ctx, sources } = fakeContext();
   let now = 0;
   let seed = 1;
   const engine = createAudioEngine({
     context: ctx,
     now: () => now,
+    ...(onLog ? { onLog } : {}),
     random: () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646,
   });
   const buffer = (n: number) => ({ id: n }) as unknown as AudioBuffer;
@@ -245,6 +253,33 @@ describe("voice manager (H §10.3)", () => {
     const { engine } = setup();
     await engine.unlock();
     expect(engine.context.state).toBe("running");
+  });
+});
+
+describe("audio log (hv-7ic2.112)", () => {
+  test("played and dropped sounds reach window.__mvm.audioLog, capped at 200", () => {
+    const qa = { audioLog: [] } as unknown as QaSurface;
+    const { engine, register, tick } = setup((entry) => recordAudio(qa, entry));
+    register("place_thunk");
+    engine.play("place_thunk");
+    expect(qa.audioLog).toEqual([{ kind: "played", id: "place_thunk", bus: "sfx", at: 0 }]);
+
+    register("hit_light");
+    for (let i = 0; i <= AUDIO_TUNING.voiceCap.hit; i++) {
+      tick();
+      engine.play("hit_light");
+    }
+    expect(qa.audioLog.at(-2)).toMatchObject({
+      kind: "dropped",
+      id: "hit_light",
+      reason: "sound cap",
+    });
+
+    for (let i = 0; i < 250; i++) {
+      tick();
+      engine.play("place_thunk");
+    }
+    expect(qa.audioLog).toHaveLength(200);
   });
 });
 
