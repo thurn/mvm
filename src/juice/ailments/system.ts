@@ -57,7 +57,12 @@ export const ailmentSystem: PresentationFactory = ({ stack, settings, now }) => 
       const dt = lastFrame === null ? 0 : Math.min(0.1, (t - lastFrame) / 1000);
       lastFrame = t;
       lastState = frame.state;
-      for (const p of placedActors(frame.state)) {
+      const placed = placedActors(frame.state);
+      // Forget the emit timers of actors that left the board.
+      const ids = new Set(placed.map((p) => p.id));
+      for (const key of nextEmit.keys())
+        if (!ids.has(key.slice(0, key.lastIndexOf(":")))) nextEmit.delete(key);
+      for (const p of placed) {
         const a = p.actor.ailments;
         const cx = boardX(p.x);
         const cy = laneY(p.lane);
