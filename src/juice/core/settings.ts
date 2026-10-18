@@ -17,6 +17,8 @@ export interface JuiceSettings {
   reduceFlashing: boolean;
   /** The loot filter's "Show all": normal items get beams, labels and stingers (H §3.7). */
   showAllLoot: boolean;
+  /** Dev overlays (GDD §15): hitboxes, ailment meters and per-hero DPS meters. */
+  devOverlays: { hitboxes: boolean; ailments: boolean; dps: boolean };
   /** Player volume sliders, 0–1 (H §10.2 options). */
   volume: { master: number; music: number; sfx: number; loot: number; ui: number };
 }
@@ -33,6 +35,7 @@ export const DEFAULT_SETTINGS: JuiceSettings = {
   shake: "full",
   reduceFlashing: false,
   showAllLoot: false,
+  devOverlays: { hitboxes: false, ailments: false, dps: false },
   volume: { master: 1, music: 1, sfx: 1, loot: 1, ui: 1 },
 };
 
@@ -76,4 +79,12 @@ export function createSettings(
       return () => listeners.delete(listener);
     },
   };
+}
+
+let shared: SettingsStore | null = null;
+
+/** The one settings store the board, the dev menu and the options share, so a knob reaches the running game. */
+export function sharedSettings(): SettingsStore {
+  shared ??= createSettings();
+  return shared;
 }

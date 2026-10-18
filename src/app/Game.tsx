@@ -31,6 +31,7 @@ import { ResumeHud } from "../ui/resume/ResumeHud";
 import { Title } from "../ui/resume/Title";
 import { acceptsIntent, bootDecision, countdownAt } from "./boot";
 import { Board, useBoardScale, type BoardSource } from "./Board";
+import { DevMenu } from "../ui/dev/DevMenu";
 
 const BUILD = import.meta.env.DEV ? "dev" : "build";
 
@@ -195,8 +196,25 @@ export function Game() {
     setPhase({ kind: "playing", account: owner, round, countdownStartedAt: null, banner: null });
   };
 
+  // The dev menu (GDD §15), in dev builds only; backquote opens it.
+  const devAccount = phase.kind === "title" ? phase.account : (playing?.account ?? null);
+  const devMenu = import.meta.env.DEV ? (
+    <DevMenu
+      account={devAccount}
+      round={playing?.round ?? null}
+      store={services?.store ?? null}
+      logger={services?.logger ?? null}
+      save={() => services && devAccount && persist(services, devAccount, playing?.round ?? null)}
+    />
+  ) : null;
   if (phase.kind === "loading") return <p>Loading…</p>;
-  if (phase.kind === "title") return <Title onPlay={() => play(phase.account)} />;
+  if (phase.kind === "title")
+    return (
+      <>
+        <Title onPlay={() => play(phase.account)} />
+        {devMenu}
+      </>
+    );
   if (!source || !store || !playing) return <p>Loading…</p>;
   const countdownStartedAt = playing.countdownStartedAt;
   const send = (intent: Intent) => {
@@ -205,6 +223,7 @@ export function Game() {
   };
   return (
     <>
+      {devMenu}
       {playing.banner && (
         <RestartBanner
           reason={playing.banner}

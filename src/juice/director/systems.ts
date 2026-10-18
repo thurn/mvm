@@ -6,6 +6,7 @@ import { lootSystem } from "../loot/system";
 import { manaSystem } from "../mana/system";
 import { vfxSystem } from "../vfx/system";
 import { ailmentSystem } from "../ailments/system";
+import { devOverlaySystem } from "../../ui/dev/overlays";
 import { tierSystem } from "../tiers/system";
 import { musicSystem } from "../../audio/music/system";
 import type { SettingsStore } from "../core/settings";
@@ -38,6 +39,7 @@ export const PRESENTATION_SYSTEMS: PresentationFactory[] = [
   manaSystem,
   vfxSystem,
   ailmentSystem,
+  devOverlaySystem,
 ];
 
 export interface PresentationOptions {
