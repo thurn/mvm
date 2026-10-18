@@ -92,6 +92,7 @@ export function ItemCard({
   });
   const unique =
     item.rarity === "unique" ? uniques().find((u) => u.id === item.uniqueId) : undefined;
+  const hasAffixes = unique ? unique.mods.length > 0 : item.mods.length > 0;
   return (
     <Panel rarity={item.rarity} testId={`item-${item.id}`}>
       {upgrade && <UpgradeTag />}
@@ -111,13 +112,14 @@ export function ItemCard({
       )}
       <div style={{ color, fontWeight: 700 }}>{name}</div>
       {base && <div style={{ color }}>{base}</div>}
-      <Separator color={color} />
+      {/* Separators only between sections that have lines (H §4.4). */}
+      {(implicitLines.length > 0 || hasAffixes) && <Separator color={color} />}
       {implicitLines.map((line) => (
         <div key={`i-${line}`} style={{ color: TEXT.implicit }}>
           {line}
         </div>
       ))}
-      {implicitLines.length > 0 && <Separator color={color} />}
+      {implicitLines.length > 0 && hasAffixes && <Separator color={color} />}
       {unique
         ? unique.mods
             .flatMap((m) =>
@@ -146,7 +148,8 @@ export function ItemCard({
               </div>
             );
           })}
-      <div style={{ position: "absolute", bottom: 2, left: 5, color: TEXT.dim, fontSize: 9 }}>
+      {/* Item level, bottom-left, in the flow so it never overlaps a line (H §4.1). */}
+      <div style={{ textAlign: "left", color: TEXT.dim, fontSize: 9, marginTop: 2 }}>
         {item.itemLevel}
       </div>
     </Panel>

@@ -96,7 +96,10 @@ export function HeroCard({
         <div>Cooldown {entry.cooldownSeconds ?? 0}s</div>
       ) : (
         <>
-          <div data-testid="dps">DPS on this card: {summary.dps.toFixed(1)}</div>
+          {/* Heroes that deal no damage (acolytes) show a dash, not a zero that reads as a bug. */}
+          <div data-testid="dps">
+            DPS on this card: {summary.dps > 0 ? summary.dps.toFixed(1) : "—"}
+          </div>
           <div data-testid="ehp">EHP: {Math.round(summary.ehp)}</div>
           <div style={{ color: TEXT.dim }}>
             Recharge {rechargeSeconds(hero.skillId).toFixed(1)}s
