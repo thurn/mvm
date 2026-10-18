@@ -85,6 +85,17 @@ export const JUICE_TUNING = {
       drag: 4,
       blend: "lighter",
     },
+    /** One cyan mote drifting up off an idle mana orb (H §3.6). */
+    manaSparkle: {
+      count: 1,
+      speed: [6, 14],
+      angle: [240, 300],
+      life: [400, 700],
+      size: [1, 1],
+      color: ["#6FD3FF", "#E6FAFF"],
+      drag: 1,
+      blend: "lighter",
+    },
     sparks: {
       count: 6,
       speed: [60, 120],

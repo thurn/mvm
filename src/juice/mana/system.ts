@@ -111,7 +111,7 @@ export const manaSystem: PresentationFactory = ({ stack, settings, now }) => {
           const x = orb.tile.x + off.dx;
           const y = orb.tile.y + off.dy;
           drawOrb(ctx, x, y, size, t);
-          if (sparkle) pool.emit("sparks", x, y, { scale: 1 / 6, loot: true });
+          if (sparkle) pool.emit("manaSparkle", x, y, { loot: true });
           continue;
         }
         orb.flightFrom ??= orb.tile;
