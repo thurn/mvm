@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { AUDIO_TUNING } from "../tuning/audio";
-import { createAudioEngine, panFor, type AudioContextLike } from "./engine";
+import { createAudioEngine, panFor, type AudioContextLike, type Sound } from "./engine";
 import { SFX, zzfxSamples } from "./zzfx";
 
 interface FakeParam {
@@ -124,7 +124,7 @@ describe("voice manager (H §10.3)", () => {
     }
     for (let i = 0; i < 29; i++) {
       register(`hit_${i}`);
-      engine.play(`hit_${i}`);
+      engine.play(`hit_${i}` as Sound);
       tick();
     }
     expect(engine.voices()).toHaveLength(32);
@@ -139,7 +139,7 @@ describe("voice manager (H §10.3)", () => {
     const { engine, register, tick } = setup();
     for (let i = 0; i < 32; i++) {
       register(`spell_${i}`);
-      engine.play(`spell_${i}`);
+      engine.play(`spell_${i}` as Sound);
       tick();
     }
     register("hit_light");
@@ -151,7 +151,7 @@ describe("voice manager (H §10.3)", () => {
     const { engine, register, tick } = setup();
     for (let i = 0; i < 32; i++) {
       register(`drop_${i}`);
-      engine.play(`drop_${i}`);
+      engine.play(`drop_${i}` as Sound);
       tick();
     }
     register("ui_click");
@@ -198,7 +198,8 @@ describe("voice manager (H §10.3)", () => {
   test("a sound without samples falls back to a ZzFX tone", () => {
     const { engine, sources } = setup();
     expect(engine.play("ui_deny")).not.toBeNull();
-    expect(engine.play("never_registered")).not.toBeNull();
+    // An id with neither samples nor a sketch can only arrive through a cast; it still plays a fallback.
+    expect(engine.play("never_registered" as Sound)).not.toBeNull();
     expect(sources).toHaveLength(2);
   });
 

@@ -1,3 +1,4 @@
+import type { Sound } from "./engine";
 import { useState } from "react";
 import { createSettings, type JuiceSettings } from "../juice/core/settings";
 import { SOUNDS } from "../assets/sounds";
@@ -18,7 +19,7 @@ export function AudioDevPage() {
     store.set({ volume: next });
     audioEngine()?.setVolume(bus, value);
   };
-  const play = (id: string, x?: number) => {
+  const play = (id: Sound, x?: number) => {
     const engine = audioEngine();
     if (!engine) return;
     void engine.unlock().then(() => {
@@ -26,7 +27,7 @@ export function AudioDevPage() {
       setLog({ played: [...engine.log.played], dropped: [...engine.log.dropped] });
     });
   };
-  const button = (id: string, x?: number) => (
+  const button = (id: Sound, x?: number) => (
     <button key={`${id}-${x ?? ""}`} onClick={() => play(id, x)} style={{ margin: 2 }}>
       {id}
       {x === undefined ? "" : ` @x=${x}`}
@@ -35,9 +36,9 @@ export function AudioDevPage() {
   return (
     <div style={{ padding: 16, color: "#ddd", fontFamily: "monospace" }}>
       <h2>ZzFX sketches</h2>
-      <div>{Object.keys(SFX).map((id) => button(id))}</div>
+      <div>{(Object.keys(SFX) as Sound[]).map((id) => button(id))}</div>
       <h2>Mapped sounds (samples, or ZzFX when absent)</h2>
-      <div>{Object.keys(SOUNDS).map((id) => button(id))}</div>
+      <div>{(Object.keys(SOUNDS) as Sound[]).map((id) => button(id))}</div>
       <h2>Pan</h2>
       <div>{[0, 4.5, 9].map((x) => button("ui_click", x))}</div>
       <h2>Volume</h2>

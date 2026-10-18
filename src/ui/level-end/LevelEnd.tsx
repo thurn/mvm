@@ -3,6 +3,7 @@ import type { LevelSummary } from "../../account/lifecycle";
 import type { AccountState } from "../../account/state";
 import { levelForXp, xpForLevel } from "../../account/xp";
 import { audioEngine } from "../../audio";
+import type { Sound } from "../../audio/engine";
 import { currencies } from "../../data";
 import type { Card, HeroInstance, OwnedHeroId } from "../../heroes/model/hero";
 import { LEVEL_END_TUNING as T } from "../../tuning/juice";
@@ -63,7 +64,7 @@ function useCues(elapsed: number, cues: readonly { at: number; key: string; play
   });
 }
 
-const play = (id: string, gainDb = 0) => audioEngine()?.play(id, { gainDb });
+const play = (id: Sound, gainDb = 0) => audioEngine()?.play(id, { gainDb });
 
 /** One XP bar: the level reached so far and the fill within it; a level-up bursts once. */
 function XpBar({

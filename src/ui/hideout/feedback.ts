@@ -1,3 +1,4 @@
+import type { Sound } from "../../audio/engine";
 import { useEffect, useRef, useState } from "react";
 import { audioEngine } from "../../audio";
 import { baseItems } from "../../data";
@@ -5,7 +6,7 @@ import type { ItemInstance } from "../../heroes/model/item";
 import { HIDEOUT_TUNING as T } from "../../tuning/juice";
 
 /** The item-class sound for a drop on a card (H §4.5): metal, leather, cloth or a ring chime. */
-export function equipSound(item: ItemInstance): string {
+export function equipSound(item: ItemInstance): Sound {
   const base = baseItems().find((b) => b.id === item.baseId);
   const cls = base?.itemClass ?? "";
   if (cls === "Ring" || cls === "Amulet" || cls === "Belt") return "ui_equip_ring";
@@ -19,7 +20,7 @@ export function equipSound(item: ItemInstance): string {
   return "ui_equip_metal";
 }
 
-export function playUi(id: string): void {
+export function playUi(id: Sound): void {
   audioEngine()?.play(id);
 }
 

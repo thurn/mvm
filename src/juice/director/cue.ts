@@ -1,3 +1,4 @@
+import type { Sound } from "../../audio/engine";
 import type { DamageType } from "../../combat/stats";
 import type { Drop } from "../../loot/drops";
 import type { PresetName, Tier } from "../../tuning/juice";
@@ -20,7 +21,7 @@ export type Cue =
     }
   | {
       kind: "sound";
-      id: string;
+      id: Sound;
       bus: "sfx" | "ui" | "music";
       /** Board x in tiles, for pan. */
       x?: number;

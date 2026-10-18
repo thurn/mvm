@@ -11,6 +11,7 @@ import { ELEMENT_COLOR, RARITY_COLOR } from "../cards/parts";
 import { cardSummary } from "../cards/summary";
 import { Flash, Glow, HoverTip } from "../fx";
 import { MENU, MenuButton, MenuScreen } from "../title/layout";
+import type { Sound } from "../../audio/engine";
 import { equipSound, playUi, useRolled } from "./feedback";
 import {
   assignHero,
@@ -423,7 +424,7 @@ export function Hideout({
   /** Runs a change through the store (which saves it), then sounds and pulses the zone, and lets the card react. */
   const change = (
     zone: string,
-    sound: string,
+    sound: Sound,
     target: RosterTarget | null,
     action: () => boolean,
   ) => {

@@ -1,3 +1,4 @@
+import type { Sound } from "../audio/engine";
 /** Appendix H's juice tables (§1.3, §2.2–§2.7), read by src/juice/. */
 
 export type Tier = 0 | 1 | 2 | 3 | 4 | 5;
@@ -240,7 +241,7 @@ export interface LootClassSpec {
   beam: { color: string; heightPx: number; whiteCore: boolean } | null;
   label: string;
   tier: Tier;
-  stinger: string;
+  stinger: Sound;
   /** Rank for the stagger: higher lands later (the best drop last). */
   rank: number;
 }
@@ -502,11 +503,11 @@ export const CUE_FEEL = {
   placement: { dustScale: 1.5, trauma: 0.35 },
   /** Each spell part's particles on every tile it lands on, and its tier; finishers hit at T4. */
   spellParts: {
-    impact: { preset: "dust", tier: 3 },
-    aftershock: { preset: "dust", tier: 4 },
-    explosion: { preset: "embers", tier: 4 },
-    comet: { preset: "frost", tier: 4 },
-  } as Readonly<Record<string, { preset: PresetName; tier: Tier }>>,
+    impact: { preset: "dust", tier: 3, sound: "spell_impact" },
+    aftershock: { preset: "dust", tier: 4, sound: "spell_aftershock" },
+    explosion: { preset: "embers", tier: 4, sound: "spell_explosion" },
+    comet: { preset: "frost", tier: 4, sound: "spell_comet" },
+  } as Readonly<Record<string, { preset: PresetName; tier: Tier; sound: Sound }>>,
   /** Three times a preset's count per tile, so a 3×3 reads as one burst (a few motes per tile vanished). */
   spellParticleScale: 3,
 };

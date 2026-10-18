@@ -1,3 +1,4 @@
+import type { Sound } from "../audio/engine";
 import { DAMAGE_TYPES, type DamageType } from "../combat/stats";
 import type { SimEvent, SimEventOf } from "../sim/events";
 import { CUE_FEEL, JUICE_TUNING, type PresetName, type Tier } from "../tuning/juice";
@@ -10,6 +11,15 @@ type Row<T extends SimEvent["type"]> = (
   event: SimEventOf<T>,
   settings: JuiceSettings,
 ) => { tier: Tier; cues: Cue[] };
+
+/** Each ailment's apply sound (H §8). */
+const AILMENT_SOUND: Readonly<Partial<Record<string, Sound>>> = {
+  shock: "ailment_shock",
+  chill: "ailment_chill",
+  freeze: "ailment_freeze",
+  ignite: "ailment_ignite",
+  fullyBroken: "ailment_fullyBroken",
+};
 
 const IMPACT: Readonly<Record<DamageType, PresetName>> = {
   physical: "dust",
@@ -223,7 +233,7 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
   cast: () => ({ tier: 2, cues: [{ kind: "sound", id: "cast", bus: "sfx" }] }),
   castRefused: () => ({ tier: 0, cues: [{ kind: "sound", id: "ui_deny", bus: "ui" }] }),
   spellImpact: (event) => {
-    const part = CUE_FEEL.spellParts[event.part] ?? { preset: "dust", tier: 3 };
+    const part = CUE_FEEL.spellParts[event.part] ?? CUE_FEEL.spellParts.impact!;
     return {
       tier: part.tier,
       cues: [
@@ -234,7 +244,7 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
           x: tile.column,
           scale: CUE_FEEL.spellParticleScale,
         })),
-        { kind: "sound", id: `spell_${event.part}`, bus: "sfx" },
+        { kind: "sound", id: part.sound, bus: "sfx" },
       ],
     };
   },
@@ -265,7 +275,10 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
     tier: event.ailment === "freeze" || event.ailment === "fullyBroken" ? 2 : 1,
     cues: [
       { kind: "ailment", targetId: event.targetId, ailment: event.ailment, phase: "apply" },
-      { kind: "sound", id: `ailment_${event.ailment}`, bus: "sfx" },
+      // Stuns sound through their own stun event, so only these ailments have an apply sound.
+      ...(AILMENT_SOUND[event.ailment]
+        ? [{ kind: "sound", id: AILMENT_SOUND[event.ailment]!, bus: "sfx" } as const]
+        : []),
     ],
   }),
   ailmentExpired: (event) => ({

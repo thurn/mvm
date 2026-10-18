@@ -1,6 +1,14 @@
 import type { AssetManifest } from "../assets/manifest";
+import type { SoundId } from "../assets/sounds";
 import { AUDIO_TUNING, CATEGORIES, soundClass, type Bus, type Category } from "../tuning/audio";
 import { SFX, zzfxSamples, type ZzfxParams } from "./zzfx";
+
+/**
+ * Every sound the game can ask for: a sampled sound from the sound map, or
+ * a ZzFX sketch. Cues and play() take only these, so naming a sound that
+ * doesn't exist is a type error (mason hv-7ic2.102).
+ */
+export type Sound = SoundId | keyof typeof SFX;
 
 /** The parts of AudioContext the engine uses, so tests can pass a fake. */
 export type AudioContextLike = Pick<
@@ -151,7 +159,7 @@ export function createAudioEngine(options: EngineOptions) {
     },
 
     /** Plays a sound id at board x (tiles); null when a rule drops it. */
-    play(id: string, at: { x?: number; gainDb?: number; semitones?: number } = {}): Voice | null {
+    play(id: Sound, at: { x?: number; gainDb?: number; semitones?: number } = {}): Voice | null {
       const { category, bus } = soundClass(id);
       const t = now();
       // Retrigger guard: raise the playing voice instead of starting another.

@@ -1,3 +1,4 @@
+import type { Sound } from "../../audio/engine";
 import { audioEngine } from "../../audio";
 import { SKILLS } from "../../heroes/board/kit";
 import type { HeroState, ProjectileState, RoundState } from "../../sim/state";
@@ -14,14 +15,14 @@ const laneY = (lane: number) => (lane + 0.5) * TILE;
 const SHOT_LIFT = 18;
 
 /** Each starter hero's launch sound (H §6.1). */
-const LAUNCH: Readonly<Record<string, string>> = {
+const LAUNCH: Readonly<Record<string, Sound>> = {
   [SKILLS.lightningArrow]: "bow_release",
   [SKILLS.armourPiercingRounds]: "crossbow_fire",
   [SKILLS.spark]: "spark_cast",
 };
 /** Area heroes whose same-step hits draw a ground ring and dust (H §5.4 striker). */
 const SLAMS = new Set<string>([SKILLS.rollingSlam, SKILLS.fallingThunder, SKILLS.iceStrike]);
-const IMPACT_SOUND: Readonly<Record<string, string>> = {
+const IMPACT_SOUND: Readonly<Record<string, Sound>> = {
   [SKILLS.rollingSlam]: "slam",
   [SKILLS.fallingThunder]: "thunder_crack",
   [SKILLS.iceStrike]: "ice_crack_heavy",
