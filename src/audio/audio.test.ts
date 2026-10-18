@@ -27,7 +27,7 @@ function node() {
 
 /** A fake AudioContext: it records sources and lets tests end them. */
 function fakeContext() {
-  const sources: { buffer: unknown; stopped: boolean }[] = [];
+  const sources: { buffer: unknown; stopped: boolean; stop(): void }[] = [];
   const ctx = {
     currentTime: 0,
     sampleRate: 44100,
@@ -210,6 +210,25 @@ describe("voice manager (H §10.3)", () => {
     tick();
     voice.stop();
     expect(sources.every((s) => s.stopped)).toBe(true);
+  });
+
+  test("a weaker duck never cuts a deeper one short", () => {
+    const { engine } = setup();
+    engine.duck("music", -8, 2);
+    const deep = engine.busGain("music");
+    engine.duck("music", -4, 1);
+    expect(engine.busGain("music")).toBeCloseTo(deep);
+  });
+
+  test("a voice counts until its longest layer ends", () => {
+    const { engine, sources, tick } = setup();
+    engine.register("drop_unique", [{} as AudioBuffer], [{} as AudioBuffer]);
+    engine.play("drop_unique");
+    tick();
+    sources[0]!.stop();
+    expect(engine.voices()).toHaveLength(1);
+    sources[1]!.stop();
+    expect(engine.voices()).toHaveLength(0);
   });
 
   test("unlock resumes the context", async () => {

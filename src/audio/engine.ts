@@ -84,6 +84,8 @@ export function createAudioEngine(options: EngineOptions) {
   const lastStart = new Map<string, number>();
   const sketches = new Map<string, AudioBuffer>();
   let voices: Voice[] = [];
+  /** The deepest duck in force per bus, so a weaker one never cuts it short. */
+  const ducks = new Map<Bus, { db: number; until: number }>();
   const log = { played: [] as string[], dropped: [] as string[] };
   const remember = (list: string[], entry: string) => {
     list.push(entry);
@@ -197,12 +199,19 @@ export function createAudioEngine(options: EngineOptions) {
           voices = voices.filter((v) => v !== voice);
           source.onended = null;
           source.stop();
-          for (const layer of extras) layer.stop();
+          for (const layer of extras) {
+            layer.onended = null;
+            layer.stop();
+          }
         },
       };
-      source.onended = () => {
-        voices = voices.filter((v) => v !== voice);
+      // The voice counts against the caps until its main sample and every layer end.
+      let playing = 1 + extras.length;
+      const ended = () => {
+        if (--playing === 0) voices = voices.filter((v) => v !== voice);
       };
+      source.onended = ended;
+      for (const layer of extras) layer.onended = ended;
       voices.push(voice);
       lastStart.set(id, t);
       remember(log.played, id);
@@ -214,12 +223,19 @@ export function createAudioEngine(options: EngineOptions) {
     /** Ducks a bus by `db` for `seconds`, then ramps back (H §10.2). Loot is never ducked. */
     duck(bus: Bus, db: number, seconds: number) {
       if (bus === "loot") return;
+      const t = ctx.currentTime;
+      const active = ducks.get(bus);
+      if (active && active.until > t && active.db <= db && active.until >= t + seconds) return;
+      ducks.set(bus, {
+        db: active && active.until > t ? Math.min(active.db, db) : db,
+        until: Math.max(active && active.until > t ? active.until : t, t + seconds),
+      });
+      const duck = ducks.get(bus)!;
       const gain = buses[bus].gain;
       const base = dbToGain(AUDIO_TUNING.busDb[bus]);
-      const t = ctx.currentTime;
       gain.cancelScheduledValues(t);
-      gain.setValueAtTime(base * dbToGain(db), t);
-      gain.linearRampToValueAtTime(base, t + seconds);
+      gain.setValueAtTime(base * dbToGain(duck.db), t);
+      gain.linearRampToValueAtTime(base, duck.until);
     },
 
     /** Resumes the context; call from the first user gesture (H §10.3). */
