@@ -51,14 +51,25 @@ function snapshot(oid: string): Snapshot {
 }
 
 let vite: ChildProcess | null = null;
+let stopping = false;
 
 function startVite(): void {
-  vite?.kill();
+  const previous = vite;
+  vite = null;
+  previous?.kill();
   mkdirSync(saves, { recursive: true });
-  vite = spawn("npx", ["vite", "--port", String(port), "--strictPort"], {
+  const child = spawn("npx", ["vite", "--port", String(port), "--strictPort"], {
     cwd: dir,
     stdio: "inherit",
     env: { ...process.env, MVM_SAVES_DIR: saves, MVM_LOG_FILE: logFile },
+  });
+  vite = child;
+  // A crashed Vite (or a port already in use) is reported and retried, never left silent.
+  child.on("exit", (code) => {
+    if (stopping || vite !== child) return;
+    console.error(`[play] Vite exited (code ${code}); restarting in 5 s. Is port ${port} free?`);
+    vite = null;
+    setTimeout(() => !stopping && !vite && startVite(), 5000);
   });
 }
 
@@ -97,6 +108,7 @@ function update(): void {
 update();
 setInterval(update, intervalSeconds * 1000);
 process.on("SIGINT", () => {
+  stopping = true;
   vite?.kill();
   process.exit(0);
 });
