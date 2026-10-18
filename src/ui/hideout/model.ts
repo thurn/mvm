@@ -5,6 +5,7 @@ import { catalogEntry } from "../../heroes/model/catalog";
 import type { Card, HeroInstance } from "../../heroes/model/hero";
 import { generateHero, generateSpell } from "../../heroes/gen/generate";
 import { canEquip, type ItemInstance, type ItemSlot } from "../../heroes/model/item";
+import { starterWeapon } from "../../heroes/model/starter";
 import { createStreams, streamRng } from "../../sim/rng";
 
 /** A roster place: one of the six card slots, or the spell slot. */
@@ -216,9 +217,11 @@ export function rollUnrolled(account: AccountState): number {
       rng,
       id: `stash-${account.nextSeed}-${account.stash.heroes.length}-${i}`,
     };
-    account.stash.heroes.push(
-      drop.kind === "hero" ? generateHero({ ...source, roster }) : generateSpell(source),
-    );
+    const hero = drop.kind === "hero" ? generateHero({ ...source, roster }) : generateSpell(source);
+    account.stash.heroes.push(hero);
+    // A new hero brings its class's starter weapon, so it can fight once slotted (1.39).
+    const weapon = starterWeapon(hero);
+    if (weapon) account.stash.items.push(weapon);
   });
   return drops.length;
 }

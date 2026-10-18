@@ -574,7 +574,15 @@ export function Hideout({
   return (
     <MenuScreen music="hideout">
       <style>{STYLE}</style>
-      <div style={{ textAlign: "left" }}>
+      {/* One box for every tab, so the header and tabs don't jump when switching (1.39). */}
+      <div
+        style={{
+          textAlign: "left",
+          width: 1208,
+          maxWidth: "calc(100vw - 32px)",
+          minHeight: "calc(100vh - 32px)",
+        }}
+      >
         <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
           <h2 style={{ margin: 0 }}>Hideout</h2>
           <span style={{ color: MENU.dim }}>

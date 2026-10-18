@@ -72,6 +72,10 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
     expect(account.stash.heroes).toHaveLength(heroes + 1);
     expect(account.stash.heroes.at(-1)).toEqual(offered[1]);
     expect(account.pendingChoices).toEqual([]);
+    // The hero brings its class's normal starter weapon, so it can fight once slotted (1.39).
+    const weapon = account.stash.items.at(-1)!;
+    expect(weapon.id).toBe(`${offered[1]!.id}-weapon`);
+    expect(weapon.rarity).toBe("normal");
     // A second pick, or a hero that was never offered, writes nothing.
     expect(chooseHero(account, "level-1", offered[0]!.id)).toBe(false);
     expect(account.stash.heroes).toHaveLength(heroes + 1);

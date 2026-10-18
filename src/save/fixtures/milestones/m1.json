@@ -1,0 +1,232 @@
+{
+  "format": 1,
+  "savedAt": "2026-10-18T22:46:18.330Z",
+  "build": "dev",
+  "account": {
+    "schemaVersion": 1,
+    "data": {
+      "focus": "warrior",
+      "roster": {
+        "slots": [
+          {
+            "hero": {
+              "id": "warrior-0-MvM/Heroes/EzomyteAcolyte",
+              "skillId": "MvM/Heroes/EzomyteAcolyte",
+              "level": 4,
+              "xp": 4896,
+              "rarity": "normal",
+              "supports": [],
+              "quality": 0
+            },
+            "weapon": {
+              "id": "warrior-0-MvM/Heroes/EzomyteAcolyte-weapon",
+              "baseId": "Metadata/Items/Weapons/OneHandWeapons/Sceptres/FourSceptre1",
+              "rarity": "normal",
+              "itemLevel": 1,
+              "quality": 0,
+              "mods": [],
+              "implicits": []
+            },
+            "armour": null,
+            "accessory": null
+          },
+          {
+            "hero": {
+              "id": "warrior-1-Metadata/Items/Gems/SkillGemRollingSlam",
+              "skillId": "Metadata/Items/Gems/SkillGemRollingSlam",
+              "level": 4,
+              "xp": 4896,
+              "rarity": "normal",
+              "supports": [],
+              "quality": 0
+            },
+            "weapon": {
+              "id": "warrior-1-Metadata/Items/Gems/SkillGemRollingSlam-weapon",
+              "baseId": "Metadata/Items/Weapons/TwoHandWeapons/TwoHandMaces/FourTwoHandMace1",
+              "rarity": "normal",
+              "itemLevel": 1,
+              "quality": 0,
+              "mods": [],
+              "implicits": []
+            },
+            "armour": null,
+            "accessory": {
+              "id": "af0ddc16-8fbb-47fb-aaa9-4fa2c663f6eb",
+              "baseId": "Metadata/Items/Rings/FourRing1",
+              "rarity": "rare",
+              "itemLevel": 1,
+              "quality": 0,
+              "mods": [
+                {
+                  "modId": "LifeRegeneration1",
+                  "values": [108]
+                },
+                {
+                  "modId": "Strength1",
+                  "values": [7]
+                },
+                {
+                  "modId": "ColdResist1",
+                  "values": [8]
+                },
+                {
+                  "modId": "AddedColdDamage1",
+                  "values": [1, 2]
+                }
+              ],
+              "implicits": [
+                {
+                  "modId": "RingImplicitPhysicalDamage1",
+                  "values": [1, 4]
+                }
+              ]
+            }
+          },
+          {
+            "hero": {
+              "id": "warrior-2-Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+              "skillId": "Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+              "level": 4,
+              "xp": 4896,
+              "rarity": "normal",
+              "supports": [],
+              "quality": 0
+            },
+            "weapon": {
+              "id": "warrior-2-Metadata/Items/Gem/SkillGemArmourPiercingRounds-weapon",
+              "baseId": "Metadata/Items/Weapons/TwoHandWeapons/Crossbows/FourCrossbow1",
+              "rarity": "normal",
+              "itemLevel": 1,
+              "quality": 0,
+              "mods": [],
+              "implicits": []
+            },
+            "armour": null,
+            "accessory": null
+          },
+          {
+            "hero": {
+              "id": "c5f6b63c-8370-40d0-98e0-5486dc1f58e6",
+              "skillId": "Metadata/Items/Gems/SkillGemLightningArrow",
+              "level": 3,
+              "xp": 2346,
+              "rarity": "normal",
+              "supports": [],
+              "quality": 0
+            },
+            "weapon": null,
+            "armour": null,
+            "accessory": null
+          },
+          null,
+          null
+        ],
+        "unlocked": 4,
+        "spell": {
+          "hero": {
+            "id": "warrior-3-Metadata/Items/Gems/SkillGemEarthquake",
+            "skillId": "Metadata/Items/Gems/SkillGemEarthquake",
+            "level": 4,
+            "xp": 4896,
+            "rarity": "normal",
+            "supports": [],
+            "quality": 0
+          },
+          "weapon": null,
+          "armour": null,
+          "accessory": null
+        }
+      },
+      "stash": {
+        "items": [
+          {
+            "id": "f4c489c8-0a5b-4793-89d0-2e1eba66aa69",
+            "baseId": "Metadata/Items/Amulets/FourAmulet1",
+            "rarity": "normal",
+            "itemLevel": 1,
+            "quality": 0,
+            "mods": [],
+            "implicits": [
+              {
+                "modId": "AmuletImplicitLifeRegeneration1",
+                "values": [238]
+              }
+            ]
+          },
+          {
+            "id": "14fd0b54-4bca-49a2-9638-83e2306fa3cd",
+            "baseId": "Metadata/Items/Armours/BodyArmours/FourBodyStrDex1",
+            "rarity": "magic",
+            "itemLevel": 1,
+            "quality": 0,
+            "mods": [
+              {
+                "modId": "LightningResist1",
+                "values": [7]
+              },
+              {
+                "modId": "AttackerTakesDamage1",
+                "values": [2, 3]
+              }
+            ],
+            "implicits": []
+          },
+          {
+            "id": "c490a961-03e5-4851-94b6-9da6c65cbed7",
+            "baseId": "Metadata/Items/Armours/BodyArmours/FourBodyDex1",
+            "rarity": "magic",
+            "itemLevel": 1,
+            "quality": 0,
+            "mods": [
+              {
+                "modId": "ColdResist1",
+                "values": [7]
+              }
+            ],
+            "implicits": []
+          },
+          {
+            "id": "7643b9c5-8c65-4faa-a405-4599826946d9",
+            "baseId": "Metadata/Items/Armours/BodyArmours/FourBodyDex1",
+            "rarity": "magic",
+            "itemLevel": 1,
+            "quality": 0,
+            "mods": [
+              {
+                "modId": "IncreasedLife1",
+                "values": [10]
+              }
+            ],
+            "implicits": []
+          }
+        ],
+        "heroes": [
+          {
+            "id": "stash-2-1-0",
+            "skillId": "Metadata/Items/Gems/SkillGemFallingThunder",
+            "level": 1,
+            "xp": 0,
+            "rarity": "magic",
+            "supports": ["Metadata/Items/Gems/SupportGemChain"],
+            "quality": 0
+          }
+        ],
+        "unrolled": []
+      },
+      "gold": 54,
+      "currency": {
+        "Metadata/Items/Currency/CurrencyAddModToMagic": 1,
+        "Metadata/Items/Currency/CurrencyUpgradeToMagic": 1
+      },
+      "player": {
+        "level": 4,
+        "xp": 4896
+      },
+      "firstClears": ["level-1"],
+      "pendingChoices": [],
+      "activeRun": null,
+      "nextSeed": 4
+    }
+  },
+  "round": null
+}

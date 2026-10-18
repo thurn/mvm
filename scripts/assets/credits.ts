@@ -87,15 +87,23 @@ export class CreditResolver {
     return this.prose("source-of-tales", local, line ?? "See source-of-tales/COPYING.txt");
   }
 
+  /** big-island's AUTHORS.txt lists files under each author's name; credit the one who made this file. */
+  private bigIsland(file: string): Credit {
+    const local = relative("big-island", file);
+    const text = readFileSync(join(this.lpcDir, "big-island/AUTHORS.txt"), "utf8");
+    const author = authorListing(text, basename(file));
+    return this.prose("big-island", local, author ?? "See big-island/AUTHORS.txt");
+  }
+
   /** `file` is relative to the LPC folder (`lpc/` audio is passed without the prefix). */
   lpc(file: string): Credit {
     const pack = file.split("/")[0] ?? "";
     if (pack === "ulpc-generator") return this.ulpc(file);
+    if (pack === "big-island") return this.bigIsland(file);
     if (pack === "lpc-revised") return this.lpcRevised(file);
     if (pack === "source-of-tales") return this.sourceOfTales(file);
     const credits: Record<string, string> = {
       "lpc-tile-atlas": "lpc-tile-atlas/files/Attribution.txt",
-      "big-island": "big-island/AUTHORS.txt",
       "lpc-medieval-village-decorations":
         "lpc-medieval-village-decorations/files/decoration_medieval/CREDITS-decorations-medieval.txt",
     };
@@ -141,4 +149,20 @@ export function creditsModule(credits: readonly Credit[]): string {
     `export const CREDITS: readonly Credit[] = ${JSON.stringify(sorted)};`,
     "",
   ].join("\n");
+}
+
+/**
+ * The author whose list names `file` in an AUTHORS-style text: a name line
+ * followed by indented "- file" lines. Null when no list names it.
+ */
+export function authorListing(text: string, file: string): string | null {
+  let author: string | null = null;
+  for (const line of text.split("\n")) {
+    const trimmed = line.trim();
+    if (trimmed === "" || /^=+$/.test(trimmed)) continue;
+    if (trimmed.startsWith("- ")) {
+      if (trimmed.slice(2).trim() === file && author) return author;
+    } else if (!line.startsWith(" ")) author = trimmed;
+  }
+  return null;
 }

@@ -159,9 +159,12 @@ function LootCard({ drop, upgrade, shown }: { drop: CardDrop; upgrade: boolean; 
       {upgrade && shown && (
         <span
           style={{
+            // Hung over the top-right corner, clear of the centred name and the affix lines.
             position: "absolute",
-            top: 6,
-            left: 6,
+            top: -10,
+            right: -8,
+            zIndex: 1,
+            background: "rgba(8, 8, 10, 0.94)",
             padding: "1px 6px",
             border: "2px solid #40D040",
             color: "#40D040",
@@ -366,7 +369,14 @@ export function LevelEnd({
             {choice ? (
               <>
                 <p style={{ margin: "0 0 8px" }}>Choose 1 of {choice.options.length} heroes</p>
-                <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 10,
+                    justifyContent: "center",
+                    alignItems: "flex-start",
+                  }}
+                >
                   {choice.options.map((hero) => (
                     <button
                       key={hero.id}
@@ -390,7 +400,9 @@ export function LevelEnd({
             ) : (
               account.stash.heroes.length > 0 &&
               summary?.firstClear !== false && (
-                <p style={{ color: MENU.dim }}>Your new hero waits in the hideout stash.</p>
+                <p style={{ color: MENU.dim }}>
+                  Your new hero and its starter weapon wait in the hideout stash.
+                </p>
               )
             )}
           </div>

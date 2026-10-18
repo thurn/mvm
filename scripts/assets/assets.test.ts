@@ -10,6 +10,7 @@ import { SHEET_FORMAT } from "../../src/assets/sheet-format";
 import { SOUNDS } from "../../src/assets/sounds";
 import { GRASSLAND_TILES } from "../../src/assets/tiles";
 import { pack } from "./atlas";
+import { authorListing } from "./credits";
 import { bake, expandPattern } from "./bake";
 import { blank, drawFrameCentred, readPng, recolor } from "./image";
 import { UlpcLibrary } from "./ulpc";
@@ -171,4 +172,30 @@ describe.skipIf(!hasLibraries)("with the libraries", () => {
     }
     expect((await bake(options)).skipped).toBe(true);
   }, 30_000);
+});
+
+describe("credit rules (1.39)", () => {
+  test("an AUTHORS listing credits the person whose list names the file, not the whole file", () => {
+    const text = [
+      "Code authors",
+      "============",
+      "",
+      "This program was written by the following people:",
+      " - Someone Else",
+      "",
+      "Lanea Zimmerman",
+      " - grass.png",
+      " ",
+      "Severin Ibarluzea",
+      " - bump.ogg",
+      " - shoot.ogg",
+    ].join("\n");
+    expect(authorListing(text, "shoot.ogg")).toBe("Severin Ibarluzea");
+    expect(authorListing(text, "grass.png")).toBe("Lanea Zimmerman");
+    expect(authorListing(text, "missing.ogg")).toBeNull();
+  });
+
+  test("no committed credit is a raw multi-section dump", () => {
+    for (const credit of CREDITS) expect(credit.text ?? "").not.toMatch(/={4,}/);
+  });
 });

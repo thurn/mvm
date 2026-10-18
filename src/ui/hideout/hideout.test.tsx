@@ -218,6 +218,8 @@ describe("unrolled hero drops (1.18)", () => {
     expect(a.stash.unrolled).toEqual([]);
     expect(a.stash.heroes.map((h) => h.rarity)).toEqual(["magic", "normal"]);
     expect(isSpell(a.stash.heroes[1]!)).toBe(true);
+    // The hero brings a normal starter weapon; the spell needs none (1.39).
+    expect(a.stash.items.map((i) => i.id)).toEqual([`${a.stash.heroes[0]!.id}-weapon`]);
     const b = make();
     rollUnrolled(b);
     expect(b.stash.heroes).toEqual(a.stash.heroes);

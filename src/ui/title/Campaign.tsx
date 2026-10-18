@@ -40,7 +40,10 @@ export function Campaign({
         )}
         {card("Level 2", "Coming soon", <MenuButton disabled>Locked</MenuButton>, true)}
       </div>
-      <MenuButton onClick={onHideout}>Hideout</MenuButton>
+      {/* Clear of the level cards (1.39 visual review). */}
+      <div style={{ marginTop: 16 }}>
+        <MenuButton onClick={onHideout}>Hideout</MenuButton>
+      </div>
     </MenuScreen>
   );
 }

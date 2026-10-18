@@ -11,10 +11,18 @@ const STARTER_BASES: Readonly<Record<string, string>> = {
   Sceptre: "Rattling Sceptre",
 };
 
-/** A normal starter item of a weapon class, for the account to grant; undefined for classes without one. */
-export function starterItem(itemClass: string, id: string): ItemInstance {
+/** A class's starter base: its named one, else its lowest-level base (spears, staves, one-hand maces). */
+function starterBase(itemClass: string) {
   const name = STARTER_BASES[itemClass];
-  const base = baseItems().find((b) => b.name === name);
+  if (name) return baseItems().find((b) => b.name === name);
+  return baseItems()
+    .filter((b) => b.itemClass === itemClass)
+    .sort((a, b) => a.dropLevel - b.dropLevel || a.name.localeCompare(b.name))[0];
+}
+
+/** A normal starter item of a weapon class, for the account to grant. */
+export function starterItem(itemClass: string, id: string): ItemInstance {
+  const base = starterBase(itemClass);
   if (!base) throw new Error(`no starter base for ${itemClass}`);
   return {
     id,
@@ -32,5 +40,5 @@ export function starterItem(itemClass: string, id: string): ItemInstance {
 
 /** Whether a class has a starter base. */
 export function hasStarterItem(itemClass: string): boolean {
-  return itemClass in STARTER_BASES;
+  return starterBase(itemClass) !== undefined;
 }
