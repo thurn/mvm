@@ -56,17 +56,57 @@ interface MonsterAttack {
   timer: number;
 }
 
-/**
- * A placed hero's skill, resolved from its card at placement (P16): its
- * behavior, cadence, named hits and numbers, and its running counters.
- */
-export interface HeroKit {
-  behavior: string;
+/** One behavior's kit shape: its named hits, numbers and running counters. */
+interface Kit<
+  Behavior extends string,
+  Hits extends string,
+  Numbers extends string,
+  Counters extends string,
+> {
+  behavior: Behavior;
   /** Seconds between actions in play, after `K_heroActionRate`. */
   actionSeconds: number;
-  hits: Record<string, SkillHit>;
-  numbers: Record<string, number>;
-  counters: Record<string, number>;
+  hits: Record<Hits, SkillHit>;
+  numbers: Record<Numbers, number>;
+  counters: Record<Counters, number>;
+}
+
+/** Pierce, fork, chain and extra projectiles, from the card's supports and stats. */
+type ProjectileNumbers = "pierce" | "fork" | "chain" | "additionalProjectiles";
+
+/**
+ * A placed hero's skill, resolved from its card at placement (P16): its
+ * behavior, cadence, named hits and numbers, and its running counters. One
+ * shape per behavior (mason hv-7ic2.100), so a kit missing a hit, number or
+ * counter its behavior reads is a type error rather than a silent zero.
+ * Persisted in the round section with these exact keys.
+ */
+export type HeroKit =
+  | Kit<"acolyte", never, "orbValue", "orbTimer">
+  | Kit<
+      "lightningArrow",
+      "main" | "beam",
+      ProjectileNumbers | "extraTargets" | "beamChains",
+      "actionTimer"
+    >
+  | Kit<
+      "armourPiercingRounds",
+      "main",
+      ProjectileNumbers | "clip" | "reloadSeconds",
+      "actionTimer" | "clipLeft"
+    >
+  | Kit<"spark", "main", ProjectileNumbers | "sparks", "actionTimer">
+  | Kit<"rollingSlam", "first" | "second", "firstRadius" | "secondRadius", "actionTimer">
+  | Kit<"fallingThunder", "slam" | "volley", "volleyProjectiles", "actionTimer" | "slams">
+  | Kit<"iceStrike", "strike" | "final", "finalSeconds", "actionTimer" | "combo">;
+
+export type KitOf<Behavior extends HeroKit["behavior"]> = Extract<HeroKit, { behavior: Behavior }>;
+
+/** Every attacking kit times its actions with `actionTimer`; the acolyte times orbs instead. */
+export type AttackKit = Exclude<HeroKit, { behavior: "acolyte" }>;
+
+export function isAttackKit(kit: HeroKit): kit is AttackKit {
+  return kit.behavior !== "acolyte";
 }
 
 export interface HeroState {

@@ -1,3 +1,4 @@
+import { isAttackKit } from "../../sim/state";
 import type { SpriteEntry } from "../../assets/manifest";
 import { HERO_SPRITES, MONSTER_SPRITES } from "../../assets/recipes";
 import { EASINGS } from "../../juice/core/easing";
@@ -155,7 +156,7 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
       const hero = state.heroes.find((h) => h.id === actor.id);
       const kit = hero?.kit;
       if (!attack || !kit) return { pose: "idle" as const, frame: 0 };
-      const raw = kit.counters.actionTimer ?? 0;
+      const raw = isAttackKit(kit) ? kit.counters.actionTimer : 0;
       const timer = raw > 0 ? Math.max(1e-6, raw - frame.alpha * STEP_SECONDS) : raw;
       const index = v.animator.sample(attack, timer, kit.actionSeconds);
       return { pose: index === 0 ? ("idle" as const) : ("attack" as const), frame: index };

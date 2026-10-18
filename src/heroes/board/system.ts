@@ -3,8 +3,9 @@ import type { SkillHit } from "../../combat/hit";
 import { dealHit } from "../../sim/combat";
 import {
   newInstanceId,
-  type HeroKit,
+  type AttackKit,
   type HeroState,
+  type KitOf,
   type MonsterState,
   type RoundState,
 } from "../../sim/state";
@@ -15,8 +16,6 @@ import { spawnOrb } from "../../sim/economy/orbs";
 import { HERO_BOARD_TUNING } from "../../tuning/heroes";
 import { SIM_TUNING } from "../../tuning/sim";
 import { chainFrom, fire, fireVolley, ON_HIT } from "./projectiles";
-
-type Act = (ctx: StepContext, hero: HeroState, kit: HeroKit) => number | null;
 
 const t = HERO_BOARD_TUNING;
 
@@ -51,7 +50,8 @@ function hitAll(
 
 // Lightning Arrow's beams: up to N extra monsters near the target, each chaining (B H12).
 ON_HIT["lightningArrowBeams"] = (ctx, hero, target) => {
-  const kit = hero.kit!;
+  const kit = hero.kit;
+  if (kit?.behavior !== "lightningArrow") return;
   const near = monstersWithin(ctx.state, target.lane, target.x, t.lightningArrow.beamRadius)
     .filter((m) => m.id !== target.id)
     .sort(
@@ -59,141 +59,135 @@ ON_HIT["lightningArrowBeams"] = (ctx, hero, target) => {
         Math.hypot(a.x - target.x, a.lane - target.lane) -
         Math.hypot(b.x - target.x, b.lane - target.lane),
     )
-    .slice(0, kit.numbers.extraTargets ?? 0);
+    .slice(0, kit.numbers.extraTargets);
   for (const monster of near) {
     const hitIds = [target.id, monster.id];
     const at = { lane: monster.lane, x: monster.x };
-    dealHit(ctx, hero, { kind: "monster", entity: monster }, kit.hits.beam!);
-    chainFrom(ctx, hero, at, kit.hits.beam!, kit.numbers.beamChains ?? 0, hitIds);
+    dealHit(ctx, hero, { kind: "monster", entity: monster }, kit.hits.beam);
+    chainFrom(ctx, hero, at, kit.hits.beam, kit.numbers.beamChains, hitIds);
   }
 };
 
 /** Each behavior acts on its target and returns the seconds until its next action, or null when idle. */
-const ACTIONS: Record<string, Act> = {
-  lightningArrow(ctx, hero, kit) {
-    if (!laneFirst(ctx.state, hero.lane, hero.column, laneRange(hero))) return null;
-    fireVolley(ctx.state, hero, kit.numbers.additionalProjectiles ?? 0, {
-      hit: kit.hits.main!,
-      pierce: kit.numbers.pierce ?? 0,
-      fork: (kit.numbers.fork ?? 0) > 0,
-      chains: kit.numbers.chain ?? 0,
-      onHit: "lightningArrowBeams",
-    });
-    return kit.actionSeconds;
-  },
+function lightningArrow(ctx: StepContext, hero: HeroState, kit: KitOf<"lightningArrow">) {
+  if (!laneFirst(ctx.state, hero.lane, hero.column, laneRange(hero))) return null;
+  fireVolley(ctx.state, hero, kit.numbers.additionalProjectiles, {
+    hit: kit.hits.main,
+    pierce: kit.numbers.pierce,
+    fork: kit.numbers.fork > 0,
+    chains: kit.numbers.chain,
+    onHit: "lightningArrowBeams",
+  });
+  return kit.actionSeconds;
+}
 
-  armourPiercingRounds(ctx, hero, kit) {
-    if (!laneFirst(ctx.state, hero.lane, hero.column, laneRange(hero))) return null;
-    fireVolley(ctx.state, hero, kit.numbers.additionalProjectiles ?? 0, {
-      hit: kit.hits.main!,
-      pierce: kit.numbers.pierce ?? 0,
-      fork: (kit.numbers.fork ?? 0) > 0,
-      chains: kit.numbers.chain ?? 0,
-    });
-    kit.counters.clipLeft = (kit.counters.clipLeft ?? 1) - 1;
-    if (kit.counters.clipLeft > 0) return kit.actionSeconds;
-    kit.counters.clipLeft = kit.numbers.clip ?? 1;
-    return kit.actionSeconds + (kit.numbers.reloadSeconds ?? 0);
-  },
+function armourPiercingRounds(
+  ctx: StepContext,
+  hero: HeroState,
+  kit: KitOf<"armourPiercingRounds">,
+) {
+  if (!laneFirst(ctx.state, hero.lane, hero.column, laneRange(hero))) return null;
+  fireVolley(ctx.state, hero, kit.numbers.additionalProjectiles, {
+    hit: kit.hits.main,
+    pierce: kit.numbers.pierce,
+    fork: kit.numbers.fork > 0,
+    chains: kit.numbers.chain,
+  });
+  kit.counters.clipLeft -= 1;
+  if (kit.counters.clipLeft > 0) return kit.actionSeconds;
+  kit.counters.clipLeft = kit.numbers.clip;
+  return kit.actionSeconds + kit.numbers.reloadSeconds;
+}
 
-  spark(ctx, hero, kit) {
-    const { state } = ctx;
-    const reach = t.spark.laneReach;
-    const inRange = state.monsters.some(
-      (m) =>
-        Math.abs(m.lane - hero.lane) <= reach &&
-        m.x - hero.column >= 0 &&
-        m.x - hero.column <= t.spark.range,
-    );
-    if (!inRange) return null;
-    const group = newInstanceId<"ProjectileGroup">(state);
+function spark(ctx: StepContext, hero: HeroState, kit: KitOf<"spark">) {
+  const { state } = ctx;
+  const reach = t.spark.laneReach;
+  const inRange = state.monsters.some(
+    (m) =>
+      Math.abs(m.lane - hero.lane) <= reach &&
+      m.x - hero.column >= 0 &&
+      m.x - hero.column <= t.spark.range,
+  );
+  if (!inRange) return null;
+  const group = newInstanceId<"ProjectileGroup">(state);
+  const lanes = [hero.lane, hero.lane - 1, hero.lane + 1];
+  for (let i = 0; i < kit.numbers.sparks; i++) {
+    fire(state, hero, lanes[i % 3]!, {
+      hit: kit.hits.main,
+      range: t.spark.range,
+      group,
+      pierce: kit.numbers.pierce,
+    });
+  }
+  return kit.actionSeconds;
+}
+
+function rollingSlam(ctx: StepContext, hero: HeroState, kit: KitOf<"rollingSlam">) {
+  const { state } = ctx;
+  if (inLaneAhead(state, hero, 0, t.rollingSlam.reach).length === 0) return null;
+  const slam = (offset: number, radius: number, hit: SkillHit) =>
+    hitAll(ctx, hero, monstersWithin(state, hero.lane, hero.column + offset, radius), hit);
+  slam(t.rollingSlam.firstOffset, kit.numbers.firstRadius, kit.hits.first);
+  slam(t.rollingSlam.secondOffset, kit.numbers.secondRadius, kit.hits.second);
+  return kit.actionSeconds;
+}
+
+function fallingThunder(ctx: StepContext, hero: HeroState, kit: KitOf<"fallingThunder">) {
+  const { state } = ctx;
+  const ft = t.fallingThunder;
+  if (inLaneAhead(state, hero, 0, ft.reach).length === 0) return null;
+  const cone = [
+    ...inLaneAhead(state, hero, ft.ownLaneFrom - 0.5, ft.reach + 0.5),
+    ...inLaneAhead(state, hero, ft.adjacentLaneFrom - 0.5, ft.reach + 0.5, hero.lane - 1),
+    ...inLaneAhead(state, hero, ft.adjacentLaneFrom - 0.5, ft.reach + 0.5, hero.lane + 1),
+  ];
+  hitAll(ctx, hero, cone, kit.hits.slam);
+  kit.counters.slams += 1;
+  if (kit.counters.slams % ft.volleyEvery === 0) {
     const lanes = [hero.lane, hero.lane - 1, hero.lane + 1];
-    for (let i = 0; i < (kit.numbers.sparks ?? 1); i++) {
-      fire(state, hero, lanes[i % 3]!, {
-        hit: kit.hits.main!,
-        range: t.spark.range,
-        group,
-        pierce: kit.numbers.pierce ?? 0,
-      });
+    for (let i = 0; i < kit.numbers.volleyProjectiles; i++) {
+      if (!state.lanes.includes(lanes[i % 3]!)) continue;
+      fire(state, hero, lanes[i % 3]!, { hit: kit.hits.volley, pierce: Number.MAX_SAFE_INTEGER });
     }
-    return kit.actionSeconds;
-  },
+  }
+  return kit.actionSeconds;
+}
 
-  rollingSlam(ctx, hero, kit) {
-    const { state } = ctx;
-    if (inLaneAhead(state, hero, 0, t.rollingSlam.reach).length === 0) return null;
-    hitAll(
-      ctx,
-      hero,
-      monstersWithin(
-        state,
-        hero.lane,
-        hero.column + t.rollingSlam.firstOffset,
-        kit.numbers.firstRadius ?? 0,
-      ),
-      kit.hits.first,
-    );
-    hitAll(
-      ctx,
-      hero,
-      monstersWithin(
-        state,
-        hero.lane,
-        hero.column + t.rollingSlam.secondOffset,
-        kit.numbers.secondRadius ?? 0,
-      ),
-      kit.hits.second,
-    );
-    return kit.actionSeconds;
-  },
+function iceStrike(ctx: StepContext, hero: HeroState, kit: KitOf<"iceStrike">) {
+  const { state } = ctx;
+  const final = kit.counters.combo === t.iceStrike.combo - 1;
+  const reach = final ? t.iceStrike.finalReach : t.meleeReach;
+  const target = mostAdvanced(inLaneAhead(state, hero, -0.5, reach + 0.5));
+  if (!target) return null;
+  dealHit(ctx, hero, { kind: "monster", entity: target }, final ? kit.hits.final : kit.hits.strike);
+  kit.counters.combo = final ? 0 : kit.counters.combo + 1;
+  return final ? kit.numbers.finalSeconds : kit.actionSeconds;
+}
 
-  fallingThunder(ctx, hero, kit) {
-    const { state } = ctx;
-    const ft = t.fallingThunder;
-    if (inLaneAhead(state, hero, 0, ft.reach).length === 0) return null;
-    const cone = [
-      ...inLaneAhead(state, hero, ft.ownLaneFrom - 0.5, ft.reach + 0.5),
-      ...inLaneAhead(state, hero, ft.adjacentLaneFrom - 0.5, ft.reach + 0.5, hero.lane - 1),
-      ...inLaneAhead(state, hero, ft.adjacentLaneFrom - 0.5, ft.reach + 0.5, hero.lane + 1),
-    ];
-    hitAll(ctx, hero, cone, kit.hits.slam);
-    kit.counters.slams = (kit.counters.slams ?? 0) + 1;
-    if (kit.counters.slams % ft.volleyEvery === 0) {
-      const lanes = [hero.lane, hero.lane - 1, hero.lane + 1];
-      for (let i = 0; i < (kit.numbers.volleyProjectiles ?? 3); i++) {
-        if (!state.lanes.includes(lanes[i % 3]!)) continue;
-        fire(state, hero, lanes[i % 3]!, {
-          hit: kit.hits.volley!,
-          pierce: Number.MAX_SAFE_INTEGER,
-        });
-      }
-    }
-    return kit.actionSeconds;
-  },
+/** One action of an attacking kit, by behavior; the switch is exhaustive, so a new behavior must act. */
+function act(ctx: StepContext, hero: HeroState, kit: AttackKit): number | null {
+  switch (kit.behavior) {
+    case "lightningArrow":
+      return lightningArrow(ctx, hero, kit);
+    case "armourPiercingRounds":
+      return armourPiercingRounds(ctx, hero, kit);
+    case "spark":
+      return spark(ctx, hero, kit);
+    case "rollingSlam":
+      return rollingSlam(ctx, hero, kit);
+    case "fallingThunder":
+      return fallingThunder(ctx, hero, kit);
+    case "iceStrike":
+      return iceStrike(ctx, hero, kit);
+  }
+}
 
-  iceStrike(ctx, hero, kit) {
-    const { state } = ctx;
-    const final = (kit.counters.combo ?? 0) === t.iceStrike.combo - 1;
-    const reach = final ? t.iceStrike.finalReach : t.meleeReach;
-    const target = mostAdvanced(inLaneAhead(state, hero, -0.5, reach + 0.5));
-    if (!target) return null;
-    dealHit(
-      ctx,
-      hero,
-      { kind: "monster", entity: target },
-      final ? kit.hits.final! : kit.hits.strike!,
-    );
-    kit.counters.combo = final ? 0 : (kit.counters.combo ?? 0) + 1;
-    return final ? (kit.numbers.finalSeconds ?? kit.actionSeconds) : kit.actionSeconds;
-  },
-};
-
-function acolyte(ctx: StepContext, hero: HeroState, kit: HeroKit) {
-  kit.counters.orbTimer = (kit.counters.orbTimer ?? 0) - STEP_SECONDS;
+function acolyte(ctx: StepContext, hero: HeroState, kit: KitOf<"acolyte">) {
+  kit.counters.orbTimer -= STEP_SECONDS;
   if (kit.counters.orbTimer > 1e-9) return;
   kit.counters.orbTimer += kit.actionSeconds;
   spawnOrb(ctx, {
-    amount: kit.numbers.orbValue ?? 0,
+    amount: kit.numbers.orbValue,
     source: "acolyte",
     lane: hero.lane,
     x: hero.column,
@@ -218,11 +212,10 @@ export const heroSystem: System = {
       }
       const speed = effectiveSpeed(hero.actor, "normal");
       if (speed <= 0) continue;
-      kit.counters.actionTimer = (kit.counters.actionTimer ?? 0) - STEP_SECONDS * speed;
+      kit.counters.actionTimer -= STEP_SECONDS * speed;
       if (kit.counters.actionTimer > 1e-9) continue;
-      const next = ACTIONS[kit.behavior]?.(ctx, hero, kit);
-      kit.counters.actionTimer =
-        next === null || next === undefined ? 0 : kit.counters.actionTimer + next;
+      const next = act(ctx, hero, kit);
+      kit.counters.actionTimer = next === null ? 0 : kit.counters.actionTimer + next;
     }
   },
 };

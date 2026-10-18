@@ -27,8 +27,12 @@ export const equipAb: Scene = {
       const hero = state.heroes.at(-1)!;
       if (!upgrade) return;
       Object.assign(hero.actor.stats, upgrade.stats);
-      if (upgrade.projectiles && hero.kit)
-        hero.kit.numbers.additionalProjectiles = upgrade.projectiles;
+      const kit = hero.kit;
+      if (
+        upgrade.projectiles &&
+        (kit?.behavior === "lightningArrow" || kit?.behavior === "armourPiercingRounds")
+      )
+        kit.numbers.additionalProjectiles = upgrade.projectiles;
     };
     place(SKILLS.armourPiercingRounds, 0);
     place(SKILLS.armourPiercingRounds, 1, { stats: { "physical_converted_to_cold_%": 100 } });

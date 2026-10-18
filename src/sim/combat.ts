@@ -1,3 +1,4 @@
+import { isAttackKit } from "./state";
 import type { Actor } from "../combat/actor";
 import { applyHitAilments } from "../combat/ailments";
 import type { SkillHit } from "../combat/hit";
@@ -91,9 +92,8 @@ export function dealHit(ctx: StepContext, source: HitSource, target: HitTarget, 
       if (kind === "light" && target.kind === "monster" && target.entity.attack) {
         target.entity.attack.timer += AILMENT_TUNING.lightStunAttackDelaySeconds;
       }
-      if (kind === "light" && target.kind === "hero" && target.entity.kit) {
-        target.entity.kit.counters.actionTimer = target.entity.kit.actionSeconds;
-      }
+      const kit = target.kind === "hero" ? target.entity.kit : undefined;
+      if (kind === "light" && kit && isAttackKit(kit)) kit.counters.actionTimer = kit.actionSeconds;
     } else {
       ctx.emit({
         type: "ailmentApplied",

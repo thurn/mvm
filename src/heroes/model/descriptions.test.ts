@@ -19,7 +19,8 @@ describe("hero descriptions (playtest hv-7ic2.83)", () => {
     const skillId = "Metadata/Items/Gems/SkillGemIceStrike";
     const card = starterCard(id<"Gem">(skillId), 1);
     const gem = heroGems().find((g) => g.id === skillId);
-    const kit = buildKit(skillId, { sheet: aggregate(card), gem })!;
+    const kit = buildKit(skillId, { sheet: aggregate(card), gem });
+    if (kit?.behavior !== "iceStrike") throw new Error("not an Ice Strike kit");
     expect(kit.numbers.finalSeconds).toBeGreaterThan(kit.actionSeconds);
     expect(heroDescription(skillId).text).toContain("slower");
   });

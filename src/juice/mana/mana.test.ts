@@ -1,3 +1,11 @@
+import { placeHero } from "../../heroes/board/place";
+import { starterCard } from "../../heroes/model/starter";
+import { createLayerStack } from "../../render/layers";
+import { createRound } from "../../sim/state";
+import { id } from "../../types/ids";
+import { createSettings } from "../core/settings";
+import { createPresentation } from "../director/systems";
+import { manaSystem } from "./system";
 import { describe, expect, test } from "vitest";
 import { MANA_JUICE } from "../../tuning/juice";
 import { ManaCounter, orbFlight, orbOffset, orbSize, placementPose, shovelPose } from "./timeline";
@@ -58,5 +66,39 @@ describe("placement (H §5.2)", () => {
   test("a shovelled hero sinks 8 px and fades out over 200 ms", () => {
     expect(shovelPose(100)).toEqual({ dy: 4, alpha: 0.5, done: false });
     expect(shovelPose(200)).toMatchObject({ dy: 8, alpha: 0, done: true });
+  });
+});
+
+describe("the acolyte's crook glow (H §3.6; found by mason hv-7ic2.100)", () => {
+  test("it shows in the last 0.8 s before an orb, and not before", () => {
+    const state = createRound({ seed: 3, lanes: [1, 2, 3], mana: 0 });
+    placeHero(state, starterCard(id<"Gem">("MvM/Heroes/EzomyteAcolyte"), 1, "a"), 2, 1);
+    const kit = state.heroes[0]!.kit!;
+    if (kit.behavior !== "acolyte") throw new Error("not an acolyte");
+    const stack = createLayerStack();
+    createPresentation({
+      stack,
+      settings: createSettings(null),
+      now: () => 0,
+      speed: () => 1,
+      factories: [manaSystem],
+    });
+    const arcs = (orbTimer: number) => {
+      kit.counters.orbTimer = orbTimer;
+      let count = 0;
+      const ctx = new Proxy({} as CanvasRenderingContext2D, {
+        get: (_target, key) =>
+          key === "arc"
+            ? () => void count++
+            : typeof key === "string"
+              ? () => ({ addColorStop() {} })
+              : undefined,
+        set: () => true,
+      });
+      stack.draw(ctx, { state, previousX: new Map(), alpha: 0, shake: { x: 0, y: 0 }, now: 0 });
+      return count;
+    };
+    expect(arcs(5)).toBe(0);
+    expect(arcs(0.4)).toBeGreaterThan(0);
   });
 });

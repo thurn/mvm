@@ -80,7 +80,9 @@ describe("Appendix A §1.3 with the real starter hero and monster", () => {
     const card = starterCard(id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"), 1);
     const sheet = aggregate(card);
     const gem = heroGems().find((g) => g.id === card.hero.skillId);
-    const arrow = buildKit(card.hero.skillId, { sheet, gem })!.hits.main!;
+    const kit = buildKit(card.hero.skillId, { sheet, gem });
+    if (kit?.behavior !== "lightningArrow") throw new Error("not a Lightning Arrow kit");
+    const arrow = kit.hits.main;
     const perHit = resolveHit(sheet.actor, shambler.actor, arrow, constantRng(0.5)).lifeLost;
     const hits = Math.ceil(shambler.actor.maxLife / perHit);
     expect(hits >= 8 && hits <= 10).toBe(!KNOWN_MISSES.has("hitsToKill:lightningArrow"));

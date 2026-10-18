@@ -69,7 +69,8 @@ export const manaSystem: PresentationFactory = ({ stack, settings, now }) => {
     for (const hero of state.heroes) {
       const kit = hero.kit;
       if (kit?.behavior !== "acolyte") continue;
-      const left = kit.counters.actionTimer ?? Infinity;
+      // The acolyte times its orbs with orbTimer; it never had an actionTimer, so this glow never showed.
+      const left = kit.counters.orbTimer;
       const leftMs = left * 1000;
       if (leftMs > M.acolyteGlowMs || leftMs <= 0) {
         charging.delete(hero.id);
