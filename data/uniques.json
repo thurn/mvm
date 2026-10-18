@@ -1,0 +1,699 @@
+[
+ {
+  "id": "Mist Whisper",
+  "name": "Mist Whisper",
+  "itemClass": "Crossbow",
+  "visualId": "FourUniqueCrossbow1",
+  "baseId": "Metadata/Items/Weapons/TwoHandWeapons/Crossbows/FourCrossbow1",
+  "mods": [
+   {
+    "id": "UniqueLocalAddedColdDamage4",
+    "stats": [
+     {
+      "id": "local_minimum_added_cold_damage",
+      "min": 8,
+      "max": 10
+     },
+     {
+      "id": "local_maximum_added_cold_damage",
+      "min": 13,
+      "max": 15
+     }
+    ]
+   },
+   {
+    "id": "UniqueManaGainedFromEnemyDeath7",
+    "stats": [
+     {
+      "id": "base_mana_gained_on_enemy_death",
+      "min": 5,
+      "max": 5
+     }
+    ]
+   },
+   {
+    "id": "UniqueFreezeDamageIncrease3",
+    "stats": [
+     {
+      "id": "hit_damage_freeze_multiplier_+%",
+      "min": 30,
+      "max": 50
+     }
+    ]
+   },
+   {
+    "id": "UniqueChillDuration1",
+    "stats": [
+     {
+      "id": "chill_duration_+%",
+      "min": 30,
+      "max": 30
+     }
+    ]
+   },
+   {
+    "id": "UniqueAdditionalAttackChain1",
+    "stats": [
+     {
+      "id": "attacks_num_of_additional_chains",
+      "min": 2,
+      "max": 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Splinter of Loratta",
+  "name": "Splinter of Lorrata",
+  "itemClass": "Spear",
+  "visualId": "FourUniqueSpear1",
+  "baseId": "Metadata/Items/Weapons/OneHandWeapons/OneHandSpears/FourSpear1",
+  "mods": [
+   {
+    "id": "UniqueLocalAddedPhysicalDamage3",
+    "stats": [
+     {
+      "id": "local_minimum_added_physical_damage",
+      "min": 2,
+      "max": 3
+     },
+     {
+      "id": "local_maximum_added_physical_damage",
+      "min": 6,
+      "max": 8
+     }
+    ]
+   },
+   {
+    "id": "DealNoElementalDamageUnique__1",
+    "stats": [
+     {
+      "id": "deal_no_elemental_damage",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   },
+   {
+    "id": "UniqueLocalWeaponRangeIncrease1",
+    "stats": [
+     {
+      "id": "local_+%_weapon_range",
+      "min": 20,
+      "max": 20
+     }
+    ]
+   },
+   {
+    "id": "UniqueLocalInfinitePoisonStackCount1",
+    "stats": [
+     {
+      "id": "local_hits_with_this_weapon_ignore_poison_limit",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   },
+   {
+    "id": "UniqueLocalPoisonOnHit1",
+    "stats": [
+     {
+      "id": "local_poison_on_hit_%",
+      "min": 100,
+      "max": 100
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "The Blood Thorn",
+  "name": "The Blood Thorn",
+  "itemClass": "Warstaff",
+  "visualId": "FourUniqueQuarterstaff1",
+  "baseId": "Metadata/Items/Weapons/TwoHandWeapons/Staves/FourQuarterstaff1",
+  "mods": [
+   {
+    "id": "UniqueLocalAddedPhysicalDamage2",
+    "stats": [
+     {
+      "id": "local_minimum_added_physical_damage",
+      "min": 8,
+      "max": 12
+     },
+     {
+      "id": "local_maximum_added_physical_damage",
+      "min": 16,
+      "max": 18
+     }
+    ]
+   },
+   {
+    "id": "UniqueCausesBleeding1",
+    "stats": [
+     {
+      "id": "local_bleed_on_hit",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   },
+   {
+    "id": "UniqueAttackerTakesDamage1",
+    "stats": [
+     {
+      "id": "thorns_minimum_base_physical_damage",
+      "min": 4,
+      "max": 5
+     },
+     {
+      "id": "thorns_maximum_base_physical_damage",
+      "min": 8,
+      "max": 10
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Sanguine Diviner",
+  "name": "Sanguine Diviner",
+  "itemClass": "Wand",
+  "visualId": "FourUniqueWand2",
+  "baseId": "Metadata/Items/Weapons/OneHandWeapons/Wands/FourWand2",
+  "mods": [
+   {
+    "id": "UniqueLifeGainedFromEnemyDeath7",
+    "stats": [
+     {
+      "id": "base_life_gained_on_enemy_death",
+      "min": 10,
+      "max": 15
+     }
+    ]
+   },
+   {
+    "id": "UniqueGlobalChanceToBleed3",
+    "stats": [
+     {
+      "id": "base_chance_to_inflict_bleeding_%",
+      "min": 25,
+      "max": 25
+     }
+    ]
+   },
+   {
+    "id": "UniqueSpellLifeCostPercent1",
+    "stats": [
+     {
+      "id": "spells_cost_life_instead_of_mana_%",
+      "min": 25,
+      "max": 25
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Enfolding Dawn",
+  "name": "Enfolding Dawn",
+  "itemClass": "Body Armour",
+  "visualId": "FourUniqueBodyStrInt1_",
+  "baseId": "Metadata/Items/Armours/BodyArmours/FourBodyStrInt1",
+  "mods": [
+   {
+    "id": "UniqueNoManaPerIntelligence1",
+    "stats": [
+     {
+      "id": "gain_no_inherent_bonus_from_intelligence",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Bramblejack",
+  "name": "Bramblejack",
+  "itemClass": "Body Armour",
+  "visualId": "FourUniqueBodyStr1",
+  "baseId": "Metadata/Items/Armours/BodyArmours/FourBodyStr1",
+  "mods": [
+   {
+    "id": "UniqueCannotEvade1",
+    "stats": [
+     {
+      "id": "base_cannot_evade",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   },
+   {
+    "id": "UniquePhysicalDamageTakenPercentToReflect1",
+    "stats": [
+     {
+      "id": "melee_physical_damage_taken_%_to_deal_to_attacker",
+      "min": 250,
+      "max": 250
+     }
+    ]
+   },
+   {
+    "id": "UniqueLifeRegenerationWhileSurrounded1",
+    "stats": [
+     {
+      "id": "life_regeneration_rate_per_minute_%_while_surrounded",
+      "min": 300,
+      "max": 300
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Frostbreath",
+  "name": "Frostbreath",
+  "itemClass": "Mace",
+  "visualId": "FourUniqueOneHandMace3",
+  "baseId": "Metadata/Items/Weapons/OneHandWeapons/OneHandMaces/FourOneHandMace3",
+  "mods": [
+   {
+    "id": "UniqueLocalAddedPhysicalDamage4",
+    "stats": [
+     {
+      "id": "local_minimum_added_physical_damage",
+      "min": 8,
+      "max": 12
+     },
+     {
+      "id": "local_maximum_added_physical_damage",
+      "min": 16,
+      "max": 20
+     }
+    ]
+   },
+   {
+    "id": "UniqueLocalAddedColdDamage2",
+    "stats": [
+     {
+      "id": "local_minimum_added_cold_damage",
+      "min": 8,
+      "max": 12
+     },
+     {
+      "id": "local_maximum_added_cold_damage",
+      "min": 16,
+      "max": 20
+     }
+    ]
+   },
+   {
+    "id": "UniqueLocalAllDamageCanFreeze1",
+    "stats": [
+     {
+      "id": "local_all_damage_can_freeze",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   },
+   {
+    "id": "UniqueLocalCullingStrikeFrozenEnemies1",
+    "stats": [
+     {
+      "id": "local_cull_frozen_enemies_on_hit",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Brain Rattler",
+  "name": "Brain Rattler",
+  "itemClass": "Mace",
+  "visualId": "FourUniqueTwoHandMace4",
+  "baseId": "Metadata/Items/Weapons/TwoHandWeapons/TwoHandMaces/FourTwoHandMace4",
+  "mods": [
+   {
+    "id": "UniqueLocalAddedLightningDamage10",
+    "stats": [
+     {
+      "id": "local_minimum_added_lightning_damage",
+      "min": 1,
+      "max": 1
+     },
+     {
+      "id": "local_maximum_added_lightning_damage",
+      "min": 110,
+      "max": 115
+     }
+    ]
+   },
+   {
+    "id": "UniqueLocalAllDamageCanElectrocute1",
+    "stats": [
+     {
+      "id": "local_all_damage_can_electrocute",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Font of Power",
+  "name": "Font of Power",
+  "itemClass": "Sceptre",
+  "visualId": "FourUniqueSceptre4",
+  "baseId": "Metadata/Items/Weapons/OneHandWeapons/Sceptres/FourSceptre4",
+  "mods": []
+ },
+ {
+  "id": "Doomgate",
+  "name": "Doomgate",
+  "itemClass": "Shield",
+  "visualId": "FourUniqueShieldStr3",
+  "baseId": "Metadata/Items/Armours/Shields/FourShieldStr3",
+  "mods": [
+   {
+    "id": "UniqueLocalBlockChance2",
+    "stats": [
+     {
+      "id": "local_block_chance_+%",
+      "min": 80,
+      "max": 100
+     }
+    ]
+   },
+   {
+    "id": "UniqueBaseBlockDamageTaken1",
+    "stats": [
+     {
+      "id": "base_block_%_damage_taken",
+      "min": 25,
+      "max": 40
+     }
+    ]
+   },
+   {
+    "id": "UniqueCullingStrikeOnBlock1",
+    "stats": [
+     {
+      "id": "culling_strike_enemies_on_block",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Levinstone",
+  "name": "Levinstone",
+  "itemClass": "Ring",
+  "visualId": "FourUniqueRing13",
+  "baseId": "Metadata/Items/Rings/FourRing5",
+  "mods": [
+   {
+    "id": "RingImplicitLightningResistance1",
+    "stats": [
+     {
+      "id": "base_lightning_damage_resistance_%",
+      "min": 20,
+      "max": 30
+     }
+    ]
+   },
+   {
+    "id": "UniqueShockChanceIncrease2",
+    "stats": [
+     {
+      "id": "shock_chance_+%",
+      "min": 10,
+      "max": 20
+     }
+    ]
+   },
+   {
+    "id": "UniqueLightningSpellsChain1",
+    "stats": [
+     {
+      "id": "lightning_skill_additional_chains",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   },
+   {
+    "id": "UniqueShockEffect1",
+    "stats": [
+     {
+      "id": "shock_effect_+%",
+      "min": 10,
+      "max": 20
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Doomfletch",
+  "name": "Doomfletch",
+  "itemClass": "Bow",
+  "visualId": "FourUniqueBow5",
+  "baseId": "Metadata/Items/Weapons/TwoHandWeapons/Bows/FourBow5",
+  "mods": [
+   {
+    "id": "UniqueLocalAddedPhysicalDamage7",
+    "stats": [
+     {
+      "id": "local_minimum_added_physical_damage",
+      "min": 5,
+      "max": 7
+     },
+     {
+      "id": "local_maximum_added_physical_damage",
+      "min": 10,
+      "max": 12
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Sculpted Suffering",
+  "name": "Sculpted Suffering",
+  "itemClass": "Mace",
+  "visualId": "FourUniqueOneHandMace5__",
+  "baseId": "Metadata/Items/Weapons/OneHandWeapons/OneHandMaces/FourOneHandMace5",
+  "mods": [
+   {
+    "id": "MaceImplicitCriticalMultiplier1",
+    "stats": [
+     {
+      "id": "local_critical_strike_multiplier_+",
+      "min": 5,
+      "max": 10
+     }
+    ]
+   },
+   {
+    "id": "UniqueLocalAddedPhysicalDamage18",
+    "stats": [
+     {
+      "id": "local_minimum_added_physical_damage",
+      "min": 21,
+      "max": 26
+     },
+     {
+      "id": "local_maximum_added_physical_damage",
+      "min": 25,
+      "max": 31
+     }
+    ]
+   },
+   {
+    "id": "UniqueLocalArmourBreakOnDamage1",
+    "stats": [
+     {
+      "id": "local_armour_break_damage_%_dealt_as_armour_break",
+      "min": 40,
+      "max": 40
+     }
+    ]
+   },
+   {
+    "id": "UniqueFullyArmourBrokenShatterOnKill1",
+    "stats": [
+     {
+      "id": "shatter_on_kill_if_fully_broken_armour",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Ming's Heart",
+  "name": "Ming's Heart",
+  "itemClass": "Ring",
+  "visualId": "FourUniqueRing16",
+  "baseId": "Metadata/Items/Rings/FourRing6",
+  "mods": [
+   {
+    "id": "RingImplicitChaosResistance1",
+    "stats": [
+     {
+      "id": "base_chaos_damage_resistance_%",
+      "min": 7,
+      "max": 13
+     }
+    ]
+   },
+   {
+    "id": "UniqueDamageAddedAsChaos1",
+    "stats": [
+     {
+      "id": "non_skill_base_all_damage_%_to_gain_as_chaos",
+      "min": 30,
+      "max": 40
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Fixation of Yix",
+  "name": "Fixation of Yix",
+  "itemClass": "Amulet",
+  "visualId": "FourUniqueAmulet16",
+  "baseId": "Metadata/Items/Amulets/FourAmulet8",
+  "mods": [
+   {
+    "id": "AmuletImplicitAllAttributes1",
+    "stats": [
+     {
+      "id": "additional_all_attributes",
+      "min": 5,
+      "max": 7
+     }
+    ]
+   },
+   {
+    "id": "UniqueNearbyAlliesCriticalStrikeChance2",
+    "stats": [
+     {
+      "id": "allies_in_presence_critical_strike_chance_+%",
+      "min": 30,
+      "max": 50
+     }
+    ]
+   },
+   {
+    "id": "UniqueNearbyAlliesCriticalMultiplier1",
+    "stats": [
+     {
+      "id": "allies_in_presence_critical_strike_multiplier_+",
+      "min": 30,
+      "max": 50
+     }
+    ]
+   },
+   {
+    "id": "UniqueNearbyAlliesIncreasedAttackSpeed1",
+    "stats": [
+     {
+      "id": "allies_in_presence_attack_speed_+%",
+      "min": 10,
+      "max": 20
+     }
+    ]
+   },
+   {
+    "id": "UniqueNearbyAlliesIncreasedCastSpeed1",
+    "stats": [
+     {
+      "id": "allies_in_presence_cast_speed_+%",
+      "min": 10,
+      "max": 20
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Death's Harp",
+  "name": "Death's Harp",
+  "itemClass": "Bow",
+  "visualId": "FourUniqueBow6",
+  "baseId": "Metadata/Items/Weapons/TwoHandWeapons/Bows/FourBow6",
+  "mods": [
+   {
+    "id": "BowImplicitAdditionalArrows1",
+    "stats": [
+     {
+      "id": "chance_to_fire_1_additional_projectile_%_with_rollover_with_bow_attacks",
+      "min": 50,
+      "max": 50
+     }
+    ]
+   },
+   {
+    "id": "UniqueLocalCriticalMultiplier1",
+    "stats": [
+     {
+      "id": "local_critical_strike_multiplier_+",
+      "min": 20,
+      "max": 25
+     }
+    ]
+   },
+   {
+    "id": "UniqueManaGainedFromEnemyDeath6",
+    "stats": [
+     {
+      "id": "base_mana_gained_on_enemy_death",
+      "min": 12,
+      "max": 18
+     }
+    ]
+   },
+   {
+    "id": "UniqueAdditionalArrowChance1",
+    "stats": [
+     {
+      "id": "chance_to_fire_1_additional_projectile_%_with_rollover_with_bow_attacks",
+      "min": 250,
+      "max": 330
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Sire of Shards",
+  "name": "Sire of Shards",
+  "itemClass": "Staff",
+  "visualId": "FourUniqueStaff6",
+  "baseId": "Metadata/Items/Weapons/TwoHandWeapons/Staves/FourStaff6",
+  "mods": [
+   {
+    "id": "UniqueSpellAdditionalProjectilesInCircle1",
+    "stats": [
+     {
+      "id": "spell_projectile_skills_fire_X_additional_projectiles_in_a_circle",
+      "min": 4,
+      "max": 4
+     }
+    ]
+   }
+  ]
+ }
+]

@@ -1,0 +1,16 @@
+{
+  "218": {
+    "base_version": null,
+    "id": "Mist Whisper",
+    "inventory_height": 4,
+    "inventory_width": 2,
+    "is_alternate_art": false,
+    "item_class": "Crossbow",
+    "name": "Mist Whisper",
+    "renamed_version": null,
+    "visual_identity": {
+      "dds_file": "Art/2DItems/Weapons/TwoHandWeapons/Crossbows/Uniques/MistWhisper.dds",
+      "id": "FourUniqueCrossbow1"
+    }
+  }
+}

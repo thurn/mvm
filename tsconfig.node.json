@@ -12,8 +12,17 @@
     "noUnusedParameters": true,
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["vite.config.ts", "eslint.config.js", "scripts", "tests"]
+  "include": [
+    "vite.config.ts",
+    "eslint.config.js",
+    "scripts",
+    "tests",
+    "src/data",
+    "src/combat/stats.ts",
+    "src/types"
+  ]
 }

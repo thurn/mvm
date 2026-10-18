@@ -1,0 +1,92 @@
+[
+ {
+  "id": "Metadata/Items/Currency/CurrencyUpgradeToMagic",
+  "name": "Orb of Transmutation",
+  "dropLevel": 1,
+  "description": "Upgrades a [ItemRarity|Normal] item to a [ItemRarity|Magic] item with 1 modifier"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyAddModToMagic",
+  "name": "Orb of Augmentation",
+  "dropLevel": 1,
+  "description": "Augments a [ItemRarity|Magic] item with a new random modifier"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyUpgradeMagicToRare",
+  "name": "Regal Orb",
+  "dropLevel": 5,
+  "description": "Upgrades a [ItemRarity|Magic] item to a [ItemRarity|Rare] item, adding 1 modifier"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyAddModToRare",
+  "name": "Exalted Orb",
+  "dropLevel": 5,
+  "description": "Augments a [ItemRarity|Rare] item with a new random modifier"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyRerollRare",
+  "name": "Chaos Orb",
+  "dropLevel": 12,
+  "description": "Removes a random modifier and augments a [ItemRarity|Rare] item with a new random modifier"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyUpgradeToRare",
+  "name": "Orb of Alchemy",
+  "dropLevel": 5,
+  "description": "Upgrades a [ItemRarity|Normal] or [ItemRarity|Magic] item to a [ItemRarity|Rare] item with 4 random modifiers"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyRemoveMod",
+  "name": "Orb of Annulment",
+  "dropLevel": 35,
+  "description": "Removes a random modifier from an item"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyModValues",
+  "name": "Divine Orb",
+  "dropLevel": 35,
+  "description": "Randomises the numeric values of modifiers on an item"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyCorrupt",
+  "name": "Vaal Orb",
+  "dropLevel": 35,
+  "description": "Modifies an item unpredictably and [Corrupted|Corrupts] it"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyAddSkillGemSocket3",
+  "name": "Lesser Jeweller's Orb",
+  "dropLevel": 25,
+  "description": "Sets a Skill Gem to have 3 Support Gem Sockets"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyAddSkillGemSocket4",
+  "name": "Greater Jeweller's Orb",
+  "dropLevel": 45,
+  "description": "Sets a Skill Gem to have 4 Support Gem Sockets"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyAddSkillGemSocket5",
+  "name": "Perfect Jeweller's Orb",
+  "dropLevel": 65,
+  "description": "Sets a Skill Gem to have 5 Support Gem Sockets"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyGemQuality",
+  "name": "Gemcutter's Prism",
+  "dropLevel": 12,
+  "description": "Improves the [Quality|quality] of a Skill Gem"
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyUpgradeToMagicShard",
+  "name": "Transmutation Shard",
+  "dropLevel": 1,
+  "description": ""
+ },
+ {
+  "id": "Metadata/Items/Currency/CurrencyUpgradeMagicToRareShard",
+  "name": "Regal Shard",
+  "dropLevel": 5,
+  "description": ""
+ }
+]

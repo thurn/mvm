@@ -1,0 +1,141 @@
+[
+  {
+    "id": "FourUniqueCrossbow1",
+    "base": "FourCrossbow1",
+    "mods": [
+      "UniqueLocalAddedColdDamage4",
+      "UniqueManaGainedFromEnemyDeath7",
+      "UniqueFreezeDamageIncrease3",
+      "UniqueChillDuration1",
+      "UniqueAdditionalAttackChain1"
+    ]
+  },
+  {
+    "id": "FourUniqueSpear1",
+    "base": "FourSpear1",
+    "mods": [
+      "UniqueLocalAddedPhysicalDamage3",
+      "DealNoElementalDamageUnique__1",
+      "UniqueLocalWeaponRangeIncrease1",
+      "UniqueLocalInfinitePoisonStackCount1",
+      "UniqueLocalPoisonOnHit1"
+    ]
+  },
+  {
+    "id": "FourUniqueQuarterstaff1",
+    "base": "FourQuarterstaff1",
+    "mods": [
+      "UniqueLocalAddedPhysicalDamage2",
+      "UniqueCausesBleeding1",
+      "UniqueAttackerTakesDamage1"
+    ]
+  },
+  {
+    "id": "FourUniqueWand2",
+    "base": "FourWand2",
+    "mods": [
+      "UniqueLifeGainedFromEnemyDeath7",
+      "UniqueGlobalChanceToBleed3",
+      "UniqueSpellLifeCostPercent1"
+    ]
+  },
+  {
+    "id": "FourUniqueBodyStrInt1_",
+    "base": "FourBodyStrInt1",
+    "mods": ["UniqueNoManaPerIntelligence1"]
+  },
+  {
+    "id": "FourUniqueBodyStr1",
+    "base": "FourBodyStr1",
+    "mods": [
+      "UniqueCannotEvade1",
+      "UniquePhysicalDamageTakenPercentToReflect1",
+      "UniqueLifeRegenerationWhileSurrounded1"
+    ]
+  },
+  {
+    "id": "FourUniqueOneHandMace3",
+    "base": "FourOneHandMace3",
+    "mods": [
+      "UniqueLocalAddedPhysicalDamage4",
+      "UniqueLocalAddedColdDamage2",
+      "UniqueLocalAllDamageCanFreeze1",
+      "UniqueLocalCullingStrikeFrozenEnemies1"
+    ]
+  },
+  {
+    "id": "FourUniqueTwoHandMace4",
+    "base": "FourTwoHandMace4",
+    "mods": ["UniqueLocalAddedLightningDamage10", "UniqueLocalAllDamageCanElectrocute1"]
+  },
+  {
+    "id": "FourUniqueSceptre4",
+    "base": "FourSceptre4",
+    "mods": []
+  },
+  {
+    "id": "FourUniqueShieldStr3",
+    "base": "FourShieldStr3",
+    "mods": [
+      "UniqueLocalBlockChance2",
+      "UniqueBaseBlockDamageTaken1",
+      "UniqueCullingStrikeOnBlock1"
+    ]
+  },
+  {
+    "id": "FourUniqueRing13",
+    "base": "FourRing5",
+    "mods": [
+      "RingImplicitLightningResistance1",
+      "UniqueShockChanceIncrease2",
+      "UniqueLightningSpellsChain1",
+      "UniqueShockEffect1"
+    ]
+  },
+  {
+    "id": "FourUniqueBow5",
+    "base": "FourBow5",
+    "mods": ["UniqueLocalAddedPhysicalDamage7"]
+  },
+  {
+    "id": "FourUniqueOneHandMace5__",
+    "base": "FourOneHandMace5",
+    "mods": [
+      "MaceImplicitCriticalMultiplier1",
+      "UniqueLocalAddedPhysicalDamage18",
+      "UniqueLocalArmourBreakOnDamage1",
+      "UniqueFullyArmourBrokenShatterOnKill1"
+    ]
+  },
+  {
+    "id": "FourUniqueRing16",
+    "base": "FourRing6",
+    "mods": ["RingImplicitChaosResistance1", "UniqueDamageAddedAsChaos1"]
+  },
+  {
+    "id": "FourUniqueAmulet16",
+    "base": "FourAmulet8",
+    "mods": [
+      "AmuletImplicitAllAttributes1",
+      "UniqueNearbyAlliesCriticalStrikeChance2",
+      "UniqueNearbyAlliesCriticalMultiplier1",
+      "UniqueNearbyAlliesIncreasedAttackSpeed1",
+      "UniqueNearbyAlliesIncreasedCastSpeed1"
+    ]
+  },
+  {
+    "id": "FourUniqueBow6",
+    "base": "FourBow6",
+    "mods": [
+      "BowImplicitAdditionalArrows1",
+      "UniqueLocalCriticalMultiplier1",
+      "UniqueManaGainedFromEnemyDeath6",
+      "UniqueAdditionalArrowChance1"
+    ]
+  },
+  {
+    "id": "FourUniqueStaff6",
+    "base": "FourStaff6",
+    "mods": ["UniqueSpellAdditionalProjectilesInCircle1"]
+  }
+]

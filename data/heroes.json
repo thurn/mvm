@@ -1,0 +1,3527 @@
+[
+ {
+  "id": "Metadata/Items/Gems/SkillGemRollingSlam",
+  "name": "Rolling Slam",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "strength",
+   "grants_active_skill",
+   "attack",
+   "area",
+   "melee",
+   "slam"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemFistOfWar",
+   "Metadata/Items/Gem/SupportGemBrink",
+   "Metadata/Items/Gems/SupportGemBrutality",
+   "Metadata/Items/Gems/SupportGemMomentum",
+   "Metadata/Items/Gems/SupportGemBrutalityTwo",
+   "Metadata/Items/Gems/SupportGemFistOfWarTwo",
+   "Metadata/Items/Gem/SupportGemBrinkTwo",
+   "Metadata/Items/Gems/SupportGemCloseCombat",
+   "Metadata/Items/Gem/SupportGemBrambleslam",
+   "Metadata/Items/Gem/SupportGemDefyTwo",
+   "Metadata/Items/Gem/SupportGemHeft",
+   "Metadata/Items/Gems/SupportGemAftershockTwo",
+   "Metadata/Items/Gem/SupportGemHitAndRun",
+   "Metadata/Items/Gems/SupportGemHeavySwing",
+   "Metadata/Items/Gems/SupportGemOverpower"
+  ],
+  "skills": [
+   {
+    "id": "RollingSlamPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Rolling Slam",
+     "id": "rolling_slam",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {},
+     "types": [
+      "Attack",
+      "Melee",
+      "Slam",
+      "Area",
+      "Totemable"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {},
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 14
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 16
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 18
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 21
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 24
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 27
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 30
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 33
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 37
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 41
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "RollingSlamPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{active_skill_stun_threshold_+%_while_performing_action}% increased [StunThreshold|Stun Threshold] while using Skill",
+         "stats": {
+          "active_skill_stun_threshold_+%_while_performing_action": 5000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "total_attack_time_+_ms",
+         "type": "constant",
+         "value": 1000
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 15
+        },
+        {
+         "id": "attack_maximum_action_distance_+",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "totemified_rolling_slam_attack_maximum_action_distance_+",
+         "type": "constant",
+         "value": 36
+        },
+        {
+         "id": "dps_display_statset_index",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "active_skill_damage_+%_final_while_dual_wielding",
+         "type": "constant",
+         "value": -30
+        },
+        {
+         "id": "cascade_aftershock_additional_offset_distance",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_skill_show_average_damage_instead_of_dps",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "console_do_not_cancel_from_turn_angle",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_deal_no_damage",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {},
+       "2": {},
+       "3": {},
+       "4": {},
+       "5": {},
+       "6": {},
+       "7": {},
+       "8": {},
+       "9": {},
+       "10": {}
+      }
+     },
+     {
+      "id": "RollingSlamFirstSlamPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{active_skill_stun_threshold_+%_while_performing_action}% increased [StunThreshold|Stun Threshold] while using Skill",
+         "stats": {
+          "active_skill_stun_threshold_+%_while_performing_action": 5000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 14
+        },
+        {
+         "id": "active_skill_hit_damage_stun_multiplier_+%_final",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "total_attack_time_+_ms",
+         "type": "constant",
+         "value": 1000
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 15
+        },
+        {
+         "id": "attack_maximum_action_distance_+",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "totemified_rolling_slam_attack_maximum_action_distance_+",
+         "type": "constant",
+         "value": 36
+        },
+        {
+         "id": "dps_display_statset_index",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "active_skill_damage_+%_final_while_dual_wielding",
+         "type": "constant",
+         "value": -30
+        },
+        {
+         "id": "cascade_aftershock_additional_offset_distance",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_skill_show_average_damage_instead_of_dps",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "console_do_not_cancel_from_turn_angle",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 75
+       },
+       "2": {
+        "damage_multiplier": 82
+       },
+       "3": {
+        "damage_multiplier": 91
+       },
+       "4": {
+        "damage_multiplier": 99
+       },
+       "5": {
+        "damage_multiplier": 107
+       },
+       "6": {
+        "damage_multiplier": 116
+       },
+       "7": {
+        "damage_multiplier": 125
+       },
+       "8": {
+        "damage_multiplier": 133
+       },
+       "9": {
+        "damage_multiplier": 140
+       },
+       "10": {
+        "damage_multiplier": 148
+       }
+      }
+     },
+     {
+      "id": "RollingSlamSecondSlamPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{active_skill_stun_threshold_+%_while_performing_action}% increased [StunThreshold|Stun Threshold] while using Skill",
+         "stats": {
+          "active_skill_stun_threshold_+%_while_performing_action": 5000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_secondary_area_of_effect_radius",
+         "type": "constant",
+         "value": 18
+        },
+        {
+         "id": "active_skill_damage_+%_final_against_heavy_stunned_enemies",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "total_attack_time_+_ms",
+         "type": "constant",
+         "value": 1000
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 15
+        },
+        {
+         "id": "attack_maximum_action_distance_+",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "totemified_rolling_slam_attack_maximum_action_distance_+",
+         "type": "constant",
+         "value": 36
+        },
+        {
+         "id": "dps_display_statset_index",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "active_skill_damage_+%_final_while_dual_wielding",
+         "type": "constant",
+         "value": -30
+        },
+        {
+         "id": "cascade_aftershock_additional_offset_distance",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_skill_show_average_damage_instead_of_dps",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "console_do_not_cancel_from_turn_angle",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 150
+       },
+       "2": {
+        "damage_multiplier": 165
+       },
+       "3": {
+        "damage_multiplier": 182
+       },
+       "4": {
+        "damage_multiplier": 198
+       },
+       "5": {
+        "damage_multiplier": 215
+       },
+       "6": {
+        "damage_multiplier": 232
+       },
+       "7": {
+        "damage_multiplier": 249
+       },
+       "8": {
+        "damage_multiplier": 265
+       },
+       "9": {
+        "damage_multiplier": 280
+       },
+       "10": {
+        "damage_multiplier": 296
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SkillGemIceStrike",
+  "name": "Ice Strike",
+  "gemType": "active",
+  "craftingLevel": 5,
+  "craftingTypes": [
+   "Quarterstaff"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 50,
+   "intelligence": 50
+  },
+  "tags": [
+   "dexterity",
+   "intelligence",
+   "grants_active_skill",
+   "attack",
+   "area",
+   "melee",
+   "strike",
+   "cold"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemCrescendo",
+   "Metadata/Items/Gems/SupportGemColdInfusion",
+   "Metadata/Items/Gems/SupportGemPrimalArmament",
+   "Metadata/Items/Gem/SupportGemFrozenSpite",
+   "Metadata/Items/Gem/SupportGemCadence",
+   "Metadata/Items/Gems/SupportGemGlaciation",
+   "Metadata/Items/Gems/SupportGemColdExposure",
+   "Metadata/Items/Gem/SupportGemPracticedCombo",
+   "Metadata/Items/Gems/SupportGemCloseCombat",
+   "Metadata/Items/Gem/SupportGemAncestralCall",
+   "Metadata/Items/Gems/SupportGemCrescendoTwo",
+   "Metadata/Items/Gems/SupportGemBeheadTwo",
+   "Metadata/Items/Gems/SupportGemCrescendoThree",
+   "Metadata/Items/Gem/SupportGemAncestralCallTwo",
+   "Metadata/Items/Gems/SupportGemCloseCombatTwo"
+  ],
+  "skills": [
+   {
+    "id": "IceStrikePlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Ice Strike",
+     "id": "ice_strike",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {},
+     "types": [
+      "Attack",
+      "Melee",
+      "MeleeSingleTarget",
+      "Area",
+      "Cold",
+      "PerformsFinalStrike",
+      "AttackInPlace"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "attack_speed_multiplier": 40
+    },
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 5
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 6
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 7
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 8
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 9
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 12
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 13
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 15
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "IceStrikePlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{attack_speed_+%}% increased [Attack] Speed",
+         "stats": {
+          "attack_speed_+%": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "statset_index_for_final_animation_combo_index",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_cold",
+         "type": "constant",
+         "value": 80
+        },
+        {
+         "id": "base_melee_dash_range",
+         "type": "constant",
+         "value": 30
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 60
+       },
+       "2": {
+        "damage_multiplier": 66
+       },
+       "3": {
+        "damage_multiplier": 73
+       },
+       "4": {
+        "damage_multiplier": 79
+       },
+       "5": {
+        "damage_multiplier": 85
+       },
+       "6": {
+        "damage_multiplier": 92
+       },
+       "7": {
+        "damage_multiplier": 98
+       },
+       "8": {
+        "damage_multiplier": 104
+       },
+       "9": {
+        "damage_multiplier": 109
+       },
+       "10": {
+        "damage_multiplier": 115
+       }
+      }
+     },
+     {
+      "id": "IceStrikeThirdAttackPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{attack_speed_+%}% increased [Attack] Speed",
+         "stats": {
+          "attack_speed_+%": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "supplementary_stat_container_attack_speed_+%_final",
+         "type": "constant",
+         "value": -50
+        },
+        {
+         "id": "melee_range_+",
+         "type": "constant",
+         "value": 7
+        },
+        {
+         "id": "is_final_strike",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "statset_index_for_final_animation_combo_index",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_cold",
+         "type": "constant",
+         "value": 80
+        },
+        {
+         "id": "base_melee_dash_range",
+         "type": "constant",
+         "value": 30
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 130
+       },
+       "2": {
+        "damage_multiplier": 143
+       },
+       "3": {
+        "damage_multiplier": 157
+       },
+       "4": {
+        "damage_multiplier": 171
+       },
+       "5": {
+        "damage_multiplier": 185
+       },
+       "6": {
+        "damage_multiplier": 199
+       },
+       "7": {
+        "damage_multiplier": 213
+       },
+       "8": {
+        "damage_multiplier": 226
+       },
+       "9": {
+        "damage_multiplier": 237
+       },
+       "10": {
+        "damage_multiplier": 249
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SkillGemFallingThunder",
+  "name": "Falling Thunder",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Quarterstaff"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 50,
+   "intelligence": 50
+  },
+  "tags": [
+   "dexterity",
+   "intelligence",
+   "grants_active_skill",
+   "attack",
+   "area",
+   "melee",
+   "slam",
+   "projectile",
+   "lightning"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemPerpetualCharge",
+   "Metadata/Items/Gems/SupportGemComboFinisher",
+   "Metadata/Items/Gems/SupportGemLightningInfusion",
+   "Metadata/Items/Gem/SupportGemVolt",
+   "Metadata/Items/Gem/SupportGemTwofold",
+   "Metadata/Items/Gems/SupportGemPrimalArmamentTwo",
+   "Metadata/Items/Gems/SupportGemFistOfWarTwo",
+   "Metadata/Items/Gem/SupportGemAmbrosiaTwo",
+   "Metadata/Items/Gems/SupportGemComboFinisherTwo",
+   "Metadata/Items/Gems/SupportGemNovaProjectilesTwo",
+   "Metadata/Items/Gem/SupportGemLivingLightningTwo",
+   "Metadata/Items/Gem/SupportGemRicochetTwo",
+   "Metadata/Items/Gem/SupportGemCulminationTwo",
+   "Metadata/Items/Gems/SupportGemAccelerationThree",
+   "Metadata/Items/Gems/SupportGemCloseCombatTwo"
+  ],
+  "skills": [
+   {
+    "id": "FallingThunderPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Falling Thunder",
+     "id": "falling_thunder",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {
+      "lightning_strike_additional_pierce": "projectile_base_number_of_targets_to_pierce",
+      "lightning_strike_additional_pierce_per_10_old": "projectiles_pierce_1_additional_target_per_10_stat_value",
+      "lightning_strike_damage_+%": "damage_+%",
+      "lightning_strike_num_of_additional_projectiles": "number_of_additional_projectiles"
+     },
+     "types": [
+      "Attack",
+      "Melee",
+      "Area",
+      "Slam",
+      "Projectile",
+      "RangedAttack",
+      "ProjectilesNotFromUser",
+      "Lightning",
+      "ConsumesCharges",
+      "SkillConsumesPowerChargesOnUse",
+      "AttackInPlace"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "attack_speed_multiplier": -40
+    },
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 13
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 14
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 17
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 19
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 21
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 24
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 26
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 29
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 32
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "FallingThunderPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{lightning_strike_damage_+%_final_per_power_charge}% more Damage per [Charges|Power Charge] Consumed",
+         "stats": {
+          "lightning_strike_damage_+%_final_per_power_charge": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_lightning",
+         "type": "constant",
+         "value": 60
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 21
+        },
+        {
+         "id": "lightning_strike_maximum_action_distance_+_when_empowered",
+         "type": "constant",
+         "value": 120
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 40
+        },
+        {
+         "id": "cascade_aftershock_additional_offset_distance",
+         "type": "constant",
+         "value": -5
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 140
+       },
+       "2": {
+        "damage_multiplier": 154
+       },
+       "3": {
+        "damage_multiplier": 169
+       },
+       "4": {
+        "damage_multiplier": 185
+       },
+       "5": {
+        "damage_multiplier": 199
+       },
+       "6": {
+        "damage_multiplier": 214
+       },
+       "7": {
+        "damage_multiplier": 229
+       },
+       "8": {
+        "damage_multiplier": 243
+       },
+       "9": {
+        "damage_multiplier": 255
+       },
+       "10": {
+        "damage_multiplier": 268
+       }
+      }
+     },
+     {
+      "id": "FallingThunderProjectilePlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{lightning_strike_damage_+%_final_per_power_charge}% more Damage per [Charges|Power Charge] Consumed",
+         "stats": {
+          "lightning_strike_damage_+%_final_per_power_charge": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_projectile_speed_+%_variation_final",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_lightning",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "lightning_strike_base_number_of_projectiles_per_power_charge",
+         "type": "constant",
+         "value": 3
+        },
+        {
+         "id": "lightning_strike_damage_+%_final_when_charged",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "lightning_strike_damage_+%_final_per_power_charge",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "is_area_damage",
+         "type": "additional",
+         "value": -1
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "always_pierce",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_should_collide_with_flying_monsters",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "check_for_targets_between_initiator_and_projectile_source",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "zero_projectiles_if_no_power_charges",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 21
+        },
+        {
+         "id": "lightning_strike_maximum_action_distance_+_when_empowered",
+         "type": "constant",
+         "value": 120
+        },
+        {
+         "id": "cascade_aftershock_additional_offset_distance",
+         "type": "constant",
+         "value": -5
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SkillGemLightningArrow",
+  "name": "Lightning Arrow",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "dexterity",
+   "grants_active_skill",
+   "attack",
+   "area",
+   "projectile",
+   "lightning",
+   "chaining",
+   "repeatable"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemChain",
+   "Metadata/Items/Gems/SupportGemLightningInfusion",
+   "Metadata/Items/Gem/SupportGemInnervate",
+   "Metadata/Items/Gem/SupportGemVolt",
+   "Metadata/Items/Gems/SupportGemElectrocute",
+   "Metadata/Items/Gems/SupportGemCoursingCurrent",
+   "Metadata/Items/Gem/SupportGemSalvo",
+   "Metadata/Items/Gems/SupportGemFork",
+   "Metadata/Items/Gem/SupportGemChargedShots",
+   "Metadata/Items/Gem/SupportGemSpectralVolley",
+   "Metadata/Items/Gems/SupportGemNovaProjectilesTwo",
+   "Metadata/Items/Gems/SupportGemAccelerationTwo",
+   "Metadata/Items/Gems/SupportGemChainThree",
+   "Metadata/Items/Gem/SupportGemAlignmentThree",
+   "Metadata/Items/Gem/SupportGemChargedShotsTwo"
+  ],
+  "skills": [
+   {
+    "id": "LightningArrowPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Lightning Arrow",
+     "id": "lightning_arrow",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {
+      "lightning_arrow_and_ice_shot_all_damage_can_ignite": "all_damage_can_ignite",
+      "lightning_arrow_damage_+%": "damage_+%",
+      "lightning_arrow_radius_+%": "base_skill_area_of_effect_+%"
+     },
+     "types": [
+      "Attack",
+      "RangedAttack",
+      "MirageArcherCanUse",
+      "Area",
+      "Projectile",
+      "ProjectilesFromUser",
+      "Totemable",
+      "Trappable",
+      "Mineable",
+      "Lightning",
+      "Triggerable",
+      "Barrageable",
+      "UsableWhileMoving",
+      "CanBecomeArrowRain",
+      "Chains",
+      "Bow"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "attack_speed_multiplier": -10
+    },
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 6
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 7
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 8
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 9
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 12
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 14
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 15
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 17
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "LightningArrowPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{active_skill_shock_chance_+%_final}% more chance to [Shock]",
+         "stats": {
+          "active_skill_shock_chance_+%_final": 2000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_lightning",
+         "type": "constant",
+         "value": 80
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 32
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "skill_lightning_rod_burst_delay_ms_override_on_damaging_lightning_rod",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "lightning_arrow_maximum_number_of_extra_targets",
+         "type": "additional"
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "check_for_targets_between_initiator_and_projectile_source",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "skill_can_fire_arrows",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "has_modular_projectiles_enabled",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_projectiles_cannot_chain",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_display_lightning_arrow_is_gem",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 80,
+        "stat_text": {
+         "lightning_arrow_maximum_number_of_extra_targets\nquality_display_lightning_arrow_is_gem": "Fires beams at up to 2 additional Enemies near the target"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "damage_multiplier": 88,
+        "stat_text": {
+         "lightning_arrow_maximum_number_of_extra_targets\nquality_display_lightning_arrow_is_gem": "Fires beams at up to 2 additional Enemies near the target"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "damage_multiplier": 97,
+        "stat_text": {
+         "lightning_arrow_maximum_number_of_extra_targets\nquality_display_lightning_arrow_is_gem": "Fires beams at up to 2 additional Enemies near the target"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "damage_multiplier": 106,
+        "stat_text": {
+         "lightning_arrow_maximum_number_of_extra_targets\nquality_display_lightning_arrow_is_gem": "Fires beams at up to 2 additional Enemies near the target"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "damage_multiplier": 114,
+        "stat_text": {
+         "lightning_arrow_maximum_number_of_extra_targets\nquality_display_lightning_arrow_is_gem": "Fires beams at up to 2 additional Enemies near the target"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "damage_multiplier": 122,
+        "stat_text": {
+         "lightning_arrow_maximum_number_of_extra_targets\nquality_display_lightning_arrow_is_gem": "Fires beams at up to 2 additional Enemies near the target"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "damage_multiplier": 131,
+        "stat_text": {
+         "lightning_arrow_maximum_number_of_extra_targets\nquality_display_lightning_arrow_is_gem": "Fires beams at up to 2 additional Enemies near the target"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "damage_multiplier": 139,
+        "stat_text": {
+         "lightning_arrow_maximum_number_of_extra_targets\nquality_display_lightning_arrow_is_gem": "Fires beams at up to 2 additional Enemies near the target"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "damage_multiplier": 146,
+        "stat_text": {
+         "lightning_arrow_maximum_number_of_extra_targets\nquality_display_lightning_arrow_is_gem": "Fires beams at up to 2 additional Enemies near the target"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "damage_multiplier": 153,
+        "stat_text": {
+         "lightning_arrow_maximum_number_of_extra_targets\nquality_display_lightning_arrow_is_gem": "Fires beams at up to 3 additional Enemies near the target"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 3
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "LightningArrowArcPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{active_skill_shock_chance_+%_final}% more chance to [Shock]",
+         "stats": {
+          "active_skill_shock_chance_+%_final": 2000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_lightning",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "number_of_chains",
+         "type": "constant",
+         "value": 2
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 32
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "skill_lightning_rod_burst_delay_ms_override_on_damaging_lightning_rod",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "check_for_targets_between_initiator_and_projectile_source",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "skill_can_fire_arrows",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "has_modular_projectiles_enabled",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_display_lightning_arrow_is_gem",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {},
+       "2": {},
+       "3": {},
+       "4": {},
+       "5": {},
+       "6": {},
+       "7": {},
+       "8": {},
+       "9": {},
+       "10": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+  "name": "Armour Piercing Rounds",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Crossbow"
+  ],
+  "requirementWeights": {
+   "strength": 50,
+   "dexterity": 50,
+   "intelligence": 0
+  },
+  "tags": [
+   "strength",
+   "dexterity",
+   "grants_active_skill",
+   "attack",
+   "ammunition",
+   "projectile",
+   "physical"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemDemolisher",
+   "Metadata/Items/Gems/SupportGemChain",
+   "Metadata/Items/Gems/SupportGemScattershot",
+   "Metadata/Items/Gem/SupportGemRicochet",
+   "Metadata/Items/Gems/SupportGemScattershotTwo",
+   "Metadata/Items/Gem/SupportGemGambleshot",
+   "Metadata/Items/Gems/SupportGemMobility",
+   "Metadata/Items/Gems/SupportGemDemolisherTwo",
+   "Metadata/Items/Gems/SupportGemAccelerationTwo",
+   "Metadata/Items/Gem/SupportGemNimbleReload",
+   "Metadata/Items/Gems/SupportGemMaim",
+   "Metadata/Items/Gems/SupportGemMartialTempoTwo",
+   "Metadata/Items/Gems/SupportGemMartialTempoThree",
+   "Metadata/Items/Gems/SupportGemPhysicalMastery",
+   "Metadata/Items/Gems/SupportGemBlindTwo"
+  ],
+  "skills": [
+   {
+    "id": "ArmourPiercingBoltsAmmoPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Load Armour Piercing Rounds",
+     "id": "armour_piercing_rounds_ammo",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {},
+     "types": [
+      "CrossbowAmmoSkill",
+      "ReservesManually",
+      "Attack",
+      "UsableWhileMoving"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 600,
+    "static": {},
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 8
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 9
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 12
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 13
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 15
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 17
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 19
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 21
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 23
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "ArmourPiercingBoltsAmmoPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "action_allowed_queue_time_override_ms",
+         "type": "constant",
+         "value": 1000
+        },
+        {
+         "id": "base_number_of_crossbow_bolts",
+         "type": "additional"
+        },
+        {
+         "id": "action_can_be_used_in_aiming_stance",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_deal_no_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_be_used_instantly_in_any_set",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "base_number_of_crossbow_bolts": "+12 Bolts loaded per clip"
+        },
+        "stats": [
+         null,
+         {
+          "value": 12
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "base_number_of_crossbow_bolts": "+12 Bolts loaded per clip"
+        },
+        "stats": [
+         null,
+         {
+          "value": 12
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "base_number_of_crossbow_bolts": "+13 Bolts loaded per clip"
+        },
+        "stats": [
+         null,
+         {
+          "value": 13
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "base_number_of_crossbow_bolts": "+13 Bolts loaded per clip"
+        },
+        "stats": [
+         null,
+         {
+          "value": 13
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "base_number_of_crossbow_bolts": "+14 Bolts loaded per clip"
+        },
+        "stats": [
+         null,
+         {
+          "value": 14
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "base_number_of_crossbow_bolts": "+14 Bolts loaded per clip"
+        },
+        "stats": [
+         null,
+         {
+          "value": 14
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "base_number_of_crossbow_bolts": "+15 Bolts loaded per clip"
+        },
+        "stats": [
+         null,
+         {
+          "value": 15
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "base_number_of_crossbow_bolts": "+15 Bolts loaded per clip"
+        },
+        "stats": [
+         null,
+         {
+          "value": 15
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "base_number_of_crossbow_bolts": "+16 Bolts loaded per clip"
+        },
+        "stats": [
+         null,
+         {
+          "value": 16
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "base_number_of_crossbow_bolts": "+16 Bolts loaded per clip"
+        },
+        "stats": [
+         null,
+         {
+          "value": 16
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   },
+   {
+    "id": "ArmourPiercingBoltsPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Armour Piercing Rounds",
+     "id": "armour_piercing_rounds",
+     "is_manually_casted": false,
+     "is_skill_totem": false,
+     "stat_conversions": {},
+     "types": [
+      "Attack",
+      "RangedAttack",
+      "Projectile",
+      "ProjectilesFromUser",
+      "CrossbowSkill",
+      "Trappable",
+      "Totemable",
+      "Mineable",
+      "UsableWhileMoving",
+      "Physical",
+      "MirageArcherCanUse"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "attack_speed_multiplier": 325,
+     "costs": {
+      "Mana": 0
+     }
+    },
+    "perLevel": {
+     "1": {},
+     "2": {},
+     "3": {},
+     "4": {},
+     "5": {},
+     "6": {},
+     "7": {},
+     "8": {},
+     "9": {},
+     "10": {}
+    },
+    "statSets": [
+     {
+      "id": "ArmourPiercingBoltsPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "[ArmourBreak|Break] {armour_break_amount_+%}% increased [Armour|Armour]",
+         "stats": {
+          "armour_break_amount_+%": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "action_required_target_facing_angle_tolerance_degrees",
+         "type": "constant",
+         "value": 60
+        },
+        {
+         "id": "active_skill_override_turn_duration_ms",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "active_skill_facing_angle_turn_duration_ms",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "crossbow_barrage_recoil_per_shot",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "crossbow_barrage_total_recoil_buff_count",
+         "type": "constant",
+         "value": 8
+        },
+        {
+         "id": "crossbow_barrage_debuff_duration_ms",
+         "type": "constant",
+         "value": 300
+        },
+        {
+         "id": "base_knockback_distance",
+         "type": "constant",
+         "value": 30
+        },
+        {
+         "id": "broken_armour_debuff_art_variation",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "apply_X_armour_break_on_hit",
+         "type": "additional"
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "has_modular_projectiles_enabled",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "action_requires_aiming_stance",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "check_for_targets_between_initiator_and_projectile_source",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_crossbow_barrage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "disable_visual_hit_effect",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "action_do_not_face_target",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 25,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 1 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "damage_multiplier": 27,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 2 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "damage_multiplier": 30,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 3 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 3
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "damage_multiplier": 33,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 5 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 5
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "damage_multiplier": 36,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 8 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 8
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "damage_multiplier": 39,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 12 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 12
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "damage_multiplier": 42,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 17 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 17
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "damage_multiplier": 44,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 24 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 24
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "damage_multiplier": 47,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 35 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 35
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "damage_multiplier": 49,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 50 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 50
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SkillGemSpark",
+  "name": "Spark",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "intelligence",
+   "grants_active_skill",
+   "spell",
+   "projectile",
+   "lightning",
+   "duration",
+   "repeatable"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemPierce",
+   "Metadata/Items/Gem/SupportGemZenith",
+   "Metadata/Items/Gems/SupportGemPersistence",
+   "Metadata/Items/Gems/SupportGemElectrocute",
+   "Metadata/Items/Gems/SupportGemRisingTempest",
+   "Metadata/Items/Gem/SupportGemConsideredCasting",
+   "Metadata/Items/Gems/SupportGemPersistenceTwo",
+   "Metadata/Items/Gems/SupportGemPierceTwo",
+   "Metadata/Items/Gems/SupportGemAccelerationTwo",
+   "Metadata/Items/Gem/SupportGemZenithTwo",
+   "Metadata/Items/Gems/SupportGemArcaneTempoTwo",
+   "Metadata/Items/Gems/SupportGemLightningExposure",
+   "Metadata/Items/Gems/SupportGemPierceThree",
+   "Metadata/Items/Gems/SupportGemLightningMastery",
+   "Metadata/Items/Gems/SupportGemAccelerationThree"
+  ],
+  "skills": [
+   {
+    "id": "SparkPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Spark",
+     "id": "spark",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {
+      "spark_damage_+%": "damage_+%",
+      "spark_num_of_additional_projectiles": "number_of_additional_projectiles",
+      "spark_num_of_additional_projectiles_in_chain": "number_of_chains",
+      "spark_number_of_additional_projectiles": "number_of_additional_projectiles",
+      "spark_projectile_speed_+%": "base_projectile_speed_+%",
+      "spark_projectiles_nova": "projectiles_nova",
+      "spark_skill_effect_duration_+%": "skill_effect_duration_+%",
+      "spark_totems_from_this_skill_grant_totemified_lightning_tendrils_larger_pulse_interval_-X_to_parent": "totems_from_this_skill_grant_totemified_lightning_tendrils_larger_pulse_interval_-X_to_parent",
+      "totemified_spark_skill_effect_duration_+%": "totemified_skill_effect_duration_+%"
+     },
+     "types": [
+      "Spell",
+      "Projectile",
+      "ProjectilesFromUser",
+      "Damage",
+      "Duration",
+      "Trappable",
+      "Totemable",
+      "Mineable",
+      "Multicastable",
+      "Triggerable",
+      "Lightning",
+      "Unleashable",
+      "Invokable",
+      "UsableWhileMoving"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 700,
+    "static": {},
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 5
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 6
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 7
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 8
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 13
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 15
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 17
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 19
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "SparkPlayer",
+      "static": {
+       "crit_chance": 900,
+       "quality_stats": [
+        {
+         "stat": "{base_projectile_speed_+%}% increased [Projectile|Projectile] Speed",
+         "stats": {
+          "base_projectile_speed_+%": 1500
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "spell_minimum_base_lightning_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_lightning_damage",
+         "type": "float"
+        },
+        {
+         "id": "base_skill_effect_duration",
+         "type": "constant",
+         "value": 2000
+        },
+        {
+         "id": "spark_pathing_width_bounds",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "damage_hit_effect_index",
+         "type": "constant",
+         "value": 1009
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "spark_min_time_between_target_clearing_ms",
+         "type": "constant",
+         "value": 660
+        },
+        {
+         "id": "base_number_of_projectiles",
+         "type": "additional"
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_should_collide_with_flying_monsters",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "check_for_targets_between_initiator_and_projectile_source",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 4 [Projectile|Projectiles]",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 1 to 10 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 1
+         },
+         {
+          "value": 10
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 4
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 5 [Projectile|Projectiles]",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 1 to 13 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 1
+         },
+         {
+          "value": 13
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 5
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 5 [Projectile|Projectiles]",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 1 to 17 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 1
+         },
+         {
+          "value": 17
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 5
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 5 [Projectile|Projectiles]",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 1 to 21 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 1
+         },
+         {
+          "value": 21
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 5
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 5 [Projectile|Projectiles]",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 1 to 26 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 1
+         },
+         {
+          "value": 26
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 5
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 5 [Projectile|Projectiles]",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 2 to 32 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 2
+         },
+         {
+          "value": 32
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 5
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 6 [Projectile|Projectiles]",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 2 to 38 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 2
+         },
+         {
+          "value": 38
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 6
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 6 [Projectile|Projectiles]",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 2 to 45 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 2
+         },
+         {
+          "value": 45
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 6
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 6 [Projectile|Projectiles]",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 3 to 53 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 3
+         },
+         {
+          "value": 53
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 6
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 6 [Projectile|Projectiles]",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 3 to 61 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 3
+         },
+         {
+          "value": 61
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 6
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "SparkColdInfusedPlayer",
+      "static": {
+       "crit_chance": 200,
+       "quality_stats": [
+        {
+         "stat": "{base_projectile_speed_+%}% increased [Projectile|Projectile] Speed",
+         "stats": {
+          "base_projectile_speed_+%": 1500
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "spell_minimum_base_lightning_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_lightning_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_minimum_base_cold_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_cold_damage",
+         "type": "float"
+        },
+        {
+         "id": "base_spell_cast_time_ms",
+         "type": "constant",
+         "value": 500
+        },
+        {
+         "id": "base_number_of_projectiles",
+         "type": "additional"
+        },
+        {
+         "id": "projectiles_nova",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_skill_effect_duration",
+         "type": "constant",
+         "value": 2000
+        },
+        {
+         "id": "spark_pathing_width_bounds",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "damage_hit_effect_index",
+         "type": "constant",
+         "value": 1009
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "spark_min_time_between_target_clearing_ms",
+         "type": "constant",
+         "value": 660
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_should_collide_with_flying_monsters",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "check_for_targets_between_initiator_and_projectile_source",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 12 [Projectile|Projectiles] in a circle",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 7 to 11 [Cold] Damage",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 1 to 10 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 1
+         },
+         {
+          "value": 10
+         },
+         {
+          "value": 7
+         },
+         {
+          "value": 11
+         },
+         null,
+         {
+          "value": 12
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 12 [Projectile|Projectiles] in a circle",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 10 to 15 [Cold] Damage",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 1 to 13 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 1
+         },
+         {
+          "value": 13
+         },
+         {
+          "value": 10
+         },
+         {
+          "value": 15
+         },
+         null,
+         {
+          "value": 12
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 12 [Projectile|Projectiles] in a circle",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 14 to 20 [Cold] Damage",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 1 to 17 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 1
+         },
+         {
+          "value": 17
+         },
+         {
+          "value": 14
+         },
+         {
+          "value": 20
+         },
+         null,
+         {
+          "value": 12
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 12 [Projectile|Projectiles] in a circle",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 18 to 26 [Cold] Damage",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 1 to 21 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 1
+         },
+         {
+          "value": 21
+         },
+         {
+          "value": 18
+         },
+         {
+          "value": 26
+         },
+         null,
+         {
+          "value": 12
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 13 [Projectile|Projectiles] in a circle",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 22 to 33 [Cold] Damage",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 1 to 26 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 1
+         },
+         {
+          "value": 26
+         },
+         {
+          "value": 22
+         },
+         {
+          "value": 33
+         },
+         null,
+         {
+          "value": 13
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 13 [Projectile|Projectiles] in a circle",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 27 to 41 [Cold] Damage",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 2 to 32 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 2
+         },
+         {
+          "value": 32
+         },
+         {
+          "value": 27
+         },
+         {
+          "value": 41
+         },
+         null,
+         {
+          "value": 13
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 13 [Projectile|Projectiles] in a circle",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 33 to 49 [Cold] Damage",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 2 to 39 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 2
+         },
+         {
+          "value": 39
+         },
+         {
+          "value": 33
+         },
+         {
+          "value": 49
+         },
+         null,
+         {
+          "value": 13
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 13 [Projectile|Projectiles] in a circle",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 39 to 59 [Cold] Damage",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 2 to 47 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 2
+         },
+         {
+          "value": 47
+         },
+         {
+          "value": 39
+         },
+         {
+          "value": 59
+         },
+         null,
+         {
+          "value": 13
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 14 [Projectile|Projectiles] in a circle",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 46 to 69 [Cold] Damage",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 3 to 55 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 3
+         },
+         {
+          "value": 55
+         },
+         {
+          "value": 46
+         },
+         {
+          "value": 69
+         },
+         null,
+         {
+          "value": 14
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "base_number_of_projectiles": "Fires 14 [Projectile|Projectiles] in a circle",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 54 to 81 [Cold] Damage",
+         "spell_minimum_base_lightning_damage\nspell_maximum_base_lightning_damage": "Deals 3 to 64 [Lightning] Damage"
+        },
+        "stats": [
+         {
+          "value": 3
+         },
+         {
+          "value": 64
+         },
+         {
+          "value": 54
+         },
+         {
+          "value": 81
+         },
+         null,
+         {
+          "value": 14
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
+ }
+]

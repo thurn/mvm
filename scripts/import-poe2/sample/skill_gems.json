@@ -1,0 +1,68 @@
+{
+  "Metadata/Items/Gems/SkillGemRollingSlam": {
+    "base_item": {
+      "display_name": "Rolling Slam",
+      "id": "Metadata/Items/Gems/SkillGemRollingSlam",
+      "release_state": "released"
+    },
+    "color": "r",
+    "crafting_level": 1,
+    "crafting_types": ["Mace"],
+    "gem_type": "active",
+    "grants_skills": ["RollingSlamPlayer"],
+    "icon_dds_file": "Art/2DArt/SkillIcons/4k/BruteDoubleSlam.dds",
+    "recommended_supports": [
+      "Metadata/Items/Gems/SupportGemFistOfWar",
+      "Metadata/Items/Gem/SupportGemBrink",
+      "Metadata/Items/Gems/SupportGemBrutality",
+      "Metadata/Items/Gems/SupportGemMomentum",
+      "Metadata/Items/Gems/SupportGemBrutalityTwo",
+      "Metadata/Items/Gems/SupportGemFistOfWarTwo",
+      "Metadata/Items/Gem/SupportGemBrinkTwo",
+      "Metadata/Items/Gems/SupportGemCloseCombat",
+      "Metadata/Items/Gem/SupportGemBrambleslam",
+      "Metadata/Items/Gem/SupportGemDefyTwo",
+      "Metadata/Items/Gem/SupportGemHeft",
+      "Metadata/Items/Gems/SupportGemAftershockTwo",
+      "Metadata/Items/Gem/SupportGemHitAndRun",
+      "Metadata/Items/Gems/SupportGemHeavySwing",
+      "Metadata/Items/Gems/SupportGemOverpower"
+    ],
+    "requirement_weights": {
+      "dexterity": 0,
+      "intelligence": 0,
+      "strength": 100
+    },
+    "skill_name": null,
+    "support_name": null,
+    "support_text": null,
+    "tags": ["strength", "grants_active_skill", "attack", "area", "melee", "slam"],
+    "tutorial_video": "Art/Videos/SkillTutorials/RollingSlam.bk2",
+    "ui_image": "Art/2DArt/UIImages/InGame/SmartHover/GemHoverImage/GemHoverImageDoubleSlam"
+  },
+  "Metadata/Items/Gems/SupportGemBrutality": {
+    "base_item": {
+      "display_name": "Brutality I",
+      "id": "Metadata/Items/Gems/SupportGemBrutality",
+      "release_state": "released"
+    },
+    "color": "r",
+    "crafting_level": 1,
+    "crafting_types": ["Mace"],
+    "gem_type": "support",
+    "grants_skills": ["SupportBrutalityPlayer"],
+    "icon_dds_file": "Art/2DArt/SkillIcons/Support/4k/BrutalitySupport.dds",
+    "is_lineage": false,
+    "requirement_weights": {
+      "dexterity": 0,
+      "intelligence": 0,
+      "strength": 100
+    },
+    "skill_name": null,
+    "support_name": null,
+    "support_text": "Supports any skill that deals damage, boosting its [Physical] damage at the expense of all other [DamageTypes|Damage Types].",
+    "tags": ["support", "physical"],
+    "tutorial_video": null,
+    "ui_image": null
+  }
+}

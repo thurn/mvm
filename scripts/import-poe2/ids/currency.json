@@ -1,0 +1,17 @@
+[
+  "Metadata/Items/Currency/CurrencyUpgradeToMagic",
+  "Metadata/Items/Currency/CurrencyAddModToMagic",
+  "Metadata/Items/Currency/CurrencyUpgradeMagicToRare",
+  "Metadata/Items/Currency/CurrencyAddModToRare",
+  "Metadata/Items/Currency/CurrencyRerollRare",
+  "Metadata/Items/Currency/CurrencyUpgradeToRare",
+  "Metadata/Items/Currency/CurrencyRemoveMod",
+  "Metadata/Items/Currency/CurrencyModValues",
+  "Metadata/Items/Currency/CurrencyCorrupt",
+  "Metadata/Items/Currency/CurrencyAddSkillGemSocket3",
+  "Metadata/Items/Currency/CurrencyAddSkillGemSocket4",
+  "Metadata/Items/Currency/CurrencyAddSkillGemSocket5",
+  "Metadata/Items/Currency/CurrencyGemQuality",
+  "Metadata/Items/Currency/CurrencyUpgradeToMagicShard",
+  "Metadata/Items/Currency/CurrencyUpgradeMagicToRareShard"
+]

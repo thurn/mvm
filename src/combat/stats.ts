@@ -15,12 +15,26 @@ type Ailment =
   "ignite" | "chill" | "freeze" | "shock" | "electrocute" | "bleed" | "poison" | "stun";
 type Keystone = "resolute_technique" | "crimson_assault" | "chaos_inoculation" | "eldritch_battery";
 
+/**
+ * Inner stats the `allies_in_presence: <stat>` wrapper (§9.7) carries. It
+ * applies the inner stat to other heroes inside this hero's Presence.
+ */
+type PresenceScalarStat =
+  | "damage_+%"
+  | "attack_speed_+%"
+  | "cast_speed_+%"
+  | "critical_strike_chance_+%"
+  | "critical_strike_multiplier_+"
+  | "all_elemental_resistances_%"
+  | "life_regeneration_rate_per_second";
+
 /** Stats whose value is an X–Y range (§9.1 added damage, §9.6 thorns). */
 export type RangeStatKey =
   | `local_added_${DamageType}_damage`
   | `attack_added_${DamageType}_damage`
   | `spell_added_${DamageType}_damage`
-  | "thorns_physical_damage";
+  | "thorns_physical_damage"
+  | `allies_in_presence:attack_added_${DamageType}_damage`;
 
 /** Stats whose value is a single number. Flags use 1. */
 export type ScalarStatKey =
@@ -101,6 +115,7 @@ export type ScalarStatKey =
   | "attribute_choice"
   | `keystone_${Keystone}`
   | "spirit"
+  | `allies_in_presence:${PresenceScalarStat}`
   | "aura_effect_+%"
   | "presence_area_+%"
   | `unique_${string}`

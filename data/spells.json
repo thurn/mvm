@@ -1,0 +1,2035 @@
+[
+ {
+  "id": "Metadata/Items/Gems/SkillGemEarthquake",
+  "name": "Earthquake",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "strength",
+   "grants_active_skill",
+   "attack",
+   "area",
+   "melee",
+   "slam",
+   "duration"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemFistOfWar",
+   "Metadata/Items/Gems/SupportGemFastForward",
+   "Metadata/Items/Gems/SupportGemBrutality",
+   "Metadata/Items/Gems/SupportGemFistOfWarTwo",
+   "Metadata/Items/Gems/SupportGemFastForwardTwo",
+   "Metadata/Items/Gem/SupportGemStoicism",
+   "Metadata/Items/Gems/SupportGemHeavySwing",
+   "Metadata/Items/Gems/SupportGemAftershock",
+   "Metadata/Items/Gem/SupportGemSuffuse",
+   "Metadata/Items/Gems/SupportGemBrutalityTwo",
+   "Metadata/Items/Gems/SupportGemAftershockTwo",
+   "Metadata/Items/Gem/SupportGemBrambleslam",
+   "Metadata/Items/Gem/SupportGemRageforged",
+   "Metadata/Items/Gem/SupportGemHeft",
+   "Metadata/Items/Gems/SupportGemBrutalityThree"
+  ],
+  "skills": [
+   {
+    "id": "EarthquakePlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Earthquake",
+     "id": "earthquake",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {
+      "earthquake_and_earthshatter_shatter_on_killing_blow": "shatter_on_killing_blow",
+      "earthquake_damage_+%": "damage_+%",
+      "earthquake_damage_+%_per_100ms_duration": "damage_+%_per_100ms_duration",
+      "earthquake_duration_+%": "skill_effect_duration_+%",
+      "earthquake_radius_+%": "base_skill_area_of_effect_+%"
+     },
+     "types": [
+      "Attack",
+      "Area",
+      "Melee",
+      "Duration",
+      "Slam",
+      "Triggerable",
+      "Totemable",
+      "CreatesGroundEffect",
+      "AttackInPlace",
+      "Limit"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "attack_speed_multiplier": -25
+    },
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 8
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 9
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 12
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 14
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 16
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 17
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 19
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 22
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 24
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "EarthquakePlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{base_number_of_earthquakes_allowed} to [JaggedGround|Jagged Ground] patch [Limit]",
+         "stats": {
+          "base_number_of_earthquakes_allowed": 100
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "skill_jagged_ground_base_duration_ms",
+         "type": "constant",
+         "value": 4000
+        },
+        {
+         "id": "jagged_ground_effect_+%",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 18
+        },
+        {
+         "id": "active_skill_base_tertiary_area_of_effect_radius",
+         "type": "constant",
+         "value": 18
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "active_skill_damage_+%_final_while_dual_wielding",
+         "type": "constant",
+         "value": -30
+        },
+        {
+         "id": "base_number_of_earthquakes_allowed",
+         "type": "additional"
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "is_player_earthquake",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_create_jagged_ground",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_display_earthquake_is_gem",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 40,
+        "stat_text": {
+         "base_number_of_earthquakes_allowed\nquality_display_earthquake_is_gem": "[Limit] 2 [JaggedGround|Jagged Ground] patches"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "damage_multiplier": 44,
+        "stat_text": {
+         "base_number_of_earthquakes_allowed\nquality_display_earthquake_is_gem": "[Limit] 2 [JaggedGround|Jagged Ground] patches"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "damage_multiplier": 48,
+        "stat_text": {
+         "base_number_of_earthquakes_allowed\nquality_display_earthquake_is_gem": "[Limit] 2 [JaggedGround|Jagged Ground] patches"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "damage_multiplier": 53,
+        "stat_text": {
+         "base_number_of_earthquakes_allowed\nquality_display_earthquake_is_gem": "[Limit] 2 [JaggedGround|Jagged Ground] patches"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "damage_multiplier": 57,
+        "stat_text": {
+         "base_number_of_earthquakes_allowed\nquality_display_earthquake_is_gem": "[Limit] 2 [JaggedGround|Jagged Ground] patches"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "damage_multiplier": 61,
+        "stat_text": {
+         "base_number_of_earthquakes_allowed\nquality_display_earthquake_is_gem": "[Limit] 2 [JaggedGround|Jagged Ground] patches"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "damage_multiplier": 66,
+        "stat_text": {
+         "base_number_of_earthquakes_allowed\nquality_display_earthquake_is_gem": "[Limit] 2 [JaggedGround|Jagged Ground] patches"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "damage_multiplier": 69,
+        "stat_text": {
+         "base_number_of_earthquakes_allowed\nquality_display_earthquake_is_gem": "[Limit] 2 [JaggedGround|Jagged Ground] patches"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "damage_multiplier": 73,
+        "stat_text": {
+         "base_number_of_earthquakes_allowed\nquality_display_earthquake_is_gem": "[Limit] 3 [JaggedGround|Jagged Ground] patches"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 3
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "damage_multiplier": 77,
+        "stat_text": {
+         "base_number_of_earthquakes_allowed\nquality_display_earthquake_is_gem": "[Limit] 3 [JaggedGround|Jagged Ground] patches"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 3
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "EarthquakeAftershockPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "",
+         "stats": {
+          "base_number_of_earthquakes_allowed": 100
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "additional"
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "jagged_ground_effect_+%",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "active_skill_base_tertiary_area_of_effect_radius",
+         "type": "constant",
+         "value": 18
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "active_skill_damage_+%_final_while_dual_wielding",
+         "type": "constant",
+         "value": -30
+        },
+        {
+         "id": "base_number_of_earthquakes_allowed",
+         "type": "constant"
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "is_player_earthquake",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_create_jagged_ground",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_display_earthquake_is_gem",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 184,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Aftershock radius is 2.4 metres"
+        },
+        "stats": [
+         {
+          "value": 24
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "damage_multiplier": 202,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Aftershock radius is 2.4 metres"
+        },
+        "stats": [
+         {
+          "value": 24
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "damage_multiplier": 223,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Aftershock radius is 2.4 metres"
+        },
+        "stats": [
+         {
+          "value": 24
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "damage_multiplier": 243,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Aftershock radius is 2.5 metres"
+        },
+        "stats": [
+         {
+          "value": 25
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "damage_multiplier": 263,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Aftershock radius is 2.5 metres"
+        },
+        "stats": [
+         {
+          "value": 25
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "damage_multiplier": 284,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Aftershock radius is 2.5 metres"
+        },
+        "stats": [
+         {
+          "value": 25
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "damage_multiplier": 305,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Aftershock radius is 2.6 metres"
+        },
+        "stats": [
+         {
+          "value": 26
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "damage_multiplier": 325,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Aftershock radius is 2.6 metres"
+        },
+        "stats": [
+         {
+          "value": 26
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "damage_multiplier": 344,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Aftershock radius is 2.6 metres"
+        },
+        "stats": [
+         {
+          "value": 26
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 3
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "damage_multiplier": 364,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Aftershock radius is 2.7 metres"
+        },
+        "stats": [
+         {
+          "value": 27
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 3
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SkillGemExplosiveGrenade",
+  "name": "Explosive Grenade",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Crossbow"
+  ],
+  "requirementWeights": {
+   "strength": 50,
+   "dexterity": 50,
+   "intelligence": 0
+  },
+  "tags": [
+   "strength",
+   "dexterity",
+   "grants_active_skill",
+   "attack",
+   "area",
+   "projectile",
+   "grenade",
+   "fire",
+   "detonator"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemScattershot",
+   "Metadata/Items/Gems/SupportGemMagnifiedEffect",
+   "Metadata/Items/Gems/SupportGemFireInfusion",
+   "Metadata/Items/Gem/SupportGemExpedite",
+   "Metadata/Items/Gem/SupportGemAdhere",
+   "Metadata/Items/Gems/SupportGemScattershotTwo",
+   "Metadata/Items/Gem/SupportGemAdhereTwo",
+   "Metadata/Items/Gem/SupportGemDeliberation",
+   "Metadata/Items/Gems/SupportGemIngenuity",
+   "Metadata/Items/Gem/SupportGemExpediteTwo",
+   "Metadata/Items/Gem/SupportGemLongFuse",
+   "Metadata/Items/Gem/SupportGemPayload",
+   "Metadata/Items/Gems/SupportGemFirePenetrationTwo",
+   "Metadata/Items/Gem/SupportGemLongFuseTwo",
+   "Metadata/Items/Gems/SupportGemSecondWindThree"
+  ],
+  "skills": [
+   {
+    "id": "ExplosiveGrenadePlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Explosive Grenade",
+     "id": "explosive_grenade",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {
+      "grenade_skill_area_of_effect_+%": "base_skill_area_of_effect_+%",
+      "grenade_skill_cooldown_count_+": "base_added_cooldown_count",
+      "grenade_skill_cooldown_speed_+%": "base_cooldown_speed_+%",
+      "grenade_skill_damage_+%": "damage_+%",
+      "grenade_skill_duration_+%": "skill_effect_duration_+%",
+      "grenade_skill_number_of_additional_projectiles": "number_of_additional_projectiles"
+     },
+     "types": [
+      "Attack",
+      "RangedAttack",
+      "Area",
+      "ProjectileNumber",
+      "ProjectileSpeed",
+      "Cooldown",
+      "Grenade",
+      "Fire",
+      "UsableWhileMoving",
+      "DetonatesAfterTime",
+      "Projectile",
+      "Detonator",
+      "MirageArcherCanUse"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "attack_speed_multiplier": -25,
+     "cooldown": 5000,
+     "stored_uses": 3
+    },
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 13
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 15
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 17
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 19
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 21
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 23
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 26
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 29
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "ExplosiveGrenadePlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{base_cooldown_speed_+%}% increased [CooldownRecovery|Cooldown Recovery Rate]",
+         "stats": {
+          "base_cooldown_speed_+%": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "action_allowed_queue_time_override_ms",
+         "type": "constant",
+         "value": 1000
+        },
+        {
+         "id": "action_required_target_facing_angle_tolerance_degrees",
+         "type": "constant",
+         "value": 90
+        },
+        {
+         "id": "base_skill_detonation_time",
+         "type": "constant",
+         "value": 3000
+        },
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_fire",
+         "type": "constant",
+         "value": 80
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "fixed_projectile_spread",
+         "type": "constant",
+         "value": 30
+        },
+        {
+         "id": "active_skill_projectile_speed_+%_variation_final_if_multiple_projectiles",
+         "type": "constant",
+         "value": 15
+        },
+        {
+         "id": "consume_X_heat_on_skill_use",
+         "type": "constant",
+         "value": 15
+        },
+        {
+         "id": "active_skill_all_damage_%_as_fire_if_heat_is_consumed",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "base_number_of_projectiles",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "additional"
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_ballistic_angle_from_reference_event",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "action_can_be_used_in_aiming_stance",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "ballistic_projectiles_always_bounce",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_skill_show_average_damage_instead_of_dps",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_cannot_fork",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 215,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion radius is 2 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 20
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "damage_multiplier": 237,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion radius is 2 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 20
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "damage_multiplier": 262,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion radius is 2 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 20
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "damage_multiplier": 287,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion radius is 2.1 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 21
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "damage_multiplier": 312,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion radius is 2.1 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 21
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "damage_multiplier": 338,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion radius is 2.1 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 21
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "damage_multiplier": 365,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion radius is 2.1 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 21
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "damage_multiplier": 391,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion radius is 2.1 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 21
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "damage_multiplier": 415,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion radius is 2.2 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 22
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "damage_multiplier": 441,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion radius is 2.2 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 22
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SkillGemComet",
+  "name": "Comet",
+  "gemType": "active",
+  "craftingLevel": 11,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "intelligence",
+   "grants_active_skill",
+   "spell",
+   "area",
+   "cold",
+   "repeatable"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gem/SupportGemSpellCascade",
+   "Metadata/Items/Gems/SupportGemSpellEcho",
+   "Metadata/Items/Gems/SupportGemHourglass",
+   "Metadata/Items/Gems/SupportGemUnleash",
+   "Metadata/Items/Gem/SupportGemConsideredCasting",
+   "Metadata/Items/Gems/SupportGemRisingTempest",
+   "Metadata/Items/Gems/SupportGemMagnifiedEffectTwo",
+   "Metadata/Items/Gems/SupportGemElementalFocus",
+   "Metadata/Items/Gem/SupportGemAmbrosiaTwo",
+   "Metadata/Items/Gems/SupportGemExecuteTwo",
+   "Metadata/Items/Gems/SupportGemColdMastery",
+   "Metadata/Items/Gems/SupportGemArcaneTempoThree"
+  ],
+  "skills": [
+   {
+    "id": "CometPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Comet",
+     "id": "comet",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {},
+     "types": [
+      "Spell",
+      "Damage",
+      "Area",
+      "Trappable",
+      "Totemable",
+      "Mineable",
+      "Multicastable",
+      "Triggerable",
+      "Cold",
+      "Cascadable",
+      "Unleashable",
+      "AreaSpell",
+      "Invokable"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {},
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 17
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 20
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 23
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 27
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 31
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 36
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 41
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 46
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 52
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 59
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "CometPlayer",
+      "static": {
+       "crit_chance": 1300,
+       "quality_stats": [
+        {
+         "stat": "{base_spell_%_chance_to_echo}% chance to [Cascadable|Echo]",
+         "stats": {
+          "base_spell_%_chance_to_echo": 500
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "spell_minimum_base_cold_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_cold_damage",
+         "type": "float"
+        },
+        {
+         "id": "range_backflip_conditional_distance",
+         "type": "constant",
+         "value": 30
+        },
+        {
+         "id": "total_cast_time_+_ms",
+         "type": "constant",
+         "value": 1000
+        },
+        {
+         "id": "comet_fall_time_ms",
+         "type": "constant",
+         "value": 550
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 28
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_skill_show_average_damage_instead_of_dps",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "active_skill_consumes_a_fire_infusion",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 23 to 35 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 23
+         },
+         {
+          "value": 35
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 31 to 47 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 31
+         },
+         {
+          "value": 47
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 43 to 64 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 43
+         },
+         {
+          "value": 64
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 56 to 83 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 56
+         },
+         {
+          "value": 83
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 70 to 106 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 70
+         },
+         {
+          "value": 106
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 87 to 131 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 87
+         },
+         {
+          "value": 131
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 106 to 160 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 106
+         },
+         {
+          "value": 160
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 128 to 192 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 128
+         },
+         {
+          "value": 192
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 153 to 229 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 153
+         },
+         {
+          "value": 229
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 180 to 271 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 180
+         },
+         {
+          "value": 271
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "CometFireInfusionPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{base_spell_%_chance_to_echo}% chance to [Cascadable|Echo]",
+         "stats": {
+          "base_spell_%_chance_to_echo": 500
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "spell_minimum_base_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_minimum_base_cold_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_cold_damage",
+         "type": "float"
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 34
+        },
+        {
+         "id": "range_backflip_conditional_distance",
+         "type": "constant",
+         "value": 30
+        },
+        {
+         "id": "total_cast_time_+_ms",
+         "type": "constant",
+         "value": 1000
+        },
+        {
+         "id": "comet_fall_time_ms",
+         "type": "constant",
+         "value": 550
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_skill_show_average_damage_instead_of_dps",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "active_skill_consumes_a_fire_infusion",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 23 to 35 [Cold] Damage",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 23 to 35 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 23
+         },
+         {
+          "value": 35
+         },
+         {
+          "value": 23
+         },
+         {
+          "value": 35
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 31 to 47 [Cold] Damage",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 31 to 47 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 31
+         },
+         {
+          "value": 47
+         },
+         {
+          "value": 31
+         },
+         {
+          "value": 47
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 43 to 64 [Cold] Damage",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 43 to 64 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 43
+         },
+         {
+          "value": 64
+         },
+         {
+          "value": 43
+         },
+         {
+          "value": 64
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 56 to 83 [Cold] Damage",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 56 to 83 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 56
+         },
+         {
+          "value": 83
+         },
+         {
+          "value": 56
+         },
+         {
+          "value": 83
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 70 to 106 [Cold] Damage",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 70 to 106 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 70
+         },
+         {
+          "value": 106
+         },
+         {
+          "value": 70
+         },
+         {
+          "value": 106
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 87 to 131 [Cold] Damage",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 87 to 131 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 87
+         },
+         {
+          "value": 131
+         },
+         {
+          "value": 87
+         },
+         {
+          "value": 131
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 106 to 160 [Cold] Damage",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 106 to 160 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 106
+         },
+         {
+          "value": 160
+         },
+         {
+          "value": 106
+         },
+         {
+          "value": 160
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 128 to 192 [Cold] Damage",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 128 to 192 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 128
+         },
+         {
+          "value": 192
+         },
+         {
+          "value": 128
+         },
+         {
+          "value": 192
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 153 to 229 [Cold] Damage",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 153 to 229 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 153
+         },
+         {
+          "value": 229
+         },
+         {
+          "value": 153
+         },
+         {
+          "value": 229
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 180 to 271 [Cold] Damage",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 180 to 271 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 180
+         },
+         {
+          "value": 271
+         },
+         {
+          "value": 180
+         },
+         {
+          "value": 271
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
+ }
+]

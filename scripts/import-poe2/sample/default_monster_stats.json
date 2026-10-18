@@ -1,0 +1,20 @@
+{
+  "1": {
+    "accuracy": 32,
+    "ally_life": 51,
+    "armour": 3,
+    "evasion": 24,
+    "experience": 17,
+    "life": 15,
+    "physical_damage": 9.15999984741211
+  },
+  "2": {
+    "accuracy": 35,
+    "ally_life": 83,
+    "armour": 6,
+    "evasion": 30,
+    "experience": 18,
+    "life": 20,
+    "physical_damage": 10.260000228881836
+  }
+}

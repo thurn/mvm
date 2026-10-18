@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "review": "npm run format:check && npm run lint && npm run typecheck && npm run test",
-    "knip": "knip"
+    "knip": "knip",
+    "import:poe2": "tsx scripts/import-poe2/index.ts"
   },
   "dependencies": {
     "react": "^19.3.1",
@@ -31,6 +32,7 @@
     "jsdom": "^30.1.3",
     "knip": "^6.42.0",
     "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.2",
     "vite": "^8.3.4",

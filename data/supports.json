@@ -1,0 +1,4338 @@
+[
+ {
+  "id": "Metadata/Items/Gem/SupportGemBrink",
+  "name": "Brink I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "attack",
+   "melee"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportBrinkPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Melee"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportBrinkPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_brink_hit_damage_stun_multiplier_+%_final",
+         "type": "constant",
+         "value": 30
+        },
+        {
+         "id": "cannot_cause_stun_but_allow_stun_buildup",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SupportGemChargedShots",
+  "name": "Charged Shots I",
+  "gemType": "support",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "attack",
+   "projectile"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportChargedShotsPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "Bow",
+      "AND"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 110
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportChargedShotsPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_charged_shots_applies_every_X_shots",
+         "type": "constant",
+         "value": 3
+        },
+        {
+         "id": "support_charged_shots_recover_%_mana_cost_on_use",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "support_charged_shots_%_damage_to_gain_as_lightning",
+         "type": "constant",
+         "value": 30
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SupportGemConsideredCasting",
+  "name": "Considered Casting",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Occult"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "spell"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportConsideredCastingPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Spell"
+     ],
+     "excluded_types": [
+      "UsedByProxy",
+      "Triggered",
+      "Persistent",
+      "FixedCastTime",
+      "HasReservation",
+      "ReservationBecomesCost",
+      "NOT",
+      "AND"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 115
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportConsideredCastingPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_slow_cast_cast_speed_+%_final",
+         "type": "constant",
+         "value": -15
+        },
+        {
+         "id": "support_slow_cast_spell_damage_+%_final",
+         "type": "constant",
+         "value": 35
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SupportGemDeliberation",
+  "name": "Deliberation",
+  "gemType": "support",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportDeliberationPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "UsableWhileMoving"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportDeliberationPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_deliberation_movement_speed_penalty_+%_final_while_performing_action",
+         "type": "constant",
+         "value": 30
+        },
+        {
+         "id": "support_deliberation_damage_+%_final",
+         "type": "constant",
+         "value": 20
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SupportGemExpedite",
+  "name": "Short Fuse I",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Crossbow"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportShortFusePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "DetonatesAfterTime"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 115
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportShortFusePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_fast_forward_detonation_time_+%_final",
+         "type": "constant",
+         "value": -40
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SupportGemFocusedCurse",
+  "name": "Focused Curse",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "curse"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportFocusedCursePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "AppliesCurse"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportFocusedCursePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_focus_curse_curse_delay_+%_final",
+         "type": "constant",
+         "value": -50
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SupportGemHeft",
+  "name": "Heft",
+  "gemType": "support",
+  "craftingLevel": 5,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "physical"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportHeftPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportHeftPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_heft_maximum_physical_damage_+%_final",
+         "type": "constant",
+         "value": 30
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SupportGemSingleOut",
+  "name": "Mark for Death",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "mark",
+   "physical"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportMarkForDeathPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Mark"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportMarkForDeathPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "marked_target_%_physical_damage_taken_as_armour_break",
+         "type": "constant",
+         "value": 10
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SupportGemSwiftAffliction",
+  "name": "Swift Affliction I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "duration"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportSwiftAfflictionPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "DamageOverTime",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportSwiftAfflictionPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_rapid_decay_damage_over_time_+%_final",
+         "type": "constant",
+         "value": 30
+        },
+        {
+         "id": "support_swift_affliction_skill_effect_and_damaging_ailment_duration_+%_final",
+         "type": "constant",
+         "value": -20
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SupportGemThornskin",
+  "name": "Thornskin I",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "buff",
+   "persistent"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportThornskinPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Persistent",
+      "Buff",
+      "AND"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100,
+     "reservations": {
+      "spirit": 20
+     }
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportThornskinPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_thorns_spirit_cost_thorns_damage_+%",
+         "type": "constant",
+         "value": 40
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SupportGemWarmBlooded",
+  "name": "Warm Blooded",
+  "gemType": "support",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "buff",
+   "persistent"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportWarmbloodedPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Persistent",
+      "Buff",
+      "AND"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100,
+     "reservations": {
+      "spirit": 15
+     }
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportWarmbloodedPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_freeze_protection_spirit_cost_freeze_duration_on_self_+%_final",
+         "type": "constant",
+         "value": -50
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemAftershock",
+  "name": "Aftershock I",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "attack",
+   "melee",
+   "slam"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportAftershockChancePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Slam"
+     ],
+     "excluded_types": [
+      "UsedByProxy",
+      "Triggered",
+      "Persistent"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportAftershockChancePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "slam_aftershock_chance_%",
+         "type": "constant",
+         "value": 25
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemAmbush",
+  "name": "Ambush",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportAmbushPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "Damage",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportAmbushPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_ambush_critical_strike_chance_vs_enemies_on_full_life_+%_final",
+         "type": "constant",
+         "value": 100
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemArcaneTempo",
+  "name": "Rapid Casting I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "spell"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportRapidCastingPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Spell"
+     ],
+     "excluded_types": [
+      "Instant",
+      "FixedCastTime",
+      "NoAttackOrCastTime"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportRapidCastingPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "base_cast_speed_+%",
+         "type": "constant",
+         "value": 15
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemBrutality",
+  "name": "Brutality I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "physical"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportBrutalityPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "DamageOverTime",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportBrutalityPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_brutality_physical_damage_+%_final",
+         "type": "constant",
+         "value": 25
+        },
+        {
+         "id": "deal_no_elemental_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_deal_no_chaos_damage",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemBrutalityThree",
+  "name": "Brutality III",
+  "gemType": "support",
+  "craftingLevel": 5,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "physical"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportBrutalityPlayerThree",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "DamageOverTime",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportBrutalityPlayerThree",
+      "static": {
+       "stats": [
+        {
+         "id": "support_brutality_physical_damage_+%_final",
+         "type": "constant",
+         "value": 30
+        },
+        {
+         "id": "hits_ignore_enemy_monster_physical_damage_reduction_%_chance",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "deal_no_elemental_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_deal_no_chaos_damage",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemBrutalityTwo",
+  "name": "Brutality II",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "physical"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportBrutalityPlayerTwo",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "DamageOverTime",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportBrutalityPlayerTwo",
+      "static": {
+       "stats": [
+        {
+         "id": "support_brutality_physical_damage_+%_final",
+         "type": "constant",
+         "value": 30
+        },
+        {
+         "id": "deal_no_elemental_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_deal_no_chaos_damage",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemChain",
+  "name": "Chain I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "projectile",
+   "chaining"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportChainPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Chains",
+      "Projectile"
+     ],
+     "excluded_types": [
+      "CannotChain",
+      "ProjectileNoCollision"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportChainPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "number_of_chains",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "support_chain_hit_damage_+%_final",
+         "type": "constant",
+         "value": -30
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemCloseCombat",
+  "name": "Close Combat I",
+  "gemType": "support",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "attack"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportCloseCombatPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportCloseCombatPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_close_combat_attack_damage_+%_final_from_distance",
+         "type": "constant",
+         "value": 20
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemColdInfusion",
+  "name": "Cold Attunement",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "cold"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportAddedColdDamagePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "CrossbowAmmoSkill",
+      "Damage"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportAddedColdDamagePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "non_skill_base_all_damage_%_to_gain_as_cold",
+         "type": "constant",
+         "value": 25
+        },
+        {
+         "id": "support_fire_and_lightning_damage_+%_final",
+         "type": "constant",
+         "value": -50
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemColdPenetration",
+  "name": "Cold Penetration",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "cold"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportColdPenetrationPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportColdPenetrationPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "base_reduce_enemy_cold_resistance_%",
+         "type": "constant",
+         "value": 30
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemConcentratedEffect",
+  "name": "Concentrated Area",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "area"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportConcentratedAreaPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Area",
+      "MinionsCanExplode"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportConcentratedAreaPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_concentrated_effect_skill_area_of_effect_+%_final",
+         "type": "constant",
+         "value": -50
+        },
+        {
+         "id": "support_area_concentrate_area_damage_+%_final",
+         "type": "constant",
+         "value": 30
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemConduction",
+  "name": "Shock",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "lightning"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportShockPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportShockPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_conduction_chance_to_shock_+%_final",
+         "type": "constant",
+         "value": 100
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemControlledDestruction",
+  "name": "Controlled Destruction",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "spell"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportControlledDestructionPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Spell",
+      "AND"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportControlledDestructionPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_controlled_destruction_spell_damage_+%_final",
+         "type": "constant",
+         "value": 25
+        },
+        {
+         "id": "global_cannot_crit",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemCoursingCurrent",
+  "name": "Shock Conduction",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "area",
+   "lightning"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportShockConductionPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportShockConductionPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_%_chance_to_shock_nearby_enemy_on_shock",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "shock_nearby_enemy_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 25
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemDeadlyHeralds",
+  "name": "Deadly Herald",
+  "gemType": "support",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Quarterstaff"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "herald"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportDeadlyHeraldsPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Herald"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100,
+     "reservations": {
+      "spirit": 20
+     }
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportDeadlyHeraldsPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_deadly_heralds_damage_+%_final",
+         "type": "constant",
+         "value": 30
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemElementalFocus",
+  "name": "Elemental Focus",
+  "gemType": "support",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportElementalFocusPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportElementalFocusPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_gem_elemental_damage_+%_final",
+         "type": "constant",
+         "value": 25
+        },
+        {
+         "id": "cannot_inflict_elemental_ailments",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemEnvenom",
+  "name": "Poison I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "chaos"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportPoisonPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportPoisonPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "base_chance_to_poison_on_hit_%",
+         "type": "constant",
+         "value": 40
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemExploitWeakness",
+  "name": "Exploit Weakness",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "payoff"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportExploitWeaknessPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": [
+      "ConsumesFullyBrokenArmour",
+      "SupportedByExploitWeakness"
+     ],
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": [
+      "ConsumesFullyBrokenArmour",
+      "SupportedByExploitWeakness",
+      "NOT",
+      "AND"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 130
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportExploitWeaknessPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_gem_consume_enemy_fully_broken_armour_to_gain_damage_+%_final",
+         "type": "constant",
+         "value": 40
+        },
+        {
+         "id": "cannot_break_armour",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemFieryDeath",
+  "name": "Fiery Death",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "grants_active_skill",
+   "spell",
+   "area",
+   "trigger",
+   "fire"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportFieryDeathPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": [
+      "SkillGrantedBySupport"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportFieryDeathPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "chance_to_trigger_fiery_death_on_ignited_enemy_death_%",
+         "type": "constant",
+         "value": 60
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   },
+   {
+    "id": "TriggeredFieryDeathPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Fiery Death",
+     "id": "triggered_fiery_death",
+     "is_manually_casted": false,
+     "is_skill_totem": false,
+     "stat_conversions": {},
+     "types": [
+      "Spell",
+      "Damage",
+      "SkillGrantedBySupport",
+      "Triggerable",
+      "Triggered",
+      "InbuiltTrigger",
+      "Fire",
+      "TargetsDestructibleCorpses",
+      "Area",
+      "AttackInPlace"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "costs": {
+      "Mana": 0
+     }
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "TriggeredFieryDeathPlayer",
+      "static": {
+       "crit_chance": 800,
+       "stats": [
+        {
+         "id": "triggered_by_fiery_death_support_%",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "corpse_explosion_monster_life_%",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemFireInfusion",
+  "name": "Fire Attunement",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "fire"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportAddedFireDamagePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "CrossbowAmmoSkill",
+      "Damage"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportAddedFireDamagePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "non_skill_base_all_damage_%_to_gain_as_fire",
+         "type": "constant",
+         "value": 25
+        },
+        {
+         "id": "support_cold_and_lightning_damage_+%_final",
+         "type": "constant",
+         "value": -50
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemFirePenetration",
+  "name": "Fire Penetration I",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "fire"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportFirePenetrationPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportFirePenetrationPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "base_reduce_enemy_fire_resistance_%",
+         "type": "constant",
+         "value": 30
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemFirePenetrationTwo",
+  "name": "Fire Penetration II",
+  "gemType": "support",
+  "craftingLevel": 5,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "fire"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportFirePenetrationPlayerTwo",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportFirePenetrationPlayerTwo",
+      "static": {
+       "stats": [
+        {
+         "id": "hits_ignore_enemy_fire_resistance",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemFork",
+  "name": "Fork",
+  "gemType": "support",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "projectile"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportForkPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Projectile"
+     ],
+     "excluded_types": [
+      "ProjectileNoCollision"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 110
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportForkPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "terrain_arrow_attachment_chance_reduction_+%",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "support_fork_forked_projectile_damage_+%_final",
+         "type": "constant",
+         "value": -30
+        },
+        {
+         "id": "projectiles_fork",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemFrostNexus",
+  "name": "Frost Nexus",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "area",
+   "cold"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportChillingIcePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": [
+      "CreatesGroundEffect"
+     ],
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportChillingIcePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "chilling_ice_freezing_area_base_radius",
+         "type": "constant",
+         "value": 30
+        },
+        {
+         "id": "chilling_ice_create_chilled_ground_on_freeze_base_duration_ms",
+         "type": "constant",
+         "value": 8000
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemGlaciation",
+  "name": "Freeze",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "cold"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportFreezePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportFreezePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_hypothermia_hit_damage_freeze_multiplier_+%_final",
+         "type": "constant",
+         "value": 50
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemHeavySwing",
+  "name": "Heavy Swing",
+  "gemType": "support",
+  "craftingLevel": 4,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "attack",
+   "melee",
+   "physical"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportMeleePhysicalDamagePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Melee"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportMeleePhysicalDamagePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_melee_physical_damage_+%_final",
+         "type": "constant",
+         "value": 35
+        },
+        {
+         "id": "support_melee_physical_damage_attack_speed_+%_final",
+         "type": "constant",
+         "value": -10
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemHeightenedCurse",
+  "name": "Heightened Curse",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "curse"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportCurseEffectPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "AppliesCurse",
+      "IsBlasphemy"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 140
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportCurseEffectPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "curse_effect_+%",
+         "type": "constant",
+         "value": 25
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemIgnition",
+  "name": "Ignite I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "fire"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportIgnitePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportIgnitePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_ignition_chance_to_ignite_+%_final",
+         "type": "constant",
+         "value": 100
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemIgnitionThree",
+  "name": "Ignite III",
+  "gemType": "support",
+  "craftingLevel": 5,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "fire"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportIgnitePlayerThree",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportIgnitePlayerThree",
+      "static": {
+       "stats": [
+        {
+         "id": "support_ignition_chance_to_ignite_+%_final",
+         "type": "constant",
+         "value": 200
+        },
+        {
+         "id": "faster_burn_%",
+         "type": "constant",
+         "value": 15
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemImpactShockwave",
+  "name": "Impact Shockwave",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "attack",
+   "area",
+   "melee",
+   "strike"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "ImpactShockwaveSupportPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "MeleeSingleTarget",
+      "Wind",
+      "Attack",
+      "AND"
+     ],
+     "excluded_types": [
+      "Slam"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {},
+     "2": {},
+     "3": {},
+     "4": {}
+    },
+    "statSets": [
+     {
+      "id": "ImpactShockwaveSupportPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_impact_shockwave_base_non_slam_aftershock_on_heavy_stun_radius",
+         "type": "constant",
+         "value": 15
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemIngenuity",
+  "name": "Cooldown Recovery I",
+  "gemType": "support",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportCooldownRecoveryPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Cooldown",
+      "AffectedByCooldownRate"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 130
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportCooldownRecoveryPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_cooldown_reduction_cooldown_recovery_+%",
+         "type": "constant",
+         "value": 25
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemInspiration",
+  "name": "Efficiency I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportEfficiencyPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": null,
+     "excluded_types": [
+      "Persistent"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportEfficiencyPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_inspiration_cost_+%_final",
+         "type": "constant",
+         "value": -30
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemLacerate",
+  "name": "Bleed I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "physical"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportBleedPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportBleedPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "base_chance_to_inflict_bleeding_%",
+         "type": "constant",
+         "value": 50
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemLifeThief",
+  "name": "Life Leech I",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "attack",
+   "physical"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportLifeLeechPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportLifeLeechPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "base_life_leech_from_physical_attack_damage_permyriad",
+         "type": "constant",
+         "value": 1200
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemLightningExposure",
+  "name": "Lightning Exposure",
+  "gemType": "support",
+  "craftingLevel": 4,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "lightning",
+   "duration"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportLightningExposurePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": [
+      "Duration"
+     ],
+     "allowed_types": [
+      "Attack",
+      "Damage",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportLightningExposurePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "inflict_exposure_for_x_ms_on_shock",
+         "type": "constant",
+         "value": 8000
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemLightningInfusion",
+  "name": "Lightning Attunement",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "lightning"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportAddedLightningDamagePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "CrossbowAmmoSkill",
+      "Damage"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportAddedLightningDamagePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "non_skill_base_all_damage_%_to_gain_as_lightning",
+         "type": "constant",
+         "value": 25
+        },
+        {
+         "id": "support_cold_and_fire_damage_+%_final",
+         "type": "constant",
+         "value": -50
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemLightningPenetration",
+  "name": "Lightning Penetration",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "lightning"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportLightningPenetrationPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportLightningPenetrationPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "base_reduce_enemy_lightning_resistance_%",
+         "type": "constant",
+         "value": 30
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemLongshot",
+  "name": "Longshot I",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "attack"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportFarCombatPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportFarCombatPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_far_combat_attack_damage_+%_final_from_distance",
+         "type": "constant",
+         "value": 25
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemMagnifiedEffect",
+  "name": "Magnified Area I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "area"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportMagnifiedAreaPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Area",
+      "MinionsCanExplode"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 130
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportMagnifiedAreaPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "base_skill_area_of_effect_+%",
+         "type": "constant",
+         "value": 35
+        },
+        {
+         "id": "support_increased_area_damage_+%_final",
+         "type": "constant",
+         "value": 0
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemMartialTempo",
+  "name": "Rapid Attacks I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "attack"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportRapidAttacksPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": [
+      "Herald",
+      "NoAttackOrCastTime"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportRapidAttacksPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "attack_speed_+%",
+         "type": "constant",
+         "value": 15
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemOverabundance",
+  "name": "Overabundance I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportIncreaseLimitPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Limit"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportIncreaseLimitPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "base_limit_+",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "support_limit_skill_effect_duration_+%_final",
+         "type": "constant",
+         "value": -50
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemOverpower",
+  "name": "Stun I",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportStunPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "Damage",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportStunPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_overpower_hit_damage_stun_multiplier_+%_final",
+         "type": "constant",
+         "value": 50
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemPersistence",
+  "name": "Prolonged Duration I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "duration"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "ProlongedDurationSupportPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Duration"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {},
+     "2": {},
+     "3": {}
+    },
+    "statSets": [
+     {
+      "id": "ProlongedDurationSupportPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_more_duration_skill_effect_duration_+%_final",
+         "type": "constant",
+         "value": 30
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemPierce",
+  "name": "Pierce I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "projectile"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportPiercePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Projectile"
+     ],
+     "excluded_types": [
+      "ProjectileNoCollision"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportPiercePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "base_chance_to_pierce_%",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "support_pierce_projectile_damage_+%_final_if_pierced_enemy",
+         "type": "constant",
+         "value": -20
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemPierceThree",
+  "name": "Pierce III",
+  "gemType": "support",
+  "craftingLevel": 5,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "projectile"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportPiercePlayerThree",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Projectile"
+     ],
+     "excluded_types": [
+      "ProjectileNoCollision"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportPiercePlayerThree",
+      "static": {
+       "stats": [
+        {
+         "id": "support_pierce_damage_+%_final_per_pierced_target",
+         "type": "constant",
+         "value": -20
+        },
+        {
+         "id": "always_pierce",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemPinpointCritical",
+  "name": "Pinpoint Critical",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Occult"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportPinpointCriticalPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {},
+     "2": {},
+     "3": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportPinpointCriticalPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_pinpoint_critical_strike_chance_+%_final",
+         "type": "constant",
+         "value": 60
+        },
+        {
+         "id": "support_pinpoint_critical_strike_multiplier_+%_final",
+         "type": "constant",
+         "value": -30
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemPrimalArmament",
+  "name": "Elemental Armament I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "attack"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportElementalArmamentPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportElementalArmamentPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_attack_skills_elemental_damage_+%_final",
+         "type": "constant",
+         "value": 20
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemPrimalArmamentTwo",
+  "name": "Elemental Armament II",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "attack"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportElementalArmamentPlayerTwo",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 120
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportElementalArmamentPlayerTwo",
+      "static": {
+       "stats": [
+        {
+         "id": "support_attack_skills_elemental_damage_+%_final",
+         "type": "constant",
+         "value": 25
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemScattershot",
+  "name": "Multishot I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "projectile"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportMultishotPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Projectile",
+      "ProjectileNumber"
+     ],
+     "excluded_types": [
+      "ProjectilesNumberModifiersNotApplied"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportMultishotPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "number_of_additional_projectiles",
+         "type": "constant",
+         "value": 2
+        },
+        {
+         "id": "support_multiple_damage_+%_final",
+         "type": "constant",
+         "value": -35
+        },
+        {
+         "id": "terrain_arrow_attachment_chance_reduction_+%",
+         "type": "constant",
+         "value": 200
+        },
+        {
+         "id": "support_scattershot_skill_speed_+%_final",
+         "type": "constant",
+         "value": -20
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemSecondWind",
+  "name": "Second Wind I",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Bow"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "support"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportSecondWindPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Cooldown",
+      "AffectedByCooldownRate"
+     ],
+     "excluded_types": [
+      "Triggered",
+      "Instant",
+      "Meta"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 150
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportSecondWindPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "base_cooldown_speed_+%_final",
+         "type": "constant",
+         "value": -50
+        },
+        {
+         "id": "support_double_number_of_cooldown_uses",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemSpellEcho",
+  "name": "Spell Echo",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support",
+   "spell",
+   "area"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportSpellEchoPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Cascadable"
+     ],
+     "excluded_types": [
+      "Triggered",
+      "UsedByProxy",
+      "Persistent"
+     ],
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 150
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportSpellEchoPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_multicast_cast_speed_+%_final",
+         "type": "constant",
+         "value": -30
+        },
+        {
+         "id": "support_spell_echo_number_of_echo_cascades",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "echoed_spell_area_of_effect_+%",
+         "type": "constant",
+         "value": 40
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemSplinter",
+  "name": "Armour Break I",
+  "gemType": "support",
+  "craftingLevel": 2,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "physical"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportArmourBreakPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Attack",
+      "Damage",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportArmourBreakPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "armour_break_physical_damage_%_dealt_as_armour_break",
+         "type": "constant",
+         "value": 15
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemSupercritical",
+  "name": "Supercritical",
+  "gemType": "support",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "support"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportIncreasedCriticalDamagePlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Damage",
+      "Attack",
+      "CrossbowAmmoSkill"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportIncreasedCriticalDamagePlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "base_critical_strike_multiplier_+",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "support_critical_damage_critical_strike_chance_+%_final",
+         "type": "constant",
+         "value": -20
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SupportGemVitality",
+  "name": "Vitality I",
+  "gemType": "support",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "support",
+   "buff",
+   "persistent"
+  ],
+  "recommendedSupports": [],
+  "skills": [
+   {
+    "id": "SupportVitalityPlayer",
+    "isSupport": true,
+    "activeSkill": null,
+    "supportGem": {
+     "added_minion_types": null,
+     "added_types": null,
+     "allowed_types": [
+      "Persistent",
+      "Buff",
+      "AND"
+     ],
+     "excluded_types": null,
+     "letter": "",
+     "supports_gems_only": false
+    },
+    "castTime": null,
+    "static": {
+     "cost_multiplier": 100,
+     "reservations": {
+      "spirit": 20
+     }
+    },
+    "perLevel": {
+     "1": {}
+    },
+    "statSets": [
+     {
+      "id": "SupportVitalityPlayer",
+      "static": {
+       "stats": [
+        {
+         "id": "support_vitality_life_regeneration_rate_per_minute_%",
+         "type": "constant",
+         "value": 60
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     }
+    ]
+   }
+  ]
+ }
+]

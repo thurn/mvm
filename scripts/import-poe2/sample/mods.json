@@ -1,0 +1,269 @@
+{
+  "LocalAddedFireDamage1": {
+    "adds_tags": [],
+    "domain": "item",
+    "generation_type": "prefix",
+    "generation_weights": [],
+    "gold_value": null,
+    "grants_effects": [],
+    "groups": ["FireDamage"],
+    "implicit_tags": ["elemental_damage", "damage", "elemental", "fire", "attack"],
+    "is_essence_only": false,
+    "name": "Heated",
+    "required_level": 1,
+    "spawn_weights": [
+      {
+        "tag": "bow",
+        "weight": 1
+      },
+      {
+        "tag": "two_hand_weapon",
+        "weight": 0
+      },
+      {
+        "tag": "sword",
+        "weight": 1
+      },
+      {
+        "tag": "axe",
+        "weight": 1
+      },
+      {
+        "tag": "mace",
+        "weight": 1
+      },
+      {
+        "tag": "spear",
+        "weight": 1
+      },
+      {
+        "tag": "claw",
+        "weight": 1
+      },
+      {
+        "tag": "dagger",
+        "weight": 1
+      },
+      {
+        "tag": "flail",
+        "weight": 1
+      },
+      {
+        "tag": "default",
+        "weight": 0
+      }
+    ],
+    "stats": [
+      {
+        "id": "local_minimum_added_fire_damage",
+        "max": 2,
+        "min": 1
+      },
+      {
+        "id": "local_maximum_added_fire_damage",
+        "max": 5,
+        "min": 3
+      }
+    ],
+    "text": "Adds (1-2) to (3-5) [Fire|Fire] Damage",
+    "type": "LocalFireDamage"
+  },
+  "LocalAddedFireDamage3": {
+    "adds_tags": [],
+    "domain": "item",
+    "generation_type": "prefix",
+    "generation_weights": [],
+    "gold_value": null,
+    "grants_effects": [],
+    "groups": ["FireDamage"],
+    "implicit_tags": ["elemental_damage", "damage", "elemental", "fire", "attack"],
+    "is_essence_only": false,
+    "name": "Smoking",
+    "required_level": 16,
+    "spawn_weights": [
+      {
+        "tag": "bow",
+        "weight": 1
+      },
+      {
+        "tag": "two_hand_weapon",
+        "weight": 0
+      },
+      {
+        "tag": "sword",
+        "weight": 1
+      },
+      {
+        "tag": "axe",
+        "weight": 1
+      },
+      {
+        "tag": "mace",
+        "weight": 1
+      },
+      {
+        "tag": "spear",
+        "weight": 1
+      },
+      {
+        "tag": "claw",
+        "weight": 1
+      },
+      {
+        "tag": "dagger",
+        "weight": 1
+      },
+      {
+        "tag": "flail",
+        "weight": 1
+      },
+      {
+        "tag": "default",
+        "weight": 0
+      }
+    ],
+    "stats": [
+      {
+        "id": "local_minimum_added_fire_damage",
+        "max": 11,
+        "min": 7
+      },
+      {
+        "id": "local_maximum_added_fire_damage",
+        "max": 19,
+        "min": 13
+      }
+    ],
+    "text": "Adds (7-11) to (13-19) [Fire|Fire] Damage",
+    "type": "LocalFireDamage"
+  },
+  "LocalIncreasedSpiritPercent1": {
+    "adds_tags": [],
+    "domain": "item",
+    "generation_type": "prefix",
+    "generation_weights": [],
+    "gold_value": null,
+    "grants_effects": [],
+    "groups": ["LocalIncreasedSpiritPercent"],
+    "implicit_tags": [],
+    "is_essence_only": false,
+    "name": "Lord's",
+    "required_level": 1,
+    "spawn_weights": [
+      {
+        "tag": "sceptre",
+        "weight": 1
+      },
+      {
+        "tag": "default",
+        "weight": 0
+      }
+    ],
+    "stats": [
+      {
+        "id": "local_spirit_+%",
+        "max": 26,
+        "min": 20
+      }
+    ],
+    "text": "(20-26)% increased [Spirit|Spirit]",
+    "type": "LocalIncreasedSpiritPercent"
+  },
+  "LocalLightRadiusAndAccuracy1": {
+    "adds_tags": [],
+    "domain": "item",
+    "generation_type": "suffix",
+    "generation_weights": [],
+    "gold_value": null,
+    "grants_effects": [],
+    "groups": ["LightRadiusAndAccuracy"],
+    "implicit_tags": ["attack"],
+    "is_essence_only": false,
+    "name": "of Shining",
+    "required_level": 8,
+    "spawn_weights": [
+      {
+        "tag": "weapon",
+        "weight": 1
+      },
+      {
+        "tag": "default",
+        "weight": 0
+      }
+    ],
+    "stats": [
+      {
+        "id": "light_radius_+%",
+        "max": 5,
+        "min": 5
+      },
+      {
+        "id": "local_accuracy_rating",
+        "max": 20,
+        "min": 10
+      }
+    ],
+    "text": "5% increased [LightRadius|Light Radius]\n+(10-20) to [Accuracy|Accuracy] Rating",
+    "type": "LocalLightRadiusAndAccuracy"
+  },
+  "ReducedBleedDuration1": {
+    "adds_tags": [],
+    "domain": "item",
+    "generation_type": "suffix",
+    "generation_weights": [],
+    "gold_value": null,
+    "grants_effects": [],
+    "groups": ["ReducedAilmentDuration"],
+    "implicit_tags": ["bleed", "physical", "ailment"],
+    "is_essence_only": false,
+    "name": "of Sealing",
+    "required_level": 21,
+    "spawn_weights": [
+      {
+        "tag": "body_armour",
+        "weight": 1
+      },
+      {
+        "tag": "default",
+        "weight": 0
+      }
+    ],
+    "stats": [
+      {
+        "id": "self_bleed_duration_+%",
+        "max": -36,
+        "min": -40
+      }
+    ],
+    "text": "(40-36)% reduced Duration of [Bleeding] on You",
+    "type": "ReducedBleedDuration"
+  },
+  "UniqueLocalAddedColdDamage4": {
+    "adds_tags": [],
+    "domain": "item",
+    "generation_type": "unique",
+    "generation_weights": [],
+    "gold_value": null,
+    "grants_effects": [],
+    "groups": ["ColdDamage"],
+    "implicit_tags": ["elemental_damage", "damage", "elemental", "cold", "attack"],
+    "is_essence_only": false,
+    "name": "",
+    "required_level": 1,
+    "spawn_weights": [],
+    "stats": [
+      {
+        "id": "local_minimum_added_cold_damage",
+        "max": 10,
+        "min": 8
+      },
+      {
+        "id": "local_maximum_added_cold_damage",
+        "max": 15,
+        "min": 13
+      }
+    ],
+    "text": "Adds (8-10) to (13-15) [Cold|Cold] Damage",
+    "type": "LocalColdDamage"
+  }
+}

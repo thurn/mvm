@@ -1,0 +1,733 @@
+[
+ {
+  "id": "Metadata/Items/Weapons/TwoHandWeapons/Bows/FourBow1",
+  "name": "Crude Bow",
+  "itemClass": "Bow",
+  "dropLevel": 1,
+  "tags": [
+   "ezomyte_basetype",
+   "bow",
+   "ranged",
+   "two_hand_weapon",
+   "twohand",
+   "weapon",
+   "default"
+  ],
+  "properties": {
+   "attack_time": 833,
+   "critical_strike_chance": 500,
+   "physical_damage_max": 9,
+   "physical_damage_min": 6,
+   "range": 120
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/TwoHandWeapons/Bows/FourBow2",
+  "name": "Shortbow",
+  "itemClass": "Bow",
+  "dropLevel": 5,
+  "tags": [
+   "ezomyte_basetype",
+   "bow",
+   "ranged",
+   "two_hand_weapon",
+   "twohand",
+   "weapon",
+   "default"
+  ],
+  "properties": {
+   "attack_time": 800,
+   "critical_strike_chance": 500,
+   "physical_damage_max": 14,
+   "physical_damage_min": 7,
+   "range": 120
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/TwoHandWeapons/Crossbows/FourCrossbow1",
+  "name": "Makeshift Crossbow",
+  "itemClass": "Crossbow",
+  "dropLevel": 1,
+  "tags": [
+   "ezomyte_basetype",
+   "crossbow",
+   "ranged",
+   "two_hand_weapon",
+   "twohand",
+   "weapon",
+   "default"
+  ],
+  "properties": {
+   "attack_time": 625,
+   "critical_strike_chance": 500,
+   "physical_damage_max": 12,
+   "physical_damage_min": 7,
+   "range": 120
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/TwoHandWeapons/Crossbows/FourCrossbow3",
+  "name": "Sturdy Crossbow",
+  "itemClass": "Crossbow",
+  "dropLevel": 10,
+  "tags": [
+   "ezomyte_basetype",
+   "crossbow",
+   "ranged",
+   "two_hand_weapon",
+   "twohand",
+   "weapon",
+   "default"
+  ],
+  "properties": {
+   "attack_time": 645,
+   "critical_strike_chance": 500,
+   "physical_damage_max": 26,
+   "physical_damage_min": 11,
+   "range": 120
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/OneHandWeapons/OneHandSpears/FourSpear1",
+  "name": "Hardwood Spear",
+  "itemClass": "Spear",
+  "dropLevel": 1,
+  "tags": [
+   "ezomyte_basetype",
+   "spear",
+   "one_hand_weapon",
+   "onehand",
+   "weapon",
+   "default"
+  ],
+  "properties": {
+   "attack_time": 625,
+   "critical_strike_chance": 500,
+   "physical_damage_max": 9,
+   "physical_damage_min": 5,
+   "range": 15
+  },
+  "implicits": [
+   {
+    "id": "SpearImplicitDisplaySpearThrow1",
+    "stats": [
+     {
+      "id": "local_display_grants_spear_throw_skill",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Weapons/OneHandWeapons/OneHandSpears/FourSpear2",
+  "name": "Ironhead Spear",
+  "itemClass": "Spear",
+  "dropLevel": 5,
+  "tags": [
+   "ezomyte_basetype",
+   "spear",
+   "one_hand_weapon",
+   "onehand",
+   "weapon",
+   "default"
+  ],
+  "properties": {
+   "attack_time": 625,
+   "critical_strike_chance": 500,
+   "physical_damage_max": 12,
+   "physical_damage_min": 9,
+   "range": 15
+  },
+  "implicits": [
+   {
+    "id": "SpearImplicitDisplaySpearThrow1",
+    "stats": [
+     {
+      "id": "local_display_grants_spear_throw_skill",
+      "min": 1,
+      "max": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Weapons/OneHandWeapons/OneHandMaces/FourOneHandMace1",
+  "name": "Wooden Club",
+  "itemClass": "One Hand Mace",
+  "dropLevel": 1,
+  "tags": [
+   "ezomyte_basetype",
+   "mace",
+   "one_hand_weapon",
+   "onehand",
+   "weapon",
+   "default"
+  ],
+  "properties": {
+   "attack_time": 690,
+   "critical_strike_chance": 500,
+   "physical_damage_max": 10,
+   "physical_damage_min": 6,
+   "range": 13
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/OneHandWeapons/OneHandMaces/FourOneHandMace2",
+  "name": "Smithing Hammer",
+  "itemClass": "One Hand Mace",
+  "dropLevel": 4,
+  "tags": [
+   "ezomyte_basetype",
+   "mace",
+   "one_hand_weapon",
+   "onehand",
+   "weapon",
+   "default"
+  ],
+  "properties": {
+   "attack_time": 690,
+   "critical_strike_chance": 500,
+   "physical_damage_max": 18,
+   "physical_damage_min": 11,
+   "range": 13
+  },
+  "implicits": [
+   {
+    "id": "MaceImplicitFireDamage1",
+    "stats": [
+     {
+      "id": "local_weapon_implicit_hidden_%_base_damage_is_fire",
+      "min": 50,
+      "max": 50
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Weapons/OneHandWeapons/OneHandMaces/FourOneHandMace3",
+  "name": "Slim Mace",
+  "itemClass": "One Hand Mace",
+  "dropLevel": 10,
+  "tags": [
+   "ezomyte_basetype",
+   "mace",
+   "one_hand_weapon",
+   "onehand",
+   "weapon",
+   "default"
+  ],
+  "properties": {
+   "attack_time": 645,
+   "critical_strike_chance": 500,
+   "physical_damage_max": 17,
+   "physical_damage_min": 11,
+   "range": 13
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/TwoHandWeapons/TwoHandMaces/FourTwoHandMace1",
+  "name": "Felled Greatclub",
+  "itemClass": "Two Hand Mace",
+  "dropLevel": 1,
+  "tags": [
+   "ezomyte_basetype",
+   "mace",
+   "two_hand_weapon",
+   "twohand",
+   "weapon",
+   "default"
+  ],
+  "properties": {
+   "attack_time": 909,
+   "critical_strike_chance": 500,
+   "physical_damage_max": 18,
+   "physical_damage_min": 13,
+   "range": 15
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/TwoHandWeapons/TwoHandMaces/FourTwoHandMace2",
+  "name": "Oak Greathammer",
+  "itemClass": "Two Hand Mace",
+  "dropLevel": 4,
+  "tags": [
+   "ezomyte_basetype",
+   "mace",
+   "two_hand_weapon",
+   "twohand",
+   "weapon",
+   "default"
+  ],
+  "properties": {
+   "attack_time": 1000,
+   "critical_strike_chance": 500,
+   "physical_damage_max": 30,
+   "physical_damage_min": 16,
+   "range": 15
+  },
+  "implicits": [
+   {
+    "id": "MaceImplicitStunDamageIncrease1",
+    "stats": [
+     {
+      "id": "local_hit_damage_stun_multiplier_+%",
+      "min": 20,
+      "max": 40
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Weapons/TwoHandWeapons/Staves/FourQuarterstaff1",
+  "name": "Wrapped Quarterstaff",
+  "itemClass": "Warstaff",
+  "dropLevel": 1,
+  "tags": [
+   "ezomyte_basetype",
+   "warstaff",
+   "two_hand_weapon",
+   "twohand",
+   "weapon",
+   "default"
+  ],
+  "properties": {
+   "attack_time": 714,
+   "critical_strike_chance": 1000,
+   "physical_damage_max": 12,
+   "physical_damage_min": 7,
+   "range": 14
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/OneHandWeapons/Wands/FourWand1",
+  "name": "Withered Wand",
+  "itemClass": "Wand",
+  "dropLevel": 1,
+  "tags": [
+   "no_fire_spell_mods",
+   "no_cold_spell_mods",
+   "no_lightning_spell_mods",
+   "no_physical_spell_mods",
+   "chaos_implicit_skill",
+   "wand",
+   "onehand",
+   "default"
+  ],
+  "properties": {},
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/OneHandWeapons/Wands/FourWand2",
+  "name": "Bone Wand",
+  "itemClass": "Wand",
+  "dropLevel": 2,
+  "tags": [
+   "no_fire_spell_mods",
+   "no_cold_spell_mods",
+   "no_lightning_spell_mods",
+   "no_chaos_spell_mods",
+   "physical_implicit_skill",
+   "wand",
+   "onehand",
+   "default"
+  ],
+  "properties": {},
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/OneHandWeapons/Wands/FourWand3",
+  "name": "Attuned Wand",
+  "itemClass": "Wand",
+  "dropLevel": 2,
+  "tags": [
+   "wand",
+   "onehand",
+   "default"
+  ],
+  "properties": {},
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/TwoHandWeapons/Staves/FourStaff1",
+  "name": "Ashen Staff",
+  "itemClass": "Staff",
+  "dropLevel": 1,
+  "tags": [
+   "no_cold_spell_mods",
+   "no_lightning_spell_mods",
+   "no_chaos_spell_mods",
+   "no_physical_spell_mods",
+   "fire_implicit_skill",
+   "staff",
+   "twohand",
+   "default"
+  ],
+  "properties": {},
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/TwoHandWeapons/Staves/FourStaff2",
+  "name": "Gelid Staff",
+  "itemClass": "Staff",
+  "dropLevel": 2,
+  "tags": [
+   "no_fire_spell_mods",
+   "no_lightning_spell_mods",
+   "no_chaos_spell_mods",
+   "no_physical_spell_mods",
+   "cold_implicit_skill",
+   "staff",
+   "twohand",
+   "default"
+  ],
+  "properties": {},
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/TwoHandWeapons/Staves/FourStaff3",
+  "name": "Voltaic Staff",
+  "itemClass": "Staff",
+  "dropLevel": 2,
+  "tags": [
+   "no_fire_spell_mods",
+   "no_cold_spell_mods",
+   "no_chaos_spell_mods",
+   "no_physical_spell_mods",
+   "lightning_implicit_skill",
+   "staff",
+   "twohand",
+   "default"
+  ],
+  "properties": {},
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/OneHandWeapons/Sceptres/FourSceptre1",
+  "name": "Rattling Sceptre",
+  "itemClass": "Sceptre",
+  "dropLevel": 1,
+  "tags": [
+   "physical_implicit_skill",
+   "sceptre",
+   "onehand",
+   "default"
+  ],
+  "properties": {},
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Weapons/OneHandWeapons/Sceptres/FourSceptre2",
+  "name": "Stoic Sceptre",
+  "itemClass": "Sceptre",
+  "dropLevel": 6,
+  "tags": [
+   "sceptre",
+   "onehand",
+   "default"
+  ],
+  "properties": {},
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Armours/BodyArmours/FourBodyStr1",
+  "name": "Rusted Cuirass",
+  "itemClass": "Body Armour",
+  "dropLevel": 1,
+  "tags": [
+   "str_armour",
+   "ezomyte_basetype",
+   "body_armour",
+   "armour",
+   "default"
+  ],
+  "properties": {
+   "movement_speed": -500
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Armours/BodyArmours/FourBodyDex1",
+  "name": "Leather Vest",
+  "itemClass": "Body Armour",
+  "dropLevel": 1,
+  "tags": [
+   "dex_armour",
+   "ezomyte_basetype",
+   "body_armour",
+   "armour",
+   "default"
+  ],
+  "properties": {
+   "movement_speed": -300
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Armours/BodyArmours/FourBodyInt1",
+  "name": "Tattered Robe",
+  "itemClass": "Body Armour",
+  "dropLevel": 1,
+  "tags": [
+   "int_armour",
+   "ezomyte_basetype",
+   "body_armour",
+   "armour",
+   "default"
+  ],
+  "properties": {
+   "movement_speed": -300
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Armours/BodyArmours/FourBodyStrDex1",
+  "name": "Chain Mail",
+  "itemClass": "Body Armour",
+  "dropLevel": 1,
+  "tags": [
+   "str_dex_armour",
+   "ezomyte_basetype",
+   "body_armour",
+   "armour",
+   "default"
+  ],
+  "properties": {
+   "movement_speed": -400
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Armours/BodyArmours/FourBodyStrInt1",
+  "name": "Pilgrim Vestments",
+  "itemClass": "Body Armour",
+  "dropLevel": 1,
+  "tags": [
+   "str_int_armour",
+   "ezomyte_basetype",
+   "body_armour",
+   "armour",
+   "default"
+  ],
+  "properties": {
+   "movement_speed": -400
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Armours/Shields/FourShieldStr1",
+  "name": "Splintered Tower Shield",
+  "itemClass": "Shield",
+  "dropLevel": 1,
+  "tags": [
+   "str_armour",
+   "str_shield",
+   "ezomyte_basetype",
+   "shield",
+   "armour",
+   "default"
+  ],
+  "properties": {
+   "block": 26,
+   "movement_speed": -300
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Armours/Shields/FourShieldStrDex1",
+  "name": "Hardwood Targe",
+  "itemClass": "Shield",
+  "dropLevel": 1,
+  "tags": [
+   "str_dex_armour",
+   "str_dex_shield",
+   "ezomyte_basetype",
+   "shield",
+   "armour",
+   "default"
+  ],
+  "properties": {
+   "block": 25,
+   "movement_speed": -150
+  },
+  "implicits": []
+ },
+ {
+  "id": "Metadata/Items/Amulets/FourAmulet1",
+  "name": "Crimson Amulet",
+  "itemClass": "Amulet",
+  "dropLevel": 1,
+  "tags": [
+   "amulet",
+   "default"
+  ],
+  "properties": {},
+  "implicits": [
+   {
+    "id": "AmuletImplicitLifeRegeneration1",
+    "stats": [
+     {
+      "id": "base_life_regeneration_rate_per_minute",
+      "min": 120,
+      "max": 240
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Amulets/FourAmulet3",
+  "name": "Amber Amulet",
+  "itemClass": "Amulet",
+  "dropLevel": 8,
+  "tags": [
+   "amulet",
+   "default"
+  ],
+  "properties": {},
+  "implicits": [
+   {
+    "id": "AmuletImplicitStrength1",
+    "stats": [
+     {
+      "id": "additional_strength",
+      "min": 10,
+      "max": 15
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Amulets/FourAmulet4",
+  "name": "Jade Amulet",
+  "itemClass": "Amulet",
+  "dropLevel": 8,
+  "tags": [
+   "amulet",
+   "default"
+  ],
+  "properties": {},
+  "implicits": [
+   {
+    "id": "AmuletImplicitDexterity1",
+    "stats": [
+     {
+      "id": "additional_dexterity",
+      "min": 10,
+      "max": 15
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Amulets/FourAmulet5",
+  "name": "Lapis Amulet",
+  "itemClass": "Amulet",
+  "dropLevel": 8,
+  "tags": [
+   "amulet",
+   "default"
+  ],
+  "properties": {},
+  "implicits": [
+   {
+    "id": "AmuletImplicitIntelligence1",
+    "stats": [
+     {
+      "id": "additional_intelligence",
+      "min": 10,
+      "max": 15
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Rings/FourRing1",
+  "name": "Iron Ring",
+  "itemClass": "Ring",
+  "dropLevel": 1,
+  "tags": [
+   "ring",
+   "default"
+  ],
+  "properties": {},
+  "implicits": [
+   {
+    "id": "RingImplicitPhysicalDamage1",
+    "stats": [
+     {
+      "id": "attack_minimum_added_physical_damage",
+      "min": 1,
+      "max": 1
+     },
+     {
+      "id": "attack_maximum_added_physical_damage",
+      "min": 4,
+      "max": 4
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Rings/FourRing3",
+  "name": "Ruby Ring",
+  "itemClass": "Ring",
+  "dropLevel": 8,
+  "tags": [
+   "ring",
+   "default"
+  ],
+  "properties": {},
+  "implicits": [
+   {
+    "id": "RingImplicitFireResistance1",
+    "stats": [
+     {
+      "id": "base_fire_damage_resistance_%",
+      "min": 20,
+      "max": 30
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Belts/FourBelt1",
+  "name": "Rawhide Belt",
+  "itemClass": "Belt",
+  "dropLevel": 1,
+  "tags": [
+   "belt",
+   "default"
+  ],
+  "properties": {},
+  "implicits": [
+   {
+    "id": "BeltImplicitFlaskLifeRecovery1",
+    "stats": [
+     {
+      "id": "flask_life_to_recover_+%",
+      "min": 20,
+      "max": 30
+     }
+    ]
+   }
+  ]
+ }
+]

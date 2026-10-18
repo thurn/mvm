@@ -1,0 +1,7116 @@
+[
+ {
+  "id": "AddedColdDamage1",
+  "name": "Frosted",
+  "type": "ColdDamage",
+  "groups": [
+   "ColdDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "quiver",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "attack_minimum_added_cold_damage",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "id": "attack_maximum_added_cold_damage",
+    "min": 2,
+    "max": 3
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "attack_added_cold_damage",
+    "part": "min",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "stat": "attack_added_cold_damage",
+    "part": "max",
+    "min": 2,
+    "max": 3
+   }
+  ]
+ },
+ {
+  "id": "AddedColdDamage2",
+  "name": "Chilled",
+  "type": "ColdDamage",
+  "groups": [
+   "ColdDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "quiver",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "attack_minimum_added_cold_damage",
+    "min": 3,
+    "max": 4
+   },
+   {
+    "id": "attack_maximum_added_cold_damage",
+    "min": 5,
+    "max": 8
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "attack_added_cold_damage",
+    "part": "min",
+    "min": 3,
+    "max": 4
+   },
+   {
+    "stat": "attack_added_cold_damage",
+    "part": "max",
+    "min": 5,
+    "max": 8
+   }
+  ]
+ },
+ {
+  "id": "AddedFireDamage1",
+  "name": "Heated",
+  "type": "FireDamage",
+  "groups": [
+   "FireDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "quiver",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "attack_minimum_added_fire_damage",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "id": "attack_maximum_added_fire_damage",
+    "min": 3,
+    "max": 3
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "attack_added_fire_damage",
+    "part": "min",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "stat": "attack_added_fire_damage",
+    "part": "max",
+    "min": 3,
+    "max": 3
+   }
+  ]
+ },
+ {
+  "id": "AddedFireDamage2",
+  "name": "Smouldering",
+  "type": "FireDamage",
+  "groups": [
+   "FireDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "quiver",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "attack_minimum_added_fire_damage",
+    "min": 3,
+    "max": 5
+   },
+   {
+    "id": "attack_maximum_added_fire_damage",
+    "min": 6,
+    "max": 9
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "attack_added_fire_damage",
+    "part": "min",
+    "min": 3,
+    "max": 5
+   },
+   {
+    "stat": "attack_added_fire_damage",
+    "part": "max",
+    "min": 6,
+    "max": 9
+   }
+  ]
+ },
+ {
+  "id": "AddedLightningDamage1",
+  "name": "Humming",
+  "type": "LightningDamage",
+  "groups": [
+   "LightningDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "quiver",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "attack_minimum_added_lightning_damage",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "id": "attack_maximum_added_lightning_damage",
+    "min": 4,
+    "max": 6
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "attack_added_lightning_damage",
+    "part": "min",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "stat": "attack_added_lightning_damage",
+    "part": "max",
+    "min": 4,
+    "max": 6
+   }
+  ]
+ },
+ {
+  "id": "AddedLightningDamage2",
+  "name": "Buzzing",
+  "type": "LightningDamage",
+  "groups": [
+   "LightningDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "quiver",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "attack_minimum_added_lightning_damage",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "id": "attack_maximum_added_lightning_damage",
+    "min": 10,
+    "max": 15
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "attack_added_lightning_damage",
+    "part": "min",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "stat": "attack_added_lightning_damage",
+    "part": "max",
+    "min": 10,
+    "max": 15
+   }
+  ]
+ },
+ {
+  "id": "AddedPhysicalDamage1",
+  "name": "Glinting",
+  "type": "PhysicalDamage",
+  "groups": [
+   "PhysicalDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "quiver",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "attack_minimum_added_physical_damage",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "id": "attack_maximum_added_physical_damage",
+    "min": 3,
+    "max": 3
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "attack_added_physical_damage",
+    "part": "min",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "stat": "attack_added_physical_damage",
+    "part": "max",
+    "min": 3,
+    "max": 3
+   }
+  ]
+ },
+ {
+  "id": "AddedPhysicalDamage2",
+  "name": "Burnished",
+  "type": "PhysicalDamage",
+  "groups": [
+   "PhysicalDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "quiver",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "attack_minimum_added_physical_damage",
+    "min": 2,
+    "max": 3
+   },
+   {
+    "id": "attack_maximum_added_physical_damage",
+    "min": 4,
+    "max": 6
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "attack_added_physical_damage",
+    "part": "min",
+    "min": 2,
+    "max": 3
+   },
+   {
+    "stat": "attack_added_physical_damage",
+    "part": "max",
+    "min": 4,
+    "max": 6
+   }
+  ]
+ },
+ {
+  "id": "AllAttributes1",
+  "name": "of the Clouds",
+  "type": "AllAttributes",
+  "groups": [
+   "AllAttributes"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "additional_all_attributes",
+    "min": 2,
+    "max": 4
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "all_attributes",
+    "min": 2,
+    "max": 4
+   }
+  ]
+ },
+ {
+  "id": "AttackerTakesDamage1",
+  "name": "Thorny",
+  "type": "ThornsPhysicalDamage",
+  "groups": [
+   "Thorns"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "body_armour",
+    "weight": 1
+   },
+   {
+    "tag": "shield",
+    "weight": 1
+   },
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "thorns_minimum_base_physical_damage",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "id": "thorns_maximum_base_physical_damage",
+    "min": 3,
+    "max": 4
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "thorns_physical_damage",
+    "part": "min",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "stat": "thorns_physical_damage",
+    "part": "max",
+    "min": 3,
+    "max": 4
+   }
+  ]
+ },
+ {
+  "id": "AttackerTakesDamage2",
+  "name": "Spiny",
+  "type": "ThornsPhysicalDamage",
+  "groups": [
+   "Thorns"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 10,
+  "spawnWeights": [
+   {
+    "tag": "body_armour",
+    "weight": 1
+   },
+   {
+    "tag": "shield",
+    "weight": 1
+   },
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "thorns_minimum_base_physical_damage",
+    "min": 5,
+    "max": 7
+   },
+   {
+    "id": "thorns_maximum_base_physical_damage",
+    "min": 7,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "thorns_physical_damage",
+    "part": "min",
+    "min": 5,
+    "max": 7
+   },
+   {
+    "stat": "thorns_physical_damage",
+    "part": "max",
+    "min": 7,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "CastSpeedJewellery1",
+  "name": "of Talent",
+  "type": "IncreasedCastSpeed",
+  "groups": [
+   "IncreasedCastSpeed"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_cast_speed_+%",
+    "min": 9,
+    "max": 12
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "cast_speed_+%",
+    "min": 9,
+    "max": 12
+   }
+  ]
+ },
+ {
+  "id": "ChaosDamagePercent1",
+  "name": "Impure",
+  "type": "IncreasedChaosDamage",
+  "groups": [
+   "IncreasedChaosDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "chaos_damage_+%",
+    "min": 3,
+    "max": 7
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "chaos_damage_+%",
+    "min": 3,
+    "max": 7
+   }
+  ]
+ },
+ {
+  "id": "ChaosDamagePrefixOnTwoHandWeapon1",
+  "name": "Impure",
+  "type": "ChaosDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "no_chaos_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "chaos_damage_+%",
+    "min": 50,
+    "max": 68
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "chaos_damage_+%",
+    "min": 50,
+    "max": 68
+   }
+  ]
+ },
+ {
+  "id": "ChaosDamagePrefixOnTwoHandWeapon2",
+  "name": "Tainted",
+  "type": "ChaosDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "no_chaos_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "chaos_damage_+%",
+    "min": 69,
+    "max": 88
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "chaos_damage_+%",
+    "min": 69,
+    "max": 88
+   }
+  ]
+ },
+ {
+  "id": "ChaosDamagePrefixOnWeapon1",
+  "name": "Impure",
+  "type": "ChaosDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "no_chaos_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "chaos_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "chaos_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ]
+ },
+ {
+  "id": "ChaosDamagePrefixOnWeapon2",
+  "name": "Tainted",
+  "type": "ChaosDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "no_chaos_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "chaos_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "chaos_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ]
+ },
+ {
+  "id": "ColdDamagePercent1",
+  "name": "Bitter",
+  "type": "ColdDamagePercentage",
+  "groups": [
+   "ColdDamagePercentage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "cold_damage_+%",
+    "min": 3,
+    "max": 7
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "cold_damage_+%",
+    "min": 3,
+    "max": 7
+   }
+  ]
+ },
+ {
+  "id": "ColdDamagePrefixOnTwoHandWeapon1",
+  "name": "Bitter",
+  "type": "ColdDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "no_cold_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "cold_damage_+%",
+    "min": 50,
+    "max": 68
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "cold_damage_+%",
+    "min": 50,
+    "max": 68
+   }
+  ]
+ },
+ {
+  "id": "ColdDamagePrefixOnTwoHandWeapon2",
+  "name": "Biting",
+  "type": "ColdDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "no_cold_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "cold_damage_+%",
+    "min": 69,
+    "max": 88
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "cold_damage_+%",
+    "min": 69,
+    "max": 88
+   }
+  ]
+ },
+ {
+  "id": "ColdDamagePrefixOnWeapon1",
+  "name": "Bitter",
+  "type": "ColdDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "no_cold_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "cold_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "cold_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ]
+ },
+ {
+  "id": "ColdDamagePrefixOnWeapon2",
+  "name": "Biting",
+  "type": "ColdDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "no_cold_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "cold_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "cold_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ]
+ },
+ {
+  "id": "ColdResist1",
+  "name": "of the Seal",
+  "type": "ColdResistance",
+  "groups": [
+   "ColdResistance"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "armour",
+    "weight": 1
+   },
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_cold_damage_resistance_%",
+    "min": 6,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "cold_resistance_%",
+    "min": 6,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "CriticalMultiplier1",
+  "name": "of Ire",
+  "type": "CriticalStrikeMultiplier",
+  "groups": [
+   "CriticalStrikeMultiplier"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_critical_strike_multiplier_+",
+    "min": 10,
+    "max": 14
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "critical_strike_multiplier_+",
+    "min": 10,
+    "max": 14
+   }
+  ]
+ },
+ {
+  "id": "CriticalStrikeChance1",
+  "name": "of Menace",
+  "type": "CriticalStrikeChance",
+  "groups": [
+   "CriticalStrikeChanceIncrease"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 5,
+  "spawnWeights": [
+   {
+    "tag": "helmet",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "critical_strike_chance_+%",
+    "min": 10,
+    "max": 14
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "critical_strike_chance_+%",
+    "min": 10,
+    "max": 14
+   }
+  ]
+ },
+ {
+  "id": "Dexterity1",
+  "name": "of the Mongoose",
+  "type": "Dexterity",
+  "groups": [
+   "Dexterity"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "quiver",
+    "weight": 1
+   },
+   {
+    "tag": "dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "spear",
+    "weight": 1
+   },
+   {
+    "tag": "claw",
+    "weight": 1
+   },
+   {
+    "tag": "warstaff",
+    "weight": 1
+   },
+   {
+    "tag": "dagger",
+    "weight": 1
+   },
+   {
+    "tag": "bow",
+    "weight": 1
+   },
+   {
+    "tag": "crossbow",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "additional_dexterity",
+    "min": 5,
+    "max": 8
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "dexterity",
+    "min": 5,
+    "max": 8
+   }
+  ]
+ },
+ {
+  "id": "FireDamagePercent1",
+  "name": "Searing",
+  "type": "FireDamagePercentage",
+  "groups": [
+   "FireDamagePercentage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "fire_damage_+%",
+    "min": 3,
+    "max": 7
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "fire_damage_+%",
+    "min": 3,
+    "max": 7
+   }
+  ]
+ },
+ {
+  "id": "FireDamagePrefixOnTwoHandWeapon1",
+  "name": "Searing",
+  "type": "FireDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "no_fire_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "fire_damage_+%",
+    "min": 50,
+    "max": 68
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "fire_damage_+%",
+    "min": 50,
+    "max": 68
+   }
+  ]
+ },
+ {
+  "id": "FireDamagePrefixOnTwoHandWeapon2___",
+  "name": "Sizzling",
+  "type": "FireDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "no_fire_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "fire_damage_+%",
+    "min": 69,
+    "max": 88
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "fire_damage_+%",
+    "min": 69,
+    "max": 88
+   }
+  ]
+ },
+ {
+  "id": "FireDamagePrefixOnWeapon1",
+  "name": "Searing",
+  "type": "FireDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "no_fire_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "fire_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "fire_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ]
+ },
+ {
+  "id": "FireDamagePrefixOnWeapon2",
+  "name": "Sizzling",
+  "type": "FireDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "no_fire_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "fire_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "fire_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ]
+ },
+ {
+  "id": "FireResist1",
+  "name": "of the Whelpling",
+  "type": "FireResistance",
+  "groups": [
+   "FireResistance"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "armour",
+    "weight": 1
+   },
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_fire_damage_resistance_%",
+    "min": 6,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "fire_resistance_%",
+    "min": 6,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "IncreasedAccuracy1",
+  "name": "Precise",
+  "type": "IncreasedAccuracy",
+  "groups": [
+   "IncreasedAccuracy"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "helmet",
+    "weight": 1
+   },
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "quiver",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "accuracy_rating",
+    "min": 11,
+    "max": 32
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "accuracy_rating",
+    "min": 11,
+    "max": 32
+   }
+  ]
+ },
+ {
+  "id": "IncreasedCastSpeed1",
+  "name": "of Talent",
+  "type": "IncreasedCastSpeed",
+  "groups": [
+   "IncreasedCastSpeed"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_cast_speed_+%",
+    "min": 9,
+    "max": 12
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "cast_speed_+%",
+    "min": 9,
+    "max": 12
+   }
+  ]
+ },
+ {
+  "id": "IncreasedCastSpeedTwoHand1_",
+  "name": "of Talent",
+  "type": "IncreasedCastSpeed",
+  "groups": [
+   "IncreasedCastSpeed"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_cast_speed_+%",
+    "min": 14,
+    "max": 19
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "cast_speed_+%",
+    "min": 14,
+    "max": 19
+   }
+  ]
+ },
+ {
+  "id": "IncreasedEnergyShield1",
+  "name": "Shining",
+  "type": "EnergyShield",
+  "groups": [
+   "IncreasedEnergyShield"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "ring",
+    "weight": 0
+   },
+   {
+    "tag": "genesis_tree_caster",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_maximum_energy_shield",
+    "min": 8,
+    "max": 14
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "energy_shield",
+    "min": 8,
+    "max": 14
+   }
+  ]
+ },
+ {
+  "id": "IncreasedEnergyShieldPercent1",
+  "name": "Protective",
+  "type": "GlobalEnergyShieldPercent",
+  "groups": [
+   "EnergyShieldPercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "maximum_energy_shield_+%",
+    "min": 10,
+    "max": 14
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "energy_shield_+%",
+    "min": 10,
+    "max": 14
+   }
+  ]
+ },
+ {
+  "id": "IncreasedEvasionRating1",
+  "name": "Agile",
+  "type": "EvasionRating",
+  "groups": [
+   "IncreasedEvasionRating"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "body_armour",
+    "weight": 0
+   },
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_evasion_rating",
+    "min": 8,
+    "max": 17
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "evasion",
+    "min": 8,
+    "max": 17
+   }
+  ]
+ },
+ {
+  "id": "IncreasedEvasionRatingPercent1",
+  "name": "Shade's",
+  "type": "GlobalEvasionRatingPercent",
+  "groups": [
+   "EvasionRatingPercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "evasion_rating_+%",
+    "min": 10,
+    "max": 14
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "evasion_+%",
+    "min": 10,
+    "max": 14
+   }
+  ]
+ },
+ {
+  "id": "IncreasedLife1",
+  "name": "Hale",
+  "type": "IncreasedLife",
+  "groups": [
+   "IncreasedLife"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "body_armour",
+    "weight": 1
+   },
+   {
+    "tag": "shield",
+    "weight": 1
+   },
+   {
+    "tag": "helmet",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "boots",
+    "weight": 1
+   },
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_maximum_life",
+    "min": 10,
+    "max": 19
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "base_maximum_life",
+    "min": 10,
+    "max": 19
+   }
+  ]
+ },
+ {
+  "id": "IncreasedLife2",
+  "name": "Healthy",
+  "type": "IncreasedLife",
+  "groups": [
+   "IncreasedLife"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 6,
+  "spawnWeights": [
+   {
+    "tag": "body_armour",
+    "weight": 1
+   },
+   {
+    "tag": "shield",
+    "weight": 1
+   },
+   {
+    "tag": "helmet",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "boots",
+    "weight": 1
+   },
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_maximum_life",
+    "min": 20,
+    "max": 29
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "base_maximum_life",
+    "min": 20,
+    "max": 29
+   }
+  ]
+ },
+ {
+  "id": "IncreasedPhysicalDamageReductionRating1",
+  "name": "Lacquered",
+  "type": "PhysicalDamageReductionRating",
+  "groups": [
+   "IncreasedPhysicalDamageReductionRating"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_physical_damage_reduction_rating",
+    "min": 12,
+    "max": 22
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "armour",
+    "min": 12,
+    "max": 22
+   }
+  ]
+ },
+ {
+  "id": "IncreasedPhysicalDamageReductionRatingPercent1",
+  "name": "Reinforced",
+  "type": "GlobalPhysicalDamageReductionRatingPercent",
+  "groups": [
+   "IncreasedPhysicalDamageReductionRatingPercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "physical_damage_reduction_rating_+%",
+    "min": 10,
+    "max": 14
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "armour_+%",
+    "min": 10,
+    "max": 14
+   }
+  ]
+ },
+ {
+  "id": "Intelligence1",
+  "name": "of the Pupil",
+  "type": "Intelligence",
+  "groups": [
+   "Intelligence"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "helmet",
+    "weight": 1
+   },
+   {
+    "tag": "int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "dagger",
+    "weight": 1
+   },
+   {
+    "tag": "warstaff",
+    "weight": 1
+   },
+   {
+    "tag": "flail",
+    "weight": 1
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "talisman",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "additional_intelligence",
+    "min": 5,
+    "max": 8
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "intelligence",
+    "min": 5,
+    "max": 8
+   }
+  ]
+ },
+ {
+  "id": "ItemFoundRarityIncrease1",
+  "name": "of Plunder",
+  "type": "ItemFoundRarityIncrease",
+  "groups": [
+   "ItemFoundRarityIncrease"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 3,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "boots",
+    "weight": 1
+   },
+   {
+    "tag": "helmet",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_item_found_rarity_+%",
+    "min": 6,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "item_rarity_+%",
+    "min": 6,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "ItemFoundRarityIncreasePrefix1",
+  "name": "Magpie's",
+  "type": "ItemFoundRarityIncreasePrefix",
+  "groups": [
+   "ItemFoundRarityIncreasePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 10,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "helmet",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_item_found_rarity_+%",
+    "min": 8,
+    "max": 11
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "item_rarity_+%",
+    "min": 8,
+    "max": 11
+   }
+  ]
+ },
+ {
+  "id": "LifeGainedFromEnemyDeath1",
+  "name": "of Success",
+  "type": "LifeGainedFromEnemyDeath",
+  "groups": [
+   "LifeGainedFromEnemyDeath"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "weapon",
+    "weight": 1
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "gloves",
+    "weight": 1
+   },
+   {
+    "tag": "quiver",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_life_gained_on_enemy_death",
+    "min": 4,
+    "max": 6
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "life_gained_on_kill",
+    "min": 4,
+    "max": 6
+   }
+  ]
+ },
+ {
+  "id": "LifeRegeneration1",
+  "name": "of the Newt",
+  "type": "LifeRegeneration",
+  "groups": [
+   "LifeRegeneration"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "body_armour",
+    "weight": 1
+   },
+   {
+    "tag": "helmet",
+    "weight": 1
+   },
+   {
+    "tag": "boots",
+    "weight": 1
+   },
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_life_regeneration_rate_per_minute",
+    "min": 60,
+    "max": 120
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "life_regeneration_rate_per_second",
+    "min": 1,
+    "max": 2
+   }
+  ]
+ },
+ {
+  "id": "LifeRegeneration2",
+  "name": "of the Lizard",
+  "type": "LifeRegeneration",
+  "groups": [
+   "LifeRegeneration"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 5,
+  "spawnWeights": [
+   {
+    "tag": "body_armour",
+    "weight": 1
+   },
+   {
+    "tag": "helmet",
+    "weight": 1
+   },
+   {
+    "tag": "boots",
+    "weight": 1
+   },
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_life_regeneration_rate_per_minute",
+    "min": 126,
+    "max": 180
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "life_regeneration_rate_per_second",
+    "min": 2.1,
+    "max": 3
+   }
+  ]
+ },
+ {
+  "id": "LightningDamagePercent1",
+  "name": "Charged",
+  "type": "LightningDamagePercentage",
+  "groups": [
+   "LightningDamagePercentage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "lightning_damage_+%",
+    "min": 3,
+    "max": 7
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "lightning_damage_+%",
+    "min": 3,
+    "max": 7
+   }
+  ]
+ },
+ {
+  "id": "LightningDamagePrefixOnTwoHandWeapon1",
+  "name": "Charged",
+  "type": "LightningDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "no_lightning_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "lightning_damage_+%",
+    "min": 50,
+    "max": 68
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "lightning_damage_+%",
+    "min": 50,
+    "max": 68
+   }
+  ]
+ },
+ {
+  "id": "LightningDamagePrefixOnTwoHandWeapon2",
+  "name": "Hissing",
+  "type": "LightningDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "no_lightning_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "lightning_damage_+%",
+    "min": 69,
+    "max": 88
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "lightning_damage_+%",
+    "min": 69,
+    "max": 88
+   }
+  ]
+ },
+ {
+  "id": "LightningDamagePrefixOnWeapon1_",
+  "name": "Charged",
+  "type": "LightningDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "no_lightning_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "lightning_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "lightning_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ]
+ },
+ {
+  "id": "LightningDamagePrefixOnWeapon2",
+  "name": "Hissing",
+  "type": "LightningDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "no_lightning_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "lightning_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "lightning_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ]
+ },
+ {
+  "id": "LightningResist1",
+  "name": "of the Cloud",
+  "type": "LightningResistance",
+  "groups": [
+   "LightningResistance"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "armour",
+    "weight": 1
+   },
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_lightning_damage_resistance_%",
+    "min": 6,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "lightning_resistance_%",
+    "min": 6,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedColdDamage1",
+  "name": "Frosted",
+  "type": "LocalColdDamage",
+  "groups": [
+   "ColdDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "bow",
+    "weight": 1
+   },
+   {
+    "tag": "two_hand_weapon",
+    "weight": 0
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "spear",
+    "weight": 1
+   },
+   {
+    "tag": "claw",
+    "weight": 1
+   },
+   {
+    "tag": "dagger",
+    "weight": 1
+   },
+   {
+    "tag": "flail",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_cold_damage",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "id": "local_maximum_added_cold_damage",
+    "min": 3,
+    "max": 4
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_cold_damage",
+    "part": "min",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "stat": "local_added_cold_damage",
+    "part": "max",
+    "min": 3,
+    "max": 4
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedColdDamage2",
+  "name": "Chilled",
+  "type": "LocalColdDamage",
+  "groups": [
+   "ColdDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "bow",
+    "weight": 1
+   },
+   {
+    "tag": "two_hand_weapon",
+    "weight": 0
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "spear",
+    "weight": 1
+   },
+   {
+    "tag": "claw",
+    "weight": 1
+   },
+   {
+    "tag": "dagger",
+    "weight": 1
+   },
+   {
+    "tag": "flail",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_cold_damage",
+    "min": 3,
+    "max": 5
+   },
+   {
+    "id": "local_maximum_added_cold_damage",
+    "min": 6,
+    "max": 9
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_cold_damage",
+    "part": "min",
+    "min": 3,
+    "max": 5
+   },
+   {
+    "stat": "local_added_cold_damage",
+    "part": "max",
+    "min": 6,
+    "max": 9
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedColdDamageTwoHand1",
+  "name": "Frosted",
+  "type": "LocalColdDamage",
+  "groups": [
+   "ColdDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "one_hand_weapon",
+    "weight": 0
+   },
+   {
+    "tag": "crossbow",
+    "weight": 1
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "warstaff",
+    "weight": 1
+   },
+   {
+    "tag": "talisman",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_cold_damage",
+    "min": 2,
+    "max": 3
+   },
+   {
+    "id": "local_maximum_added_cold_damage",
+    "min": 4,
+    "max": 6
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_cold_damage",
+    "part": "min",
+    "min": 2,
+    "max": 3
+   },
+   {
+    "stat": "local_added_cold_damage",
+    "part": "max",
+    "min": 4,
+    "max": 6
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedColdDamageTwoHand2",
+  "name": "Chilled",
+  "type": "LocalColdDamage",
+  "groups": [
+   "ColdDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "one_hand_weapon",
+    "weight": 0
+   },
+   {
+    "tag": "crossbow",
+    "weight": 1
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "warstaff",
+    "weight": 1
+   },
+   {
+    "tag": "talisman",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_cold_damage",
+    "min": 5,
+    "max": 8
+   },
+   {
+    "id": "local_maximum_added_cold_damage",
+    "min": 9,
+    "max": 14
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_cold_damage",
+    "part": "min",
+    "min": 5,
+    "max": 8
+   },
+   {
+    "stat": "local_added_cold_damage",
+    "part": "max",
+    "min": 9,
+    "max": 14
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedFireDamage1",
+  "name": "Heated",
+  "type": "LocalFireDamage",
+  "groups": [
+   "FireDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "bow",
+    "weight": 1
+   },
+   {
+    "tag": "two_hand_weapon",
+    "weight": 0
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "spear",
+    "weight": 1
+   },
+   {
+    "tag": "claw",
+    "weight": 1
+   },
+   {
+    "tag": "dagger",
+    "weight": 1
+   },
+   {
+    "tag": "flail",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_fire_damage",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "id": "local_maximum_added_fire_damage",
+    "min": 3,
+    "max": 5
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_fire_damage",
+    "part": "min",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "stat": "local_added_fire_damage",
+    "part": "max",
+    "min": 3,
+    "max": 5
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedFireDamage2",
+  "name": "Smouldering",
+  "type": "LocalFireDamage",
+  "groups": [
+   "FireDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "bow",
+    "weight": 1
+   },
+   {
+    "tag": "two_hand_weapon",
+    "weight": 0
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "spear",
+    "weight": 1
+   },
+   {
+    "tag": "claw",
+    "weight": 1
+   },
+   {
+    "tag": "dagger",
+    "weight": 1
+   },
+   {
+    "tag": "flail",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_fire_damage",
+    "min": 4,
+    "max": 6
+   },
+   {
+    "id": "local_maximum_added_fire_damage",
+    "min": 7,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_fire_damage",
+    "part": "min",
+    "min": 4,
+    "max": 6
+   },
+   {
+    "stat": "local_added_fire_damage",
+    "part": "max",
+    "min": 7,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedFireDamageTwoHand1",
+  "name": "Heated",
+  "type": "LocalFireDamage",
+  "groups": [
+   "FireDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "one_hand_weapon",
+    "weight": 0
+   },
+   {
+    "tag": "crossbow",
+    "weight": 1
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "warstaff",
+    "weight": 1
+   },
+   {
+    "tag": "talisman",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_fire_damage",
+    "min": 2,
+    "max": 4
+   },
+   {
+    "id": "local_maximum_added_fire_damage",
+    "min": 5,
+    "max": 7
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_fire_damage",
+    "part": "min",
+    "min": 2,
+    "max": 4
+   },
+   {
+    "stat": "local_added_fire_damage",
+    "part": "max",
+    "min": 5,
+    "max": 7
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedFireDamageTwoHand2",
+  "name": "Smouldering",
+  "type": "LocalFireDamage",
+  "groups": [
+   "FireDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "one_hand_weapon",
+    "weight": 0
+   },
+   {
+    "tag": "crossbow",
+    "weight": 1
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "warstaff",
+    "weight": 1
+   },
+   {
+    "tag": "talisman",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_fire_damage",
+    "min": 6,
+    "max": 9
+   },
+   {
+    "id": "local_maximum_added_fire_damage",
+    "min": 10,
+    "max": 16
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_fire_damage",
+    "part": "min",
+    "min": 6,
+    "max": 9
+   },
+   {
+    "stat": "local_added_fire_damage",
+    "part": "max",
+    "min": 10,
+    "max": 16
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedLightningDamage1",
+  "name": "Humming",
+  "type": "LocalLightningDamage",
+  "groups": [
+   "LightningDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "bow",
+    "weight": 1
+   },
+   {
+    "tag": "two_hand_weapon",
+    "weight": 0
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "spear",
+    "weight": 1
+   },
+   {
+    "tag": "claw",
+    "weight": 1
+   },
+   {
+    "tag": "dagger",
+    "weight": 1
+   },
+   {
+    "tag": "flail",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_lightning_damage",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "id": "local_maximum_added_lightning_damage",
+    "min": 4,
+    "max": 6
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_lightning_damage",
+    "part": "min",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "stat": "local_added_lightning_damage",
+    "part": "max",
+    "min": 4,
+    "max": 6
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedLightningDamage2",
+  "name": "Buzzing",
+  "type": "LocalLightningDamage",
+  "groups": [
+   "LightningDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "bow",
+    "weight": 1
+   },
+   {
+    "tag": "two_hand_weapon",
+    "weight": 0
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "spear",
+    "weight": 1
+   },
+   {
+    "tag": "claw",
+    "weight": 1
+   },
+   {
+    "tag": "dagger",
+    "weight": 1
+   },
+   {
+    "tag": "flail",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_lightning_damage",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "id": "local_maximum_added_lightning_damage",
+    "min": 13,
+    "max": 19
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_lightning_damage",
+    "part": "min",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "stat": "local_added_lightning_damage",
+    "part": "max",
+    "min": 13,
+    "max": 19
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedLightningDamageTwoHand1_",
+  "name": "Humming",
+  "type": "LocalLightningDamage",
+  "groups": [
+   "LightningDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "one_hand_weapon",
+    "weight": 0
+   },
+   {
+    "tag": "crossbow",
+    "weight": 1
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "warstaff",
+    "weight": 1
+   },
+   {
+    "tag": "talisman",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_lightning_damage",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "id": "local_maximum_added_lightning_damage",
+    "min": 7,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_lightning_damage",
+    "part": "min",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "stat": "local_added_lightning_damage",
+    "part": "max",
+    "min": 7,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedLightningDamageTwoHand2",
+  "name": "Buzzing",
+  "type": "LocalLightningDamage",
+  "groups": [
+   "LightningDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "one_hand_weapon",
+    "weight": 0
+   },
+   {
+    "tag": "crossbow",
+    "weight": 1
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "warstaff",
+    "weight": 1
+   },
+   {
+    "tag": "talisman",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_lightning_damage",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "id": "local_maximum_added_lightning_damage",
+    "min": 19,
+    "max": 27
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_lightning_damage",
+    "part": "min",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "stat": "local_added_lightning_damage",
+    "part": "max",
+    "min": 19,
+    "max": 27
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedPhysicalDamage1",
+  "name": "Glinting",
+  "type": "LocalPhysicalDamage",
+  "groups": [
+   "PhysicalDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "bow",
+    "weight": 1
+   },
+   {
+    "tag": "one_hand_weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_physical_damage",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "id": "local_maximum_added_physical_damage",
+    "min": 4,
+    "max": 5
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_physical_damage",
+    "part": "min",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "stat": "local_added_physical_damage",
+    "part": "max",
+    "min": 4,
+    "max": 5
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedPhysicalDamage2",
+  "name": "Burnished",
+  "type": "LocalPhysicalDamage",
+  "groups": [
+   "PhysicalDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "bow",
+    "weight": 1
+   },
+   {
+    "tag": "one_hand_weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_physical_damage",
+    "min": 4,
+    "max": 6
+   },
+   {
+    "id": "local_maximum_added_physical_damage",
+    "min": 7,
+    "max": 11
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_physical_damage",
+    "part": "min",
+    "min": 4,
+    "max": 6
+   },
+   {
+    "stat": "local_added_physical_damage",
+    "part": "max",
+    "min": 7,
+    "max": 11
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedPhysicalDamageTwoHand1",
+  "name": "Glinting",
+  "type": "LocalPhysicalDamage",
+  "groups": [
+   "PhysicalDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "bow",
+    "weight": 0
+   },
+   {
+    "tag": "two_hand_weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_physical_damage",
+    "min": 2,
+    "max": 3
+   },
+   {
+    "id": "local_maximum_added_physical_damage",
+    "min": 5,
+    "max": 7
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_physical_damage",
+    "part": "min",
+    "min": 2,
+    "max": 3
+   },
+   {
+    "stat": "local_added_physical_damage",
+    "part": "max",
+    "min": 5,
+    "max": 7
+   }
+  ]
+ },
+ {
+  "id": "LocalAddedPhysicalDamageTwoHand2",
+  "name": "Burnished",
+  "type": "LocalPhysicalDamage",
+  "groups": [
+   "PhysicalDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "bow",
+    "weight": 0
+   },
+   {
+    "tag": "two_hand_weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_minimum_added_physical_damage",
+    "min": 5,
+    "max": 8
+   },
+   {
+    "id": "local_maximum_added_physical_damage",
+    "min": 10,
+    "max": 15
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_added_physical_damage",
+    "part": "min",
+    "min": 5,
+    "max": 8
+   },
+   {
+    "stat": "local_added_physical_damage",
+    "part": "max",
+    "min": 10,
+    "max": 15
+   }
+  ]
+ },
+ {
+  "id": "LocalArmourAndEnergyShieldAndStunThreshold1",
+  "name": "Defender's",
+  "type": "LocalArmourAndEnergyShieldAndStunThreshold",
+  "groups": [
+   "DefencesPercentAndStunThreshold"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 10,
+  "spawnWeights": [
+   {
+    "tag": "body_armour",
+    "weight": 0
+   },
+   {
+    "tag": "helmet",
+    "weight": 0
+   },
+   {
+    "tag": "gloves",
+    "weight": 0
+   },
+   {
+    "tag": "str_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_armour_and_energy_shield_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "stun_threshold_+",
+    "min": 8,
+    "max": 13
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_hybrid_defence_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "stun_threshold",
+    "min": 8,
+    "max": 13
+   }
+  ]
+ },
+ {
+  "id": "LocalArmourAndEvasionAndStunThreshold1",
+  "name": "Captain's",
+  "type": "LocalArmourAndEvasionAndStunThreshold",
+  "groups": [
+   "DefencesPercentAndStunThreshold"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 10,
+  "spawnWeights": [
+   {
+    "tag": "body_armour",
+    "weight": 0
+   },
+   {
+    "tag": "helmet",
+    "weight": 0
+   },
+   {
+    "tag": "gloves",
+    "weight": 0
+   },
+   {
+    "tag": "str_dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_armour_and_evasion_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "stun_threshold_+",
+    "min": 8,
+    "max": 13
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_hybrid_defence_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "stun_threshold",
+    "min": 8,
+    "max": 13
+   }
+  ]
+ },
+ {
+  "id": "LocalArmourAndStunThreshold1",
+  "name": "Beetle's",
+  "type": "LocalArmourAndStunThreshold",
+  "groups": [
+   "DefencesPercentAndStunThreshold"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 10,
+  "spawnWeights": [
+   {
+    "tag": "body_armour",
+    "weight": 0
+   },
+   {
+    "tag": "helmet",
+    "weight": 0
+   },
+   {
+    "tag": "gloves",
+    "weight": 0
+   },
+   {
+    "tag": "str_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_physical_damage_reduction_rating_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "stun_threshold_+",
+    "min": 8,
+    "max": 13
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_armour_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "stun_threshold",
+    "min": 8,
+    "max": 13
+   }
+  ]
+ },
+ {
+  "id": "LocalBaseArmourAndEnergyShield1",
+  "name": "Blessed",
+  "type": "LocalBaseArmourAndEnergyShield",
+  "groups": [
+   "BaseLocalDefences"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "str_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_base_physical_damage_reduction_rating",
+    "min": 9,
+    "max": 16
+   },
+   {
+    "id": "local_energy_shield",
+    "min": 5,
+    "max": 8
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_armour",
+    "min": 9,
+    "max": 16
+   },
+   {
+    "stat": "local_energy_shield",
+    "min": 5,
+    "max": 8
+   }
+  ]
+ },
+ {
+  "id": "LocalBaseArmourAndEvasionRating1",
+  "name": "Supple",
+  "type": "LocalBaseArmourAndEvasionRating",
+  "groups": [
+   "BaseLocalDefences"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "str_dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_base_physical_damage_reduction_rating",
+    "min": 9,
+    "max": 16
+   },
+   {
+    "id": "local_base_evasion_rating",
+    "min": 6,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_armour",
+    "min": 9,
+    "max": 16
+   },
+   {
+    "stat": "local_evasion",
+    "min": 6,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "LocalBaseEvasionRatingAndEnergyShield1",
+  "name": "Will-o-wisp's",
+  "type": "LocalBaseEvasionRatingAndEnergyShield",
+  "groups": [
+   "BaseLocalDefences"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_base_evasion_rating",
+    "min": 6,
+    "max": 10
+   },
+   {
+    "id": "local_energy_shield",
+    "min": 5,
+    "max": 8
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_evasion",
+    "min": 6,
+    "max": 10
+   },
+   {
+    "stat": "local_energy_shield",
+    "min": 5,
+    "max": 8
+   }
+  ]
+ },
+ {
+  "id": "LocalBlockChance1",
+  "name": "Steadfast",
+  "type": "LocalIncreasedBlockPercentage",
+  "groups": [
+   "IncreasedShieldBlockPercentage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "shield",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_block_chance_+%",
+    "min": 15,
+    "max": 19
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "block_chance_+%",
+    "min": 15,
+    "max": 19
+   }
+  ]
+ },
+ {
+  "id": "LocalCriticalMultiplier1",
+  "name": "of Ire",
+  "type": "LocalCriticalStrikeMultiplier",
+  "groups": [
+   "CriticalStrikeMultiplier"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_critical_strike_multiplier_+",
+    "min": 10,
+    "max": 11
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "critical_strike_multiplier_+",
+    "min": 10,
+    "max": 11
+   }
+  ]
+ },
+ {
+  "id": "LocalCriticalStrikeChance1",
+  "name": "of Menace",
+  "type": "LocalBaseCriticalStrikeChance",
+  "groups": [
+   "CriticalStrikeChanceIncrease"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_critical_strike_chance",
+    "min": 101,
+    "max": 150
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_critical_strike_chance",
+    "min": 1.01,
+    "max": 1.5
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedAccuracy1",
+  "name": "Precise",
+  "type": "LocalAccuracyRating",
+  "groups": [
+   "IncreasedAccuracy"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_accuracy_rating",
+    "min": 11,
+    "max": 32
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_accuracy_rating",
+    "min": 11,
+    "max": 32
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedArmourAndBase1",
+  "name": "Abalone's",
+  "type": "LocalIncreasedArmourAndBase",
+  "groups": [
+   "BaseLocalDefencesAndDefencePercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "helmet",
+    "weight": 0
+   },
+   {
+    "tag": "gloves",
+    "weight": 0
+   },
+   {
+    "tag": "boots",
+    "weight": 0
+   },
+   {
+    "tag": "shield",
+    "weight": 0
+   },
+   {
+    "tag": "str_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_physical_damage_reduction_rating_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "local_base_physical_damage_reduction_rating",
+    "min": 5,
+    "max": 9
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_armour_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "local_armour",
+    "min": 5,
+    "max": 9
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedArmourAndEnergyShield1",
+  "name": "Infixed",
+  "type": "LocalArmourAndEnergyShield",
+  "groups": [
+   "DefencesPercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "str_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_armour_and_energy_shield_+%",
+    "min": 15,
+    "max": 26
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_hybrid_defence_+%",
+    "min": 15,
+    "max": 26
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedArmourAndEnergyShieldAndBase1",
+  "name": "Faithful",
+  "type": "LocalIncreasedArmourAndEnergyShieldAndBase",
+  "groups": [
+   "BaseLocalDefencesAndDefencePercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "helmet",
+    "weight": 0
+   },
+   {
+    "tag": "gloves",
+    "weight": 0
+   },
+   {
+    "tag": "boots",
+    "weight": 0
+   },
+   {
+    "tag": "shield",
+    "weight": 0
+   },
+   {
+    "tag": "str_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_armour_and_energy_shield_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "local_base_physical_damage_reduction_rating",
+    "min": 3,
+    "max": 5
+   },
+   {
+    "id": "local_energy_shield",
+    "min": 2,
+    "max": 4
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_hybrid_defence_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "local_armour",
+    "min": 3,
+    "max": 5
+   },
+   {
+    "stat": "local_energy_shield",
+    "min": 2,
+    "max": 4
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedArmourAndEnergyShieldAndLife1",
+  "name": "Augur's",
+  "type": "LocalIncreasedArmourAndEnergyShieldAndLife",
+  "groups": [
+   "BaseLocalDefencesAndLife"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "boots",
+    "weight": 0
+   },
+   {
+    "tag": "shield",
+    "weight": 0
+   },
+   {
+    "tag": "str_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_armour_and_energy_shield_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "base_maximum_life",
+    "min": 7,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_hybrid_defence_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "base_maximum_life",
+    "min": 7,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedArmourAndEvasion1",
+  "name": "Scrapper's",
+  "type": "LocalArmourAndEvasion",
+  "groups": [
+   "DefencesPercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "str_dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_armour_and_evasion_+%",
+    "min": 15,
+    "max": 26
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_hybrid_defence_+%",
+    "min": 15,
+    "max": 26
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedArmourAndEvasionAndBase1",
+  "name": "Swordsman's",
+  "type": "LocalIncreasedArmourAndEvasionAndBase",
+  "groups": [
+   "BaseLocalDefencesAndDefencePercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "helmet",
+    "weight": 0
+   },
+   {
+    "tag": "gloves",
+    "weight": 0
+   },
+   {
+    "tag": "boots",
+    "weight": 0
+   },
+   {
+    "tag": "shield",
+    "weight": 0
+   },
+   {
+    "tag": "str_dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_armour_and_evasion_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "local_base_physical_damage_reduction_rating",
+    "min": 3,
+    "max": 5
+   },
+   {
+    "id": "local_base_evasion_rating",
+    "min": 2,
+    "max": 3
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_hybrid_defence_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "local_armour",
+    "min": 3,
+    "max": 5
+   },
+   {
+    "stat": "local_evasion",
+    "min": 2,
+    "max": 3
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedArmourAndEvasionAndLife1",
+  "name": "Bully's",
+  "type": "LocalIncreasedArmourAndEvasionAndLife",
+  "groups": [
+   "BaseLocalDefencesAndLife"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "boots",
+    "weight": 0
+   },
+   {
+    "tag": "shield",
+    "weight": 0
+   },
+   {
+    "tag": "str_dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_armour_and_evasion_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "base_maximum_life",
+    "min": 7,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_hybrid_defence_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "base_maximum_life",
+    "min": 7,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedArmourAndLife1",
+  "name": "Oyster's",
+  "type": "LocalIncreasedArmourAndLife",
+  "groups": [
+   "BaseLocalDefencesAndLife"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "boots",
+    "weight": 0
+   },
+   {
+    "tag": "shield",
+    "weight": 0
+   },
+   {
+    "tag": "str_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_physical_damage_reduction_rating_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "base_maximum_life",
+    "min": 7,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_armour_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "base_maximum_life",
+    "min": 7,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedAttackSpeed1",
+  "name": "of Skill",
+  "type": "LocalIncreasedAttackSpeed",
+  "groups": [
+   "IncreasedAttackSpeed"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_attack_speed_+%",
+    "min": 5,
+    "max": 7
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_attack_speed_+%",
+    "min": 5,
+    "max": 7
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEnergyShield1",
+  "name": "Shining",
+  "type": "LocalEnergyShield",
+  "groups": [
+   "BaseLocalDefences"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_energy_shield",
+    "min": 10,
+    "max": 17
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_energy_shield",
+    "min": 10,
+    "max": 17
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEnergyShield2",
+  "name": "Glimmering",
+  "type": "LocalEnergyShield",
+  "groups": [
+   "BaseLocalDefences"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_energy_shield",
+    "min": 18,
+    "max": 24
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_energy_shield",
+    "min": 18,
+    "max": 24
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEnergyShieldAndBase1",
+  "name": "Deacon's",
+  "type": "LocalIncreasedEnergyShieldAndBase",
+  "groups": [
+   "BaseLocalDefencesAndDefencePercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "helmet",
+    "weight": 0
+   },
+   {
+    "tag": "gloves",
+    "weight": 0
+   },
+   {
+    "tag": "boots",
+    "weight": 0
+   },
+   {
+    "tag": "shield",
+    "weight": 0
+   },
+   {
+    "tag": "focus",
+    "weight": 0
+   },
+   {
+    "tag": "int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_energy_shield_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "local_energy_shield",
+    "min": 4,
+    "max": 7
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_energy_shield_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "local_energy_shield",
+    "min": 4,
+    "max": 7
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEnergyShieldAndLife1",
+  "name": "Monk's",
+  "type": "LocalIncreasedEnergyShieldAndLife",
+  "groups": [
+   "BaseLocalDefencesAndLife"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "boots",
+    "weight": 0
+   },
+   {
+    "tag": "shield",
+    "weight": 0
+   },
+   {
+    "tag": "focus",
+    "weight": 0
+   },
+   {
+    "tag": "int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_energy_shield_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "base_maximum_life",
+    "min": 7,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_energy_shield_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "base_maximum_life",
+    "min": 7,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEnergyShieldPercent1",
+  "name": "Protective",
+  "type": "LocalEnergyShieldPercent",
+  "groups": [
+   "DefencesPercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_energy_shield_+%",
+    "min": 15,
+    "max": 26
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_energy_shield_+%",
+    "min": 15,
+    "max": 26
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEvasionAndBase1",
+  "name": "Impala's",
+  "type": "LocalIncreasedEvasionAndBase",
+  "groups": [
+   "BaseLocalDefencesAndDefencePercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "helmet",
+    "weight": 0
+   },
+   {
+    "tag": "gloves",
+    "weight": 0
+   },
+   {
+    "tag": "boots",
+    "weight": 0
+   },
+   {
+    "tag": "shield",
+    "weight": 0
+   },
+   {
+    "tag": "dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_evasion_rating_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "local_base_evasion_rating",
+    "min": 4,
+    "max": 6
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_evasion_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "local_evasion",
+    "min": 4,
+    "max": 6
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEvasionAndEnergyShield1",
+  "name": "Shadowy",
+  "type": "LocalEvasionAndEnergyShield",
+  "groups": [
+   "DefencesPercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_evasion_and_energy_shield_+%",
+    "min": 15,
+    "max": 26
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_hybrid_defence_+%",
+    "min": 15,
+    "max": 26
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEvasionAndEnergyShieldAndBase1",
+  "name": "Pursuer's",
+  "type": "LocalIncreasedEvasionAndEnergyShieldAndBase",
+  "groups": [
+   "BaseLocalDefencesAndDefencePercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "helmet",
+    "weight": 0
+   },
+   {
+    "tag": "gloves",
+    "weight": 0
+   },
+   {
+    "tag": "boots",
+    "weight": 0
+   },
+   {
+    "tag": "shield",
+    "weight": 0
+   },
+   {
+    "tag": "dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_evasion_and_energy_shield_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "local_base_evasion_rating",
+    "min": 2,
+    "max": 3
+   },
+   {
+    "id": "local_energy_shield",
+    "min": 2,
+    "max": 4
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_hybrid_defence_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "local_evasion",
+    "min": 2,
+    "max": 3
+   },
+   {
+    "stat": "local_energy_shield",
+    "min": 2,
+    "max": 4
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEvasionAndEnergyShieldAndLife1",
+  "name": "Poet's",
+  "type": "LocalIncreasedEvasionAndEnergyShieldAndLife",
+  "groups": [
+   "BaseLocalDefencesAndLife"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "boots",
+    "weight": 0
+   },
+   {
+    "tag": "shield",
+    "weight": 0
+   },
+   {
+    "tag": "dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_evasion_and_energy_shield_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "base_maximum_life",
+    "min": 7,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_hybrid_defence_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "base_maximum_life",
+    "min": 7,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEvasionAndLife1",
+  "name": "Flea's",
+  "type": "LocalIncreasedEvasionAndLife",
+  "groups": [
+   "BaseLocalDefencesAndLife"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "boots",
+    "weight": 0
+   },
+   {
+    "tag": "shield",
+    "weight": 0
+   },
+   {
+    "tag": "dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_evasion_rating_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "id": "base_maximum_life",
+    "min": 7,
+    "max": 10
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_evasion_+%",
+    "min": 6,
+    "max": 13
+   },
+   {
+    "stat": "base_maximum_life",
+    "min": 7,
+    "max": 10
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEvasionRating1",
+  "name": "Agile",
+  "type": "LocalEvasionRating",
+  "groups": [
+   "BaseLocalDefences"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_base_evasion_rating",
+    "min": 11,
+    "max": 18
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_evasion",
+    "min": 11,
+    "max": 18
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEvasionRating2",
+  "name": "Dancer's",
+  "type": "LocalEvasionRating",
+  "groups": [
+   "BaseLocalDefences"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_base_evasion_rating",
+    "min": 19,
+    "max": 46
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_evasion",
+    "min": 19,
+    "max": 46
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedEvasionRatingPercent1",
+  "name": "Shade's",
+  "type": "LocalEvasionRatingIncreasePercent",
+  "groups": [
+   "DefencesPercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_evasion_rating_+%",
+    "min": 15,
+    "max": 26
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_evasion_+%",
+    "min": 15,
+    "max": 26
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedPhysicalDamagePercent1",
+  "name": "Heavy",
+  "type": "LocalPhysicalDamagePercent",
+  "groups": [
+   "LocalPhysicalDamagePercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_physical_damage_+%",
+    "min": 40,
+    "max": 49
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_physical_damage_+%",
+    "min": 40,
+    "max": 49
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedPhysicalDamagePercent2",
+  "name": "Serrated",
+  "type": "LocalPhysicalDamagePercent",
+  "groups": [
+   "LocalPhysicalDamagePercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_physical_damage_+%",
+    "min": 50,
+    "max": 64
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_physical_damage_+%",
+    "min": 50,
+    "max": 64
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedPhysicalDamagePercentAndAccuracyRating1",
+  "name": "Squire's",
+  "type": "LocalIncreasedPhysicalDamagePercentAndAccuracyRating",
+  "groups": [
+   "LocalIncreasedPhysicalDamagePercentAndAccuracyRating"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_physical_damage_+%",
+    "min": 15,
+    "max": 19
+   },
+   {
+    "id": "local_accuracy_rating",
+    "min": 16,
+    "max": 20
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_physical_damage_+%",
+    "min": 15,
+    "max": 19
+   },
+   {
+    "stat": "local_accuracy_rating",
+    "min": 16,
+    "max": 20
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedPhysicalDamageReductionRating1",
+  "name": "Lacquered",
+  "type": "LocalPhysicalDamageReductionRating",
+  "groups": [
+   "BaseLocalDefences"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "str_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_base_physical_damage_reduction_rating",
+    "min": 16,
+    "max": 27
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_armour",
+    "min": 16,
+    "max": 27
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedPhysicalDamageReductionRating2",
+  "name": "Studded",
+  "type": "LocalPhysicalDamageReductionRating",
+  "groups": [
+   "BaseLocalDefences"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "str_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_base_physical_damage_reduction_rating",
+    "min": 28,
+    "max": 56
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_armour",
+    "min": 28,
+    "max": 56
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedPhysicalDamageReductionRatingPercent1",
+  "name": "Reinforced",
+  "type": "LocalPhysicalDamageReductionRatingPercent",
+  "groups": [
+   "DefencesPercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "str_armour",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_physical_damage_reduction_rating_+%",
+    "min": 15,
+    "max": 26
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_armour_+%",
+    "min": 15,
+    "max": 26
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedSpiritAndMana1",
+  "name": "Advisor's",
+  "type": "LocalIncreasedSpiritAndMana",
+  "groups": [
+   "LocalIncreasedSpiritAndMana"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_spirit_+%",
+    "min": 10,
+    "max": 14
+   },
+   {
+    "id": "base_maximum_mana",
+    "min": 17,
+    "max": 20
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "spirit",
+    "min": 10,
+    "max": 14
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedSpiritPercent1",
+  "name": "Lord's",
+  "type": "LocalIncreasedSpiritPercent",
+  "groups": [
+   "LocalIncreasedSpiritPercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_spirit_+%",
+    "min": 20,
+    "max": 26
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "spirit",
+    "min": 20,
+    "max": 26
+   }
+  ]
+ },
+ {
+  "id": "LocalIncreasedSpiritPercent2",
+  "name": "Baron's",
+  "type": "LocalIncreasedSpiritPercent",
+  "groups": [
+   "LocalIncreasedSpiritPercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_spirit_+%",
+    "min": 27,
+    "max": 32
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "spirit",
+    "min": 27,
+    "max": 32
+   }
+  ]
+ },
+ {
+  "id": "LocalLightRadiusAndAccuracy1",
+  "name": "of Shining",
+  "type": "LocalLightRadiusAndAccuracy",
+  "groups": [
+   "LightRadiusAndAccuracy"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "light_radius_+%",
+    "min": 5,
+    "max": 5
+   },
+   {
+    "id": "local_accuracy_rating",
+    "min": 10,
+    "max": 20
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "local_accuracy_rating",
+    "min": 10,
+    "max": 20
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesAddedColdDamage1",
+  "name": "Frosted",
+  "type": "AlliesInPresenceAddedColdDamage",
+  "groups": [
+   "ColdDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_attack_minimum_added_cold_damage",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "id": "allies_in_presence_attack_maximum_added_cold_damage",
+    "min": 3,
+    "max": 4
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:attack_added_cold_damage",
+    "part": "min",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "stat": "allies_in_presence:attack_added_cold_damage",
+    "part": "max",
+    "min": 3,
+    "max": 4
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesAddedColdDamage2",
+  "name": "Chilled",
+  "type": "AlliesInPresenceAddedColdDamage",
+  "groups": [
+   "ColdDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_attack_minimum_added_cold_damage",
+    "min": 3,
+    "max": 4
+   },
+   {
+    "id": "allies_in_presence_attack_maximum_added_cold_damage",
+    "min": 5,
+    "max": 8
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:attack_added_cold_damage",
+    "part": "min",
+    "min": 3,
+    "max": 4
+   },
+   {
+    "stat": "allies_in_presence:attack_added_cold_damage",
+    "part": "max",
+    "min": 5,
+    "max": 8
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesAddedFireDamage1",
+  "name": "Heated",
+  "type": "AlliesInPresenceAddedFireDamage",
+  "groups": [
+   "FireDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_attack_minimum_added_fire_damage",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "id": "allies_in_presence_attack_maximum_added_fire_damage",
+    "min": 3,
+    "max": 4
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:attack_added_fire_damage",
+    "part": "min",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "stat": "allies_in_presence:attack_added_fire_damage",
+    "part": "max",
+    "min": 3,
+    "max": 4
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesAddedFireDamage2",
+  "name": "Smouldering",
+  "type": "AlliesInPresenceAddedFireDamage",
+  "groups": [
+   "FireDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_attack_minimum_added_fire_damage",
+    "min": 3,
+    "max": 5
+   },
+   {
+    "id": "allies_in_presence_attack_maximum_added_fire_damage",
+    "min": 6,
+    "max": 9
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:attack_added_fire_damage",
+    "part": "min",
+    "min": 3,
+    "max": 5
+   },
+   {
+    "stat": "allies_in_presence:attack_added_fire_damage",
+    "part": "max",
+    "min": 6,
+    "max": 9
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesAddedLightningDamage1",
+  "name": "Humming",
+  "type": "AlliesInPresenceAddedLightningDamage",
+  "groups": [
+   "LightningDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_attack_minimum_added_lightning_damage",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "id": "allies_in_presence_attack_maximum_added_lightning_damage",
+    "min": 5,
+    "max": 7
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:attack_added_lightning_damage",
+    "part": "min",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "stat": "allies_in_presence:attack_added_lightning_damage",
+    "part": "max",
+    "min": 5,
+    "max": 7
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesAddedLightningDamage2",
+  "name": "Buzzing",
+  "type": "AlliesInPresenceAddedLightningDamage",
+  "groups": [
+   "LightningDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_attack_minimum_added_lightning_damage",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "id": "allies_in_presence_attack_maximum_added_lightning_damage",
+    "min": 10,
+    "max": 15
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:attack_added_lightning_damage",
+    "part": "min",
+    "min": 1,
+    "max": 1
+   },
+   {
+    "stat": "allies_in_presence:attack_added_lightning_damage",
+    "part": "max",
+    "min": 10,
+    "max": 15
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesAddedPhysicalDamage1",
+  "name": "Glinting",
+  "type": "AlliesInPresenceAddedPhysicalDamage",
+  "groups": [
+   "PhysicalDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_attack_minimum_added_physical_damage",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "id": "allies_in_presence_attack_maximum_added_physical_damage",
+    "min": 3,
+    "max": 4
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:attack_added_physical_damage",
+    "part": "min",
+    "min": 1,
+    "max": 2
+   },
+   {
+    "stat": "allies_in_presence:attack_added_physical_damage",
+    "part": "max",
+    "min": 3,
+    "max": 4
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesAddedPhysicalDamage2",
+  "name": "Burnished",
+  "type": "AlliesInPresenceAddedPhysicalDamage",
+  "groups": [
+   "PhysicalDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_attack_minimum_added_physical_damage",
+    "min": 2,
+    "max": 3
+   },
+   {
+    "id": "allies_in_presence_attack_maximum_added_physical_damage",
+    "min": 4,
+    "max": 6
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:attack_added_physical_damage",
+    "part": "min",
+    "min": 2,
+    "max": 3
+   },
+   {
+    "stat": "allies_in_presence:attack_added_physical_damage",
+    "part": "max",
+    "min": 4,
+    "max": 6
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesAllDamage1",
+  "name": "Coercive",
+  "type": "AlliesInPresenceAllDamage",
+  "groups": [
+   "AllDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesAllDamage2",
+  "name": "Agitative",
+  "type": "AlliesInPresenceAllDamage",
+  "groups": [
+   "AllDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesCriticalMultiplier1",
+  "name": "of Ire",
+  "type": "AlliesInPresenceCriticalStrikeMultiplier",
+  "groups": [
+   "CriticalStrikeMultiplier"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_critical_strike_multiplier_+",
+    "min": 10,
+    "max": 14
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:critical_strike_multiplier_+",
+    "min": 10,
+    "max": 14
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesIncreasedAttackSpeed1",
+  "name": "of Skill",
+  "type": "AlliesInPresenceIncreasedAttackSpeed",
+  "groups": [
+   "IncreasedAttackSpeed"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 5,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_attack_speed_+%",
+    "min": 5,
+    "max": 7
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:attack_speed_+%",
+    "min": 5,
+    "max": 7
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesIncreasedCastSpeed1",
+  "name": "of Talent",
+  "type": "AlliesInPresenceIncreasedCastSpeed",
+  "groups": [
+   "IncreasedCastSpeed"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 6,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_cast_speed_+%",
+    "min": 5,
+    "max": 8
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:cast_speed_+%",
+    "min": 5,
+    "max": 8
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesLifeRegeneration1",
+  "name": "of the Newt",
+  "type": "AlliesInPresenceLifeRegeneration",
+  "groups": [
+   "LifeRegeneration"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_life_regeneration_rate_per_minute",
+    "min": 60,
+    "max": 120
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:life_regeneration_rate_per_second",
+    "min": 1,
+    "max": 2
+   }
+  ]
+ },
+ {
+  "id": "NearbyAlliesLifeRegeneration2",
+  "name": "of the Lizard",
+  "type": "AlliesInPresenceLifeRegeneration",
+  "groups": [
+   "LifeRegeneration"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 5,
+  "spawnWeights": [
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "allies_in_presence_life_regeneration_rate_per_minute",
+    "min": 126,
+    "max": 180
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "allies_in_presence:life_regeneration_rate_per_second",
+    "min": 2.1,
+    "max": 3
+   }
+  ]
+ },
+ {
+  "id": "PhysicalDamagePrefixOnTwoHandWeapon1",
+  "name": "Punishing",
+  "type": "PhysicalSpellDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "no_physical_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "spell_physical_damage_+%",
+    "min": 50,
+    "max": 68
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "physical_damage_+%",
+    "min": 50,
+    "max": 68
+   }
+  ]
+ },
+ {
+  "id": "PhysicalDamagePrefixOnTwoHandWeapon2",
+  "name": "Unforgiving",
+  "type": "PhysicalSpellDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "no_physical_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "spell_physical_damage_+%",
+    "min": 69,
+    "max": 88
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "physical_damage_+%",
+    "min": 69,
+    "max": 88
+   }
+  ]
+ },
+ {
+  "id": "PhysicalDamagePrefixOnWeapon1",
+  "name": "Punishing",
+  "type": "PhysicalSpellDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "no_physical_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "spell_physical_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "physical_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ]
+ },
+ {
+  "id": "PhysicalDamagePrefixOnWeapon2",
+  "name": "Unforgiving",
+  "type": "PhysicalSpellDamageWeaponPrefix",
+  "groups": [
+   "WeaponDamageTypePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "no_physical_spell_mods",
+    "weight": 0
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "trap",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "spell_physical_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "physical_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ]
+ },
+ {
+  "id": "SpellCriticalStrikeMultiplier1",
+  "name": "of Ire",
+  "type": "SpellCriticalStrikeMultiplier",
+  "groups": [
+   "CriticalStrikeMultiplier"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_spell_critical_strike_multiplier_+",
+    "min": 10,
+    "max": 14
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "critical_strike_multiplier_+",
+    "min": 10,
+    "max": 14
+   }
+  ]
+ },
+ {
+  "id": "SpellCriticalStrikeMultiplierTwoHand1",
+  "name": "of Ire",
+  "type": "SpellCriticalStrikeMultiplier",
+  "groups": [
+   "CriticalStrikeMultiplier"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "base_spell_critical_strike_multiplier_+",
+    "min": 15,
+    "max": 21
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "critical_strike_multiplier_+",
+    "min": 15,
+    "max": 21
+   }
+  ]
+ },
+ {
+  "id": "SpellDamage1",
+  "name": "Apprentice's",
+  "type": "SpellDamage",
+  "groups": [
+   "SpellDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "spell_damage_+%",
+    "min": 3,
+    "max": 7
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "spell_damage_+%",
+    "min": 3,
+    "max": 7
+   }
+  ]
+ },
+ {
+  "id": "SpellDamageAndManaOnTwoHandWeapon1",
+  "name": "Caster's",
+  "type": "WeaponSpellDamageAndMana",
+  "groups": [
+   "SpellDamageAndMana"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "spell_damage_+%",
+    "min": 30,
+    "max": 38
+   },
+   {
+    "id": "base_maximum_mana",
+    "min": 34,
+    "max": 40
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "spell_damage_+%",
+    "min": 30,
+    "max": 38
+   }
+  ]
+ },
+ {
+  "id": "SpellDamageAndManaOnWeapon1",
+  "name": "Caster's",
+  "type": "WeaponSpellDamageAndMana",
+  "groups": [
+   "SpellDamageAndMana"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 2,
+  "spawnWeights": [
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "spell_damage_+%",
+    "min": 15,
+    "max": 19
+   },
+   {
+    "id": "base_maximum_mana",
+    "min": 17,
+    "max": 20
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "spell_damage_+%",
+    "min": 15,
+    "max": 19
+   }
+  ]
+ },
+ {
+  "id": "SpellDamageGainedAsCold1",
+  "name": "Malignant",
+  "type": "DamageGainedAsCold",
+  "groups": [
+   "ColdDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 5,
+  "spawnWeights": [
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "non_skill_base_all_damage_%_to_gain_as_cold",
+    "min": 13,
+    "max": 15
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "damage_gained_as_cold_%",
+    "min": 13,
+    "max": 15
+   }
+  ]
+ },
+ {
+  "id": "SpellDamageGainedAsColdTwoHand1",
+  "name": "Malignant",
+  "type": "DamageGainedAsCold",
+  "groups": [
+   "ColdDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 5,
+  "spawnWeights": [
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "non_skill_base_all_damage_%_to_gain_as_cold",
+    "min": 26,
+    "max": 30
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "damage_gained_as_cold_%",
+    "min": 26,
+    "max": 30
+   }
+  ]
+ },
+ {
+  "id": "SpellDamageGainedAsFire1",
+  "name": "Fervent",
+  "type": "DamageGainedAsFire",
+  "groups": [
+   "FireDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 5,
+  "spawnWeights": [
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "non_skill_base_all_damage_%_to_gain_as_fire",
+    "min": 13,
+    "max": 15
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "damage_gained_as_fire_%",
+    "min": 13,
+    "max": 15
+   }
+  ]
+ },
+ {
+  "id": "SpellDamageGainedAsFireTwoHand1",
+  "name": "Fervent",
+  "type": "DamageGainedAsFire",
+  "groups": [
+   "FireDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 5,
+  "spawnWeights": [
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "non_skill_base_all_damage_%_to_gain_as_fire",
+    "min": 26,
+    "max": 30
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "damage_gained_as_fire_%",
+    "min": 26,
+    "max": 30
+   }
+  ]
+ },
+ {
+  "id": "SpellDamageGainedAsLightning1",
+  "name": "Deadly",
+  "type": "DamageGainedAsLightning",
+  "groups": [
+   "LightningDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 5,
+  "spawnWeights": [
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "non_skill_base_all_damage_%_to_gain_as_lightning",
+    "min": 13,
+    "max": 15
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "damage_gained_as_lightning_%",
+    "min": 13,
+    "max": 15
+   }
+  ]
+ },
+ {
+  "id": "SpellDamageGainedAsLightningTwoHand1",
+  "name": "Deadly",
+  "type": "DamageGainedAsLightning",
+  "groups": [
+   "LightningDamage"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 5,
+  "spawnWeights": [
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "non_skill_base_all_damage_%_to_gain_as_lightning",
+    "min": 26,
+    "max": 30
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "damage_gained_as_lightning_%",
+    "min": 26,
+    "max": 30
+   }
+  ]
+ },
+ {
+  "id": "SpellDamageOnTwoHandWeapon1",
+  "name": "Apprentice's",
+  "type": "WeaponSpellDamage",
+  "groups": [
+   "WeaponCasterDamagePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "spell_damage_+%",
+    "min": 50,
+    "max": 68
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "spell_damage_+%",
+    "min": 50,
+    "max": 68
+   }
+  ]
+ },
+ {
+  "id": "SpellDamageOnTwoHandWeapon2",
+  "name": "Adept's",
+  "type": "WeaponSpellDamage",
+  "groups": [
+   "WeaponCasterDamagePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "staff",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "spell_damage_+%",
+    "min": 69,
+    "max": 88
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "spell_damage_+%",
+    "min": 69,
+    "max": 88
+   }
+  ]
+ },
+ {
+  "id": "SpellDamageOnWeapon1",
+  "name": "Apprentice's",
+  "type": "WeaponSpellDamage",
+  "groups": [
+   "WeaponCasterDamagePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "spell_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "spell_damage_+%",
+    "min": 25,
+    "max": 34
+   }
+  ]
+ },
+ {
+  "id": "SpellDamageOnWeapon2",
+  "name": "Adept's",
+  "type": "WeaponSpellDamage",
+  "groups": [
+   "WeaponCasterDamagePrefix"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "focus",
+    "weight": 1
+   },
+   {
+    "tag": "wand",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "spell_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "spell_damage_+%",
+    "min": 35,
+    "max": 44
+   }
+  ]
+ },
+ {
+  "id": "Strength1",
+  "name": "of the Brute",
+  "type": "Strength",
+  "groups": [
+   "Strength"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "ring",
+    "weight": 1
+   },
+   {
+    "tag": "amulet",
+    "weight": 1
+   },
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "str_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "str_dex_int_armour",
+    "weight": 1
+   },
+   {
+    "tag": "mace",
+    "weight": 1
+   },
+   {
+    "tag": "axe",
+    "weight": 1
+   },
+   {
+    "tag": "sword",
+    "weight": 1
+   },
+   {
+    "tag": "spear",
+    "weight": 1
+   },
+   {
+    "tag": "flail",
+    "weight": 1
+   },
+   {
+    "tag": "crossbow",
+    "weight": 1
+   },
+   {
+    "tag": "sceptre",
+    "weight": 1
+   },
+   {
+    "tag": "talisman",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "additional_strength",
+    "min": 5,
+    "max": 8
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "strength",
+    "min": 5,
+    "max": 8
+   }
+  ]
+ },
+ {
+  "id": "StunDamageIncrease1",
+  "name": "of the Pugilist",
+  "type": "LocalStunDamageIncrease",
+  "groups": [
+   "StunDamageIncrease"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 5,
+  "spawnWeights": [
+   {
+    "tag": "ranged",
+    "weight": 0
+   },
+   {
+    "tag": "weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "local_hit_damage_stun_multiplier_+%",
+    "min": 21,
+    "max": 30
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "stun_buildup_+%",
+    "min": 21,
+    "max": 30
+   }
+  ]
+ },
+ {
+  "id": "StunThreshold1",
+  "name": "of Thick Skin",
+  "type": "StunThreshold",
+  "groups": [
+   "StunThreshold"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 1,
+  "spawnWeights": [
+   {
+    "tag": "body_armour",
+    "weight": 1
+   },
+   {
+    "tag": "boots",
+    "weight": 1
+   },
+   {
+    "tag": "shield",
+    "weight": 1
+   },
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "stun_threshold_+",
+    "min": 6,
+    "max": 11
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "stun_threshold",
+    "min": 6,
+    "max": 11
+   }
+  ]
+ },
+ {
+  "id": "StunThreshold2",
+  "name": "of Reinforced Skin",
+  "type": "StunThreshold",
+  "groups": [
+   "StunThreshold"
+  ],
+  "generationType": "suffix",
+  "requiredLevel": 8,
+  "spawnWeights": [
+   {
+    "tag": "body_armour",
+    "weight": 1
+   },
+   {
+    "tag": "boots",
+    "weight": 1
+   },
+   {
+    "tag": "shield",
+    "weight": 1
+   },
+   {
+    "tag": "belt",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "stun_threshold_+",
+    "min": 12,
+    "max": 29
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "stun_threshold",
+    "min": 12,
+    "max": 29
+   }
+  ]
+ },
+ {
+  "id": "WeaponElementalDamage1",
+  "name": "Catalysing",
+  "type": "IncreasedWeaponElementalDamagePercent",
+  "groups": [
+   "IncreasedWeaponElementalDamagePercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 4,
+  "spawnWeights": [
+   {
+    "tag": "bow",
+    "weight": 1
+   },
+   {
+    "tag": "one_hand_weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "elemental_damage_with_attack_skills_+%",
+    "min": 19,
+    "max": 35
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "elemental_damage_+%",
+    "min": 19,
+    "max": 35
+   }
+  ]
+ },
+ {
+  "id": "WeaponElementalDamageOnTwohandWeapon1",
+  "name": "Catalysing",
+  "type": "IncreasedWeaponElementalDamagePercent",
+  "groups": [
+   "IncreasedWeaponElementalDamagePercent"
+  ],
+  "generationType": "prefix",
+  "requiredLevel": 4,
+  "spawnWeights": [
+   {
+    "tag": "bow",
+    "weight": 0
+   },
+   {
+    "tag": "two_hand_weapon",
+    "weight": 1
+   },
+   {
+    "tag": "default",
+    "weight": 0
+   }
+  ],
+  "stats": [
+   {
+    "id": "elemental_damage_with_attack_skills_+%",
+    "min": 34,
+    "max": 47
+   }
+  ],
+  "mvmStats": [
+   {
+    "stat": "elemental_damage_+%",
+    "min": 34,
+    "max": 47
+   }
+  ]
+ }
+]
