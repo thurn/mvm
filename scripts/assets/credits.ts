@@ -1,0 +1,143 @@
+import { existsSync, readFileSync } from "node:fs";
+import { basename, dirname, join, relative } from "node:path";
+import type { Credit } from "../../src/assets/credit";
+
+function parseCsv(text: string): string[][] {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let field = "";
+  let quoted = false;
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    if (quoted) {
+      if (char === '"' && text[i + 1] === '"') {
+        field += '"';
+        i++;
+      } else if (char === '"') quoted = false;
+      else field += char;
+    } else if (char === '"') quoted = true;
+    else if (char === ",") {
+      row.push(field.trim());
+      field = "";
+    } else if (char === "\n") {
+      row.push(field.trim());
+      rows.push(row);
+      row = [];
+      field = "";
+    } else if (char !== "\r") field += char;
+  }
+  if (field || row.length) rows.push([...row, field.trim()]);
+  return rows;
+}
+
+const list = (value: string | undefined) =>
+  (value ?? "")
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+/** Resolves baked source files to their credits, per pack. */
+export class CreditResolver {
+  private ulpcRows: Map<string, string[]> | undefined;
+
+  constructor(
+    private readonly lpcDir: string,
+    private readonly audioDir: string,
+  ) {}
+
+  private ulpc(file: string): Credit {
+    if (!this.ulpcRows) {
+      const rows = parseCsv(readFileSync(join(this.lpcDir, "ulpc-generator/CREDITS.csv"), "utf8"));
+      this.ulpcRows = new Map(rows.slice(1).map((row) => [row[0] ?? "", row]));
+    }
+    const sprite = file.replace(/^ulpc-generator\/spritesheets\//, "");
+    // Variant files are credited at animation level: dirname + ".png" (G §8.2).
+    const row = this.ulpcRows.get(sprite) ?? this.ulpcRows.get(`${dirname(sprite)}.png`);
+    if (!row) throw new Error(`no ULPC credit for ${sprite}`);
+    return {
+      pack: "ulpc-generator",
+      file: sprite,
+      authors: list(row[2]),
+      licenses: list(row[3]),
+      urls: list(row[4]),
+      ...(row[1] ? { text: row[1] } : {}),
+    };
+  }
+
+  private prose(pack: string, file: string, text: string): Credit {
+    return { pack, file, authors: [], licenses: [], urls: [], text: text.trim() };
+  }
+
+  /** The section of an lpc-revised `Credits.txt` headed by the asset's name, or all of it. */
+  private lpcRevised(file: string): Credit {
+    let dir = dirname(join(this.lpcDir, file));
+    while (!existsSync(join(dir, "Credits.txt")) && dir.length > this.lpcDir.length)
+      dir = dirname(dir);
+    const text = readFileSync(join(dir, "Credits.txt"), "utf8");
+    const name = basename(file, ".png");
+    const sections = text.split(/\n(?=[^\n]+\n-{3,})/);
+    const section = sections.find((part) => part.trim().split("\n")[0]?.trim() === name);
+    return this.prose("lpc-revised", relative("lpc-revised", file), section ?? text);
+  }
+
+  private sourceOfTales(file: string): Credit {
+    const local = relative("source-of-tales", file);
+    const authors = readFileSync(join(this.lpcDir, "source-of-tales/AUTHORS.txt"), "utf8");
+    const line = authors.split("\n").find((entry) => entry.trim().endsWith(local));
+    return this.prose("source-of-tales", local, line ?? "See source-of-tales/COPYING.txt");
+  }
+
+  /** `file` is relative to the LPC folder (`lpc/` audio is passed without the prefix). */
+  lpc(file: string): Credit {
+    const pack = file.split("/")[0] ?? "";
+    if (pack === "ulpc-generator") return this.ulpc(file);
+    if (pack === "lpc-revised") return this.lpcRevised(file);
+    if (pack === "source-of-tales") return this.sourceOfTales(file);
+    const credits: Record<string, string> = {
+      "lpc-tile-atlas": "lpc-tile-atlas/files/Attribution.txt",
+      "lpc-medieval-village-decorations":
+        "lpc-medieval-village-decorations/files/decoration_medieval/CREDITS-decorations-medieval.txt",
+    };
+    const creditFile = credits[pack];
+    if (!creditFile) throw new Error(`no credit rule for LPC pack ${pack}`);
+    return this.prose(
+      pack,
+      relative(pack, file),
+      readFileSync(join(this.lpcDir, creditFile), "utf8"),
+    );
+  }
+
+  /** `file` is relative to the game-audio folder; each pack has a `SOURCE.txt`. */
+  audio(file: string): Credit {
+    const pack = file.split("/")[0] ?? "";
+    const text = readFileSync(join(this.audioDir, pack, "SOURCE.txt"), "utf8");
+    const licence = /Licen[cs]e:\s*(.+)/.exec(text)?.[1]?.trim();
+    const author = /Author:\s*(.+)/.exec(text)?.[1]?.trim();
+    const url = /Source:\s*(.+)/.exec(text)?.[1]?.trim();
+    return {
+      pack,
+      file: relative(pack, file),
+      authors: author ? [author] : [],
+      licenses: licence ? [licence] : [],
+      urls: url ? [url] : [],
+    };
+  }
+}
+
+/** The generated `src/assets/credits.ts` source. */
+export function creditsModule(credits: readonly Credit[]): string {
+  const sorted = [...credits].sort(
+    (a, b) => a.pack.localeCompare(b.pack) || a.file.localeCompare(b.file),
+  );
+  return [
+    "// Generated by `npm run assets` from each pack's SOURCE.txt and CREDITS.csv. Do not edit.",
+    'import type { Credit } from "./credit";',
+    "",
+    "export const LPC_LINE =",
+    '  "Sprites contributed as part of the Liberated Pixel Cup project from OpenGameArt.org";',
+    'export const CHANGES = "Changes: composited, recoloured, cropped, scaled";',
+    "",
+    `export const CREDITS: readonly Credit[] = ${JSON.stringify(sorted)};`,
+    "",
+  ].join("\n");
+}
