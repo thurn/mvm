@@ -1,0 +1,63 @@
+import { useEffect, useRef, useState } from "react";
+import { installQaSurface, recordEvents } from "../dev/qa-surface";
+import type { Scene } from "../dev/scenes";
+import { createIntentQueue, drain } from "../sim/intents";
+import { step } from "../sim/kernel";
+import { createLayerStack } from "../render/layers";
+import { registerPlaceholderLayers } from "../render/placeholder";
+import { BOARD_HEIGHT, BOARD_WIDTH, chooseScale } from "../render/scale";
+import { createDriver } from "./driver";
+
+/** The board canvas for one round: the time driver, the layer stack and the QA surface. */
+export function Board({ scene }: { scene: Scene }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [scale, setScale] = useState(() => chooseScale(window.innerWidth, window.innerHeight));
+
+  useEffect(() => {
+    const onResize = () => setScale(chooseScale(window.innerWidth, window.innerHeight));
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    const ctx = canvasRef.current?.getContext("2d");
+    if (!ctx) return;
+    const qa = installQaSurface();
+    qa.screen = `scene:${scene.name}`;
+    const state = scene.create();
+    qa.round = state;
+    const intents = createIntentQueue();
+    const previousX = new Map<string, number>();
+    const driver = createDriver({
+      step() {
+        previousX.clear();
+        for (const monster of state.monsters) previousX.set(monster.id, monster.x);
+        recordEvents(qa, step(state, drain(intents)));
+      },
+    });
+    const stack = createLayerStack();
+    registerPlaceholderLayers(stack);
+
+    let last = performance.now();
+    let frame = requestAnimationFrame(function tick(now) {
+      driver.advance(now - last);
+      last = now;
+      ctx.save();
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+      ctx.imageSmoothingEnabled = false;
+      stack.draw(ctx, { state, previousX, alpha: driver.alpha(), shake: { x: 0, y: 0 }, now });
+      ctx.restore();
+      frame = requestAnimationFrame(tick);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [scene, scale]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      width={BOARD_WIDTH * scale}
+      height={BOARD_HEIGHT * scale}
+      style={{ imageRendering: "pixelated", display: "block", margin: "0 auto" }}
+    />
+  );
+}
