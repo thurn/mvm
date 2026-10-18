@@ -1,7 +1,7 @@
 import { heroGems } from "../data";
 import type { GemId } from "../data/types";
 import { catalogEntry, HERO_CATALOG } from "../heroes/model/catalog";
-import { newHero, type HeroInstance } from "../heroes/model/hero";
+import { newHero, type HeroInstance, type OwnedHeroId } from "../heroes/model/hero";
 import { ACCOUNT_TUNING } from "../tuning/progression";
 import type { AccountState } from "./state";
 
@@ -47,7 +47,7 @@ export function heroOffer(
   account: AccountState,
   level: number,
   rng: Rng,
-  newId: () => string,
+  newId: () => OwnedHeroId,
 ): HeroInstance[] {
   const pool = offerPool();
   const picks: string[] = [];

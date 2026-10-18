@@ -1,3 +1,4 @@
+import { id } from "../../types/ids";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { newAccount, resumeFromDocument, saveDocument } from "../../account/lifecycle";
@@ -9,7 +10,7 @@ import { createStreams, streamRng } from "../../sim/rng";
 import { DEFAULT_SETTINGS, sharedSettings, type JuiceSettings } from "../../juice/core/settings";
 import { JUICE_TUNING } from "../../tuning/juice";
 import { skillName } from "../cards/HeroCard";
-import { chooseHero } from "./choose";
+import { chooseHero } from "../../account/stash";
 import { LevelEnd } from "./LevelEnd";
 import { sortDrops, type CardDrop } from "./sort";
 
@@ -19,7 +20,7 @@ const rng = streamRng(createStreams(7), "loot");
 
 let items = 0;
 function item(rarity: "normal" | "magic" | "rare" | "unique"): Drop {
-  const newId = () => `item-${items++}`;
+  const newId = () => id<"Item">(`item-${items++}`);
   return { kind: "item", item: generateGear({ ilvl: 40, rarity, newId }, rng) };
 }
 
@@ -58,7 +59,7 @@ function withChoice(): AccountState {
   account.firstClears.push("level-1");
   account.pendingChoices.push({
     levelId: "level-1",
-    options: heroOffer(account, 3, rng, () => `offer-${n++}`),
+    options: heroOffer(account, 3, rng, () => id<"OwnedHero">(`offer-${n++}`)),
   });
   return account;
 }

@@ -1,3 +1,6 @@
+import { acquireHero, acquireItem } from "../../account/stash";
+import type { OwnedHeroId } from "../../heroes/model/hero";
+import type { ItemId } from "../../heroes/model/item";
 import type { AccountState } from "../../account/state";
 import { xpForLevel } from "../../account/xp";
 import { chooseOneOfThree } from "../../heroes/gen/generate";
@@ -14,7 +17,7 @@ export function grantItem(
   account: AccountState,
   request: { level: number; rarity: Rarity | "unique"; itemClass?: string },
   rng: Rng,
-  newId: () => string,
+  newId: () => ItemId,
 ): ItemInstance {
   const item = generateGear(
     {
@@ -25,8 +28,7 @@ export function grantItem(
     },
     rng,
   );
-  account.stash.items.push(item);
-  return item;
+  return acquireItem(account, item);
 }
 
 /** Grants a generated hero or spell at a chosen level and rarity into the stash. */
@@ -34,7 +36,7 @@ export function grantHero(
   account: AccountState,
   request: { kind: "hero" | "spell"; level: number; rarity: Rarity },
   rng: Rng,
-  newId: () => string,
+  newId: () => OwnedHeroId,
 ): HeroInstance {
   const roster = account.roster.slots.flatMap((card) => (card ? [card.hero.skillId] : []));
   const [hero] = chooseOneOfThree({
@@ -47,8 +49,7 @@ export function grantHero(
     newId,
   });
   if (!hero) throw new Error(`no ${request.kind} can generate at level ${request.level}`);
-  account.stash.heroes.push(hero);
-  return hero;
+  return acquireHero(account, hero);
 }
 
 export function grantCurrency(account: AccountState, currencyId: string, count: number): void {

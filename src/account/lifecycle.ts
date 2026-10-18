@@ -1,3 +1,4 @@
+import { acquireItem } from "./stash";
 import { starterCard } from "../heroes/model/starter";
 import type { GemId } from "../data/types";
 import type { LevelDefinition } from "../monsters/levels/types";
@@ -82,7 +83,7 @@ function grantXp(account: AccountState, xp: number): void {
 function credit(account: AccountState, drop: Drop): void {
   switch (drop.kind) {
     case "item":
-      account.stash.items.push(drop.item);
+      acquireItem(account, drop.item);
       break;
     case "hero":
     case "spell":
@@ -141,7 +142,7 @@ export function finishLevel(account: AccountState, round: RoundState): LevelSumm
       account.pendingChoices.push({
         levelId,
         options: heroOffer(account, reward.heroOffer.level, rng, () =>
-          newInstanceId<"HeroInstance">(round),
+          newInstanceId<"OwnedHero">(round),
         ),
       });
     }

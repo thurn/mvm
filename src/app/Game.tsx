@@ -39,7 +39,7 @@ import { acceptsIntent, bootDecision, countdownAt } from "./boot";
 import { Board, useBoardScale, type BoardSource } from "./Board";
 import { DevMenu } from "../ui/dev/DevMenu";
 import { Hideout } from "../ui/hideout/Hideout";
-import { rollUnrolled } from "../ui/hideout/model";
+import { rollUnrolled } from "../account/stash";
 import { LevelEnd, xpSnapshot, type XpSnapshot } from "../ui/level-end/LevelEnd";
 
 const BUILD = import.meta.env.DEV ? "dev" : "build";

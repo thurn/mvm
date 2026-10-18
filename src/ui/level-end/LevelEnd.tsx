@@ -4,7 +4,7 @@ import type { AccountState } from "../../account/state";
 import { levelForXp, xpForLevel } from "../../account/xp";
 import { audioEngine } from "../../audio";
 import { currencies } from "../../data";
-import type { Card, HeroInstance } from "../../heroes/model/hero";
+import type { Card, HeroInstance, OwnedHeroId } from "../../heroes/model/hero";
 import { sharedSettings } from "../../juice/core/settings";
 import { flashAlpha } from "../../juice/tiers/screen";
 import { LEVEL_END_TUNING as T } from "../../tuning/juice";
@@ -13,7 +13,7 @@ import { HeroCard, skillName } from "../cards/HeroCard";
 import { ItemCard } from "../cards/ItemCard";
 import { Panel, RARITY_COLOR } from "../cards/parts";
 import { MenuButton, MenuScreen, MENU } from "../title/layout";
-import { chooseHero } from "./choose";
+import { chooseHero } from "../../account/stash";
 import { dropRarity, sortDrops, type CardDrop } from "./sort";
 import { fillProgress, revealTimes } from "./timeline";
 
@@ -264,7 +264,7 @@ export function LevelEnd({
     });
   useCues(elapsed, cues);
 
-  const pick = (heroId: string) => {
+  const pick = (heroId: OwnedHeroId) => {
     if (!choice || !chooseHero(account, choice.levelId, heroId)) return;
     onSave();
     play("ui_click");

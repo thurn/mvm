@@ -2,7 +2,7 @@ import { heroGems, spellGems } from "../../data";
 import type { GemId } from "../../data/types";
 import { HERO_GEN_TUNING as T } from "../../tuning/heroes";
 import { catalogEntry, HERO_CATALOG } from "../model/catalog";
-import { newHero, type HeroInstance } from "../model/hero";
+import { newHero, type HeroInstance, type OwnedHeroId } from "../model/hero";
 import { rollSupports } from "./supports";
 
 type Rng = () => number;
@@ -95,7 +95,13 @@ function rarityFor(supports: number): Rarity {
 }
 
 /** A hero or spell at a level and rarity, with its supports rolled. */
-function build(skillId: string, level: number, rarity: Rarity, rng: Rng, id: string): HeroInstance {
+function build(
+  skillId: string,
+  level: number,
+  rarity: Rarity,
+  rng: Rng,
+  id: OwnedHeroId,
+): HeroInstance {
   const supports = rollSupports(skillId, level, supportCount(rarity, rng), rng);
   return { ...newHero(id, skillId as GemId, level), rarity: rarityFor(supports.length), supports };
 }
@@ -117,7 +123,7 @@ interface DropSource {
   /** A rarity the drop already rolled (an unrolled stash drop); otherwise rolled here. */
   rarity?: Rarity;
   rng: Rng;
-  id: string;
+  id: OwnedHeroId;
 }
 
 /** A hero drop (B §7): skill, then level, then rarity and supports. */
@@ -158,7 +164,7 @@ export function chooseOneOfThree(options: {
   areaLevel: number;
   roster: readonly string[];
   rng: Rng;
-  newId: () => string;
+  newId: () => OwnedHeroId;
 }): HeroInstance[] {
   const { rng } = options;
   const pool = (options.kind === "hero" ? heroPool() : spellPool()).filter(

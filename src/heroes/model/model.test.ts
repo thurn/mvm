@@ -19,7 +19,7 @@ const bases = [wingedSpear, ...baseItems()];
 
 function item(base: BaseItemData, mods: ItemInstance["mods"] = []): ItemInstance {
   return {
-    id: `item-${base.id}-${mods.length}`,
+    id: id<"Item">(`item-${base.id}-${mods.length}`),
     baseId: base.id,
     rarity: "normal",
     itemLevel: 1,
@@ -50,7 +50,7 @@ describe("gem level (Appendix B §1.5)", () => {
 describe("Appendix B §3: level 17 Rare Lightning Spear", () => {
   const card: Card = {
     hero: {
-      ...newHero("hero-1", spearGem.id, 17),
+      ...newHero(id<"OwnedHero">("hero-1"), spearGem.id, 17),
       rarity: "rare",
       supports: [
         id<"Gem">("Metadata/Items/Gems/SupportGemPrimalArmamentTwo"),
@@ -121,7 +121,11 @@ describe("Appendix B §3: level 17 Rare Lightning Spear", () => {
 describe("life (Appendix B §1.4)", () => {
   test("a level 1 squishy with Str 7 has 42 life", () => {
     const card: Card = {
-      hero: newHero("h", id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"), 1),
+      hero: newHero(
+        id<"OwnedHero">("h"),
+        id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"),
+        1,
+      ),
       weapon: null,
       armour: null,
       accessory: null,
@@ -147,7 +151,7 @@ describe("starter cards (Appendix B §4)", () => {
   ])("%s costs %d", (skillId, cost) => {
     expect(STARTER_HEROES).toContain(skillId);
     const card: Card = {
-      hero: newHero("h", id<"Gem">(skillId), 1),
+      hero: newHero(id<"OwnedHero">("h"), id<"Gem">(skillId), 1),
       weapon: null,
       armour: null,
       accessory: null,
@@ -161,8 +165,12 @@ describe("starter cards (Appendix B §4)", () => {
 });
 
 describe("weapon lock and slots (Appendix B §1.3, C §C.1.1)", () => {
-  const bowHero = newHero("h", id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"), 1);
-  const spearHero = newHero("h2", spearGem.id, 1);
+  const bowHero = newHero(
+    id<"OwnedHero">("h"),
+    id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"),
+    1,
+  );
+  const spearHero = newHero(id<"OwnedHero">("h2"), spearGem.id, 1);
 
   test("a weapon of the wrong class is refused", () => {
     expect(canEquip(bowHero, "weapon", baseNamed("Crude Bow"))).toBe(true);
@@ -193,13 +201,21 @@ describe("item mods (Appendix C §C.1.7)", () => {
 
   test("a global mod on one card's item affects only that card", () => {
     const a: Card = {
-      hero: newHero("a", id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"), 1),
+      hero: newHero(
+        id<"OwnedHero">("a"),
+        id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"),
+        1,
+      ),
       weapon: null,
       armour: null,
       accessory: lifeRing,
     };
     const b: Card = {
-      hero: newHero("b", id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"), 1),
+      hero: newHero(
+        id<"OwnedHero">("b"),
+        id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"),
+        1,
+      ),
       weapon: null,
       armour: null,
       accessory: null,
@@ -215,7 +231,11 @@ describe("item mods (Appendix C §C.1.7)", () => {
       { modId: id<"Mod">("LocalIncreasedAttackSpeed1"), values: [5] },
     ]);
     const card: Card = {
-      hero: newHero("h", id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"), 1),
+      hero: newHero(
+        id<"OwnedHero">("h"),
+        id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"),
+        1,
+      ),
       weapon: bow,
       armour: null,
       accessory: null,
@@ -233,7 +253,11 @@ describe("mods the data doesn't map yet", () => {
       { modId: id<"Mod">("UniqueLocalAddedColdDamage4"), values: [9, 14] },
     ]);
     const card: Card = {
-      hero: newHero("h", id<"Gem">("Metadata/Items/Gem/SkillGemArmourPiercingRounds"), 1),
+      hero: newHero(
+        id<"OwnedHero">("h"),
+        id<"Gem">("Metadata/Items/Gem/SkillGemArmourPiercingRounds"),
+        1,
+      ),
       weapon: { ...crossbow, rarity: "unique" },
       armour: null,
       accessory: null,
@@ -250,7 +274,7 @@ test("rolled implicits reach the sheet (Appendix C §C.1.3)", () => {
     implicits: [{ modId: "RingImplicitFireResistance1", values: [25] }],
   };
   const card: Card = {
-    hero: newHero("h", id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"), 1),
+    hero: newHero(id<"OwnedHero">("h"), id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"), 1),
     weapon: null,
     armour: null,
     accessory: ring,

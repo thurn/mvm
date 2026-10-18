@@ -1,3 +1,4 @@
+import { id } from "../../types/ids";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { saveDocument } from "../../account/lifecycle";
 import type { AccountState } from "../../account/state";
@@ -88,7 +89,7 @@ export function DevMenu({ account, round, store, logger, save }: DevMenuProps) {
   }, [open]);
 
   if (!open) return null;
-  const newId = () => `dev-${Date.now().toString(36)}-${Math.floor(rng() * 1e6)}`;
+  const raw = () => `dev-${Date.now().toString(36)}-${Math.floor(rng() * 1e6)}`;
   const doGrant = () => {
     if (!account) return setStatus("no account yet: press Play first");
     if (grant.kind === "item")
@@ -100,14 +101,14 @@ export function DevMenu({ account, round, store, logger, save }: DevMenuProps) {
           ...(grant.itemClass ? { itemClass: grant.itemClass } : {}),
         },
         rng,
-        newId,
+        () => id<"Item">(raw()),
       );
     else if (grant.kind === "hero" || grant.kind === "spell")
       grantHero(
         account,
         { kind: grant.kind, level: grant.level, rarity: grant.rarity as "normal" },
         rng,
-        newId,
+        () => id<"OwnedHero">(raw()),
       );
     else if (grant.kind === "currency") grantCurrency(account, grant.currencyId, grant.amount);
     else grantGold(account, grant.amount);

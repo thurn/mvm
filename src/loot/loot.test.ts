@@ -1,3 +1,4 @@
+import { id } from "../types/ids";
 import { describe, expect, test } from "vitest";
 import { seededRng } from "../combat/test-rng";
 import { baseItems, mods } from "../data";
@@ -9,7 +10,7 @@ import { itemSellPrice } from "./prices";
 import { starterItem } from "./starter";
 
 let counter = 0;
-const newId = () => `item-${counter++}`;
+const newId = () => id<"Item">(`item-${counter++}`);
 const modById = new Map(mods().map((m) => [m.id as string, m]));
 
 describe("Appendix C §C.6.1: a rare spear from a rare monster at area level 14", () => {
@@ -135,7 +136,7 @@ describe("gold piles (E §5.1)", () => {
 });
 
 test("starter bases and sell prices", () => {
-  const bow = starterItem("Bow", "starter-bow");
+  const bow = starterItem("Bow", id<"Item">("starter-bow"));
   expect(baseItems().find((b) => b.id === bow.baseId)!.name).toBe("Crude Bow");
   expect(bow).toMatchObject({ rarity: "normal", itemLevel: 1, mods: [] });
   expect(itemSellPrice({ ...bow, itemLevel: 14, rarity: "magic" })).toBeCloseTo(

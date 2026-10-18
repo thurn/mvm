@@ -82,7 +82,7 @@ describe("card summary (H §4.4, §5.1)", () => {
     expect(high.dps).toBeGreaterThan(low.dps);
     expect(high.ehp).toBeGreaterThan(low.ehp);
     const acolyte: Card = {
-      hero: newHero("a", id<"Gem">("MvM/Heroes/EzomyteAcolyte"), 1),
+      hero: newHero(id<"OwnedHero">("a"), id<"Gem">("MvM/Heroes/EzomyteAcolyte"), 1),
       weapon: null,
       armour: null,
       accessory: null,
@@ -135,7 +135,7 @@ describe("currency orbs (H §4.3)", () => {
 describe("card components (H §4.1, §5.1)", () => {
   const rng = streamRng(createStreams(5), "loot");
   let n = 0;
-  const newId = () => `t-${n++}`;
+  const newId = () => id<"Item">(`t-${n++}`);
 
   test("an item card shows its name, affix lines, and on Alt the tier headers and ranges", () => {
     const item = generateGear({ ilvl: 10, rarity: "rare", itemClass: "Ring", newId }, rng);

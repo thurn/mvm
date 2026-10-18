@@ -1,6 +1,6 @@
 import type { StatSheet } from "../combat/stats";
 import { stat } from "../combat/stats";
-import type { ItemInstance } from "../heroes/model/item";
+import type { ItemId, ItemInstance } from "../heroes/model/item";
 import { LOOT_TUNING } from "../tuning/loot";
 import { goldPileSize } from "./gold";
 import { generateGear, itemLevel, pickWeighted, rollItemRarity, type MonsterRarity } from "./items";
@@ -25,7 +25,7 @@ export interface DropContext {
   killerStats?: StatSheet;
   /** Weapon classes the current roster uses, for build-aware shaping (E §3.3). */
   rosterWeaponClasses: readonly string[];
-  newId: () => string;
+  newId: () => ItemId;
 }
 
 function rollCount(expected: number, rng: Rng): number {

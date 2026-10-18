@@ -18,7 +18,7 @@ export function CardsSheet() {
   const [rng] = useState(() => streamRng(createStreams(31), "loot"));
   const [items] = useState(() => {
     let n = 0;
-    const newId = () => `sheet-${n++}`;
+    const newId = () => id<"Item">(`sheet-${n++}`);
     const classes = ["Bow", "Body Armour", "Ring"];
     return [
       ...classes.flatMap((itemClass) =>
@@ -38,14 +38,20 @@ export function CardsSheet() {
         rarityBonus: bonus,
         roster: [],
         rng,
-        id: `gen-${i}`,
+        id: id<"OwnedHero">(`gen-${i}`),
       }),
       weapon: null,
       armour: null,
       accessory: null,
     })),
     {
-      hero: generateSpell({ areaLevel: 5, highestUnlocked: 5, rarityBonus: 1, rng, id: "spell-0" }),
+      hero: generateSpell({
+        areaLevel: 5,
+        highestUnlocked: 5,
+        rarityBonus: 1,
+        rng,
+        id: id<"OwnedHero">("spell-0"),
+      }),
       weapon: null,
       armour: null,
       accessory: null,

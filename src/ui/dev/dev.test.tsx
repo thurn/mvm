@@ -1,3 +1,4 @@
+import { id } from "../../types/ids";
 import { describe, expect, test } from "vitest";
 import { newAccount } from "../../account/lifecycle";
 import { baseItems, currencies } from "../../data";
@@ -17,7 +18,8 @@ import { applyKnob, KNOBS } from "./knobs";
 
 const rng = () => streamRng(createStreams(33), "loot");
 let n = 0;
-const newId = () => `dev-${n++}`;
+const newId = () => id<"Item">(`dev-${n++}`);
+const heroId = () => id<"OwnedHero">(`dev-hero-${n++}`);
 
 describe("grants (GDD §15)", () => {
   test.each(["normal", "magic", "rare", "unique"] as const)(
@@ -44,7 +46,7 @@ describe("grants (GDD §15)", () => {
 
   test.each(["hero", "spell"] as const)("a %s at a chosen level and rarity", (kind) => {
     const account = newAccount("warrior");
-    const hero = grantHero(account, { kind, level: 8, rarity: "rare" }, rng(), newId);
+    const hero = grantHero(account, { kind, level: 8, rarity: "rare" }, rng(), heroId);
     expect(account.stash.heroes).toContain(hero);
     expect(hero.level).toBe(8);
     expect((kind === "hero" ? heroPool() : spellPool()).includes(hero.skillId)).toBe(true);

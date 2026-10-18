@@ -5,7 +5,8 @@ import { ItemCard, itemName } from "../cards/ItemCard";
 import { skillName } from "../cards/HeroCard";
 import { RARITY_COLOR } from "../cards/parts";
 import { MENU } from "../title/layout";
-import { itemSlot, stashView, type StashEntry, type StashFilter } from "./model";
+import { itemSlot } from "../../heroes/model/item";
+import { stashView, type StashEntry, type StashFilter } from "./model";
 import type { Drag } from "./Hideout";
 
 const SLOT_LABEL = { weapon: "Weapon", armour: "Armour", accessory: "Jewellery" } as const;
@@ -231,8 +232,8 @@ export function StashPanel({
                 onDragStart={() =>
                   setDrag(
                     entry.kind === "item"
-                      ? { kind: "item", id: key, from: "stash" }
-                      : { kind: "hero", id: key, from: "stash" },
+                      ? { kind: "item", id: entry.item.id, from: "stash" }
+                      : { kind: "hero", id: entry.hero.id, from: "stash" },
                   )
                 }
                 onDragEnd={() => setDrag(null)}

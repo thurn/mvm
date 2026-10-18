@@ -1,11 +1,15 @@
 import type { GemId } from "../../data/types";
+import type { Id } from "../../types/ids";
 import type { ItemInstance } from "./item";
 
 type HeroRarity = "normal" | "magic" | "rare";
 
+/** An owned hero's ID (roster, stash, offers); distinct from a placed hero's `HeroInstanceId` in the sim. */
+export type OwnedHeroId = Id<"OwnedHero">;
+
 /** A hero: one skill plus level, rarity and supports (Appendix B §1.1). JSON-safe. */
 export interface HeroInstance {
-  id: string;
+  id: OwnedHeroId;
   /** The hero's skill gem ID, or an MvM ID for custom heroes. */
   skillId: GemId;
   level: number;
@@ -25,6 +29,6 @@ export interface Card {
   accessory: ItemInstance | null;
 }
 
-export function newHero(id: string, skillId: GemId, level: number): HeroInstance {
+export function newHero(id: OwnedHeroId, skillId: GemId, level: number): HeroInstance {
   return { id, skillId, level, xp: 0, rarity: "normal", supports: [], quality: 0 };
 }

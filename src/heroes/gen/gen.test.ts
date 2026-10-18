@@ -1,3 +1,4 @@
+import { id } from "../../types/ids";
 import { describe, expect, test } from "vitest";
 import { createStreams, streamRng } from "../../sim/rng";
 import { HERO_GEN_TUNING } from "../../tuning/heroes";
@@ -121,7 +122,7 @@ describe("rarity and levels (B §1.9, §7.2–§7.3)", () => {
         rarityBonus: 6,
         roster: [],
         rng: rngFor(seed),
-        id: `h${seed}`,
+        id: id<"OwnedHero">(`h${seed}`),
       });
       const n = hero.supports.length;
       expect(hero.rarity).toBe(n === 0 ? "normal" : n <= 2 ? "magic" : "rare");
@@ -164,7 +165,7 @@ describe("skill choice (B §1.8, §7.4)", () => {
         rarityBonus: 0,
         roster: [],
         rng: rngFor(seed),
-        id: "h",
+        id: id<"OwnedHero">("h"),
       });
       expect(unlockAreaLevel(hero.skillId)).toBeLessThanOrEqual(3);
       const spell = generateSpell({
@@ -172,7 +173,7 @@ describe("skill choice (B §1.8, §7.4)", () => {
         highestUnlocked: 3,
         rarityBonus: 0,
         rng: rngFor(seed),
-        id: "s",
+        id: id<"OwnedHero">("s"),
       });
       expect(unlockAreaLevel(spell.skillId)).toBeLessThanOrEqual(3);
     }
@@ -203,7 +204,7 @@ describe("choose 1 of 3 (E §4.5)", () => {
         rng: rngFor(seed),
         newId: (() => {
           let n = 0;
-          return () => `o${n++}`;
+          return () => id<"OwnedHero">(`o${n++}`);
         })(),
       });
       expect(offer).toHaveLength(3);

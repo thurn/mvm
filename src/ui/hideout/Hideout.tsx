@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import type { AccountState } from "../../account/state";
 import { currencies } from "../../data";
-import type { Card } from "../../heroes/model/hero";
-import type { ItemInstance, ItemSlot } from "../../heroes/model/item";
+import type { Card, OwnedHeroId } from "../../heroes/model/hero";
+import type { ItemId, ItemInstance, ItemSlot } from "../../heroes/model/item";
 import { sharedSettings } from "../../juice/core/settings";
 import { flashAlpha } from "../../juice/tiers/screen";
 import { HIDEOUT_TUNING as T } from "../../tuning/juice";
@@ -22,13 +22,13 @@ import {
   moveCard,
   unequip,
   type RosterTarget,
-} from "./model";
+} from "../../account/stash";
 import { StashPanel } from "./StashPanel";
 
 /** What is being dragged, and from where. */
 export type Drag =
-  | { kind: "item"; id: string; from: "stash" | { target: RosterTarget; part: ItemSlot } }
-  | { kind: "hero"; id: string; from: "stash" | { target: RosterTarget } };
+  | { kind: "item"; id: ItemId; from: "stash" | { target: RosterTarget; part: ItemSlot } }
+  | { kind: "hero"; id: OwnedHeroId; from: "stash" | { target: RosterTarget } };
 
 const PARTS: readonly ItemSlot[] = ["weapon", "armour", "accessory"];
 const PART_LABEL = { weapon: "weapon", armour: "armour", accessory: "jewellery" } as const;

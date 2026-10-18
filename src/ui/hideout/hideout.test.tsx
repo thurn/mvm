@@ -10,7 +10,8 @@ import { id } from "../../types/ids";
 import { DEFAULT_SETTINGS, sharedSettings, type JuiceSettings } from "../../juice/core/settings";
 import { JUICE_TUNING } from "../../tuning/juice";
 import { Hideout } from "./Hideout";
-import { isSpell, rollUnrolled, stashView } from "./model";
+import { isSpell, rollUnrolled } from "../../account/stash";
+import { stashView } from "./model";
 
 afterEach(cleanup);
 
@@ -21,7 +22,7 @@ function gear(
   rarity: ItemInstance["rarity"] = "magic",
   ilvl = 10,
 ): ItemInstance {
-  return generateGear({ ilvl, rarity, itemClass, newId: () => `gear-${n++}` }, rng);
+  return generateGear({ ilvl, rarity, itemClass, newId: () => id<"Item">(`gear-${n++}`) }, rng);
 }
 
 /** A warrior: slot 0 the acolyte (Sceptre), slot 1 Rolling Slam (Two Hand Mace), slot 2 APR (Crossbow). */
@@ -83,7 +84,11 @@ describe("the roster", () => {
   test("a stash hero dragged into an empty unlocked slot joins the roster; a locked slot refuses", () => {
     const account = warrior();
     account.roster.unlocked = 4;
-    const hero = newHero("h-1", id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"), 3);
+    const hero = newHero(
+      id<"OwnedHero">("h-1"),
+      id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"),
+      3,
+    );
     account.stash.heroes.push(hero);
     setup(account);
     drag(screen.getByTestId("stash-hero-h-1"), screen.getByTestId("roster-slot-4"));
@@ -136,7 +141,9 @@ describe("the stash view (GDD §15)", () => {
       gear("Amulet", "normal", 20),
     ];
     account.stash.items.push(...items);
-    account.stash.heroes.push(newHero("h-2", id<"Gem">("Metadata/Items/Gems/SkillGemSpark"), 4));
+    account.stash.heroes.push(
+      newHero(id<"OwnedHero">("h-2"), id<"Gem">("Metadata/Items/Gems/SkillGemSpark"), 4),
+    );
     return { account, items };
   }
 

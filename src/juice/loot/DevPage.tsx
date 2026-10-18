@@ -1,3 +1,4 @@
+import { id } from "../../types/ids";
 import { useEffect, useMemo, useState } from "react";
 import { Board } from "../../app/Board";
 import { audioEngine } from "../../audio";
@@ -22,7 +23,7 @@ function sampleDrops(): Record<string, Drop> {
   const item = (rarity: "normal" | "magic" | "rare" | "unique"): Drop => ({
     kind: "item",
     item: {
-      id: `dev-item-${next++}`,
+      id: id<"Item">(`dev-item-${next++}`),
       baseId: (rarity === "unique" && unique ? unique.baseId : base.id) as BaseItemId,
       rarity,
       itemLevel: 1,

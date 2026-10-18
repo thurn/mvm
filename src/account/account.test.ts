@@ -1,3 +1,4 @@
+import { id } from "../types/ids";
 import { describe, expect, test } from "vitest";
 import { hashState } from "../sim/hash";
 import { step } from "../sim/kernel";
@@ -136,7 +137,7 @@ describe("saves", () => {
   test("an unknown base ID in the stash reconciles to gold with a log line (P17)", () => {
     const account = newAccount("warrior");
     account.stash.items.push({
-      id: "x",
+      id: id<"Item">("x"),
       baseId: "Metadata/Retired/Thing" as never,
       rarity: "rare",
       itemLevel: 10,

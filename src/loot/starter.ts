@@ -1,5 +1,5 @@
 import { baseItems } from "../data";
-import type { ItemInstance } from "../heroes/model/item";
+import type { ItemId, ItemInstance } from "../heroes/model/item";
 
 /** Each class's level 1 normal starter base (Appendix B §4). */
 const STARTER_BASES: Readonly<Record<string, string>> = {
@@ -21,7 +21,7 @@ function starterBase(itemClass: string) {
 }
 
 /** A normal starter item of a weapon class, for the account to grant. */
-export function starterItem(itemClass: string, id: string): ItemInstance {
+export function starterItem(itemClass: string, id: ItemId): ItemInstance {
   const base = starterBase(itemClass);
   if (!base) throw new Error(`no starter base for ${itemClass}`);
   return {

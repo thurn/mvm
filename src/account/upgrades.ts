@@ -1,17 +1,9 @@
 import { baseItems } from "../data";
 import { aggregate } from "../heroes/model/aggregate";
 import type { Card } from "../heroes/model/hero";
-import { canEquip, type ItemInstance, type ItemSlot } from "../heroes/model/item";
+import { canEquip, slotOfClass, type ItemInstance, type ItemSlot } from "../heroes/model/item";
 import { stat } from "../combat/stats";
 import type { AccountState } from "./state";
-
-const SLOT_OF_CLASS: Readonly<Record<string, ItemSlot>> = {
-  "Body Armour": "armour",
-  Shield: "armour",
-  Amulet: "accessory",
-  Ring: "accessory",
-  Belt: "accessory",
-};
 
 /**
  * A rough card power: weapon damage per second (weapon and added attack
@@ -37,7 +29,7 @@ function power(card: Card): number {
 export function isUpgrade(account: AccountState, item: ItemInstance): boolean {
   const base = baseItems().find((b) => b.id === item.baseId);
   if (!base) return false;
-  const slot: ItemSlot = SLOT_OF_CLASS[base.itemClass] ?? "weapon";
+  const slot: ItemSlot = slotOfClass(base.itemClass);
   return account.roster.slots.some((card) => {
     if (!card || !canEquip(card.hero, slot, base)) return false;
     return power({ ...card, [slot]: item }) > power(card) * 1.01;

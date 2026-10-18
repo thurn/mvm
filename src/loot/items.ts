@@ -1,7 +1,7 @@
 import { baseItems, mods } from "../data";
 import { uniques } from "../data/uniques";
 import type { BaseItemData, BaseItemId, ModData, ModId, RawModStat } from "../data/types";
-import type { ItemInstance } from "../heroes/model/item";
+import type { ItemId, ItemInstance } from "../heroes/model/item";
 import {
   LOOT_TUNING,
   MOD_WEIGHTS_BY_GROUP,
@@ -195,7 +195,7 @@ export interface GearRequest {
   /** Forces the item class; otherwise rolled by slot with roster shaping. */
   itemClass?: string;
   rosterWeaponClasses?: readonly string[];
-  newId: () => string;
+  newId: () => ItemId;
 }
 
 /** A unique at the item level per C.4.1's random rule: uniform over uniques whose base can drop. */

@@ -1,3 +1,4 @@
+import { id } from "../../types/ids";
 import { describe, expect, test } from "vitest";
 import { damageMap } from "../../combat/damage";
 import type { SimEvent } from "../../sim/events";
@@ -97,7 +98,14 @@ describe("the cue table (H §1.3, §2.6)", () => {
       x: 5,
       drop: {
         kind: "item",
-        item: { id: "i", baseId: "b" as never, rarity, itemLevel: 1, quality: 0, mods: [] },
+        item: {
+          id: id<"Item">("i"),
+          baseId: "b" as never,
+          rarity,
+          itemLevel: 1,
+          quality: 0,
+          mods: [],
+        },
       },
     };
     const batch = cuesFor(event, DEFAULT_SETTINGS);
