@@ -17,8 +17,14 @@ function arg(name: string): string | undefined {
   return index >= 0 ? process.argv[index + 1] : undefined;
 }
 
+// `tg status --json` outgrows execFileSync's 1 MB default as Tollgate's history grows.
 const run = (cmd: string, args: string[], cwd: string) =>
-  execFileSync(cmd, args, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
+  execFileSync(cmd, args, {
+    cwd,
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
+    maxBuffer: 256 * 1024 * 1024,
+  }).trim();
 
 const root = dirname(
   run("git", ["rev-parse", "--path-format=absolute", "--git-common-dir"], process.cwd()),
