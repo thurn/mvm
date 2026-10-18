@@ -672,6 +672,20 @@ export const CREDITS: readonly Credit[] = [
     urls: ["https://kenney.nl/assets/rpg-audio"],
   },
   {
+    pack: "kenney-rpg-audio",
+    file: "Audio/handleCoins.ogg",
+    authors: ["Kenney"],
+    licenses: ["CC0 (verified on the source page, 2026-10-18)"],
+    urls: ["https://kenney.nl/assets/rpg-audio"],
+  },
+  {
+    pack: "kenney-rpg-audio",
+    file: "Audio/handleCoins2.ogg",
+    authors: ["Kenney"],
+    licenses: ["CC0 (verified on the source page, 2026-10-18)"],
+    urls: ["https://kenney.nl/assets/rpg-audio"],
+  },
+  {
     pack: "lpc-medieval-village-decorations",
     file: "files/decoration_medieval/decorations-medieval.png",
     authors: [],

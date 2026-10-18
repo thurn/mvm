@@ -15,6 +15,8 @@ export const SFX = {
   card_ready: [0.4, 0, 587, 0, 0.02, 0.15, 0, 1, 0, 0, 588, 0.04, 0, 0, 0, 0, 0, 1, 0, 0],
   // The unique drum-roll riser.
   riser: [0.6, 0, 200, 0.6, 0.1, 0.1, 2, 1, 1.5, 0, 0, 0, 0, 0.3, 0, 0, 0, 1, 0, 0.2],
+  /** The short generic "pop" under every kill, on the kill ladder (H §7.2). */
+  kill_pop: [0.4, 0, 520, 0, 0.01, 0.06, 1, 1.5, -8, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
   /** A soft thud: the placeholder for any combat sound without a sample. */
   thud: [0.6, 0.05, 90, 0, 0.02, 0.12, 4, 1, -2, 0, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0],
 } satisfies Record<string, ZzfxParams>;

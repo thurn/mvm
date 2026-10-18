@@ -48,6 +48,11 @@ export const SOUNDS = {
   },
   drop_currency: { variants: [`${RPG}/item_gem_0#.ogg`] },
   drop_gold: { variants: [`${RPG}/item_coins_0#.ogg`] },
+  // Each coin's arrival at the gold readout, on the coin ladder (H §3.4, §3.5).
+  coin: { variants: [`${RPG}/item_coins_0#.ogg`] },
+  coin_pile: {
+    variants: ["kenney-rpg-audio/Audio/handleCoins.ogg", "kenney-rpg-audio/Audio/handleCoins2.ogg"],
+  },
   drop_hero: {
     variants: ["kenney-casino-audio/Audio/chip-lay-#.ogg"],
     layers: [`${UI}/pluck_001.ogg`],

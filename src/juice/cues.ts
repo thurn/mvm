@@ -136,12 +136,30 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
       },
     ],
   }),
+  // The soul puff, the coins and the hero tile flash are the kills system's, timed off the death cue (H §7.2).
   kill: (event) => ({
     tier:
-      event.rarity === "rare" ? 3 : event.rarity === "unique" || event.rarity === "boss" ? 5 : 2,
+      event.rarity === null
+        ? 3
+        : event.rarity === "rare"
+          ? 3
+          : event.rarity === "unique" || event.rarity === "boss"
+            ? 5
+            : 2,
     cues: [
-      { kind: "particles", preset: "soul", lane: event.lane, x: event.x },
-      { kind: "sound", id: event.rarity === null ? "hero_death" : "kill", bus: "sfx" },
+      {
+        kind: "death",
+        targetId: event.targetId,
+        lane: event.lane,
+        x: event.x,
+        rarity: event.rarity,
+      },
+      ...(event.rarity === null
+        ? [{ kind: "sound", id: "hero_death", bus: "sfx", x: event.x } as const]
+        : [
+            { kind: "sound", id: "kill", bus: "sfx", x: event.x } as const,
+            { kind: "sound", id: "kill_pop", bus: "sfx", x: event.x } as const,
+          ]),
     ],
   }),
   drop(event) {

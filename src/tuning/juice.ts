@@ -192,3 +192,30 @@ export const HIT_TUNING = {
   ringMs: 220,
   ringRadius: [4, 16] as const,
 };
+
+/** Kills, deaths and gold (H §3.4, §3.5, §5.2, §7.2). Times in ms. */
+export const KILL_TUNING = {
+  /** The soul puff rises on the fall's last frame (6 hurt frames × 100 ms). */
+  soulDelayMs: 600,
+  heroTileFlashMs: 300,
+  heroTileFlashAlpha: 0.45,
+  killLadderWindowMs: 500,
+  killLadderMaxSteps: 5,
+  coins: {
+    min: 3,
+    max: 8,
+    /** Gold per coin before clamping to min–max. */
+    goldPerCoin: 3,
+    rareShower: 15,
+    sprayGravity: 300,
+    spraySpeed: [40, 90] as const,
+    magnetiseAfterMs: 600,
+    flightMs: 350,
+    staggerMs: 30,
+    ladderWindowMs: 400,
+    ladderMaxSemitones: 12,
+    size: 3,
+    color: "#F2C14E",
+    shade: "#A87A1E",
+  },
+};

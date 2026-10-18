@@ -41,6 +41,14 @@ export type Cue =
       dot?: boolean;
     }
   | { kind: "flash"; targetId: string; crit: boolean; band: Band }
+  /** Someone died at (lane, x); rarity is null for heroes. */
+  | {
+      kind: "death";
+      targetId: string;
+      lane: number;
+      x: number;
+      rarity: "normal" | "magic" | "rare" | "unique" | "boss" | null;
+    }
   | { kind: "lootTimeline"; dropId: string; drop: Drop; lane: number; x: number }
   | { kind: "hudBump"; target: "mana" | "life" | "wave" }
   | { kind: "banner"; text: string };

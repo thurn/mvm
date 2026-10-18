@@ -32,13 +32,13 @@ describe("the cue table (H §1.3, §2.6)", () => {
       "a normal kill",
       { type: "kill", sourceId: "s", targetId: "t", lane: 2, x: 5, rarity: "normal" } as SimEvent,
       2,
-      ["particles", "sound"],
+      ["death", "sound"],
     ],
     [
       "a rare kill",
       { type: "kill", sourceId: "s", targetId: "t", lane: 2, x: 5, rarity: "rare" } as SimEvent,
       3,
-      ["particles", "shake", "sound"],
+      ["death", "shake", "sound"],
     ],
     [
       "a leak",

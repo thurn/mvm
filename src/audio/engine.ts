@@ -151,7 +151,7 @@ export function createAudioEngine(options: EngineOptions) {
     },
 
     /** Plays a sound id at board x (tiles); null when a rule drops it. */
-    play(id: string, at: { x?: number; gainDb?: number } = {}): Voice | null {
+    play(id: string, at: { x?: number; gainDb?: number; semitones?: number } = {}): Voice | null {
       const { category, bus } = soundClass(id);
       const t = now();
       // Retrigger guard: raise the playing voice instead of starting another.
@@ -190,7 +190,9 @@ export function createAudioEngine(options: EngineOptions) {
       const variation =
         category === "loot" ? AUDIO_TUNING.pitchVariation.loot : AUDIO_TUNING.pitchVariation.combat;
       const varied = category === "ui" ? 0 : variation;
-      source.playbackRate.value = 1 + (random() * 2 - 1) * varied;
+      // Ladders shift pitch by semitones (H §3.4); variation rides on top.
+      source.playbackRate.value =
+        2 ** ((at.semitones ?? 0) / 12) * (1 + (random() * 2 - 1) * varied);
       const gain = ctx.createGain();
       const volumeDb = category === "ui" ? 0 : (random() * 2 - 1) * AUDIO_TUNING.volumeVariationDb;
       gain.gain.value = dbToGain(volumeDb + (at.gainDb ?? 0));

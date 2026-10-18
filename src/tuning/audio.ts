@@ -41,7 +41,7 @@ export const AUDIO_TUNING = {
 
 /** Each sound id's category and bus; ids not listed are hits on the sfx bus. */
 export function soundClass(id: string): { category: Category; bus: Bus } {
-  if (id.startsWith("drop_") || id === "mana_collect" || id === "mana_spawn")
+  if (id.startsWith("drop_") || id === "mana_collect" || id === "mana_spawn" || id === "coin")
     return { category: "loot", bus: "loot" };
   if (id.startsWith("ui_") || id === "card_ready" || id === "ui_hover")
     return { category: "ui", bus: "ui" };
