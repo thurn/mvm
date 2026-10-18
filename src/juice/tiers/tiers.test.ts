@@ -126,6 +126,14 @@ describe("screen flash (H accessibility)", () => {
     expect(screen.sample(0).flash).toBeLessThanOrEqual(0.4);
   });
 
+  test("a T4 vignette never cuts a stronger T5 vignette short", () => {
+    const screen = new ScreenEffects();
+    screen.start(5, 0, DEFAULT_SETTINGS);
+    const deep = screen.sample(50).vignette;
+    screen.start(4, 50, DEFAULT_SETTINGS);
+    expect(screen.sample(50).vignette).toBeCloseTo(deep);
+  });
+
   test("the juice knob scales the flash, and 0 turns it off", () => {
     expect(flashAlpha(0.6, { ...DEFAULT_SETTINGS, juice: 0 })).toBe(0);
   });

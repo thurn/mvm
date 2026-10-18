@@ -26,14 +26,21 @@ export class ScreenEffects {
   start(tier: Tier, now: number, settings: JuiceSettings): void {
     const row = JUICE_TUNING.screen[tier];
     if (!row) return;
+    // A weaker pulse never replaces a stronger one still showing.
+    const stronger = (current: Pulse | null, next: Pulse) =>
+      fade(current, now) > next.alpha ? current : next;
     if (row.flash)
-      this.flash = { alpha: flashAlpha(row.flash.alpha, settings), start: now, ms: row.flash.ms };
+      this.flash = stronger(this.flash, {
+        alpha: flashAlpha(row.flash.alpha, settings),
+        start: now,
+        ms: row.flash.ms,
+      });
     if (row.vignette)
-      this.vignette = {
+      this.vignette = stronger(this.vignette, {
         alpha: row.vignette.alpha * Math.min(1, settings.juice),
         start: now,
         ms: row.vignette.ms,
-      };
+      });
   }
 
   sample(now: number): { flash: number; vignette: number } {
