@@ -231,6 +231,15 @@ describe("voice manager (H §10.3)", () => {
     expect(engine.voices()).toHaveLength(0);
   });
 
+  test("bus volume scales the bus's mix level and survives a duck", () => {
+    const { engine } = setup();
+    const full = engine.busGain("sfx");
+    engine.setVolume("sfx", 0.5);
+    expect(engine.busGain("sfx")).toBeCloseTo(full * 0.5);
+    engine.duck("sfx", -6, 1);
+    expect(engine.busGain("sfx")).toBeCloseTo(full * 0.5 * 10 ** (-6 / 20));
+  });
+
   test("unlock resumes the context", async () => {
     const { engine } = setup();
     await engine.unlock();

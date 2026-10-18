@@ -54,3 +54,12 @@ export function soundClass(id: string): { category: Category; bus: Bus } {
     return { category: "ui", bus: "sfx" };
   return { category: "hit", bus: "sfx" };
 }
+
+/** Music behaviour (H §10.4). */
+export const MUSIC_TUNING = {
+  /** The intensity layer comes in above this many monsters on the board. */
+  intensityMonsters: 12,
+  /** …and leaves this long after its last trigger. */
+  intensityHoldSeconds: 6,
+  crossfadeSeconds: 1.5,
+};

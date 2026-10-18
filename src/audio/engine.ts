@@ -68,11 +68,16 @@ export function createAudioEngine(options: EngineOptions) {
   compressor.threshold.value = AUDIO_TUNING.compressor.thresholdDb;
   compressor.ratio.value = AUDIO_TUNING.compressor.ratio;
   compressor.knee.value = AUDIO_TUNING.compressor.kneeDb;
-  compressor.connect(ctx.destination);
+  const master = ctx.createGain();
+  compressor.connect(master);
+  master.connect(ctx.destination);
+  /** Player volume per bus (the settings sliders), 0–1 on top of the bus's mix level. */
+  const volumes: Record<Bus, number> = { music: 1, sfx: 1, loot: 1, ui: 1 };
+  const base = (bus: Bus) => dbToGain(AUDIO_TUNING.busDb[bus]) * volumes[bus];
   const buses = {} as Record<Bus, GainNode>;
-  for (const [bus, db] of Object.entries(AUDIO_TUNING.busDb) as [Bus, number][]) {
+  for (const bus of Object.keys(AUDIO_TUNING.busDb) as Bus[]) {
     const gain = ctx.createGain();
-    gain.gain.value = dbToGain(db);
+    gain.gain.value = base(bus);
     gain.connect(compressor);
     buses[bus] = gain;
   }
@@ -123,6 +128,22 @@ export function createAudioEngine(options: EngineOptions) {
     log,
     voices: () => [...voices],
     busGain: (bus: Bus) => buses[bus].gain.value,
+    /** A bus's input node, for players that manage their own sources (music). */
+    bus: (bus: Bus): AudioNode => buses[bus],
+
+    /** Sets the player's volume (0–1) for a bus, or for everything with "master". */
+    setVolume(bus: Bus | "master", volume: number) {
+      const v = Math.max(0, Math.min(1, volume));
+      if (bus === "master") {
+        master.gain.value = v;
+        return;
+      }
+      volumes[bus] = v;
+      const gain = buses[bus].gain;
+      gain.cancelScheduledValues(ctx.currentTime);
+      gain.setValueAtTime(base(bus), ctx.currentTime);
+      ducks.delete(bus);
+    },
 
     register(id: string, buffers: AudioBuffer[], layered: AudioBuffer[] = []) {
       samples.set(id, buffers);
@@ -232,10 +253,9 @@ export function createAudioEngine(options: EngineOptions) {
       });
       const duck = ducks.get(bus)!;
       const gain = buses[bus].gain;
-      const base = dbToGain(AUDIO_TUNING.busDb[bus]);
       gain.cancelScheduledValues(t);
-      gain.setValueAtTime(base * dbToGain(duck.db), t);
-      gain.linearRampToValueAtTime(base, duck.until);
+      gain.setValueAtTime(base(bus) * dbToGain(duck.db), t);
+      gain.linearRampToValueAtTime(base(bus), duck.until);
     },
 
     /** Resumes the context; call from the first user gesture (H §10.3). */

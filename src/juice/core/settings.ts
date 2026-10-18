@@ -15,6 +15,8 @@ export interface JuiceSettings {
   tierLog: boolean;
   shake: "off" | "low" | "full";
   reduceFlashing: boolean;
+  /** Player volume sliders, 0–1 (H §10.2 options). */
+  volume: { master: number; music: number; sfx: number; loot: number; ui: number };
 }
 
 export const DEFAULT_SETTINGS: JuiceSettings = {
@@ -28,6 +30,7 @@ export const DEFAULT_SETTINGS: JuiceSettings = {
   tierLog: false,
   shake: "full",
   reduceFlashing: false,
+  volume: { master: 1, music: 1, sfx: 1, loot: 1, ui: 1 },
 };
 
 const KEY = "mvm-juice-settings";

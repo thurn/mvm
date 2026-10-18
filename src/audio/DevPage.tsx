@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createSettings, type JuiceSettings } from "../juice/core/settings";
 import { SOUNDS } from "../assets/sounds";
 import { audioEngine } from ".";
 import { SFX } from "./zzfx";
@@ -9,6 +10,14 @@ export function AudioDevPage() {
     played: [],
     dropped: [],
   });
+  const [store] = useState(() => createSettings());
+  const [volume, setVolume] = useState(store.get().volume);
+  const slide = (bus: keyof JuiceSettings["volume"], value: number) => {
+    const next = { ...volume, [bus]: value };
+    setVolume(next);
+    store.set({ volume: next });
+    audioEngine()?.setVolume(bus, value);
+  };
   const play = (id: string, x?: number) => {
     const engine = audioEngine();
     if (!engine) return;
@@ -31,6 +40,20 @@ export function AudioDevPage() {
       <div>{Object.keys(SOUNDS).map((id) => button(id))}</div>
       <h2>Pan</h2>
       <div>{[0, 4.5, 9].map((x) => button("ui_click", x))}</div>
+      <h2>Volume</h2>
+      {(Object.keys(volume) as (keyof JuiceSettings["volume"])[]).map((bus) => (
+        <label key={bus} style={{ display: "block" }}>
+          {bus}{" "}
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.05}
+            value={volume[bus]}
+            onChange={(e) => slide(bus, Number(e.target.value))}
+          />
+        </label>
+      ))}
       <h2>audioLog</h2>
       <pre data-testid="audio-log">{JSON.stringify(log, null, 2)}</pre>
     </div>
