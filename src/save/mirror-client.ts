@@ -11,6 +11,8 @@ export interface MirrorClient {
   post(doc: SaveDocument): Promise<boolean>;
   /** Files a document that failed to load under `.saves/rejected/`, with its reasons. */
   reject(raw: unknown, reasons: Record<string, string>): Promise<boolean>;
+  /** Forgets the mirrored save and its history (the dev QA reset). */
+  clear(): Promise<boolean>;
 }
 
 export function createMirrorClient(
@@ -42,5 +44,12 @@ export function createMirrorClient(
     },
     post: (doc) => send(base, doc),
     reject: (raw, reasons) => send(`${base}/rejected`, { reasons, raw }),
+    async clear() {
+      try {
+        return (await fetchFn(base, { method: "DELETE" })).ok;
+      } catch {
+        return false;
+      }
+    },
   };
 }

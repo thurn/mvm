@@ -12,6 +12,7 @@ export const LOG_RING_LIMIT = 5000;
 export interface LogRing {
   append(lines: readonly LogLine[]): Promise<void>;
   all(): Promise<LogLine[]>;
+  clear(): Promise<void>;
 }
 
 export function createMemoryRing(): LogRing {
@@ -22,6 +23,9 @@ export function createMemoryRing(): LogRing {
       lines.splice(0, Math.max(0, lines.length - LOG_RING_LIMIT));
     },
     all: async () => [...lines],
+    async clear() {
+      lines.length = 0;
+    },
   };
 }
 
@@ -59,6 +63,10 @@ export function createIndexedDbRing(name = "mvm-log"): LogRing {
       const db = await opening;
       return request(db.transaction(STORE).objectStore(STORE).getAll() as IDBRequest<LogLine[]>);
     },
+    async clear() {
+      const db = await opening;
+      await request(db.transaction(STORE, "readwrite").objectStore(STORE).clear());
+    },
   };
 }
 
@@ -67,6 +75,8 @@ export interface Logger {
   /** Writes pending lines to the ring and the sink. */
   flush(): Promise<void>;
   exportJsonl(): Promise<string>;
+  /** Drops pending lines and empties the ring (the dev QA reset). */
+  clear(): Promise<void>;
 }
 
 export interface LoggerOptions {
@@ -99,6 +109,10 @@ export function createLogger({
     },
     async exportJsonl() {
       return (await ring.all()).map((line) => JSON.stringify(line)).join("\n") + "\n";
+    },
+    async clear() {
+      pending = [];
+      await ring.clear();
     },
   };
 }

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactElement } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactElement } from "react";
 import {
   applyStep,
   beginLevel,
@@ -37,6 +37,7 @@ import { route, type RouteAction, type Screen } from "./router";
 import { acceptsIntent, bootDecision, countdownAt } from "./boot";
 import { Board, useBoardScale, type BoardSource } from "./Board";
 import { DevMenu } from "../ui/dev/DevMenu";
+import { forgetSettings } from "../juice/core/settings";
 import { Hideout } from "../ui/hideout/Hideout";
 import { rollUnrolled } from "../account/stash";
 import { createAccountStore } from "../account/store";
@@ -50,6 +51,13 @@ interface Services {
   store: SaveStore;
   mirror: ReturnType<typeof createMirrorClient>;
   logger: Logger;
+  /** True from the dev QA reset until a new account starts, so a frame of the old game can't re-save it. */
+  halted(): boolean;
+}
+
+/** The dev QA reset (mason hv-7ic2.106): forgets the local saves, the log ring and the mirror. */
+async function forgetSaves(services: Omit<Services, "halted">): Promise<void> {
+  await Promise.all([services.store.clear(), services.logger.clear(), services.mirror.clear()]);
 }
 
 interface Playing {
@@ -88,6 +96,7 @@ function menuPhase(screen: Exclude<Screen, "level">, account: AccountState | nul
 }
 
 function persist(services: Services, account: AccountState, round: RoundState | null): void {
+  if (services.halted()) return;
   const doc = saveDocument(account, round, BUILD, new Date().toISOString());
   void services.store.write(doc);
   void services.mirror.post(doc);
@@ -129,6 +138,7 @@ function logEvents(logger: Logger, round: RoundState, events: readonly SimEvent[
 export function Game() {
   const [services, setServices] = useState<Services | null>(null);
   const [phase, setPhase] = useState<Phase>({ kind: "loading" });
+  const halt = useRef(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -141,6 +151,17 @@ export function Game() {
         ring: memory ? createMemoryRing() : createIndexedDbRing(),
         ...(import.meta.env.DEV ? { send: sendToSink } : {}),
       });
+      // ?reset=1 (or ?reset=settings) starts QA from nothing: no saves, no mirror, optionally default settings.
+      const reset = import.meta.env.DEV
+        ? new URLSearchParams(window.location.search).get("reset")
+        : null;
+      if (reset !== null) {
+        await forgetSaves({ store, mirror, logger });
+        if (reset === "settings") forgetSettings();
+        const url = new URL(window.location.href);
+        url.searchParams.delete("reset");
+        window.history.replaceState(null, "", url);
+      }
       const doc = await latestOf(store, mirror);
       let resumed: Resumed | null = null;
       if (doc) {
@@ -148,7 +169,7 @@ export function Game() {
         if (resumed.roundRejected) void mirror.reject(doc, { round: resumed.roundRejected });
       }
       if (cancelled) return;
-      setServices({ store, mirror, logger });
+      setServices({ store, mirror, logger, halted: () => halt.current });
       const decision = bootDecision(resumed);
       if (decision.kind === "title" || decision.kind === "pick" || !resumed?.round) {
         setPhase(
@@ -184,6 +205,17 @@ export function Game() {
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, [playing, services]);
+
+  // The dev QA reset on window.__mvm: forget everything and land on a fresh title, from any screen.
+  useEffect(() => {
+    if (!import.meta.env.DEV || !services || !window.__mvm) return;
+    window.__mvm.reset = async ({ settings = false } = {}) => {
+      halt.current = true;
+      await forgetSaves(services);
+      if (settings) forgetSettings();
+      setPhase(menuPhase("title", null));
+    };
+  }, [services]);
 
   // One store per account: screens and the dev menu change, save and re-render through it.
   const account = phase.kind === "menu" ? phase.account : (playing?.account ?? null);
@@ -245,6 +277,7 @@ export function Game() {
   const play = (account: AccountState | null) => {
     if (!services) return;
     const owner = account ?? newAccount("warrior");
+    halt.current = false;
     const round = beginLevel(owner, LEVEL_1);
     services.logger.log("levelStart", { levelId: LEVEL_1.id, wavePlan: round.waves?.plan });
     setPhase({
@@ -306,6 +339,7 @@ export function Game() {
               onBack={() => go("back")}
               onChoose={(focus) => {
                 const account = newAccount(focus);
+                halt.current = false;
                 if (services) persist(services, account, null);
                 setPhase(menuPhase("campaign", account));
               }}

@@ -22,6 +22,13 @@ export interface QaSurface {
   fireTier?: (tier: Tier) => void;
   /** Feeds synthetic sim events to the running board's director (dev pages). */
   fireEvents?: (events: SimEvent[]) => void;
+  /**
+   * Dev only: forgets every save (IndexedDB, the log ring and the dev
+   * server's mirror), optionally the juice settings too, and returns to a
+   * fresh title from any screen, mid-round included. `?reset=1` (or
+   * `?reset=settings`) does the same on load.
+   */
+  reset?: (options?: { settings?: boolean }) => Promise<void>;
 }
 
 declare global {

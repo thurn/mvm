@@ -322,6 +322,11 @@ A review/QA bead:
 - **Assertions.** Assert through the DOM and `window.__mvm`
   ([P22](decisions.md#p22-the-qa-surface)): state, cue log, tier log and
   audio log, with `window.__mvm.caps` empty at the end.
+- **Fresh start.** `await window.__mvm.reset()` forgets every save (IndexedDB,
+  the log ring and the dev server's `.saves/` mirror) and lands on a fresh
+  title from any screen, mid-round included; `reset({ settings: true })`
+  also restores default juice settings. Loading with `?reset=1` (or
+  `?reset=settings`) does the same before boot. Dev builds only.
 - **Scenes.** Prefer `?scene=<name>` for feel work. Use `debugSlowmo` to
   capture timing.
 - **Screenshots.** Captures go to the primary checkout's gitignored

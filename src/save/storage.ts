@@ -13,6 +13,8 @@ export interface SaveStore {
   history(): Promise<SaveDocument[]>;
   checkpoint(name: string, doc: SaveDocument): Promise<void>;
   readCheckpoint(name: string): Promise<SaveDocument | null>;
+  /** Forgets every document and checkpoint (the dev QA reset). */
+  clear(): Promise<void>;
 }
 
 export function createMemoryStore(): SaveStore {
@@ -29,6 +31,10 @@ export function createMemoryStore(): SaveStore {
       checkpoints.set(name, structuredClone(doc));
     },
     readCheckpoint: async (name) => structuredClone(checkpoints.get(name) ?? null),
+    async clear() {
+      documents.length = 0;
+      checkpoints.clear();
+    },
   };
 }
 
@@ -94,6 +100,13 @@ export function createIndexedDbStore(name = "mvm-saves"): SaveStore {
         db.transaction(CHECKPOINTS).objectStore(CHECKPOINTS).get(checkpoint),
       );
       return (found as SaveDocument | undefined) ?? null;
+    },
+    async clear() {
+      const db = await opening;
+      const tx = db.transaction([DOCUMENTS, CHECKPOINTS], "readwrite");
+      tx.objectStore(DOCUMENTS).clear();
+      tx.objectStore(CHECKPOINTS).clear();
+      await done(tx);
     },
   };
 }

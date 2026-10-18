@@ -83,6 +83,16 @@ export function createSettings(
 
 let shared: SettingsStore | null = null;
 
+/** Puts the shared settings back to their defaults and forgets the saved ones (the dev QA reset). */
+export function forgetSettings(): void {
+  sharedSettings().set(DEFAULT_SETTINGS);
+  try {
+    localStorage.removeItem(KEY);
+  } catch {
+    // Storage can be blocked; the in-memory settings are already the defaults.
+  }
+}
+
 /** The one settings store the board, the dev menu and the options share, so a knob reaches the running game. */
 export function sharedSettings(): SettingsStore {
   shared ??= createSettings();

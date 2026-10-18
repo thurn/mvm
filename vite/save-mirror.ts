@@ -19,8 +19,8 @@ function prune(dir: string, keep: number): void {
 
 /**
  * The save mirror (P18): POST /__mvm/save writes `latest.json` and a rolling
- * history; GET serves the latest back; POST /__mvm/save/rejected files a
- * document that failed to load.
+ * history; GET serves the latest back; DELETE forgets both (the QA reset);
+ * POST /__mvm/save/rejected files a document that failed to load.
  */
 export async function handleSaveRequest(
   dir: string,
@@ -35,6 +35,12 @@ export async function handleSaveRequest(
     return existsSync(latest)
       ? { status: 200, body: readFileSync(latest, "utf8") }
       : { status: 204, body: "" };
+  }
+  // The dev QA reset (window.__mvm.reset): forget the save, keep rejected documents as evidence.
+  if (method === "DELETE" && path === "/__mvm/save") {
+    rmSync(join(dir, "latest.json"), { force: true });
+    rmSync(join(dir, "history"), { recursive: true, force: true });
+    return { status: 204, body: "" };
   }
   if (method !== "POST") return { status: 405, body: "" };
   let parsed: unknown;

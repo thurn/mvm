@@ -36,6 +36,20 @@ describe("the save mirror endpoint", () => {
     ).toBe(204);
     expect(readdirSync(join(dir, "rejected"))).toHaveLength(1);
     expect((await handleSaveRequest(dir, "POST", "/__mvm/save", "{not json")).status).toBe(400);
-    expect((await handleSaveRequest(dir, "DELETE", "/__mvm/save", "")).status).toBe(405);
+    expect((await handleSaveRequest(dir, "PUT", "/__mvm/save", "")).status).toBe(405);
+  });
+
+  test("DELETE clears the latest save and its history, keeping rejected documents (QA reset)", async () => {
+    const dir = mkdtempSync(join(tmpdir(), "mvm-saves-"));
+    await handleSaveRequest(
+      dir,
+      "POST",
+      "/__mvm/save",
+      JSON.stringify({ format: 1, savedAt: "t" }),
+    );
+    await handleSaveRequest(dir, "POST", "/__mvm/save/rejected", JSON.stringify({ bad: true }));
+    expect((await handleSaveRequest(dir, "DELETE", "/__mvm/save", "")).status).toBe(204);
+    expect((await handleSaveRequest(dir, "GET", "/__mvm/save", "")).status).toBe(204);
+    expect(readdirSync(dir)).toEqual(["rejected"]);
   });
 });
