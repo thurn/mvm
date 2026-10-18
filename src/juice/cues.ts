@@ -1,9 +1,10 @@
 import { DAMAGE_TYPES, type DamageType } from "../combat/stats";
 import type { SimEvent, SimEventOf } from "../sim/events";
 import { JUICE_TUNING, type PresetName, type Tier } from "../tuning/juice";
-import { significance, type Band } from "./core/significance";
+import { significance } from "./core/significance";
 import type { JuiceSettings } from "./core/settings";
 import type { Cue, CueBatch } from "./director/cue";
+import { bandEffects, hitSoundId, hitstopMs } from "./hits/bands";
 
 type Row<T extends SimEvent["type"]> = (
   event: SimEventOf<T>,
@@ -17,8 +18,6 @@ const IMPACT: Readonly<Record<DamageType, PresetName>> = {
   lightning: "sparks",
   chaos: "bubbles",
 };
-
-const BAND_SCALE: Readonly<Record<Band, number>> = { small: 0.5, medium: 1, big: 2 };
 
 function mainType(breakdown: Record<DamageType, number>): DamageType {
   return DAMAGE_TYPES.reduce(
@@ -57,10 +56,29 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
       };
     }
     const band = significance(event.dealt, event.targetMaxLife, false, settings);
+    // A hit fully mitigated to nothing reads as IMMUNE (H §2.5).
+    if (event.dealt <= 0)
+      return {
+        tier: 1,
+        cues: [
+          {
+            kind: "number",
+            sourceId: event.sourceId,
+            targetId: event.targetId,
+            amount: 0,
+            type: "physical",
+            crit: false,
+            big: false,
+            lane: event.lane,
+            x: event.x,
+            words: "IMMUNE",
+          },
+        ],
+      };
     const tier: Tier = event.crit || band === "big" ? 2 : 1;
     const type = mainType(event.breakdown);
     const cues: Cue[] = [
-      { kind: "flash", targetId: event.targetId, crit: event.crit },
+      { kind: "flash", targetId: event.targetId, crit: event.crit, band },
       {
         kind: "number",
         sourceId: event.sourceId,
@@ -77,23 +95,47 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
         preset: IMPACT[type],
         lane: event.lane,
         x: event.x,
-        scale: BAND_SCALE[band],
+        scale: bandEffects(band).particleScale,
       },
       {
         kind: "sound",
-        id: band === "small" ? "hit_light" : band === "medium" ? "hit_medium" : "hit_heavy",
+        id: hitSoundId(band),
         bus: "sfx",
+        x: event.x,
+        gainDb: bandEffects(band).gainDb,
       },
     ];
-    if (band !== "small" || event.crit)
+    // Big hits add a low thump under the heavy variant (H §2.6).
+    if (bandEffects(band).thump)
+      cues.push({ kind: "sound", id: "hit_thump", bus: "sfx", x: event.x });
+    const ms = hitstopMs(band, event.crit);
+    if (ms > 0)
       cues.push({
         kind: "hitstop",
         scope: "actor",
         actorIds: [event.sourceId, event.targetId],
-        big: band === "big",
+        ms,
       });
     return { tier, cues };
   },
+  // DoT ticks every step; the hits system sums them into 0.5 s numbers (H §2.5).
+  dot: (event) => ({
+    tier: 0,
+    cues: [
+      {
+        kind: "number",
+        sourceId: event.sourceId,
+        targetId: event.targetId,
+        amount: event.amount,
+        type: "fire",
+        crit: false,
+        big: false,
+        lane: event.lane,
+        x: event.x,
+        dot: true,
+      },
+    ],
+  }),
   kill: (event) => ({
     tier:
       event.rarity === "rare" ? 3 : event.rarity === "unique" || event.rarity === "boss" ? 5 : 2,

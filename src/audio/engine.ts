@@ -151,7 +151,7 @@ export function createAudioEngine(options: EngineOptions) {
     },
 
     /** Plays a sound id at board x (tiles); null when a rule drops it. */
-    play(id: string, at: { x?: number } = {}): Voice | null {
+    play(id: string, at: { x?: number; gainDb?: number } = {}): Voice | null {
       const { category, bus } = soundClass(id);
       const t = now();
       // Retrigger guard: raise the playing voice instead of starting another.
@@ -193,7 +193,7 @@ export function createAudioEngine(options: EngineOptions) {
       source.playbackRate.value = 1 + (random() * 2 - 1) * varied;
       const gain = ctx.createGain();
       const volumeDb = category === "ui" ? 0 : (random() * 2 - 1) * AUDIO_TUNING.volumeVariationDb;
-      gain.gain.value = dbToGain(volumeDb);
+      gain.gain.value = dbToGain(volumeDb + (at.gainDb ?? 0));
       source.connect(gain);
       const extras = (buffers && buffers.length > 0 ? (layers.get(id) ?? []) : []).map((buffer) => {
         const layer = ctx.createBufferSource();

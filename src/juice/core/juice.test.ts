@@ -92,14 +92,14 @@ describe("hitstop (H §2.3)", () => {
     hitstop.global(5, 0, 2);
     expect(hitstop.frozen(59)).toBe(true);
     expect(hitstop.frozen(61)).toBe(false);
-    hitstop.actor("m1", 2, false, 5000, 2);
+    hitstop.actor("m1", 30, 5000, 2);
     expect(hitstop.actorFrozen("m1", 5014)).toBe(true);
     expect(hitstop.actorFrozen("m1", 5016)).toBe(false);
   });
 
-  test("actor hitstop holds only that actor's clock: T2 30 ms, T3 50 ms, +30 ms for big hits", () => {
+  test("actor hitstop holds only that actor's clock for its length", () => {
     const hitstop = createHitstop(() => settings());
-    hitstop.actor("a", 3, true, 0, 1);
+    hitstop.actor("a", 80, 0, 1);
     expect(hitstop.actorFrozen("a", 79)).toBe(true);
     expect(hitstop.actorFrozen("a", 81)).toBe(false);
     expect(hitstop.actorFrozen("b", 10)).toBe(false);
@@ -171,7 +171,7 @@ describe("juice = 0, the A/B (H §14)", () => {
     expect(shake.offset(0.1)).toEqual({ x: 0, y: 0 });
     const hitstop = createHitstop(zero);
     hitstop.global(5, 0, 1);
-    hitstop.actor("a", 3, true, 0, 1);
+    hitstop.actor("a", 80, 0, 1);
     expect(hitstop.frozen(1)).toBe(false);
     expect(hitstop.actorFrozen("a", 1)).toBe(false);
     const slowmo = createSlowmo(zero);

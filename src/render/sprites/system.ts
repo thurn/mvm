@@ -6,6 +6,9 @@ import type { Rarity, RoundState } from "../../sim/state";
 import { STEP_SECONDS } from "../../sim/time";
 import { SIM_TUNING } from "../../tuning/sim";
 import { SPRITE_TUNING as T } from "../../tuning/sprites";
+import { HIT_TUNING } from "../../tuning/juice";
+import { bandEffects } from "../../juice/hits/bands";
+import type { Band } from "../../juice/core/significance";
 import type { Frame } from "../layers";
 import { TILE } from "../scale";
 import { ActorClock, AttackAnimator, bobOffset, deathFrame, walkFrameMs } from "./animation";
@@ -26,6 +29,8 @@ interface View {
   frame: number;
   bornAt: number;
   hitAt: number;
+  /** The last hit's significance band, which sizes knockback (H §2.6). */
+  hitBand: Band;
   phaseMs: number;
 }
 
@@ -116,7 +121,7 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
   const corpses: Corpse[] = [];
   const shovelled = new Set<string>();
   let lastSimMs: number | null = null;
-  let flashes = new Map<string, number>();
+  let flashes = new Map<string, { at: number; band: Band }>();
 
   const view = (id: string, now: number, firstFrame: boolean): View => {
     let found = views.get(id);
@@ -128,6 +133,7 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
         frame: 0,
         bornAt: firstFrame ? -Infinity : now,
         hitAt: -Infinity,
+        hitBand: "small",
         phaseMs: phaseOf(id),
       };
       views.set(id, found);
@@ -268,9 +274,12 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
     const sprites = assets?.manifest.sprites ?? {};
     const actors = actorsOf(state, frame, sprites);
     const present = new Map(actors.map((a) => [a.id, a]));
-    for (const flash of flashes.keys()) {
-      const v = views.get(flash);
-      if (v) v.hitAt = flashes.get(flash)!;
+    for (const [id, hit] of flashes) {
+      const v = views.get(id);
+      if (v) {
+        v.hitAt = hit.at;
+        v.hitBand = hit.band;
+      }
     }
     flashes = new Map();
 
@@ -296,11 +305,14 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
       const flash = sinceHit < T.flashMs ? 1 - sinceHit / T.flashMs : 0;
       let cx = boardX(actor.x);
       let cy = laneY(actor.lane);
-      if (sinceHit < T.knockbackMs) {
-        if (actor.kind === "monster")
-          cx += Math.round(T.knockbackPx * (1 - sinceHit / T.knockbackMs));
-        else cx += Math.floor(sinceHit / 33) % 2 ? 1 : -1;
-      }
+      // Monsters are knocked back by band and recover with outQuad; heroes never move, they jitter (H §2.4).
+      if (actor.kind !== "hero" && sinceHit < HIT_TUNING.knockbackRecoverMs)
+        cx += Math.round(
+          bandEffects(v.hitBand).knockbackPx *
+            (1 - EASINGS.outQuad(sinceHit / HIT_TUNING.knockbackRecoverMs)),
+        );
+      else if (actor.kind === "hero" && sinceHit < T.jitterMs)
+        cx += Math.floor(sinceHit / 33) % 2 ? 1 : -1;
       if (actor.kind === "hero" && v.pose === "idle") cy -= bobOffset(now, v.phaseMs);
       const sinceBorn = now - v.bornAt;
       let squash: { x: number; y: number } | null = null;
@@ -308,6 +320,10 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
       else if (sinceBorn < T.dropInMs + T.squashMs) {
         const t = (sinceBorn - T.dropInMs) / T.squashMs;
         squash = { x: T.squash.x + (1 - T.squash.x) * t, y: T.squash.y + (1 - T.squash.y) * t };
+      } else if (sinceHit < HIT_TUNING.squash.ms) {
+        const t = sinceHit / HIT_TUNING.squash.ms;
+        const { x, y } = HIT_TUNING.squash;
+        squash = { x: x + (1 - x) * t, y: y + (1 - y) * t };
       }
       const scale = actor.rarity === "rare" ? T.rareScale : 1;
       const showBar = now - v.hitAt < T.healthBarMs && actor.life < actor.maxLife;
@@ -367,7 +383,7 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
   return {
     id: "sprites",
     consume(cue, batch) {
-      if (cue.kind === "flash") flashes.set(cue.targetId, batch.at);
+      if (cue.kind === "flash") flashes.set(cue.targetId, { at: batch.at, band: cue.band });
       if (batch.event === "shovelled" && cue.kind === "particles")
         shovelled.add(`${cue.lane}:${cue.x}`);
     },

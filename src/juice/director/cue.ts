@@ -1,12 +1,13 @@
 import type { DamageType } from "../../combat/stats";
 import type { Drop } from "../../loot/drops";
 import type { PresetName, Tier } from "../../tuning/juice";
+import type { Band } from "../core/significance";
 
 /** What presentation does about one sim event (P12). Cosmetic only; never fed back to the sim. */
 export type Cue =
   | { kind: "shake"; trauma: number }
   | { kind: "hitstop"; scope: "global" }
-  | { kind: "hitstop"; scope: "actor"; actorIds: string[]; big: boolean }
+  | { kind: "hitstop"; scope: "actor"; actorIds: string[]; ms: number }
   | { kind: "slowmo"; scale: number; ms: number }
   | { kind: "duck"; db: number; seconds: number }
   | {
@@ -17,7 +18,14 @@ export type Cue =
       scale?: number;
       loot?: boolean;
     }
-  | { kind: "sound"; id: string; bus: "sfx" | "ui" | "music" }
+  | {
+      kind: "sound";
+      id: string;
+      bus: "sfx" | "ui" | "music";
+      /** Board x in tiles, for pan. */
+      x?: number;
+      gainDb?: number;
+    }
   | {
       kind: "number";
       sourceId: string;
@@ -29,8 +37,10 @@ export type Cue =
       lane: number;
       x: number;
       words?: "EVADE" | "BLOCK" | "IMMUNE";
+      /** A summed DoT tick. */
+      dot?: boolean;
     }
-  | { kind: "flash"; targetId: string; crit: boolean }
+  | { kind: "flash"; targetId: string; crit: boolean; band: Band }
   | { kind: "lootTimeline"; dropId: string; drop: Drop; lane: number; x: number }
   | { kind: "hudBump"; target: "mana" | "life" | "wave" }
   | { kind: "banner"; text: string };

@@ -30,9 +30,6 @@ export const JUICE_TUNING = {
       particles: [48, 96],
     },
   },
-  /** Actor hitstop by tier, plus a bonus for big-significance hits (H §2.3). */
-  actorHitstopMs: { 0: 0, 1: 0, 2: 30, 3: 50, 4: 50, 5: 50 } as Record<Tier, number>,
-  bigHitstopBonusMs: 30,
   globalHitstopCooldownMs: 1000,
   slowmoCooldownMs: 4000,
   /** Full-screen effects by tier (H §1.3, §1.4 layer 11); alphas before "reduce flashing". */
@@ -129,3 +126,69 @@ export const JUICE_TUNING = {
 } as const;
 
 export type PresetName = keyof typeof JUICE_TUNING.presets;
+
+/** What each significance band does to a hit (H §2.4, §2.6). */
+export const BAND_TUNING = {
+  small: {
+    sound: "light",
+    gainDb: -6,
+    thump: false,
+    hitstopMs: 0,
+    knockbackPx: 1,
+    numberScale: 1,
+    particleScale: 0.5,
+    ring: false,
+  },
+  medium: {
+    sound: "medium",
+    gainDb: 0,
+    thump: false,
+    hitstopMs: 30,
+    knockbackPx: 2,
+    numberScale: 1,
+    particleScale: 1,
+    ring: false,
+  },
+  big: {
+    sound: "heavy",
+    gainDb: 0,
+    thump: true,
+    hitstopMs: 60,
+    knockbackPx: 4,
+    numberScale: 1.3,
+    particleScale: 2,
+    ring: true,
+  },
+} as const;
+
+/** Damage numbers (H §2.5). Times in ms, sizes in logical px. */
+export const NUMBER_TUNING = {
+  cap: 48,
+  popMs: 120,
+  popFrom: 0.5,
+  popPeak: 1.3,
+  riseMs: 600,
+  risePx: 14,
+  jitterPx: 4,
+  fadeMs: 200,
+  critScale: 1.5,
+  dotScale: 0.8,
+  /** FX main colours by damage type (G §1.4); words have their own. */
+  colors: {
+    physical: "#E8E2D0",
+    fire: "#FF6A1A",
+    cold: "#7FD4FF",
+    lightning: "#FFE14D",
+    chaos: "#B44DFF",
+  },
+  words: { IMMUNE: "#9A9A9A", EVADE: "#FFFFFF", BLOCK: "#B8C4D0" },
+  outline: "#1B1B1B",
+} as const;
+
+/** The hit squash and the crit flash (H §2.4). */
+export const HIT_TUNING = {
+  squash: { x: 1.06, y: 0.94, ms: 60 },
+  knockbackRecoverMs: 120,
+  ringMs: 220,
+  ringRadius: [4, 16] as const,
+};

@@ -93,4 +93,14 @@ export type SimEvent =
       seconds: number;
     }
   | { type: "ailmentExpired"; targetId: EntityId; ailment: string }
+  /** One step of damage over time (ignite); presentation sums them into 0.5 s numbers. */
+  | {
+      type: "dot";
+      sourceId: EntityId;
+      targetId: EntityId;
+      ailment: string;
+      amount: number;
+      lane: number;
+      x: number;
+    }
   | { type: "stun"; targetId: EntityId; kind: "light" | "heavy"; seconds: number };

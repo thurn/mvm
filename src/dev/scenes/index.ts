@@ -1,6 +1,7 @@
 import type { Intent } from "../../sim/intents";
 import type { RoundState } from "../../sim/state";
 import { emptyBoard } from "./empty-board";
+import { hitBands } from "./hit-bands";
 import { shamblersVsScripted } from "./shamblers-vs-scripted";
 import { spells } from "./spells";
 import { starterHeroes } from "./starter-heroes";
@@ -14,7 +15,13 @@ export interface Scene {
 }
 
 /** Every scene. Beads add theirs beside their features. */
-export const SCENES: readonly Scene[] = [emptyBoard, shamblersVsScripted, starterHeroes, spells];
+export const SCENES: readonly Scene[] = [
+  emptyBoard,
+  shamblersVsScripted,
+  starterHeroes,
+  spells,
+  hitBands,
+];
 
 export function findScene(name: string): Scene | undefined {
   return SCENES.find((scene) => scene.name === name);

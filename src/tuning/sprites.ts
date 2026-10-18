@@ -11,8 +11,6 @@ export const SPRITE_TUNING = {
   deathFadeMs: 400,
   bobPeriodMs: 600,
   flashMs: 80,
-  knockbackPx: 2,
-  knockbackMs: 100,
   jitterMs: 100,
   dropInPx: 24,
   dropInMs: 150,

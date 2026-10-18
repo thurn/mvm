@@ -21,6 +21,15 @@ export const ailmentSystem: System = {
         ctx.emit({ type: "ailmentExpired", targetId: target.entity.id, ailment });
       if (tick.dotDamage <= 0) continue;
       actor.life -= tick.dotDamage;
+      ctx.emit({
+        type: "dot",
+        sourceId: (tick.dotSourceId ?? target.entity.id) as EntityId,
+        targetId: target.entity.id,
+        ailment: "ignite",
+        amount: tick.dotDamage,
+        lane: target.entity.lane,
+        x: target.kind === "monster" ? target.entity.x : target.entity.column,
+      });
       if (actor.life <= 0)
         killTarget(ctx, (tick.dotSourceId ?? target.entity.id) as EntityId, target);
     }

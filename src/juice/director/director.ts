@@ -52,7 +52,7 @@ export function createDirector(options: DirectorOptions) {
       else if (cue.kind === "hitstop" && cue.scope === "global")
         hitstop.global(batch.tier, now, speed);
       else if (cue.kind === "hitstop")
-        for (const id of cue.actorIds) hitstop.actor(id, batch.tier, cue.big, now, speed);
+        for (const id of cue.actorIds) hitstop.actor(id, cue.ms, now, speed);
       else if (cue.kind === "slowmo" && !options.telegraph?.())
         slowmo.start(cue.scale, cue.ms, now, speed);
       for (const system of options.systems) system.consume(cue, batch, round);

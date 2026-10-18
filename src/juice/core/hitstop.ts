@@ -22,13 +22,10 @@ export function createHitstop(settings: () => JuiceSettings) {
       return true;
     },
     frozen: (now: number) => now < globalUntil,
-    /** Holds one actor's animation clock for its tier, plus the big-hit bonus. */
-    actor(id: string, tier: Tier, big: boolean, now: number, speed: number) {
-      const ms = scaled(
-        JUICE_TUNING.actorHitstopMs[tier] + (big ? JUICE_TUNING.bigHitstopBonusMs : 0),
-        speed,
-      );
-      if (ms > 0) actors.set(id, Math.max(actors.get(id) ?? -Infinity, now + ms));
+    /** Holds one actor's animation clock for `ms` (H §2.3, sized by the hit's band in §2.6). */
+    actor(id: string, ms: number, now: number, speed: number) {
+      const held = scaled(ms, speed);
+      if (held > 0) actors.set(id, Math.max(actors.get(id) ?? -Infinity, now + held));
     },
     actorFrozen: (id: string, now: number) => now < (actors.get(id) ?? -Infinity),
   };
