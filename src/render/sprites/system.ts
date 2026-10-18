@@ -115,7 +115,7 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
   let previous = new Map<string, Actor>();
   const corpses: Corpse[] = [];
   const shovelled = new Set<string>();
-  let lastNow: number | null = null;
+  let lastSimMs: number | null = null;
   let flashes = new Map<string, number>();
 
   const view = (id: string, now: number, firstFrame: boolean): View => {
@@ -260,9 +260,11 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
 
   function draw(ctx: CanvasRenderingContext2D, frame: Frame) {
     const { state, now } = frame;
-    const firstFrame = lastNow === null;
-    const dt = firstFrame ? 0 : Math.min(100, now - (lastNow ?? now));
-    lastNow = now;
+    const firstFrame = lastSimMs === null;
+    // Actor clocks run on sim time, so a paused or slowed round holds or slows its animation.
+    const simMs = (state.tick + frame.alpha) * STEP_SECONDS * 1000;
+    const dt = firstFrame ? 0 : Math.min(250, Math.max(0, simMs - (lastSimMs ?? simMs)));
+    lastSimMs = simMs;
     const sprites = assets?.manifest.sprites ?? {};
     const actors = actorsOf(state, frame, sprites);
     const present = new Map(actors.map((a) => [a.id, a]));
@@ -288,7 +290,7 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
     for (const actor of actors) {
       const v = view(actor.id, now, firstFrame);
       const frozen = director.frozen(now) || director.actorFrozen(actor.id, now);
-      v.clock.advance(dt * state.speed, frozen);
+      v.clock.advance(dt, frozen);
       if (!frozen) Object.assign(v, pose(state, frame, actor, v));
       const sinceHit = now - v.hitAt;
       const flash = sinceHit < T.flashMs ? 1 - sinceHit / T.flashMs : 0;
