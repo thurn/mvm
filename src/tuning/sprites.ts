@@ -12,10 +12,6 @@ export const SPRITE_TUNING = {
   bobPeriodMs: 600,
   flashMs: 80,
   jitterMs: 100,
-  dropInPx: 24,
-  dropInMs: 150,
-  squashMs: 120,
-  squash: { x: 1.15, y: 0.85 },
   healthBarMs: 2000,
   lowLifeFraction: 0.3,
   /** G §1.1: a 64 px frame's top-left sits 6 px above its cell. */

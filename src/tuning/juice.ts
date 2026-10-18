@@ -365,3 +365,29 @@ export const LOOT_JUICE = {
   } as Record<string, "currencyLow" | "currencyMid" | "currencyTop">,
 };
 export type LootClass = keyof typeof LOOT_JUICE.classes;
+
+/** Mana orbs and placement feel (H §3.6, §5.2). Times in ms, sizes in logical px. */
+export const MANA_JUICE = {
+  /** A sky orb's visible fall ends as the sim's 0.5 s rest begins (sim auto-collect 0.95 s). */
+  skyFallMs: 450,
+  skyFallSpeedPxPerS: 40,
+  swayPx: 6,
+  swayPeriodMs: 1600,
+  acolyteArcPx: 20,
+  acolyteArcMs: 450,
+  acolyteGlowMs: 800,
+  flightMs: 450,
+  orbSize: 10,
+  orbMaxSize: 16,
+  /** +1 px per this much mana over 25 (Spirit-boosted orbs). */
+  manaPerPx: 10,
+  pulseHz: 1.5,
+  sparklesPerSecond: 4,
+  rollMs: 200,
+  ladderWindowMs: 400,
+  ladderMaxSteps: 5,
+  color: "#6FD3FF",
+  core: "#E6FAFF",
+  placement: { dropPx: 24, dropMs: 150, squashMs: 120, squash: { x: 1.15, y: 0.85 } },
+  shovel: { sinkPx: 8, ms: 200 },
+};

@@ -8,6 +8,7 @@ import { SIM_TUNING } from "../../tuning/sim";
 import { SPRITE_TUNING as T } from "../../tuning/sprites";
 import { HIT_TUNING } from "../../tuning/juice";
 import { bandEffects } from "../../juice/hits/bands";
+import { placementPose, shovelPose } from "../../juice/mana/timeline";
 import type { Band } from "../../juice/core/significance";
 import type { Frame } from "../layers";
 import { TILE } from "../scale";
@@ -316,11 +317,10 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
       if (actor.kind === "hero" && v.pose === "idle") cy -= bobOffset(now, v.phaseMs);
       const sinceBorn = now - v.bornAt;
       let squash: { x: number; y: number } | null = null;
-      if (sinceBorn < T.dropInMs) cy -= T.dropInPx * (1 - EASINGS.inQuad(sinceBorn / T.dropInMs));
-      else if (sinceBorn < T.dropInMs + T.squashMs) {
-        const t = (sinceBorn - T.dropInMs) / T.squashMs;
-        squash = { x: T.squash.x + (1 - T.squash.x) * t, y: T.squash.y + (1 - T.squash.y) * t };
-      } else if (sinceHit < HIT_TUNING.squash.ms) {
+      const placed = placementPose(sinceBorn);
+      cy += placed.dy;
+      if (placed.sx !== 1 || placed.sy !== 1) squash = { x: placed.sx, y: placed.sy };
+      else if (sinceHit < HIT_TUNING.squash.ms) {
         const t = sinceHit / HIT_TUNING.squash.ms;
         const { x, y } = HIT_TUNING.squash;
         squash = { x: x + (1 - x) * t, y: y + (1 - y) * t };
@@ -353,13 +353,13 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
       const cx = boardX(corpse.actor.x);
       const cy = laneY(corpse.actor.lane);
       if (corpse.sink) {
-        const t = ms / 200;
-        if (t >= 1) corpses.splice(i, 1);
+        const sink = shovelPose(ms);
+        if (sink.done) corpses.splice(i, 1);
         else
           draws.push({
             lane: corpse.actor.lane,
             x: corpse.actor.x,
-            run: () => drawBody(ctx, corpse.actor, "idle", 0, cx, cy + 8 * t, 1 - t, 0),
+            run: () => drawBody(ctx, corpse.actor, "idle", 0, cx, cy + sink.dy, sink.alpha, 0),
           });
         continue;
       }

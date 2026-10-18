@@ -3,6 +3,7 @@ import type { RoundState } from "../../sim/state";
 import { emptyBoard } from "./empty-board";
 import { hitBands } from "./hit-bands";
 import { kills } from "./kills";
+import { manaRain } from "./mana-rain";
 import { shamblersVsScripted } from "./shamblers-vs-scripted";
 import { spells } from "./spells";
 import { starterHeroes } from "./starter-heroes";
@@ -23,6 +24,7 @@ export const SCENES: readonly Scene[] = [
   spells,
   hitBands,
   kills,
+  manaRain,
 ];
 
 export function findScene(name: string): Scene | undefined {

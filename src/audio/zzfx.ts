@@ -15,6 +15,10 @@ export const SFX = {
   card_ready: [0.4, 0, 587, 0, 0.02, 0.15, 0, 1, 0, 0, 588, 0.04, 0, 0, 0, 0, 0, 1, 0, 0],
   // The unique drum-roll riser.
   riser: [0.6, 0, 200, 0.6, 0.1, 0.1, 2, 1, 1.5, 0, 0, 0, 0, 0.3, 0, 0, 0, 1, 0, 0.2],
+  /** A quick downward whoosh when mana is spent on a placement (H §5.2). */
+  mana_spend: [0.3, 0, 900, 0.01, 0.04, 0.1, 0, 1, -12, 0, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0],
+  /** The acolyte's soft rising charge before its orb (H §3.6). */
+  mana_charge: [0.25, 0, 300, 0.4, 0.2, 0.2, 0, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0.6, 0, 0],
   /** The short generic "pop" under every kill, on the kill ladder (H §7.2). */
   kill_pop: [0.4, 0, 520, 0, 0.01, 0.06, 1, 1.5, -8, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
   /** A soft thud: the placeholder for any combat sound without a sample. */

@@ -1,4 +1,5 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { audioEngine } from "../../audio";
 import { heroGems, spellGems } from "../../data";
 import type { RosterSlot } from "../../sim/economy/roster";
 import type { Intent } from "../../sim/intents";
@@ -14,6 +15,8 @@ const BOARD_HEIGHT = 5 * TILE;
 export const HUD_TOP = 56;
 export const HUD_BOTTOM = 24;
 const DENY_MS = 400;
+const DENY_SHAKE_MS = 200;
+const SHINE_MS = 150;
 const BUMP_MS = 200;
 
 /** Display names: PoE2 names from the data, plus MvM custom heroes. */
@@ -93,6 +96,19 @@ function RosterCard({
           ? "unaffordable"
           : "ready";
   const name = NAMES.get(slot.card.hero.skillId) ?? slot.card.hero.skillId;
+  // Card ready (H §5.2): a 150 ms diagonal shine and a soft tick when the recharge completes.
+  const wasReady = useRef(ready);
+  const [readyAt, setReadyAt] = useState(-Infinity);
+  useEffect(() => {
+    if (ready && !wasReady.current) {
+      setReadyAt(performance.now());
+      audioEngine()?.play("card_ready");
+    }
+    wasReady.current = ready;
+  }, [ready]);
+  const shine = Math.max(0, Math.min(1, (now - readyAt) / SHINE_MS));
+  // Unaffordable (H §5.2): ±3 px, three times over 200 ms.
+  const shake = denied ? 3 * Math.sin((2 * Math.PI * 3 * (now - deniedAt)) / DENY_SHAKE_MS) : 0;
   return (
     <button
       type="button"
@@ -114,7 +130,11 @@ function RosterCard({
         lineHeight: 1.1,
         overflow: "hidden",
         cursor: "pointer",
-        transform: picked ? "translateY(-4px)" : denied ? "translateX(3px)" : "none",
+        transform: picked
+          ? "translateY(-4px)"
+          : now - deniedAt < DENY_SHAKE_MS
+            ? `translateX(${Math.round(shake)}px)`
+            : "none",
         opacity: ready && affordable ? 1 : 0.6,
       }}
     >
@@ -134,6 +154,17 @@ function RosterCard({
       </span>
       {slot.kind === "spell" && (
         <span style={{ position: "absolute", top: 2, left: 3, color: COLORS.mana }}>✦</span>
+      )}
+      {shine > 0 && shine < 1 && (
+        <span
+          aria-hidden
+          data-testid="card-shine"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `linear-gradient(120deg, transparent ${shine * 100 - 30}%, rgba(255,255,255,0.7) ${shine * 100}%, transparent ${shine * 100 + 30}%)`,
+          }}
+        />
       )}
       {!ready && (
         <span

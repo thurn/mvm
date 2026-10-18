@@ -196,7 +196,7 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
     tier: 2,
     cues: [
       { kind: "particles", preset: "dust", lane: event.lane, x: event.column },
-      { kind: "sound", id: "place_thunk", bus: "sfx" },
+      { kind: "sound", id: "place_thunk", bus: "sfx", x: event.column },
     ],
   }),
   placeRefused: () => ({ tier: 0, cues: [{ kind: "sound", id: "ui_deny", bus: "ui" }] }),
