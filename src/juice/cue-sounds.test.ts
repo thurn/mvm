@@ -18,10 +18,14 @@ function soundIds(): Set<string> {
     for (const cue of cues) if (cue.kind === "sound" && cue.id) ids.add(cue.id);
   };
   for (const tier of [1, 2, 3, 4, 5] as Tier[]) add(tierCues(tier));
-  for (const focus of ["warrior", "ranger", "sorceress"]) {
-    const account = newAccount(focus);
+  // The opener rarely casts; the spellcaster plays each focus's spell in a real round (hv-7ic2.110).
+  for (const [focus, name] of ["warrior", "ranger", "sorceress"].flatMap((f) => [
+    [f, "pvzOpener"],
+    [f, "spellcaster"],
+  ])) {
+    const account = newAccount(focus!);
     const round = beginLevel(account, LEVEL_1, 3);
-    const policy = POLICIES.pvzOpener!;
+    const policy = POLICIES[name!]!;
     while (round.result === null && round.tick < 600 * STEPS_PER_SECOND) {
       const events = step(round, policy(round));
       applyStep(account, round, events);

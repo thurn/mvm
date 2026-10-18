@@ -50,8 +50,11 @@ function place(
   return [];
 }
 
-/** Casts the spell where it covers the most monsters on the lawn: a column, or a 3×3 (grenade one tile right of its rest). */
-function castSpell(state: RoundState, slot: RosterSlot | undefined): Intent[] {
+/**
+ * Casts the spell where it covers the most monsters on the lawn: a column, or
+ * a 3×3 (grenade one tile right of its rest), once it would cover `minScore`.
+ */
+function castSpell(state: RoundState, slot: RosterSlot | undefined, minScore = 3): Intent[] {
   if (!ready(state, slot)) return [];
   const shapeIsColumn = slot!.card.hero.skillId.endsWith("Earthquake");
   const rollsLeft = slot!.card.hero.skillId.endsWith("ExplosiveGrenade");
@@ -67,7 +70,7 @@ function castSpell(state: RoundState, slot: RosterSlot | undefined): Intent[] {
       if (score > best.score) best = { score, lane, column };
     }
   }
-  return best.score >= 3
+  return best.score >= minScore
     ? [{ type: "cast", spellId: slot!.cardId, lane: best.lane, x: best.column }]
     : [];
 }
@@ -142,4 +145,32 @@ const wallFirst: Policy = (state) => {
   ];
 };
 
-export const POLICIES: Readonly<Record<string, Policy>> = { pvzOpener, rangedHeavy, wallFirst };
+/** Seconds before the spell is ready when the spellcaster starts banking mana for it. */
+const BANK_SECONDS = 8;
+
+/**
+ * The PvZ opener, but it banks mana for the spell once its acolytes are down
+ * and casts at the first monster in reach (mason hv-7ic2.110): the opener
+ * alone spends mana as it arrives and almost never casts in Level 1, so this
+ * is the policy that exercises spells in autoplay QA and tests.
+ */
+const spellcaster: Policy = (state) => {
+  const spellSlot = slotFor(state, "spell");
+  const cast = castSpell(state, spellSlot, 1);
+  if (cast.length > 0) return cast;
+  const acolyte = slotFor(state, "acolyte");
+  if (count(state, acolyte) < 3) return acolyteStep(state, acolyte, 3);
+  const banking =
+    spellSlot !== undefined &&
+    spellSlot.rechargeLeft <= BANK_SECONDS &&
+    state.mana < spellSlot.cost &&
+    state.monsters.length > 0;
+  return banking ? [] : pvzOpener(state).filter((intent) => intent.type !== "cast");
+};
+
+export const POLICIES: Readonly<Record<string, Policy>> = {
+  pvzOpener,
+  rangedHeavy,
+  wallFirst,
+  spellcaster,
+};

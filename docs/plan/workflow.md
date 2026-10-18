@@ -329,6 +329,9 @@ A review/QA bead:
   `?reset=settings`) does the same before boot. Dev builds only.
 - **Scenes.** Prefer `?scene=<name>` for feel work. Use `debugSlowmo` to
   capture timing.
+- **Autoplay.** `?autoplay=pvzOpener` plays a level hands-free;
+  `?autoplay=spellcaster` also banks mana and casts the focus's spell, for QA
+  that needs spells in a real round.
 - **Measuring juice.** Screenshots miss effects shorter than their own
   latency, so assert the A/B with numbers: `window.__mvm.fx.peaks()` returns
   what started since the last call (particles emitted per preset, peak live
