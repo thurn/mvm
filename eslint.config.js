@@ -3,10 +3,23 @@ import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-/** Directories that hold the pure, deterministic sim and what it calls (P11). */
-const SIM_DIRS = ["sim", "combat", "heroes", "spells", "monsters", "loot", "account"];
+/** Directories that hold the pure, deterministic sim and everything it imports (P11). */
+const SIM_DIRS = [
+  "sim",
+  "combat",
+  "heroes",
+  "spells",
+  "monsters",
+  "loot",
+  "account",
+  "tuning",
+  "data",
+  "types",
+];
 
 const IMPURE_GLOBALS = [
+  "globalThis",
+  "self",
   "window",
   "document",
   "navigator",
@@ -17,6 +30,8 @@ const IMPURE_GLOBALS = [
   "requestAnimationFrame",
   "setTimeout",
   "setInterval",
+  "queueMicrotask",
+  "requestIdleCallback",
   "fetch",
   "Date",
   "performance",

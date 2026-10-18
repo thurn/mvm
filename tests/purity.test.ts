@@ -20,17 +20,33 @@ describe("sim purity lint rule", () => {
       'import { useState } from "react";\nexport const x = useState;\n',
       "no-restricted-imports",
     ],
+    ["globalThis", "export const x = globalThis.Math.random();\n", "no-restricted-globals"],
+    ["self", "export const x = self.location;\n", "no-restricted-globals"],
+    ["queueMicrotask", "queueMicrotask(() => {});\n", "no-restricted-globals"],
+    [
+      "destructured Math.random",
+      "const { random } = Math;\nexport const x = random();\n",
+      "no-restricted-properties",
+    ],
   ])("rejects %s in src/sim/", async (_name, code, rule) => {
     expect(await ruleIds("src/sim/fixture.ts", code)).toContain(rule);
   });
 
-  test.each(["combat", "heroes", "spells", "monsters", "loot", "account"])(
-    "covers src/%s/",
-    async (dir) => {
-      const ids = await ruleIds(`src/${dir}/fixture.ts`, "export const x = Math.random();\n");
-      expect(ids).toContain("no-restricted-properties");
-    },
-  );
+  // The sim and everything it imports (P11): tuning tables, data accessors and ID types too.
+  test.each([
+    "combat",
+    "heroes",
+    "spells",
+    "monsters",
+    "loot",
+    "account",
+    "tuning",
+    "data",
+    "types",
+  ])("covers src/%s/", async (dir) => {
+    const ids = await ruleIds(`src/${dir}/fixture.ts`, "export const x = Math.random();\n");
+    expect(ids).toContain("no-restricted-properties");
+  });
 
   test("allows Math.random outside the sim", async () => {
     expect(await ruleIds("src/render/fixture.ts", "export const x = Math.random();\n")).toEqual([]);
