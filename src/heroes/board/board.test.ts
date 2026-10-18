@@ -135,8 +135,8 @@ describe("the Ezomyte Acolyte (Appendix B H01)", () => {
     const orbs: { tick: number; amount: number }[] = [];
     for (let i = 0; i < 100 * STEPS_PER_SECOND; i++) {
       for (const e of step(state, [])) {
-        if (e.type === "manaSpawn") {
-          expect(e).toMatchObject({ source: "acolyte", lane: 2, x: 1 });
+        if (e.type === "manaSpawn" && e.source === "acolyte") {
+          expect(e).toMatchObject({ lane: 2, x: 1 });
           orbs.push({ tick: state.tick, amount: e.amount });
         }
       }

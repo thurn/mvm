@@ -1,6 +1,8 @@
 import type { Actor } from "../combat/actor";
 import type { SkillHit } from "../combat/hit";
 import type { WaveRuntime } from "../monsters/waves";
+import type { ManaOrb } from "./economy/orbs";
+import type { RosterSlot } from "./economy/roster";
 import type { Id } from "../types/ids";
 import { id } from "../types/ids";
 import { createStreams, drawUint32, type RngStreams } from "./rng";
@@ -135,6 +137,13 @@ export interface RoundState {
   /** Named countdowns in seconds, owned by the systems that set them. */
   timers: Record<string, number>;
   mana: number;
+  /** Mana orbs waiting to auto-collect. */
+  orbs: ManaOrb[];
+  /** The sky-mana clock: when the next orb falls, and how many have fallen. */
+  sky: { nextAtSeconds: number | null; count: number };
+  /** The roster, locked at level start (GDD §6.3). */
+  roster: RosterSlot[];
+  speed: 1 | 2;
   life: number;
   waveCursor: number;
   rng: RngStreams;
@@ -161,6 +170,10 @@ export function createRound({ seed, lanes, mana }: RoundOptions): RoundState {
     scripted: [],
     timers: {},
     mana,
+    orbs: [],
+    sky: { nextAtSeconds: null, count: 0 },
+    roster: [],
+    speed: 1,
     life: SIM_TUNING.startingLife,
     waveCursor: 0,
     rng: createStreams(seed),

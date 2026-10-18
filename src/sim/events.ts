@@ -40,6 +40,13 @@ export type SimEvent =
     }
   | { type: "manaCollect"; orbId: string; amount: number }
   | { type: "placed"; heroId: HeroInstanceId; lane: number; column: number }
+  | {
+      type: "placeRefused";
+      cardId: string;
+      lane: number;
+      column: number;
+      reason: "unknown-card" | "out-of-bounds" | "occupied" | "recharging" | "cost";
+    }
   | { type: "shovelled"; heroId: HeroInstanceId; lane: number; column: number }
   | {
       type: "leak";

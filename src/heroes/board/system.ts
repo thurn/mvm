@@ -10,6 +10,7 @@ import {
 import type { StepContext, System } from "../../sim/system";
 import { laneFirst, monstersWithin } from "../../sim/targeting";
 import { STEP_SECONDS } from "../../sim/time";
+import { spawnOrb } from "../../sim/economy/orbs";
 import { HERO_BOARD_TUNING } from "../../tuning/heroes";
 import { SIM_TUNING } from "../../tuning/sim";
 import { chainFrom, fire, fireVolley, ON_HIT } from "./projectiles";
@@ -190,13 +191,11 @@ function acolyte(ctx: StepContext, hero: HeroState, kit: HeroKit) {
   kit.counters.orbTimer = (kit.counters.orbTimer ?? 0) - STEP_SECONDS;
   if (kit.counters.orbTimer > 1e-9) return;
   kit.counters.orbTimer += kit.actionSeconds;
-  ctx.emit({
-    type: "manaSpawn",
-    orbId: newInstanceId<"ManaOrb">(ctx.state),
+  spawnOrb(ctx, {
     amount: kit.numbers.orbValue ?? 0,
+    source: "acolyte",
     lane: hero.lane,
     x: hero.column,
-    source: "acolyte",
   });
 }
 

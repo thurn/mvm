@@ -38,6 +38,7 @@ export function Board({ scene }: { scene: Scene }) {
         previousX.clear();
         for (const monster of state.monsters) previousX.set(monster.id, monster.x);
         recordEvents(qa, step(state, drain(intents)));
+        if (driver.speed() !== state.speed) driver.setSpeed(state.speed);
       },
     });
     const stack = createLayerStack();
