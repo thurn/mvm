@@ -12,6 +12,11 @@ import { createDriver } from "./driver";
 export function Board({ scene }: { scene: Scene }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [scale, setScale] = useState(() => chooseScale(window.innerWidth, window.innerHeight));
+  // The render loop reads the scale from a ref, so a resize never restarts the round.
+  const scaleRef = useRef(scale);
+  useEffect(() => {
+    scaleRef.current = scale;
+  }, [scale]);
 
   useEffect(() => {
     const onResize = () => setScale(chooseScale(window.innerWidth, window.innerHeight));
@@ -43,14 +48,14 @@ export function Board({ scene }: { scene: Scene }) {
       driver.advance(now - last);
       last = now;
       ctx.save();
-      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+      ctx.setTransform(scaleRef.current, 0, 0, scaleRef.current, 0, 0);
       ctx.imageSmoothingEnabled = false;
       stack.draw(ctx, { state, previousX, alpha: driver.alpha(), shake: { x: 0, y: 0 }, now });
       ctx.restore();
       frame = requestAnimationFrame(tick);
     });
     return () => cancelAnimationFrame(frame);
-  }, [scene, scale]);
+  }, [scene]);
 
   return (
     <canvas
