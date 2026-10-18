@@ -42,8 +42,16 @@ export function createMusicPlayer(
 
   function fadeOut(playing: Playing, seconds: number) {
     const t = ctx.currentTime;
-    playing.gain.gain.cancelScheduledValues(t);
-    playing.gain.gain.setValueCurveAtTime(crossfadeCurves().from, t, seconds);
+    const gain = playing.gain.gain;
+    // Hold a fade-in where it is and fade out from there, so a quick switch never jumps up.
+    if (typeof gain.cancelAndHoldAtTime === "function") gain.cancelAndHoldAtTime(t);
+    else gain.cancelScheduledValues(t);
+    const level = gain.value;
+    gain.setValueCurveAtTime(
+      crossfadeCurves().from.map((v) => v * level),
+      t,
+      seconds,
+    );
     playing.source.stop(t + seconds);
   }
 

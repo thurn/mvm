@@ -1,9 +1,13 @@
 import { audioEngine, musicPlayer } from "..";
 import type { PresentationFactory } from "../../juice/director/systems";
+import type { SettingsStore } from "../../juice/core/settings";
 import type { Bus } from "../../tuning/audio";
 import { IntensityState } from "./intensity";
 
 const BUSES: Bus[] = ["music", "sfx", "loot", "ui"];
+
+/** The settings store whose volumes the engine follows; subscribed once, not per board. */
+let followed: SettingsStore | null = null;
 
 /**
  * Music for a round (H §10.4): Grassland's base track, crossfading to its
@@ -22,7 +26,10 @@ export const musicSystem: PresentationFactory = ({ stack, settings, now }) => {
     for (const bus of BUSES) engine.setVolume(bus, volume[bus]);
   };
   applyVolumes();
-  settings.subscribe(applyVolumes);
+  if (followed !== settings) {
+    followed = settings;
+    settings.subscribe(applyVolumes);
+  }
 
   const intensity = new IntensityState();
   let ended = false;
