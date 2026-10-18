@@ -125,7 +125,7 @@ describe("Level 1's wave plan (Appendix D §5)", () => {
   test("rarity rolls follow the level 1–3 mix (12% magic, 2% rare)", () => {
     const rng = seededRng(5);
     const counts = { normal: 0, magic: 0, rare: 0 };
-    for (let i = 0; i < 20_000; i++) counts[rollRarity(LEVEL_1, rng)]++;
+    for (let i = 0; i < 20_000; i++) counts[rollRarity(LEVEL_1.index, rng)]++;
     expect(counts.magic / 20_000).toBeGreaterThan(0.11);
     expect(counts.magic / 20_000).toBeLessThan(0.13);
     expect(counts.rare / 20_000).toBeGreaterThan(0.015);

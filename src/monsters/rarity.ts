@@ -1,14 +1,13 @@
 import { WAVE_TUNING } from "../tuning/waves";
 import { MONSTER_AFFIXES } from "./affixes";
-import type { LevelDefinition } from "./levels/types";
 
 export type SpawnRarity = "normal" | "magic" | "rare";
 type Rng = () => number;
 
-/** Rolls one spawn's rarity from the level's magic and rare chances (Appendix D §3). */
-export function rollRarity(level: LevelDefinition, rng: Rng): SpawnRarity {
+/** Rolls one spawn's rarity from its campaign level's magic and rare chances (Appendix D §3). */
+export function rollRarity(levelIndex: number, rng: Rng): SpawnRarity {
   const row =
-    WAVE_TUNING.rarityByLevel.find((r) => level.index <= r.maxLevel) ??
+    WAVE_TUNING.rarityByLevel.find((r) => levelIndex <= r.maxLevel) ??
     WAVE_TUNING.rarityByLevel.at(-1)!;
   const roll = rng();
   if (roll < row.rare) return "rare";

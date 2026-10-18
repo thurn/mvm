@@ -237,8 +237,7 @@ export const waveSystem: System = {
     if (due.length > 0) {
       runtime.pending = runtime.pending.filter((p) => !due.includes(p));
       for (const { wave, monster } of due) {
-        const level = { index: plan.levelIndex } as LevelDefinition;
-        const rarity = rollRarity(level, rng);
+        const rarity = rollRarity(plan.levelIndex, rng);
         const spawned = spawnMonster(
           state,
           buildMonster({
