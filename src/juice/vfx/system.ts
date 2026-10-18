@@ -5,7 +5,7 @@ import { TILE } from "../../render/scale";
 import { VFX_TUNING as V } from "../../tuning/juice";
 import { createParticlePool } from "../core/particles";
 import type { PresentationFactory } from "../director/systems";
-import { vfxProfile, type VfxProfile } from "./profile";
+import { elementPreset, vfxProfile, type VfxProfile } from "./profile";
 import { lightningPolyline, ringAt, volleyDelayMs } from "./shapes";
 
 const boardX = (x: number) => (x - 0.5) * TILE;
@@ -32,6 +32,7 @@ interface Trail {
   bornAt: number;
   index: number;
   sourceId: string;
+  group: string;
 }
 
 /**
@@ -72,12 +73,12 @@ export const vfxSystem: PresentationFactory = ({ stack, settings, now }) => {
     if (!trail) {
       const index = groups.get(p.group) ?? 0;
       groups.set(p.group, index + 1);
-      trail = { points: [], bornAt: t, index, sourceId: p.sourceId };
+      trail = { points: [], bornAt: t, index, sourceId: p.sourceId, group: p.group };
       trails.set(p.id, trail);
       const profile = profileOf(state, p.sourceId);
       if (index === 0 && profile) {
         // Muzzle puff on release, in the element colour (H §5.2).
-        pool.emit("sparks", x, y, { scale: V.muzzleParticles / 6 });
+        pool.emit(elementPreset(profile.main), x, y, { scale: V.muzzleParticles / 6 });
         const skill = heroOf(state, p.sourceId)?.skillId;
         const launch = skill ? LAUNCH[skill] : undefined;
         if (launch) audioEngine()?.play(launch, { x: p.x });
@@ -138,6 +139,9 @@ export const vfxSystem: PresentationFactory = ({ stack, settings, now }) => {
       for (const [id, trail] of trails) {
         if (!live.has(id)) {
           trails.delete(id);
+          // Forget a volley once its last projectile is gone, so the map stays small.
+          if (![...trails.values()].some((other) => other.group === trail.group))
+            groups.delete(trail.group);
           continue;
         }
         drawProjectile(ctx, frame.state, trail, t);

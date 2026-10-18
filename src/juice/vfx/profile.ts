@@ -1,7 +1,7 @@
 import { damageMap, totalDamage } from "../../combat/damage";
 import { convert, critChance, gainAsExtra, type SkillHit } from "../../combat/hit";
 import { DAMAGE_TYPES, stat, type DamageType, type StatSheet } from "../../combat/stats";
-import { VFX_TUNING as V } from "../../tuning/juice";
+import { VFX_TUNING as V, type PresetName } from "../../tuning/juice";
 
 /** How a hero's effects look, from its final stat block (H §5.3). */
 export interface VfxProfile {
@@ -15,6 +15,19 @@ export interface VfxProfile {
   outline: string | null;
   ringScale: number;
   critSpark: boolean;
+}
+
+/** The particle preset for an element's puffs and impacts (H §2.7, §5.2). */
+export function elementPreset(main: DamageType): PresetName {
+  return (
+    {
+      physical: "dust",
+      fire: "embers",
+      cold: "frost",
+      lightning: "sparks",
+      chaos: "bubbles",
+    } as const
+  )[main];
 }
 
 export function vfxProfile(hit: SkillHit, stats: StatSheet): VfxProfile {

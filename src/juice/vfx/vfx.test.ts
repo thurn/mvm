@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import type { SkillHit } from "../../combat/hit";
 import { VFX_TUNING } from "../../tuning/juice";
-import { vfxProfile } from "./profile";
+import { elementPreset, vfxProfile } from "./profile";
 import { lightningPolyline, ringAt, volleyDelayMs } from "./shapes";
 
 const arrow = (over: Partial<SkillHit> = {}): SkillHit => ({
@@ -46,6 +46,14 @@ describe("vfxProfile (H §5.3)", () => {
   test("ring scale tracks the area multiplier", () => {
     expect(vfxProfile(arrow(), {}).ringScale).toBe(1);
     expect(vfxProfile(arrow(), { "area_of_effect_+%": 40 }).ringScale).toBeCloseTo(1.4);
+  });
+
+  test("the muzzle puff and impacts use the main element's particles", () => {
+    expect(elementPreset(vfxProfile(arrow(), {}).main)).toBe("sparks");
+    expect(
+      elementPreset(vfxProfile(arrow({ conversion: { lightning: { fire: 60 } } }), {}).main),
+    ).toBe("embers");
+    expect(elementPreset("cold")).toBe("frost");
   });
 
   test("trail length grows with projectile speed; crit sparks above 20% crit", () => {
