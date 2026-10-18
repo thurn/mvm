@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import { applyStep, beginLevel, newAccount } from "../account/lifecycle";
 import { SOUNDS } from "../assets/sounds";
 import { SFX } from "../audio/zzfx";
+import { findScene } from "../dev/scenes";
 import { LEVEL_1 } from "../monsters/levels/level-1";
 import { step } from "../sim/kernel";
 import { POLICIES } from "../sim/policies/policies";
@@ -27,12 +28,22 @@ function soundIds(): Set<string> {
       for (const event of events) add(cuesFor(event, DEFAULT_SETTINGS).cues);
     }
   }
+  // The opener rarely banks a spell's mana, so the spells scene lands every starter spell's parts.
+  const scene = findScene("spells")!;
+  const state = scene.create();
+  for (let i = 0; i < 20 * STEPS_PER_SECOND; i++)
+    for (const event of step(state, scene.intents?.(state) ?? []))
+      add(cuesFor(event, DEFAULT_SETTINGS).cues);
   return ids;
 }
 
 describe("cue rows and the sound map meet (1.38 seams)", () => {
   test("every sound a Level 1 cue names has samples or a ZzFX sketch", () => {
-    const missing = [...soundIds()].filter((id) => !(id in SOUNDS) && !(id in SFX));
+    const ids = soundIds();
+    // The spell rows are in the set, so the test covers them.
+    for (const id of ["cast", "spell_comet", "spell_explosion", "spell_aftershock"])
+      expect(ids.has(id)).toBe(true);
+    const missing = [...ids].filter((id) => !(id in SOUNDS) && !(id in SFX));
     expect(missing).toEqual([]);
   });
 });
