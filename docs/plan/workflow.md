@@ -242,6 +242,18 @@ revalidate the combined behavior, and resubmit.
 5. **`scripts/ci`** in full only for changes to tooling, configuration or
    cross-cutting architecture. Tollgate runs it on every candidate anyway.
 
+### Editing
+
+Prettier reflows code and JSON, so text that was on one line may not be
+any more. A scripted edit that misses its target fails silently.
+
+- **Format first.** Run `npm run format` before scripted text edits, and after
+  them.
+- **Edits must match.** A scripted replacement asserts that its target was
+  found, or uses the editor's exact-match edit, which fails on no match.
+- **Edit JSON as JSON.** Change `tsconfig*.json` and `package.json` by
+  parsing and rewriting them, never with text replacement.
+
 ### The gate and ci-fix
 
 - **The gate.** Tollgate's one `ci` step runs `scripts/ci` on every
