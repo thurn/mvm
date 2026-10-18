@@ -22,7 +22,10 @@ import {
   type Logger,
 } from "../dev/log";
 import type { SimEvent } from "../sim/events";
-import { Board, type BoardSource } from "./Board";
+import { createIntentQueue, enqueue } from "../sim/intents";
+import { HUD_BOTTOM, HUD_TOP, Hud } from "../ui/hud/Hud";
+import { createRoundStore } from "../ui/hud/round-store";
+import { Board, useBoardScale, type BoardSource } from "./Board";
 
 const BUILD = import.meta.env.DEV ? "dev" : "build";
 
@@ -154,10 +157,21 @@ export function Game() {
     };
   }, [session]);
 
-  if (!source) return <p>Loading…</p>;
+  const scale = useBoardScale(HUD_TOP + HUD_BOTTOM);
+  const queue = useMemo(() => createIntentQueue(), []);
+  const store = useMemo(() => (session ? createRoundStore(session.round) : null), [session]);
+
+  if (!source || !store) return <p>Loading…</p>;
   return (
     <>
-      <Board scene={source} />
+      <Hud
+        store={store}
+        enqueue={(intent) => enqueue(queue, intent)}
+        scale={scale}
+        countdown={null}
+      >
+        <Board scene={source} scale={scale} queue={queue} onFrame={store.notify} />
+      </Hud>
       {ended && <p style={{ textAlign: "center" }}>{ended}</p>}
     </>
   );

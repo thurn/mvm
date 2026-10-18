@@ -8,7 +8,7 @@ export type Intent =
   | { type: "cast"; spellId: string; lane: number; x: number }
   | { type: "setSpeed"; speed: 1 | 2 };
 
-interface IntentQueue {
+export interface IntentQueue {
   pending: Intent[];
 }
 

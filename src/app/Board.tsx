@@ -9,7 +9,7 @@ export interface BoardSource extends Scene {
   /** Called after every step with its events, for the lifecycle and autosave. */
   onStep?(state: RoundState, events: readonly SimEvent[]): void;
 }
-import { createIntentQueue, drain } from "../sim/intents";
+import { createIntentQueue, drain, type IntentQueue } from "../sim/intents";
 import { step } from "../sim/kernel";
 import { createLayerStack } from "../render/layers";
 import { registerPlaceholderLayers } from "../render/placeholder";
@@ -17,20 +17,42 @@ import { BOARD_HEIGHT, BOARD_WIDTH, chooseScale } from "../render/scale";
 import { createDriver } from "./driver";
 
 /** The board canvas for one round: the time driver, the layer stack and the QA surface. */
-export function Board({ scene }: { scene: BoardSource }) {
+/** The board's integer scale for the window, leaving `reserveHeight` px for HUD bars; follows resizes. */
+export function useBoardScale(reserveHeight = 0): number {
+  const choose = () => chooseScale(window.innerWidth, window.innerHeight - reserveHeight);
+  const [scale, setScale] = useState(choose);
+  useEffect(() => {
+    const onResize = () =>
+      setScale(chooseScale(window.innerWidth, window.innerHeight - reserveHeight));
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [reserveHeight]);
+  return scale;
+}
+
+export interface BoardProps {
+  scene: BoardSource;
+  /** Overrides the board's own window-fit scale (the HUD lays out around it). */
+  scale?: number;
+  /** Player intents from the HUD, drained into each step. */
+  queue?: IntentQueue;
+  /** Called once per rendered frame, after drawing. */
+  onFrame?(): void;
+}
+
+export function Board({ scene, scale: forcedScale, queue, onFrame }: BoardProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [scale, setScale] = useState(() => chooseScale(window.innerWidth, window.innerHeight));
+  const ownScale = useBoardScale();
+  const scale = forcedScale ?? ownScale;
   // The render loop reads the scale from a ref, so a resize never restarts the round.
   const scaleRef = useRef(scale);
   useEffect(() => {
     scaleRef.current = scale;
   }, [scale]);
-
+  const onFrameRef = useRef(onFrame);
   useEffect(() => {
-    const onResize = () => setScale(chooseScale(window.innerWidth, window.innerHeight));
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+    onFrameRef.current = onFrame;
+  }, [onFrame]);
 
   useEffect(() => {
     const ctx = canvasRef.current?.getContext("2d");
@@ -39,7 +61,7 @@ export function Board({ scene }: { scene: BoardSource }) {
     qa.screen = `scene:${scene.name}`;
     const state = scene.create();
     qa.round = state;
-    const intents = createIntentQueue();
+    const intents = queue ?? createIntentQueue();
     const previousX = new Map<string, number>();
     const driver = createDriver({
       step() {
@@ -63,10 +85,11 @@ export function Board({ scene }: { scene: BoardSource }) {
       ctx.imageSmoothingEnabled = false;
       stack.draw(ctx, { state, previousX, alpha: driver.alpha(), shake: { x: 0, y: 0 }, now });
       ctx.restore();
+      onFrameRef.current?.();
       frame = requestAnimationFrame(tick);
     });
     return () => cancelAnimationFrame(frame);
-  }, [scene]);
+  }, [scene, queue]);
 
   return (
     <canvas
