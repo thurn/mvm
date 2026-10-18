@@ -230,9 +230,12 @@ export function generateGear(request: GearRequest, rng: Rng): ItemInstance {
   }
   let itemClass = request.itemClass ?? rollItemClass(request.rosterWeaponClasses ?? [], rng);
   let base = rollBase(itemClass, request.ilvl, rng);
-  while (!base) {
-    itemClass = pickUniform(WEAPON_CLASSES, rng);
-    base = rollBase(itemClass, request.ilvl, rng);
+  if (!base) {
+    // The rolled class has nothing this low: fall back to any weapon class that does.
+    const open = WEAPON_CLASSES.filter((c) => rollBase(c, request.ilvl, () => 0));
+    if (open.length === 0) throw new Error(`no base can drop at item level ${request.ilvl}`);
+    itemClass = pickUniform(open, rng);
+    base = rollBase(itemClass, request.ilvl, rng)!;
   }
   const t = LOOT_TUNING;
   const cap = rarity === "magic" ? t.affixCaps.magic : t.affixCaps.rare;

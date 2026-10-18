@@ -143,3 +143,9 @@ test("starter bases and sell prices", () => {
   );
   expect(itemSellPrice({ ...bow, itemLevel: 14, rarity: "unique" })).toBe((10 + 28) * 4);
 });
+
+test("an item level no base can drop at fails loudly instead of looping", () => {
+  expect(() => generateGear({ ilvl: 0, rarity: "normal", newId }, seededRng(1))).toThrow(
+    /item level 0/,
+  );
+});
