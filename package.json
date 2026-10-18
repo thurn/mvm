@@ -15,7 +15,8 @@
     "knip": "knip",
     "import:poe2": "tsx scripts/import-poe2/index.ts",
     "sim": "tsx scripts/sim/index.ts",
-    "save:fixture": "tsx scripts/save-fixture.ts"
+    "save:fixture": "tsx scripts/save-fixture.ts",
+    "play": "tsx scripts/play/index.ts"
   },
   "dependencies": {
     "react": "^19.3.1",
