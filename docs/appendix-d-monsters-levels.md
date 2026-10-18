@@ -145,6 +145,33 @@ There are 12 behaviours, with 13 entries because Armoured has two weights, like 
 | Brute | +20% all elemental |
 | All others | 0 |
 
+### 2.3 Damage elements (MvM custom)
+
+Monster hits are physical unless a rule below says otherwise. This gives team resistances ([appendix C §C.3.8](appendix-c-items.md)) a readable job: "this is the fire level, stack team fire resistance".
+
+**Native elements.** These archetypes convert **100%** of their hit damage, everywhere:
+
+| Archetype | Element |
+|---|---|
+| Rot Slime (and its children) | chaos |
+| Orc Shaman | fire |
+
+**Biome element.** Every other archetype converts **50%** of its physical hit damage to its biome's element:
+
+| Biome | Levels | Element | Matching terrain |
+|---|---|---|---|
+| Grassland | 1–5 | none (all physical, while the player learns) | — |
+| Bog | 6–10 | lightning | — |
+| Desert ruins | 11–15 | fire | Burning Ground |
+| Winter keep | 16–20 | cold | Chilled Ground |
+
+- Stat: `monster_physical_damage_converted_to_{element}_%` ([appendix A §9.8](appendix-a-combat.md)). Conversion happens before the "gained as extra" affixes (§4.1), which still stack on top.
+- A native element replaces the biome element; they never add.
+- Bosses use their own spec (§7), not the biome rule.
+- Converted damage applies its element's ailments to heroes exactly as the §4.1 affixes do.
+- Armour doesn't reduce elemental damage, so a biome element also tests walls: in the Bog, half of each hit skips armour and checks lightning resistance instead.
+- The level-select card shows the biome element next to the team's resistance to it ([GDD §15](gdd.md)).
+
 ---
 
 ## 3. Monster rarity

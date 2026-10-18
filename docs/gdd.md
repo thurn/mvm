@@ -268,6 +268,13 @@ PoE2 rules apply throughout:
 
 **One item powers every copy.** Equipping a +1 projectile bow on your Lightning Arrow card upgrades *every* Lightning Arrow on the board. That is the "loot you can see" pillar at work.
 
+**Team affixes power every hero.** Most affixes are local to their hero, who plays a role: a wall invests in life, a carry in damage. Team affixes ("+12% team fire resistance", "+6% team fire damage") go into one team sheet that buffs every hero instead.
+
+- **Resistances are team-only.** A monster hits only the hero in front of it, so a hero-only resistance was a dead roll.
+- **Life, defences and elemental damage** come in both versions. The team version is weaker and rarer, so stacking it is a mid-to-late build, e.g. fire damage on all six heroes' gear to feed one fire carry.
+- Each roster hero's items count once, however many copies are placed.
+- Biomes lean on one element (Bog lightning, Desert fire, Winter cold), so team resistances answer a threat the player can plan for ([appendix D §2.3](appendix-d-monsters-levels.md)).
+
 Full catalog: [appendix C](appendix-c-items.md).
 
 ---
@@ -428,9 +435,9 @@ Full rules: [appendix A](appendix-a-combat.md).
 | Screen | Contents |
 |---|---|
 | **Title / Focus select** | 3 focus cards with starter kit previews |
-| **Campaign map** | 20 level nodes. Each node card shows biome, area level, monster types (only these are previewed), first-clear reward, and a Strongbox hint ("possible"). |
-| **Hideout (between rounds)** | Tabs: **Roster** (6 cards + spell; drag heroes and items), **Stash** (uniform cards, no Tetris; sort and filter by slot, rarity, level, and "Upgrade"), **Craft** (drag an orb onto an item or hero, with a PoE-style tooltip before and after), **Armorer**, **Recruiter**, **Gamble**, **Passive tree**, **Loot filter** |
-| **In level (HUD)** | Mana counter (top left). Roster bar with costs and recharge sweeps (top). Spell card. Life pool hearts. Wave progress with flag markers (bottom). Loot ticker (right edge). Shovel. 1x/2x toggle. |
+| **Campaign map** | 20 level nodes. Each node card shows biome, area level, monster types (only these are previewed), first-clear reward, and a Strongbox hint ("possible"). It also shows the biome's element next to the team's resistance to it, e.g. "Fire 34% / 75%". |
+| **Hideout (between rounds)** | Tabs: **Roster** (6 cards + spell; drag heroes and items; a **Team** panel sums every team stat, and hovering a line lists the items it comes from), **Stash** (uniform cards, no Tetris; sort and filter by slot, rarity, level, and "Upgrade"), **Craft** (drag an orb onto an item or hero, with a PoE-style tooltip before and after), **Armorer**, **Recruiter**, **Gamble**, **Passive tree**, **Loot filter** |
+| **In level (HUD)** | Mana counter (top left). Roster bar with costs and recharge sweeps (top). Spell card. Life pool hearts. Wave progress with flag markers (bottom). Loot ticker (right edge). Shovel. 1x/2x toggle. Damage numbers on heroes show a small shield icon when resistance reduced the hit. |
 | **Level end** | Loot summary sorted by rarity with Upgrade tags; XP gained; first-clear reward; "Next level" and "Hideout" buttons |
 | **Dev menu** | Grant items, heroes, or currency; set level; skip to any campaign level; toggle overlays (hitboxes, ailment meters, DPS meters) |
 
@@ -532,6 +539,7 @@ These decisions came from the design interview on 2026-10-18.
 | Hero cost | Role base × support cost multipliers; PvZ recharge tiers |
 | Attributes | Weapon-locked heroes; no attribute requirements on items |
 | Slots | Weapon / body armour or shield / amulet, ring, or belt |
+| Affix scope | Hero-local by default; team affixes buff every hero. Resistances are team-only at half PoE2 value; life, defences and elemental damage get half-value, half-weight team twins. Roster heroes count once. Biomes lean on one element. |
 | Grid mapping | Lane-literal |
 | Formulas | PoE2 verbatim with a trimmed ~100-stat vocabulary |
 | Scale bridge | PvZ tempo, PoE2 curves, 4 global knobs |

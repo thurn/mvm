@@ -13,10 +13,11 @@ Part of the Mercs vs. Monsters (MvM) GDD. Primary doc: `gdd.md`. Related appendi
 
 - 3 hero slots: **Weapon** (locked class), **Armor** (body armour, or a shield for Spear and One Hand Mace heroes), **Accessory** (amulet, ring or belt).
 - One item buffs **every placed copy** of that roster hero. Nothing is split between copies.
+- **Team affixes** ("+12% team fire resistance") buff every hero instead (C.3.8). Resistances exist only as team affixes; life, defences and elemental damage have a hero version and a rarer, weaker team version.
 - Rarities and mod counts follow PoE2. Item level gates mod tiers by `required_level`.
 - **Everything auto-identifies.** The loot ticker shows real affixes the moment an item drops.
 - Catalog: **45 weapon bases** across 9 classes, **12 body armours**, **5 shields**, **13 jewellery bases**.
-- **88 affix families**: 78 core, plus 10 sceptre "Allies in your Presence" families that need one vocabulary addition.
+- **101 affix families**: 73 core, 18 team families (C.3.8), plus 10 sceptre "Allies in your Presence" families that need one vocabulary addition.
 - **17 uniques**. Each boss draws its guaranteed unique from a level-gated pool.
 - **13 currency families** (Jeweller's Orb counts once, in 3 grades), 2 PoE2 shards, and 1 MvM custom shard.
 - Six of these currencies have PoE2 drop levels of 25–65, at or past the demo's end. MvM lowers them (see Deviations).
@@ -127,7 +128,13 @@ Why:
 
 **Global mods** go into the hero's stat sheet: life, resistances, attributes, Spirit, "Adds X to Y … to Attacks" on rings, "% increased Fire Damage" on rings, and so on.
 
-They stay on that hero and its copies. They never buff other heroes. The one exception is "Allies in your Presence" (below).
+They stay on that hero and its copies. They never buff other heroes. The exceptions are team mods and "Allies in your Presence" (below).
+
+**Team mods** (**MvM custom**, C.3.8) go into one team stat sheet that buffs every hero ([appendix A §2.1](appendix-a-combat.md)).
+
+- Stat ids start with `team_`. Tooltips say "team": "+12% team fire resistance", "+6% team fire damage".
+- Each roster hero's items count **once**, placed or not. Copies don't multiply them.
+- **Why.** A monster hits only the hero in front of it. A hero-only resistance roll on a back-row archer did nothing, so it competed with real affixes and lost. A team roll pays off for the whole board, and stacking one element's damage across six heroes' gear feeds one carry, as stacking across slots does in PoE.
 
 **Weapon calculation order** (PoE2, local first):
 
@@ -313,10 +320,10 @@ Defence values are fixed base values from `properties`. ES = energy shield.
 | Stellar Amulet (`FourAmulet8`) | Amulet | 25 | `AmuletImplicitAllAttributes1` +(5-7) to all Attributes → kept | Fixation of Yix |
 | Solar Amulet (`FourAmulet9`) | Amulet | 30 | `AmuletImplicitBaseSpirit1` +(10-15) to Spirit → kept: + Spirit |  |
 | Iron Ring (`FourRing1`) | Ring | 1 | `RingImplicitPhysicalDamage1` Adds 1 to 4 Physical Damage to Attacks → kept: adds Physical to Attacks |  |
-| Ruby Ring (`FourRing3`) | Ring | 8 | `RingImplicitFireResistance1` +(20-30)% to Fire Resistance → kept |  |
-| Sapphire Ring (`FourRing4`) | Ring | 12 | `RingImplicitColdResistance1` +(20-30)% to Cold Resistance → kept |  |
-| Topaz Ring (`FourRing5`) | Ring | 16 | `RingImplicitLightningResistance1` +(20-30)% to Lightning Resistance → kept | Levinstone |
-| Amethyst Ring (`FourRing6`) | Ring | 20 | `RingImplicitChaosResistance1` +(7-13)% to Chaos Resistance → kept | Ming's Heart |
+| Ruby Ring (`FourRing3`) | Ring | 8 | `RingImplicitFireResistance1` +(20-30)% to Fire Resistance → **adapted**: +(10-15)% team fire resistance (C.3.8) |  |
+| Sapphire Ring (`FourRing4`) | Ring | 12 | `RingImplicitColdResistance1` +(20-30)% to Cold Resistance → **adapted**: +(10-15)% team cold resistance (C.3.8) |  |
+| Topaz Ring (`FourRing5`) | Ring | 16 | `RingImplicitLightningResistance1` +(20-30)% to Lightning Resistance → **adapted**: +(10-15)% team lightning resistance (C.3.8) | Levinstone |
+| Amethyst Ring (`FourRing6`) | Ring | 20 | `RingImplicitChaosResistance1` +(7-13)% to Chaos Resistance → **adapted**: +(4-6)% team chaos resistance (C.3.8) | Ming's Heart |
 | Rawhide Belt (`FourBelt1`) | Belt | 1 | `BeltImplicitFlaskLifeRecovery1` (20-30)% increased Life Recovery from Flasks → cut: flasks are cut (belt has no implicit in MvM) |  |
 | Plate Belt (`FourBelt5`) | Belt | 25 | `BeltImplicitPhysicalDamageReductionRating1` +(140-180) to Armour → kept: + armour (global) |  |
 
@@ -453,11 +460,11 @@ Defence values are fixed base values from `properties`. ES = energy shield.
 | 76 | `Dexterity`<br>group `Dexterity`<br>`additional_dexterity` | S | + Dexterity → `dexterity` | T1 of the Mongoose rl1: `Dexterity1` 5–8<br>T2 of the Lynx rl11: `Dexterity2` 9–12<br>T3 of the Fox rl22: `Dexterity3` 13–16<br>T4 of the Falcon rl33: `Dexterity4` 17–20 |
 | 77 | `Intelligence`<br>group `Intelligence`<br>`additional_intelligence` | S | + Intelligence → `intelligence` | T1 of the Pupil rl1: `Intelligence1` 5–8<br>T2 of the Student rl11: `Intelligence2` 9–12<br>T3 of the Prodigy rl22: `Intelligence3` 13–16<br>T4 of the Augur rl33: `Intelligence4` 17–20 |
 | 78 | `AllAttributes`<br>group `AllAttributes`<br>`additional_all_attributes` | S | + all attributes → `all_attributes` | T1 of the Clouds rl1: `AllAttributes1` 2–4<br>T2 of the Sky rl11: `AllAttributes2` 5–7<br>T3 of the Meteor rl22: `AllAttributes3` 8–10<br>T4 of the Comet rl33: `AllAttributes4` 11–13 |
-| 79 | `FireResistance`<br>group `FireResistance`<br>`base_fire_damage_resistance_%` | S | +% Fire resistance → `fire_resistance_%` | T1 of the Whelpling rl1: `FireResist1` 6–10<br>T2 of the Salamander rl12: `FireResist2` 11–15<br>T3 of the Drake rl24: `FireResist3` 16–20<br>T4 of the Kiln rl36: `FireResist4` 21–25 |
-| 80 | `ColdResistance`<br>group `ColdResistance`<br>`base_cold_damage_resistance_%` | S | +% Cold resistance → `cold_resistance_%` | T1 of the Seal rl1: `ColdResist1` 6–10<br>T2 of the Penguin rl14: `ColdResist2` 11–15<br>T3 of the Narwhal rl26: `ColdResist3` 16–20<br>T4 of the Yeti rl38: `ColdResist4` 21–25 |
-| 81 | `LightningResistance`<br>group `LightningResistance`<br>`base_lightning_damage_resistance_%` | S | +% Lightning resistance → `lightning_resistance_%` | T1 of the Cloud rl1: `LightningResist1` 6–10<br>T2 of the Squall rl13: `LightningResist2` 11–15<br>T3 of the Storm rl25: `LightningResist3` 16–20<br>T4 of the Thunderhead rl37: `LightningResist4` 21–25 |
-| 82 | `ChaosResistance`<br>group `ChaosResistance`<br>`base_chaos_damage_resistance_%` | S | +% Chaos resistance → `chaos_resistance_%` | T1 of the Lost rl16: `ChaosResist1` 4–7<br>T2 of Banishment rl30: `ChaosResist2` 8–11 |
-| 83 | `AllResistances`<br>group `AllResistances`<br>`base_resist_all_elements_%` | S | +% all elemental resistances → `all_elemental_resistances_%` | T1 of the Crystal rl12: `AllResistances1` 3–5<br>T2 of the Prism rl26: `AllResistances2` 6–8<br>T3 of the Kaleidoscope rl40: `AllResistances3` 9–11 |
+| 79 | `FireResistance`<br>group `FireResistance`<br>`base_fire_damage_resistance_%` | S | **replaced** by its team twin (C.3.8); the hero-only roll is cut. PoE2: +% Fire resistance → `fire_resistance_%` | T1 of the Whelpling rl1: `FireResist1` 6–10<br>T2 of the Salamander rl12: `FireResist2` 11–15<br>T3 of the Drake rl24: `FireResist3` 16–20<br>T4 of the Kiln rl36: `FireResist4` 21–25 |
+| 80 | `ColdResistance`<br>group `ColdResistance`<br>`base_cold_damage_resistance_%` | S | **replaced** by its team twin (C.3.8); the hero-only roll is cut. PoE2: +% Cold resistance → `cold_resistance_%` | T1 of the Seal rl1: `ColdResist1` 6–10<br>T2 of the Penguin rl14: `ColdResist2` 11–15<br>T3 of the Narwhal rl26: `ColdResist3` 16–20<br>T4 of the Yeti rl38: `ColdResist4` 21–25 |
+| 81 | `LightningResistance`<br>group `LightningResistance`<br>`base_lightning_damage_resistance_%` | S | **replaced** by its team twin (C.3.8); the hero-only roll is cut. PoE2: +% Lightning resistance → `lightning_resistance_%` | T1 of the Cloud rl1: `LightningResist1` 6–10<br>T2 of the Squall rl13: `LightningResist2` 11–15<br>T3 of the Storm rl25: `LightningResist3` 16–20<br>T4 of the Thunderhead rl37: `LightningResist4` 21–25 |
+| 82 | `ChaosResistance`<br>group `ChaosResistance`<br>`base_chaos_damage_resistance_%` | S | **replaced** by its team twin (C.3.8); the hero-only roll is cut. PoE2: +% Chaos resistance → `chaos_resistance_%` | T1 of the Lost rl16: `ChaosResist1` 4–7<br>T2 of Banishment rl30: `ChaosResist2` 8–11 |
+| 83 | `AllResistances`<br>group `AllResistances`<br>`base_resist_all_elements_%` | S | **replaced** by its team twin (C.3.8); the hero-only roll is cut. PoE2: +% all elemental resistances → `all_elemental_resistances_%` | T1 of the Crystal rl12: `AllResistances1` 3–5<br>T2 of the Prism rl26: `AllResistances2` 6–8<br>T3 of the Kaleidoscope rl40: `AllResistances3` 9–11 |
 | 84 | `LifeRegeneration`<br>group `LifeRegeneration`<br>`base_life_regeneration_rate_per_minute` | S | + life regeneration per second → `life_regeneration_rate_per_second` — value per minute in data: 60 = 1/s | T1 of the Newt rl1: `LifeRegeneration1` 60–120<br>T2 of the Lizard rl5: `LifeRegeneration2` 126–180<br>T3 of the Flatworm rl11: `LifeRegeneration3` 186–240<br>T4 of the Starfish rl17: `LifeRegeneration4` 246–360<br>T5 of the Hydra rl26: `LifeRegeneration5` 366–540<br>T6 of the Troll rl35: `LifeRegeneration6` 546–780 |
 | 85 | `CriticalStrikeChance`<br>group `CriticalStrikeChanceIncrease`<br>`critical_strike_chance_+%` | S | % increased critical hit chance → `critical_strike_chance_+%` | T1 of Menace rl5: `CriticalStrikeChance1` 10–14<br>T2 of Havoc rl20: `CriticalStrikeChance2` 15–19<br>T3 of Disaster rl30: `CriticalStrikeChance3` 20–24 |
 | 86 | `CriticalStrikeMultiplier`<br>group `CriticalStrikeMultiplier`<br>`base_critical_strike_multiplier_+` | S | +% critical damage bonus → `critical_strike_multiplier_+` — PoE2 text says "increased"; stat is base_critical_strike_multiplier_+ | T1 of Ire rl8: `CriticalMultiplier1` 10–14<br>T2 of Anger rl21: `CriticalMultiplier2` 15–19<br>T3 of Rage rl31: `CriticalMultiplier3` 20–24 |
@@ -560,11 +567,11 @@ Columns:
 | 76 | `Dexterity` | S | 1000 | 1000 | 1000 | — | — | 1000 | — | — | — | 1000 (D,SD,DI) | 1000 (SD) | 1000 | 1000 | — |
 | 77 | `Intelligence` | S | — | — | — | — | — | 1000 | 1000 | 1000 | 1000 | 1000 (I,SI,DI) | 1000 (SI) | 1000 | 1000 | — |
 | 78 | `AllAttributes` | S | — | — | — | — | — | — | — | — | — | — | — | 250 | 250 | — |
-| 79 | `FireResistance` | S | — | — | — | — | — | — | — | — | — | 1000 | 1000 | 1000 | 1000 | 1000 |
-| 80 | `ColdResistance` | S | — | — | — | — | — | — | — | — | — | 1000 | 1000 | 1000 | 1000 | 1000 |
-| 81 | `LightningResistance` | S | — | — | — | — | — | — | — | — | — | 1000 | 1000 | 1000 | 1000 | 1000 |
-| 82 | `ChaosResistance` | S | — | — | — | — | — | — | — | — | — | 500 | 500 | 500 | 500 | 500 |
-| 83 | `AllResistances` | S | — | — | — | — | — | — | — | — | — | — | 250 (SI) | 250 | 250 | — |
+| 79 | `FireResistance` (→ team, C.3.8) | S | — | — | — | — | — | — | — | — | — | 1000 | 1000 | 1000 | 1000 | 1000 |
+| 80 | `ColdResistance` (→ team, C.3.8) | S | — | — | — | — | — | — | — | — | — | 1000 | 1000 | 1000 | 1000 | 1000 |
+| 81 | `LightningResistance` (→ team, C.3.8) | S | — | — | — | — | — | — | — | — | — | 1000 | 1000 | 1000 | 1000 | 1000 |
+| 82 | `ChaosResistance` (→ team, C.3.8) | S | — | — | — | — | — | — | — | — | — | 500 | 500 | 500 | 500 | 500 |
+| 83 | `AllResistances` (→ team, C.3.8) | S | — | — | — | — | — | — | — | — | — | — | 250 (SI) | 250 | 250 | — |
 | 84 | `LifeRegeneration` | S | — | — | — | — | — | — | — | — | — | 500 | — | 500 | 500 | 500 |
 | 85 | `CriticalStrikeChance` | S | — | — | — | — | — | — | — | — | — | — | — | 500 | — | — |
 | 86 | `CriticalStrikeMultiplier` | S | — | — | — | — | — | — | — | — | — | — | — | 500 | — | — |
@@ -580,6 +587,8 @@ Columns:
 - Stun buildup is a melee suffix (Spear, Maces, Quarterstaff). Bows and crossbows cannot roll it.
 
 ### C.3.7 PoE2 families deliberately cut
+
+The five hero-only resistance families (rows 79–83) are not listed here: they are replaced by team twins (C.3.8).
 
 | Cut family (PoE2 type: first … last mod id) | Group | Why |
 |---|---|---|
@@ -605,6 +614,82 @@ Columns:
 
 - PoE2's projectile item mods (pierce, +arrows, projectile damage) live on **quivers**, which are cut. Projectile scaling therefore comes from supports, passives, uniques, base implicits (Warden Bow, Dualstring Bow) and the bow corruption.
 - PoE2 0.5 has no "Adds X to Y damage to Spells" affix on our slots. That vocabulary entry is for passives, supports and uniques.
+
+### C.3.8 Team affixes (MvM custom)
+
+Team affixes buff every hero through the team stat sheet ([appendix A §2.1](appendix-a-combat.md)). The rules in C.1.7 apply.
+
+**Rules.**
+
+- **Twins.** Each team family is the twin of a hero family (the "Twin" column). It spawns on the same slots as its twin and uses the twin's tier names and required levels.
+- **Separate groups.** A team family has its own mod group (`Team` + the twin's group), so "+30 to maximum life" and "+15 team maximum life" can roll on the same item.
+- **Values.** About half the twin's, rounded to whole numbers.
+- **Weights.**
+  - Team resistances **replace** their twins, so they keep the twin's weights (rows 79–83 in C.3.6).
+  - All other team families get **half the twin's weight**. Early drops are mostly hero gear; team stacking is assembled over the campaign.
+- **Tooltip.** "+N% team <stat>" or "+N team <stat>", e.g. "+12% team fire resistance".
+- **Mod ids.** `Team` + the twin's mod id, e.g. `TeamFireResist2`.
+- **Uniques** keep their lines as written in C.4.3, including hero-only resistances.
+
+**Resistances** (suffixes; replace rows 79–83)
+
+| # | Team family | Twin | MvM stat | Tiers: rl, values |
+|---|---|---|---|---|
+| T1 | `TeamFireResistance` | 79 | `team_fire_resistance_%` | T1 rl1 3–5 · T2 rl12 6–7 · T3 rl24 8–10 · T4 rl36 11–13 |
+| T2 | `TeamColdResistance` | 80 | `team_cold_resistance_%` | T1 rl1 3–5 · T2 rl14 6–7 · T3 rl26 8–10 · T4 rl38 11–13 |
+| T3 | `TeamLightningResistance` | 81 | `team_lightning_resistance_%` | T1 rl1 3–5 · T2 rl13 6–7 · T3 rl25 8–10 · T4 rl37 11–13 |
+| T4 | `TeamChaosResistance` | 82 | `team_chaos_resistance_%` | T1 rl16 2–4 · T2 rl30 4–6 |
+| T5 | `TeamAllResistances` | 83 | `team_all_elemental_resistances_%` | T1 rl12 2–3 · T2 rl26 3–4 · T3 rl40 5–6 |
+
+With 18 item slots on the board, capping one element at 75% takes about six good rolls, plus any Ruby/Sapphire/Topaz ring implicits (+10–15% each), passives and Purity of Fire.
+
+**Life and defences** (prefixes; hero twins stay)
+
+| # | Team family | Twin | MvM stat | Tiers: rl, values |
+|---|---|---|---|---|
+| T6 | `TeamIncreasedLife` | 56 | `team_base_maximum_life` | T1 rl1 5–9 · T2 rl6 10–14 · T3 rl16 15–19 · T4 rl24 20–29 · T5 rl33 30–34 · T6 rl38 35–42 |
+| T7 | `TeamMaximumLifeIncreasePercent` | 57 | `team_maximum_life_+%` | T1 rl33 2 |
+| T8 | `TeamEnergyShield` | 58 | `team_energy_shield` | T1 rl1 4–7 · T2 rl11 8–10 · T3 rl16 11–12 · T4 rl25 13–16 · T5 rl33 17–20 |
+| T9 | `TeamGlobalEnergyShieldPercent` | 59 | `team_energy_shield_+%` | T1 rl2 5–7 · T2 rl16 8–10 · T3 rl33 11–13 |
+| T10 | `TeamGlobalEvasionRatingPercent` | 60 | `team_evasion_+%` | T1 rl2 5–7 · T2 rl16 8–10 · T3 rl33 11–13 |
+| T11 | `TeamGlobalArmourPercent` | 61 | `team_armour_+%` | T1 rl2 5–7 · T2 rl16 8–10 · T3 rl33 11–13 |
+| T12 | `TeamEvasionRating` | 62 | `team_evasion` | T1 rl1 4–8 · T2 rl11 9–19 · T3 rl16 20–25 · T4 rl25 26–39 · T5 rl33 40–53 |
+| T13 | `TeamArmourRating` | 63 | `team_armour` | T1 rl1 6–11 · T2 rl11 12–25 · T3 rl16 26–34 · T4 rl25 35–53 · T5 rl33 54–70 |
+
+- Flat team life goes into `flatLife` before the archetype multiplier ([appendix A §2.1](appendix-a-combat.md)), so a wall still gets the most out of it.
+- Local armour defences (rows 46–50) and local life hybrids (row 49) stay hero-only. They are part of the item, not the team.
+
+**Damage** (prefixes; hero twins stay)
+
+| # | Team family | Twin | MvM stat | Tiers: rl, values |
+|---|---|---|---|---|
+| T14 | `TeamFireDamagePercentage` | 71 | `team_fire_damage_+%` | T1 rl8 2–3 · T2 rl16 4–6 · T3 rl33 7–8 |
+| T15 | `TeamColdDamagePercentage` | 72 | `team_cold_damage_+%` | T1 rl8 2–3 · T2 rl16 4–6 · T3 rl33 7–8 |
+| T16 | `TeamLightningDamagePercentage` | 73 | `team_lightning_damage_+%` | T1 rl8 2–3 · T2 rl16 4–6 · T3 rl33 7–8 |
+| T17 | `TeamChaosDamagePercentage` | 74 | `team_chaos_damage_+%` | T1 rl8 2–3 · T2 rl16 4–6 · T3 rl33 7–8 |
+| T18 | `TeamPhysicalDamagePercentage` | — (**MvM custom**, no PoE2 jewellery twin) | `team_physical_damage_+%` | T1 rl8 2–3 · T2 rl16 4–6 · T3 rl33 7–8 |
+
+- % increased only. No flat "adds X to Y" team damage and no generic "all damage" team mod: the point is element identity.
+- Team damage also applies to the player spell.
+- The caster-weapon element prefixes (rows 18–22) stay hero-only. They lock the weapon's element, so they belong to the hero.
+
+**Team spawn weights** (per tier; slots not listed are "—")
+
+| # | Body | Shld | Amu | Rng | Blt |
+|---|---|---|---|---|---|
+| T1–T3 | 1000 | 1000 | 1000 | 1000 | 1000 |
+| T4 | 500 | 500 | 500 | 500 | 500 |
+| T5 | — | 250 (SI) | 250 | 250 | — |
+| T6 | 500 | 500 | 500 | 500 | 500 |
+| T7 | — | — | 125 | — | — |
+| T8–T11 | — | — | 250 | — | — |
+| T12 | — | — | — | 250 | — |
+| T13 | — | — | — | — | 500 |
+| T14–T18 | — | — | — | 250 | — |
+
+**Allies in your Presence vs team.** The sceptre presence families (rows 34–44) stay radius-based and sceptre-only. They keep their PoE2 values, about double the team values: a smaller area for a bigger buff. Presence buffs and team buffs stack additively.
+
+**Saves.** No backwards compatibility for removed mods. On load, an item mod whose id is no longer in the catalog (the old `FireResist1` … `AllResistances3`) is dropped. Ring resistance implicits are re-rolled inside their new range. The golden fixtures in `src/save/fixtures/` hold none of these mods, so they keep loading.
 
 ---
 
@@ -1087,6 +1172,10 @@ Each item says what the data forced, and what happens if the team says no.
      - local "% increased Spirit" → flat Spirit on the 100 base.
 8. **Quality on wands, staves and sceptres adapted.** PoE2 quality boosts the skill the item grants, and granted skills are cut. MvM: 1% increased Spell damage (wand, staff) or 1% increased Spirit (sceptre) per 1% quality.
 9. **Scope counts slightly over the targets:** 13 jewellery bases (target ~10) and 17 uniques (target ~15). That way every weapon class and slot has at least one unique, and every unique's base is in the catalog.
+10. **Team affixes and the `team_` wrapper stat (C.3.8, new vocabulary entry).**
+   - PoE2 has no team scope: every PoE2 mod buffs the one character. MvM spreads the board across 6 heroes with 3 slots each, and monsters hit only the hero in front, so hero-only resistance rolls were dead weight.
+   - 18 MvM custom families, twins of PoE2 families at about half value. The 5 hero-only resistance families are cut in favour of their twins; ring resistance implicits become team implicits at half value.
+   - If rejected: restore rows 79–83 and the ring implicits as written in PoE2, and cut C.3.8.
 
 ---
 

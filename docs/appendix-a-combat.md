@@ -112,8 +112,17 @@ When a level starts, each roster slot computes one stat sheet. Every copy placed
 1. Skill per-level stats ([appendix-b-heroes.md](appendix-b-heroes.md)), with hero level mapped to PoE2 gem level.
 2. Support gem stats.
 3. Item stats: local mods first, folded into the item's own properties; then global mods.
-4. Passive tree stats (global).
-5. Global aura buffs currently active on the board (recomputed whenever an aura hero enters or dies). Positional auras resolve per hero.
+4. The **team stat sheet** (below).
+5. Passive tree stats (global).
+6. Global aura buffs currently active on the board (recomputed whenever an aura hero enters or dies). Positional auras resolve per hero.
+
+**Team stat sheet** (**MvM custom**, [appendix C §C.3.8](appendix-c-items.md)).
+
+- Any item stat with the `team_` prefix goes into one team sheet instead of the carrier's own sheet.
+- Each of the 6 roster slots contributes its 3 items **once**, placed or not, however many copies are out. Stashed heroes contribute nothing.
+- The sheet is fixed when the level starts, like the rest of step 3.
+- Each team stat is applied to every roster slot's sheet as its unprefixed twin: `team_fire_resistance_%` 12 is `fire_resistance_%` 12 on every hero. It adds to the hero's own stats and still respects caps (75% resistance).
+- Team damage stats also apply to the player spell, as passives do.
 
 **Attribute bonuses**
 
@@ -591,6 +600,7 @@ This is the closed list of stats. Every hero, support, item mod, unique, passive
 | `keystone_*` | one flag per keystone (Resolute Technique, Crimson Assault, Chaos Inoculation, Eldritch Battery); effects are in [appendix F](appendix-f-passives.md) |
 | `spirit` | Spirit: drives acolyte mana output ([appendix-e](appendix-e-economy.md)) |
 | `aura_effect_+%`, `presence_area_+%` | aura scaling |
+| `team_<stat>` | **MvM custom** wrapper: summed into the team stat sheet (§2.1) and applied as `<stat>` to every hero. Only the stats in [appendix C §C.3.8](appendix-c-items.md) take it. |
 | `allies_in_presence: <stat>` | Wrapper: applies `<stat>` to *other* heroes inside this hero's Presence radius (1.5 tiles, §8). The inner stat must itself be in this vocabulary. Same non-stacking rule as positional auras (§8). Comes from sceptre affixes and Fixation of Yix ([appendix C](appendix-c-items.md)). |
 | `unique_*` | Unique-only mechanic flags, e.g. cull on block or unlimited poison stacks. The list and each flag's fallback are in [appendix C §C.4.4](appendix-c-items.md). |
 | `acolyte_mana_generated_+%` | **MvM custom**: increased mana per orb |
@@ -606,6 +616,7 @@ This is the closed list of stats. Every hero, support, item mod, unique, passive
 | `monster_movement_speed_+%` | walk speed |
 | `monster_life_+%`, `monster_damage_+%` | rarity and affix scaling |
 | `monster_extra_{element}_damage_%` | adds X% of physical as extra {fire, cold, lightning, chaos} |
+| `monster_physical_damage_converted_to_{element}_%` | **MvM custom**: converts X% of the monster's physical hit damage to {fire, cold, lightning, chaos}. Comes from native archetype elements and the biome element ([appendix D §2.3](appendix-d-monsters-levels.md)). Applied before "gained as extra". |
 | `monster_{type}_resistance_%` | resistances |
 | `monster_armour_+%`, `monster_evasion_+%`, `monster_energy_shield` | defences |
 | `monster_block_frontal_projectiles_%` | **MvM custom**: Shieldbearer front block vs projectiles only |
