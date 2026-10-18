@@ -226,3 +226,20 @@ describe("item mods (Appendix C §C.1.7)", () => {
     expect(sheet.actor.stats["local_physical_damage_+%"]).toBeUndefined();
   });
 });
+
+describe("mods the data doesn't map yet", () => {
+  test("a unique's mods are reported, not fatal, until their phase maps them", () => {
+    const crossbow = item(baseNamed("Makeshift Crossbow"), [
+      { modId: id<"Mod">("UniqueLocalAddedColdDamage4"), values: [9, 14] },
+    ]);
+    const card: Card = {
+      hero: newHero("h", id<"Gem">("Metadata/Items/Gem/SkillGemArmourPiercingRounds"), 1),
+      weapon: { ...crossbow, rarity: "unique" },
+      armour: null,
+      accessory: null,
+    };
+    const sheet = aggregate(card, { bases });
+    expect(sheet.unmodelled).toContain("mod:UniqueLocalAddedColdDamage4");
+    expect(sheet.weapon!.damage.physical).toEqual({ min: 7, max: 12 });
+  });
+});

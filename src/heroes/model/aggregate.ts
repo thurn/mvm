@@ -49,8 +49,12 @@ export interface HeroSheet {
   /** Support "more" multipliers for the skill's hits. */
   more: MoreModifier[];
   spirit: number;
-  /** PoE2 support stats no system models yet, for logs. */
-  unmodelledSupportStats: string[];
+  /**
+   * What no system models yet, for logs: `mod:<id>` for item mods outside
+   * data/mods.json (such as unique mods before their phase maps them) and
+   * `supportStat:<id>` for support stats.
+   */
+  unmodelled: string[];
 }
 
 export interface AggregateContext {
@@ -92,10 +96,14 @@ function addItemMods(
   modsById: Map<string, ModData>,
   local: Sheet,
   global: Sheet,
+  unmodelled: string[],
 ) {
   for (const rolled of item.mods) {
     const mod = modsById.get(rolled.modId);
-    if (!mod) throw new Error(`item ${item.id}: unknown mod ${rolled.modId}`);
+    if (!mod) {
+      unmodelled.push(`mod:${rolled.modId}`);
+      continue;
+    }
     mod.stats.forEach((raw, index) => {
       const mapping = STAT_MAP[raw.id];
       const value = rolled.values[index];
@@ -164,7 +172,7 @@ function addSupports(
         for (const { id, value } of stats) {
           const effect = SUPPORT_STAT_MAP[id];
           if (!effect) {
-            unmodelled.push(id);
+            unmodelled.push(`supportStat:${id}`);
           } else if ("stat" in effect) {
             global.add(effect.stat, value / (effect.divisor ?? 1));
           } else {
@@ -192,6 +200,7 @@ export function aggregate(card: Card, context: AggregateContext = {}): HeroSheet
     entry.attributeWeights ?? { strength: 0, dexterity: 0, intelligence: 0 };
 
   const global = new Sheet();
+  const unmodelled: string[] = [];
   const baseOf = (item: ItemInstance) => {
     const base = bases.find((b) => b.id === item.baseId);
     if (!base) throw new Error(`item ${item.id}: unknown base ${item.baseId}`);
@@ -201,17 +210,16 @@ export function aggregate(card: Card, context: AggregateContext = {}): HeroSheet
   let weapon: WeaponStats | null = null;
   const weaponLocal = new Sheet();
   if (card.weapon) {
-    addItemMods(card.weapon, modsById, weaponLocal, global);
+    addItemMods(card.weapon, modsById, weaponLocal, global, unmodelled);
     weapon = weaponStats(baseOf(card.weapon), weaponLocal, card.weapon.quality);
   }
 
   const armourLocal = new Sheet();
   const armourBase = card.armour ? baseOf(card.armour) : null;
-  if (card.armour) addItemMods(card.armour, modsById, armourLocal, global);
-  if (card.accessory) addItemMods(card.accessory, modsById, new Sheet(), global);
+  if (card.armour) addItemMods(card.armour, modsById, armourLocal, global, unmodelled);
+  if (card.accessory) addItemMods(card.accessory, modsById, new Sheet(), global, unmodelled);
 
   const more: MoreModifier[] = [];
-  const unmodelled: string[] = [];
   addSupports(hero.supports, context.supports ?? supportGems(), global, more, unmodelled);
 
   const attrs = attributes(weights, hero.level, global);
@@ -277,7 +285,7 @@ export function aggregate(card: Card, context: AggregateContext = {}): HeroSheet
     weapon,
     more,
     spirit: sceptreSpirit + stat(stats, "spirit"),
-    unmodelledSupportStats: [...new Set(unmodelled)].sort(),
+    unmodelled: [...new Set(unmodelled)].sort(),
   };
 }
 
