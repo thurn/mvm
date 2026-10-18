@@ -247,6 +247,7 @@ export function DevMenu({ account, round, store, logger, save }: DevMenuProps) {
         <div>
           level{" "}
           <input
+            key={account?.player.level ?? 0}
             aria-label="player level"
             type="number"
             min={1}
@@ -265,7 +266,12 @@ export function DevMenu({ account, round, store, logger, save }: DevMenuProps) {
               key={result}
               type="button"
               disabled={!round || round.result !== null}
-              onClick={() => round && skipToLevelEnd(round, result)}
+              onClick={() => {
+                if (!round) return;
+                skipToLevelEnd(round, result);
+                // The sim stops without emitting, so the director gets the level end it would have seen.
+                window.__mvm?.fireEvents?.([{ type: "levelEnd", result }]);
+              }}
             >
               {result}
             </button>
