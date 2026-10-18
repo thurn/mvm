@@ -1,17 +1,16 @@
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { LevelSummary } from "../../account/lifecycle";
 import type { AccountState } from "../../account/state";
 import { levelForXp, xpForLevel } from "../../account/xp";
 import { audioEngine } from "../../audio";
 import { currencies } from "../../data";
 import type { Card, HeroInstance, OwnedHeroId } from "../../heroes/model/hero";
-import { sharedSettings } from "../../juice/core/settings";
-import { flashAlpha } from "../../juice/tiers/screen";
 import { LEVEL_END_TUNING as T } from "../../tuning/juice";
 import { ACCOUNT_TUNING } from "../../tuning/progression";
 import { HeroCard, skillName } from "../cards/HeroCard";
 import { ItemCard } from "../cards/ItemCard";
 import { Panel, RARITY_COLOR } from "../cards/parts";
+import { Burst, Flash } from "../fx";
 import { MenuButton, MenuScreen, MENU } from "../title/layout";
 import { chooseHero } from "../../account/stash";
 import type { AccountStore } from "../../account/store";
@@ -35,9 +34,7 @@ export function xpSnapshot(account: AccountState): XpSnapshot {
 const TEAL = "#3fd6c4";
 const STYLE = `@keyframes mvm-end-slide { from { transform: translateY(60px); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes mvm-end-flip { from { transform: rotateY(90deg); } to { transform: none; } }
-@keyframes mvm-end-stamp { from { transform: rotate(-12deg) scale(${T.stampScale}); opacity: 0; } to { transform: rotate(-12deg) scale(1); opacity: 1; } }
-@keyframes mvm-end-burst { from { transform: rotate(var(--a)) translateX(0); opacity: 1; } to { transform: rotate(var(--a)) translateX(46px); opacity: 0; } }
-@keyframes mvm-end-flash { to { opacity: 0; } }`;
+@keyframes mvm-end-stamp { from { transform: rotate(-12deg) scale(${T.stampScale}); opacity: 0; } to { transform: rotate(-12deg) scale(1); opacity: 1; } }`;
 const OUT_BACK = "cubic-bezier(0.34, 1.56, 0.64, 1)";
 
 /** Milliseconds since mount, on animation frames. */
@@ -68,43 +65,17 @@ function useCues(elapsed: number, cues: readonly { at: number; key: string; play
 
 const play = (id: string, gainDb = 0) => audioEngine()?.play(id, { gainDb });
 
-function Burst({ count }: { count: number }) {
-  return (
-    <span style={{ position: "absolute", left: "50%", top: "50%", pointerEvents: "none" }}>
-      {Array.from({ length: count }, (_, i) => (
-        <span
-          key={i}
-          data-testid="burst-particle"
-          style={
-            {
-              position: "absolute",
-              width: 4,
-              height: 4,
-              background: TEAL,
-              "--a": `${(360 / count) * i}deg`,
-              animation: `mvm-end-burst ${T.burstMs}ms ease-out forwards`,
-            } as React.CSSProperties
-          }
-        />
-      ))}
-    </span>
-  );
-}
-
 /** One XP bar: the level reached so far and the fill within it; a level-up bursts once. */
 function XpBar({
   label,
   from,
   to,
   progress,
-  particles,
 }: {
   label: string;
   from: number;
   to: number;
   progress: number;
-  /** The level-up burst's particle count, already scaled by the juice setting. */
-  particles: number;
 }) {
   const xp = from + (to - from) * progress;
   const level = levelForXp(xp);
@@ -124,7 +95,7 @@ function XpBar({
         }}
       >
         {level}
-        {leveled && particles > 0 && <Burst count={particles} />}
+        {leveled && <Burst count={T.burstParticles} color={TEAL} ms={T.burstMs} distance={46} />}
       </span>
       <span
         style={{ width: 220, height: 8, background: "#0c0e12", border: `1px solid ${MENU.edge}` }}
@@ -207,11 +178,6 @@ export function LevelEnd({
 }) {
   const account = useAccount(store);
   const elapsed = useElapsed();
-  const settingsStore = sharedSettings();
-  const settings = useSyncExternalStore(settingsStore.subscribe, settingsStore.get);
-  // The juice A/B and accessibility settings scale the particles and the flash (H §1.1, §14).
-  const particles = Math.round(T.burstParticles * Math.min(1, settings.juice));
-  const flash = flashAlpha(T.flashAlpha, settings);
   const loot = sortDrops(summary?.drops ?? []);
   const choice = account.pendingChoices[0];
   // A reload before the pick has no summary; the pending choice names the level, kept past the pick.
@@ -274,20 +240,13 @@ export function LevelEnd({
   return (
     <MenuScreen music="hideout">
       <style>{STYLE}</style>
-      {firstClearShown && flash > 0 && (
-        <div
-          data-testid="first-clear-flash"
-          data-alpha={flash}
-          style={{
-            opacity: flash,
-            position: "fixed",
-            inset: 0,
-            // Above the cards, which are positioned and later in the page.
-            zIndex: 10,
-            pointerEvents: "none",
-            background: "radial-gradient(circle, #ffffff, rgba(255,209,102,0.5))",
-            animation: "mvm-end-flash 400ms linear forwards",
-          }}
+      {firstClearShown && (
+        <Flash
+          screen
+          alpha={T.flashAlpha}
+          ms={400}
+          background="radial-gradient(circle, #ffffff, rgba(255,209,102,0.5))"
+          testId="first-clear-flash"
         />
       )}
       <section
@@ -341,7 +300,6 @@ export function LevelEnd({
                 from={before?.player.xp ?? account.player.xp}
                 to={account.player.xp}
                 progress={progress}
-                particles={particles}
               />
               {cards.map(({ hero }) => (
                 <XpBar
@@ -350,7 +308,6 @@ export function LevelEnd({
                   from={before?.heroes[hero.id]?.xp ?? hero.xp}
                   to={hero.xp}
                   progress={progress}
-                  particles={particles}
                 />
               ))}
             </div>

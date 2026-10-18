@@ -4,6 +4,7 @@ import { HeroTooltip } from "../cards/HeroTooltip";
 import { ItemCard, itemName } from "../cards/ItemCard";
 import { skillName } from "../cards/HeroCard";
 import { RARITY_COLOR } from "../cards/parts";
+import { HoverTip } from "../fx";
 import { MENU } from "../title/layout";
 import { itemSlot } from "../../heroes/model/item";
 import { stashView, type StashEntry, type StashFilter } from "./model";
@@ -78,22 +79,13 @@ function Tile({
         )}
       </div>
       {hover && (
-        <div
-          style={{
-            position: "absolute",
-            right: "100%",
-            top: 0,
-            marginRight: 6,
-            zIndex: 30,
-            pointerEvents: "none",
-          }}
-        >
+        <HoverTip placement="left">
           {entry.kind === "item" ? (
             <ItemCard item={entry.item} upgrade={entry.upgrade} />
           ) : (
             <HeroTooltip card={{ hero: entry.hero, weapon: null, armour: null, accessory: null }} />
           )}
-        </div>
+        </HoverTip>
       )}
     </div>
   );

@@ -1,4 +1,5 @@
 import { HeroTooltip } from "../cards/HeroTooltip";
+import { HoverTip } from "../fx";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { audioEngine } from "../../audio";
 import { heroGems, spellGems } from "../../data";
@@ -186,18 +187,9 @@ function RosterCard({
         )}
       </button>
       {hovered && (
-        <div
-          style={{
-            position: "absolute",
-            top: "100%",
-            left: 0,
-            marginTop: 6,
-            zIndex: 20,
-            pointerEvents: "none",
-          }}
-        >
+        <HoverTip placement="below">
           <HeroTooltip card={slot.card} />
-        </div>
+        </HoverTip>
       )}
     </div>
   );
