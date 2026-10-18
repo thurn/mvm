@@ -16,7 +16,7 @@ const tiles = (n: number) => `${n} ${n === 1 ? "tile" : "tiles"}`;
 /** One per catalog entry, matching the behaviors in src/heroes/board/ and src/spells/. */
 const DESCRIPTIONS: Readonly<Record<string, HeroDescription>> = {
   "MvM/Heroes/EzomyteAcolyte": {
-    tags: ["Minion", "Mana"],
+    tags: ["Persistent", "Mana"],
     text: `Makes a mana orb every ${B.acolyte.orbSeconds} s, the first within ${B.acolyte.firstOrbMaxSeconds} s; Spirit makes the orbs bigger. Deals no damage, but blocks monsters like any hero.`,
     range: "Its own tile",
   },
@@ -27,7 +27,7 @@ const DESCRIPTIONS: Readonly<Record<string, HeroDescription>> = {
   },
   "Metadata/Items/Gems/SkillGemIceStrike": {
     tags: ["Attack", "Melee", "Strike", "Cold"],
-    text: `Strikes the most advanced monster on its tile or the next one. Every ${B.iceStrike.combo === 3 ? "third" : `${B.iceStrike.combo}th`} strike is a faster finisher that reaches ${tiles(B.iceStrike.finalReach)} ahead.`,
+    text: `Strikes the most advanced monster on its tile or the next one. Every ${B.iceStrike.combo === 3 ? "third" : `${B.iceStrike.combo}th`} strike is a slower, harder finisher that reaches ${tiles(B.iceStrike.finalReach)} ahead.`,
     range: `${tiles(B.meleeReach)} ahead; finisher ${tiles(B.iceStrike.finalReach)}`,
   },
   "Metadata/Items/Gems/SkillGemFallingThunder": {
