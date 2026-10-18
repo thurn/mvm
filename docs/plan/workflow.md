@@ -329,6 +329,13 @@ A review/QA bead:
   `?reset=settings`) does the same before boot. Dev builds only.
 - **Scenes.** Prefer `?scene=<name>` for feel work. Use `debugSlowmo` to
   capture timing.
+- **Measuring juice.** Screenshots miss effects shorter than their own
+  latency, so assert the A/B with numbers: `window.__mvm.fx.peaks()` returns
+  what started since the last call (particles emitted per preset, peak live
+  particles, the largest shake amplitude in px, the strongest screen flash
+  and vignette) and starts over; `fx.live()` is the live particle count. Call
+  `peaks()` once to reset, play the moment, call it again. At `juice=0` the
+  particles, shake and flash read zero.
 - **Screenshots.** Captures go to the primary checkout's gitignored
   `/Users/dthurn/mvm/artifacts/qa/<bead-id>/` and are referenced by filename
   only. Never commit them.

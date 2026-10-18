@@ -1,3 +1,4 @@
+import { fxProbe } from "../core/probe";
 import { JUICE_TUNING, type Tier } from "../../tuning/juice";
 import type { JuiceSettings } from "../core/settings";
 
@@ -41,6 +42,7 @@ export class ScreenEffects {
         start: now,
         ms: row.vignette.ms,
       });
+    fxProbe.screen(fade(this.flash, now), fade(this.vignette, now));
   }
 
   sample(now: number): { flash: number; vignette: number } {

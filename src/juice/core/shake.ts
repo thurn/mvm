@@ -1,3 +1,4 @@
+import { fxProbe } from "./probe";
 import { JUICE_TUNING } from "../../tuning/juice";
 import type { JuiceSettings } from "./settings";
 
@@ -9,9 +10,16 @@ function noise(a: number, b: number): number {
 /** The trauma shake (H §2.2): events add trauma; it decays linearly; offsets are integer px. */
 export function createShake(settings: () => JuiceSettings) {
   let trauma = 0;
+  /** The shake's size in px now: shakeMax × trauma² × shake mode × juice. */
+  const amplitude = () => {
+    const s = settings();
+    const mode = s.shake === "off" ? 0 : s.shake === "low" ? JUICE_TUNING.shakeLowScale : 1;
+    return Math.min(s.shakeMax, s.shakeMax * trauma * trauma * mode * s.juice);
+  };
   return {
     add(amount: number) {
       trauma = Math.min(1, trauma + amount);
+      fxProbe.shake(amplitude());
     },
     update(dt: number) {
       trauma = Math.max(0, trauma - dt * JUICE_TUNING.traumaDecayPerSecond);
@@ -20,14 +28,13 @@ export function createShake(settings: () => JuiceSettings) {
     /** The board's offset at wall time `t` seconds; the HUD never shakes. */
     offset(t: number): { x: number; y: number } {
       const s = settings();
-      const mode = s.shake === "off" ? 0 : s.shake === "low" ? JUICE_TUNING.shakeLowScale : 1;
       // juice scales the amplitude (0–2); the offset is still clamped to shakeMax.
-      const amplitude = s.shakeMax * trauma * trauma * mode * s.juice;
+      const size = amplitude();
       const f = JUICE_TUNING.shakeFrequency;
       const clamp = (v: number) => Math.max(-s.shakeMax, Math.min(s.shakeMax, Math.round(v)));
       return {
-        x: clamp(amplitude * noise(t * f, 0)) || 0,
-        y: clamp(amplitude * noise(0, t * f)) || 0,
+        x: clamp(size * noise(t * f, 0)) || 0,
+        y: clamp(size * noise(0, t * f)) || 0,
       };
     },
   };

@@ -1,3 +1,4 @@
+import { fxProbe, type FxReading } from "../juice/core/probe";
 import type { Tier } from "../tuning/juice";
 import type { CueBatch } from "../juice/director/cue";
 import type { SimEvent } from "../sim/events";
@@ -16,6 +17,8 @@ export interface QaSurface {
   cues: CueBatch[];
   tierLog: unknown[];
   audioLog: unknown[];
+  /** Juice measurements: live particles, and everything started since the last peaks() (mason hv-7ic2.108). */
+  fx: { live(): number; peaks(): FxReading };
   /** Caught errors and console errors; must be empty at the end of every QA run. */
   caps: string[];
   /** Fires a tier's global effects on the running board (`?scene=tiers`). */
@@ -52,6 +55,7 @@ export function installQaSurface(): QaSurface {
     cues: [],
     tierLog: [],
     audioLog: [],
+    fx: { live: fxProbe.live, peaks: fxProbe.peaks },
     caps: [],
   };
   window.__mvm = qa;

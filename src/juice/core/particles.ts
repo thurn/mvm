@@ -1,3 +1,4 @@
+import { fxProbe } from "./probe";
 import { JUICE_TUNING, type PresetName } from "../../tuning/juice";
 import type { JuiceSettings } from "./settings";
 
@@ -34,6 +35,7 @@ export function createParticlePool(settings: () => JuiceSettings, rng: () => num
       const s = settings();
       let n = Math.floor(preset.count * (options.scale ?? 1) * s.juice);
       if (!options.loot && count > capacity * JUICE_TUNING.particleBudget) n = Math.floor(n / 2);
+      const before = count;
       for (let i = 0; i < n && count < capacity; i++, count++) {
         const angle = (between(preset.angle) * Math.PI) / 180;
         const speed = between(preset.speed);
@@ -50,9 +52,11 @@ export function createParticlePool(settings: () => JuiceSettings, rng: () => num
           typeof colors === "string" ? colors : colors[Math.floor(rng() * colors.length)]!;
         additive[count] = "blend" in preset ? 1 : 0;
       }
+      fxProbe.emitted(name, count - before);
     },
     /** Integrates and retires particles; `dt` in seconds. */
     update(dt: number) {
+      const before = count;
       for (let i = 0; i < count;) {
         life[i]! -= dt;
         if (life[i]! <= 0) {
@@ -77,6 +81,7 @@ export function createParticlePool(settings: () => JuiceSettings, rng: () => num
         y[i]! += vy[i]! * dt;
         i++;
       }
+      fxProbe.retired(before - count);
     },
     /** Draws every particle as a pixel-snapped square, additive where the preset says. */
     draw(ctx: CanvasRenderingContext2D) {
