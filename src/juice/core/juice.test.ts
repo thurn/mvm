@@ -202,3 +202,23 @@ describe("the settings store (P21)", () => {
     expect(createSettings(storage).get()).toEqual(DEFAULT_SETTINGS);
   });
 });
+
+test("juice = 2 doubles hitstop and strengthens shake, still within shakeMax", () => {
+  const double = () => settings({ juice: 2 });
+  const hitstop = createHitstop(double);
+  hitstop.global(4, 0, 1);
+  expect(hitstop.frozen(119)).toBe(true);
+  expect(hitstop.frozen(121)).toBe(false);
+  const strong = createShake(double);
+  const normal = createShake(() => settings());
+  strong.add(0.5);
+  normal.add(0.5);
+  let maxStrong = 0;
+  let maxNormal = 0;
+  for (let t = 0; t < 1; t += 0.01) {
+    maxStrong = Math.max(maxStrong, Math.abs(strong.offset(t).x));
+    maxNormal = Math.max(maxNormal, Math.abs(normal.offset(t).x));
+  }
+  expect(maxStrong).toBeGreaterThan(maxNormal);
+  expect(maxStrong).toBeLessThanOrEqual(6);
+});

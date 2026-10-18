@@ -10,7 +10,7 @@ export function createHitstop(settings: () => JuiceSettings) {
   let globalUntil = -Infinity;
   let lastGlobal = -Infinity;
   const actors = new Map<string, number>();
-  const scaled = (ms: number, speed: number) => (ms * Math.min(1, settings().juice)) / speed;
+  const scaled = (ms: number, speed: number) => (ms * settings().juice) / speed;
   return {
     /** Starts a tier's global hitstop; false when inside the rate limit, so the caller adds shake only. */
     global(tier: Tier, now: number, speed: number): boolean {

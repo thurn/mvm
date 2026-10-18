@@ -21,7 +21,8 @@ export function createShake(settings: () => JuiceSettings) {
     offset(t: number): { x: number; y: number } {
       const s = settings();
       const mode = s.shake === "off" ? 0 : s.shake === "low" ? JUICE_TUNING.shakeLowScale : 1;
-      const amplitude = s.shakeMax * trauma * trauma * mode * Math.min(1, s.juice);
+      // juice scales the amplitude (0–2); the offset is still clamped to shakeMax.
+      const amplitude = s.shakeMax * trauma * trauma * mode * s.juice;
       const f = JUICE_TUNING.shakeFrequency;
       const clamp = (v: number) => Math.max(-s.shakeMax, Math.min(s.shakeMax, Math.round(v)));
       return {
