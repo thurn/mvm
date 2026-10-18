@@ -2,3 +2,10 @@ node_modules/
 dist/
 .DS_Store
 .tollgate/
+.worktrees/
+.cache/
+public/assets/
+.saves/
+.play/
+logs/
+artifacts/
