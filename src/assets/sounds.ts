@@ -48,6 +48,20 @@ export const SOUNDS = {
   },
   drop_currency: { variants: [`${RPG}/item_gem_0#.ogg`] },
   drop_gold: { variants: [`${RPG}/item_coins_0#.ogg`] },
+  // Skill launch and impact layers for the M1 heroes (H §6.1).
+  bow_release: { variants: ["lpc/big-island/resources/sounds/shoot.ogg"] },
+  crossbow_fire: { variants: ["lpc/big-island/resources/sounds/shoot1.ogg"] },
+  spark_cast: {
+    variants: [
+      "kenney-digital-audio/Audio/zapTwoTone.ogg",
+      "kenney-digital-audio/Audio/zapTwoTone2.ogg",
+    ],
+  },
+  zap: { variants: ["kenney-digital-audio/Audio/zap#.ogg"] },
+  slam: { variants: [`${BREAK}/bfh1_rock_breaking_0#.ogg`] },
+  swing_light: { variants: ["starninjas-swords/sword - StarNinjas/sword.#.ogg"] },
+  thunder_crack: { variants: [`${IMPACT}/impactMining_00#.ogg`], layers: [BOMB] },
+  ice_crack_heavy: { variants: ["bart-ice-spells/ice.wav"] },
   // Each coin's arrival at the gold readout, on the coin ladder (H §3.4, §3.5).
   coin: { variants: [`${RPG}/item_coins_0#.ogg`] },
   coin_pile: {

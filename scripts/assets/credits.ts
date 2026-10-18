@@ -95,6 +95,7 @@ export class CreditResolver {
     if (pack === "source-of-tales") return this.sourceOfTales(file);
     const credits: Record<string, string> = {
       "lpc-tile-atlas": "lpc-tile-atlas/files/Attribution.txt",
+      "big-island": "big-island/AUTHORS.txt",
       "lpc-medieval-village-decorations":
         "lpc-medieval-village-decorations/files/decoration_medieval/CREDITS-decorations-medieval.txt",
     };

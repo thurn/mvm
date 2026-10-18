@@ -402,3 +402,24 @@ export const MANA_JUICE = {
   placement: { dropPx: 24, dropMs: 150, squashMs: 120, squash: { x: 1.15, y: 0.85 } },
   shovel: { sinkPx: 8, ms: 200 },
 };
+
+/** Stat-driven VFX (H §5.3, §2.8, §11.1). Colours are G §1.4's FX main and core. */
+export const VFX_TUNING = {
+  fx: {
+    physical: { main: "#E8E2D0", core: "#FFFFFF" },
+    fire: { main: "#FF6A1A", core: "#FFD27A" },
+    cold: { main: "#7FD4FF", core: "#E6FAFF" },
+    lightning: { main: "#FFE14D", core: "#FFFFFF" },
+    chaos: { main: "#B44DFF", core: "#F0A0FF" },
+  },
+  /** A secondary element must be at least this share of the mix to show as a trail. */
+  trailShare: 0.1,
+  trailBase: 6,
+  trailPerSpeed: 8,
+  critSparkChance: 0.2,
+  frameMs: 1000 / 60,
+  polyline: { subdivisions: 4, offsetPx: 6, regenerateFrames: 2 },
+  beamMs: 120,
+  ring: { aspect: 0.5, fromScale: 0.3, expandMs: 120, fadeMs: 200, stroke: 2 },
+  muzzleParticles: 2,
+};

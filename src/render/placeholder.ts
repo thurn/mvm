@@ -7,18 +7,8 @@ const COLORS = {
   lawnB: "#5a8743",
   unusedLane: "#2f3b2a",
   grid: "rgba(0, 0, 0, 0.12)",
-  projectile: "#ffe066",
   spellTile: "rgba(140, 200, 255, 0.35)",
 } as const;
-
-/** Logical px of a continuous board x (1.0 = centre of column 1) and a lane centre. */
-function boardX(x: number): number {
-  return (x - 0.5) * TILE;
-}
-
-function laneY(lane: number): number {
-  return (lane + 0.5) * TILE;
-}
 
 function drawLawn(ctx: CanvasRenderingContext2D, { state }: Frame) {
   for (let lane = 0; lane < 5; lane++) {
@@ -41,17 +31,8 @@ function drawSpellTiles(ctx: CanvasRenderingContext2D, { state }: Frame) {
   }
 }
 
-function drawProjectiles(ctx: CanvasRenderingContext2D, { state }: Frame) {
-  ctx.fillStyle = COLORS.projectile;
-  for (const p of state.projectiles) {
-    if (p.delaySeconds > 0) continue;
-    ctx.fillRect(Math.round(boardX(p.x) - 4), Math.round(laneY(p.lane) - 2), 8, 4);
-  }
-}
-
-/** Placeholder lawn, projectiles and spell tiles straight from RoundState; actors are src/render/sprites/. */
+/** Placeholder lawn and spell tiles straight from RoundState; actors are src/render/sprites/, projectiles src/juice/vfx/. */
 export function registerPlaceholderLayers(stack: LayerStack): void {
   stack.register({ id: "placeholder-lawn", layer: "lawn", draw: drawLawn });
-  stack.register({ id: "placeholder-projectiles", layer: "projectiles", draw: drawProjectiles });
   stack.register({ id: "placeholder-spell-tiles", layer: "groundEffects", draw: drawSpellTiles });
 }

@@ -1,6 +1,7 @@
 import type { Intent } from "../../sim/intents";
 import type { RoundState } from "../../sim/state";
 import { emptyBoard } from "./empty-board";
+import { equipAb } from "./equip-ab";
 import { hitBands } from "./hit-bands";
 import { kills } from "./kills";
 import { manaRain } from "./mana-rain";
@@ -25,6 +26,7 @@ export const SCENES: readonly Scene[] = [
   hitBands,
   kills,
   manaRain,
+  equipAb,
 ];
 
 export function findScene(name: string): Scene | undefined {
