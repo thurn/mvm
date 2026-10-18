@@ -37,7 +37,7 @@ export function Board({ scene }: { scene: Scene }) {
       step() {
         previousX.clear();
         for (const monster of state.monsters) previousX.set(monster.id, monster.x);
-        recordEvents(qa, step(state, drain(intents)));
+        recordEvents(qa, step(state, [...drain(intents), ...(scene.intents?.(state) ?? [])]));
         if (driver.speed() !== state.speed) driver.setSpeed(state.speed);
       },
     });

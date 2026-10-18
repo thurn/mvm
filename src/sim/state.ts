@@ -1,6 +1,7 @@
 import type { Actor } from "../combat/actor";
 import type { SkillHit } from "../combat/hit";
 import type { WaveRuntime } from "../monsters/waves";
+import type { SpellShape } from "../spells/shapes";
 import type { ManaOrb } from "./economy/orbs";
 import type { RosterSlot } from "./economy/roster";
 import type { Id } from "../types/ids";
@@ -13,7 +14,21 @@ export type Rarity = "normal" | "magic" | "rare" | "unique" | "boss";
 export type MonsterInstanceId = Id<"MonsterInstance">;
 export type HeroInstanceId = Id<"HeroInstance">;
 type ScriptedActorId = Id<"ScriptedActor">;
-export type EntityId = MonsterInstanceId | HeroInstanceId | ScriptedActorId;
+type SpellCastId = Id<"SpellCast">;
+export type EntityId = MonsterInstanceId | HeroInstanceId | ScriptedActorId | SpellCastId;
+
+/** One timed part of a cast spell, waiting to land (Appendix B §6). */
+export interface PendingSpellPart {
+  castId: SpellCastId;
+  spellId: string;
+  part: string;
+  lane: number;
+  column: number;
+  atSeconds: number;
+  shape: SpellShape;
+  hit: SkillHit;
+  actor: Actor;
+}
 
 export interface MonsterState {
   id: MonsterInstanceId;
@@ -133,6 +148,8 @@ export interface RoundState {
   monsters: MonsterState[];
   projectiles: ProjectileState[];
   groundEffects: GroundEffectState[];
+  /** Cast spell parts waiting to land. */
+  spells: PendingSpellPart[];
   scripted: ScriptedActorState[];
   /** Named countdowns in seconds, owned by the systems that set them. */
   timers: Record<string, number>;
@@ -167,6 +184,7 @@ export function createRound({ seed, lanes, mana }: RoundOptions): RoundState {
     monsters: [],
     projectiles: [],
     groundEffects: [],
+    spells: [],
     scripted: [],
     timers: {},
     mana,

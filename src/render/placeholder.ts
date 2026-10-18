@@ -1,3 +1,4 @@
+import { shapeTiles } from "../spells/shapes";
 import type { Frame, LayerStack } from "./layers";
 import { BOARD_HEIGHT, BOARD_WIDTH, TILE } from "./scale";
 
@@ -13,6 +14,7 @@ const COLORS = {
   lifeBack: "#3a0d0d",
   life: "#d23c3c",
   projectile: "#ffe066",
+  spellTile: "rgba(140, 200, 255, 0.35)",
 } as const;
 
 /** Logical px of a continuous board x (1.0 = centre of column 1) and a lane centre. */
@@ -106,6 +108,15 @@ function drawActors(ctx: CanvasRenderingContext2D, frame: Frame) {
   for (const sprite of sprites) sprite.draw();
 }
 
+function drawSpellTiles(ctx: CanvasRenderingContext2D, { state }: Frame) {
+  ctx.fillStyle = COLORS.spellTile;
+  for (const part of state.spells) {
+    for (const tile of shapeTiles(part.shape, part.lane, part.column, state.lanes)) {
+      ctx.fillRect((tile.column - 1) * TILE + 2, tile.lane * TILE + 2, TILE - 4, TILE - 4);
+    }
+  }
+}
+
 function drawProjectiles(ctx: CanvasRenderingContext2D, { state }: Frame) {
   ctx.fillStyle = COLORS.projectile;
   for (const p of state.projectiles) {
@@ -119,4 +130,5 @@ export function registerPlaceholderLayers(stack: LayerStack): void {
   stack.register({ id: "placeholder-lawn", layer: "lawn", draw: drawLawn });
   stack.register({ id: "placeholder-actors", layer: "actors", draw: drawActors });
   stack.register({ id: "placeholder-projectiles", layer: "projectiles", draw: drawProjectiles });
+  stack.register({ id: "placeholder-spell-tiles", layer: "groundEffects", draw: drawSpellTiles });
 }

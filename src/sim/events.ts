@@ -56,6 +56,22 @@ export type SimEvent =
       cost: number;
       lifeLeft: number;
     }
+  | { type: "cast"; castId: EntityId; spellId: string; lane: number; column: number }
+  | {
+      type: "castRefused";
+      spellId: string;
+      lane: number;
+      column: number;
+      reason: "unknown-spell" | "out-of-bounds" | "recharging" | "cost";
+    }
+  | {
+      type: "spellImpact";
+      castId: EntityId;
+      part: string;
+      lane: number;
+      column: number;
+      tiles: { lane: number; column: number }[];
+    }
   | { type: "waveStart"; wave: number; flag: boolean }
   | { type: "flagWarning"; wave: number }
   | { type: "levelEnd"; result: "won" | "lost" }
