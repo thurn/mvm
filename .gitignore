@@ -9,3 +9,4 @@ public/assets/
 .play/
 logs/
 artifacts/
+.playwright-mcp/
