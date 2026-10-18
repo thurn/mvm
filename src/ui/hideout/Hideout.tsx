@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import type { AccountState } from "../../account/state";
 import { currencies } from "../../data";
 import type { Card } from "../../heroes/model/hero";
 import type { ItemInstance, ItemSlot } from "../../heroes/model/item";
+import { sharedSettings } from "../../juice/core/settings";
+import { flashAlpha } from "../../juice/tiers/screen";
 import { HIDEOUT_TUNING as T } from "../../tuning/juice";
 import { HeroCard } from "../cards/HeroCard";
 import { ItemCard, itemName } from "../cards/ItemCard";
@@ -35,7 +37,7 @@ const STYLE = `@keyframes mvm-hideout-click { from { transform: scale(0.9); } to
 @keyframes mvm-hideout-pulse { 50% { outline-color: rgba(255, 209, 102, 0.25); } }
 @keyframes mvm-hideout-deny { 25% { transform: translateX(-3px); background: rgba(224,72,72,0.35); } 75% { transform: translateX(3px); background: rgba(224,72,72,0.35); } }
 @keyframes mvm-hideout-delta { from { transform: none; opacity: 1; } to { transform: translateY(-22px); opacity: 0; } }
-@keyframes mvm-hideout-flash { from { opacity: 0.9; } to { opacity: 0; } }
+@keyframes mvm-hideout-flash { to { opacity: 0; } }
 @keyframes mvm-hideout-burst { from { opacity: 0.8; transform: scale(0.6); } to { opacity: 0; transform: scale(1.4); } }`;
 
 function dominant(mix: Partial<Record<string, number>>): string | null {
@@ -211,6 +213,7 @@ function RosterSlot({
   drag,
   pulse,
   reaction,
+  fx,
   validFor,
   setDrag,
   onDropSlot,
@@ -225,6 +228,8 @@ function RosterSlot({
   pulse: Pulse | null;
   /** This card's latest reaction to a change, if any. */
   reaction: Reaction | null;
+  /** The juice and reduce-flashing settings, applied to the card's reaction (H §1.1, §14). */
+  fx: { juice: number; flash: number };
   validFor(zone: "slot" | ItemSlot): boolean;
   setDrag(drag: Drag | null): void;
   onDropSlot(): void;
@@ -287,10 +292,13 @@ function RosterSlot({
             }}
           >
             <HeroCard card={card} shown={{ dps, ehp }} />
-            {reaction && (
+            {reaction && fx.flash > 0 && (
               <div
                 key={`flash-${reaction.seq}`}
+                data-testid="card-flash"
+                data-alpha={fx.flash}
                 style={{
+                  opacity: fx.flash,
                   position: "absolute",
                   inset: 0,
                   background: "#ffffff",
@@ -299,7 +307,7 @@ function RosterSlot({
                 }}
               />
             )}
-            {reaction?.burst && (
+            {reaction?.burst && fx.juice > 0 && (
               <div
                 key={`burst-${reaction.seq}`}
                 style={{
@@ -433,6 +441,9 @@ export function Hideout({
   onPlay(): void;
 }) {
   const [tab, setTab] = useState<Tab>("roster");
+  const settingsStore = sharedSettings();
+  const settings = useSyncExternalStore(settingsStore.subscribe, settingsStore.get);
+  const fx = { juice: Math.min(1, settings.juice), flash: flashAlpha(T.flashAlpha, settings) };
   const [drag, setDrag] = useState<Drag | null>(null);
   const [pulse, setPulse] = useState<Pulse | null>(null);
   const [status, setStatus] = useState<string | null>(null);
@@ -477,6 +488,8 @@ export function Hideout({
     const reason = equipRefusal(account, item, target, part);
     if (reason) return refuse(zone, `Can't equip ${itemName(item).name}: ${reason}.`);
     const from = drag.from;
+    // Dropped back where it came from: nothing to do.
+    if (from !== "stash" && from.target === target && from.part === part) return;
     change(zone, equipSound(item), target, () => {
       if (from !== "stash") unequip(account, from.target, from.part);
       return equip(account, item.id, target, part);
@@ -496,7 +509,12 @@ export function Hideout({
     } else if (drag.from.target !== target) {
       const from = drag.from.target;
       if (!change(zone, "ui_click", null, () => moveCard(account, from, target)))
-        refuse(zone, "That slot is locked.");
+        refuse(
+          zone,
+          target === "spell" || from === "spell"
+            ? "Heroes go in card slots; spells go in the spell slot."
+            : "That slot is locked.",
+        );
     }
   };
   const dropOnStash = () => {
@@ -544,6 +562,7 @@ export function Hideout({
         drag={drag}
         pulse={pulse}
         reaction={reaction?.target === target ? reaction : null}
+        fx={fx}
         validFor={validFor(target)}
         setDrag={setDrag}
         onDropSlot={() => dropOnSlot(target)}

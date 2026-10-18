@@ -7,6 +7,8 @@ import type { ItemInstance } from "../../heroes/model/item";
 import { generateGear } from "../../loot/items";
 import { createStreams, streamRng } from "../../sim/rng";
 import { id } from "../../types/ids";
+import { DEFAULT_SETTINGS, sharedSettings, type JuiceSettings } from "../../juice/core/settings";
+import { JUICE_TUNING } from "../../tuning/juice";
 import { Hideout } from "./Hideout";
 import { isSpell, rollUnrolled, stashView } from "./model";
 
@@ -219,5 +221,46 @@ describe("unrolled hero drops (1.18)", () => {
     const b = make();
     rollUnrolled(b);
     expect(b.stash.heroes).toEqual(a.stash.heroes);
+  });
+});
+
+describe("review fixes (hv-7ic2.72)", () => {
+  afterEach(() => sharedSettings().set(DEFAULT_SETTINGS));
+
+  function equipMace(patch: Partial<JuiceSettings>) {
+    cleanup();
+    sharedSettings().set({ ...DEFAULT_SETTINGS, ...patch });
+    const account = warrior();
+    const mace = gear("Two Hand Mace", "rare", 30);
+    account.stash.items.push(mace);
+    setup(account);
+    drag(screen.getByTestId(`stash-item-${mace.id}`), screen.getByTestId("slot-1-weapon"));
+    expect(account.roster.slots[1]!.weapon).toBe(mace);
+    return screen.queryByTestId("card-flash");
+  }
+
+  test("the card flash honours juice and reduce flashing", () => {
+    expect(Number(equipMace({})!.dataset.alpha)).toBeGreaterThan(
+      JUICE_TUNING.reduceFlashingMaxAlpha,
+    );
+    expect(Number(equipMace({ reduceFlashing: true })!.dataset.alpha)).toBeLessThanOrEqual(
+      JUICE_TUNING.reduceFlashingMaxAlpha,
+    );
+    expect(equipMace({ juice: 0 })).toBeNull();
+  });
+
+  test("an equipped item dropped back on its own slot changes and saves nothing", () => {
+    const account = warrior();
+    const weapon = account.roster.slots[1]!.weapon;
+    const onSave = setup(account);
+    drag(screen.getByTestId("slot-1-weapon"), screen.getByTestId("slot-1-weapon"));
+    expect(account.roster.slots[1]!.weapon).toBe(weapon);
+    expect(onSave).not.toHaveBeenCalled();
+  });
+
+  test("a roster hero dropped on the spell slot says why", () => {
+    setup(warrior());
+    drag(screen.getByTestId("roster-hero-1"), screen.getByTestId("roster-spell"));
+    expect(screen.getByTestId("hideout-status").textContent).toContain("spell slot");
   });
 });

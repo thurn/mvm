@@ -487,6 +487,8 @@ export const HIDEOUT_TUNING = {
   deltaMs: 900,
   /** The card flashes white for two frames. */
   flashMs: 33,
+  /** The flash's peak alpha, before the juice and reduce-flashing settings. */
+  flashAlpha: 0.9,
   /** A burst in the new element's colour when the dominant damage type changes. */
   elementBurstMs: 400,
   /** A refused drop shakes the target this long. */
