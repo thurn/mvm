@@ -20,6 +20,7 @@ export function createParticlePool(settings: () => JuiceSettings, rng: () => num
   const color: string[] = new Array<string>(capacity).fill("");
   const additive = new Uint8Array(capacity);
   let count = 0;
+  const probeId = fxProbe.pool();
   const between = ([lo, hi]: readonly [number, number]) => lo + rng() * (hi - lo);
 
   return {
@@ -52,11 +53,10 @@ export function createParticlePool(settings: () => JuiceSettings, rng: () => num
           typeof colors === "string" ? colors : colors[Math.floor(rng() * colors.length)]!;
         additive[count] = "blend" in preset ? 1 : 0;
       }
-      fxProbe.emitted(name, count - before);
+      fxProbe.emitted(probeId, name, count - before, count);
     },
     /** Integrates and retires particles; `dt` in seconds. */
     update(dt: number) {
-      const before = count;
       for (let i = 0; i < count;) {
         life[i]! -= dt;
         if (life[i]! <= 0) {
@@ -81,7 +81,7 @@ export function createParticlePool(settings: () => JuiceSettings, rng: () => num
         y[i]! += vy[i]! * dt;
         i++;
       }
-      fxProbe.retired(before - count);
+      fxProbe.alive(probeId, count);
     },
     /** Draws every particle as a pixel-snapped square, additive where the preset says. */
     draw(ctx: CanvasRenderingContext2D) {

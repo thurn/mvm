@@ -1,4 +1,4 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { DEFAULT_SETTINGS, type JuiceSettings } from "./settings";
 import { createDirector } from "../director/director";
 import { createParticlePool } from "./particles";
@@ -44,4 +44,17 @@ describe("window.__mvm.fx (mason hv-7ic2.108)", () => {
     pool.update(10);
     expect(fxProbe.live()).toBe(start);
   });
+});
+
+test("a pool that stops updating (its board unmounted) stops counting as live", () => {
+  vi.useFakeTimers();
+  try {
+    const pool = createParticlePool(() => DEFAULT_SETTINGS);
+    pool.emit("dust", 0, 0);
+    expect(fxProbe.live()).toBeGreaterThan(0);
+    vi.advanceTimersByTime(1500);
+    expect(fxProbe.live()).toBe(0);
+  } finally {
+    vi.useRealTimers();
+  }
 });
