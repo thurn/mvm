@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { installQaSurface, recordEvents } from "../dev/qa-surface";
+import { installQaSurface, recordCues, recordEvents } from "../dev/qa-surface";
+import { createSettings } from "../juice/core/settings";
+import { createDirector } from "../juice/director/director";
 import type { Scene } from "../dev/scenes";
 import type { SimEvent } from "../sim/events";
 import type { RoundState } from "../sim/state";
@@ -67,14 +69,34 @@ export function Board({ scene, scale: forcedScale, queue, onFrame, isPaused }: B
     qa.round = state;
     const intents = queue ?? createIntentQueue();
     const previousX = new Map<string, number>();
+    const settings = createSettings();
+    // The juice director (P12) reads each step's events; its hitstop and slow-mo reach the sim only through the driver.
+    const director = createDirector({
+      settings: settings.get,
+      now: () => performance.now(),
+      speed: () => state.speed,
+      systems: [
+        {
+          id: "qa",
+          consume: (_cue, batch) => {
+            if (qa.cues.at(-1) !== batch) recordCues(qa, batch, settings.get().tierLog);
+          },
+        },
+      ],
+    });
     const driver = createDriver({
       step() {
         previousX.clear();
         for (const monster of state.monsters) previousX.set(monster.id, monster.x);
         const events = step(state, [...drain(intents), ...(scene.intents?.(state) ?? [])]);
         recordEvents(qa, events);
+        director.handle(events, state);
         scene.onStep?.(state, events);
         if (driver.speed() !== state.speed) driver.setSpeed(state.speed);
+      },
+      hooks: {
+        frozen: () => director.frozen(performance.now()),
+        timeScale: () => director.timeScale(performance.now()),
       },
     });
     const stack = createLayerStack();
@@ -83,12 +105,20 @@ export function Board({ scene, scale: forcedScale, queue, onFrame, isPaused }: B
     let last = performance.now();
     let frame = requestAnimationFrame(function tick(now) {
       driver.setPaused(isPausedRef.current?.() ?? false);
+      driver.setDebugSlowmo(settings.get().debugSlowmo ?? 1);
       driver.advance(now - last);
+      director.update((now - last) / 1000);
       last = now;
       ctx.save();
       ctx.setTransform(scaleRef.current, 0, 0, scaleRef.current, 0, 0);
       ctx.imageSmoothingEnabled = false;
-      stack.draw(ctx, { state, previousX, alpha: driver.alpha(), shake: { x: 0, y: 0 }, now });
+      stack.draw(ctx, {
+        state,
+        previousX,
+        alpha: driver.alpha(),
+        shake: director.shakeOffset(now / 1000),
+        now,
+      });
       ctx.restore();
       onFrameRef.current?.();
       frame = requestAnimationFrame(tick);

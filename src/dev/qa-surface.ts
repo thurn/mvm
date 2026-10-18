@@ -1,3 +1,4 @@
+import type { CueBatch } from "../juice/director/cue";
 import type { SimEvent } from "../sim/events";
 import { installSaveDebug } from "./save-debug";
 import type { RoundState } from "../sim/state";
@@ -10,8 +11,8 @@ export interface QaSurface {
   round: RoundState | null;
   /** The last 200 sim events. */
   events: SimEvent[];
-  /** The last 200 juice cues (1.6 onward). */
-  cues: unknown[];
+  /** The last 200 juice cue batches (1.15). */
+  cues: CueBatch[];
   tierLog: unknown[];
   audioLog: unknown[];
   /** Caught errors and console errors; must be empty at the end of every QA run. */
@@ -53,6 +54,16 @@ export function installQaSurface(): QaSurface {
     consoleError(...args);
   };
   return qa;
+}
+
+/** Records a juice cue batch, and T3+ batches in the tier log when it is on (P22). */
+export function recordCues(qa: QaSurface, batch: CueBatch, tierLog: boolean): void {
+  qa.cues.push(batch);
+  if (qa.cues.length > HISTORY) qa.cues.splice(0, qa.cues.length - HISTORY);
+  if (tierLog && batch.tier >= 3) {
+    qa.tierLog.push({ event: batch.event, tier: batch.tier });
+    if (qa.tierLog.length > HISTORY) qa.tierLog.splice(0, qa.tierLog.length - HISTORY);
+  }
 }
 
 export function recordEvents(qa: QaSurface, events: readonly SimEvent[]): void {

@@ -7,6 +7,8 @@ import type { EntityId, HeroInstanceId, MonsterInstanceId, Rarity } from "./stat
  * Everything presentation needs to know about one step (P11, P12). Events
  * carry IDs, positions and numbers, never names. Later beads add variants.
  */
+export type SimEventOf<T extends SimEvent["type"]> = Extract<SimEvent, { type: T }>;
+
 export type SimEvent =
   | {
       type: "hit";
