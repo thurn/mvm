@@ -43,6 +43,8 @@ export const killSystem: PresentationFactory = ({ stack, settings, now }) => {
   const killLadder = new Ladder(KILL_TUNING.killLadderWindowMs, KILL_TUNING.killLadderMaxSteps);
   const coinLadder = new Ladder(C.ladderWindowMs, C.ladderMaxSemitones);
   let last: number | null = null;
+  /** The coins layer keeps its own clock; the impacts layer advances `last` first each frame. */
+  let lastCoinFrame: number | null = null;
 
   function spawnCoins(lane: number, x: number, amount: number, rare: boolean, t: number) {
     const count = coinCount(amount, rare);
@@ -106,7 +108,9 @@ export const killSystem: PresentationFactory = ({ stack, settings, now }) => {
     layer: "loot",
     draw(ctx, frame) {
       const t = frame.now;
-      const dt = Math.min(0.1, Math.max(0, (t - (last ?? t)) / 1000)) || 1 / 60;
+      const dt =
+        lastCoinFrame === null ? 0 : Math.min(0.1, Math.max(0, (t - lastCoinFrame) / 1000));
+      lastCoinFrame = t;
       const landed: Coin[] = [];
       for (const coin of coins) {
         if (t >= coin.arriveAt) {
