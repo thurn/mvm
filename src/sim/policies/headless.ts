@@ -87,9 +87,10 @@ export function runRound(request: RoundRequest): RoundMetrics {
         monsters.set(m.id, { rarity: m.rarity, affixes: m.affixes?.length ?? 0 });
     for (const event of step(state, policy(state))) {
       if (event.type === "leak") metrics.leaks++;
-      if (event.type !== "kill" || !monsters.has(event.targetId)) continue;
+      // Monster kills carry a rarity; hero deaths don't. A monster can spawn and die in one step.
+      if (event.type !== "kill" || event.rarity === null) continue;
       metrics.kills++;
-      const monster = monsters.get(event.targetId)!;
+      const monster = monsters.get(event.targetId) ?? { rarity: event.rarity, affixes: 0 };
       const killer = state.heroes.find((h) => h.id === event.sourceId);
       const drops = rollDrops(
         {
