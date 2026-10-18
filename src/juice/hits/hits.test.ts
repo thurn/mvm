@@ -91,6 +91,13 @@ describe("number cap (H §2.5)", () => {
     expect(field.live(60)).toHaveLength(1);
     expect(field.live(60)[0]!.amount).toBe(9);
   });
+
+  test("a merged hit keeps its first jitter, so the number never jumps sideways", () => {
+    const field = new NumberField();
+    field.add({ key: "a", ...hit({ amount: 5 }), jitter: 3 }, 0);
+    field.add({ key: "a", ...hit({ amount: 9 }), jitter: -4 }, 50);
+    expect(field.live(60)[0]!.jitter).toBe(3);
+  });
 });
 
 describe("bands (H §2.6)", () => {

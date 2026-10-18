@@ -65,7 +65,8 @@ export class NumberField {
   add(number: Omit<LiveNumber, "bornAt">, now: number): void {
     const existing = this.numbers.find((n) => n.key === number.key && n.fadeFrom === undefined);
     if (existing) {
-      Object.assign(existing, number);
+      // A merged hit counts up in place: its position and pop stay put.
+      Object.assign(existing, { ...number, jitter: existing.jitter });
       return;
     }
     this.numbers.push({ ...number, bornAt: now });
