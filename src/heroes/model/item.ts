@@ -15,6 +15,10 @@ export interface ItemInstance {
   itemLevel: number;
   quality: number;
   mods: { modId: ModId; values: number[] }[];
+  /** The base's implicits, rolled at drop (Appendix C §C.1.3). */
+  implicits?: { modId: string; values: number[] }[];
+  /** The unique this item is, when its rarity is unique (C.4). */
+  uniqueId?: string;
 }
 
 const ACCESSORY_CLASSES = new Set(["Amulet", "Ring", "Belt"]);

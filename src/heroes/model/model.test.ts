@@ -243,3 +243,17 @@ describe("mods the data doesn't map yet", () => {
     expect(sheet.weapon!.damage.physical).toEqual({ min: 7, max: 12 });
   });
 });
+
+test("rolled implicits reach the sheet (Appendix C §C.1.3)", () => {
+  const ring = {
+    ...item(baseNamed("Ruby Ring")),
+    implicits: [{ modId: "RingImplicitFireResistance1", values: [25] }],
+  };
+  const card: Card = {
+    hero: newHero("h", id<"Gem">("Metadata/Items/Gems/SkillGemLightningArrow"), 1),
+    weapon: null,
+    armour: null,
+    accessory: ring,
+  };
+  expect(aggregate(card, { bases }).actor.resist.fire).toBe(25);
+});

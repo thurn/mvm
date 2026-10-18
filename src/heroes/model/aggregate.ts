@@ -93,11 +93,24 @@ function isLocal(key: string): boolean {
 /** Splits one item's mods into its local sheet and the hero's global sheet. */
 function addItemMods(
   item: ItemInstance,
+  base: BaseItemData,
   modsById: Map<string, ModData>,
   local: Sheet,
   global: Sheet,
   unmodelled: string[],
 ) {
+  // Implicits (C.1.3): the base lists each implicit's PoE2 stats; the item holds its rolled values.
+  for (const rolled of item.implicits ?? []) {
+    const implicit = base.implicits.find((i) => i.id === rolled.modId);
+    implicit?.stats.forEach((raw, index) => {
+      const mapping = STAT_MAP[raw.id];
+      const value = rolled.values[index];
+      if (!mapping || value === undefined) return;
+      const sheet = isLocal(mapping.stat) ? local : global;
+      if ("part" in mapping) sheet.addRange(mapping.stat, mapping.part, value);
+      else sheet.add(mapping.stat, value / (mapping.divisor ?? 1));
+    });
+  }
   for (const rolled of item.mods) {
     const mod = modsById.get(rolled.modId);
     if (!mod) {
@@ -210,14 +223,15 @@ export function aggregate(card: Card, context: AggregateContext = {}): HeroSheet
   let weapon: WeaponStats | null = null;
   const weaponLocal = new Sheet();
   if (card.weapon) {
-    addItemMods(card.weapon, modsById, weaponLocal, global, unmodelled);
+    addItemMods(card.weapon, baseOf(card.weapon), modsById, weaponLocal, global, unmodelled);
     weapon = weaponStats(baseOf(card.weapon), weaponLocal, card.weapon.quality);
   }
 
   const armourLocal = new Sheet();
   const armourBase = card.armour ? baseOf(card.armour) : null;
-  if (card.armour) addItemMods(card.armour, modsById, armourLocal, global, unmodelled);
-  if (card.accessory) addItemMods(card.accessory, modsById, new Sheet(), global, unmodelled);
+  if (card.armour) addItemMods(card.armour, armourBase!, modsById, armourLocal, global, unmodelled);
+  if (card.accessory)
+    addItemMods(card.accessory, baseOf(card.accessory), modsById, new Sheet(), global, unmodelled);
 
   const more: MoreModifier[] = [];
   addSupports(hero.supports, context.supports ?? supportGems(), global, more, unmodelled);
