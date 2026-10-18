@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactElement } from "react";
 import {
   applyStep,
   beginLevel,
@@ -28,12 +28,19 @@ import { HUD_BOTTOM, HUD_TOP } from "../ui/hud/Hud";
 import { createRoundStore } from "../ui/hud/round-store";
 import { RestartBanner } from "../ui/resume/Banner";
 import { ResumeHud } from "../ui/resume/ResumeHud";
-import { Title } from "../ui/resume/Title";
+import { Campaign } from "../ui/title/Campaign";
+import { Credits } from "../ui/title/Credits";
+import { FocusSelect } from "../ui/title/FocusSelect";
+import { MenuButton, MenuScreen } from "../ui/title/layout";
+import { TitleScreen } from "../ui/title/TitleScreen";
+import { route, type RouteAction, type Screen } from "./router";
 import { acceptsIntent, bootDecision, countdownAt } from "./boot";
 import { Board, useBoardScale, type BoardSource } from "./Board";
 import { DevMenu } from "../ui/dev/DevMenu";
 
 const BUILD = import.meta.env.DEV ? "dev" : "build";
+/** How long the board stays up after a level ends, so its banner and stinger play. */
+const LEVEL_END_HOLD_MS = 1500;
 
 interface Services {
   store: SaveStore;
@@ -51,7 +58,13 @@ interface Playing {
 
 type Phase =
   | { kind: "loading" }
-  | { kind: "title"; account: AccountState | null }
+  | {
+      kind: "menu";
+      screen: Exclude<Screen, "level">;
+      account: AccountState | null;
+      /** The last level's result line, for the level-end screen until 1.35's summary. */
+      summary?: string;
+    }
   | ({ kind: "playing" } & Playing);
 
 function persist(services: Services, account: AccountState, round: RoundState | null): void {
@@ -96,7 +109,6 @@ function logEvents(logger: Logger, round: RoundState, events: readonly SimEvent[
 export function Game() {
   const [services, setServices] = useState<Services | null>(null);
   const [phase, setPhase] = useState<Phase>({ kind: "loading" });
-  const [ended, setEnded] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -119,7 +131,7 @@ export function Game() {
       setServices({ store, mirror, logger });
       const decision = bootDecision(resumed);
       if (decision.kind === "title" || !resumed?.round) {
-        setPhase({ kind: "title", account: resumed?.account ?? null });
+        setPhase({ kind: "menu", screen: "title", account: resumed?.account ?? null });
       } else {
         logger.log("resume", { decision: decision.kind, tick: resumed.round.tick });
         setPhase({
@@ -179,8 +191,17 @@ export function Game() {
             drops: summary.drops.length,
           });
           persist(services, playing.account, null);
-          setEnded(
-            `Level 1 ${summary.result}: ${summary.drops.length} drops, ${summary.xpGained} XP`,
+          // The level-end banner and stinger play on the board first, then the level-end screen.
+          const line = `Level 1 ${summary.result}: ${summary.drops.length} drops, ${summary.xpGained} XP`;
+          setTimeout(
+            () =>
+              setPhase({
+                kind: "menu",
+                screen: "levelEnd",
+                account: playing.account,
+                summary: line,
+              }),
+            LEVEL_END_HOLD_MS,
           );
         }
       },
@@ -192,12 +213,22 @@ export function Game() {
     const owner = account ?? newAccount("warrior");
     const round = beginLevel(owner, LEVEL_1);
     services.logger.log("levelStart", { levelId: LEVEL_1.id, wavePlan: round.waves?.plan });
-    setEnded(null);
     setPhase({ kind: "playing", account: owner, round, countdownStartedAt: null, banner: null });
   };
 
+  /** Follows the router from a menu screen (1.34); "level" starts the level. */
+  const go = (action: RouteAction) => {
+    if (phase.kind !== "menu") return;
+    const next = route(phase.screen, action, {
+      hasAccount: phase.account !== null,
+      hasRound: false,
+    });
+    if (next === "level") play(phase.account);
+    else setPhase({ ...phase, screen: next });
+  };
+
   // The dev menu (GDD §15), in dev builds only; backquote opens it.
-  const devAccount = phase.kind === "title" ? phase.account : (playing?.account ?? null);
+  const devAccount = phase.kind === "menu" ? phase.account : (playing?.account ?? null);
   const devMenu = import.meta.env.DEV ? (
     <DevMenu
       account={devAccount}
@@ -208,13 +239,63 @@ export function Game() {
     />
   ) : null;
   if (phase.kind === "loading") return <p>Loading…</p>;
-  if (phase.kind === "title")
+  if (phase.kind === "menu") {
+    const save = { hasAccount: phase.account !== null, hasRound: false };
+    const screens: Record<Exclude<Screen, "level">, ReactElement> = {
+      title: (
+        <TitleScreen
+          save={save}
+          onNewGame={() => go("newGame")}
+          onContinue={() => go("continue")}
+          onCredits={() => go("credits")}
+        />
+      ),
+      focus: (
+        <FocusSelect
+          onBack={() => go("back")}
+          onChoose={(focus) => {
+            const account = newAccount(focus);
+            if (services) persist(services, account, null);
+            setPhase({ kind: "menu", screen: "campaign", account });
+          }}
+        />
+      ),
+      campaign: (
+        <Campaign
+          cleared={phase.account?.firstClears.includes(LEVEL_1.id) ?? false}
+          onPlay={() => go("playLevel")}
+          onHideout={() => go("hideout")}
+        />
+      ),
+      credits: <Credits onBack={() => go("back")} />,
+      // Until 1.35's summary: the result line, Replay and Hideout.
+      levelEnd: (
+        <MenuScreen music="hideout">
+          <h2>{phase.summary ?? "Level over"}</h2>
+          <MenuButton primary onClick={() => go("replay")}>
+            Replay
+          </MenuButton>
+          <MenuButton onClick={() => go("hideout")}>Hideout</MenuButton>
+        </MenuScreen>
+      ),
+      // Until 1.36's hideout: back into Level 1.
+      hideout: (
+        <MenuScreen music="hideout">
+          <h2>Hideout</h2>
+          <p style={{ color: "#8a8f99" }}>The roster and stash arrive with the hideout (1.36).</p>
+          <MenuButton primary onClick={() => go("playLevel")}>
+            Play Level 1
+          </MenuButton>
+        </MenuScreen>
+      ),
+    };
     return (
       <>
-        <Title onPlay={() => play(phase.account)} />
+        {screens[phase.screen]}
         {devMenu}
       </>
     );
+  }
   if (!source || !store || !playing) return <p>Loading…</p>;
   const countdownStartedAt = playing.countdownStartedAt;
   const send = (intent: Intent) => {
@@ -245,14 +326,6 @@ export function Game() {
           isPaused={() => countdownAt(countdownStartedAt, performance.now()) !== null}
         />
       </ResumeHud>
-      {ended && (
-        <p style={{ textAlign: "center" }}>
-          {ended}{" "}
-          <button type="button" onClick={() => play(playing.account)}>
-            Play again
-          </button>
-        </p>
-      )}
     </>
   );
 }
