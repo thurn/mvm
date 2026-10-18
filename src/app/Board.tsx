@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { installQaSurface, recordCues, recordEvents } from "../dev/qa-surface";
 import { createSettings } from "../juice/core/settings";
-import { createDirector } from "../juice/director/director";
+import { createPresentation } from "../juice/director/systems";
 import type { Scene } from "../dev/scenes";
 import type { SimEvent } from "../sim/events";
 import type { RoundState } from "../sim/state";
@@ -70,12 +70,15 @@ export function Board({ scene, scale: forcedScale, queue, onFrame, isPaused }: B
     const intents = queue ?? createIntentQueue();
     const previousX = new Map<string, number>();
     const settings = createSettings();
+    const stack = createLayerStack();
+    registerPlaceholderLayers(stack);
     // The juice director (P12) reads each step's events; its hitstop and slow-mo reach the sim only through the driver.
-    const director = createDirector({
-      settings: settings.get,
+    const { director } = createPresentation({
+      stack,
+      settings,
       now: () => performance.now(),
       speed: () => state.speed,
-      systems: [
+      base: [
         {
           id: "qa",
           consume: (_cue, batch) => {
@@ -99,9 +102,6 @@ export function Board({ scene, scale: forcedScale, queue, onFrame, isPaused }: B
         timeScale: () => director.timeScale(performance.now()),
       },
     });
-    const stack = createLayerStack();
-    registerPlaceholderLayers(stack);
-
     let last = performance.now();
     let frame = requestAnimationFrame(function tick(now) {
       driver.setPaused(isPausedRef.current?.() ?? false);
