@@ -1,0 +1,9871 @@
+{
+ "meta": {
+  "title": "Knights vs Nightmares passive sub-tree",
+  "doc": "docs/appendix-f-passives.md",
+  "source": {
+   "repo": "repoe-fork/poe2",
+   "export_version": "4.5.5.2 (PoE2 0.5.x)",
+   "tree": "https://raw.githubusercontent.com/repoe-fork/poe2/master/data/passive_skill_trees/Default.json",
+   "stat_text": [
+    "data/stat_translations/passive_skill_stat_descriptions.json",
+    "data/stat_translations/stat_descriptions.json"
+   ]
+  },
+  "coordinates": "PoE2 tree units. x = group.x + orbit_radii[r] * sin(2*pi*k/skills_per_orbit[r]); y = group.y - orbit_radii[r] * cos(...). y grows downward. Tree origin (0,0) is the centre ring.",
+  "method": {
+   "excluded": "ascendancy nodes, icon-only mastery art nodes, other class start nodes (impassable)",
+   "core_radius": 3,
+   "bridges": "union of shortest start-to-start paths that contain at least one notable; plus notables within one detour step of a bridge midpoint",
+   "notables_per_region": 15,
+   "notable_max_distance": 11,
+   "notable_score": "greedy: fewest new nodes + 3 x unsupported fraction (keep 0, adapt 0.25, replace/drop 1), forced picks first",
+   "forced_notables": {
+    "sorceress": [
+     "Open Mind",
+     "Mana Blessing"
+    ],
+    "ranger": [
+     "Cautious Concoctions",
+     "Dispatch Foes",
+     "Locked On",
+     "Catlike Agility"
+    ],
+    "warrior": [
+     "Beef",
+     "Burning Strikes"
+    ]
+   },
+   "keystones": [
+    "Resolute Technique",
+    "Crimson Assault",
+    "Chaos Inoculation",
+    "Eldritch Battery"
+   ]
+  },
+  "counts": {
+   "nodes": 225,
+   "edges": 229,
+   "by_region": {
+    "sorceress": 68,
+    "ranger": 60,
+    "warrior": 62,
+    "bridge": 35
+   },
+   "by_region_type": {
+    "warrior": {
+     "attribute": 18,
+     "small": 27,
+     "notable": 15,
+     "keystone": 1,
+     "start": 1
+    },
+    "ranger": {
+     "attribute": 16,
+     "small": 27,
+     "keystone": 1,
+     "notable": 15,
+     "start": 1
+    },
+    "sorceress": {
+     "small": 26,
+     "attribute": 24,
+     "notable": 15,
+     "start": 1,
+     "keystone": 2
+    },
+    "bridge": {
+     "notable": 12,
+     "attribute": 12,
+     "small": 11
+    }
+   },
+   "by_status": {
+    "adapted": 44,
+    "kept": 167,
+    "replaced": 11,
+    "start": 3
+   }
+  },
+  "kvn_stats_used": [
+   "accuracy_rating",
+   "accuracy_rating_+%",
+   "acolyte_mana_generated_+%",
+   "ailment_duration_+%",
+   "ailment_magnitude_+%",
+   "ailment_threshold_+%",
+   "all_elemental_resistances_%",
+   "area_damage_+%",
+   "area_of_effect_+%",
+   "armour",
+   "armour_+%",
+   "armour_break_+%",
+   "attack_damage_+%",
+   "attack_speed_+%",
+   "attribute_choice",
+   "aura_effect_+%",
+   "base_maximum_life",
+   "block_chance_+%",
+   "cast_speed_+%",
+   "chaos_damage_+%",
+   "chill_magnitude_+%",
+   "cold_penetration_%",
+   "cooldown_recovery_+%",
+   "critical_strike_chance_+%",
+   "critical_strike_multiplier_+",
+   "damage_gained_as_cold_%",
+   "damage_gained_as_fire_%",
+   "damage_gained_as_lightning_%",
+   "dexterity",
+   "elemental_damage_+%",
+   "energy_shield",
+   "energy_shield_+%",
+   "energy_shield_recharge_start_faster_%",
+   "evasion",
+   "evasion_+%",
+   "fire_damage_+%",
+   "fire_penetration_%",
+   "flammability_magnitude_+%",
+   "freeze_buildup_+%",
+   "gold_found_+%",
+   "intelligence",
+   "item_rarity_+%",
+   "keystone_chaos_inoculation",
+   "keystone_crimson_assault",
+   "keystone_eldritch_battery",
+   "keystone_resolute_technique",
+   "life_gained_on_kill",
+   "life_regeneration_rate_%_per_second",
+   "local_armour_+%",
+   "maximum_life_+%",
+   "melee_damage_+%",
+   "physical_damage_+%",
+   "projectile_damage_+%",
+   "projectile_speed_+%",
+   "self_ailment_duration_-%",
+   "shock_chance_+%",
+   "skill_effect_duration_+%",
+   "spell_damage_+%",
+   "spirit",
+   "strength",
+   "stun_buildup_+%",
+   "stun_threshold_+%"
+  ],
+  "kvn_stats_not_in_appendix_a": [
+   "armour_break_+%",
+   "attribute_choice",
+   "keystone_chaos_inoculation",
+   "keystone_crimson_assault",
+   "keystone_eldritch_battery",
+   "keystone_resolute_technique",
+   "stun_threshold_+%"
+  ]
+ },
+ "starts": {
+  "warrior": {
+   "node": 47175,
+   "poe2_root": "MARAUDER",
+   "poe2_class": "Warrior (Metadata/Characters/Str/StrFourb)",
+   "x": -1271.2,
+   "y": 733.1,
+   "base_attributes": {
+    "strength": 15,
+    "dexterity": 7,
+    "intelligence": 7
+   }
+  },
+  "ranger": {
+   "node": 50459,
+   "poe2_root": "RANGER",
+   "poe2_class": "Ranger (Metadata/Characters/Dex/DexFour)",
+   "x": 1274.7,
+   "y": 735.8,
+   "base_attributes": {
+    "strength": 7,
+    "dexterity": 15,
+    "intelligence": 7
+   }
+  },
+  "sorceress": {
+   "node": 54447,
+   "poe2_root": "WITCH",
+   "poe2_class": "Sorceress (Metadata/Characters/Int/IntFourb)",
+   "x": 0.0,
+   "y": -1490.6,
+   "base_attributes": {
+    "strength": 7,
+    "dexterity": 7,
+    "intelligence": 15
+   }
+  }
+ },
+ "rules": {
+  "attribute_node": "Allocating an Attribute node asks for Strength, Dexterity or Intelligence; it grants +5 of that attribute to every hero. Default highlight = the focus attribute. Changing the choice later costs 0.5x the per-point respec price (PoE2 rule).",
+  "passives_are_global": true,
+  "start_node_free": true,
+  "point_budget": "1 per player level after 1, +2 for first kill of each boss (L5, L10, L15, L20)",
+  "respec_gold_per_point_by_player_level": {
+   "1": 15,
+   "5": 39,
+   "10": 98,
+   "15": 182,
+   "20": 273,
+   "30": 470
+  },
+  "respec_demo_default": "free"
+ },
+ "keystones": [
+  44017,
+  9085,
+  56349,
+  57513
+ ],
+ "sample_builds": [
+  {
+   "focus": "warrior",
+   "name": "Iron Wall Smasher",
+   "points": 33,
+   "attribute_choice": "strength",
+   "allocated": [
+    3936,
+    13397,
+    1207,
+    38323,
+    5710,
+    58528,
+    45363,
+    38646,
+    23570,
+    41031,
+    54232,
+    7721,
+    6529,
+    32416,
+    53443,
+    59767,
+    18629,
+    64327,
+    22928,
+    27373,
+    16725,
+    54811,
+    57703,
+    26725,
+    52298,
+    4527,
+    44017,
+    54485,
+    25482,
+    18742,
+    62732,
+    46325,
+    39581
+   ],
+   "totals": {
+    "melee_damage_+%": 86,
+    "strength": 118,
+    "stun_buildup_+%": 25,
+    "armour": 20,
+    "life_regeneration_rate_%_per_second": 0.6,
+    "armour_+%": 30,
+    "local_armour_+%": 80,
+    "area_damage_+%": 10,
+    "armour_break_+%": 25,
+    "area_of_effect_+%": 12,
+    "block_chance_+%": 17,
+    "stun_threshold_+%": 52,
+    "item_rarity_+%": 8,
+    "keystone_resolute_technique": 1
+   },
+   "steps": [
+    {
+     "target": "Brutal",
+     "cost": 5,
+     "path": [
+      3936,
+      13397,
+      1207,
+      38323,
+      5710
+     ]
+    },
+    {
+     "target": "Smash",
+     "cost": 2,
+     "path": [
+      58528,
+      45363
+     ]
+    },
+    {
+     "target": "Relentless",
+     "cost": 5,
+     "path": [
+      38646,
+      23570,
+      41031,
+      54232,
+      7721
+     ]
+    },
+    {
+     "target": "Sturdy Metal",
+     "cost": 2,
+     "path": [
+      6529,
+      32416
+     ]
+    },
+    {
+     "target": "Reverberating Impact",
+     "cost": 2,
+     "path": [
+      53443,
+      59767
+     ]
+    },
+    {
+     "target": "Defender's Resolve",
+     "cost": 2,
+     "path": [
+      18629,
+      64327
+     ]
+    },
+    {
+     "target": "Resolute Technique",
+     "cost": 9,
+     "path": [
+      22928,
+      27373,
+      16725,
+      54811,
+      57703,
+      26725,
+      52298,
+      4527,
+      44017
+     ]
+    },
+    {
+     "target": "Beef",
+     "cost": 2,
+     "path": [
+      54485,
+      25482
+     ]
+    },
+    {
+     "target": "Titan's Determination",
+     "cost": 2,
+     "path": [
+      18742,
+      62732
+     ]
+    },
+    {
+     "target": "Stun Buildup",
+     "cost": 2,
+     "path": [
+      46325,
+      39581
+     ]
+    }
+   ]
+  },
+  {
+   "focus": "ranger",
+   "name": "Crit Archer",
+   "points": 33,
+   "attribute_choice": "dexterity",
+   "allocated": [
+    56651,
+    38143,
+    43746,
+    16460,
+    28992,
+    22795,
+    42781,
+    13828,
+    1140,
+    15507,
+    48401,
+    35987,
+    29582,
+    19104,
+    29843,
+    20831,
+    10909,
+    16489,
+    48568,
+    26786,
+    14340,
+    26319,
+    30990,
+    58939,
+    42250,
+    44014,
+    11855,
+    30829,
+    56999,
+    33053,
+    4844,
+    58013,
+    50795
+   ],
+   "totals": {
+    "projectile_damage_+%": 95,
+    "dexterity": 80,
+    "attack_speed_+%": 8,
+    "projectile_speed_+%": 8,
+    "evasion": 16,
+    "maximum_life_+%": 4,
+    "evasion_+%": 75,
+    "accuracy_rating_+%": 72,
+    "accuracy_rating": 30,
+    "critical_strike_chance_+%": 55
+   },
+   "steps": [
+    {
+     "target": "Honed Instincts",
+     "cost": 5,
+     "path": [
+      56651,
+      38143,
+      43746,
+      16460,
+      28992
+     ]
+    },
+    {
+     "target": "Clean Shot",
+     "cost": 2,
+     "path": [
+      22795,
+      42781
+     ]
+    },
+    {
+     "target": "Blur",
+     "cost": 5,
+     "path": [
+      13828,
+      1140,
+      15507,
+      48401,
+      35987
+     ]
+    },
+    {
+     "target": "Eagle Eye",
+     "cost": 2,
+     "path": [
+      29582,
+      19104
+     ]
+    },
+    {
+     "target": "Catlike Agility",
+     "cost": 2,
+     "path": [
+      29843,
+      20831
+     ]
+    },
+    {
+     "target": "Dispatch Foes",
+     "cost": 8,
+     "path": [
+      10909,
+      16489,
+      48568,
+      26786,
+      14340,
+      26319,
+      30990,
+      58939
+     ]
+    },
+    {
+     "target": "Locked On",
+     "cost": 5,
+     "path": [
+      42250,
+      44014,
+      11855,
+      30829,
+      56999
+     ]
+    },
+    {
+     "target": "Careful Aim",
+     "cost": 4,
+     "path": [
+      33053,
+      4844,
+      58013,
+      50795
+     ]
+    }
+   ]
+  },
+  {
+   "focus": "sorceress",
+   "name": "Battery Acolyte Caster",
+   "points": 33,
+   "attribute_choice": "intelligence",
+   "allocated": [
+    44871,
+    56216,
+    9485,
+    60685,
+    2254,
+    4739,
+    22419,
+    18407,
+    47555,
+    51184,
+    3242,
+    59636,
+    1826,
+    39037,
+    517,
+    61027,
+    9642,
+    29502,
+    36302,
+    42736,
+    4203,
+    49046,
+    8569,
+    46034,
+    41029,
+    25557,
+    55668,
+    29240,
+    57513,
+    18845,
+    55807,
+    30346,
+    34006
+   ],
+   "totals": {
+    "energy_shield": 20,
+    "intelligence": 105,
+    "energy_shield_+%": 73,
+    "spell_damage_+%": 40,
+    "acolyte_mana_generated_+%": 33,
+    "ailment_threshold_+%": 20,
+    "stun_threshold_+%": 20,
+    "spirit": 10,
+    "cast_speed_+%": 9,
+    "keystone_eldritch_battery": 1
+   },
+   "steps": [
+    {
+     "target": "Pure Energy",
+     "cost": 5,
+     "path": [
+      44871,
+      56216,
+      9485,
+      60685,
+      2254
+     ]
+    },
+    {
+     "target": "Raw Power",
+     "cost": 5,
+     "path": [
+      4739,
+      22419,
+      18407,
+      47555,
+      51184
+     ]
+    },
+    {
+     "target": "Open Mind",
+     "cost": 2,
+     "path": [
+      3242,
+      59636
+     ]
+    },
+    {
+     "target": "Mana Blessing",
+     "cost": 4,
+     "path": [
+      1826,
+      39037,
+      517,
+      61027
+     ]
+    },
+    {
+     "target": "Dampening Shield",
+     "cost": 1,
+     "path": [
+      9642
+     ]
+    },
+    {
+     "target": "Practiced Signs",
+     "cost": 2,
+     "path": [
+      29502,
+      36302
+     ]
+    },
+    {
+     "target": "Eldritch Battery",
+     "cost": 10,
+     "path": [
+      42736,
+      4203,
+      49046,
+      8569,
+      46034,
+      41029,
+      25557,
+      55668,
+      29240,
+      57513
+     ]
+    },
+    {
+     "target": "Mana Regeneration",
+     "cost": 2,
+     "path": [
+      18845,
+      55807
+     ]
+    },
+    {
+     "target": "Energy Shield",
+     "cost": 2,
+     "path": [
+      30346,
+      34006
+     ]
+    }
+   ]
+  }
+ ],
+ "nodes": [
+  {
+   "id": 517,
+   "poe2_id": "energy_shield11",
+   "name": "Stun and Ailment Threshold from Energy Shield",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 419.3,
+   "y": -4284.2,
+   "group": 854,
+   "connections": [
+    9642,
+    39037,
+    61027
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 19,
+    "sorceress": 7
+   },
+   "poe2_stats": {
+    "ailment_threshold_+_from_%_maximum_energy_shield": 8,
+    "stun_threshold_+_from_%_maximum_energy_shield": 8
+   },
+   "poe2_text": [
+    "Gain additional Ailment Threshold equal to 8% of maximum Energy Shield",
+    "Gain additional Stun Threshold equal to 8% of maximum Energy Shield"
+   ],
+   "kvn_stats": [
+    {
+     "id": "ailment_threshold_+%",
+     "value": 8
+    },
+    {
+     "id": "stun_threshold_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Elemental Ailment Threshold",
+    "8% increased Stun Threshold"
+   ],
+   "status": "adapted",
+   "note": "ailment_threshold_+_from_%_maximum_energy_shield: ES-derived threshold -> % threshold; stun_threshold_+_from_%_maximum_energy_shield: ES-derived threshold -> % threshold"
+  },
+  {
+   "id": 1140,
+   "poe2_id": "dexterity25",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1493.1,
+   "y": 1568.6,
+   "group": 930,
+   "connections": [
+    13828,
+    15507
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 2,
+    "sorceress": 24
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 1207,
+   "poe2_id": "strength18",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2520.7,
+   "y": 557.5,
+   "group": 665,
+   "connections": [
+    13397,
+    38323
+   ],
+   "dist": {
+    "warrior": 3,
+    "ranger": 23,
+    "sorceress": 19
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 1755,
+   "poe2_id": "spell_criticals2__",
+   "name": "Spell Damage",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -530.7,
+   "y": -2532.2,
+   "group": 789,
+   "connections": [
+    18845
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 25,
+    "sorceress": 3
+   },
+   "poe2_stats": {
+    "spell_damage_+%": 8
+   },
+   "poe2_text": [
+    "8% increased Spell Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "spell_damage_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Spell Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 1826,
+   "poe2_id": "intelligence18",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 1308.1,
+   "y": -3294.7,
+   "group": 912,
+   "connections": [
+    39037,
+    60685
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 19,
+    "sorceress": 5
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 1913,
+   "poe2_id": "armour7",
+   "name": "Armour",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -1915.3,
+   "y": 1377.2,
+   "group": 684,
+   "connections": [
+    4665,
+    36709,
+    38646
+   ],
+   "dist": {
+    "warrior": 2,
+    "ranger": 22,
+    "sorceress": 26
+   },
+   "poe2_stats": {
+    "base_physical_damage_reduction_rating": 20
+   },
+   "poe2_text": [
+    "+20 to Armour"
+   ],
+   "kvn_stats": [
+    {
+     "id": "armour",
+     "value": 20
+    }
+   ],
+   "kvn_text": [
+    "+20 to Armour"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 2254,
+   "poe2_id": "witch_sorceress_notable2",
+   "name": "Pure Energy",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 487.0,
+   "y": -3030.4,
+   "group": 859,
+   "connections": [
+    4748,
+    14666,
+    60685
+   ],
+   "dist": {
+    "warrior": 23,
+    "ranger": 19,
+    "sorceress": 5
+   },
+   "poe2_stats": {
+    "base_intelligence": 10,
+    "maximum_energy_shield_+%": 30
+   },
+   "poe2_text": [
+    "+10 to Intelligence",
+    "30% increased maximum Energy Shield"
+   ],
+   "kvn_stats": [
+    {
+     "id": "intelligence",
+     "value": 10
+    },
+    {
+     "id": "energy_shield_+%",
+     "value": 30
+    }
+   ],
+   "kvn_text": [
+    "+10 to Intelligence",
+    "30% increased maximum Energy Shield"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 2863,
+   "poe2_id": "chill_and_freeze18",
+   "name": "Perpetual Freeze",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3556.9,
+   "y": -337.6,
+   "group": 569,
+   "connections": [
+    35708
+   ],
+   "dist": {
+    "warrior": 10,
+    "ranger": 28,
+    "sorceress": 18
+   },
+   "poe2_stats": {
+    "chill_and_freeze_duration_+%": 15,
+    "chill_effect_+%": 15,
+    "hit_damage_freeze_multiplier_+%": 20
+   },
+   "poe2_text": [
+    "15% increased Chill and Freeze Duration on Enemies",
+    "15% increased Magnitude of Chill you inflict",
+    "20% increased Freeze Buildup"
+   ],
+   "kvn_stats": [
+    {
+     "id": "ailment_duration_+%",
+     "value": 15
+    },
+    {
+     "id": "chill_magnitude_+%",
+     "value": 15
+    },
+    {
+     "id": "freeze_buildup_+%",
+     "value": 20
+    }
+   ],
+   "kvn_text": [
+    "15% increased Ailment Duration",
+    "15% increased Magnitude of Chill you inflict",
+    "20% increased Freeze Buildup"
+   ],
+   "status": "adapted",
+   "note": "chill_and_freeze_duration_+%: chill/freeze duration broadened to ailment duration"
+  },
+  {
+   "id": 3041,
+   "poe2_id": "attributes2",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -1724.8,
+   "y": -3003.9,
+   "group": 706,
+   "connections": [
+    53697,
+    59795
+   ],
+   "dist": {
+    "warrior": 16,
+    "ranger": 24,
+    "sorceress": 6
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 3242,
+   "poe2_id": "mana_regeneration14",
+   "name": "Mana Regeneration",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -140.3,
+   "y": -2950.5,
+   "group": 816,
+   "connections": [
+    51184,
+    59636
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 22,
+    "sorceress": 6
+   },
+   "poe2_stats": {
+    "mana_regeneration_rate_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Mana Regeneration Rate"
+   ],
+   "kvn_stats": [
+    {
+     "id": "acolyte_mana_generated_+%",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "5% increased Mana generated by Acolytes"
+   ],
+   "status": "replaced",
+   "note": "mana_regeneration_rate_+%: mana regen -> acolyte output at half value (KvN custom stat)"
+  },
+  {
+   "id": 3823,
+   "poe2_id": "cold34",
+   "name": "Elemental Force",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -478.2,
+   "y": -3834.2,
+   "group": 776,
+   "connections": [
+    22821
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 23,
+    "sorceress": 8
+   },
+   "poe2_stats": {
+    "base_resist_all_elements_%": 3,
+    "elemental_damage_+%": 20
+   },
+   "poe2_text": [
+    "+3% to all Elemental Resistances",
+    "20% increased Elemental Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "all_elemental_resistances_%",
+     "value": 3
+    },
+    {
+     "id": "elemental_damage_+%",
+     "value": 20
+    }
+   ],
+   "kvn_text": [
+    "+3% to all Elemental Resistances",
+    "20% increased Elemental Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 3936,
+   "poe2_id": "melee17",
+   "name": "Melee Damage",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -1525.9,
+   "y": 733.4,
+   "group": 722,
+   "connections": [
+    13397,
+    46325,
+    47175
+   ],
+   "dist": {
+    "warrior": 1,
+    "ranger": 25,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "melee_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Melee Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "melee_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Melee Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 4059,
+   "poe2_id": "attributes23",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 4703.0,
+   "y": -8121.1,
+   "group": 1169,
+   "connections": [
+    10382,
+    25557
+   ],
+   "dist": {
+    "warrior": 27,
+    "ranger": 19,
+    "sorceress": 12
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 4157,
+   "poe2_id": "criticals11",
+   "name": "Critical Chance",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 2443.5,
+   "y": -2103.7,
+   "group": 1015,
+   "connections": [
+    34168,
+    49220
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 14,
+    "sorceress": 10
+   },
+   "poe2_stats": {
+    "critical_strike_chance_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Critical Hit Chance"
+   ],
+   "kvn_stats": [
+    {
+     "id": "critical_strike_chance_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Critical Hit Chance"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 4203,
+   "poe2_id": "intelligence81",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 1714.7,
+   "y": -2969.9,
+   "group": 942,
+   "connections": [
+    30555,
+    42736,
+    49046,
+    59603
+   ],
+   "dist": {
+    "warrior": 24,
+    "ranger": 16,
+    "sorceress": 6
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 4456,
+   "poe2_id": "intelligence88",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -949.0,
+   "y": -5546.4,
+   "group": 760,
+   "connections": [
+    32427,
+    57710
+   ],
+   "dist": {
+    "warrior": 18,
+    "ranger": 20,
+    "sorceress": 8
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 4527,
+   "poe2_id": "attributes51",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -7763.0,
+   "y": 2567.5,
+   "group": 245,
+   "connections": [
+    44017,
+    52298
+   ],
+   "dist": {
+    "warrior": 12,
+    "ranger": 24,
+    "sorceress": 22
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 4665,
+   "poe2_id": "life_regeneration19",
+   "name": "Life Regeneration",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2092.8,
+   "y": 1303.7,
+   "group": 684,
+   "connections": [
+    1913
+   ],
+   "dist": {
+    "warrior": 3,
+    "ranger": 21,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "life_regeneration_rate_per_minute_%": 12
+   },
+   "poe2_text": [
+    "Regenerate 0.2% of maximum Life per second"
+   ],
+   "kvn_stats": [
+    {
+     "id": "life_regeneration_rate_%_per_second",
+     "value": 0.2
+    }
+   ],
+   "kvn_text": [
+    "Regenerate 0.2% of maximum Life per second"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 4739,
+   "poe2_id": "spells18",
+   "name": "Spell Damage",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -138.6,
+   "y": -1694.8,
+   "group": 835,
+   "connections": [
+    18845,
+    22419,
+    54447
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 25,
+    "sorceress": 1
+   },
+   "poe2_stats": {
+    "spell_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Spell Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "spell_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Spell Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 4748,
+   "poe2_id": "energy_shield_recovery24",
+   "name": "Energy Shield Delay",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 815.3,
+   "y": -3752.2,
+   "group": 857,
+   "connections": [
+    2254,
+    17973
+   ],
+   "dist": {
+    "warrior": 23,
+    "ranger": 20,
+    "sorceress": 6
+   },
+   "poe2_stats": {
+    "energy_shield_delay_-%": 6
+   },
+   "poe2_text": [
+    "6% faster start of Energy Shield Recharge"
+   ],
+   "kvn_stats": [
+    {
+     "id": "energy_shield_recharge_start_faster_%",
+     "value": 6
+    }
+   ],
+   "kvn_text": [
+    "6% faster start of Energy Shield Recharge"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 4844,
+   "poe2_id": "ranged2",
+   "name": "Projectile Damage",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2442.8,
+   "y": 2744.3,
+   "group": 990,
+   "connections": [
+    33053,
+    58013
+   ],
+   "dist": {
+    "warrior": 19,
+    "ranger": 7,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "projectile_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Projectile Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "projectile_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Projectile Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 5501,
+   "poe2_id": "spell_criticals14",
+   "name": "Critical Overload",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 0.0,
+   "y": -4439.9,
+   "group": 815,
+   "connections": [
+    32404
+   ],
+   "dist": {
+    "warrior": 22,
+    "ranger": 22,
+    "sorceress": 10
+   },
+   "poe2_stats": {
+    "base_spell_critical_strike_multiplier_+": 15,
+    "spell_critical_strike_chance_+%": 15
+   },
+   "poe2_text": [
+    "15% increased Critical Spell Damage Bonus",
+    "15% increased Critical Hit Chance for Spells"
+   ],
+   "kvn_stats": [
+    {
+     "id": "critical_strike_multiplier_+",
+     "value": 15
+    },
+    {
+     "id": "critical_strike_chance_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "15% increased Critical Damage Bonus",
+    "15% increased Critical Hit Chance"
+   ],
+   "status": "adapted",
+   "note": "base_spell_critical_strike_multiplier_+: spell-only crit bonus broadened; spell_critical_strike_chance_+%: spell-only crit chance broadened"
+  },
+  {
+   "id": 5692,
+   "poe2_id": "chill_and_freeze15",
+   "name": "Chill Magnitude",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3416.6,
+   "y": -256.6,
+   "group": 569,
+   "connections": [
+    8406,
+    35708
+   ],
+   "dist": {
+    "warrior": 8,
+    "ranger": 26,
+    "sorceress": 16
+   },
+   "poe2_stats": {
+    "chill_effect_+%": 12
+   },
+   "poe2_text": [
+    "12% increased Magnitude of Chill you inflict"
+   ],
+   "kvn_stats": [
+    {
+     "id": "chill_magnitude_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "12% increased Magnitude of Chill you inflict"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 5710,
+   "poe2_id": "marauder_brute_notable1",
+   "name": "Brutal",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2869.3,
+   "y": 1161.3,
+   "group": 665,
+   "connections": [
+    6529,
+    38323,
+    53443,
+    58528
+   ],
+   "dist": {
+    "warrior": 5,
+    "ranger": 23,
+    "sorceress": 19
+   },
+   "poe2_stats": {
+    "base_strength": 10,
+    "hit_damage_stun_multiplier_+%": 10,
+    "melee_damage_+%": 16
+   },
+   "poe2_text": [
+    "+10 to Strength",
+    "10% increased Stun Buildup",
+    "16% increased Melee Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "strength",
+     "value": 10
+    },
+    {
+     "id": "stun_buildup_+%",
+     "value": 10
+    },
+    {
+     "id": "melee_damage_+%",
+     "value": 16
+    }
+   ],
+   "kvn_text": [
+    "+10 to Strength",
+    "10% increased Stun Buildup",
+    "16% increased Melee Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 6015,
+   "poe2_id": "strength16",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3086.5,
+   "y": 237.4,
+   "group": 625,
+   "connections": [
+    35426,
+    38323,
+    51248
+   ],
+   "dist": {
+    "warrior": 5,
+    "ranger": 23,
+    "sorceress": 17
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 6529,
+   "poe2_id": "armour5",
+   "name": "Armour",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2851.0,
+   "y": 1483.2,
+   "group": 624,
+   "connections": [
+    5710,
+    32416
+   ],
+   "dist": {
+    "warrior": 6,
+    "ranger": 22,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "physical_damage_reduction_rating_+%": 15
+   },
+   "poe2_text": [
+    "15% increased Armour"
+   ],
+   "kvn_stats": [
+    {
+     "id": "armour_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "15% increased Armour"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 6544,
+   "poe2_id": "fire38",
+   "name": "Burning Strikes",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -5525.9,
+   "y": 1563.5,
+   "group": 448,
+   "connections": [
+    56061
+   ],
+   "dist": {
+    "warrior": 9,
+    "ranger": 23,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "non_skill_base_physical_damage_%_to_gain_as_fire": 12
+   },
+   "poe2_text": [
+    "Gain 12% of Physical Damage as Extra Fire Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "damage_gained_as_fire_%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "Gain 12% of Physical Damage as Extra Fire Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 6789,
+   "poe2_id": "projectiles8",
+   "name": "Projectile Damage",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2054.8,
+   "y": 708.5,
+   "group": 965,
+   "connections": [
+    35234
+   ],
+   "dist": {
+    "warrior": 25,
+    "ranger": 3,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "projectile_damage_+%": 8
+   },
+   "poe2_text": [
+    "8% increased Projectile Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "projectile_damage_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Projectile Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 6898,
+   "poe2_id": "templar_druid_notable1",
+   "name": "Relentless Vindicator",
+   "type": "notable",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -2774.4,
+   "y": -1070.7,
+   "group": 629,
+   "connections": [
+    17517,
+    38103,
+    48305
+   ],
+   "dist": {
+    "warrior": 9,
+    "ranger": 27,
+    "sorceress": 13
+   },
+   "poe2_stats": {
+    "base_strength_and_intelligence": 5,
+    "critical_strike_chance_+%": 10,
+    "damage_+%": 10
+   },
+   "poe2_text": [
+    "+5 to Strength and Intelligence",
+    "10% increased Critical Hit Chance",
+    "10% increased Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "strength",
+     "value": 5
+    },
+    {
+     "id": "intelligence",
+     "value": 5
+    },
+    {
+     "id": "critical_strike_chance_+%",
+     "value": 10
+    },
+    {
+     "id": "physical_damage_+%",
+     "value": 10
+    },
+    {
+     "id": "elemental_damage_+%",
+     "value": 10
+    },
+    {
+     "id": "chaos_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength",
+    "+5 to Intelligence",
+    "10% increased Critical Hit Chance",
+    "10% increased Physical Damage",
+    "10% increased Elemental Damage",
+    "10% increased Chaos Damage"
+   ],
+   "status": "adapted",
+   "note": "damage_+%: generic \"increased Damage\" written as the typed stats it covers"
+  },
+  {
+   "id": 7344,
+   "poe2_id": "life_on_kill14",
+   "name": "Life from Death",
+   "type": "notable",
+   "region": "bridge",
+   "bridge": "ranger-sorceress",
+   "x": 3225.7,
+   "y": -1862.3,
+   "group": 1041,
+   "connections": [
+    26931,
+    58182
+   ],
+   "dist": {
+    "warrior": 29,
+    "ranger": 11,
+    "sorceress": 11
+   },
+   "poe2_stats": {
+    "recover_%_maximum_life_on_kill": 3
+   },
+   "poe2_text": [
+    "Recover 3% of maximum Life on Kill"
+   ],
+   "kvn_stats": [
+    {
+     "id": "life_gained_on_kill",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "Gain 12 Life per enemy killed"
+   ],
+   "status": "adapted",
+   "note": "recover_%_maximum_life_on_kill: % of max life on kill -> flat (about 4 life per 1% at hero level 20)"
+  },
+  {
+   "id": 7721,
+   "poe2_id": "marauder_brute_notable2",
+   "name": "Relentless",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2441.4,
+   "y": 1903.3,
+   "group": 684,
+   "connections": [
+    18629,
+    18742,
+    54232
+   ],
+   "dist": {
+    "warrior": 5,
+    "ranger": 19,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "base_strength": 10,
+    "life_regeneration_rate_per_minute_%": 30,
+    "physical_damage_reduction_rating_+%": 15
+   },
+   "poe2_text": [
+    "+10 to Strength",
+    "Regenerate 0.5% of maximum Life per second",
+    "15% increased Armour"
+   ],
+   "kvn_stats": [
+    {
+     "id": "strength",
+     "value": 10
+    },
+    {
+     "id": "life_regeneration_rate_%_per_second",
+     "value": 0.5
+    },
+    {
+     "id": "armour_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "+10 to Strength",
+    "Regenerate 0.5% of maximum Life per second",
+    "15% increased Armour"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 8406,
+   "poe2_id": "strength12",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -3086.5,
+   "y": -236.3,
+   "group": 625,
+   "connections": [
+    5692,
+    35426,
+    48305
+   ],
+   "dist": {
+    "warrior": 7,
+    "ranger": 25,
+    "sorceress": 15
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 8569,
+   "poe2_id": "intelligence79",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 2715.2,
+   "y": -4702.8,
+   "group": 986,
+   "connections": [
+    46034,
+    49046
+   ],
+   "dist": {
+    "warrior": 23,
+    "ranger": 15,
+    "sorceress": 8
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 9085,
+   "poe2_id": "passive_keystone_crimson_dance_",
+   "name": "Crimson Assault",
+   "type": "keystone",
+   "region": "ranger",
+   "bridge": null,
+   "x": 4347.0,
+   "y": 6925.8,
+   "group": 1141,
+   "connections": [
+    18923
+   ],
+   "dist": {
+    "warrior": 19,
+    "ranger": 12,
+    "sorceress": 27
+   },
+   "poe2_stats": {
+    "keystone_crimson_assault": 1
+   },
+   "poe2_text": [
+    "Bleeding you inflict is Aggravated",
+    "Base Bleeding Duration is 1 second",
+    "50% more Magnitude of Bleeding you inflict"
+   ],
+   "kvn_stats": [
+    {
+     "id": "keystone_crimson_assault",
+     "value": 1
+    }
+   ],
+   "kvn_text": [
+    "Bleeding you inflict is Aggravated (always counts the monster as moving: +100% extra damage, even against monsters held by a wall)",
+    "Base Bleeding Duration is 1 second",
+    "50% more Magnitude of Bleeding you inflict"
+   ],
+   "status": "kept",
+   "note": "Rule flag. Answers the Appendix A wall-halves-bleed tension."
+  },
+  {
+   "id": 9485,
+   "poe2_id": "intelligence20",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 756.5,
+   "y": -2537.9,
+   "group": 878,
+   "connections": [
+    56216,
+    60685
+   ],
+   "dist": {
+    "warrior": 23,
+    "ranger": 19,
+    "sorceress": 3
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 9642,
+   "poe2_id": "energy_shield37",
+   "name": "Dampening Shield",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 302.8,
+   "y": -3929.7,
+   "group": 857,
+   "connections": [
+    517,
+    14666
+   ],
+   "dist": {
+    "warrior": 22,
+    "ranger": 20,
+    "sorceress": 7
+   },
+   "poe2_stats": {
+    "ailment_threshold_+_from_%_maximum_energy_shield": 12,
+    "maximum_energy_shield_+%": 28,
+    "stun_threshold_+_from_%_maximum_energy_shield": 12
+   },
+   "poe2_text": [
+    "Gain additional Ailment Threshold equal to 12% of maximum Energy Shield",
+    "28% increased maximum Energy Shield",
+    "Gain additional Stun Threshold equal to 12% of maximum Energy Shield"
+   ],
+   "kvn_stats": [
+    {
+     "id": "ailment_threshold_+%",
+     "value": 12
+    },
+    {
+     "id": "energy_shield_+%",
+     "value": 28
+    },
+    {
+     "id": "stun_threshold_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "12% increased Elemental Ailment Threshold",
+    "28% increased maximum Energy Shield",
+    "12% increased Stun Threshold"
+   ],
+   "status": "adapted",
+   "note": "ailment_threshold_+_from_%_maximum_energy_shield: ES-derived threshold -> % threshold; stun_threshold_+_from_%_maximum_energy_shield: ES-derived threshold -> % threshold"
+  },
+  {
+   "id": 10156,
+   "poe2_id": "intelligence29",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -2039.3,
+   "y": -2460.9,
+   "group": 706,
+   "connections": [
+    28950,
+    59795
+   ],
+   "dist": {
+    "warrior": 14,
+    "ranger": 26,
+    "sorceress": 8
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 10382,
+   "poe2_id": "attributes24",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 5026.3,
+   "y": -8703.0,
+   "group": 1201,
+   "connections": [
+    4059,
+    21984
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 20,
+    "sorceress": 13
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 10909,
+   "poe2_id": "dexterity31",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1806.3,
+   "y": 2781.9,
+   "group": 925,
+   "connections": [
+    16489,
+    33053,
+    48401
+   ],
+   "dist": {
+    "warrior": 17,
+    "ranger": 5,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 11037,
+   "poe2_id": "cooldowns20",
+   "name": "Volatile Catalyst",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 182.3,
+   "y": 3700.2,
+   "group": 802,
+   "connections": [
+    57039
+   ],
+   "dist": {
+    "warrior": 14,
+    "ranger": 11,
+    "sorceress": 28
+   },
+   "poe2_stats": {
+    "base_cooldown_speed_+%": 10,
+    "base_skill_area_of_effect_+%": 8
+   },
+   "poe2_text": [
+    "10% increased Cooldown Recovery Rate",
+    "8% increased Area of Effect"
+   ],
+   "kvn_stats": [
+    {
+     "id": "cooldown_recovery_+%",
+     "value": 10
+    },
+    {
+     "id": "area_of_effect_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "10% increased Cooldown Recovery Rate",
+    "8% increased Area of Effect"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 11826,
+   "poe2_id": "ranged32",
+   "name": "Heavy Ammunition",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2232.7,
+   "y": 3125.2,
+   "group": 966,
+   "connections": [
+    17726
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 8,
+    "sorceress": 26
+   },
+   "poe2_stats": {
+    "attack_speed_+%": -5,
+    "projectile_damage_+%": 40,
+    "projectile_hit_damage_stun_multiplier_+%": 40
+   },
+   "poe2_text": [
+    "5% reduced Attack Speed",
+    "40% increased Projectile Damage",
+    "40% increased Projectile Stun Buildup"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attack_speed_+%",
+     "value": -5
+    },
+    {
+     "id": "projectile_damage_+%",
+     "value": 40
+    },
+    {
+     "id": "stun_buildup_+%",
+     "value": 40
+    }
+   ],
+   "kvn_text": [
+    "5% reduced Attack Speed",
+    "40% increased Projectile Damage",
+    "40% increased Stun Buildup"
+   ],
+   "status": "adapted",
+   "note": "projectile_hit_damage_stun_multiplier_+%: projectile-only stun buildup broadened"
+  },
+  {
+   "id": 11855,
+   "poe2_id": "accuracy15",
+   "name": "Accuracy",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2450.1,
+   "y": 5250.6,
+   "group": 1007,
+   "connections": [
+    30829,
+    44014
+   ],
+   "dist": {
+    "warrior": 18,
+    "ranger": 11,
+    "sorceress": 26
+   },
+   "poe2_stats": {
+    "accuracy_rating_+%": 8
+   },
+   "poe2_text": [
+    "8% increased Accuracy Rating"
+   ],
+   "kvn_stats": [
+    {
+     "id": "accuracy_rating_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Accuracy Rating"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 13233,
+   "poe2_id": "area_of_effect23",
+   "name": "Radial Force",
+   "type": "notable",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -2880.6,
+   "y": -1668.6,
+   "group": 622,
+   "connections": [
+    17517,
+    19873
+   ],
+   "dist": {
+    "warrior": 11,
+    "ranger": 29,
+    "sorceress": 11
+   },
+   "poe2_stats": {
+    "base_skill_area_of_effect_+%": 10,
+    "hit_damage_immobilisation_multiplier_+%": 12
+   },
+   "poe2_text": [
+    "10% increased Area of Effect",
+    "12% increased Immobilisation buildup"
+   ],
+   "kvn_stats": [
+    {
+     "id": "area_of_effect_+%",
+     "value": 10
+    },
+    {
+     "id": "stun_buildup_+%",
+     "value": 12
+    },
+    {
+     "id": "freeze_buildup_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "10% increased Area of Effect",
+    "12% increased Stun Buildup",
+    "12% increased Freeze Buildup"
+   ],
+   "status": "adapted",
+   "note": "hit_damage_immobilisation_multiplier_+%: immobilisation buildup = heavy stun + freeze buildup"
+  },
+  {
+   "id": 13397,
+   "poe2_id": "strength3",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2146.6,
+   "y": 606.8,
+   "group": 665,
+   "connections": [
+    1207,
+    3936
+   ],
+   "dist": {
+    "warrior": 2,
+    "ranger": 24,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 13411,
+   "poe2_id": "dexterity3",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "bridge",
+   "bridge": "ranger-sorceress",
+   "x": 3038.0,
+   "y": -604.8,
+   "group": 1075,
+   "connections": [
+    34136,
+    48198
+   ],
+   "dist": {
+    "warrior": 26,
+    "ranger": 8,
+    "sorceress": 14
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 13783,
+   "poe2_id": "exploiting_elemental_ailments8",
+   "name": "Ailment Chance",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2866.9,
+   "y": 1272.0,
+   "group": 1053,
+   "connections": [
+    28992,
+    30695
+   ],
+   "dist": {
+    "warrior": 23,
+    "ranger": 6,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "ailment_chance_+%": 10
+   },
+   "poe2_text": [
+    "10% increased chance to inflict Ailments"
+   ],
+   "kvn_stats": [
+    {
+     "id": "flammability_magnitude_+%",
+     "value": 10
+    },
+    {
+     "id": "freeze_buildup_+%",
+     "value": 10
+    },
+    {
+     "id": "shock_chance_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Flammability Magnitude",
+    "10% increased Freeze Buildup",
+    "10% increased chance to Shock"
+   ],
+   "status": "adapted",
+   "note": "ailment_chance_+%: generic ailment chance written as the elemental ailment stats"
+  },
+  {
+   "id": 13828,
+   "poe2_id": "evasion11",
+   "name": "Evasion",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1403.0,
+   "y": 958.3,
+   "group": 918,
+   "connections": [
+    1140,
+    49691,
+    50459
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 1,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "base_evasion_rating": 16
+   },
+   "poe2_text": [
+    "+16 to Evasion Rating"
+   ],
+   "kvn_stats": [
+    {
+     "id": "evasion",
+     "value": 16
+    }
+   ],
+   "kvn_text": [
+    "+16 to Evasion Rating"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 14340,
+   "poe2_id": "dexterity70",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1735.0,
+   "y": 4453.0,
+   "group": 943,
+   "connections": [
+    26319,
+    26786
+   ],
+   "dist": {
+    "warrior": 14,
+    "ranger": 9,
+    "sorceress": 24
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 14666,
+   "poe2_id": "energy_shield10_",
+   "name": "Stun and Ailment Threshold from Energy Shield",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 145.3,
+   "y": -3752.2,
+   "group": 857,
+   "connections": [
+    2254,
+    9642
+   ],
+   "dist": {
+    "warrior": 23,
+    "ranger": 20,
+    "sorceress": 6
+   },
+   "poe2_stats": {
+    "ailment_threshold_+_from_%_maximum_energy_shield": 8,
+    "stun_threshold_+_from_%_maximum_energy_shield": 8
+   },
+   "poe2_text": [
+    "Gain additional Ailment Threshold equal to 8% of maximum Energy Shield",
+    "Gain additional Stun Threshold equal to 8% of maximum Energy Shield"
+   ],
+   "kvn_stats": [
+    {
+     "id": "ailment_threshold_+%",
+     "value": 8
+    },
+    {
+     "id": "stun_threshold_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Elemental Ailment Threshold",
+    "8% increased Stun Threshold"
+   ],
+   "status": "adapted",
+   "note": "ailment_threshold_+_from_%_maximum_energy_shield: ES-derived threshold -> % threshold; stun_threshold_+_from_%_maximum_energy_shield: ES-derived threshold -> % threshold"
+  },
+  {
+   "id": 14725,
+   "poe2_id": "attack_speed46",
+   "name": "Skill Speed",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 2591.3,
+   "y": -2002.0,
+   "group": 1021,
+   "connections": [
+    34233,
+    49220
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 14,
+    "sorceress": 10
+   },
+   "poe2_stats": {
+    "skill_speed_+%": 3
+   },
+   "poe2_text": [
+    "3% increased Skill Speed"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attack_speed_+%",
+     "value": 3
+    },
+    {
+     "id": "cast_speed_+%",
+     "value": 3
+    }
+   ],
+   "kvn_text": [
+    "3% increased Attack Speed",
+    "3% increased Cast Speed"
+   ],
+   "status": "adapted",
+   "note": "skill_speed_+%: Skill Speed = attack and cast speed (no warcries)"
+  },
+  {
+   "id": 14926,
+   "poe2_id": "life_regeneration24",
+   "name": "Life Regeneration",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -138.6,
+   "y": 3532.7,
+   "group": 838,
+   "connections": [
+    50609,
+    56910
+   ],
+   "dist": {
+    "warrior": 10,
+    "ranger": 14,
+    "sorceress": 28
+   },
+   "poe2_stats": {
+    "life_regeneration_rate_per_minute_%": 12
+   },
+   "poe2_text": [
+    "Regenerate 0.2% of maximum Life per second"
+   ],
+   "kvn_stats": [
+    {
+     "id": "life_regeneration_rate_%_per_second",
+     "value": 0.2
+    }
+   ],
+   "kvn_text": [
+    "Regenerate 0.2% of maximum Life per second"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 15507,
+   "poe2_id": "dexterity24_",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1741.6,
+   "y": 1999.1,
+   "group": 930,
+   "connections": [
+    1140,
+    48401
+   ],
+   "dist": {
+    "warrior": 19,
+    "ranger": 3,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 15618,
+   "poe2_id": "spell_criticals4",
+   "name": "Spell Critical Damage",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 0.0,
+   "y": -4774.9,
+   "group": 815,
+   "connections": [
+    32404,
+    57710
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 20,
+    "sorceress": 8
+   },
+   "poe2_stats": {
+    "base_spell_critical_strike_multiplier_+": 15
+   },
+   "poe2_text": [
+    "15% increased Critical Spell Damage Bonus"
+   ],
+   "kvn_stats": [
+    {
+     "id": "critical_strike_multiplier_+",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "15% increased Critical Damage Bonus"
+   ],
+   "status": "adapted",
+   "note": "base_spell_critical_strike_multiplier_+: spell-only crit bonus broadened"
+  },
+  {
+   "id": 15975,
+   "poe2_id": "evasion_and_energy_shield27",
+   "name": "Evasion and Energy Shield",
+   "type": "small",
+   "region": "bridge",
+   "bridge": "ranger-sorceress",
+   "x": 2893.6,
+   "y": -1538.4,
+   "group": 1041,
+   "connections": [
+    48198,
+    62984
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 10,
+    "sorceress": 12
+   },
+   "poe2_stats": {
+    "evasion_rating_+%": 12,
+    "maximum_energy_shield_+%": 12
+   },
+   "poe2_text": [
+    "12% increased Evasion Rating",
+    "12% increased maximum Energy Shield"
+   ],
+   "kvn_stats": [
+    {
+     "id": "evasion_+%",
+     "value": 12
+    },
+    {
+     "id": "energy_shield_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "12% increased Evasion Rating",
+    "12% increased maximum Energy Shield"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 16168,
+   "poe2_id": "strength27",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2266.3,
+   "y": 3071.5,
+   "group": 720,
+   "connections": [
+    25374,
+    54232,
+    55478
+   ],
+   "dist": {
+    "warrior": 5,
+    "ranger": 17,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 16460,
+   "poe2_id": "dexterity15",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3081.5,
+   "y": 536.1,
+   "group": 982,
+   "connections": [
+    24825,
+    28992,
+    43746
+   ],
+   "dist": {
+    "warrior": 22,
+    "ranger": 4,
+    "sorceress": 18
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 16484,
+   "poe2_id": "strength87",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3395.6,
+   "y": 5881.7,
+   "group": 1077,
+   "connections": [
+    18923,
+    42250
+   ],
+   "dist": {
+    "warrior": 17,
+    "ranger": 10,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 16489,
+   "poe2_id": "dexterity33",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1939.2,
+   "y": 3347.1,
+   "group": 925,
+   "connections": [
+    10909,
+    28556,
+    48568
+   ],
+   "dist": {
+    "warrior": 16,
+    "ranger": 6,
+    "sorceress": 24
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 16725,
+   "poe2_id": "strength21",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -4227.3,
+   "y": 2439.5,
+   "group": 509,
+   "connections": [
+    27373,
+    36163,
+    54811
+   ],
+   "dist": {
+    "warrior": 7,
+    "ranger": 19,
+    "sorceress": 19
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 17517,
+   "poe2_id": "area_of_effect1",
+   "name": "Area of Effect",
+   "type": "small",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -2880.6,
+   "y": -1417.6,
+   "group": 622,
+   "connections": [
+    6898,
+    13233,
+    17655
+   ],
+   "dist": {
+    "warrior": 10,
+    "ranger": 28,
+    "sorceress": 12
+   },
+   "poe2_stats": {
+    "base_skill_area_of_effect_+%": 5
+   },
+   "poe2_text": [
+    "5% increased Area of Effect"
+   ],
+   "kvn_stats": [
+    {
+     "id": "area_of_effect_+%",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "5% increased Area of Effect"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 17655,
+   "poe2_id": "auras1",
+   "name": "Aura Effect",
+   "type": "small",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -3141.2,
+   "y": -1813.6,
+   "group": 596,
+   "connections": [
+    17517,
+    19873,
+    64299
+   ],
+   "dist": {
+    "warrior": 11,
+    "ranger": 29,
+    "sorceress": 11
+   },
+   "poe2_stats": {
+    "aura_effect_+%": 5
+   },
+   "poe2_text": [
+    "Aura Skills have 5% increased Magnitudes"
+   ],
+   "kvn_stats": [
+    {
+     "id": "aura_effect_+%",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "5% increased Aura Effect"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 17726,
+   "poe2_id": "ranged3",
+   "name": "Stun Buildup",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2257.8,
+   "y": 2934.8,
+   "group": 966,
+   "connections": [
+    11826,
+    33053
+   ],
+   "dist": {
+    "warrior": 19,
+    "ranger": 7,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "hit_damage_stun_multiplier_+%": 15
+   },
+   "poe2_text": [
+    "15% increased Stun Buildup"
+   ],
+   "kvn_stats": [
+    {
+     "id": "stun_buildup_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "15% increased Stun Buildup"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 17973,
+   "poe2_id": "energy_shield_recovery14",
+   "name": "Rapid Recharge",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 657.8,
+   "y": -3929.7,
+   "group": 857,
+   "connections": [
+    4748
+   ],
+   "dist": {
+    "warrior": 22,
+    "ranger": 20,
+    "sorceress": 7
+   },
+   "poe2_stats": {
+    "energy_shield_delay_-%": 12,
+    "energy_shield_recharge_rate_+%": 12
+   },
+   "poe2_text": [
+    "12% faster start of Energy Shield Recharge",
+    "12% increased Energy Shield Recharge Rate"
+   ],
+   "kvn_stats": [
+    {
+     "id": "energy_shield_recharge_start_faster_%",
+     "value": 24
+    }
+   ],
+   "kvn_text": [
+    "24% faster start of Energy Shield Recharge"
+   ],
+   "status": "adapted",
+   "note": "energy_shield_recharge_rate_+%: recharge rate is fixed at 12.5%/s in KvN; folded into faster start"
+  },
+  {
+   "id": 18086,
+   "poe2_id": "cold_penetration25",
+   "name": "Breath of Ice",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -1442.0,
+   "y": -5546.4,
+   "group": 760,
+   "connections": [
+    62844
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 23,
+    "sorceress": 11
+   },
+   "poe2_stats": {
+    "base_intelligence": 10,
+    "base_reduce_enemy_cold_resistance_%": 15
+   },
+   "poe2_text": [
+    "+10 to Intelligence",
+    "Damage Penetrates 15% Cold Resistance"
+   ],
+   "kvn_stats": [
+    {
+     "id": "intelligence",
+     "value": 10
+    },
+    {
+     "id": "cold_penetration_%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "+10 to Intelligence",
+    "Damage Penetrates 15% Cold Resistance"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 18407,
+   "poe2_id": "intelligence12",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -753.0,
+   "y": -2537.9,
+   "group": 763,
+   "connections": [
+    22419,
+    47555
+   ],
+   "dist": {
+    "warrior": 19,
+    "ranger": 23,
+    "sorceress": 3
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 18629,
+   "poe2_id": "block7_",
+   "name": "Block",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3067.3,
+   "y": 2194.2,
+   "group": 611,
+   "connections": [
+    7721,
+    64327
+   ],
+   "dist": {
+    "warrior": 6,
+    "ranger": 20,
+    "sorceress": 24
+   },
+   "poe2_stats": {
+    "block_chance_+%": 5
+   },
+   "poe2_text": [
+    "5% increased Block chance"
+   ],
+   "kvn_stats": [
+    {
+     "id": "block_chance_+%",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "5% increased Block chance"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 18742,
+   "poe2_id": "stun_threshold7",
+   "name": "Stun Threshold",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2732.3,
+   "y": 2529.2,
+   "group": 611,
+   "connections": [
+    7721,
+    62732
+   ],
+   "dist": {
+    "warrior": 6,
+    "ranger": 20,
+    "sorceress": 24
+   },
+   "poe2_stats": {
+    "stun_threshold_+%": 12
+   },
+   "poe2_text": [
+    "12% increased Stun Threshold"
+   ],
+   "kvn_stats": [
+    {
+     "id": "stun_threshold_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "12% increased Stun Threshold"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 18845,
+   "poe2_id": "spells15",
+   "name": "Spell Damage",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -309.3,
+   "y": -2331.7,
+   "group": 789,
+   "connections": [
+    1755,
+    4739,
+    55807
+   ],
+   "dist": {
+    "warrior": 22,
+    "ranger": 26,
+    "sorceress": 2
+   },
+   "poe2_stats": {
+    "spell_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Spell Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "spell_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Spell Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 18923,
+   "poe2_id": "dexterity64",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3993.0,
+   "y": 6932.8,
+   "group": 1126,
+   "connections": [
+    9085,
+    16484
+   ],
+   "dist": {
+    "warrior": 18,
+    "ranger": 11,
+    "sorceress": 26
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 19104,
+   "poe2_id": "accuracy18",
+   "name": "Eagle Eye",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2770.8,
+   "y": 1599.7,
+   "group": 1024,
+   "connections": [
+    29582
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 7,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "accuracy_rating": 30,
+    "accuracy_rating_+%": 10
+   },
+   "poe2_text": [
+    "+30 to Accuracy Rating",
+    "10% increased Accuracy Rating"
+   ],
+   "kvn_stats": [
+    {
+     "id": "accuracy_rating",
+     "value": 30
+    },
+    {
+     "id": "accuracy_rating_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "+30 to Accuracy Rating",
+    "10% increased Accuracy Rating"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 19873,
+   "poe2_id": "area_of_effect4",
+   "name": "Area of Effect",
+   "type": "small",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -2663.2,
+   "y": -1794.1,
+   "group": 622,
+   "connections": [
+    13233,
+    17655,
+    28950
+   ],
+   "dist": {
+    "warrior": 12,
+    "ranger": 28,
+    "sorceress": 10
+   },
+   "poe2_stats": {
+    "base_skill_area_of_effect_+%": 5
+   },
+   "poe2_text": [
+    "5% increased Area of Effect"
+   ],
+   "kvn_stats": [
+    {
+     "id": "area_of_effect_+%",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "5% increased Area of Effect"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 20831,
+   "poe2_id": "evasion39",
+   "name": "Catlike Agility",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2646.5,
+   "y": 2165.0,
+   "group": 1018,
+   "connections": [
+    29843
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 7,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "evasion_rating_+%": 25,
+    "evasion_rating_+%_if_you_dodge_rolled_recently": 40,
+    "movement_speed_penalty_+%_while_performing_action": -3
+   },
+   "poe2_text": [
+    "25% increased Evasion Rating",
+    "40% increased Evasion Rating if you've Dodge Rolled Recently",
+    "3% reduced Movement Speed Penalty from using Skills while moving"
+   ],
+   "kvn_stats": [
+    {
+     "id": "evasion_+%",
+     "value": 45
+    }
+   ],
+   "kvn_text": [
+    "45% increased Evasion Rating"
+   ],
+   "status": "adapted",
+   "note": "evasion_rating_+%_if_you_dodge_rolled_recently: dodge roll cut; condition removed, value halved; movement_speed_penalty_+%_while_performing_action: heroes never move"
+  },
+  {
+   "id": 21336,
+   "poe2_id": "evasion_and_energy_shield26",
+   "name": "Evasion and Energy Shield",
+   "type": "small",
+   "region": "bridge",
+   "bridge": "ranger-sorceress",
+   "x": 2779.1,
+   "y": -1736.8,
+   "group": 1041,
+   "connections": [
+    49220,
+    62984
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 12,
+    "sorceress": 10
+   },
+   "poe2_stats": {
+    "evasion_rating_+%": 12,
+    "maximum_energy_shield_+%": 12
+   },
+   "poe2_text": [
+    "12% increased Evasion Rating",
+    "12% increased maximum Energy Shield"
+   ],
+   "kvn_stats": [
+    {
+     "id": "evasion_+%",
+     "value": 12
+    },
+    {
+     "id": "energy_shield_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "12% increased Evasion Rating",
+    "12% increased maximum Energy Shield"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 21984,
+   "poe2_id": "jewel_slot1979",
+   "name": "[Jewel] Socket",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 5516.3,
+   "y": -9522.0,
+   "group": 1233,
+   "connections": [
+    10382,
+    61403
+   ],
+   "dist": {
+    "warrior": 29,
+    "ranger": 21,
+    "sorceress": 14
+   },
+   "poe2_stats": {},
+   "poe2_text": [
+    "Jewel Socket"
+   ],
+   "kvn_stats": [
+    {
+     "id": "item_rarity_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Rarity of Items found"
+   ],
+   "status": "replaced",
+   "note": "PoE2 Jewel Socket; jewels are cut. Replaced with a loot stat."
+  },
+  {
+   "id": 22314,
+   "poe2_id": "elemental14",
+   "name": "Elemental Damage",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -478.3,
+   "y": -3316.2,
+   "group": 774,
+   "connections": [
+    22821,
+    51184,
+    51968
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 24,
+    "sorceress": 6
+   },
+   "poe2_stats": {
+    "elemental_damage_+%": 8
+   },
+   "poe2_text": [
+    "8% increased Elemental Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "elemental_damage_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Elemental Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 22419,
+   "poe2_id": "intelligence11",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -478.0,
+   "y": -2158.2,
+   "group": 778,
+   "connections": [
+    4739,
+    18407
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 24,
+    "sorceress": 2
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 22795,
+   "poe2_id": "projectiles16",
+   "name": "Projectile Damage",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2931.9,
+   "y": 1159.5,
+   "group": 1053,
+   "connections": [
+    28992,
+    42781
+   ],
+   "dist": {
+    "warrior": 24,
+    "ranger": 6,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "projectile_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Projectile Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "projectile_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Projectile Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 22821,
+   "poe2_id": "cold2",
+   "name": "Elemental Damage",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -478.3,
+   "y": -3567.2,
+   "group": 774,
+   "connections": [
+    3823,
+    22314
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 24,
+    "sorceress": 7
+   },
+   "poe2_stats": {
+    "elemental_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Elemental Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "elemental_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Elemental Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 22928,
+   "poe2_id": "strength20",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3895.6,
+   "y": 750.9,
+   "group": 556,
+   "connections": [
+    27373,
+    38323
+   ],
+   "dist": {
+    "warrior": 5,
+    "ranger": 21,
+    "sorceress": 19
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 23570,
+   "poe2_id": "strength26",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -1599.8,
+   "y": 1554.7,
+   "group": 684,
+   "connections": [
+    38646,
+    41031
+   ],
+   "dist": {
+    "warrior": 2,
+    "ranger": 20,
+    "sorceress": 24
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 24239,
+   "poe2_id": "life_on_kill10",
+   "name": "Life on Kill",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3559.0,
+   "y": -482.9,
+   "group": 1099,
+   "connections": [
+    34136,
+    55846
+   ],
+   "dist": {
+    "warrior": 26,
+    "ranger": 8,
+    "sorceress": 16
+   },
+   "poe2_stats": {
+    "base_life_gained_on_enemy_death": 5
+   },
+   "poe2_text": [
+    "Gain 5 Life per enemy killed"
+   ],
+   "kvn_stats": [
+    {
+     "id": "life_gained_on_kill",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "Gain 5 Life per enemy killed"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 24825,
+   "poe2_id": "dexterity14",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3371.4,
+   "y": 290.5,
+   "group": 1065,
+   "connections": [
+    16460,
+    29479
+   ],
+   "dist": {
+    "warrior": 23,
+    "ranger": 5,
+    "sorceress": 17
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 25374,
+   "poe2_id": "strength86",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -1956.7,
+   "y": 3381.2,
+   "group": 720,
+   "connections": [
+    16168,
+    45969
+   ],
+   "dist": {
+    "warrior": 6,
+    "ranger": 16,
+    "sorceress": 24
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 25429,
+   "poe2_id": "duration15",
+   "name": "Grounded in the Earth",
+   "type": "notable",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -2400.7,
+   "y": -1381.2,
+   "group": 651,
+   "connections": [
+    38103,
+    41838
+   ],
+   "dist": {
+    "warrior": 11,
+    "ranger": 29,
+    "sorceress": 11
+   },
+   "poe2_stats": {
+    "skill_effect_duration_+%": 16,
+    "stun_threshold_+%": 16
+   },
+   "poe2_text": [
+    "16% increased Skill Effect Duration",
+    "16% increased Stun Threshold"
+   ],
+   "kvn_stats": [
+    {
+     "id": "skill_effect_duration_+%",
+     "value": 16
+    },
+    {
+     "id": "stun_threshold_+%",
+     "value": 16
+    }
+   ],
+   "kvn_text": [
+    "16% increased Skill Effect Duration",
+    "16% increased Stun Threshold"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 25482,
+   "poe2_id": "strength102",
+   "name": "Beef",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -5457.8,
+   "y": 4362.3,
+   "group": 406,
+   "connections": [
+    54485
+   ],
+   "dist": {
+    "warrior": 11,
+    "ranger": 23,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "base_strength": 25
+   },
+   "poe2_text": [
+    "+25 to Strength"
+   ],
+   "kvn_stats": [
+    {
+     "id": "strength",
+     "value": 25
+    }
+   ],
+   "kvn_text": [
+    "+25 to Strength"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 25557,
+   "poe2_id": "intelligence62",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 4280.0,
+   "y": -7413.3,
+   "group": 1083,
+   "connections": [
+    4059,
+    41029,
+    55668
+   ],
+   "dist": {
+    "warrior": 26,
+    "ranger": 18,
+    "sorceress": 11
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 26319,
+   "poe2_id": "criticals81_",
+   "name": "Critical Chance",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1737.8,
+   "y": 4616.0,
+   "group": 944,
+   "connections": [
+    14340,
+    30990
+   ],
+   "dist": {
+    "warrior": 15,
+    "ranger": 10,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "critical_strike_chance_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Critical Hit Chance"
+   ],
+   "kvn_stats": [
+    {
+     "id": "critical_strike_chance_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Critical Hit Chance"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 26725,
+   "poe2_id": "jewel_slot1956",
+   "name": "[Jewel] Socket",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -6934.3,
+   "y": 4002.7,
+   "group": 299,
+   "connections": [
+    52298,
+    57703
+   ],
+   "dist": {
+    "warrior": 10,
+    "ranger": 22,
+    "sorceress": 22
+   },
+   "poe2_stats": {},
+   "poe2_text": [
+    "Jewel Socket"
+   ],
+   "kvn_stats": [
+    {
+     "id": "item_rarity_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Rarity of Items found"
+   ],
+   "status": "replaced",
+   "note": "PoE2 Jewel Socket; jewels are cut. Replaced with a loot stat."
+  },
+  {
+   "id": 26786,
+   "poe2_id": "dexterity66",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2459.2,
+   "y": 4266.5,
+   "group": 995,
+   "connections": [
+    14340,
+    42250,
+    48568
+   ],
+   "dist": {
+    "warrior": 15,
+    "ranger": 8,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 26931,
+   "poe2_id": "life_on_kill2",
+   "name": "Life on Kill",
+   "type": "small",
+   "region": "bridge",
+   "bridge": "ranger-sorceress",
+   "x": 3103.1,
+   "y": -1404.7,
+   "group": 1041,
+   "connections": [
+    7344,
+    48198
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 10,
+    "sorceress": 12
+   },
+   "poe2_stats": {
+    "base_life_gained_on_enemy_death": 3
+   },
+   "poe2_text": [
+    "Gain 3 Life per enemy killed"
+   ],
+   "kvn_stats": [
+    {
+     "id": "life_gained_on_kill",
+     "value": 3
+    }
+   ],
+   "kvn_text": [
+    "Gain 3 Life per enemy killed"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 27373,
+   "poe2_id": "strength19",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -4363.7,
+   "y": 1561.7,
+   "group": 556,
+   "connections": [
+    16725,
+    22928,
+    51369,
+    53405
+   ],
+   "dist": {
+    "warrior": 6,
+    "ranger": 20,
+    "sorceress": 18
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 28510,
+   "poe2_id": "strength32",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "bridge",
+   "bridge": "warrior-ranger",
+   "x": -1095.4,
+   "y": 3009.5,
+   "group": 794,
+   "connections": [
+    45969,
+    56910
+   ],
+   "dist": {
+    "warrior": 8,
+    "ranger": 14,
+    "sorceress": 26
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 28556,
+   "poe2_id": "strength43",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "bridge",
+   "bridge": "warrior-ranger",
+   "x": 1516.2,
+   "y": 2949.4,
+   "group": 925,
+   "connections": [
+    16489,
+    59881
+   ],
+   "dist": {
+    "warrior": 15,
+    "ranger": 7,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 28950,
+   "poe2_id": "templar_druid_notable2",
+   "name": "Devoted Protector",
+   "type": "notable",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -2308.2,
+   "y": -1862.6,
+   "group": 671,
+   "connections": [
+    10156,
+    19873,
+    41838
+   ],
+   "dist": {
+    "warrior": 13,
+    "ranger": 27,
+    "sorceress": 9
+   },
+   "poe2_stats": {
+    "armour_%_applies_to_fire_cold_lightning_damage": 15,
+    "base_strength_and_intelligence": 5,
+    "energy_shield_delay_-%": 10,
+    "physical_damage_reduction_rating_+%": 15
+   },
+   "poe2_text": [
+    "+15% of Armour also applies to Elemental Damage",
+    "+5 to Strength and Intelligence",
+    "10% faster start of Energy Shield Recharge",
+    "15% increased Armour"
+   ],
+   "kvn_stats": [
+    {
+     "id": "all_elemental_resistances_%",
+     "value": 5
+    },
+    {
+     "id": "strength",
+     "value": 5
+    },
+    {
+     "id": "intelligence",
+     "value": 5
+    },
+    {
+     "id": "energy_shield_recharge_start_faster_%",
+     "value": 10
+    },
+    {
+     "id": "armour_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "+5% to all Elemental Resistances",
+    "+5 to Strength",
+    "+5 to Intelligence",
+    "10% faster start of Energy Shield Recharge",
+    "15% increased Armour"
+   ],
+   "status": "adapted",
+   "note": "armour_%_applies_to_fire_cold_lightning_damage: armour-vs-elemental cut; resistances instead"
+  },
+  {
+   "id": 28992,
+   "poe2_id": "ranger_huntress_notable2",
+   "name": "Honed Instincts",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2489.1,
+   "y": 992.6,
+   "group": 965,
+   "connections": [
+    13783,
+    16460,
+    22795
+   ],
+   "dist": {
+    "warrior": 23,
+    "ranger": 5,
+    "sorceress": 19
+   },
+   "poe2_stats": {
+    "attack_speed_+%": 8,
+    "base_dexterity": 10,
+    "base_projectile_speed_+%": 8
+   },
+   "poe2_text": [
+    "8% increased Attack Speed",
+    "+10 to Dexterity",
+    "8% increased Projectile Speed"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attack_speed_+%",
+     "value": 8
+    },
+    {
+     "id": "dexterity",
+     "value": 10
+    },
+    {
+     "id": "projectile_speed_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Attack Speed",
+    "+10 to Dexterity",
+    "8% increased Projectile Speed"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 29240,
+   "poe2_id": "attributes61",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 3284.6,
+   "y": -9003.4,
+   "group": 1073,
+   "connections": [
+    55668,
+    57513
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 20,
+    "sorceress": 13
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 29479,
+   "poe2_id": "dexterity87",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3865.9,
+   "y": 0.4,
+   "group": 1065,
+   "connections": [
+    24825,
+    34136
+   ],
+   "dist": {
+    "warrior": 24,
+    "ranger": 6,
+    "sorceress": 16
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 29502,
+   "poe2_id": "cast_speed10",
+   "name": "Cast Speed",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -140.3,
+   "y": -3112.5,
+   "group": 816,
+   "connections": [
+    36302,
+    51184
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 22,
+    "sorceress": 6
+   },
+   "poe2_stats": {
+    "base_cast_speed_+%": 3
+   },
+   "poe2_text": [
+    "3% increased Cast Speed"
+   ],
+   "kvn_stats": [
+    {
+     "id": "cast_speed_+%",
+     "value": 3
+    }
+   ],
+   "kvn_text": [
+    "3% increased Cast Speed"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 29582,
+   "poe2_id": "accuracy8",
+   "name": "Accuracy",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2492.1,
+   "y": 1625.8,
+   "group": 1005,
+   "connections": [
+    19104,
+    35987
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 6,
+    "sorceress": 22
+   },
+   "poe2_stats": {
+    "accuracy_rating_+%": 8
+   },
+   "poe2_text": [
+    "8% increased Accuracy Rating"
+   ],
+   "kvn_stats": [
+    {
+     "id": "accuracy_rating_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Accuracy Rating"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 29695,
+   "poe2_id": "energy_shield_recovery19",
+   "name": "Energy Shield Delay",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 528.4,
+   "y": -2532.2,
+   "group": 849,
+   "connections": [
+    30346
+   ],
+   "dist": {
+    "warrior": 25,
+    "ranger": 21,
+    "sorceress": 3
+   },
+   "poe2_stats": {
+    "energy_shield_delay_-%": 6
+   },
+   "poe2_text": [
+    "6% faster start of Energy Shield Recharge"
+   ],
+   "kvn_stats": [
+    {
+     "id": "energy_shield_recharge_start_faster_%",
+     "value": 6
+    }
+   ],
+   "kvn_text": [
+    "6% faster start of Energy Shield Recharge"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 29843,
+   "poe2_id": "evasion4",
+   "name": "Evasion and Reduced Movement Penalty",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2485.0,
+   "y": 1959.7,
+   "group": 1018,
+   "connections": [
+    20831,
+    35987
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 6,
+    "sorceress": 24
+   },
+   "poe2_stats": {
+    "evasion_rating_+%": 10,
+    "movement_speed_penalty_+%_while_performing_action": -2
+   },
+   "poe2_text": [
+    "10% increased Evasion Rating",
+    "2% reduced Movement Speed Penalty from using Skills while moving"
+   ],
+   "kvn_stats": [
+    {
+     "id": "evasion_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Evasion Rating"
+   ],
+   "status": "adapted",
+   "note": "movement_speed_penalty_+%_while_performing_action: heroes never move"
+  },
+  {
+   "id": 30346,
+   "poe2_id": "energy_shield14",
+   "name": "Energy Shield",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 306.9,
+   "y": -2331.7,
+   "group": 849,
+   "connections": [
+    29695,
+    34006,
+    44871
+   ],
+   "dist": {
+    "warrior": 26,
+    "ranger": 22,
+    "sorceress": 2
+   },
+   "poe2_stats": {
+    "base_maximum_energy_shield": 10
+   },
+   "poe2_text": [
+    "+10 to maximum Energy Shield"
+   ],
+   "kvn_stats": [
+    {
+     "id": "energy_shield",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "+10 to maximum Energy Shield"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 30390,
+   "poe2_id": "block23",
+   "name": "Block",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -4842.4,
+   "y": 2159.3,
+   "group": 485,
+   "connections": [
+    33978,
+    36163
+   ],
+   "dist": {
+    "warrior": 9,
+    "ranger": 21,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "block_chance_+%": 5
+   },
+   "poe2_text": [
+    "5% increased Block chance"
+   ],
+   "kvn_stats": [
+    {
+     "id": "block_chance_+%",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "5% increased Block chance"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 30555,
+   "poe2_id": "attributes40",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "bridge",
+   "bridge": "ranger-sorceress",
+   "x": 1695.7,
+   "y": -2698.1,
+   "group": 940,
+   "connections": [
+    4203,
+    53960
+   ],
+   "dist": {
+    "warrior": 25,
+    "ranger": 15,
+    "sorceress": 7
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 30695,
+   "poe2_id": "exploiting_elemental_ailments10",
+   "name": "Vile Wounds",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3028.4,
+   "y": 1477.3,
+   "group": 1053,
+   "connections": [
+    13783
+   ],
+   "dist": {
+    "warrior": 22,
+    "ranger": 7,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "hit_damage_+%_vs_enemies_affected_by_ailments": 33
+   },
+   "poe2_text": [
+    "33% increased Damage with Hits against Enemies affected by Ailments"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attack_damage_+%",
+     "value": 17
+    },
+    {
+     "id": "spell_damage_+%",
+     "value": 17
+    }
+   ],
+   "kvn_text": [
+    "17% increased Attack Damage",
+    "17% increased Spell Damage"
+   ],
+   "status": "adapted",
+   "note": "hit_damage_+%_vs_enemies_affected_by_ailments: condition removed, value halved"
+  },
+  {
+   "id": 30829,
+   "poe2_id": "accuracy27",
+   "name": "Accuracy",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2590.4,
+   "y": 5007.6,
+   "group": 1007,
+   "connections": [
+    11855,
+    56999
+   ],
+   "dist": {
+    "warrior": 19,
+    "ranger": 12,
+    "sorceress": 27
+   },
+   "poe2_stats": {
+    "accuracy_rating_+%": 8
+   },
+   "poe2_text": [
+    "8% increased Accuracy Rating"
+   ],
+   "kvn_stats": [
+    {
+     "id": "accuracy_rating_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Accuracy Rating"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 30990,
+   "poe2_id": "criticals82",
+   "name": "Critical Chance",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1597.5,
+   "y": 4859.0,
+   "group": 944,
+   "connections": [
+    26319,
+    58939
+   ],
+   "dist": {
+    "warrior": 16,
+    "ranger": 11,
+    "sorceress": 26
+   },
+   "poe2_stats": {
+    "critical_strike_chance_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Critical Hit Chance"
+   ],
+   "kvn_stats": [
+    {
+     "id": "critical_strike_chance_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Critical Hit Chance"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 31409,
+   "poe2_id": "evasion13",
+   "name": "Evasion",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1874.5,
+   "y": 1205.9,
+   "group": 946,
+   "connections": [
+    49691
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 3,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "evasion_rating_+%": 15
+   },
+   "poe2_text": [
+    "15% increased Evasion Rating"
+   ],
+   "kvn_stats": [
+    {
+     "id": "evasion_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "15% increased Evasion Rating"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 31419,
+   "poe2_id": "duration2",
+   "name": "Increased Duration",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -4483.2,
+   "y": 401.1,
+   "group": 474,
+   "connections": [
+    35787,
+    53405
+   ],
+   "dist": {
+    "warrior": 8,
+    "ranger": 22,
+    "sorceress": 18
+   },
+   "poe2_stats": {
+    "skill_effect_duration_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Skill Effect Duration"
+   ],
+   "kvn_stats": [
+    {
+     "id": "skill_effect_duration_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Skill Effect Duration"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 32404,
+   "poe2_id": "spell_criticals9",
+   "name": "Spell Critical Chance",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -162.0,
+   "y": -4439.9,
+   "group": 815,
+   "connections": [
+    5501,
+    15618
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 21,
+    "sorceress": 9
+   },
+   "poe2_stats": {
+    "spell_critical_strike_chance_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Critical Hit Chance for Spells"
+   ],
+   "kvn_stats": [
+    {
+     "id": "critical_strike_chance_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Critical Hit Chance"
+   ],
+   "status": "adapted",
+   "note": "spell_critical_strike_chance_+%: spell-only crit chance broadened"
+  },
+  {
+   "id": 32416,
+   "poe2_id": "armour35",
+   "name": "Sturdy Metal",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2991.3,
+   "y": 1726.2,
+   "group": 624,
+   "connections": [
+    6529
+   ],
+   "dist": {
+    "warrior": 7,
+    "ranger": 21,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "body_armour_+%": 80
+   },
+   "poe2_text": [
+    "80% increased Armour from Equipped Body Armour"
+   ],
+   "kvn_stats": [
+    {
+     "id": "local_armour_+%",
+     "value": 80
+    }
+   ],
+   "kvn_text": [
+    "80% increased Armour from the equipped Armor-slot item"
+   ],
+   "status": "adapted",
+   "note": "body_armour_+%: body armour -> KvN Armor slot (body armour or shield); applied as the item local_armour_+%"
+  },
+  {
+   "id": 32427,
+   "poe2_id": "cold_penetration5",
+   "name": "Cold Penetration",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -1111.0,
+   "y": -5546.4,
+   "group": 760,
+   "connections": [
+    4456,
+    62844
+   ],
+   "dist": {
+    "warrior": 19,
+    "ranger": 21,
+    "sorceress": 9
+   },
+   "poe2_stats": {
+    "base_reduce_enemy_cold_resistance_%": 6
+   },
+   "poe2_text": [
+    "Damage Penetrates 6% Cold Resistance"
+   ],
+   "kvn_stats": [
+    {
+     "id": "cold_penetration_%",
+     "value": 6
+    }
+   ],
+   "kvn_text": [
+    "Damage Penetrates 6% Cold Resistance"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 32683,
+   "poe2_id": "cold39__",
+   "name": "Essence of the Mountain",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3392.1,
+   "y": -904.2,
+   "group": 1061,
+   "connections": [
+    40068
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 11,
+    "sorceress": 14
+   },
+   "poe2_stats": {
+    "hit_damage_freeze_multiplier_+%": 20,
+    "non_skill_base_all_damage_%_to_gain_as_cold": 5
+   },
+   "poe2_text": [
+    "20% increased Freeze Buildup",
+    "Gain 5% of Damage as Extra Cold Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "freeze_buildup_+%",
+     "value": 20
+    },
+    {
+     "id": "damage_gained_as_cold_%",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "20% increased Freeze Buildup",
+    "Gain 5% of Damage as Extra Cold Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 33053,
+   "poe2_id": "ranged1",
+   "name": "Projectile Damage",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2252.3,
+   "y": 2769.4,
+   "group": 990,
+   "connections": [
+    4844,
+    10909,
+    17726
+   ],
+   "dist": {
+    "warrior": 18,
+    "ranger": 6,
+    "sorceress": 24
+   },
+   "poe2_stats": {
+    "projectile_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Projectile Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "projectile_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Projectile Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 33556,
+   "poe2_id": "melee25",
+   "name": "Melee Damage",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2267.6,
+   "y": 816.3,
+   "group": 665,
+   "connections": [
+    46325
+   ],
+   "dist": {
+    "warrior": 3,
+    "ranger": 26,
+    "sorceress": 22
+   },
+   "poe2_stats": {
+    "melee_damage_+%": 8
+   },
+   "poe2_text": [
+    "8% increased Melee Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "melee_damage_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Melee Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 33978,
+   "poe2_id": "block12",
+   "name": "Unstoppable Barrier",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -4684.9,
+   "y": 1981.8,
+   "group": 485,
+   "connections": [
+    30390
+   ],
+   "dist": {
+    "warrior": 10,
+    "ranger": 22,
+    "sorceress": 22
+   },
+   "poe2_stats": {
+    "base_slow_potency_+%": -15,
+    "block_chance_+%": 10
+   },
+   "poe2_text": [
+    "15% reduced Slowing Potency of Debuffs on You",
+    "10% increased Block chance"
+   ],
+   "kvn_stats": [
+    {
+     "id": "self_ailment_duration_-%",
+     "value": 15
+    },
+    {
+     "id": "block_chance_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "15% reduced Duration of Ailments on You",
+    "10% increased Block chance"
+   ],
+   "status": "adapted",
+   "note": "base_slow_potency_+%: slows on heroes are chills; folded into ailment duration"
+  },
+  {
+   "id": 34006,
+   "poe2_id": "energy_shield21",
+   "name": "Energy Shield",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 215.4,
+   "y": -2616.1,
+   "group": 849,
+   "connections": [
+    30346
+   ],
+   "dist": {
+    "warrior": 25,
+    "ranger": 21,
+    "sorceress": 3
+   },
+   "poe2_stats": {
+    "maximum_energy_shield_+%": 15
+   },
+   "poe2_text": [
+    "15% increased maximum Energy Shield"
+   ],
+   "kvn_stats": [
+    {
+     "id": "energy_shield_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "15% increased maximum Energy Shield"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 34136,
+   "poe2_id": "dexterity8",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "bridge",
+   "bridge": "ranger-sorceress",
+   "x": 3290.6,
+   "y": -323.2,
+   "group": 1065,
+   "connections": [
+    13411,
+    24239,
+    29479
+   ],
+   "dist": {
+    "warrior": 25,
+    "ranger": 7,
+    "sorceress": 15
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 34168,
+   "poe2_id": "criticals3",
+   "name": "Crashing Wave",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 2569.0,
+   "y": -2321.1,
+   "group": 1015,
+   "connections": [
+    4157
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 14,
+    "sorceress": 11
+   },
+   "poe2_stats": {
+    "damage_+%_if_have_crit_in_past_8_seconds": 25
+   },
+   "poe2_text": [
+    "25% increased Damage if you've dealt a Critical Hit in the past 8 seconds"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attack_damage_+%",
+     "value": 13
+    },
+    {
+     "id": "spell_damage_+%",
+     "value": 13
+    }
+   ],
+   "kvn_text": [
+    "13% increased Attack Damage",
+    "13% increased Spell Damage"
+   ],
+   "status": "adapted",
+   "note": "damage_+%_if_have_crit_in_past_8_seconds: condition removed, value halved"
+  },
+  {
+   "id": 34233,
+   "poe2_id": "attack_speed37",
+   "name": "Flow State",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 2672.3,
+   "y": -2142.3,
+   "group": 1021,
+   "connections": [
+    14725
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 14,
+    "sorceress": 11
+   },
+   "poe2_stats": {
+    "mana_regeneration_rate_+%": 15,
+    "skill_speed_+%": 5
+   },
+   "poe2_text": [
+    "15% increased Mana Regeneration Rate",
+    "5% increased Skill Speed"
+   ],
+   "kvn_stats": [
+    {
+     "id": "acolyte_mana_generated_+%",
+     "value": 8
+    },
+    {
+     "id": "attack_speed_+%",
+     "value": 5
+    },
+    {
+     "id": "cast_speed_+%",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "8% increased Mana generated by Acolytes",
+    "5% increased Attack Speed",
+    "5% increased Cast Speed"
+   ],
+   "status": "adapted",
+   "note": "mana_regeneration_rate_+%: mana regen -> acolyte output at half value (KvN custom stat); skill_speed_+%: Skill Speed = attack and cast speed (no warcries)"
+  },
+  {
+   "id": 35234,
+   "poe2_id": "projectiles22",
+   "name": "Projectile Damage",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1770.4,
+   "y": 800.1,
+   "group": 965,
+   "connections": [
+    6789,
+    35660,
+    56651
+   ],
+   "dist": {
+    "warrior": 26,
+    "ranger": 2,
+    "sorceress": 22
+   },
+   "poe2_stats": {
+    "projectile_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Projectile Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "projectile_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Projectile Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 35426,
+   "poe2_id": "strength89",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3695.6,
+   "y": 0.5,
+   "group": 625,
+   "connections": [
+    6015,
+    8406
+   ],
+   "dist": {
+    "warrior": 6,
+    "ranger": 24,
+    "sorceress": 16
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 35660,
+   "poe2_id": "attack_speed3",
+   "name": "Attack Speed",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1970.9,
+   "y": 1021.5,
+   "group": 965,
+   "connections": [
+    35234
+   ],
+   "dist": {
+    "warrior": 25,
+    "ranger": 3,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "attack_speed_+%": 3
+   },
+   "poe2_text": [
+    "3% increased Attack Speed"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attack_speed_+%",
+     "value": 3
+    }
+   ],
+   "kvn_text": [
+    "3% increased Attack Speed"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 35708,
+   "poe2_id": "chill_and_freeze16",
+   "name": "Chill Magnitude",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3475.9,
+   "y": -477.9,
+   "group": 569,
+   "connections": [
+    2863,
+    5692
+   ],
+   "dist": {
+    "warrior": 9,
+    "ranger": 27,
+    "sorceress": 17
+   },
+   "poe2_stats": {
+    "chill_effect_+%": 12
+   },
+   "poe2_text": [
+    "12% increased Magnitude of Chill you inflict"
+   ],
+   "kvn_stats": [
+    {
+     "id": "chill_magnitude_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "12% increased Magnitude of Chill you inflict"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 35787,
+   "poe2_id": "duration4",
+   "name": "Increased Duration",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -4660.7,
+   "y": 141.7,
+   "group": 474,
+   "connections": [
+    31419,
+    42813
+   ],
+   "dist": {
+    "warrior": 9,
+    "ranger": 23,
+    "sorceress": 19
+   },
+   "poe2_stats": {
+    "skill_effect_duration_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Skill Effect Duration"
+   ],
+   "kvn_stats": [
+    {
+     "id": "skill_effect_duration_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Skill Effect Duration"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 35987,
+   "poe2_id": "ranger_huntress_notable1",
+   "name": "Blur",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2108.6,
+   "y": 1669.0,
+   "group": 946,
+   "connections": [
+    29582,
+    29843,
+    48401,
+    55397
+   ],
+   "dist": {
+    "warrior": 19,
+    "ranger": 5,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "base_dexterity": 10,
+    "base_movement_velocity_+%": 4,
+    "evasion_rating_+%": 20
+   },
+   "poe2_text": [
+    "+10 to Dexterity",
+    "4% increased Movement Speed",
+    "20% increased Evasion Rating"
+   ],
+   "kvn_stats": [
+    {
+     "id": "dexterity",
+     "value": 10
+    },
+    {
+     "id": "maximum_life_+%",
+     "value": 4
+    },
+    {
+     "id": "evasion_+%",
+     "value": 20
+    }
+   ],
+   "kvn_text": [
+    "+10 to Dexterity",
+    "4% increased maximum Life",
+    "20% increased Evasion Rating"
+   ],
+   "status": "adapted",
+   "note": "base_movement_velocity_+%: heroes never move; brief fallback +% life"
+  },
+  {
+   "id": 36163,
+   "poe2_id": "block25_",
+   "name": "Block",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -4392.9,
+   "y": 2273.9,
+   "group": 485,
+   "connections": [
+    16725,
+    30390
+   ],
+   "dist": {
+    "warrior": 8,
+    "ranger": 20,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "block_chance_+%": 5
+   },
+   "poe2_text": [
+    "5% increased Block chance"
+   ],
+   "kvn_stats": [
+    {
+     "id": "block_chance_+%",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "5% increased Block chance"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 36302,
+   "poe2_id": "cast_speed36_",
+   "name": "Practiced Signs",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 0.0,
+   "y": -3282.5,
+   "group": 816,
+   "connections": [
+    29502
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 21,
+    "sorceress": 7
+   },
+   "poe2_stats": {
+    "base_cast_speed_+%": 6
+   },
+   "poe2_text": [
+    "6% increased Cast Speed"
+   ],
+   "kvn_stats": [
+    {
+     "id": "cast_speed_+%",
+     "value": 6
+    }
+   ],
+   "kvn_text": [
+    "6% increased Cast Speed"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 36479,
+   "poe2_id": "lightning41",
+   "name": "Essence of the Storm",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 2478.2,
+   "y": -2485.4,
+   "group": 1017,
+   "connections": [
+    36778
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 14,
+    "sorceress": 11
+   },
+   "poe2_stats": {
+    "non_skill_base_all_damage_%_to_gain_as_lightning": 5,
+    "shock_chance_+%": 30
+   },
+   "poe2_text": [
+    "Gain 5% of Damage as Extra Lightning Damage",
+    "30% increased chance to Shock"
+   ],
+   "kvn_stats": [
+    {
+     "id": "damage_gained_as_lightning_%",
+     "value": 5
+    },
+    {
+     "id": "shock_chance_+%",
+     "value": 30
+    }
+   ],
+   "kvn_text": [
+    "Gain 5% of Damage as Extra Lightning Damage",
+    "30% increased chance to Shock"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 36709,
+   "poe2_id": "stun_threshold13",
+   "name": "Stun Threshold",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -1841.8,
+   "y": 1554.7,
+   "group": 684,
+   "connections": [
+    1913
+   ],
+   "dist": {
+    "warrior": 3,
+    "ranger": 21,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "stun_threshold_+%": 12
+   },
+   "poe2_text": [
+    "12% increased Stun Threshold"
+   ],
+   "kvn_stats": [
+    {
+     "id": "stun_threshold_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "12% increased Stun Threshold"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 36778,
+   "poe2_id": "lightning42",
+   "name": "Shock Chance",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 2261.5,
+   "y": -2227.0,
+   "group": 1017,
+   "connections": [
+    36479,
+    49220
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 14,
+    "sorceress": 10
+   },
+   "poe2_stats": {
+    "shock_chance_+%": 15
+   },
+   "poe2_text": [
+    "15% increased chance to Shock"
+   ],
+   "kvn_stats": [
+    {
+     "id": "shock_chance_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "15% increased chance to Shock"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 38103,
+   "poe2_id": "duration14",
+   "name": "Increased Duration and Stun Threshold",
+   "type": "small",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -2541.0,
+   "y": -1211.2,
+   "group": 651,
+   "connections": [
+    6898,
+    25429
+   ],
+   "dist": {
+    "warrior": 10,
+    "ranger": 28,
+    "sorceress": 12
+   },
+   "poe2_stats": {
+    "skill_effect_duration_+%": 8,
+    "stun_threshold_+%": 8
+   },
+   "poe2_text": [
+    "8% increased Skill Effect Duration",
+    "8% increased Stun Threshold"
+   ],
+   "kvn_stats": [
+    {
+     "id": "skill_effect_duration_+%",
+     "value": 8
+    },
+    {
+     "id": "stun_threshold_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Skill Effect Duration",
+    "8% increased Stun Threshold"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 38143,
+   "poe2_id": "dexterity17",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2073.5,
+   "y": 536.1,
+   "group": 982,
+   "connections": [
+    43746,
+    56651
+   ],
+   "dist": {
+    "warrior": 24,
+    "ranger": 2,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 38323,
+   "poe2_id": "strength17",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3154.8,
+   "y": 556.1,
+   "group": 603,
+   "connections": [
+    1207,
+    5710,
+    6015,
+    22928
+   ],
+   "dist": {
+    "warrior": 4,
+    "ranger": 22,
+    "sorceress": 18
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 38646,
+   "poe2_id": "armour6",
+   "name": "Armour",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -1397.9,
+   "y": 957.2,
+   "group": 734,
+   "connections": [
+    1913,
+    23570,
+    47175
+   ],
+   "dist": {
+    "warrior": 1,
+    "ranger": 21,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "base_physical_damage_reduction_rating": 20
+   },
+   "poe2_text": [
+    "+20 to Armour"
+   ],
+   "kvn_stats": [
+    {
+     "id": "armour",
+     "value": 20
+    }
+   ],
+   "kvn_text": [
+    "+20 to Armour"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 38779,
+   "poe2_id": "armour_and_evasion27",
+   "name": "Armour and Evasion",
+   "type": "small",
+   "region": "bridge",
+   "bridge": "warrior-ranger",
+   "x": 142.2,
+   "y": 2910.7,
+   "group": 826,
+   "connections": [
+    44605,
+    44836
+   ],
+   "dist": {
+    "warrior": 12,
+    "ranger": 10,
+    "sorceress": 28
+   },
+   "poe2_stats": {
+    "evasion_and_physical_damage_reduction_rating_+%": 12
+   },
+   "poe2_text": [
+    "12% increased Armour and Evasion Rating"
+   ],
+   "kvn_stats": [
+    {
+     "id": "armour_+%",
+     "value": 12
+    },
+    {
+     "id": "evasion_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "12% increased Armour",
+    "12% increased Evasion Rating"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 39037,
+   "poe2_id": "intelligence17",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 486.6,
+   "y": -4703.5,
+   "group": 858,
+   "connections": [
+    517,
+    1826,
+    57710
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 18,
+    "sorceress": 6
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 39581,
+   "poe2_id": "stun4_",
+   "name": "Stun Buildup",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2175.7,
+   "y": 1159.2,
+   "group": 665,
+   "connections": [
+    46325
+   ],
+   "dist": {
+    "warrior": 3,
+    "ranger": 25,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "hit_damage_stun_multiplier_+%": 15
+   },
+   "poe2_text": [
+    "15% increased Stun Buildup"
+   ],
+   "kvn_stats": [
+    {
+     "id": "stun_buildup_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "15% increased Stun Buildup"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 39594,
+   "poe2_id": "fire_penetration1",
+   "name": "Fire Penetration",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3383.9,
+   "y": 207.0,
+   "group": 575,
+   "connections": [
+    51248,
+    53294
+   ],
+   "dist": {
+    "warrior": 7,
+    "ranger": 25,
+    "sorceress": 19
+   },
+   "poe2_stats": {
+    "base_reduce_enemy_fire_resistance_%": 6
+   },
+   "poe2_text": [
+    "Damage Penetrates 6% Fire Resistance"
+   ],
+   "kvn_stats": [
+    {
+     "id": "fire_penetration_%",
+     "value": 6
+    }
+   ],
+   "kvn_text": [
+    "Damage Penetrates 6% Fire Resistance"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 40068,
+   "poe2_id": "cold28",
+   "name": "Freeze Buildup",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3060.0,
+   "y": -845.6,
+   "group": 1061,
+   "connections": [
+    32683,
+    48198
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 10,
+    "sorceress": 14
+   },
+   "poe2_stats": {
+    "hit_damage_freeze_multiplier_+%": 15
+   },
+   "poe2_text": [
+    "15% increased Freeze Buildup"
+   ],
+   "kvn_stats": [
+    {
+     "id": "freeze_buildup_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "15% increased Freeze Buildup"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 40213,
+   "poe2_id": "life_on_kill15",
+   "name": "Taste for Blood",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3682.0,
+   "y": -553.9,
+   "group": 1099,
+   "connections": [
+    55846
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 10,
+    "sorceress": 18
+   },
+   "poe2_stats": {
+    "base_life_gained_on_enemy_death": 20,
+    "recover_maximum_life_on_enemy_killed_chance_%": 2
+   },
+   "poe2_text": [
+    "Gain 20 Life per enemy killed",
+    "2% chance to Recover all Life when you Kill an Enemy"
+   ],
+   "kvn_stats": [
+    {
+     "id": "life_gained_on_kill",
+     "value": 25
+    }
+   ],
+   "kvn_text": [
+    "Gain 25 Life per enemy killed"
+   ],
+   "status": "adapted",
+   "note": "recover_maximum_life_on_enemy_killed_chance_%: chance to fully heal -> flat life on kill"
+  },
+  {
+   "id": 41029,
+   "poe2_id": "attributes68",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 3541.6,
+   "y": -6134.2,
+   "group": 1088,
+   "connections": [
+    25557,
+    46034
+   ],
+   "dist": {
+    "warrior": 25,
+    "ranger": 17,
+    "sorceress": 10
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 41031,
+   "poe2_id": "strength25",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -1744.2,
+   "y": 1903.3,
+   "group": 684,
+   "connections": [
+    23570,
+    54232
+   ],
+   "dist": {
+    "warrior": 3,
+    "ranger": 19,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 41838,
+   "poe2_id": "duration13",
+   "name": "Increased Duration and Stun Threshold",
+   "type": "small",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -2323.7,
+   "y": -1587.7,
+   "group": 651,
+   "connections": [
+    25429,
+    28950
+   ],
+   "dist": {
+    "warrior": 12,
+    "ranger": 28,
+    "sorceress": 10
+   },
+   "poe2_stats": {
+    "skill_effect_duration_+%": 8,
+    "stun_threshold_+%": 8
+   },
+   "poe2_text": [
+    "8% increased Skill Effect Duration",
+    "8% increased Stun Threshold"
+   ],
+   "kvn_stats": [
+    {
+     "id": "skill_effect_duration_+%",
+     "value": 8
+    },
+    {
+     "id": "stun_threshold_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Skill Effect Duration",
+    "8% increased Stun Threshold"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 42250,
+   "poe2_id": "dexterity65_",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3086.3,
+   "y": 5345.9,
+   "group": 1051,
+   "connections": [
+    16484,
+    26786,
+    44014
+   ],
+   "dist": {
+    "warrior": 16,
+    "ranger": 9,
+    "sorceress": 24
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 42736,
+   "poe2_id": "attributes39",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 1484.8,
+   "y": -2826.5,
+   "group": 923,
+   "connections": [
+    4203,
+    60685
+   ],
+   "dist": {
+    "warrior": 23,
+    "ranger": 17,
+    "sorceress": 5
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 42781,
+   "poe2_id": "projectiles23",
+   "name": "Clean Shot",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3190.4,
+   "y": 1196.7,
+   "group": 1053,
+   "connections": [
+    22795
+   ],
+   "dist": {
+    "warrior": 23,
+    "ranger": 7,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "base_chance_to_pierce_%": 15,
+    "projectile_damage_+%": 15
+   },
+   "poe2_text": [
+    "15% chance to Pierce an Enemy",
+    "15% increased Projectile Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "projectile_damage_+%",
+     "value": 25
+    }
+   ],
+   "kvn_text": [
+    "25% increased Projectile Damage"
+   ],
+   "status": "adapted",
+   "note": "base_chance_to_pierce_%: chance-to-pierce has no KvN stat (pierce is +N); value-equivalent projectile damage"
+  },
+  {
+   "id": 42813,
+   "poe2_id": "duration8",
+   "name": "Tides of Change",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -4903.1,
+   "y": 158.7,
+   "group": 474,
+   "connections": [
+    35787
+   ],
+   "dist": {
+    "warrior": 10,
+    "ranger": 24,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "skill_effect_duration_+%": 25
+   },
+   "poe2_text": [
+    "25% increased Skill Effect Duration"
+   ],
+   "kvn_stats": [
+    {
+     "id": "skill_effect_duration_+%",
+     "value": 25
+    }
+   ],
+   "kvn_text": [
+    "25% increased Skill Effect Duration"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 43746,
+   "poe2_id": "dexterity16",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2570.5,
+   "y": 536.1,
+   "group": 982,
+   "connections": [
+    16460,
+    38143
+   ],
+   "dist": {
+    "warrior": 23,
+    "ranger": 3,
+    "sorceress": 19
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 44014,
+   "poe2_id": "accuracy24",
+   "name": "Accuracy",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2730.7,
+   "y": 5250.6,
+   "group": 1007,
+   "connections": [
+    11855,
+    42250
+   ],
+   "dist": {
+    "warrior": 17,
+    "ranger": 10,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "accuracy_rating_+%": 8
+   },
+   "poe2_text": [
+    "8% increased Accuracy Rating"
+   ],
+   "kvn_stats": [
+    {
+     "id": "accuracy_rating_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "8% increased Accuracy Rating"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 44017,
+   "poe2_id": "passive_keystone_resolute_technique",
+   "name": "Resolute Technique",
+   "type": "keystone",
+   "region": "warrior",
+   "bridge": null,
+   "x": -7860.5,
+   "y": 2931.7,
+   "group": 240,
+   "connections": [
+    4527
+   ],
+   "dist": {
+    "warrior": 13,
+    "ranger": 25,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "resolute_technique": 1
+   },
+   "poe2_text": [
+    "Accuracy Rating is Doubled",
+    "Never deal Critical Hits"
+   ],
+   "kvn_stats": [
+    {
+     "id": "keystone_resolute_technique",
+     "value": 1
+    }
+   ],
+   "kvn_text": [
+    "Accuracy Rating is Doubled",
+    "Never deal Critical Hits"
+   ],
+   "status": "kept",
+   "note": "Rule flag: accuracy x2, crit chance forced to 0 for every hero and the spell."
+  },
+  {
+   "id": 44527,
+   "poe2_id": "flasks24",
+   "name": "Cautious Concoctions",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2808.5,
+   "y": 1884.4,
+   "group": 1018,
+   "connections": [
+    55397
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 7,
+    "sorceress": 22
+   },
+   "poe2_stats": {
+    "flask_charges_gained_+%": 15,
+    "flask_duration_+%": 15
+   },
+   "poe2_text": [
+    "15% increased Flask Charges gained",
+    "15% increased Flask Effect Duration"
+   ],
+   "kvn_stats": [
+    {
+     "id": "item_rarity_+%",
+     "value": 15
+    },
+    {
+     "id": "gold_found_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "15% increased Rarity of Items found",
+    "15% increased Gold found"
+   ],
+   "status": "replaced",
+   "note": "flask_charges_gained_+%: flask charges cut; loot stat instead (KvN fantasy: alchemy -> loot); flask_duration_+%: flasks cut; loot stat instead"
+  },
+  {
+   "id": 44605,
+   "poe2_id": "duelist_mercenary_notable2",
+   "name": "Remorseless",
+   "type": "notable",
+   "region": "bridge",
+   "bridge": "warrior-ranger",
+   "x": 436.0,
+   "y": 2764.0,
+   "group": 800,
+   "connections": [
+    38779,
+    57039,
+    59881
+   ],
+   "dist": {
+    "warrior": 13,
+    "ranger": 9,
+    "sorceress": 27
+   },
+   "poe2_stats": {
+    "base_strength_and_dexterity": 5,
+    "hit_damage_stun_multiplier_+%_vs_enemies_at_close_range": 30,
+    "projectile_damage_+%": 15
+   },
+   "poe2_text": [
+    "+5 to Strength and Dexterity",
+    "30% increased Stun Buildup against enemies within 2 metres",
+    "15% increased Projectile Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "strength",
+     "value": 5
+    },
+    {
+     "id": "dexterity",
+     "value": 5
+    },
+    {
+     "id": "stun_buildup_+%",
+     "value": 15
+    },
+    {
+     "id": "projectile_damage_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength",
+    "+5 to Dexterity",
+    "15% increased Stun Buildup",
+    "15% increased Projectile Damage"
+   ],
+   "status": "adapted",
+   "note": "hit_damage_stun_multiplier_+%_vs_enemies_at_close_range: condition removed, value halved"
+  },
+  {
+   "id": 44836,
+   "poe2_id": "armour_and_evasion28",
+   "name": "Feel no Pain",
+   "type": "notable",
+   "region": "bridge",
+   "bridge": "warrior-ranger",
+   "x": 1.9,
+   "y": 2991.7,
+   "group": 826,
+   "connections": [
+    38779,
+    47150
+   ],
+   "dist": {
+    "warrior": 11,
+    "ranger": 11,
+    "sorceress": 29
+   },
+   "poe2_stats": {
+    "evasion_and_physical_damage_reduction_rating_+%": 20,
+    "stun_threshold_+%": 20
+   },
+   "poe2_text": [
+    "20% increased Armour and Evasion Rating",
+    "20% increased Stun Threshold"
+   ],
+   "kvn_stats": [
+    {
+     "id": "armour_+%",
+     "value": 20
+    },
+    {
+     "id": "evasion_+%",
+     "value": 20
+    },
+    {
+     "id": "stun_threshold_+%",
+     "value": 20
+    }
+   ],
+   "kvn_text": [
+    "20% increased Armour",
+    "20% increased Evasion Rating",
+    "20% increased Stun Threshold"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 44871,
+   "poe2_id": "energy_shield15",
+   "name": "Energy Shield",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 136.6,
+   "y": -1695.8,
+   "group": 807,
+   "connections": [
+    30346,
+    54447,
+    56216
+   ],
+   "dist": {
+    "warrior": 25,
+    "ranger": 21,
+    "sorceress": 1
+   },
+   "poe2_stats": {
+    "base_maximum_energy_shield": 10
+   },
+   "poe2_text": [
+    "+10 to maximum Energy Shield"
+   ],
+   "kvn_stats": [
+    {
+     "id": "energy_shield",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "+10 to maximum Energy Shield"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 45363,
+   "poe2_id": "melee55",
+   "name": "Smash",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3810.9,
+   "y": 1066.8,
+   "group": 556,
+   "connections": [
+    58528
+   ],
+   "dist": {
+    "warrior": 7,
+    "ranger": 23,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "melee_damage_+%": 20,
+    "melee_damage_+%_vs_heavy_stunned_enemies": 40
+   },
+   "poe2_text": [
+    "20% increased Melee Damage",
+    "40% increased Melee Damage against Heavy Stunned enemies"
+   ],
+   "kvn_stats": [
+    {
+     "id": "melee_damage_+%",
+     "value": 40
+    }
+   ],
+   "kvn_text": [
+    "40% increased Melee Damage"
+   ],
+   "status": "adapted",
+   "note": "melee_damage_+%_vs_heavy_stunned_enemies: condition removed, value halved"
+  },
+  {
+   "id": 45969,
+   "poe2_id": "strength31",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "bridge",
+   "bridge": "warrior-ranger",
+   "x": -1533.7,
+   "y": 3494.5,
+   "group": 720,
+   "connections": [
+    25374,
+    28510
+   ],
+   "dist": {
+    "warrior": 7,
+    "ranger": 15,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 46034,
+   "poe2_id": "attributes69",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 3255.1,
+   "y": -5628.7,
+   "group": 1069,
+   "connections": [
+    8569,
+    41029
+   ],
+   "dist": {
+    "warrior": 24,
+    "ranger": 16,
+    "sorceress": 9
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 46325,
+   "poe2_id": "melee18",
+   "name": "Melee Damage",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2150.6,
+   "y": 968.8,
+   "group": 665,
+   "connections": [
+    3936,
+    33556,
+    39581
+   ],
+   "dist": {
+    "warrior": 2,
+    "ranger": 26,
+    "sorceress": 22
+   },
+   "poe2_stats": {
+    "melee_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Melee Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "melee_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Melee Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 47150,
+   "poe2_id": "armour_and_evasion26",
+   "name": "Armour and Evasion",
+   "type": "small",
+   "region": "bridge",
+   "bridge": "warrior-ranger",
+   "x": -138.4,
+   "y": 2910.7,
+   "group": 826,
+   "connections": [
+    44836,
+    56910
+   ],
+   "dist": {
+    "warrior": 10,
+    "ranger": 12,
+    "sorceress": 28
+   },
+   "poe2_stats": {
+    "evasion_and_physical_damage_reduction_rating_+%": 12
+   },
+   "poe2_text": [
+    "12% increased Armour and Evasion Rating"
+   ],
+   "kvn_stats": [
+    {
+     "id": "armour_+%",
+     "value": 12
+    },
+    {
+     "id": "evasion_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "12% increased Armour",
+    "12% increased Evasion Rating"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 47175,
+   "poe2_id": "marauder594",
+   "name": "MARAUDER",
+   "type": "start",
+   "region": "warrior",
+   "bridge": null,
+   "x": -1271.2,
+   "y": 733.1,
+   "group": 745,
+   "connections": [
+    3936,
+    38646
+   ],
+   "dist": {
+    "warrior": 0,
+    "ranger": 22,
+    "sorceress": 22
+   },
+   "poe2_stats": {},
+   "poe2_text": [],
+   "kvn_stats": [],
+   "kvn_text": [],
+   "status": "start",
+   "note": "Class start node (free)."
+  },
+  {
+   "id": 47555,
+   "poe2_id": "intelligence13",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -1097.4,
+   "y": -3004.7,
+   "group": 706,
+   "connections": [
+    18407,
+    51184,
+    53697
+   ],
+   "dist": {
+    "warrior": 18,
+    "ranger": 22,
+    "sorceress": 4
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 48006,
+   "poe2_id": "area_attacks28",
+   "name": "Devastation",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2303.5,
+   "y": 3579.2,
+   "group": 659,
+   "connections": [
+    55478
+   ],
+   "dist": {
+    "warrior": 7,
+    "ranger": 19,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "attack_area_damage_+%": 15,
+    "attack_area_of_effect_+%": 12
+   },
+   "poe2_text": [
+    "15% increased Attack Area Damage",
+    "12% increased Area of Effect for Attacks"
+   ],
+   "kvn_stats": [
+    {
+     "id": "area_damage_+%",
+     "value": 15
+    },
+    {
+     "id": "area_of_effect_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "15% increased Area Damage",
+    "12% increased Area of Effect"
+   ],
+   "status": "adapted",
+   "note": "attack_area_damage_+%: attack-only area damage broadened to area damage; attack_area_of_effect_+%: attack-only area broadened"
+  },
+  {
+   "id": 48198,
+   "poe2_id": "shadow_monk_notable2",
+   "name": "Step Like Mist",
+   "type": "notable",
+   "region": "bridge",
+   "bridge": "ranger-sorceress",
+   "x": 2385.8,
+   "y": -1224.6,
+   "group": 961,
+   "connections": [
+    13411,
+    15975,
+    26931,
+    40068,
+    65437
+   ],
+   "dist": {
+    "warrior": 27,
+    "ranger": 9,
+    "sorceress": 13
+   },
+   "poe2_stats": {
+    "base_dexterity_and_intelligence": 5,
+    "base_movement_velocity_+%": 4,
+    "mana_regeneration_rate_+%": 15
+   },
+   "poe2_text": [
+    "+5 to Dexterity and Intelligence",
+    "4% increased Movement Speed",
+    "15% increased Mana Regeneration Rate"
+   ],
+   "kvn_stats": [
+    {
+     "id": "dexterity",
+     "value": 5
+    },
+    {
+     "id": "intelligence",
+     "value": 5
+    },
+    {
+     "id": "maximum_life_+%",
+     "value": 4
+    },
+    {
+     "id": "acolyte_mana_generated_+%",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "+5 to Dexterity",
+    "+5 to Intelligence",
+    "4% increased maximum Life",
+    "8% increased Mana generated by Acolytes"
+   ],
+   "status": "adapted",
+   "note": "base_movement_velocity_+%: heroes never move; brief fallback +% life; mana_regeneration_rate_+%: mana regen -> acolyte output at half value (KvN custom stat)"
+  },
+  {
+   "id": 48305,
+   "poe2_id": "strength6",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -3144.8,
+   "y": -551.6,
+   "group": 604,
+   "connections": [
+    6898,
+    8406
+   ],
+   "dist": {
+    "warrior": 8,
+    "ranger": 26,
+    "sorceress": 14
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 48401,
+   "poe2_id": "dexterity23_",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1997.1,
+   "y": 2441.6,
+   "group": 930,
+   "connections": [
+    10909,
+    15507,
+    35987
+   ],
+   "dist": {
+    "warrior": 18,
+    "ranger": 4,
+    "sorceress": 22
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 48568,
+   "poe2_id": "attributes67",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2199.2,
+   "y": 3806.8,
+   "group": 979,
+   "connections": [
+    16489,
+    26786
+   ],
+   "dist": {
+    "warrior": 16,
+    "ranger": 7,
+    "sorceress": 24
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 49046,
+   "poe2_id": "attributes38",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 2214.9,
+   "y": -3836.4,
+   "group": 980,
+   "connections": [
+    4203,
+    8569
+   ],
+   "dist": {
+    "warrior": 24,
+    "ranger": 16,
+    "sorceress": 7
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 49220,
+   "poe2_id": "shadow_monk_notable1",
+   "name": "Flow Like Water",
+   "type": "notable",
+   "region": "bridge",
+   "bridge": "ranger-sorceress",
+   "x": 2248.3,
+   "y": -1449.4,
+   "group": 954,
+   "connections": [
+    4157,
+    14725,
+    21336,
+    36778,
+    53960,
+    58182
+   ],
+   "dist": {
+    "warrior": 27,
+    "ranger": 13,
+    "sorceress": 9
+   },
+   "poe2_stats": {
+    "attack_and_cast_speed_+%": 8,
+    "base_dexterity_and_intelligence": 5
+   },
+   "poe2_text": [
+    "8% increased Attack and Cast Speed",
+    "+5 to Dexterity and Intelligence"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attack_speed_+%",
+     "value": 8
+    },
+    {
+     "id": "cast_speed_+%",
+     "value": 8
+    },
+    {
+     "id": "dexterity",
+     "value": 5
+    },
+    {
+     "id": "intelligence",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "8% increased Attack Speed",
+    "8% increased Cast Speed",
+    "+5 to Dexterity",
+    "+5 to Intelligence"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 49691,
+   "poe2_id": "evasion12",
+   "name": "Evasion",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1582.5,
+   "y": 1143.0,
+   "group": 946,
+   "connections": [
+    13828,
+    31409,
+    61106
+   ],
+   "dist": {
+    "warrior": 22,
+    "ranger": 2,
+    "sorceress": 26
+   },
+   "poe2_stats": {
+    "base_evasion_rating": 16
+   },
+   "poe2_text": [
+    "+16 to Evasion Rating"
+   ],
+   "kvn_stats": [
+    {
+     "id": "evasion",
+     "value": 16
+    }
+   ],
+   "kvn_text": [
+    "+16 to Evasion Rating"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 50459,
+   "poe2_id": "ranger596",
+   "name": "RANGER",
+   "type": "start",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1274.7,
+   "y": 735.8,
+   "group": 911,
+   "connections": [
+    13828,
+    56651
+   ],
+   "dist": {
+    "warrior": 22,
+    "ranger": 0,
+    "sorceress": 22
+   },
+   "poe2_stats": {},
+   "poe2_text": [],
+   "kvn_stats": [],
+   "kvn_text": [],
+   "status": "start",
+   "note": "Class start node (free)."
+  },
+  {
+   "id": 50609,
+   "poe2_id": "life_regeneration17_",
+   "name": "Hard to Kill",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -183.5,
+   "y": 3700.2,
+   "group": 838,
+   "connections": [
+    14926
+   ],
+   "dist": {
+    "warrior": 11,
+    "ranger": 14,
+    "sorceress": 28
+   },
+   "poe2_stats": {
+    "flask_life_recovery_rate_+%": 40,
+    "life_regeneration_rate_per_minute_%": 45
+   },
+   "poe2_text": [
+    "40% increased Flask Life Recovery rate",
+    "Regenerate 0.75% of maximum Life per second"
+   ],
+   "kvn_stats": [
+    {
+     "id": "life_regeneration_rate_%_per_second",
+     "value": 0.95
+    }
+   ],
+   "kvn_text": [
+    "Regenerate 0.95% of maximum Life per second"
+   ],
+   "status": "adapted",
+   "note": "flask_life_recovery_rate_+%: flasks cut"
+  },
+  {
+   "id": 50795,
+   "poe2_id": "ranged31",
+   "name": "Careful Aim",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2620.3,
+   "y": 3051.7,
+   "group": 990,
+   "connections": [
+    58013
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 9,
+    "sorceress": 27
+   },
+   "poe2_stats": {
+    "accuracy_rating_+%": 15,
+    "projectile_damage_+%": 20
+   },
+   "poe2_text": [
+    "15% increased Accuracy Rating",
+    "20% increased Projectile Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "accuracy_rating_+%",
+     "value": 15
+    },
+    {
+     "id": "projectile_damage_+%",
+     "value": 20
+    }
+   ],
+   "kvn_text": [
+    "15% increased Accuracy Rating",
+    "20% increased Projectile Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 51184,
+   "poe2_id": "witch_sorceress_notable1",
+   "name": "Raw Power",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -478.3,
+   "y": -3030.4,
+   "group": 775,
+   "connections": [
+    3242,
+    22314,
+    29502,
+    47555
+   ],
+   "dist": {
+    "warrior": 19,
+    "ranger": 23,
+    "sorceress": 5
+   },
+   "poe2_stats": {
+    "base_intelligence": 10,
+    "spell_damage_+%": 20
+   },
+   "poe2_text": [
+    "+10 to Intelligence",
+    "20% increased Spell Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "intelligence",
+     "value": 10
+    },
+    {
+     "id": "spell_damage_+%",
+     "value": 20
+    }
+   ],
+   "kvn_text": [
+    "+10 to Intelligence",
+    "20% increased Spell Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 51248,
+   "poe2_id": "fire27",
+   "name": "Fire Damage",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3383.9,
+   "y": 436.1,
+   "group": 575,
+   "connections": [
+    6015,
+    39594
+   ],
+   "dist": {
+    "warrior": 6,
+    "ranger": 24,
+    "sorceress": 18
+   },
+   "poe2_stats": {
+    "fire_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Fire Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "fire_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Fire Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 51335,
+   "poe2_id": "fire32",
+   "name": "Affliction Enforcer",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -655.7,
+   "y": -3929.7,
+   "group": 776,
+   "connections": [
+    51968
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 23,
+    "sorceress": 8
+   },
+   "poe2_stats": {
+    "hit_damage_freeze_multiplier_+%": 20,
+    "ignite_chance_+%": 40,
+    "shock_chance_+%": 20
+   },
+   "poe2_text": [
+    "20% increased Freeze Buildup",
+    "40% increased Flammability Magnitude",
+    "20% increased chance to Shock"
+   ],
+   "kvn_stats": [
+    {
+     "id": "freeze_buildup_+%",
+     "value": 20
+    },
+    {
+     "id": "flammability_magnitude_+%",
+     "value": 40
+    },
+    {
+     "id": "shock_chance_+%",
+     "value": 20
+    }
+   ],
+   "kvn_text": [
+    "20% increased Freeze Buildup",
+    "40% increased Flammability Magnitude",
+    "20% increased chance to Shock"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 51369,
+   "poe2_id": "fire10",
+   "name": "Damage against Burning Enemies",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -4872.8,
+   "y": 1520.6,
+   "group": 448,
+   "connections": [
+    27373,
+    56061
+   ],
+   "dist": {
+    "warrior": 7,
+    "ranger": 21,
+    "sorceress": 19
+   },
+   "poe2_stats": {
+    "damage_+%_vs_burning_enemies": 14
+   },
+   "poe2_text": [
+    "14% increased Damage with Hits against Burning Enemies"
+   ],
+   "kvn_stats": [
+    {
+     "id": "fire_damage_+%",
+     "value": 7
+    }
+   ],
+   "kvn_text": [
+    "7% increased Fire Damage"
+   ],
+   "status": "adapted",
+   "note": "damage_+%_vs_burning_enemies: condition removed, value halved"
+  },
+  {
+   "id": 51968,
+   "poe2_id": "fire3",
+   "name": "Elemental Ailment Chance",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -813.2,
+   "y": -3752.2,
+   "group": 776,
+   "connections": [
+    22314,
+    51335
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 24,
+    "sorceress": 7
+   },
+   "poe2_stats": {
+    "hit_damage_freeze_multiplier_+%": 10,
+    "ignite_chance_+%": 20,
+    "shock_chance_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Freeze Buildup",
+    "20% increased Flammability Magnitude",
+    "10% increased chance to Shock"
+   ],
+   "kvn_stats": [
+    {
+     "id": "freeze_buildup_+%",
+     "value": 10
+    },
+    {
+     "id": "flammability_magnitude_+%",
+     "value": 20
+    },
+    {
+     "id": "shock_chance_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Freeze Buildup",
+    "20% increased Flammability Magnitude",
+    "10% increased chance to Shock"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 52298,
+   "poe2_id": "strength61_",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -7437.5,
+   "y": 3131.2,
+   "group": 266,
+   "connections": [
+    4527,
+    26725
+   ],
+   "dist": {
+    "warrior": 11,
+    "ranger": 23,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 53294,
+   "poe2_id": "fire33",
+   "name": "Burn Away",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3498.4,
+   "y": 321.5,
+   "group": 575,
+   "connections": [
+    39594
+   ],
+   "dist": {
+    "warrior": 8,
+    "ranger": 26,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "base_ignite_effect_+%": 10,
+    "base_reduce_enemy_fire_resistance_%": 10,
+    "fire_damage_+%": 15
+   },
+   "poe2_text": [
+    "10% increased Ignite Magnitude",
+    "Damage Penetrates 10% Fire Resistance",
+    "15% increased Fire Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "ailment_magnitude_+%",
+     "value": 10
+    },
+    {
+     "id": "fire_penetration_%",
+     "value": 10
+    },
+    {
+     "id": "fire_damage_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "10% increased Magnitude of Damaging Ailments",
+    "Damage Penetrates 10% Fire Resistance",
+    "15% increased Fire Damage"
+   ],
+   "status": "adapted",
+   "note": "base_ignite_effect_+%: ignite-only magnitude broadened"
+  },
+  {
+   "id": 53405,
+   "poe2_id": "strength58",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -4731.2,
+   "y": 733.2,
+   "group": 498,
+   "connections": [
+    27373,
+    31419
+   ],
+   "dist": {
+    "warrior": 7,
+    "ranger": 21,
+    "sorceress": 17
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 53443,
+   "poe2_id": "area_attacks24",
+   "name": "Area Damage",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3434.1,
+   "y": 1557.9,
+   "group": 556,
+   "connections": [
+    5710,
+    59767
+   ],
+   "dist": {
+    "warrior": 6,
+    "ranger": 24,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "attack_area_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Attack Area Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "area_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Area Damage"
+   ],
+   "status": "adapted",
+   "note": "attack_area_damage_+%: attack-only area damage broadened to area damage"
+  },
+  {
+   "id": 53697,
+   "poe2_id": "intelligence26",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -1385.2,
+   "y": -2868.5,
+   "group": 706,
+   "connections": [
+    3041,
+    47555
+   ],
+   "dist": {
+    "warrior": 17,
+    "ranger": 23,
+    "sorceress": 5
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 53960,
+   "poe2_id": "intelligence5",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "bridge",
+   "bridge": "ranger-sorceress",
+   "x": 2042.1,
+   "y": -2329.8,
+   "group": 1016,
+   "connections": [
+    30555,
+    49220
+   ],
+   "dist": {
+    "warrior": 26,
+    "ranger": 14,
+    "sorceress": 8
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 54232,
+   "poe2_id": "strength24_",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2059.2,
+   "y": 2453.8,
+   "group": 690,
+   "connections": [
+    7721,
+    16168,
+    41031
+   ],
+   "dist": {
+    "warrior": 4,
+    "ranger": 18,
+    "sorceress": 22
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 54447,
+   "poe2_id": "witch595",
+   "name": "WITCH",
+   "type": "start",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 0.0,
+   "y": -1490.6,
+   "group": 817,
+   "connections": [
+    4739,
+    44871
+   ],
+   "dist": {
+    "warrior": 22,
+    "ranger": 22,
+    "sorceress": 0
+   },
+   "poe2_stats": {},
+   "poe2_text": [],
+   "kvn_stats": [],
+   "kvn_text": [],
+   "status": "start",
+   "note": "Class start node (free)."
+  },
+  {
+   "id": 54485,
+   "poe2_id": "strength105",
+   "name": "Strength",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -5583.3,
+   "y": 4145.0,
+   "group": 406,
+   "connections": [
+    25482,
+    57703
+   ],
+   "dist": {
+    "warrior": 10,
+    "ranger": 22,
+    "sorceress": 22
+   },
+   "poe2_stats": {
+    "base_strength": 8
+   },
+   "poe2_text": [
+    "+8 to Strength"
+   ],
+   "kvn_stats": [
+    {
+     "id": "strength",
+     "value": 8
+    }
+   ],
+   "kvn_text": [
+    "+8 to Strength"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 54811,
+   "poe2_id": "strength15",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -5314.1,
+   "y": 3067.3,
+   "group": 421,
+   "connections": [
+    16725,
+    57703
+   ],
+   "dist": {
+    "warrior": 8,
+    "ranger": 20,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 55397,
+   "poe2_id": "flasks22",
+   "name": "Flask Charges Gained",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2550.0,
+   "y": 1847.2,
+   "group": 1018,
+   "connections": [
+    35987,
+    44527
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 6,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "flask_charges_gained_+%": 15
+   },
+   "poe2_text": [
+    "15% increased Flask Charges gained"
+   ],
+   "kvn_stats": [
+    {
+     "id": "item_rarity_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "15% increased Rarity of Items found"
+   ],
+   "status": "replaced",
+   "note": "flask_charges_gained_+%: flask charges cut; loot stat instead (KvN fantasy: alchemy -> loot)"
+  },
+  {
+   "id": 55478,
+   "poe2_id": "area_attacks22",
+   "name": "Attack Area Damage and Area",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2400.0,
+   "y": 3261.4,
+   "group": 659,
+   "connections": [
+    16168,
+    48006
+   ],
+   "dist": {
+    "warrior": 6,
+    "ranger": 18,
+    "sorceress": 24
+   },
+   "poe2_stats": {
+    "attack_area_damage_+%": 6,
+    "attack_area_of_effect_+%": 4
+   },
+   "poe2_text": [
+    "6% increased Attack Area Damage",
+    "4% increased Area of Effect for Attacks"
+   ],
+   "kvn_stats": [
+    {
+     "id": "area_damage_+%",
+     "value": 6
+    },
+    {
+     "id": "area_of_effect_+%",
+     "value": 4
+    }
+   ],
+   "kvn_text": [
+    "6% increased Area Damage",
+    "4% increased Area of Effect"
+   ],
+   "status": "adapted",
+   "note": "attack_area_damage_+%: attack-only area damage broadened to area damage; attack_area_of_effect_+%: attack-only area broadened"
+  },
+  {
+   "id": 55668,
+   "poe2_id": "intelligence63__",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 3266.7,
+   "y": -8000.0,
+   "group": 1070,
+   "connections": [
+    25557,
+    29240
+   ],
+   "dist": {
+    "warrior": 27,
+    "ranger": 19,
+    "sorceress": 12
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 55807,
+   "poe2_id": "mana25",
+   "name": "Mana Regeneration",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -217.7,
+   "y": -2616.1,
+   "group": 789,
+   "connections": [
+    18845
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 25,
+    "sorceress": 3
+   },
+   "poe2_stats": {
+    "mana_regeneration_rate_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Mana Regeneration Rate"
+   ],
+   "kvn_stats": [
+    {
+     "id": "acolyte_mana_generated_+%",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "5% increased Mana generated by Acolytes"
+   ],
+   "status": "replaced",
+   "note": "mana_regeneration_rate_+%: mana regen -> acolyte output at half value (KvN custom stat)"
+  },
+  {
+   "id": 55846,
+   "poe2_id": "life_on_kill11",
+   "name": "Life on Kill",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3682.0,
+   "y": -411.8,
+   "group": 1099,
+   "connections": [
+    24239,
+    40213
+   ],
+   "dist": {
+    "warrior": 27,
+    "ranger": 9,
+    "sorceress": 17
+   },
+   "poe2_stats": {
+    "base_life_gained_on_enemy_death": 5
+   },
+   "poe2_text": [
+    "Gain 5 Life per enemy killed"
+   ],
+   "kvn_stats": [
+    {
+     "id": "life_gained_on_kill",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "Gain 5 Life per enemy killed"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 56061,
+   "poe2_id": "fire16",
+   "name": "Damage against Burning Enemies",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -5034.8,
+   "y": 1682.6,
+   "group": 448,
+   "connections": [
+    6544,
+    51369
+   ],
+   "dist": {
+    "warrior": 8,
+    "ranger": 22,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "damage_+%_vs_burning_enemies": 14
+   },
+   "poe2_text": [
+    "14% increased Damage with Hits against Burning Enemies"
+   ],
+   "kvn_stats": [
+    {
+     "id": "fire_damage_+%",
+     "value": 7
+    }
+   ],
+   "kvn_text": [
+    "7% increased Fire Damage"
+   ],
+   "status": "adapted",
+   "note": "damage_+%_vs_burning_enemies: condition removed, value halved"
+  },
+  {
+   "id": 56216,
+   "poe2_id": "intelligence21",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 472.4,
+   "y": -2158.2,
+   "group": 856,
+   "connections": [
+    9485,
+    44871
+   ],
+   "dist": {
+    "warrior": 24,
+    "ranger": 20,
+    "sorceress": 2
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 56349,
+   "poe2_id": "passive_keystone_chaos_inoculation",
+   "name": "Chaos Inoculation",
+   "type": "keystone",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 6372.7,
+   "y": -8307.7,
+   "group": 1288,
+   "connections": [
+    61403
+   ],
+   "dist": {
+    "warrior": 31,
+    "ranger": 22,
+    "sorceress": 16
+   },
+   "poe2_stats": {
+    "keystone_chaos_inoculation": 1
+   },
+   "poe2_text": [
+    "Maximum Life is 1",
+    "Immune to Chaos Damage and Bleeding"
+   ],
+   "kvn_stats": [
+    {
+     "id": "keystone_chaos_inoculation",
+     "value": 1
+    }
+   ],
+   "kvn_text": [
+    "Maximum Life is 1",
+    "Immune to Chaos Damage and Bleeding (so also immune to Poison)"
+   ],
+   "status": "kept",
+   "note": "Rule flag. Applies to every hero: walls must stack Energy Shield."
+  },
+  {
+   "id": 56651,
+   "poe2_id": "projectiles15",
+   "name": "Projectile Damage",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1535.8,
+   "y": 728.0,
+   "group": 926,
+   "connections": [
+    35234,
+    38143,
+    50459
+   ],
+   "dist": {
+    "warrior": 25,
+    "ranger": 1,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "projectile_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Projectile Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "projectile_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Projectile Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 56910,
+   "poe2_id": "duelist_mercenary_notable1",
+   "name": "Battle-hardened",
+   "type": "notable",
+   "region": "bridge",
+   "bridge": "warrior-ranger",
+   "x": -414.0,
+   "y": 2767.4,
+   "group": 839,
+   "connections": [
+    14926,
+    28510,
+    47150
+   ],
+   "dist": {
+    "warrior": 9,
+    "ranger": 13,
+    "sorceress": 27
+   },
+   "poe2_stats": {
+    "base_self_critical_strike_multiplier_-%": 20,
+    "base_strength_and_dexterity": 5,
+    "evasion_and_physical_damage_reduction_rating_+%": 20
+   },
+   "poe2_text": [
+    "Hits against you have 20% reduced Critical Damage Bonus",
+    "+5 to Strength and Dexterity",
+    "20% increased Armour and Evasion Rating"
+   ],
+   "kvn_stats": [
+    {
+     "id": "armour_+%",
+     "value": 30
+    },
+    {
+     "id": "evasion_+%",
+     "value": 30
+    },
+    {
+     "id": "strength",
+     "value": 5
+    },
+    {
+     "id": "dexterity",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "30% increased Armour",
+    "30% increased Evasion Rating",
+    "+5 to Strength",
+    "+5 to Dexterity"
+   ],
+   "status": "adapted",
+   "note": "base_self_critical_strike_multiplier_-%: no crit-damage-taken stat; defensive equivalent"
+  },
+  {
+   "id": 56999,
+   "poe2_id": "accuracy19",
+   "name": "Locked On",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2590.4,
+   "y": 5169.6,
+   "group": 1007,
+   "connections": [
+    30829
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 13,
+    "sorceress": 28
+   },
+   "poe2_stats": {
+    "accuracy_rating_+%": 15,
+    "attack_critical_strike_chance_+%": 15
+   },
+   "poe2_text": [
+    "15% increased Accuracy Rating",
+    "15% increased Critical Hit Chance for Attacks"
+   ],
+   "kvn_stats": [
+    {
+     "id": "accuracy_rating_+%",
+     "value": 15
+    },
+    {
+     "id": "critical_strike_chance_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "15% increased Accuracy Rating",
+    "15% increased Critical Hit Chance"
+   ],
+   "status": "adapted",
+   "note": "attack_critical_strike_chance_+%: attack-only crit chance broadened"
+  },
+  {
+   "id": 57039,
+   "poe2_id": "cooldowns1",
+   "name": "Cooldown Recovery Rate",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 137.4,
+   "y": 3532.7,
+   "group": 802,
+   "connections": [
+    11037,
+    44605
+   ],
+   "dist": {
+    "warrior": 14,
+    "ranger": 10,
+    "sorceress": 28
+   },
+   "poe2_stats": {
+    "base_cooldown_speed_+%": 5
+   },
+   "poe2_text": [
+    "5% increased Cooldown Recovery Rate"
+   ],
+   "kvn_stats": [
+    {
+     "id": "cooldown_recovery_+%",
+     "value": 5
+    }
+   ],
+   "kvn_text": [
+    "5% increased Cooldown Recovery Rate"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 57110,
+   "poe2_id": "life_recoup16",
+   "name": "Infused Flesh",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 2472.4,
+   "y": -3214.3,
+   "group": 981,
+   "connections": [
+    62159
+   ],
+   "dist": {
+    "warrior": 27,
+    "ranger": 19,
+    "sorceress": 9
+   },
+   "poe2_stats": {
+    "base_maximum_life": 20,
+    "damage_taken_goes_to_life_over_4_seconds_%": 8
+   },
+   "poe2_text": [
+    "+20 to maximum Life",
+    "8% of Damage taken Recouped as Life"
+   ],
+   "kvn_stats": [
+    {
+     "id": "base_maximum_life",
+     "value": 20
+    },
+    {
+     "id": "maximum_life_+%",
+     "value": 4
+    }
+   ],
+   "kvn_text": [
+    "+20 to maximum Life",
+    "4% increased maximum Life"
+   ],
+   "status": "adapted",
+   "note": "damage_taken_goes_to_life_over_4_seconds_%: Recoup cut; half its value as % life"
+  },
+  {
+   "id": 57513,
+   "poe2_id": "passive_keystone_eldritch_battery__",
+   "name": "Eldritch Battery",
+   "type": "keystone",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 3444.6,
+   "y": -9280.5,
+   "group": 1082,
+   "connections": [
+    29240
+   ],
+   "dist": {
+    "warrior": 29,
+    "ranger": 21,
+    "sorceress": 14
+   },
+   "poe2_stats": {
+    "keystone_eldritch_battery": 1
+   },
+   "poe2_text": [
+    "Convert 100% of maximum Energy Shield to maximum Mana",
+    "Mana Costs are Doubled"
+   ],
+   "kvn_stats": [
+    {
+     "id": "keystone_eldritch_battery",
+     "value": 1
+    }
+   ],
+   "kvn_text": [
+    "Heroes have no Energy Shield",
+    "Acolytes gain Spirit equal to 100% of the maximum Energy Shield they would have had"
+   ],
+   "status": "adapted",
+   "note": "KvN custom adaptation: mana is not a hero stat, so the battery feeds the acolyte economy instead. Replaces \"Mana Costs are Doubled\": the loss of all ES is the price."
+  },
+  {
+   "id": 57703,
+   "poe2_id": "attributes32",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "warrior",
+   "bridge": null,
+   "x": -5982.7,
+   "y": 3453.3,
+   "group": 363,
+   "connections": [
+    26725,
+    54485,
+    54811
+   ],
+   "dist": {
+    "warrior": 9,
+    "ranger": 21,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 57710,
+   "poe2_id": "intelligence16",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 0.0,
+   "y": -5546.4,
+   "group": 814,
+   "connections": [
+    4456,
+    15618,
+    39037
+   ],
+   "dist": {
+    "warrior": 19,
+    "ranger": 19,
+    "sorceress": 7
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 58013,
+   "poe2_id": "ranged4",
+   "name": "Projectile Damage",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 2595.2,
+   "y": 2861.3,
+   "group": 990,
+   "connections": [
+    4844,
+    50795
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 8,
+    "sorceress": 26
+   },
+   "poe2_stats": {
+    "projectile_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Projectile Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "projectile_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Projectile Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 58182,
+   "poe2_id": "life_on_kill1",
+   "name": "Life on Kill",
+   "type": "small",
+   "region": "bridge",
+   "bridge": "ranger-sorceress",
+   "x": 2768.1,
+   "y": -1985.0,
+   "group": 1041,
+   "connections": [
+    7344,
+    49220
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 12,
+    "sorceress": 10
+   },
+   "poe2_stats": {
+    "base_life_gained_on_enemy_death": 3
+   },
+   "poe2_text": [
+    "Gain 3 Life per enemy killed"
+   ],
+   "kvn_stats": [
+    {
+     "id": "life_gained_on_kill",
+     "value": 3
+    }
+   ],
+   "kvn_text": [
+    "Gain 3 Life per enemy killed"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 58528,
+   "poe2_id": "melee54",
+   "name": "Melee Damage",
+   "type": "small",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3556.7,
+   "y": 1100.3,
+   "group": 556,
+   "connections": [
+    5710,
+    45363
+   ],
+   "dist": {
+    "warrior": 6,
+    "ranger": 24,
+    "sorceress": 20
+   },
+   "poe2_stats": {
+    "melee_damage_+%": 10
+   },
+   "poe2_text": [
+    "10% increased Melee Damage"
+   ],
+   "kvn_stats": [
+    {
+     "id": "melee_damage_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "10% increased Melee Damage"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 58939,
+   "poe2_id": "criticals80",
+   "name": "Dispatch Foes",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1878.1,
+   "y": 4859.0,
+   "group": 944,
+   "connections": [
+    30990
+   ],
+   "dist": {
+    "warrior": 17,
+    "ranger": 12,
+    "sorceress": 27
+   },
+   "poe2_stats": {
+    "critical_strike_chance_+%_if_have_not_crit_recently": 40
+   },
+   "poe2_text": [
+    "40% increased Critical Hit Chance if you haven't dealt a Critical Hit Recently"
+   ],
+   "kvn_stats": [
+    {
+     "id": "critical_strike_chance_+%",
+     "value": 20
+    }
+   ],
+   "kvn_text": [
+    "20% increased Critical Hit Chance"
+   ],
+   "status": "adapted",
+   "note": "critical_strike_chance_+%_if_have_not_crit_recently: condition removed, value halved"
+  },
+  {
+   "id": 59603,
+   "poe2_id": "life_recoup12",
+   "name": "Life Recoup",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 2230.0,
+   "y": -3149.3,
+   "group": 981,
+   "connections": [
+    4203,
+    62159
+   ],
+   "dist": {
+    "warrior": 25,
+    "ranger": 17,
+    "sorceress": 7
+   },
+   "poe2_stats": {
+    "damage_taken_goes_to_life_over_4_seconds_%": 3
+   },
+   "poe2_text": [
+    "3% of Damage taken Recouped as Life"
+   ],
+   "kvn_stats": [
+    {
+     "id": "maximum_life_+%",
+     "value": 2
+    }
+   ],
+   "kvn_text": [
+    "2% increased maximum Life"
+   ],
+   "status": "replaced",
+   "note": "damage_taken_goes_to_life_over_4_seconds_%: Recoup cut; half its value as % life"
+  },
+  {
+   "id": 59636,
+   "poe2_id": "mana_regeneration22_",
+   "name": "Open Mind",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 0.0,
+   "y": -2780.5,
+   "group": 816,
+   "connections": [
+    3242
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 21,
+    "sorceress": 7
+   },
+   "poe2_stats": {
+    "mana_regeneration_rate_+%": 25
+   },
+   "poe2_text": [
+    "25% increased Mana Regeneration Rate"
+   ],
+   "kvn_stats": [
+    {
+     "id": "acolyte_mana_generated_+%",
+     "value": 13
+    }
+   ],
+   "kvn_text": [
+    "13% increased Mana generated by Acolytes"
+   ],
+   "status": "replaced",
+   "note": "mana_regeneration_rate_+%: mana regen -> acolyte output at half value (KvN custom stat)"
+  },
+  {
+   "id": 59767,
+   "poe2_id": "area_attacks32",
+   "name": "Reverberating Impact",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3637.5,
+   "y": 1714.0,
+   "group": 556,
+   "connections": [
+    53443
+   ],
+   "dist": {
+    "warrior": 7,
+    "ranger": 23,
+    "sorceress": 21
+   },
+   "poe2_stats": {
+    "armour_break_amount_+%": 25,
+    "attack_area_of_effect_+%": 12
+   },
+   "poe2_text": [
+    "Break 25% increased Armour",
+    "12% increased Area of Effect for Attacks"
+   ],
+   "kvn_stats": [
+    {
+     "id": "armour_break_+%",
+     "value": 25
+    },
+    {
+     "id": "area_of_effect_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "Break 25% increased Armour",
+    "12% increased Area of Effect"
+   ],
+   "status": "adapted",
+   "note": "armour_break_amount_+%: needs proposed stat armour_break_+% (see Deviations); attack_area_of_effect_+%: attack-only area broadened"
+  },
+  {
+   "id": 59795,
+   "poe2_id": "strength95",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -1721.0,
+   "y": -2654.6,
+   "group": 706,
+   "connections": [
+    3041,
+    10156
+   ],
+   "dist": {
+    "warrior": 15,
+    "ranger": 25,
+    "sorceress": 7
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 59881,
+   "poe2_id": "dexterity28",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "bridge",
+   "bridge": "warrior-ranger",
+   "x": 1095.2,
+   "y": 3008.9,
+   "group": 843,
+   "connections": [
+    28556,
+    44605
+   ],
+   "dist": {
+    "warrior": 14,
+    "ranger": 8,
+    "sorceress": 26
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 60685,
+   "poe2_id": "intelligence19",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 1090.0,
+   "y": -3001.5,
+   "group": 894,
+   "connections": [
+    1826,
+    2254,
+    9485,
+    42736
+   ],
+   "dist": {
+    "warrior": 22,
+    "ranger": 18,
+    "sorceress": 4
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 61027,
+   "poe2_id": "mana18",
+   "name": "Mana Blessing",
+   "type": "notable",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 480.3,
+   "y": -3752.2,
+   "group": 857,
+   "connections": [
+    517
+   ],
+   "dist": {
+    "warrior": 22,
+    "ranger": 20,
+    "sorceress": 8
+   },
+   "poe2_stats": {
+    "base_maximum_mana": 20,
+    "mana_regeneration_rate_+%": 20
+   },
+   "poe2_text": [
+    "+20 to maximum Mana",
+    "20% increased Mana Regeneration Rate"
+   ],
+   "kvn_stats": [
+    {
+     "id": "spirit",
+     "value": 10
+    },
+    {
+     "id": "acolyte_mana_generated_+%",
+     "value": 10
+    }
+   ],
+   "kvn_text": [
+    "+10 to Spirit",
+    "10% increased Mana generated by Acolytes"
+   ],
+   "status": "replaced",
+   "note": "base_maximum_mana: max mana -> Spirit at half value; mana_regeneration_rate_+%: mana regen -> acolyte output at half value (KvN custom stat)"
+  },
+  {
+   "id": 61106,
+   "poe2_id": "movement_speed1",
+   "name": "Movement Speed",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 1645.4,
+   "y": 1435.0,
+   "group": 946,
+   "connections": [
+    49691
+   ],
+   "dist": {
+    "warrior": 21,
+    "ranger": 3,
+    "sorceress": 25
+   },
+   "poe2_stats": {
+    "base_movement_velocity_+%": 2
+   },
+   "poe2_text": [
+    "2% increased Movement Speed"
+   ],
+   "kvn_stats": [
+    {
+     "id": "maximum_life_+%",
+     "value": 2
+    }
+   ],
+   "kvn_text": [
+    "2% increased maximum Life"
+   ],
+   "status": "replaced",
+   "note": "base_movement_velocity_+%: heroes never move; brief fallback +% life"
+  },
+  {
+   "id": 61403,
+   "poe2_id": "intelligence69",
+   "name": "Attribute",
+   "type": "attribute",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 6372.7,
+   "y": -8685.7,
+   "group": 1287,
+   "connections": [
+    21984,
+    56349
+   ],
+   "dist": {
+    "warrior": 30,
+    "ranger": 21,
+    "sorceress": 15
+   },
+   "poe2_stats": {
+    "display_passive_attribute_text": 1
+   },
+   "poe2_text": [
+    "+5 to any Attribute"
+   ],
+   "kvn_stats": [
+    {
+     "id": "attribute_choice",
+     "value": 5,
+     "options": [
+      "strength",
+      "dexterity",
+      "intelligence"
+     ]
+    }
+   ],
+   "kvn_text": [
+    "+5 to Strength, Dexterity or Intelligence (chosen on allocation)"
+   ],
+   "status": "kept",
+   "note": "Attribute node: see the KvN attribute rule."
+  },
+  {
+   "id": 62159,
+   "poe2_id": "life_recoup11",
+   "name": "Life Recoup",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": 2370.3,
+   "y": -3068.3,
+   "group": 981,
+   "connections": [
+    57110,
+    59603
+   ],
+   "dist": {
+    "warrior": 26,
+    "ranger": 18,
+    "sorceress": 8
+   },
+   "poe2_stats": {
+    "damage_taken_goes_to_life_over_4_seconds_%": 3
+   },
+   "poe2_text": [
+    "3% of Damage taken Recouped as Life"
+   ],
+   "kvn_stats": [
+    {
+     "id": "maximum_life_+%",
+     "value": 2
+    }
+   ],
+   "kvn_text": [
+    "2% increased maximum Life"
+   ],
+   "status": "replaced",
+   "note": "damage_taken_goes_to_life_over_4_seconds_%: Recoup cut; half its value as % life"
+  },
+  {
+   "id": 62732,
+   "poe2_id": "stun_threshold11",
+   "name": "Titan's Determination",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -2830.4,
+   "y": 2766.1,
+   "group": 611,
+   "connections": [
+    18742
+   ],
+   "dist": {
+    "warrior": 7,
+    "ranger": 21,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "life_regeneration_rate_+%_while_moving": 20,
+    "stun_threshold_+%": 25
+   },
+   "poe2_text": [
+    "20% increased Life Regeneration Rate while moving",
+    "25% increased Stun Threshold"
+   ],
+   "kvn_stats": [
+    {
+     "id": "life_regeneration_rate_%_per_second",
+     "value": 0.1
+    },
+    {
+     "id": "stun_threshold_+%",
+     "value": 25
+    }
+   ],
+   "kvn_text": [
+    "Regenerate 0.1% of maximum Life per second",
+    "25% increased Stun Threshold"
+   ],
+   "status": "adapted",
+   "note": "life_regeneration_rate_+%_while_moving: heroes never move; 20% -> 0.1%/s"
+  },
+  {
+   "id": 62844,
+   "poe2_id": "cold_penetration9",
+   "name": "Cold Penetration",
+   "type": "small",
+   "region": "sorceress",
+   "bridge": null,
+   "x": -1284.0,
+   "y": -5546.4,
+   "group": 760,
+   "connections": [
+    18086,
+    32427
+   ],
+   "dist": {
+    "warrior": 20,
+    "ranger": 22,
+    "sorceress": 10
+   },
+   "poe2_stats": {
+    "base_reduce_enemy_cold_resistance_%": 6
+   },
+   "poe2_text": [
+    "Damage Penetrates 6% Cold Resistance"
+   ],
+   "kvn_stats": [
+    {
+     "id": "cold_penetration_%",
+     "value": 6
+    }
+   ],
+   "kvn_text": [
+    "Damage Penetrates 6% Cold Resistance"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 62984,
+   "poe2_id": "evasion_and_energy_shield35_",
+   "name": "Mindful Awareness",
+   "type": "notable",
+   "region": "bridge",
+   "bridge": "ranger-sorceress",
+   "x": 3075.9,
+   "y": -1775.8,
+   "group": 1041,
+   "connections": [
+    15975,
+    21336
+   ],
+   "dist": {
+    "warrior": 29,
+    "ranger": 11,
+    "sorceress": 11
+   },
+   "poe2_stats": {
+    "evasion_rating_+%": 24,
+    "maximum_energy_shield_+%": 24
+   },
+   "poe2_text": [
+    "24% increased Evasion Rating",
+    "24% increased maximum Energy Shield"
+   ],
+   "kvn_stats": [
+    {
+     "id": "evasion_+%",
+     "value": 24
+    },
+    {
+     "id": "energy_shield_+%",
+     "value": 24
+    }
+   ],
+   "kvn_text": [
+    "24% increased Evasion Rating",
+    "24% increased maximum Energy Shield"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 63064,
+   "poe2_id": "energy_shield_recovery12",
+   "name": "Mystic Stance",
+   "type": "notable",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3197.5,
+   "y": -1248.9,
+   "group": 1058,
+   "connections": [
+    65437
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 11,
+    "sorceress": 14
+   },
+   "poe2_stats": {
+    "energy_shield_delay_-%": 12,
+    "stun_threshold_+%_when_on_full_life": 30
+   },
+   "poe2_text": [
+    "12% faster start of Energy Shield Recharge",
+    "30% increased Stun Threshold while on Full Life"
+   ],
+   "kvn_stats": [
+    {
+     "id": "energy_shield_recharge_start_faster_%",
+     "value": 12
+    },
+    {
+     "id": "stun_threshold_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "12% faster start of Energy Shield Recharge",
+    "15% increased Stun Threshold"
+   ],
+   "status": "adapted",
+   "note": "stun_threshold_+%_when_on_full_life: condition removed, value halved"
+  },
+  {
+   "id": 64299,
+   "poe2_id": "auras18",
+   "name": "Bolstering Presence",
+   "type": "notable",
+   "region": "bridge",
+   "bridge": "warrior-sorceress",
+   "x": -3421.8,
+   "y": -1975.6,
+   "group": 596,
+   "connections": [
+    17655
+   ],
+   "dist": {
+    "warrior": 12,
+    "ranger": 30,
+    "sorceress": 12
+   },
+   "poe2_stats": {
+    "aura_effect_+%": 12
+   },
+   "poe2_text": [
+    "Aura Skills have 12% increased Magnitudes"
+   ],
+   "kvn_stats": [
+    {
+     "id": "aura_effect_+%",
+     "value": 12
+    }
+   ],
+   "kvn_text": [
+    "12% increased Aura Effect"
+   ],
+   "status": "kept",
+   "note": null
+  },
+  {
+   "id": 64327,
+   "poe2_id": "block15",
+   "name": "Defender's Resolve",
+   "type": "notable",
+   "region": "warrior",
+   "bridge": null,
+   "x": -3304.2,
+   "y": 2292.3,
+   "group": 611,
+   "connections": [
+    18629
+   ],
+   "dist": {
+    "warrior": 7,
+    "ranger": 21,
+    "sorceress": 23
+   },
+   "poe2_stats": {
+    "block_chance_+%": 12,
+    "heavy_stun_poise_decay_rate_+%": 50
+   },
+   "poe2_text": [
+    "12% increased Block chance",
+    "Your Heavy Stun buildup empties 50% faster"
+   ],
+   "kvn_stats": [
+    {
+     "id": "block_chance_+%",
+     "value": 12
+    },
+    {
+     "id": "stun_threshold_+%",
+     "value": 15
+    }
+   ],
+   "kvn_text": [
+    "12% increased Block chance",
+    "15% increased Stun Threshold"
+   ],
+   "status": "adapted",
+   "note": "heavy_stun_poise_decay_rate_+%: heroes are never heavy-stunned in KvN"
+  },
+  {
+   "id": 65437,
+   "poe2_id": "energy_shield_recovery4",
+   "name": "Energy Shield Delay",
+   "type": "small",
+   "region": "ranger",
+   "bridge": null,
+   "x": 3035.5,
+   "y": -1248.9,
+   "group": 1058,
+   "connections": [
+    48198,
+    63064
+   ],
+   "dist": {
+    "warrior": 28,
+    "ranger": 10,
+    "sorceress": 14
+   },
+   "poe2_stats": {
+    "energy_shield_delay_-%": 6
+   },
+   "poe2_text": [
+    "6% faster start of Energy Shield Recharge"
+   ],
+   "kvn_stats": [
+    {
+     "id": "energy_shield_recharge_start_faster_%",
+     "value": 6
+    }
+   ],
+   "kvn_text": [
+    "6% faster start of Energy Shield Recharge"
+   ],
+   "status": "kept",
+   "note": null
+  }
+ ]
+}
