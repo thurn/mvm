@@ -1,6 +1,6 @@
 # Appendix G: Art Direction & LPC Asset Map
 
-Part of the [Knights vs Nightmares GDD](gdd.md).
+Part of the [Mercs vs. Monsters GDD](gdd.md).
 
 This appendix covers:
 
@@ -15,6 +15,7 @@ This appendix covers:
 - Items and currency: [appendix-c-items.md](appendix-c-items.md).
 - Monsters, bosses, terrain, Strongboxes: [appendix-d-monsters-levels.md](appendix-d-monsters-levels.md).
 - Loot presentation (beams, ticker): [appendix-e-economy.md](appendix-e-economy.md).
+- Game feel, VFX timing, audio, and what to draw in code: [appendix-h-juice.md](appendix-h-juice.md).
 
 ---
 
@@ -49,7 +50,7 @@ This appendix covers:
 
 ### 1.1 Board, camera, and scale
 
-LPC is drawn at 3/4 top-down. KvN reads it as a PvZ lawn: a flat field of cells, with characters standing upright on them.
+LPC is drawn at 3/4 top-down. MvM reads it as a PvZ lawn: a flat field of cells, with characters standing upright on them.
 
 | Decision | Value | Why |
 |---|---|---|
@@ -248,7 +249,7 @@ These come from `ulpc-generator/sources/custom-animations.ts`.
 - Each has 4 rows (N, W, S, E), so right is row 3 and left is row 1.
 - The 64 px body is centred, offset by (F − 64) / 2.
 
-| Custom animation | Frame | Frames/row | Body frames it reuses | KvN users |
+| Custom animation | Frame | Frames/row | Body frames it reuses | MvM users |
 |---|---|---|---|---|
 | `thrust_oversize` | 192 | 8 | thrust | Jewelled staffs; long spear, trident, halberd, longsword |
 | `slash_oversize` | 192 | 6 | slash | **One Hand Mace**; waraxe, halberd, longsword |
@@ -268,7 +269,7 @@ These come from `ulpc-generator/sources/custom-animations.ts`.
 
 Definitions are in `ulpc-generator/sheet_definitions/`; art is in `ulpc-generator/spritesheets/`.
 
-| KvN class | Definition | Animations it provides | Frame | Bodies | Variants | Licence options |
+| MvM class | Definition | Animations it provides | Frame | Bodies | Variants | Licence options |
 |---|---|---|---|---|---|---|
 | Bow | `weapons/ranged/bow/weapon_ranged_bow_recurve.json` (also `_normal`, `_great`) | shoot, hurt (64); walk only via `walk_128` | 64 / 128 | male, female, teen, pregnant (muscular is listed but has no `shoot`) | 12 woods and metals | recurve and great: CC-BY-SA 3.0; normal: CC-BY 4.0 / GPL 3.0 / OGA-BY 3.0+ |
 | Arrow (ammo) | `weapons/ranged/bow/weapon_ranged_bow_arrow.json` | shoot | 64 | same | `arrow` | CC-BY-SA 3.0 / GPL 3.0 / OGA-BY 3.0 |
@@ -332,7 +333,7 @@ This is a recommendation, and deliberately small.
   - read `sheet_definitions/`, `palette_definitions/`, and `sources/custom-animations.ts`;
   - composite layers in `zPos` order;
   - palette-swap them;
-  - write only the rows KvN uses: right for heroes, left for monsters, front `hurt`.
+  - write only the rows MvM uses: right for heroes, left for monsters, front `hurt`.
 - Output one strip per animation, plus a JSON with frame size, frame count, and release frame, plus a **credits manifest** listing every source PNG.
 - I built a throwaway version while writing this appendix. It reproduced every recipe in §3 and §4 with no missing files. The only gaps are the expected ones: bows have no 64 px walk, and the kite shield and waraxe-behind layers have no `hurt`.
 - **Drop layers with no `hurt` sheet from the death row.**
@@ -646,7 +647,7 @@ All three are in the §3.2 tables. They all hold the `simple` crook as a sceptre
 
 Names and archetypes follow appendix D §2. Walk and attack rows face left (row 1).
 
-| # | Archetype (KvN name) | Source | Walk | Attack | Hurt (hit) | Death | Gaps → fallback | Scale |
+| # | Archetype (MvM name) | Source | Walk | Attack | Hurt (hit) | Death | Gaps → fallback | Scale |
 |---|---|---|---|---|---|---|---|---|
 | 1 | Shambler (Shambling Corpse) | ULPC zombie body + zombie head, recipe `m01` | `walk` 9 | `slash` 6 or `thrust` 8 | none → flash | `hurt` 6 | No idle or run | 1.0 |
 | 2a | Armoured, light (Helmed Skeleton) | ULPC skeleton + pointed "cone" helm, `m02a` | `walk` 9 | `slash` 6 (claw) | flash | `hurt` 6 | **Plating break:** re-bake without the helmet layer and swap sheets | 1.0 |
@@ -1044,6 +1045,8 @@ A 64 px board cell is 2×2 tiles. Fill each cell with 4 random picks from row 5.
 
 ### 7.2 Currency
 
+> **Superseded:** [appendix H §4.3](appendix-h-juice.md#43-currency-orbs-programmatic-supersedes-g-72) draws currency as code-generated orbs. The mapping below is the fallback.
+
 There are **no PoE-style orb icons**. Use distinct shapes where possible, so currencies read by silhouette and not only by tint.
 
 | Currency (appendix C) | Icon (`source-of-tales/items/`) |
@@ -1060,8 +1063,8 @@ There are **no PoE-style orb icons**. Use distinct shapes where possible, so cur
 | Shards (all kinds) | `Jewels.png`, plus a small corner badge of the parent's icon |
 | Lesser / Greater / Perfect Jeweller's Orb | `CrystalsGreen.png` / `CrystalsBlue.png` / `CrystalsPurple.png` |
 | Gemcutter's Prism | `GlyphYellow.png` |
-| Support-reroll orb (**KvN custom**) | `GlyphGreen.png` |
-| Support-transfer orb (**KvN custom**) | `KeyAnkh.png` |
+| Support-reroll orb (**MvM custom**) | `GlyphGreen.png` |
+| Support-transfer orb (**MvM custom**) | `KeyAnkh.png` |
 | Gold (stash or vendor) | `CoinsGold.png`, `CoinsGoldSmall.png`, `CoinsGoldLarge.png`, chosen by amount |
 | Gold (world pickup) | `neverwell-moor/resources/img/coin_gold.png` (8-frame spinning coin, 18×21) |
 | Mana orb (world pickup) | Procedural: `source-of-tales/particles/orb_10x10_dyable.png`, tinted cyan, with a glow |
@@ -1120,7 +1123,7 @@ There are **no PoE-style orb icons**. Use distinct shapes where possible, so cur
 | `lpc-adobe-town-set`: no licence. Probably Sharm and William Thompson. | Adobe ruins | Use the `lpc-revised` adobe walls instead. |
 | `lpc-frama-sci-fi-extensions`, `lpc-goes-to-space`: no licence | Obelisk and crystal (possible wardstone) | Don't use them. |
 | ULPC `head/heads/human/male_plump/*`: co-author "??" | Hero heads | Don't use it. |
-| ULPC `neck/scarf/*`: OGA-SA 3.0 | — | Avoid it; KvN doesn't need it. |
+| ULPC `neck/scarf/*`: OGA-SA 3.0 | — | Avoid it; MvM doesn't need it. |
 | source-of-tales files with no AUTHORS entry: `particles/orb_3x3_dyable.png`, `tiles/terrain.png`, `tiles/mountains_new.png`, `tiles/wooden_stairs.png`, `tiles/cellar_shadow.png` | Particles | Prefer `orb_5x5_dyable.png` and larger, which are credited. |
 | neverwell-moor: `snow.png` has no author or licence; `tree_stump.png` is uncredited; `animwater.png` is credited under the wrong name | — | Don't use `snow.png`. |
 | big-island: the base monsters, castle, and lava are credited only in the LPC archive README; the JS expansion README states no licence | — | Use the source-of-tales or lpc-tile-atlas copies instead. |

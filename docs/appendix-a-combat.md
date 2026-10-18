@@ -1,6 +1,6 @@
 # Appendix A: Combat Rules, Formulas & Stat Vocabulary
 
-Part of the [Knights vs Nightmares GDD](gdd.md).
+Part of the [Mercs vs. Monsters GDD](gdd.md).
 
 This appendix defines how a fight on the 5x9 board resolves:
 
@@ -15,7 +15,7 @@ This appendix defines how a fight on the 5x9 board resolves:
 
 - PoE2 formulas are used **verbatim** for heroes *and* monsters.
 - Only the stats in the [Stat vocabulary](#9-stat-vocabulary) exist.
-- Anything without a PoE2 equivalent is marked **KvN custom**.
+- Anything without a PoE2 equivalent is marked **MvM custom**.
 - Anything bent to fit the lanes is marked **adapted**.
 - Constants that come from community calculators, not GGG, are marked **(verify)**. The PoE2 wiki was unreachable during research.
 
@@ -45,12 +45,12 @@ This appendix defines how a fight on the 5x9 board resolves:
 
 **Unit conversion examples**
 
-| PoE2 value | KvN radius |
+| PoE2 value | MvM radius |
 |---|---|
 | 2 m Ignited Ground radius | ~1.7 tiles |
 | 1.5 m slam radius | ~1.25 tiles, which reaches the adjacent lanes |
 
-**Exception: auras.** Presence and Banner radii do **not** use the metre conversion. Converted, PoE2's 4 m Presence would be 3.3 tiles (±3 lanes) and a 6 m Banner 5 tiles. Either would cover nearly the whole 5-lane board, turning "positional" auras into global ones. KvN uses a **1.5-tile Presence** and a **2.5-tile Banner** instead (adapted; see §8).
+**Exception: auras.** Presence and Banner radii do **not** use the metre conversion. Converted, PoE2's 4 m Presence would be 3.3 tiles (±3 lanes) and a 6 m Banner 5 tiles. Either would cover nearly the whole 5-lane board, turning "positional" auras into global ones. MvM uses a **1.5-tile Presence** and a **2.5-tile Banner** instead (adapted; see §8).
 
 ### 1.2 Time
 
@@ -230,7 +230,7 @@ Example: a Lightning Arrow hero in lane 2 with Fork and +1 projectile fires two 
 
 ## 4. The damage pipeline
 
-KvN uses PoE2's order exactly. A **hit** goes through steps 1–8, then the target's mitigation (§5). **Damage over time** (§6) skips accuracy, crit, armour, and block.
+MvM uses PoE2's order exactly. A **hit** goes through steps 1–8, then the target's mitigation (§5). **Damage over time** (§6) skips accuracy, crit, armour, and block.
 
 ### 4.1 Base damage
 
@@ -316,8 +316,8 @@ taken        = damage × (1 − effectiveRes)
 
 - Penetration can't lower resistance below 0 (PoE2) (verify).
 - Exposure lowers elemental resistances, by −20% for 4 s by default. Its effect is reduced on tougher monsters: 15% less on magic, 30% less on rare, 50% less on unique. Exposure *can* push resistance negative.
-- **Monster resistances by area level** (KvN rule): white monsters have 0 base elemental resistances. Archetypes and affixes add resistance ([appendix-d](appendix-d-monsters-levels.md)).
-- **Hero resistances** (KvN rule): heroes start at 0. This mirrors PoE2 Act 1, which has no resistance penalty, and makes resistance affixes immediately readable.
+- **Monster resistances by area level** (MvM rule): white monsters have 0 base elemental resistances. Archetypes and affixes add resistance ([appendix-d](appendix-d-monsters-levels.md)).
+- **Hero resistances** (MvM rule): heroes start at 0. This mirrors PoE2 Act 1, which has no resistance penalty, and makes resistance affixes immediately readable.
 
 ### 5.3 Damage-taken multipliers
 
@@ -397,10 +397,10 @@ All three bypass ES and can't be blocked or evaded.
 
 **Freeze** (cold)
 
-- *Trigger:* cold hits build up freeze. Buildup = cold hit damage / ailment threshold, which the KvN prototype simplifies to a 0→100% meter. Freeze triggers at 100%.
+- *Trigger:* cold hits build up freeze. Buildup = cold hit damage / ailment threshold, which the MvM prototype simplifies to a 0→100% meter. Freeze triggers at 100%.
 - *Effect:* frozen targets can't move or act.
 - *Duration:* 4 s.
-- *TD notes:* The meter decays after 2 s without buildup (KvN custom simplification). Uniques take more buildup to fill.
+- *TD notes:* The meter decays after 2 s without buildup (MvM custom simplification). Uniques take more buildup to fill.
 
 **Shock** (lightning)
 
@@ -426,7 +426,7 @@ All three bypass ES and can't be blocked or evaded.
 **Heavy stun** (monsters only)
 
 - Each hit adds `damage / stunThreshold` to a stun bar, using the same 1.5x bonuses. The bar fills at 100%.
-- Effect: **3 s** heavy stun (verify). The monster counts as immobilised, and the bar is harder to refill for 4 s afterwards (KvN rule: 50% less buildup).
+- Effect: **3 s** heavy stun (verify). The monster counts as immobilised, and the bar is harder to refill for 4 s afterwards (MvM rule: 50% less buildup).
 
 **Primed for Stun**
 
@@ -497,7 +497,7 @@ This is the closed list of stats. Every hero, support, item mod, unique, passive
 
 ### 9.1 Offence: base damage
 
-| KvN stat | Meaning | PoE2 stat id family |
+| MvM stat | Meaning | PoE2 stat id family |
 |---|---|---|
 | `local_added_{type}_damage` | Adds X–Y {physical, fire, cold, lightning, chaos} damage (weapon) | `local_minimum_added_{type}_damage`, `local_maximum_added_…` |
 | `local_physical_damage_+%` | % increased physical damage (weapon) | `local_physical_damage_+%` |
@@ -509,7 +509,7 @@ This is the closed list of stats. Every hero, support, item mod, unique, passive
 
 ### 9.2 Offence: scaling
 
-| KvN stat | Meaning |
+| MvM stat | Meaning |
 |---|---|
 | `{type}_damage_+%` | % increased {physical, fire, cold, lightning, chaos, elemental} damage |
 | `{tag}_damage_+%` | % increased {spell, attack, melee, projectile, area, damage over time} damage |
@@ -525,7 +525,7 @@ This is the closed list of stats. Every hero, support, item mod, unique, passive
 
 ### 9.3 Offence: projectile and area
 
-| KvN stat | Meaning |
+| MvM stat | Meaning |
 |---|---|
 | `additional_projectiles` | + number of projectiles (§3.4) |
 | `pierce_count` | pierce +N |
@@ -538,7 +538,7 @@ This is the closed list of stats. Every hero, support, item mod, unique, passive
 
 ### 9.4 Offence: ailments and debuffs
 
-| KvN stat | Meaning |
+| MvM stat | Meaning |
 |---|---|
 | `bleed_chance_%`, `poison_chance_%` | chance to inflict |
 | `flammability_magnitude_+%` | % increased Flammability, i.e. ignite chance |
@@ -558,7 +558,7 @@ This is the closed list of stats. Every hero, support, item mod, unique, passive
 
 ### 9.5 Sustain
 
-| KvN stat | Meaning |
+| MvM stat | Meaning |
 |---|---|
 | `life_leech_from_physical_attack_damage_%` | life leech |
 | `life_gained_on_kill` | flat life per kill |
@@ -567,7 +567,7 @@ This is the closed list of stats. Every hero, support, item mod, unique, passive
 
 ### 9.6 Defence
 
-| KvN stat | Meaning |
+| MvM stat | Meaning |
 |---|---|
 | `base_maximum_life`, `maximum_life_+%` | life |
 | `armour`, `armour_+%`, `local_armour`, `local_armour_+%` | armour |
@@ -584,7 +584,7 @@ This is the closed list of stats. Every hero, support, item mod, unique, passive
 
 ### 9.7 Attributes, Spirit, auras, economy, loot
 
-| KvN stat | Meaning |
+| MvM stat | Meaning |
 |---|---|
 | `strength`, `dexterity`, `intelligence`, `all_attributes` | attributes (§2.1) |
 | `attribute_choice` | passive-tree attribute node: +5 to an attribute the player picks ([appendix F](appendix-f-passives.md)) |
@@ -593,29 +593,29 @@ This is the closed list of stats. Every hero, support, item mod, unique, passive
 | `aura_effect_+%`, `presence_area_+%` | aura scaling |
 | `allies_in_presence: <stat>` | Wrapper: applies `<stat>` to *other* heroes inside this hero's Presence radius (1.5 tiles, §8). The inner stat must itself be in this vocabulary. Same non-stacking rule as positional auras (§8). Comes from sceptre affixes and Fixation of Yix ([appendix C](appendix-c-items.md)). |
 | `unique_*` | Unique-only mechanic flags, e.g. cull on block or unlimited poison stacks. The list and each flag's fallback are in [appendix C §C.4.4](appendix-c-items.md). |
-| `acolyte_mana_generated_+%` | **KvN custom**: increased mana per orb |
-| `acolyte_mana_interval_-%` | **KvN custom**: faster orb interval |
-| `acolyte_mana_per_orb` | **KvN custom**: + flat mana per orb |
+| `acolyte_mana_generated_+%` | **MvM custom**: increased mana per orb |
+| `acolyte_mana_interval_-%` | **MvM custom**: faster orb interval |
+| `acolyte_mana_per_orb` | **MvM custom**: + flat mana per orb |
 | `item_rarity_+%` | % increased rarity of items dropped by monsters **this hero kills** (adapted from "items found") |
 | `gold_found_+%` | % increased gold dropped by monsters this hero kills |
 
 ### 9.8 Monster-only
 
-| KvN stat | Meaning |
+| MvM stat | Meaning |
 |---|---|
 | `monster_movement_speed_+%` | walk speed |
 | `monster_life_+%`, `monster_damage_+%` | rarity and affix scaling |
 | `monster_extra_{element}_damage_%` | adds X% of physical as extra {fire, cold, lightning, chaos} |
 | `monster_{type}_resistance_%` | resistances |
 | `monster_armour_+%`, `monster_evasion_+%`, `monster_energy_shield` | defences |
-| `monster_block_frontal_projectiles_%` | **KvN custom**: Shieldbearer front block vs projectiles only |
+| `monster_block_frontal_projectiles_%` | **MvM custom**: Shieldbearer front block vs projectiles only |
 | `monster_aura_{effect}` | buffs nearby monsters (Shaman, rare affixes) |
 | `monster_on_death_{effect}` | explode, split, corrupted ground |
 | `cannot_be_{ailment}` | ailment immunity flags |
 
 ### 9.9 Deliberately cut
 
-These PoE2 stats exist in the data but are **not** in KvN. Strip them from imported pools, or swap them per the importing appendix.
+These PoE2 stats exist in the data but are **not** in MvM. Strip them from imported pools, or swap them per the importing appendix.
 
 - Mana: max mana, mana regen, mana cost, mana leech, mana on kill.
 - Movement speed (heroes), dodge roll, sprint.

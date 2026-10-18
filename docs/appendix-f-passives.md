@@ -1,6 +1,6 @@
 # Appendix F: Focuses & Passive Tree
 
-This appendix defines the three **focuses** (KvN's classes) and the **passive tree** they share. The tree is a curated piece of the real PoE2 tree.
+This appendix defines the three **focuses** (MvM's classes) and the **passive tree** they share. The tree is a curated piece of the real PoE2 tree.
 
 - **Machine-readable tree:** [`docs/data/passive-subtree.json`](data/passive-subtree.json). It holds every node, edge, stat line, region, and the three sample builds (§2.7 has the schema).
 - **Source data:** repoe-fork/poe2 export 4.5.5.2 (PoE2 0.5.x):
@@ -43,7 +43,7 @@ All three classes also have base life 16 and base mana 30 in `characters.json`. 
 - `Ranger1`–`Ranger3` link to node 50459. The Huntress also starts here.
 - `Sorceress1`–`Sorceress3` link to node 54447. The Sorceress shares the Witch start.
 
-**Base attributes in KvN: reference only.** The brief says hero attributes come from the gem's profile, hero level, items, and passives. The focus adds none. If the team wants a stronger focus identity later, the simplest knob is to grant the class's 15/7/7 to every hero. It is off by default.
+**Base attributes in MvM: reference only.** The brief says hero attributes come from the gem's profile, hero level, items, and passives. The focus adds none. If the team wants a stronger focus identity later, the simplest knob is to grant the class's 15/7/7 to every hero. It is off by default.
 
 ### 1.1 Warrior
 
@@ -136,7 +136,7 @@ The six class roots sit on a ring of radius about 1,470 units, 60° apart.
 | MARAUDER | 47175 | (−1271, 733) | lower left | **Warrior** |
 | TEMPLAR | 61525 | (−1245, −729) | upper left | — |
 
-The three KvN starts are every other vertex, so every pair is the same distance apart:
+The three MvM starts are every other vertex, so every pair is the same distance apart:
 
 | Pair | Straight line | Graph steps | Hybrid root in between | Shortest paths |
 |---|---|---|---|---|
@@ -180,7 +180,7 @@ Each focus is also exactly 12 steps from its two neighbouring hybrid roots.
 9. **Verify:**
    - The graph is connected from 47175.
    - Every edge is symmetric.
-   - Every KvN stat id is in [appendix A §9](appendix-a-combat.md#9-stat-vocabulary) or listed under Deviations.
+   - Every MvM stat id is in [appendix A §9](appendix-a-combat.md#9-stat-vocabulary) or listed under Deviations.
 
 **Forced picks, and why**
 
@@ -202,7 +202,7 @@ Nodes that had to stay for connectivity were **replaced** instead, such as jewel
 
 | Status | Meaning | Count |
 |---|---|---|
-| **kept** | Every line is a vocabulary stat with the PoE2 value. Splitting one PoE2 line into two KvN stats still counts as kept, e.g. "Armour and Evasion". | 167 |
+| **kept** | Every line is a vocabulary stat with the PoE2 value. Splitting one PoE2 line into two MvM stats still counts as kept, e.g. "Armour and Evasion". | 167 |
 | **adapted** | At least one line was re-scoped, de-conditioned, or swapped, and the node keeps its identity. | 44 |
 | **replaced** | Every original line was a cut mechanic and got swapped by the rules below. | 11 |
 
@@ -210,11 +210,11 @@ Nodes that had to stay for connectivity were **replaced** instead, such as jewel
 
 **Replacement rule:** swap an unsupported line for the **nearest supported stat of similar value**. Keep the node where it is so the graph stays connected. When a node has nothing left to say, it inherits a stat that fits its neighbourhood.
 
-**Conditional rule:** KvN's vocabulary has no conditions. Any "if / while / against X" line becomes **unconditional at half value**, rounded half up.
+**Conditional rule:** MvM's vocabulary has no conditions. Any "if / while / against X" line becomes **unconditional at half value**, rounded half up.
 
-| PoE2 stat family | KvN result | Ratio | Example in the tree |
+| PoE2 stat family | MvM result | Ratio | Example in the tree |
 |---|---|---|---|
-| Mana regeneration rate | `acolyte_mana_generated_+%` (**KvN custom** stat) | 50% | Open Mind 25% → 13%; small Mana Regeneration 10% → 5% |
+| Mana regeneration rate | `acolyte_mana_generated_+%` (**MvM custom** stat) | 50% | Open Mind 25% → 13%; small Mana Regeneration 10% → 5% |
 | Maximum mana, flat | `spirit` | 50% | Mana Blessing +20 mana → +10 Spirit |
 | Movement speed | `maximum_life_+%` | 1:1 | Blur 4% → 4% increased maximum Life |
 | Recoup | `maximum_life_+%` | 50% | Infused Flesh 8% → 4% |
@@ -244,7 +244,7 @@ Same-stat results inside one node are summed. Smash, for example, shows one "40%
 
 PoE2 "Attribute" nodes (`display_passive_attribute_text`) read "+5 to any Attribute", and you choose when you allocate. The sub-tree has **70** of them.
 
-**KvN rule:**
+**MvM rule:**
 
 - When you allocate one, a small picker asks for **Str, Dex, or Int**. The default highlight is the focus attribute.
 - The choice grants **+5 of that attribute to every hero**:
@@ -261,7 +261,7 @@ In the JSON, attribute nodes have `"type": "attribute"` and a pseudo-stat `{"id"
 ```jsonc
 {
   "meta": { "source": {...}, "method": {...}, "counts": {...},
-            "kvn_stats_used": [...], "kvn_stats_not_in_appendix_a": [...] },
+            "mvm_stats_used": [...], "mvm_stats_not_in_appendix_a": [...] },
   "starts": { "warrior": { "node": 47175, "poe2_root": "MARAUDER", "x": -1271.2, "y": 733.1,
                            "base_attributes": { "strength": 15, "dexterity": 7, "intelligence": 7 } }, ... },
   "rules": { "attribute_node": "...", "respec_gold_per_point_by_player_level": {...}, ... },
@@ -279,8 +279,8 @@ In the JSON, attribute nodes have `"type": "attribute"` and a pseudo-stat `{"id"
     "dist": { "warrior": 7, "ranger": 23, "sorceress": 21 },   // full-tree BFS steps
     "poe2_stats": { "melee_damage_+%": 20, "melee_damage_+%_vs_heavy_stunned_enemies": 40 },
     "poe2_text": ["20% increased Melee Damage", "40% increased Melee Damage against Heavy Stunned enemies"],
-    "kvn_stats": [ { "id": "melee_damage_+%", "value": 40 } ],
-    "kvn_text": ["40% increased Melee Damage"],
+    "mvm_stats": [ { "id": "melee_damage_+%", "value": 40 } ],
+    "mvm_text": ["40% increased Melee Damage"],
     "status": "adapted",                 // kept | adapted | replaced | start
     "note": "melee_damage_+%_vs_heavy_stunned_enemies: condition removed, value halved"
   } ]
@@ -302,7 +302,7 @@ How to read these:
 
 62 nodes: 15 notable, 1 keystone, 27 small, 18 attribute, 1 start. Status: 46 kept, 14 adapted, 1 replaced.
 
-| Node id | Name | Type | PoE2 original | KvN | Status | Pts W/R/S |
+| Node id | Name | Type | PoE2 original | MvM | Status | Pts W/R/S |
 |---|---|---|---|---|---|---|
 | 47175 | MARAUDER | start | class start (MARAUDER root) | free; the focus starts here | - | 0 / 22 / 22 |
 | 44017 | **Resolute Technique** | keystone | Accuracy Rating is Doubled; Never deal Critical Hits | Accuracy Rating is Doubled; Never deal Critical Hits | kept | 13 / 35 / 27 |
@@ -354,7 +354,7 @@ How to read these:
 
 60 nodes: 15 notable, 1 keystone, 27 small, 16 attribute, 1 start. Status: 45 kept, 11 adapted, 3 replaced.
 
-| Node id | Name | Type | PoE2 original | KvN | Status | Pts W/R/S |
+| Node id | Name | Type | PoE2 original | MvM | Status | Pts W/R/S |
 |---|---|---|---|---|---|---|
 | 50459 | RANGER | start | class start (RANGER root) | free; the focus starts here | - | 22 / 0 / 22 |
 | 9085 | **Crimson Assault** | keystone | Bleeding you inflict is Aggravated; Base Bleeding Duration is 1 second; 50% more Magnitude of Bleeding you inflict | Bleeding you inflict is Aggravated (always counts the monster as moving: +100% extra damage, even against monsters held by a wall); Base Bleeding Duration is 1 second; 50% more Magnitude of Bleeding you inflict | kept | 22 / 12 / 34 |
@@ -406,7 +406,7 @@ How to read these:
 
 68 nodes: 15 notable, 2 keystone, 26 small, 24 attribute, 1 start. Status: 48 kept, 12 adapted, 7 replaced.
 
-| Node id | Name | Type | PoE2 original | KvN | Status | Pts W/R/S |
+| Node id | Name | Type | PoE2 original | MvM | Status | Pts W/R/S |
 |---|---|---|---|---|---|---|
 | 54447 | WITCH | start | class start (WITCH root) | free; the focus starts here | - | 22 / 22 / 0 |
 | 57513 | **Eldritch Battery** | keystone | Convert 100% of maximum Energy Shield to maximum Mana; Mana Costs are Doubled | Heroes have no Energy Shield; Acolytes gain Spirit equal to 100% of the maximum Energy Shield they would have had | adapted | 36 / 24 / 14 |
@@ -464,7 +464,7 @@ How to read these:
 | ranger-sorceress | 12 | Flow Like Water, Life from Death, Mindful Awareness, Step Like Mist |
 | warrior-sorceress | 14 | Bolstering Presence, Devoted Protector, Grounded in the Earth, Radial Force, Relentless Vindicator |
 
-| Node id | Name | Type | PoE2 original | KvN | Status | Pts W/R/S |
+| Node id | Name | Type | PoE2 original | MvM | Status | Pts W/R/S |
 |---|---|---|---|---|---|---|
 | 6898 | **Relentless Vindicator** (W-S) | notable | +5 to Strength and Intelligence; 10% increased Critical Hit Chance; 10% increased Damage | +5 to Strength; +5 to Intelligence; 10% increased Critical Hit Chance; 10% increased Physical Damage; 10% increased Elemental Damage; 10% increased Chaos Damage | adapted | 9 / 31 / 13 |
 | 28950 | **Devoted Protector** (W-S) | notable | +15% of Armour also applies to Elemental Damage; +5 to Strength and Intelligence; 10% faster start of Energy Shield Recharge; 15% increased Armour | +5% to all Elemental Resistances; +5 to Strength; +5 to Intelligence; 10% faster start of Energy Shield Recharge; 15% increased Armour | adapted | 13 / 31 / 9 |
@@ -495,7 +495,7 @@ How to read these:
 
 Acolyte and aura builds need somewhere to spend points. These are the nodes that serve them.
 
-| Node | Id | Region | Pts from nearest start | KvN effect |
+| Node | Id | Region | Pts from nearest start | MvM effect |
 |---|---|---|---|---|
 | Mana Regeneration (small) | 55807 | Sorceress | 3 | 5% increased Mana generated by Acolytes |
 | Mana Regeneration (small) | 3242 | Sorceress | 6 | 5% increased Mana generated by Acolytes |
@@ -520,12 +520,12 @@ The tree has **no real PoE2 Spirit node** this close to the starts. The nearest,
 
 ### 4.1 The four keystones in the tree
 
-| Keystone | Id | Owner | Pts W / R / S | PoE2 effect (verbatim) | KvN effect | Status |
+| Keystone | Id | Owner | Pts W / R / S | PoE2 effect (verbatim) | MvM effect | Status |
 |---|---|---|---|---|---|---|
 | **Resolute Technique** | 44017 | Warrior | 13 / 35 / 27 | Accuracy Rating is Doubled. Never deal Critical Hits. | Same, for every hero and the spell | kept |
 | **Crimson Assault** | 9085 | Ranger | 22 / 12 / 34 | Bleeding you inflict is Aggravated. Base Bleeding Duration is 1 second. 50% more Magnitude of Bleeding you inflict. | Same. Aggravated = always counts the monster as moving | kept |
 | **Chaos Inoculation** | 56349 | Sorceress | 38 / 26 / 16 | Maximum Life is 1. Immune to Chaos Damage and Bleeding. | Same, for every hero (chaos immunity covers Poison) | kept |
-| **Eldritch Battery** | 57513 | Sorceress | 36 / 24 / 14 | Convert 100% of maximum Energy Shield to maximum Mana. Mana Costs are Doubled. | Heroes have no Energy Shield. Acolytes gain Spirit equal to 100% of the maximum ES they would have had. | **adapted**, **KvN custom** |
+| **Eldritch Battery** | 57513 | Sorceress | 36 / 24 / 14 | Convert 100% of maximum Energy Shield to maximum Mana. Mana Costs are Doubled. | Heroes have no Energy Shield. Acolytes gain Spirit equal to 100% of the maximum ES they would have had. | **adapted**, **MvM custom** |
 
 Each keystone is one rule flag in the JSON, e.g. `keystone_resolute_technique`. Each flag is built only from vocabulary mechanics.
 
@@ -555,7 +555,7 @@ Each keystone is one rule flag in the JSON, e.g. `keystone_resolute_technique`. 
 
 **Eldritch Battery (Sorceress, 14 pts), adapted**
 
-- PoE2's version feeds ES into mana. KvN heroes have no mana, so the battery feeds the acolyte economy instead.
+- PoE2's version feeds ES into mana. MvM heroes have no mana, so the battery feeds the acolyte economy instead.
 - The price is that **every** hero loses its ES, including the Sorceress's own ES defence. This replaces "Mana Costs are Doubled", because hero costs are fixed by the brief.
 - Synergy: the Sorceress ES nodes (Pure Energy, Dampening Shield, Int) now grow acolyte Spirit instead of defence.
 - Worked example, from the Battery sample build (§6.3):
@@ -579,7 +579,7 @@ Distances are full-tree BFS steps from the nearest focus start.
 | Blackflame Covenant | 42680 | S 13 | Fire spells convert to chaos | Fire-to-chaos conversion isn't in the vocabulary |
 | Mind Over Matter | 45918 | S 13 | Damage taken from mana first | Mana is cut |
 | Scarred Faith | 49547 | W 13 / S 13 | Recoup to ES per enemy Power | Recoup and Power are cut |
-| **Blood Magic** | 51749 | W 14 | You have no Mana; mana costs become life costs | Mana is cut. Sketch if wanted later (**KvN custom**): "placing a hero also costs 1 point of the 20-point life pool; its mana cost is 30% lower". |
+| **Blood Magic** | 51749 | W 14 | You have no Mana; mana costs become life costs | Mana is cut. Sketch if wanted later (**MvM custom**): "placing a hero also costs 1 point of the 20-point life pool; its mana cost is 30% lower". |
 | Conduit | 33979 | S 14 | Charges go to allies | Charges are cut |
 | Glancing Blows | 19288 | R 14 | Evade Unlucky, Deflect Lucky | Deflection is cut |
 | Ritual Cadence | 11230 | S 14 | Invocation timing | Invocations are cut |
@@ -636,7 +636,7 @@ PoE2 charges gold per refunded point, by player level (research notes §1.6, fro
 - Changing an attribute node's pick costs 0.5× (PoE2).
 - Store the table in `rules.respec_gold_per_point_by_player_level` in the JSON.
 
-**KvN gold reality** ([appendix E §5.1](appendix-e-economy.md)):
+**MvM gold reality** ([appendix E §5.1](appendix-e-economy.md)):
 
 - Kills give about 200 gold per level at campaign level 10, and about 5,300 over the whole campaign.
 - A full respec of 19 points at campaign level 10 (player level 16) would cost about **3,800 gold**, or 19 levels of income.
@@ -645,7 +645,7 @@ PoE2 charges gold per refunded point, by player level (research notes §1.6, fro
 **Recommendation: respec is free in the demo.**
 
 1. The test is whether loot and build crafting are fun. Trying a keystone, hating it, and switching is part of that fun. A gold gate would block the thing being measured.
-2. PoE2's table is tuned to PoE2's gold income. In KvN it would cost a large share of all the gold a run earns, and starve the Armorer and Recruiter, the gold sinks the demo actually tests.
+2. PoE2's table is tuned to PoE2's gold income. In MvM it would cost a large share of all the gold a run earns, and starve the Armorer and Recruiter, the gold sinks the demo actually tests.
 3. The keystones here are huge swings: Chaos Inoculation sets every hero to 1 life, and Eldritch Battery removes all ES. A bad pick should cost minutes, not the session.
 4. The demo is about 2 hours, with no time to grind back gold.
 5. There is no exploit risk: the tree is locked during a level.
@@ -795,20 +795,20 @@ All three are in the JSON (`sample_builds`) so the dev cheat menu can load them.
 
 **Search**
 
-- One box that matches, case-insensitive, against node name, PoE2 text, KvN text, and KvN stat id. Typing "acolyte", "Crit", or "bleed" all work.
+- One box that matches, case-insensitive, against node name, PoE2 text, MvM text, and MvM stat id. Typing "acolyte", "Crit", or "bleed" all work.
 - Matches glow; everything else dims. The box shows "7 matches", and Enter cycles through them, panning to each.
 - Filter chips: **Notables**, **Keystones**, **Adapted / Replaced**, **Economy**. The Economy chip covers the acolyte, spirit, rarity, and gold stats.
 
-**Tooltip:** show the PoE2 original next to the KvN text, so ARPG-literate testers see exactly what changed.
+**Tooltip:** show the PoE2 original next to the MvM text, so ARPG-literate testers see exactly what changed.
 
 ```
 +-- Smash ------------------------- Notable · Warrior · 7 pts --+
-| PoE2 original                   | KvN (what you get)          |
+| PoE2 original                   | MvM (what you get)          |
 | 20% increased Melee Damage      | 40% increased Melee Damage  |
 | 40% increased Melee Damage      |                             |
 |   against Heavy Stunned enemies |                             |
 +---------------------------------------------------------------+
-| ADAPTED: condition removed, value halved (no conditions in KvN)|
+| ADAPTED: condition removed, value halved (no conditions in MvM)|
 | PoE2 node 45363 · melee55                                     |
 +---------------------------------------------------------------+
 ```
@@ -835,7 +835,7 @@ All three are in the JSON (`sample_builds`) so the dev cheat menu can load them.
 ## 8. Deviations from brief
 
 1. **Bridge geometry.** The task expected Warrior–Ranger and Ranger–Sorceress to be the adjacent pairs. In the data, all three starts are alternate vertices of the six-root hexagon and every pair is exactly 22 steps apart. **All three bridges are included**, and the sub-tree is a ring (§2.2).
-2. **Proposed vocabulary additions.** The tree needs these KvN stat ids that aren't in appendix A §9 yet:
+2. **Proposed vocabulary additions.** The tree needs these MvM stat ids that aren't in appendix A §9 yet:
    - `stun_threshold_+%`: appendix A lists `stun_threshold`, but PoE2 passives give "% increased Stun Threshold" (on 12 nodes).
    - `armour_break_+%`, "Break X% increased Armour" (Reverberating Impact): a modifier on the existing Armour Break mechanic.
    - `attribute_choice`, a pseudo-stat for attribute nodes that resolves to `strength`, `dexterity`, or `intelligence`.
@@ -844,11 +844,11 @@ All three are in the JSON (`sample_builds`) so the dev cheat menu can load them.
 3. **Keystone set.** There are 4 keystones, within the brief's 3–4, but the Sorceress holds two (CI and EB) and the bridges hold none.
    - Iron Reflexes, from the example list, was left out to stay within the node budget (+11 nodes).
    - Acrobatics does not exist in the PoE2 0.5 data.
-   - Elemental Equilibrium was reworked in 0.5 into an Infusion-Remnant effect, which KvN cuts.
+   - Elemental Equilibrium was reworked in 0.5 into an Infusion-Remnant effect, which MvM cuts.
    - Blood Magic is cut, with only a design sketch.
-4. **Eldritch Battery is a KvN custom adaptation.** ES becomes acolyte Spirit, and the price is that all heroes lose ES. "Mana Costs are Doubled" is dropped, because the brief fixes hero costs.
+4. **Eldritch Battery is a MvM custom adaptation.** ES becomes acolyte Spirit, and the price is that all heroes lose ES. "Mana Costs are Doubled" is dropped, because the brief fixes hero costs.
 5. **Point budget.** The brief says about 33 points by demo end. Appendix E's XP curve gives player level 30, so **37**: 29 from levels plus 8 from bosses. The sample builds use 33, which arrive during campaign level 19.
-6. **Respec is free in the demo** (recommendation). The brief doesn't set a price, and PoE2's table costs a large share of all KvN gold. The table ships behind a toggle.
+6. **Respec is free in the demo** (recommendation). The brief doesn't set a price, and PoE2's table costs a large share of all MvM gold. The table ships behind a toggle.
 7. **Forced Ranger crit picks.** The real tree puts the Ranger's crit 10–13 steps out, beyond the 11-step notable radius for Locked On. Two crit notables were forced to honour the brief's "crit" fantasy.
 8. **The Bridges region has 12 notables, not 15.** The brief's "about 15 per region" is met by the three focus regions.
 9. **Conditional lines lose their condition at half value.** This touches 9 lines, e.g. Smash and Vile Wounds. "Allies in your Presence" lines become global, since passives are global anyway.

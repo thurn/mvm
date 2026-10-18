@@ -1,4 +1,4 @@
-# Working on the 'Knights vs Nightmares' prototype.
+# Working on the 'Mercs vs. Monsters' prototype.
 
 This is a throwaway web-based prototype for a tower defense game. Do not overarchitect. Treat all code as disposable.
 

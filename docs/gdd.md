@@ -1,4 +1,4 @@
-# Knights vs Nightmares: Game Design Document (Prototype Demo)
+# Mercs vs. Monsters: Game Design Document (Prototype Demo)
 
 > **Status:** a design for a throwaway prototype. All content below that comes from Path of Exile 2 or Plants vs. Zombies is **test scaffolding only**. It exists to answer one question fast, and none of it ships.
 
@@ -39,6 +39,7 @@
 | [E: Economy, Loot Rates & Progression Pacing](appendix-e-economy.md) | Mana, drop rates, currency, gold and vendors, XP, time-to-fun |
 | [F: Focuses & Passive Tree](appendix-f-passives.md) | Focus definitions, the curated PoE2 sub-tree, keystones, sample builds |
 | [G: Art Direction & LPC Asset Map](appendix-g-art.md) | LPC sheet format, hero and monster sprite recipes, tilesets, FX, icons, licensing |
+| [H: Game Feel, VFX & Audio](appendix-h-juice.md) | Juice rules, loot drop choreography, per-skill VFX and SFX, crafting feedback, audio mix, music, code-authored assets, open audio sources |
 
 ---
 
@@ -194,7 +195,7 @@ The **roster bar** holds 6 hero cards and 1 spell card.
 
 ### 6.6 Waves, terrain, and events
 
-**Waves.** PvZ structure: the first wave at 18 s, then every 25–31 s, or sooner if you're crushing it. A **flag wave** comes at the end, with a warning. KvN waves are 2–3x denser than PvZ's, because kills are loot.
+**Waves.** PvZ structure: the first wave at 18 s, then every 25–31 s, or sooner if you're crushing it. A **flag wave** comes at the end, with a warning. MvM waves are 2–3x denser than PvZ's, because kills are loot.
 
 **Terrain.** It arrives gradually from level 4:
 
@@ -260,7 +261,7 @@ PoE2 rules apply throughout:
 | **Bases** | Real PoE2 bases with their implicits and properties (damage, attack speed, crit, armour, evasion, ES, block, Spirit) |
 | **Item level** | The area level where the item dropped, +1 from rares and +2 from bosses. It gates which affix tiers can roll. |
 | **Rarity** | Normal (0 mods), Magic (1 prefix + 1 suffix max), Rare (up to 3 + 3), Unique (fixed) |
-| **Affixes** | PoE2 `mods.json`, filtered to KvN's ~100-stat vocabulary. Mana, movement, flask, and minion mods are cut. |
+| **Affixes** | PoE2 `mods.json`, filtered to MvM's ~100-stat vocabulary. Mana, movement, flask, and minion mods are cut. |
 | **Uniques** | 17 build-enablers from PoE2. Each boss guarantees one from its own level-gated pool. |
 
 **Demo weapon classes:** Bow, Crossbow, Spear, One/Two Hand Mace, Quarterstaff, Wand, Staff, Sceptre. Swords, axes, daggers, claws, and flails are cut. Shields are allowed only with one-handed weapons.
@@ -291,8 +292,8 @@ Shards come from salvaging.
 
 - Lesser, Greater, and Perfect Jeweller's Orbs: +1 support slot.
 - Gemcutter's Prism: quality.
-- **Orb of Realignment** (KvN custom): rerolls a single support.
-- **Orb of Transference** (KvN custom): moves supports between two heroes of the same skill, so a great Rare's supports survive a higher-level drop.
+- **Orb of Realignment** (MvM custom): rerolls a single support.
+- **Orb of Transference** (MvM custom): moves supports between two heroes of the same skill, so a great Rare's supports survive a higher-level drop.
 
 **Cut from the demo:** PoE2 Essences, Omens, runes, soul cores, catalysts, Artificer's Orbs, and Orb of Chance.
 
@@ -339,7 +340,7 @@ Numbers: [appendix E](appendix-e-economy.md).
 
 ## 12. Focuses and the passive tree
 
-**Focus** is KvN's class: it picks a start position on the passive tree and a starter kit. Any hero can still go in any roster.
+**Focus** is MvM's class: it picks a start position on the passive tree and a starter kit. Any hero can still go in any roster.
 
 | Focus | PoE2 class start | Fantasy | Starter kit (all Normal, level 1) |
 |---|---|---|---|
@@ -352,7 +353,7 @@ Starter kit details: [appendix B §4](appendix-b-heroes.md#4-starter-kits).
 **The passive tree**
 
 - A **curated region of the real PoE2 tree**: 225 nodes around the three starts, with bridges between every pair, so the tree is a ring.
-- Real positions, connections, and stat lines are kept where KvN supports the stat. Unsupported nodes are swapped for the nearest supported stat.
+- Real positions, connections, and stat lines are kept where MvM supports the stat. Unsupported nodes are swapped for the nearest supported stat.
 - Passives are **global**: they modify every hero and the spell.
 - About **37 points** are available by demo end: 1 per player level, plus 2 per boss.
 - **No ascendancy** in the demo.
@@ -387,7 +388,7 @@ Details: [appendix D](appendix-d-monsters-levels.md).
 
 ## 14. Combat model
 
-KvN runs **PoE2's formulas verbatim** for heroes and monsters, with a trimmed vocabulary of ~100 stats:
+MvM runs **PoE2's formulas verbatim** for heroes and monsters, with a trimmed vocabulary of ~100 stats:
 
 - added damage → conversion → gained as extra → increased → more → crit;
 - accuracy versus evasion;
@@ -455,9 +456,17 @@ Asset map and licensing: [appendix G](appendix-g-art.md).
 
 **Audio** (not discussed in the design interview; recommendation)
 
-- Use CC0 placeholder SFX.
-- The **drop sounds are the priority**: distinct stingers for rare, unique, hero, and currency drops. PoE players are conditioned to them, and they carry the loot hook.
-- Music is optional.
+- Use open SFX: 23 CC0 packs are already downloaded and mapped to game events.
+- The **drop sounds are the priority**: distinct stingers for rare, unique, hero, and currency drops. PoE players are conditioned to them, and they carry the loot hook. All stingers share one key, so loot bursts play as rising arpeggios.
+- Music: per-biome loops with an intensity layer, a hideout theme, and a boss loop.
+
+**Game feel ("the juice")**
+
+- Feedback scales with **hit significance** (damage ÷ target life), so a better item makes hits look and sound chunkier without new art.
+- VFX colours and shapes are **derived from each hero's final stats**, so a conversion support visibly recolours its projectiles.
+- A drop's 3 seconds (pop, beam, stinger, label, ticker) are choreographed per rarity.
+
+Juice, VFX, SFX, music, and sources: [appendix H](appendix-h-juice.md).
 
 ---
 
@@ -544,20 +553,20 @@ These decisions came from the design interview on 2026-10-18.
 | Events | Strongboxes only |
 | Art | PvZ-style 3/4 lawn; ULPC sprites; gear not drawn |
 | Success | Team gut check |
-| Docs | This GDD + 7 appendices of curated tables with RePoE IDs |
+| Docs | This GDD + 8 appendices of curated tables with RePoE IDs |
 | Small calls | PoE2 names verbatim; shovel with no refund; 1x/2x speed; uniform-card stash; no unique heroes; dev cheats; single local save |
 
 ---
 
 ## 21. Glossary
 
-| KvN term | PoE2 equivalent | PvZ equivalent |
+| MvM term | PoE2 equivalent | PvZ equivalent |
 |---|---|---|
 | Hero | Active skill gem (as a character) | Plant |
 | Hero card / roster slot | Gem + equipment loadout | Seed packet |
 | Support (hero modifier) | Support gem | — |
 | Mana | — (PoE2 mana is cut) | Sun |
-| Acolyte | — (Spirit-scaled, KvN custom) | Sunflower |
+| Acolyte | — (Spirit-scaled, MvM custom) | Sunflower |
 | Spell | Spell skill gem | Cherry Bomb, Jalapeño |
 | Focus | Character class start | — |
 | Area level | Area level | Level number |

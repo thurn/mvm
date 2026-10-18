@@ -1,8 +1,8 @@
 # Appendix E: Economy, Loot Rates & Progression Pacing
 
-Part of the [Knights vs Nightmares GDD](gdd.md).
+Part of the [Mercs vs. Monsters GDD](gdd.md).
 
-KvN runs four economies:
+MvM runs four economies:
 
 | Economy | Lives | Earned from | Spent on |
 |---|---|---|---|
@@ -75,7 +75,7 @@ Everything is auto-collected.
 |---|---|---|
 | Starting mana | **50**. Level 1 starts with **150**. | PvZ |
 | Sky mana ("mana wisps") | **25** each, on PvZ's sky-sun schedule | Falls automatically; no clicking |
-| Acolytes | `25 × (1 + Spirit / 200)` mana every **23.5–25 s**. First orb arrives 3–12.5 s after placement. | Spirit comes from the acolyte's sceptre (100 base Spirit on every sceptre, per [appendix C](appendix-c-items.md)), amulet, body armour, and passives, plus **+2 Spirit per acolyte hero level** ([appendix B](appendix-b-heroes.md)). **KvN custom.** |
+| Acolytes | `25 × (1 + Spirit / 200)` mana every **23.5–25 s**. First orb arrives 3–12.5 s after placement. | Spirit comes from the acolyte's sceptre (100 base Spirit on every sceptre, per [appendix C](appendix-c-items.md)), amulet, body armour, and passives, plus **+2 Spirit per acolyte hero level** ([appendix B](appendix-b-heroes.md)). **MvM custom.** |
 | Acolyte stats | `acolyte_mana_generated_+%`, `acolyte_mana_interval_-%`, `acolyte_mana_per_orb` | From acolyte supports and passives ([appendix B](appendix-b-heroes.md)) |
 | Mana cap | **9,990** | PvZ |
 
@@ -248,11 +248,11 @@ Currency rolls are separate from item rolls.
 
 A currency can't drop below its drop level, measured in area level.
 
-**Deviation from PoE2:** KvN drop levels are **compressed**. The demo tops out at area 29, and PoE2 gates Divine, Vaal, and Annulment at 35, which would mean the demo never sees them.
+**Deviation from PoE2:** MvM drop levels are **compressed**. The demo tops out at area 29, and PoE2 gates Divine, Vaal, and Annulment at 35, which would mean the demo never sees them.
 
 **Item currency**
 
-| Currency | KvN drop level | PoE2 drop level | Weight |
+| Currency | MvM drop level | PoE2 drop level | Weight |
 |---|---|---|---|
 | Orb of Transmutation | 1 | 1 | 30 |
 | Orb of Augmentation | 1 | 1 | 30 |
@@ -266,14 +266,14 @@ A currency can't drop below its drop level, measured in area level.
 
 **Hero currency**
 
-| Currency | KvN drop level | PoE2 drop level | Weight |
+| Currency | MvM drop level | PoE2 drop level | Weight |
 |---|---|---|---|
 | Gemcutter's Prism | 8 | 12 | 2 |
 | Lesser Jeweller's Orb | 5 | 25 | 4 |
 | Greater Jeweller's Orb | 15 | 45 | 1 |
 | Perfect Jeweller's Orb | 25 | 65 | 0.25 |
-| Orb of Realignment (KvN custom: reroll one support) | 12 | — | 1 |
-| Orb of Transference (KvN custom: move supports between heroes of the same skill) | 15 | — | 0.5 |
+| Orb of Realignment (MvM custom: reroll one support) | 12 | — | 1 |
+| Orb of Transference (MvM custom: move supports between heroes of the same skill) | 15 | — | 0.5 |
 
 Exact names and behaviours are in [appendix C](appendix-c-items.md). If C and this table disagree on a name, C wins. Weights are relative among currencies past their drop level.
 
@@ -293,13 +293,13 @@ Salvage shards (appendix C) add more on top.
 
 ### 4.4 Why currency is richer than PoE2
 
-- PoE2's Act 1 hands out about 2 Exalts and zero Divines in several hours. A 2-hour KvN demo at those rates would never let players craft, and crafting is half the hypothesis.
+- PoE2's Act 1 hands out about 2 Exalts and zero Divines in several hours. A 2-hour MvM demo at those rates would never let players craft, and crafting is half the hypothesis.
 - Gear and hero **drop** rates match PoE2. Currency is roughly **3x** PoE2 campaign rates, and its drop levels are compressed.
 - If playtests show crafting trivialising drops, reduce the currency rolls in §4.1 first.
 
 ### 4.5 First-clear rewards (PoE2 quest-reward equivalent)
 
-PoE2's early progression feels good partly because quests hand out guaranteed rewards. Act 1 gives ~8 uncut skill gems, ~9 support gems, and +4 passive points. KvN mirrors this: **each level's first clear grants a fixed reward**, shown on the level card before the player starts.
+PoE2's early progression feels good partly because quests hand out guaranteed rewards. Act 1 gives ~8 uncut skill gems, ~9 support gems, and +4 passive points. MvM mirrors this: **each level's first clear grants a fixed reward**, shown on the level card before the player starts.
 
 "Choose 1 of 3" draws three heroes or spells at the listed rarity and level, with at least 1 matching the roster (35% shaping).
 
@@ -322,7 +322,7 @@ PoE2's early progression feels good partly because quests hand out guaranteed re
 | 15 (boss) | +2 passive points; Divine Orb | |
 | 16 | **Choose 1 of 3 Rare heroes** (level 23) | |
 | 17 | 2 Exalted Orbs | |
-| 18 | Orb of Realignment (KvN custom) | |
+| 18 | Orb of Realignment (MvM custom) | |
 | 19 | Greater Jeweller's Orb | |
 | 20 (act boss) | +2 passive points; 2 Divine Orbs; demo-complete screen | |
 
@@ -360,7 +360,7 @@ That's ~5,300 over the whole campaign. Selling roughly doubles it.
 | Hero | `(15 + 3 × lvl) × rarityMult` | 20% of buy |
 | Spell | 1.2x the hero price | 20% of buy |
 | Unique item | never sold by vendors | `(10 + 2 × ilvl) × 4` |
-| Currency | not sold | not buyable (KvN: no currency exchange in the demo) |
+| Currency | not sold | not buyable (MvM: no currency exchange in the demo) |
 
 **Worked prices at level 10 (ilvl 14)**
 
@@ -388,7 +388,7 @@ Gambling and gold sinks:
 | **Gamble: heroes** | Pick a **role** (melee, ranged, caster, curse, aura, acolyte) or a **damage tag**. It costs `1.5 × the magic hero price`. Reveals Magic 70% / Rare 30%. |
 | **Respec** | **Free in the demo**, so players experiment. PoE2's gold-per-point table (15 gold at level 1, 98 at level 10, 470 at level 30) is ready behind a toggle; see [appendix F](appendix-f-passives.md). |
 
-PoE2's own gambler (Finn in Act 1) sells known bases of unknown rarity, magic being most common. KvN's gamble tab is that, plus heroes.
+PoE2's own gambler (Finn in Act 1) sells known bases of unknown rarity, magic being most common. MvM's gamble tab is that, plus heroes.
 
 ---
 
@@ -398,13 +398,13 @@ PoE2's own gambler (Finn in Act 1) sells known bases of unknown rarity, magic be
 
 ```
 killXP = default_monster_stats[areaLevel].experience × rarityXP × K_xp × levelPenalty
-rarityXP     = { normal: 1, magic: 2, rare: 5, boss: 20 }   // KvN custom; the PoE2 export has none
-K_xp         = 6                                            // KvN density bridge, explained below
+rarityXP     = { normal: 1, magic: 2, rare: 5, boss: 20 }   // MvM custom; the PoE2 export has none
+K_xp         = 6                                            // MvM density bridge, explained below
 levelPenalty = PoE2's: safe band = 3 + floor(playerLevel / 16)
                beyond the band: ((L + 5) / (L + 5 + ED^2.5))^1.5, where ED = levels outside the band
 ```
 
-**Why `K_xp` = 6.** PoE2 zones have hundreds of kills, and the 20-level KvN campaign has ~1,250. With `K_xp` = 6, the player reaches **level 30** at the end of level 20 and stays about area level +1 to +2 throughout. That's what the PoE2 campaign feels like.
+**Why `K_xp` = 6.** PoE2 zones have hundreds of kills, and the 20-level MvM campaign has ~1,250. With `K_xp` = 6, the player reaches **level 30** at the end of level 20 and stays about area level +1 to +2 throughout. That's what the PoE2 campaign feels like.
 
 **XP needed per level** (PoE2, cumulative; [poe2db](https://poe2db.tw/us/Experience))
 

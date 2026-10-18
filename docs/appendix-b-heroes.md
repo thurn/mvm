@@ -1,6 +1,6 @@
 # Appendix B: Heroes, Supports & Spells
 
-Part of the Knights vs Nightmares (KvN) GDD. It covers how a PoE2 skill gem becomes a placeable hero, the 32-hero demo roster, the support gems that roll on heroes, the 8 player spells, and how heroes and spells drop.
+Part of the Mercs vs. Monsters (MvM) GDD. It covers how a PoE2 skill gem becomes a placeable hero, the 32-hero demo roster, the support gems that roll on heroes, the 8 player spells, and how heroes and spells drop.
 
 **Related files:**
 
@@ -15,10 +15,10 @@ Part of the Knights vs Nightmares (KvN) GDD. It covers how a PoE2 skill gem beco
 
 **Markers:**
 
-- **KvN custom**: invented for the demo.
-- **adapted**: a PoE2 mechanic or stat swapped for a KvN equivalent. The original is named next to it.
+- **MvM custom**: invented for the demo.
+- **adapted**: a PoE2 mechanic or stat swapped for a MvM equivalent. The original is named next to it.
 - ★: the support is in the gem's PoE2 `recommended_supports`, so it gets 3× roll weight.
-- ✦: KvN custom hero.
+- ✦: MvM custom hero.
 
 ---
 
@@ -106,7 +106,7 @@ Examples at hero level 30: pure Str = 73 Str; Str 50 / Dex 50 = 40 / 40.
 
 - Str: +2 life per point.
 - Dex: +8 accuracy per point.
-- Int: +1% increased maximum Energy Shield per 5 points (**KvN**).
+- Int: +1% increased maximum Energy Shield per 5 points (**MvM**).
 
 **Life:**
 
@@ -159,12 +159,12 @@ Appendix E §6.2 owns the XP rules. In short:
 
 - Each Prism adds **+5% quality**, up to **20%**. The 5% step is from PoE2's Dec 2024 tuning in the research file.
 - The bonus is the gem's own PoE2 `quality_stats`: **value × quality / 1000**. Example: Armour Breaker `armour_break_amount_+%: 1000` gives 1% per 1%, so 20% increased Armour Break at 20%.
-- Each hero block lists its 20% bonus. Bonuses that are dead in KvN (Reservation Efficiency, a Limit on once-per-cooldown spells) are **adapted** and marked.
-- Acolytes (**KvN custom**): +1% increased mana generated per 1% quality.
+- Each hero block lists its 20% bonus. Bonuses that are dead in MvM (Reservation Efficiency, a Limit on once-per-cooldown spells) are **adapted** and marked.
+- Acolytes (**MvM custom**): +1% increased mana generated per 1% quality.
 
 ### 1.8 Unlock gate (when a skill can drop)
 
-PoE2 gates skills behind uncut-gem level. A gem's `crafting_level` is its tier (1, 3, 5 … 13). The real breakpoints (research §1.7) would hide tier 9+ skills until area level 33, which is past the demo. KvN compresses them about 2×:
+PoE2 gates skills behind uncut-gem level. A gem's `crafting_level` is its tier (1, 3, 5 … 13). The real breakpoints (research §1.7) would hide tier 9+ skills until area level 33, which is past the demo. MvM compresses them about 2×:
 
 ```
 minimum area level to drop or sell = max(1, 2 × tier − 3)
@@ -174,8 +174,8 @@ minimum area level to drop or sell = max(1, 2 × tier − 3)
 |---|---|---|---|---|---|---|---|---|
 | Unlock AL | 1 | 3 | 5 | 7 | 11 | 15 | 19 | 23 |
 
-- Purity of Fire and Malice have `crafting_level 0`, so they are not in PoE2 0.5's uncut pool. They unlock at **AL 9** (**KvN custom**).
-- KvN custom acolytes: basic AL 1, Shrinewarden AL 5, Twin Votaries AL 7.
+- Purity of Fire and Malice have `crafting_level 0`, so they are not in PoE2 0.5's uncut pool. They unlock at **AL 9** (**MvM custom**).
+- MvM custom acolytes: basic AL 1, Shrinewarden AL 5, Twin Votaries AL 7.
 - Starter-kit grants ignore the gate.
 
 ### 1.9 Rarity and support slots
@@ -194,12 +194,12 @@ minimum area level to drop or sell = max(1, 2 × tier − 3)
 
 ### 1.10 Support roll algorithm
 
-**Inputs:** the hero's skill types, hero level, the gem's `recommended_supports`, and the KvN support catalog (§5).
+**Inputs:** the hero's skill types, hero level, the gem's `recommended_supports`, and the MvM support catalog (§5).
 
-1. **Pool = KvN catalog** (66 PoE2 supports + 5 KvN custom). Lineage supports and supports with `crafting_level 0` never roll.
-2. **PoE2 compatibility.** Evaluate the support's `allowed_types` and `excluded_types` against the skill's `active_skill.types`. Both are RPN with `AND` / `OR` / `NOT`; leftover stack items are OR-ed. For crossbow heroes, use the union of the shot skill's and the Ammo skill's types; for War Banner, the banner's and the reservation skill's. Acolytes use KvN types `Buff, Persistent, KvNAcolyte`.
+1. **Pool = MvM catalog** (66 PoE2 supports + 5 MvM custom). Lineage supports and supports with `crafting_level 0` never roll.
+2. **PoE2 compatibility.** Evaluate the support's `allowed_types` and `excluded_types` against the skill's `active_skill.types`. Both are RPN with `AND` / `OR` / `NOT`; leftover stack items are OR-ed. For crossbow heroes, use the union of the shot skill's and the Ammo skill's types; for War Banner, the banner's and the reservation skill's. Acolytes use MvM types `Buff, Persistent, MvMAcolyte`.
 3. **Tier gate:** tier I needs hero level 1+, tier II needs **12+**, tier III needs **24+**. Tier = the Roman numeral in the name; unnumbered supports map from `crafting_level` (1–2 → I, 3–4 → II, 5 → III).
-4. **No dead rolls (KvN).** Drop supports that cannot do anything on this hero:
+4. **No dead rolls (MvM).** Drop supports that cannot do anything on this hero:
    - **Implicit "cannot" flags.** Lightning Spear has `cannot_pierce`, `projectiles_cannot_fork` and `base_projectiles_cannot_chain`, so it never gets Pierce, Fork or Chain. Pierce-all skills (Explosive Spear, Frostbolt) never get Pierce, Fork or Chain.
    - **Damage-type gates.** Fire supports need fire damage, Bleed needs Physical, Brutality needs a mostly-Physical skill, and Attunements must not cut the hero's main element.
    - **Role gates.** Longshot is for non-melee, Close Combat for melee, Stun supports are excluded on Boneshatter (−100% stun), and Exploit Weakness is excluded on Armour Break heroes.
@@ -210,7 +210,7 @@ minimum area level to drop or sell = max(1, 2 × tier − 3)
    - conflict partners (table below).
 7. Repeat until the rolled count is reached or the pool is empty.
 
-**Conflict groups (KvN, anti-synergy blockers):**
+**Conflict groups (MvM, anti-synergy blockers):**
 
 | If the hero has… | …it cannot also roll |
 |---|---|
@@ -318,31 +318,31 @@ cost = round_to_nearest_25( role_base × Π support cost multipliers )      (min
 
 ### 2.2 Acolytes (economy)
 
-All three are **KvN custom**. They wield sceptres, never attack, and make mana orbs.
+All three are **MvM custom**. They wield sceptres, never attack, and make mana orbs.
 
-**Shared formula** (brief): `mana per orb = 25 × (1 + Spirit / 200)`, plus **KvN custom** support modifiers:
+**Shared formula** (brief): `mana per orb = 25 × (1 + Spirit / 200)`, plus **MvM custom** support modifiers:
 
 ```
 orb = (25 + flat mana per orb) × (1 + Spirit/200) × (1 + increased mana generated)
 interval = base interval × (1 − reduced mana generation interval)
 ```
 
-### H01. Ezomyte Acolyte (KvN custom)
+### H01. Ezomyte Acolyte (MvM custom)
 
-`KvN/Heroes/EzomyteAcolyte` · **KvN custom**: no PoE2 gem
+`MvM/Heroes/EzomyteAcolyte` · **MvM custom**: no PoE2 gem
 
 | Role | Weapon | Attributes | PoE2 tier → unlock | Mana | Recharge | Life × |
 |---|---|---|---|---|---|---|
 | Acolyte (basic) | Sceptre | Int 100 | – → AL 1 | 50 | fast 7.5 s | ×1 |
 
-PoE2 tags: kvn_acolyte, buff, persistent (KvN custom types).
+PoE2 tags: mvm_acolyte, buff, persistent (MvM custom types).
 
 **TD behaviour**
 
 - **Targeting:** None. Never attacks.
 - **Output:** Drops one mana orb on its own tile every **24 s**. The first orb comes **3–12.5 s** (uniform) after placement, as with the PvZ Sunflower.
 - **Orb value:** `25 × (1 + Spirit / 200)` mana, rounded down to a whole number when collected.
-- **Special:** Spirit comes from the sceptre, amulet, body armour and passives, plus +2 per hero level above 1 (**KvN custom**).
+- **Special:** Spirit comes from the sceptre, amulet, body armour and passives, plus +2 per hero level above 1 (**MvM custom**).
 
 **Key numbers**
 
@@ -357,21 +357,21 @@ PoE2 tags: kvn_acolyte, buff, persistent (KvN custom types).
 
 Fixed at every level: Orbs per cycle · cycle: 1 · 24 s.
 
-**Quality (Gemcutter's Prism, 20% max):** +1% increased mana generated per 1% quality (+20% at 20%). **KvN custom**.
+**Quality (Gemcutter's Prism, 20% max):** +1% increased mana generated per 1% quality (+20% at 20%). **MvM custom**.
 
 **Recommended supports:** Abundant Offering (I), Fervent Prayer (I), Steadfast Devotion (I), Spirit Conduit (II), Heavy Tithe (III), Vitality I (I).
 
 **TD notes:** The cheap opener. Buy two or three before anything else on levels 1–3. Squishy: put it in column 1 or 2, behind a wall.
 
-### H02. Twin Votaries (KvN custom)
+### H02. Twin Votaries (MvM custom)
 
-`KvN/Heroes/TwinVotaries` · **KvN custom**: no PoE2 gem
+`MvM/Heroes/TwinVotaries` · **MvM custom**: no PoE2 gem
 
 | Role | Weapon | Attributes | PoE2 tier → unlock | Mana | Recharge | Life × |
 |---|---|---|---|---|---|---|
 | Acolyte (twin) | Sceptre | Int 100 | – → AL 7 | 125 | very slow 50 s | ×1 |
 
-PoE2 tags: kvn_acolyte, buff, persistent (KvN custom types).
+PoE2 tags: mvm_acolyte, buff, persistent (MvM custom types).
 
 **TD behaviour**
 
@@ -392,21 +392,21 @@ PoE2 tags: kvn_acolyte, buff, persistent (KvN custom types).
 
 Fixed at every level: Orbs per cycle · cycle: 2 · 24 s.
 
-**Quality (Gemcutter's Prism, 20% max):** +1% increased mana generated per 1% quality. **KvN custom**.
+**Quality (Gemcutter's Prism, 20% max):** +1% increased mana generated per 1% quality. **MvM custom**.
 
 **Recommended supports:** Abundant Offering (I), Fervent Prayer (I), Spirit Conduit (II), Heavy Tithe (III), Vitality I (I), Thornskin I (I).
 
 **TD notes:** Space saver for later levels, where tiles matter more than mana. It does not need an existing acolyte underneath (unlike PvZ).
 
-### H03. Shrinewarden (KvN custom)
+### H03. Shrinewarden (MvM custom)
 
-`KvN/Heroes/Shrinewarden` · **KvN custom**: no PoE2 gem
+`MvM/Heroes/Shrinewarden` · **MvM custom**: no PoE2 gem
 
 | Role | Weapon | Attributes | PoE2 tier → unlock | Mana | Recharge | Life × |
 |---|---|---|---|---|---|---|
 | Acolyte (sturdy) | Sceptre | Str 50 / Int 50 | – → AL 5 | 75 | slow 30 s | ×4 |
 
-PoE2 tags: kvn_acolyte, buff, persistent (KvN custom types).
+PoE2 tags: mvm_acolyte, buff, persistent (MvM custom types).
 
 **TD behaviour**
 
@@ -427,7 +427,7 @@ PoE2 tags: kvn_acolyte, buff, persistent (KvN custom types).
 
 Fixed at every level: Orbs per cycle · cycle: 1 · 30 s.
 
-**Quality (Gemcutter's Prism, 20% max):** +1% increased mana generated per 1% quality. **KvN custom**.
+**Quality (Gemcutter's Prism, 20% max):** +1% increased mana generated per 1% quality. **MvM custom**.
 
 **Recommended supports:** Steadfast Devotion (I), Spirit Conduit (II), Abundant Offering (I), Fervent Prayer (I), Vitality I (I), Thornskin I (I).
 
@@ -565,7 +565,7 @@ PoE2 tags: strength, attack, area, melee, slam.
 
 - **Targeting:** Swings when any monster is within 2 tiles ahead in its lane.
 - **First slam:** Centred 1 tile ahead, radius 1.4 m = **1.17 tiles**: its own lane plus adjacent lanes within 0.6 tiles of the centre. It has 50% more Stun buildup, and PoE2 Knockback is cut.
-- **Second slam:** Centred **2 tiles** ahead (PoE2: the hero "rolls forward"; the KvN hero stays put and the slam lands further on). Radius 1.8 m = **1.5 tiles**. It deals 50% more damage to Heavy Stunned monsters.
+- **Second slam:** Centred **2 tiles** ahead (PoE2: the hero "rolls forward"; the MvM hero stays put and the slam lands further on). Radius 1.8 m = **1.5 tiles**. It deals 50% more damage to Heavy Stunned monsters.
 - **Timing:** The total attack time is weapon time ÷ 100% + **1.0 s** (PoE2 "+1 second to Total Attack Time").
 
 **Key numbers**
@@ -677,7 +677,7 @@ PoE2 tags: dexterity, intelligence, attack, area, melee, slam, projectile, light
 
 - **Targeting:** Slams when any monster is within 3 tiles ahead in its lane.
 - **Shape:** A **cone** 4 m = 3.33 tiles long: its own lane from +1 to +3 tiles, plus adjacent lanes from +2 to +3 tiles.
-- **Charged slam (adapted):** PoE2 consumes Power Charges, but appendix A §9.9 cuts Charges. KvN instead makes **every 3rd slam** act as if 1 Power Charge were consumed. It fires **3 lightning projectiles** that Pierce all, spread over its own and adjacent lanes. Each deals 100% × 2 ("100% more if charged") × 1.5 ("50% more per charge") = **300%** attack damage.
+- **Charged slam (adapted):** PoE2 consumes Power Charges, but appendix A §9.9 cuts Charges. MvM instead makes **every 3rd slam** act as if 1 Power Charge were consumed. It fires **3 lightning projectiles** that Pierce all, spread over its own and adjacent lanes. Each deals 100% × 2 ("100% more if charged") × 1.5 ("50% more per charge") = **300%** attack damage.
 - **On hit:** Converts 60% of Physical to Lightning (100% for the projectiles).
 
 **Key numbers**
@@ -714,7 +714,7 @@ PoE2 tags: dexterity, attack, area, melee, strike, cold.
 
 - **Targeting:** Melee stab on the nearest monster in its own tile or 1 tile ahead (+0.4 m reach).
 - **On hit:** Converts 80% of Physical to Cold and has more Chill and Freeze buildup (table).
-- **Off-balance burst (adapted):** PoE2 Parry needs a buckler, and appendix A §9.9 cuts parry and active block. KvN uses **passive shield block** instead. When this hero blocks a monster's attack, that monster is marked **Off Balance** (the PoE2 Parried debuff). The next stab on it consumes the mark for a frost **Explosion** of radius 2.2 m = **1.83 tiles**, and leaves that tile as Chilled Ground for 8 s.
+- **Off-balance burst (adapted):** PoE2 Parry needs a buckler, and appendix A §9.9 cuts parry and active block. MvM uses **passive shield block** instead. When this hero blocks a monster's attack, that monster is marked **Off Balance** (the PoE2 Parried debuff). The next stab on it consumes the mark for a frost **Explosion** of radius 2.2 m = **1.83 tiles**, and leaves that tile as Chilled Ground for 8 s.
 
 **Key numbers**
 
@@ -833,7 +833,7 @@ PoE2 tags: dexterity, attack, area, projectile, sustained.
 - **Targeting:** The point with the most monsters within a 3-tile radius, in any lane, up to 8 tiles ahead.
 - **Shape:** A **rain zone** of radius 3.6 m = **3.0 tiles**, which reaches every lane within 3 of the centre. Arrows land one every 0.08 s at random points in the zone. Each impact has radius 0.7 m = 0.58 tiles. A monster can be hit at most once per 0.12 s.
 - **Limit:** One rain at a time. A new attack replaces the old rain.
-- **Special:** The Frenzy Charge bonus (+150% arrows) is cut, because KvN has no frenzy charges.
+- **Special:** The Frenzy Charge bonus (+150% arrows) is cut, because MvM has no frenzy charges.
 
 **Key numbers**
 
@@ -984,7 +984,7 @@ PoE2 tags: strength, dexterity, attack, ammunition, projectile, physical.
 
 - **Targeting:** The first monster ahead in its own lane.
 - **Shape:** Rapid single bolts down its lane (Gatling Pea).
-- **Clip:** Fires a clip of 12–16 bolts at +325% attack speed, then **reloads** for 0.6 s. **Adapted**: the export has no crossbow reload time, so KvN uses the Ammo skill's cast time.
+- **Clip:** Fires a clip of 12–16 bolts at +325% attack speed, then **reloads** for 0.6 s. **Adapted**: the export has no crossbow reload time, so MvM uses the Ammo skill's cast time.
 - **On hit:** Each bolt Breaks Armour (×3 vs Normal). PoE2 Knockback is cut.
 
 **Key numbers**
@@ -1399,7 +1399,7 @@ PoE2 tags: buff, dexterity, intelligence, attack, persistent, area, cold, herald
 
 - **Scope:** **Global**: the whole board while this hero lives. It does not stack with a second Herald of Ice.
 - **Trigger:** When **any** hero kills a Frozen monster with a non-Herald Attack hit, the monster Shatters and explodes.
-- **Explosion:** Radius 1.6 m = **1.33 tiles** around the corpse. Damage = explosion % × the killing hero's weapon damage, 100% converted to Cold. It can't be Evaded. **Adapted**: PoE2 uses the player's weapon; KvN uses the killer's.
+- **Explosion:** Radius 1.6 m = **1.33 tiles** around the corpse. Damage = explosion % × the killing hero's weapon damage, 100% converted to Cold. It can't be Evaded. **Adapted**: PoE2 uses the player's weapon; MvM uses the killer's.
 - **Attack:** None (aura heroes have no attack).
 
 **Key numbers**
@@ -1433,7 +1433,7 @@ PoE2 tags: strength, intelligence, buff, persistent, aura, fire.
 
 - **Scope:** **Global**: every hero gets the listed **Fire Resistance**, which still caps at 75%.
 - **Attack:** None.
-- **Unlock:** PoE2 lists crafting_level 0, so it is not in the 0.5 uncut-gem pool. **KvN custom** unlock at area level 9.
+- **Unlock:** PoE2 lists crafting_level 0, so it is not in the 0.5 uncut-gem pool. **MvM custom** unlock at area level 9.
 
 **Key numbers**
 
@@ -1463,7 +1463,7 @@ PoE2 tags: strength, dexterity, banner, buff, persistent, area, aura, duration.
 **TD behaviour**
 
 - **Scope:** **Positional**: heroes within the banner radius of **2.5 tiles** (adapted from PoE2's 6 m; appendix A §8, `hypot(dx, dLane)`). From a middle lane that reaches ±2 lanes at its own column, or the adjacent lanes about ±2 columns away.
-- **Banner cycle (adapted):** PoE2 builds Glory (200 from attack hits), but appendix A §9.9 cuts Glory. KvN replaces it with a **12 s charge timer** that starts when the hero is placed. The timer only runs while a monster is on the board.
+- **Banner cycle (adapted):** PoE2 builds Glory (200 from attack hits), but appendix A §9.9 cuts Glory. MvM replaces it with a **12 s charge timer** that starts when the hero is placed. The timer only runs while a monster is on the board.
 - **Banner:** When charged, the hero plants the banner. For the listed duration, allies in radius get **25% more Attack damage, 25% increased attack speed and 50% increased Accuracy**. The timer restarts when the banner falls, giving about 35% uptime at gem 1.
 - **Attack:** None.
 
@@ -1478,7 +1478,7 @@ PoE2 tags: strength, dexterity, banner, buff, persistent, area, aura, duration.
 
 Fixed at every level: Aura: 25% more Attack damage · 25% inc. attack speed · 50% inc. Accuracy; Charge time (replaces 200 Glory): 12 s.
 
-**Quality (Gemcutter's Prism, 20% max):** PoE2: 10% increased Reservation Efficiency (dead in KvN). **Adapted**: 10% increased banner duration.
+**Quality (Gemcutter's Prism, 20% max):** PoE2: 10% increased Reservation Efficiency (dead in MvM). **Adapted**: 10% increased banner duration.
 
 **Recommended supports:** ★Prolonged Duration I (I), ★Magnified Area I (I), Vitality I (I), Thornskin I (I), Warm Blooded (II).
 
@@ -1498,7 +1498,7 @@ PoE2 tags: strength, intelligence, buff, persistent, aura, duration.
 
 - **Scope:** **Positional**: monsters within its Presence of **1.5 tiles** (adapted from PoE2's 4 m; appendix A §8). That is its own lane ±1.5 columns, or the adjacent lanes about ±1 column away.
 - **Effect:** At the listed interval, applies a stack of **Critical Weakness** to every monster in range. Each stack gives +0.5% to Critical Hit chance against that monster (added to base). Stacks last 4 s, up to 20 stacks. In steady state that is about 4 s ÷ interval ≈ 6 stacks, or +3% base crit.
-- **Unlock:** PoE2 crafting_level 0, so **KvN custom** unlock at area level 9.
+- **Unlock:** PoE2 crafting_level 0, so **MvM custom** unlock at area level 9.
 - **Attack:** None.
 
 **Key numbers**
@@ -1613,7 +1613,7 @@ Every kit has a cheap acolyte opener (50 mana), a 100–125 mana ranged hero and
 
 ### 5.1 How to read the tables
 
-- **Tier (PoE2 lvl):** the KvN tier (I/II/III, gated at hero level 1/12/24), then PoE2 `crafting_level` in brackets.
+- **Tier (PoE2 lvl):** the MvM tier (I/II/III, gated at hero level 1/12/24), then PoE2 `crafting_level` in brackets.
 - **Cost ×:** PoE2 `cost_multiplier` ÷ 100.
 - **Rolls on:** PoE2 `allowed_types`, then "not" `excluded_types`, written in infix.
 - **Rollable on:** the number of demo heroes plus spells that can roll it after the dead-roll filter.
@@ -1623,7 +1623,7 @@ Every kit has a cheap acolyte opener (50 mana), a 100–125 mana ranged hero and
 
 #### Damage
 
-| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (KvN vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
+| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (MvM vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
 |---|---|---|---|---|---|---|---|
 | Brutality I | `SupportGemBrutality` | I (1) | ×1.20 | 25% more Physical damage; deals no Elemental or Chaos damage | Damage OR Attack OR DamageOverTime OR CrossbowAmmoSkill | 9 | Best on unconverted physical heroes (Armour Breaker, Boneshatter, Rolling Slam, APR). |
 | Brutality II | `SupportGemBrutalityTwo` | II (2) | ×1.20 | 30% more Physical damage; no Elemental or Chaos damage | Damage OR Attack OR DamageOverTime OR CrossbowAmmoSkill | 9 |  |
@@ -1641,7 +1641,7 @@ Every kit has a cheap acolyte opener (50 mana), a 100–125 mana ranged hero and
 
 #### Conversion and gained-as-extra
 
-| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (KvN vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
+| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (MvM vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
 |---|---|---|---|---|---|---|---|
 | Cold Attunement | `SupportGemColdInfusion` | I (1) | ×1.00 | Gain 25% of damage as extra Cold; 50% less Fire and Lightning damage | Attack OR CrossbowAmmoSkill OR Damage | 18 |  |
 | Fire Attunement | `SupportGemFireInfusion` | I (1) | ×1.00 | Gain 25% of damage as extra Fire; 50% less Cold and Lightning damage | Attack OR CrossbowAmmoSkill OR Damage | 15 |  |
@@ -1649,7 +1649,7 @@ Every kit has a cheap acolyte opener (50 mana), a 100–125 mana ranged hero and
 
 #### Projectile
 
-| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (KvN vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
+| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (MvM vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
 |---|---|---|---|---|---|---|---|
 | Chain I | `SupportGemChain` | I (1) | ×1.00 | Chain +1 (nearest monster within 2 tiles, any lane); 30% less Hit damage | Chains OR Projectile; not CannotChain OR ProjectileNoCollision | 8 |  |
 | Charged Shots I | `SupportGemChargedShots` | I (3) | ×1.10 | Every 3rd shot is Charged and gains 30% of damage as extra Lightning | Attack AND Bow | 4 | **adapted**: PoE2's 'recover 100% of mana cost' clause is cut (no hero mana). |
@@ -1660,7 +1660,7 @@ Every kit has a cheap acolyte opener (50 mana), a 100–125 mana ranged hero and
 
 #### Area and duration
 
-| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (KvN vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
+| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (MvM vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
 |---|---|---|---|---|---|---|---|
 | Aftershock I | `SupportGemAftershock` | I (2) | ×1.00 | Slams: 25% chance to cause an extra Aftershock (repeats the impact in the same area) | Slam; not UsedByProxy OR Triggered OR Persistent | 5 |  |
 | Concentrated Area | `SupportGemConcentratedEffect` | I (1) | ×1.00 | 30% more Area damage; 50% less Area of Effect (radius x0.71) | Area OR MinionsCanExplode | 27 |  |
@@ -1672,7 +1672,7 @@ Every kit has a cheap acolyte opener (50 mana), a 100–125 mana ranged hero and
 
 #### Ailments and penetration
 
-| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (KvN vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
+| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (MvM vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
 |---|---|---|---|---|---|---|---|
 | Bleed I | `SupportGemLacerate` | I (1) | ×1.20 | 50% chance to inflict Bleeding | Damage OR Attack OR CrossbowAmmoSkill | 19 |  |
 | Cold Penetration | `SupportGemColdPenetration` | I (2) | ×1.20 | Penetrate 30% Cold Resistance | Damage OR Attack OR CrossbowAmmoSkill | 9 |  |
@@ -1692,7 +1692,7 @@ Every kit has a cheap acolyte opener (50 mana), a 100–125 mana ranged hero and
 
 #### Critical
 
-| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (KvN vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
+| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (MvM vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
 |---|---|---|---|---|---|---|---|
 | Ambush | `SupportGemAmbush` | I (1) | ×1.00 | 100% more Critical Hit chance against monsters on full life | Attack OR Damage OR CrossbowAmmoSkill | 31 | Strong on first-hit heroes at the back of a lane. |
 | Pinpoint Critical | `SupportGemPinpointCritical` | I (2) | ×1.00 | 60% more Critical Hit chance; 30% less Critical damage bonus | Damage OR Attack OR CrossbowAmmoSkill | 31 |  |
@@ -1700,7 +1700,7 @@ Every kit has a cheap acolyte opener (50 mana), a 100–125 mana ranged hero and
 
 #### Stun and Armour
 
-| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (KvN vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
+| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (MvM vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
 |---|---|---|---|---|---|---|---|
 | Armour Break I | `SupportGemSplinter` | I (2) | ×1.00 | Break Armour equal to 15% of Physical damage dealt | Attack OR Damage OR CrossbowAmmoSkill | 19 |  |
 | Brink I | `SupportGemBrink` | I (1) | ×1.00 | 30% more Stun buildup; Stun buildup cannot reach 100% | Melee | 9 | Primes monsters for a partner's Heavy Stun (Boneshatter, Rolling Slam). |
@@ -1709,7 +1709,7 @@ Every kit has a cheap acolyte opener (50 mana), a 100–125 mana ranged hero and
 
 #### Defence
 
-| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (KvN vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
+| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (MvM vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
 |---|---|---|---|---|---|---|---|
 | Life Leech I | `SupportGemLifeThief` | I (2) | ×1.00 | Leech 12% of Physical Attack damage as life | Attack OR CrossbowAmmoSkill | 16 |  |
 | Thornskin I | `SupportGemThornskin` | I (2) | ×1.00 | 40% increased Thorns damage | Persistent AND Buff | 7 | Persistent skills only (acolytes, auras). Thorns hit melee attackers. |
@@ -1718,11 +1718,11 @@ Every kit has a cheap acolyte opener (50 mana), a 100–125 mana ranged hero and
 
 #### Utility, curse, mark, herald
 
-| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (KvN vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
+| Support | PoE2 id | Tier (PoE2 lvl) | Cost × | Effect (MvM vocabulary) | Rolls on (PoE2 skill types) | Rollable on | TD notes |
 |---|---|---|---|---|---|---|---|
 | Cooldown Recovery I | `SupportGemIngenuity` | I (3) | ×1.30 | 25% increased cooldown recovery rate | Cooldown OR AffectedByCooldownRate | 9 | Marks and player spells. |
 | Deadly Herald | `SupportGemDeadlyHeralds` | II (3) | ×1.00 | Herald skills deal 30% more damage | Herald | 1 |  |
-| Efficiency I | `SupportGemInspiration` | I (1) | ×1.00 | x0.70 placement cost | any; not Persistent | 33 | **adapted**: PoE2 '30% less Cost' applies to KvN placement mana. Cannot roll on Persistent skills (auras, acolytes), as in PoE2. |
+| Efficiency I | `SupportGemInspiration` | I (1) | ×1.00 | x0.70 placement cost | any; not Persistent | 33 | **adapted**: PoE2 '30% less Cost' applies to MvM placement mana. Cannot roll on Persistent skills (auras, acolytes), as in PoE2. |
 | Focused Curse | `SupportGemFocusedCurse` | I (2) | ×1.20 | Curse zones erupt after 50% less delay (1.5 s to 0.75 s) | AppliesCurse | 2 |  |
 | Heightened Curse | `SupportGemHeightenedCurse` | I (1) | ×1.40 | 25% increased Curse magnitudes | AppliesCurse OR IsBlasphemy | 2 |  |
 | Mark for Death | `SupportGemSingleOut` | I (2) | ×1.20 | Hits against the Marked monster Break Armour equal to 10% of Physical damage | Mark | 1 |  |
@@ -1732,17 +1732,17 @@ Every kit has a cheap acolyte opener (50 mana), a 100–125 mana ranged hero and
 | Spell Echo | `SupportGemSpellEcho` | I (2) | ×1.50 | Spells Echo once (repeat in the same area); echoes have 40% increased AoE; 30% less cast speed | Cascadable; not Triggered OR UsedByProxy OR Persistent | 8 |  |
 
 
-### 5.3 KvN custom acolyte supports (5)
+### 5.3 MvM custom acolyte supports (5)
 
-These roll only on acolytes (KvN type `KvNAcolyte`). They use the brief's acolyte-only stats: % increased mana generated, % reduced mana generation interval, + mana per orb, and + Spirit.
+These roll only on acolytes (MvM type `MvMAcolyte`). They use the brief's acolyte-only stats: % increased mana generated, % reduced mana generation interval, + mana per orb, and + Spirit.
 
-| Support | KvN id | Tier | Cost × | Effect | TD notes |
+| Support | MvM id | Tier | Cost × | Effect | TD notes |
 |---|---|---|---|---|---|
-| Abundant Offering **(KvN custom)** | `KvN/Supports/AbundantOffering` | I | ×1.20 | 25% increased mana generated | The simple pick. |
-| Fervent Prayer **(KvN custom)** | `KvN/Supports/FerventPrayer` | I | ×1.25 | 20% reduced mana generation interval (24 s to 19.2 s) | Also brings the first orb forward by 20%. |
-| Steadfast Devotion **(KvN custom)** | `KvN/Supports/SteadfastDevotion` | I | ×1.10 | 50% increased maximum life; 10% increased mana generated | For exposed acolytes. |
-| Spirit Conduit **(KvN custom)** | `KvN/Supports/SpiritConduit` | II | ×1.20 | +60 Spirit (+30% orb value through the Spirit formula) | Stacks with gear Spirit. |
-| Heavy Tithe **(KvN custom)** | `KvN/Supports/HeavyTithe` | III | ×1.15 | +20 mana per orb (added before the Spirit multiplier); 25% increased mana generation interval | Lumpy but strongest with high Spirit. |
+| Abundant Offering **(MvM custom)** | `MvM/Supports/AbundantOffering` | I | ×1.20 | 25% increased mana generated | The simple pick. |
+| Fervent Prayer **(MvM custom)** | `MvM/Supports/FerventPrayer` | I | ×1.25 | 20% reduced mana generation interval (24 s to 19.2 s) | Also brings the first orb forward by 20%. |
+| Steadfast Devotion **(MvM custom)** | `MvM/Supports/SteadfastDevotion` | I | ×1.10 | 50% increased maximum life; 10% increased mana generated | For exposed acolytes. |
+| Spirit Conduit **(MvM custom)** | `MvM/Supports/SpiritConduit` | II | ×1.20 | +60 Spirit (+30% orb value through the Spirit formula) | Stacks with gear Spirit. |
+| Heavy Tithe **(MvM custom)** | `MvM/Supports/HeavyTithe` | III | ×1.15 | +20 mana per orb (added before the Spirit multiplier); 25% increased mana generation interval | Lumpy but strongest with high Spirit. |
 
 Rough value check for a no-gear level 1 acolyte making 25 mana per 24 s (1.04/s):
 
@@ -1763,7 +1763,7 @@ Rough value check for a no-gear level 1 acolyte making 25 mana per 24 s (1.04/s)
 | Movement | Mobility, Momentum, Hit and Run, Stomping Ground, Advancing Storm | **Cut**: heroes never move. Deliberation is kept with its movement clause dropped. |
 | Flasks, charms, corpses | Ambrosia, Concoct, Bounty, Gorge, Herbalism, Profanity, Corpse Conservation | **Cut**: no flasks, charms or corpses. |
 | Channelling, combo, timing | Burgeon, Steadfast, Combo Finisher, Culmination, Window of Opportunity, Perfection | **Cut**: no channelled or player-timed skills. |
-| Charges, infusions, remnants | Abiding Hex, Heightened Charges, Perpetual Charge, Inhibitor, Harmonic Remnants | **Cut**: KvN has no charge or infusion economy (appendix A §9.9). Falling Thunder's charged slam is **adapted** to work without charges. |
+| Charges, infusions, remnants | Abiding Hex, Heightened Charges, Perpetual Charge, Inhibitor, Harmonic Remnants | **Cut**: MvM has no charge or infusion economy (appendix A §9.9). Falling Thunder's charged slam is **adapted** to work without charges. |
 | Grenade and ammo niche | Adhesive Grenades, Long Fuse, Payload, Double Barrel, Ammo Conservation | **Cut** for scope: no grenade heroes; crossbow heroes stay simple. |
 | Lineage and `crafting_level 0` | e.g. Arjun's Medal, Daze, Ricochet III | **Cut**: they are not in PoE2's normal uncut pool. |
 | Knockback, Maim, Blind, Pin, Impale, Daze | Knockback, Maim, Blind I, Pin I, Impale, Opening Move | **Cut**: their mechanics are not in the stat vocabulary (see §8). |
@@ -1783,7 +1783,7 @@ Eight spells, all verified as released gems in the export. Fireball is deliberat
 | Cooldown | 30–50 s (below). Cooldown Recovery and Second Wind apply. |
 | Start of level | Cooldown ≤ 35 s starts with **20 s left**; ≥ 40 s starts with **35 s left** (PvZ slow / very-slow rule). |
 | Level, rarity, supports, XP, quality | Same rules as heroes; the spell slot earns XP. |
-| Damage | PoE2 per-level base × **spell power E(L) = 5 + 0.5 × spell level** (**KvN custom**), then supports and global passives. |
+| Damage | PoE2 per-level base × **spell power E(L) = 5 + 0.5 × spell level** (**MvM custom**), then supports and global passives. |
 | Attack spells (**adapted**) | Earthquake, Explosive Grenade and Volcanic Fissure are PoE2 Attacks. They use a **virtual weapon**: the normal base of their class with the highest drop level ≤ spell level. They have 5% crit and always hit. |
 | Shapes | Grid shapes (3×3, column, lane). **Adapted** from PoE2 radii so the player can read them at a glance. |
 
@@ -1804,9 +1804,9 @@ Eight spells, all verified as released gems in the export. Fireball is deliberat
 | | Spell 1 | Spell 10 | Spell 20 | Spell 30 |
 |---|---|---|---|---|
 | PoE2 gem level | 1 | 4 | 6.5 | 8.8 |
-| KvN spell power E(L) | 5.5 | 10 | 15 | 20 |
+| MvM spell power E(L) | 5.5 | 10 | 15 | 20 |
 | Hit: PoE2 hit | 7–11 | 18–27 | 31–46.5 | 46.6–70.6 |
-| Hit: **KvN hit (× E)** | **38–60** | **180–270** | **465–698** | **932–1412** |
+| Hit: **MvM hit (× E)** | **38–60** | **180–270** | **465–698** | **932–1412** |
 
 **Supports that can roll:** Controlled Destruction (I), Considered Casting (I), Deliberation (II), Elemental Focus (II), Cold Attunement (I), Magnified Area I (I), Concentrated Area (I), Prolonged Duration I (I), Short Fuse I (I), Freeze (I), Frost Nexus (I), Pinpoint Critical (I), Supercritical (II), Ambush (I), Stun I (I), Exploit Weakness (I), Efficiency I (I), Cooldown Recovery I (I), Second Wind I (I), Spell Echo (I), Cold Penetration (I).
 
@@ -1827,12 +1827,12 @@ Eight spells, all verified as released gems in the export. Fireball is deliberat
 | | Spell 1 | Spell 10 | Spell 20 | Spell 30 |
 |---|---|---|---|---|
 | PoE2 gem level | 1 | 4 | 6.5 | 8.8 |
-| KvN spell power E(L) | 5.5 | 10 | 15 | 20 |
+| MvM spell power E(L) | 5.5 | 10 | 15 | 20 |
 | Impact: virtual weapon | Felled Greatclub | Oak Greathammer | Studded Greatclub | Temple Maul |
 | Impact: PoE2 hit | 5.2–7.2 | 8.5–15.9 | 20.3–30.5 | 25.3–52 |
-| Impact: **KvN hit (× E)** | **29–40** | **85–159** | **305–457** | **505–1040** |
+| Impact: **MvM hit (× E)** | **29–40** | **85–159** | **305–457** | **505–1040** |
 | Aftershock: PoE2 hit | 23.9–33.1 | 38.9–72.9 | 94.2–141.4 | 119.1–244.9 |
-| Aftershock: **KvN hit (× E)** | **132–182** | **389–729** | **1414–2120** | **2381–4899** |
+| Aftershock: **MvM hit (× E)** | **132–182** | **389–729** | **1414–2120** | **2381–4899** |
 
 **Supports that can roll:** Brutality I (I), Brutality II (II), Heft (III), Fire Attunement (I), Cold Attunement (I), Lightning Attunement (I), Magnified Area I (I), Concentrated Area (I), Aftershock I (I), Prolonged Duration I (I), Bleed I (I), Poison I (I), Pinpoint Critical (I), Supercritical (II), Ambush (I), Stun I (I), Brink I (I), Armour Break I (I), Exploit Weakness (I), Efficiency I (I), Cooldown Recovery I (I), Second Wind I (I), Brutality III (III).
 
@@ -1853,10 +1853,10 @@ Eight spells, all verified as released gems in the export. Fireball is deliberat
 | | Spell 1 | Spell 10 | Spell 20 | Spell 30 |
 |---|---|---|---|---|
 | PoE2 gem level | 1 | 4 | 6.5 | 8.8 |
-| KvN spell power E(L) | 5.5 | 10 | 15 | 20 |
+| MvM spell power E(L) | 5.5 | 10 | 15 | 20 |
 | Hit: virtual weapon | Makeshift Crossbow | Sturdy Crossbow | Dyad Crossbow | Alloy Crossbow |
 | Hit: PoE2 hit | 15–25.8 | 31.6–74.6 | 31.6–130.1 | 49.2–205.1 |
-| Hit: **KvN hit (× E)** | **83–142** | **316–746** | **475–1951** | **984–4102** |
+| Hit: **MvM hit (× E)** | **83–142** | **316–746** | **475–1951** | **984–4102** |
 
 **Supports that can roll:** Elemental Armament I (I), Elemental Armament II (II), Deliberation (II), Heft (III), Elemental Focus (II), Fire Attunement (I), Multishot I (I), Magnified Area I (I), Concentrated Area (I), Short Fuse I (I), Ignite I (I), Fiery Death (I), Bleed I (I), Poison I (I), Pinpoint Critical (I), Supercritical (II), Ambush (I), Stun I (I), Armour Break I (I), Exploit Weakness (I), Efficiency I (I), Cooldown Recovery I (I), Second Wind I (I), Ignite III (III), Fire Penetration I (I), Fire Penetration II (II).
 
@@ -1877,10 +1877,10 @@ Eight spells, all verified as released gems in the export. Fireball is deliberat
 | | Spell 1 | Spell 10 | Spell 20 | Spell 30 |
 |---|---|---|---|---|
 | PoE2 gem level | 1 | 4 | 6.5 | 8.8 |
-| KvN spell power E(L) | 5.5 | 10 | 15 | 20 |
+| MvM spell power E(L) | 5.5 | 10 | 15 | 20 |
 | Hit: virtual weapon | Felled Greatclub | Oak Greathammer | Studded Greatclub | Temple Maul |
 | Hit: PoE2 hit | 8.2–11.3 | 13.1–24.6 | 31.4–47 | 38.5–79.2 |
-| Hit: **KvN hit (× E)** | **45–62** | **131–246** | **470–706** | **770–1584** |
+| Hit: **MvM hit (× E)** | **45–62** | **131–246** | **470–706** | **770–1584** |
 
 **Supports that can roll:** Elemental Armament I (I), Elemental Armament II (II), Heft (III), Elemental Focus (II), Fire Attunement (I), Magnified Area I (I), Concentrated Area (I), Aftershock I (I), Prolonged Duration I (I), Ignite I (I), Fiery Death (I), Bleed I (I), Poison I (I), Pinpoint Critical (I), Supercritical (II), Ambush (I), Stun I (I), Brink I (I), Armour Break I (I), Exploit Weakness (I), Efficiency I (I), Cooldown Recovery I (I), Second Wind I (I), Ignite III (III), Fire Penetration I (I), Fire Penetration II (II).
 
@@ -1901,9 +1901,9 @@ Eight spells, all verified as released gems in the export. Fireball is deliberat
 | | Spell 1 | Spell 10 | Spell 20 | Spell 30 |
 |---|---|---|---|---|
 | PoE2 gem level | 1 | 4 | 6.5 | 8.8 |
-| KvN spell power E(L) | 5.5 | 10 | 15 | 20 |
+| MvM spell power E(L) | 5.5 | 10 | 15 | 20 |
 | Hit: PoE2 hit | 23–35 | 56–83 | 96.5–145.5 | 148–221.6 |
-| Hit: **KvN hit (× E)** | **126–192** | **560–830** | **1448–2182** | **2960–4432** |
+| Hit: **MvM hit (× E)** | **126–192** | **560–830** | **1448–2182** | **2960–4432** |
 
 **Supports that can roll:** Controlled Destruction (I), Considered Casting (I), Elemental Focus (II), Cold Attunement (I), Magnified Area I (I), Concentrated Area (I), Freeze (I), Frost Nexus (I), Pinpoint Critical (I), Supercritical (II), Ambush (I), Stun I (I), Exploit Weakness (I), Efficiency I (I), Cooldown Recovery I (I), Second Wind I (I), Spell Echo (I), Cold Penetration (I).
 
@@ -1924,9 +1924,9 @@ Eight spells, all verified as released gems in the export. Fireball is deliberat
 | | Spell 1 | Spell 10 | Spell 20 | Spell 30 |
 |---|---|---|---|---|
 | PoE2 gem level | 1 | 4 | 6.5 | 8.8 |
-| KvN spell power E(L) | 5.5 | 10 | 15 | 20 |
+| MvM spell power E(L) | 5.5 | 10 | 15 | 20 |
 | Hit: PoE2 hit | 3–5 | 8–13 | 14.5–22 | 22.2–32.8 |
-| Hit: **KvN hit (× E)** | **16–28** | **80–130** | **218–330** | **444–656** |
+| Hit: **MvM hit (× E)** | **16–28** | **80–130** | **218–330** | **444–656** |
 
 **Supports that can roll:** Controlled Destruction (I), Considered Casting (I), Deliberation (II), Elemental Focus (II), Fire Attunement (I), Magnified Area I (I), Concentrated Area (I), Prolonged Duration I (I), Ignite I (I), Fiery Death (I), Pinpoint Critical (I), Supercritical (II), Ambush (I), Stun I (I), Exploit Weakness (I), Efficiency I (I), Cooldown Recovery I (I), Second Wind I (I), Spell Echo (I), Ignite III (III), Fire Penetration I (I), Fire Penetration II (II).
 
@@ -1947,9 +1947,9 @@ Eight spells, all verified as released gems in the export. Fireball is deliberat
 | | Spell 1 | Spell 10 | Spell 20 | Spell 30 |
 |---|---|---|---|---|
 | PoE2 gem level | 1 | 4 | 6.5 | 8.8 |
-| KvN spell power E(L) | 5.5 | 10 | 15 | 20 |
+| MvM spell power E(L) | 5.5 | 10 | 15 | 20 |
 | Hit: PoE2 hit | 21–39 | 51–95 | 89–165.5 | 135.6–252.6 |
-| Hit: **KvN hit (× E)** | **116–214** | **510–950** | **1335–2482** | **2712–5052** |
+| Hit: **MvM hit (× E)** | **116–214** | **510–950** | **1335–2482** | **2712–5052** |
 
 **Supports that can roll:** Controlled Destruction (I), Considered Casting (I), Deliberation (II), Magnified Area I (I), Concentrated Area (I), Poison I (I), Pinpoint Critical (I), Supercritical (II), Ambush (I), Stun I (I), Exploit Weakness (I), Efficiency I (I), Cooldown Recovery I (I), Second Wind I (I), Spell Echo (I).
 
@@ -1970,9 +1970,9 @@ Eight spells, all verified as released gems in the export. Fireball is deliberat
 | | Spell 1 | Spell 10 | Spell 20 | Spell 30 |
 |---|---|---|---|---|
 | PoE2 gem level | 1 | 4 | 6.5 | 8.8 |
-| KvN spell power E(L) | 5.5 | 10 | 15 | 20 |
+| MvM spell power E(L) | 5.5 | 10 | 15 | 20 |
 | Hit: PoE2 hit | 6–17 | 13–40 | 23.5–70 | 35.8–106.4 |
-| Hit: **KvN hit (× E)** | **33–94** | **130–400** | **352–1050** | **716–2128** |
+| Hit: **MvM hit (× E)** | **33–94** | **130–400** | **352–1050** | **716–2128** |
 
 **Supports that can roll:** Controlled Destruction (I), Considered Casting (I), Elemental Focus (II), Lightning Attunement (I), Magnified Area I (I), Concentrated Area (I), Shock (I), Shock Conduction (I), Lightning Exposure (II), Pinpoint Critical (I), Supercritical (II), Ambush (I), Stun I (I), Exploit Weakness (I), Efficiency I (I), Cooldown Recovery I (I), Second Wind I (I), Lightning Penetration (I).
 
@@ -2084,7 +2084,7 @@ Things the data forced, or that the brief left open and this appendix had to dec
 
 **Spell power and shapes**
 
-5. **Player-spell power E(L) = 5 + 0.5 × level** (**KvN custom**), tuned to appendix A's `K_monsterLife` 4.5. Without gear, PoE2 spell numbers cannot kill same-level monsters.
+5. **Player-spell power E(L) = 5 + 0.5 × level** (**MvM custom**), tuned to appendix A's `K_monsterLife` 4.5. Without gear, PoE2 spell numbers cannot kill same-level monsters.
 6. **Attack spells use a virtual weapon** (Earthquake and Volcanic Fissure: Two Hand Mace; Explosive Grenade: Crossbow), because PoE2 slams and grenades need one.
 7. **Player-spell shapes are grid shapes** (3×3, column, lane, 3×4), adapted from PoE2 radii. Hero areas stay continuous radii in tiles, per the brief and appendix A §3.
 
@@ -2104,7 +2104,7 @@ Things the data forced, or that the brief left open and this appendix had to dec
 
 **Engine adaptations**
 
-16. **Crossbow reload time** is missing from `base_items.json`. KvN uses the Ammo skill's `cast_time`: Armour Piercing Rounds 0.6 s, Permafrost Bolts 0.8 s.
+16. **Crossbow reload time** is missing from `base_items.json`. MvM uses the Ammo skill's `cast_time`: Armour Piercing Rounds 0.6 s, Permafrost Bolts 0.8 s.
 17. **Shield Wall cadence:** one raise per 2 × attack time (4 s in play). PoE2 has no cooldown, and an instant re-raise would stall lanes forever.
 18. **Frostbolt's "terrain"** is a Rock tile, a Shieldbearer's shield, or the board edge.
 19. **Herald of Ice's explosion** uses the killing hero's weapon, not the herald's.
@@ -2113,7 +2113,7 @@ Things the data forced, or that the brief left open and this appendix had to dec
 
 **Economy and progression**
 
-22. **Acolyte Spirit per level** (+2 per hero level above 1, **KvN custom**) makes acolyte levels matter. The brief's formula is unchanged. Appendix C's 100 base Spirit on every sceptre is the main source, so a white sceptre already makes 37.5 mana per orb.
+22. **Acolyte Spirit per level** (+2 per hero level above 1, **MvM custom**) makes acolyte levels matter. The brief's formula is unchanged. Appendix C's 100 base Spirit on every sceptre is the main source, so a white sceptre already makes 37.5 mana per orb.
 23. **Hero attribute growth** (`7 + 8w + 2(L−1)w`) is defined here because the brief names the inputs but not the formula.
 24. **Starter grants ignore the tier gate.** The Sorceress gets Comet (tier 11) and Ice Strike (tier 5).
 25. **Efficiency I is adapted** to multiply placement cost by ×0.70. As in PoE2, it cannot roll on Persistent heroes (auras, acolytes).

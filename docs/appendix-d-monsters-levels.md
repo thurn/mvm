@@ -1,6 +1,6 @@
 # Appendix D: Monsters, Bosses, Campaign & Terrain
 
-Part of the [Knights vs Nightmares GDD](gdd.md).
+Part of the [Mercs vs. Monsters GDD](gdd.md).
 
 This appendix covers:
 
@@ -18,7 +18,7 @@ This appendix covers:
 
 - PoE2 `default_monster_stats.json` and `mods.json` (domain `monster`), from RePoE PoE2 4.5.5.2.
 - PvZ wave and zombie numbers from the reverse-engineered source, summarised in appendix E.
-- Monster names are **KvN custom** placeholders. Boss names are PoE2 Act 1 bosses, used verbatim as test flavour.
+- Monster names are **MvM custom** placeholders. Boss names are PoE2 Act 1 bosses, used verbatim as test flavour.
 
 ---
 
@@ -58,7 +58,7 @@ There are 12 behaviours, with 13 entries because Armoured has two weights, like 
 
 ### 2.1 Stats
 
-| Archetype | KvN name (custom) | PvZ analogue | First level | Point cost | Life x | Dmg x | Armour x | Evasion x | Speed (s/tile) | Attack interval |
+| Archetype | MvM name (custom) | PvZ analogue | First level | Point cost | Life x | Dmg x | Armour x | Evasion x | Speed (s/tile) | Attack interval |
 |---|---|---|---|---|---|---|---|---|---|---|
 | **Shambler** | Shambling Corpse | Zombie | 1 | 1 | 1.0 | 1.0 | 1 | 1 | 4.7 | 1.0 s |
 | **Armoured (light)** | Helmed Skeleton | Conehead | 2 | 2 | 1.4 | 1.0 | 6 | 0.5 | 4.7 | 1.0 s |
@@ -104,7 +104,7 @@ There are 12 behaviours, with 13 entries because Armoured has two weights, like 
 
 - Carries a shield with HP = 2x its life. Projectile hits arriving from the front (all hero projectiles) are **blocked 100%**, and their damage goes into the shield's HP.
 - Melee, area, and DoT bypass the shield.
-- When the shield breaks, it becomes a Shambler. **KvN custom.** Stat: `monster_block_frontal_projectiles_%`.
+- When the shield breaks, it becomes a Shambler. **MvM custom.** Stat: `monster_block_frontal_projectiles_%`.
 
 **Runner.** Fast, slightly tough. Punishes thin lanes.
 
@@ -135,7 +135,7 @@ There are 12 behaviours, with 13 entries because Armoured has two weights, like 
 - Its smash one-shots most non-wall heroes. Immune to light stun.
 - At ≤ 50% life it throws one Rat Swarm pack over the defence to column 3 (PvZ's Imp).
 
-**Archetype resistances** (KvN custom, before affixes)
+**Archetype resistances** (MvM custom, before affixes)
 
 | Archetype | Resistances |
 |---|---|
@@ -149,7 +149,7 @@ There are 12 behaviours, with 13 entries because Armoured has two weights, like 
 
 ## 3. Monster rarity
 
-PoE2 decides which monsters get modifiers. The life and damage multipliers are **KvN custom**, because the export doesn't carry PoE2's rarity multipliers.
+PoE2 decides which monsters get modifiers. The life and damage multipliers are **MvM custom**, because the export doesn't carry PoE2's rarity multipliers.
 
 | Rarity | Affixes | Life x | Dmg x | Scale | Loot | XP x |
 |---|---|---|---|---|---|---|
@@ -174,7 +174,7 @@ PoE2 decides which monsters get modifiers. The life and damage multipliers are *
 
 **Rare monster names**
 
-- Generated PoE-style from two word lists, e.g. "Gloom Rattler", "Ashen Gnaw". **KvN custom**.
+- Generated PoE-style from two word lists, e.g. "Gloom Rattler", "Ashen Gnaw". **MvM custom**.
 - They show on the health bar.
 
 ---
@@ -191,7 +191,7 @@ Magic monsters roll 1 affix; rares roll 2–4. Rules:
 
 All four add 40% of damage as extra of the element.
 
-| PoE2 mod id | Name | Req lvl | PoE2 stats | KvN effect / notes |
+| PoE2 mod id | Name | Req lvl | PoE2 stats | MvM effect / notes |
 |---|---|---|---|---|
 | `MonsterDamageGainedAsFire1` | of the Inferno | 1 | `non_skill_base_all_damage_%_to_gain_as_fire` 40 | +40% of damage as extra fire |
 | `MonsterDamageGainedAsCold1` | of Frostbite | 1 | `…_to_gain_as_cold` 40 | +40% as extra cold; chills heroes |
@@ -200,7 +200,7 @@ All four add 40% of damage as extra of the element.
 
 ### 4.2 Speed, crit, stun, accuracy
 
-| PoE2 mod id | Name | Req lvl | PoE2 stats | KvN effect / notes |
+| PoE2 mod id | Name | Req lvl | PoE2 stats | MvM effect / notes |
 |---|---|---|---|---|
 | `MonsterIncreasedSpeed1` | of Fleeting | 7 | `attack_and_cast_speed_+%` 30, `base_movement_velocity_+%` 30 | +30% walk and attack speed |
 | `MonsterCriticalStrikeChance1` | of Incision | 12 | `critical_strike_chance_+%` 300 | Bites can crit (base 5% → 20%) |
@@ -209,7 +209,7 @@ All four add 40% of damage as extra of the element.
 
 ### 4.3 Defence
 
-| PoE2 mod id | Name | Req lvl | PoE2 stats | KvN effect / notes |
+| PoE2 mod id | Name | Req lvl | PoE2 stats | MvM effect / notes |
 |---|---|---|---|---|
 | `MonsterExtraArmour1` | of Endurance | 1 | `monster_additional_strength_ratio_%_for_armour` 100 | **Adapted:** +100% armour |
 | `MonsterExtraEvasion1` | of the Blur | 1 | `monster_additional_dexterity_ratio_%_for_evasion` 100 | **Adapted:** +100% evasion |
@@ -221,7 +221,7 @@ All four add 40% of damage as extra of the element.
 
 ### 4.4 Ailments on heroes
 
-| PoE2 mod id | Name | Req lvl | PoE2 stats | KvN effect / notes |
+| PoE2 mod id | Name | Req lvl | PoE2 stats | MvM effect / notes |
 |---|---|---|---|---|
 | `MonsterAlwaysPoison1` | of Venom | 10 | `global_poison_on_hit` | Hits always poison heroes |
 | `MonsterAlwaysBleed1` | of Bloodletting | 16 | `global_bleed_on_hit` | Hits always bleed heroes. Heroes are stationary, so no aggravation. |
@@ -231,16 +231,16 @@ All four add 40% of damage as extra of the element.
 
 ### 4.5 Ground effects
 
-| PoE2 mod id | Name | Req lvl | PoE2 stats | KvN effect / notes |
+| PoE2 mod id | Name | Req lvl | PoE2 stats | MvM effect / notes |
 |---|---|---|---|---|
-| `MonsterBurningGroundOnDeath1` | Heated | 4 | (effect only) | **KvN:** on death, Burning Ground on its tile for 4 s |
-| `MonsterChilledGroundOnDeath1` | Frosted | 4 | (effect only) | **KvN:** on death, Chilled Ground on its tile for 6 s |
-| `MonsterShockedGroundOnDeath1` | Electrocuting | 4 | (effect only) | **KvN:** on death, Shocked Ground (heroes on it are shocked) for 4 s |
-| `MonsterBurningGroundTrail1` / `…ChilledGroundTrail1` / `…ShockedGroundTrail1` | of Flames / Ice / Electricity | 4 | (effect only) | **KvN:** leaves 1-tile ground of that element behind it every 1 tile walked |
+| `MonsterBurningGroundOnDeath1` | Heated | 4 | (effect only) | **MvM:** on death, Burning Ground on its tile for 4 s |
+| `MonsterChilledGroundOnDeath1` | Frosted | 4 | (effect only) | **MvM:** on death, Chilled Ground on its tile for 6 s |
+| `MonsterShockedGroundOnDeath1` | Electrocuting | 4 | (effect only) | **MvM:** on death, Shocked Ground (heroes on it are shocked) for 4 s |
+| `MonsterBurningGroundTrail1` / `…ChilledGroundTrail1` / `…ShockedGroundTrail1` | of Flames / Ice / Electricity | 4 | (effect only) | **MvM:** leaves 1-tile ground of that element behind it every 1 tile walked |
 
 ### 4.6 Immunities and counters
 
-| PoE2 mod id | Name | Req lvl | PoE2 stats | KvN effect / notes |
+| PoE2 mod id | Name | Req lvl | PoE2 stats | MvM effect / notes |
 |---|---|---|---|---|
 | `MonsterImmuneToStun1` | of Stone Skin | 1 | `base_cannot_be_stunned` | Immune to light and heavy stun |
 | `MonsterImmuneToSlow1` | of Freedom | 7 | `monster_slow_potency_+%_final` −50 | Slows (chill, hinder, maim) have 50% less effect |
@@ -250,7 +250,7 @@ All four add 40% of damage as extra of the element.
 
 ### 4.7 Ranged and area
 
-| PoE2 mod id | Name | Req lvl | PoE2 stats | KvN effect / notes |
+| PoE2 mod id | Name | Req lvl | PoE2 stats | MvM effect / notes |
 |---|---|---|---|---|
 | `MonsterArmourPenetration1` | of Shattering | 1 | `armour_break_physical_damage_%_dealt_as_armour_break` 1000 | Breaks hero armour fast. A wall counter. |
 | `MonsterAdditionalProjectiles1` | of Splintering | 10 | `number_of_additional_projectiles` 4 | Ranged only. **Adapted:** also fires into both adjacent lanes |
@@ -260,9 +260,9 @@ All four add 40% of damage as extra of the element.
 
 ### 4.8 Timed
 
-| PoE2 mod id | Name | Req lvl | PoE2 stats | KvN effect / notes |
+| PoE2 mod id | Name | Req lvl | PoE2 stats | MvM effect / notes |
 |---|---|---|---|---|
-| `MonsterPeriodicEnrage1` | Enraging | 16 | (effect only) | **KvN:** every 8 s, +50% speed for 3 s |
+| `MonsterPeriodicEnrage1` | Enraging | 16 | (effect only) | **MvM:** every 8 s, +50% speed for 3 s |
 
 ### 4.9 Cut from the pool
 
@@ -294,18 +294,18 @@ The wave system is PvZ's, adjusted for density. PvZ's rules come from the revers
 | First wave | **18 s** after level start. Level 1 waits 25 s, to give time to place the first acolytes. |
 | Normal gap | **25–31 s** |
 | Early trigger | When the current wave drops to **50–65%** of its spawned life, the next wave comes **2 s** later (minimum 4 s after spawn). |
-| Huge wave | Every 10th wave and every level's final wave is a **flag wave**. A banner warning shows 7.5 s ahead: "A huge wave of Nightmares approaches!" |
+| Huge wave | Every 10th wave and every level's final wave is a **flag wave**. A banner warning shows 7.5 s ahead: "A huge wave of Monsters approaches!" |
 | Level end | The level ends when the final wave and any boss are dead. Remaining drops are collected automatically. |
 
 ### 5.2 Budget
 
 ```
 waveBudget(levelIndex, w) = (floor(w / 3) + 1) × B(levelIndex) × (isFlagWave ? 2.5 : 1)
-B(levelIndex) = 2.0 + levelIndex / 19        // 2.0 at level 1 → 3.0 at level 20 (KvN density knob)
+B(levelIndex) = 2.0 + levelIndex / 19        // 2.0 at level 1 → 3.0 at level 20 (MvM density knob)
 ```
 
 - PvZ uses B = 1.
-- KvN doubles or triples density, because loot comes from kills. The target is about **8–20 kills/min**, at or above PoE2's early 6–15 kills/min.
+- MvM doubles or triples density, because loot comes from kills. The target is about **8–20 kills/min**, at or above PoE2's early 6–15 kills/min.
 
 ### 5.3 Composition
 
@@ -392,7 +392,7 @@ A level may use:
 - Each boss is a unique-rarity monster that occupies **2–5 lanes**. It counts as present in every lane it covers.
 - A hero in front of *any* covered lane blocks it. Its attacks can hit heroes in all covered lanes.
 - **Telegraphs.** Every boss ability has a ground telegraph of **1.2–1.5 s**. Abilities flagged **unblockable** glow red (PoE2 convention).
-- **Heavy-stun bar.** Shown prominently under the boss health bar. Unique bosses are Primed at 70% (PoE2). Boss stun threshold = **30% of max life** (KvN custom), so a good burst build gets 2–4 stuns per fight. A heavy stun gives **3 s** of no actions: the burst window.
+- **Heavy-stun bar.** Shown prominently under the boss health bar. Unique bosses are Primed at 70% (PoE2). Boss stun threshold = **30% of max life** (MvM custom), so a good burst build gets 2–4 stuns per fight. A heavy stun gives **3 s** of no actions: the burst window.
 - **Light stun.** Bosses are immune.
 - **Leak.** If a boss reaches the gate, the level is lost (it costs 20 life).
 - **Loot.**
@@ -478,8 +478,8 @@ Six special tile types are introduced gradually (see the level table).
 | Tile | Heroes | Monsters | Rules |
 |---|---|---|---|
 | **Rock** | Can't place | Walk past (decoration) | Forces formation changes |
-| **Shallow Water** | Can't place | 30% slower walk (KvN Hinder-like); Fliers unaffected | Comes in 2–3-tile horizontal strips |
-| **Shrine** | Placeable; the hero there gets **+30% damage and +30% max life** (KvN custom) | — | At most 1 per map, in columns 2–6 |
+| **Shallow Water** | Can't place | 30% slower walk (MvM Hinder-like); Fliers unaffected | Comes in 2–3-tile horizontal strips |
+| **Shrine** | Placeable; the hero there gets **+30% damage and +30% max life** (MvM custom) | — | At most 1 per map, in columns 2–6 |
 | **Burning Ground** | Placeable, but the hero takes fire DoT | Take fire DoT while on it | DoT = `dms.physical_damage × 0.5` fire per second, scaled to area level. Can ignite. |
 | **Chilled Ground** | Placeable; the hero is chilled (30% slower actions) | Chilled 30% while on it (PoE2 Chilled Ground) | — |
 | **Grave** | Can't place | Each flag wave and the final wave spawn a Shambler (rarity rolled normally) **at the grave's tile** | Only in columns 5–9. PvZ night graves. |

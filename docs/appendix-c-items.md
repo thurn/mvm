@@ -1,6 +1,6 @@
 # Appendix C: Items, Affixes, Uniques & Currency
 
-Part of the Knights vs Nightmares (KvN) GDD. Primary doc: `gdd.md`. Related appendices:
+Part of the Mercs vs. Monsters (MvM) GDD. Primary doc: `gdd.md`. Related appendices:
 
 - `appendix-a-combat.md`: damage pipeline, stat vocabulary ids (§9), grid mapping, projectile fan rule (§3.4).
 - `appendix-b-heroes.md`: heroes, supports, hero quality effects.
@@ -18,19 +18,19 @@ Part of the Knights vs Nightmares (KvN) GDD. Primary doc: `gdd.md`. Related appe
 - Catalog: **45 weapon bases** across 9 classes, **12 body armours**, **5 shields**, **13 jewellery bases**.
 - **88 affix families**: 78 core, plus 10 sceptre "Allies in your Presence" families that need one vocabulary addition.
 - **17 uniques**. Each boss draws its guaranteed unique from a level-gated pool.
-- **13 currency families** (Jeweller's Orb counts once, in 3 grades), 2 PoE2 shards, and 1 KvN custom shard.
-- Six of these currencies have PoE2 drop levels of 25–65, at or past the demo's end. KvN lowers them (see Deviations).
+- **13 currency families** (Jeweller's Orb counts once, in 3 grades), 2 PoE2 shards, and 1 MvM custom shard.
+- Six of these currencies have PoE2 drop levels of 25–65, at or past the demo's end. MvM lowers them (see Deviations).
 
 ## Conventions used in this appendix
 
 | Term | Meaning |
 |---|---|
 | `rl` | PoE2 `required_level` of a mod tier. A tier can roll only if item level ≥ rl. |
-| T1, T2… | Tier index counting **up from the weakest** (T1 = lowest rl). It counts only tiers that can spawn on KvN slots.<br>It usually matches the PoE2 mod id suffix (`…Percent1`, `…Percent2`). The exception is life leech: `LifeLeech1` and `LifeLeechLocal1` have spawn weight 0 in PoE2, so T1 there is `…2`.<br>PoE2's in-game tooltip counts the other way. |
-| Weight | KvN spawn weight **per tier**. PoE2's client data only has 0/1 spawn flags: all 7,140 spawn-weight entries on item prefixes and suffixes in `mods.json` are 0 or 1, and poe2db notes that weights cannot be read from game files. KvN keeps PoE2's 0/1 allow-list and sets the numbers. |
+| T1, T2… | Tier index counting **up from the weakest** (T1 = lowest rl). It counts only tiers that can spawn on MvM slots.<br>It usually matches the PoE2 mod id suffix (`…Percent1`, `…Percent2`). The exception is life leech: `LifeLeech1` and `LifeLeechLocal1` have spawn weight 0 in PoE2, so T1 there is `…2`.<br>PoE2's in-game tooltip counts the other way. |
+| Weight | MvM spawn weight **per tier**. PoE2's client data only has 0/1 spawn flags: all 7,140 spawn-weight entries on item prefixes and suffixes in `mods.json` are 0 or 1, and poe2db notes that weights cannot be read from game files. MvM keeps PoE2's 0/1 allow-list and sets the numbers. |
 | 1H+Bow / 2H+Xbw | PoE2 gives bows the one-hand values of added-damage mods and crossbows the two-hand values. The tables follow the data. |
-| **adapted** | A PoE2 stat swapped for a KvN vocabulary stat; the original is named. |
-| **KvN custom** | Invented for KvN. |
+| **adapted** | A PoE2 stat swapped for a MvM vocabulary stat; the original is named. |
+| **MvM custom** | Invented for MvM. |
 | **deviation** | Needs something the brief does not allow yet; listed under Deviations from brief. |
 
 ---
@@ -61,7 +61,7 @@ Not in the demo: swords, axes, daggers, claws, flails, helmets, gloves, boots, q
 **Item level (ilvl).**
 
 - ilvl = area level of the level where the item dropped.
-- +1 if it dropped from a **rare monster**, +2 if from a **boss**. This is PoE2's rule (research file §1.3: "rare monsters give +1 item level and unique monsters give +2"). The brief says "rares +1, uniques +2", which KvN reads as monster rarity. See Deviations.
+- +1 if it dropped from a **rare monster**, +2 if from a **boss**. This is PoE2's rule (research file §1.3: "rare monsters give +1 item level and unique monsters give +2"). The brief says "rares +1, uniques +2", which MvM reads as monster rarity. See Deviations.
 - A mod tier is eligible only if `required_level ≤ ilvl`.
 - A base is eligible only if its `drop_level ≤ ilvl`.
 - Vendors and gambles use the current area level as ilvl (`appendix-e-economy.md`).
@@ -77,7 +77,7 @@ Not in the demo: swords, axes, daggers, claws, flails, helmets, gloves, boots, q
 
 The default maximum is 20%, as in PoE2. A corruption outcome can push it to 23% (C.5.3).
 
-| Class | PoE2 effect (poe2db Quality page and glossary) | KvN |
+| Class | PoE2 effect (poe2db Quality page and glossary) | MvM |
 |---|---|---|
 | Martial weapons: Bow, Crossbow, Spear, One/Two Hand Mace, Quarterstaff | 1% more Physical damage per 1% quality | Same. Applied as a separate × (1 + Q/100) on the weapon's physical damage. |
 | Body armour, Shield | 1% more Armour, Evasion and ES per 1% quality | Same. Applied as × (1 + Q/100) on the item's local defences. |
@@ -85,16 +85,16 @@ The default maximum is 20%, as in PoE2. A corruption outcome can push it to 23% 
 | Amulet, Ring | Quality type set by catalysts | Catalysts are cut, so no quality. |
 | Belt | No quality effect in PoE2 | No quality. |
 
-**Where quality comes from.** The brief's 13 currencies have no item-quality orb (Armourer's Scrap, Blacksmith's Whetstone and Arcanist's Etcher are not listed). In KvN, quality comes only from:
+**Where quality comes from.** The brief's 13 currencies have no item-quality orb (Armourer's Scrap, Blacksmith's Whetstone and Arcanist's Etcher are not listed). In MvM, quality comes only from:
 
-- drops: **KvN custom**, 10% of non-unique weapon and armour drops roll quality uniformly from 1 to 20%;
+- drops: **MvM custom**, 10% of non-unique weapon and armour drops roll quality uniformly from 1 to 20%;
 - the Vaal Orb quality outcome.
 
 See Deviations for the option of adding the three PoE2 quality currencies.
 
 ### C.1.5 Identification: auto-identify (recommended)
 
-In PoE2, magic, rare and unique drops are unidentified until you use a Scroll of Wisdom. **KvN identifies every item and hero on drop.**
+In PoE2, magic, rare and unique drops are unidentified until you use a Scroll of Wisdom. **MvM identifies every item and hero on drop.**
 
 Why:
 
@@ -109,7 +109,7 @@ Why:
 - The Vaal Orb corrupts any non-corrupted item: Normal, Magic, Rare or Unique. Outcome table: C.5.3.
 - A corrupted item **cannot be changed by any currency**, not even Divine or another Vaal. It can still be equipped, sold and salvaged as usual.
 - Corrupted items show a red "Corrupted" line.
-- No item drops already corrupted in the demo (**KvN custom**; PoE2 has some). This keeps corruption a choice the player makes.
+- No item drops already corrupted in the demo (**MvM custom**; PoE2 has some). This keeps corruption a choice the player makes.
 
 ### C.1.7 Local vs global mods, with many copies of a hero
 
@@ -167,15 +167,15 @@ accuracy  = hero_accuracy + Σ local_accuracy
 
 - Damage, attack time (ms), crit (base, in %) and range are PoE2 `properties`.
 - APS = 1000 / attack time.
-- Range is in raw PoE2 units (10 = 1 m). It is informational only: melee is lane-literal in KvN.
-- Attribute requirements are dropped (KvN has none).
+- Range is in raw PoE2 units (10 = 1 m). It is informational only: melee is lane-literal in MvM.
+- Attribute requirements are dropped (MvM has none).
 - PoE2 body armours and shields also list a movement-speed penalty. It is ignored, since heroes don't move.
 
 ### C.2.1 Weapons (45 bases, 5 per class)
 
 **Bow**
 
-| Base (PoE2 id) | Drop lvl | Phys dmg | Attack time (APS) | Crit | Range | Implicit → KvN | Unique on base |
+| Base (PoE2 id) | Drop lvl | Phys dmg | Attack time (APS) | Crit | Range | Implicit → MvM | Unique on base |
 |---|---|---|---|---|---|---|---|
 | Crude Bow (`FourBow1`) | 1 | 6–9 | 833 ms (1.20) | 5% | 120 | — |  |
 | Shortbow (`FourBow2`) | 5 | 7–14 | 800 ms (1.25) | 5% | 120 | — |  |
@@ -185,7 +185,7 @@ accuracy  = hero_accuracy + Σ local_accuracy
 
 **Crossbow**
 
-| Base (PoE2 id) | Drop lvl | Phys dmg | Attack time (APS) | Crit | Range | Implicit → KvN | Unique on base |
+| Base (PoE2 id) | Drop lvl | Phys dmg | Attack time (APS) | Crit | Range | Implicit → MvM | Unique on base |
 |---|---|---|---|---|---|---|---|
 | Makeshift Crossbow (`FourCrossbow1`) | 1 | 7–12 | 625 ms (1.60) | 5% | 120 | — | Mist Whisper |
 | Sturdy Crossbow (`FourCrossbow3`) | 10 | 11–26 | 645 ms (1.55) | 5% | 120 | — |  |
@@ -195,7 +195,7 @@ accuracy  = hero_accuracy + Σ local_accuracy
 
 **Spear**
 
-| Base (PoE2 id) | Drop lvl | Phys dmg | Attack time (APS) | Crit | Range | Implicit → KvN | Unique on base |
+| Base (PoE2 id) | Drop lvl | Phys dmg | Attack time (APS) | Crit | Range | Implicit → MvM | Unique on base |
 |---|---|---|---|---|---|---|---|
 | Hardwood Spear (`FourSpear1`) | 1 | 5–9 | 625 ms (1.60) | 5% | 15 | `SpearImplicitDisplaySpearThrow1` Grants Skill: Spear Throw → cut: grants Spear Throw (the hero is the skill) | Splinter of Lorrata |
 | Ironhead Spear (`FourSpear2`) | 5 | 9–12 | 625 ms (1.60) | 5% | 15 | `SpearImplicitDisplaySpearThrow1` Grants Skill: Spear Throw → cut: grants Spear Throw (the hero is the skill) |  |
@@ -205,7 +205,7 @@ accuracy  = hero_accuracy + Σ local_accuracy
 
 **One Hand Mace**
 
-| Base (PoE2 id) | Drop lvl | Phys dmg | Attack time (APS) | Crit | Range | Implicit → KvN | Unique on base |
+| Base (PoE2 id) | Drop lvl | Phys dmg | Attack time (APS) | Crit | Range | Implicit → MvM | Unique on base |
 |---|---|---|---|---|---|---|---|
 | Wooden Club (`FourOneHandMace1`) | 1 | 6–10 | 690 ms (1.45) | 5% | 13 | — |  |
 | Smithing Hammer (`FourOneHandMace2`) | 4 | 11–18 | 690 ms (1.45) | 5% | 13 | `MaceImplicitFireDamage1` (hidden) 50% of base damage is Fire → **adapted**: 50% of physical converted to fire (local) |  |
@@ -215,7 +215,7 @@ accuracy  = hero_accuracy + Σ local_accuracy
 
 **Two Hand Mace**
 
-| Base (PoE2 id) | Drop lvl | Phys dmg | Attack time (APS) | Crit | Range | Implicit → KvN | Unique on base |
+| Base (PoE2 id) | Drop lvl | Phys dmg | Attack time (APS) | Crit | Range | Implicit → MvM | Unique on base |
 |---|---|---|---|---|---|---|---|
 | Felled Greatclub (`FourTwoHandMace1`) | 1 | 13–18 | 909 ms (1.10) | 5% | 15 | — |  |
 | Oak Greathammer (`FourTwoHandMace2`) | 4 | 16–30 | 1000 ms (1.00) | 5% | 15 | `MaceImplicitStunDamageIncrease1` Causes (20-40)% increased Stun Buildup → kept: % increased stun buildup |  |
@@ -225,7 +225,7 @@ accuracy  = hero_accuracy + Σ local_accuracy
 
 **Quarterstaff (item class "Warstaff")**
 
-| Base (PoE2 id) | Drop lvl | Phys dmg | Attack time (APS) | Crit | Range | Implicit → KvN | Unique on base |
+| Base (PoE2 id) | Drop lvl | Phys dmg | Attack time (APS) | Crit | Range | Implicit → MvM | Unique on base |
 |---|---|---|---|---|---|---|---|
 | Wrapped Quarterstaff (`FourQuarterstaff1`) | 1 | 7–12 | 714 ms (1.40) | 10% | 14 | — | The Blood Thorn |
 | Gothic Quarterstaff (`FourQuarterstaff3`) | 11 | 16–26 | 714 ms (1.40) | 12% | 14 | — |  |
@@ -268,7 +268,7 @@ accuracy  = hero_accuracy + Σ local_accuracy
 - Wands and staves have **no base damage**. Their value is the mod pool, and the base decides which spell elements can roll.
 - A base with PoE2 tags like `no_cold_spell_mods` can only roll its own element's spell mods.
 - On an "any element" base, the **first** element-specific spell mod adds the other elements' `no_*_spell_mods` tags (PoE2 `adds_tags`) and locks the item to that element.
-- Sceptres cannot attack or cast in PoE2. In KvN they are the acolyte and aura weapon, and their value is Spirit plus mods.
+- Sceptres cannot attack or cast in PoE2. In MvM they are the acolyte and aura weapon, and their value is Spirit plus mods.
 
 ### C.2.2 Body armours (12)
 
@@ -292,7 +292,7 @@ Defence values are fixed base values from `properties`. ES = energy shield.
 ### C.2.3 Shields (5)
 
 - Base block chance is local to the shield.
-- PoE2 shields grant the "Raise Shield" skill. In KvN, block is passive (`appendix-a-combat.md`) and Raise Shield is cut.
+- PoE2 shields grant the "Raise Shield" skill. In MvM, block is passive (`appendix-a-combat.md`) and Raise Shield is cut.
 
 | Base (PoE2 id) | Type | Drop lvl | Armour | Evasion | ES | Block | Unique on base |
 |---|---|---|---|---|---|---|---|
@@ -304,7 +304,7 @@ Defence values are fixed base values from `properties`. ES = energy shield.
 
 ### C.2.4 Amulets, rings, belts (13)
 
-| Base (PoE2 id) | Class | Drop lvl | Implicit → KvN | Unique on base |
+| Base (PoE2 id) | Class | Drop lvl | Implicit → MvM | Unique on base |
 |---|---|---|---|---|
 | Crimson Amulet (`FourAmulet1`) | Amulet | 1 | `AmuletImplicitLifeRegeneration1` (2-4) Life Regeneration per second → kept: + life regen per second |  |
 | Amber Amulet (`FourAmulet3`) | Amulet | 8 | `AmuletImplicitStrength1` +(10-15) to Strength → kept |  |
@@ -317,7 +317,7 @@ Defence values are fixed base values from `properties`. ES = energy shield.
 | Sapphire Ring (`FourRing4`) | Ring | 12 | `RingImplicitColdResistance1` +(20-30)% to Cold Resistance → kept |  |
 | Topaz Ring (`FourRing5`) | Ring | 16 | `RingImplicitLightningResistance1` +(20-30)% to Lightning Resistance → kept | Levinstone |
 | Amethyst Ring (`FourRing6`) | Ring | 20 | `RingImplicitChaosResistance1` +(7-13)% to Chaos Resistance → kept | Ming's Heart |
-| Rawhide Belt (`FourBelt1`) | Belt | 1 | `BeltImplicitFlaskLifeRecovery1` (20-30)% increased Life Recovery from Flasks → cut: flasks are cut (belt has no implicit in KvN) |  |
+| Rawhide Belt (`FourBelt1`) | Belt | 1 | `BeltImplicitFlaskLifeRecovery1` (20-30)% increased Life Recovery from Flasks → cut: flasks are cut (belt has no implicit in MvM) |  |
 | Plate Belt (`FourBelt5`) | Belt | 25 | `BeltImplicitPhysicalDamageReductionRating1` +(140-180) to Armour → kept: + armour (global) |  |
 
 **Not used, and why:**
@@ -339,21 +339,21 @@ Defence values are fixed base values from `properties`. ES = energy shield.
 
 ## C.3 Affix catalog
 
-**Source filter.** `mods.json` with `domain = "item"`, `generation_type` prefix or suffix, `is_essence_only = false`, a PoE2 spawn flag of 1 on at least one KvN slot tag set, and `required_level ≤ 40`. That yields 149 PoE2 mod types. 37 are cut (C.3.7). The other 112 are kept and shown as **88 family rows**, because defence types that share one mod group are merged into one row.
+**Source filter.** `mods.json` with `domain = "item"`, `generation_type` prefix or suffix, `is_essence_only = false`, a PoE2 spawn flag of 1 on at least one MvM slot tag set, and `required_level ≤ 40`. That yields 149 PoE2 mod types. 37 are cut (C.3.7). The other 112 are kept and shown as **88 family rows**, because defence types that share one mod group are merged into one row.
 
 **Rules that apply to every roll.**
 
 - **One mod per PoE2 mod group per item** (the `groups` field). Example: `WeaponDamageTypePrefix` covers the Fire, Cold, Lightning, Chaos and Physical spell % prefixes, so a wand gets only one of them.
 - **Separate groups can stack.** `LocalPhysicalDamagePercent` and the hybrid `LocalIncreasedPhysicalDamagePercentAndAccuracyRating` are different groups, so both can roll.
 - **Max 3 prefixes and 3 suffixes on a rare, 1 + 1 on a magic item.**
-- **Weights: Common 1000, Uncommon 500, Rare 250, per tier.** A family with 3 unlocked tiers has 3× its tier weight in the pool, as in PoE. This is a KvN proposal (see Conventions).
+- **Weights: Common 1000, Uncommon 500, Rare 250, per tier.** A family with 3 unlocked tiers has 3× its tier weight in the pool, as in PoE. This is a MvM proposal (see Conventions).
 - **Values roll uniformly** inside the tier range, as integers, except stats with decimals.
 - **Defence-typed families.** The "by type" rows list one variant per defence type. A base can only roll the variant matching its PoE2 tag (`str_armour`, `dex_int_armour`…).
 - **Value units.** Life regeneration is stored per minute (60 = 1 life/s). Leech is in 1/100 % (600 = 6%). Local crit is in 1/100 % (150 = +1.5%).
 
 ### C.3.1 Martial weapon affixes (Bow, Crossbow, Spear, Maces, Quarterstaff)
 
-| # | Family (PoE2 type) / mod group / PoE2 stat ids | P/S | KvN stat → appendix-a stat id | Tiers (T1 = weakest): name, required level (rl), `mod id`, values |
+| # | Family (PoE2 type) / mod group / PoE2 stat ids | P/S | MvM stat → appendix-a stat id | Tiers (T1 = weakest): name, required level (rl), `mod id`, values |
 |---|---|---|---|---|
 | 1 | `LocalPhysicalDamagePercent`<br>group `LocalPhysicalDamagePercent`<br>`local_physical_damage_+%` | P | % increased Physical damage (local) → `local_physical_damage_+%` | T1 Heavy rl1: `LocalIncreasedPhysicalDamagePercent1` 40–49<br>T2 Serrated rl8: `LocalIncreasedPhysicalDamagePercent2` 50–64<br>T3 Wicked rl16: `LocalIncreasedPhysicalDamagePercent3` 65–84<br>T4 Vicious rl33: `LocalIncreasedPhysicalDamagePercent4` 85–109 |
 | 2 | `LocalIncreasedPhysicalDamagePercentAndAccuracyRating`<br>group `LocalIncreasedPhysicalDamagePercentAndAccuracyRating`<br>`local_physical_damage_+%`, `local_accuracy_rating` | P | % increased Physical damage (local) + accuracy (local) → `local_physical_damage_+%, local_accuracy_rating` | T1 Squire's rl8: `LocalIncreasedPhysicalDamagePercentAndAccuracyRating1` 15–19 / 16–20<br>T2 Journeyman's rl14: `LocalIncreasedPhysicalDamagePercentAndAccuracyRating2` 20–24 / 21–46<br>T3 Reaver's rl23: `LocalIncreasedPhysicalDamagePercentAndAccuracyRating3` 25–34 / 47–72<br>T4 Mercenary's rl38: `LocalIncreasedPhysicalDamagePercentAndAccuracyRating4` 35–44 / 73–97 |
@@ -373,7 +373,7 @@ Defence values are fixed base values from `properties`. ES = energy shield.
 
 ### C.3.2 Caster weapon affixes (Wand, Staff)
 
-| # | Family (PoE2 type) / mod group / PoE2 stat ids | P/S | KvN stat → appendix-a stat id | Tiers (T1 = weakest): name, required level (rl), `mod id`, values |
+| # | Family (PoE2 type) / mod group / PoE2 stat ids | P/S | MvM stat → appendix-a stat id | Tiers (T1 = weakest): name, required level (rl), `mod id`, values |
 |---|---|---|---|---|
 | 16 | `WeaponSpellDamage`<br>group `WeaponCasterDamagePrefix`<br>`spell_damage_+%` | P | % increased Spell damage → `spell_damage_+%` | T1 Apprentice's rl1: Wnd `SpellDamageOnWeapon1` 25–34; Stf `SpellDamageOnTwoHandWeapon1` 50–68<br>T2 Adept's rl8: Wnd `SpellDamageOnWeapon2` 35–44; Stf `SpellDamageOnTwoHandWeapon2` 69–88<br>T3 Scholar's rl16: Wnd `SpellDamageOnWeapon3` 45–54; Stf `SpellDamageOnTwoHandWeapon3` 89–108<br>T4 Professor's rl33: Wnd `SpellDamageOnWeapon4` 55–64; Stf `SpellDamageOnTwoHandWeapon4` 109–128 |
 | 17 | `WeaponSpellDamageAndMana`<br>group `SpellDamageAndMana`<br>`spell_damage_+%`, `base_maximum_mana` | P | % increased Spell damage → `spell_damage_+%` — **adapted**: + max mana half dropped | T1 Caster's rl2: Wnd `SpellDamageAndManaOnWeapon1` 15–19 / 17–20; Stf `SpellDamageAndManaOnTwoHandWeapon1` 30–38 / 34–40<br>T2 Conjuror's rl11: Wnd `SpellDamageAndManaOnWeapon2` 20–24 / 21–24; Stf `SpellDamageAndManaOnTwoHandWeapon2` 39–48 / 41–48<br>T3 Wizard's rl23: Wnd `SpellDamageAndManaOnWeapon3` 25–29 / 25–28; Stf `SpellDamageAndManaOnTwoHandWeapon3` 49–58 / 49–56<br>T4 Warlock's rl38: Wnd `SpellDamageAndManaOnWeapon4` 30–34 / 29–33; Stf `SpellDamageAndManaOnTwoHandWeapon4` 59–68 / 57–66 |
@@ -394,7 +394,7 @@ Defence values are fixed base values from `properties`. ES = energy shield.
 
 ### C.3.3 Sceptre affixes
 
-| # | Family (PoE2 type) / mod group / PoE2 stat ids | P/S | KvN stat → appendix-a stat id | Tiers (T1 = weakest): name, required level (rl), `mod id`, values |
+| # | Family (PoE2 type) / mod group / PoE2 stat ids | P/S | MvM stat → appendix-a stat id | Tiers (T1 = weakest): name, required level (rl), `mod id`, values |
 |---|---|---|---|---|
 | 32 | `LocalIncreasedSpiritPercent`<br>group `LocalIncreasedSpiritPercent`<br>`local_spirit_+%` | P | + Spirit → `spirit` — **adapted**: local % of the sceptre's base 100 Spirit, so 20–26% = +20–26 Spirit | T1 Lord's rl1: `LocalIncreasedSpiritPercent1` 20–26<br>T2 Baron's rl8: `LocalIncreasedSpiritPercent2` 27–32<br>T3 Viscount's rl16: `LocalIncreasedSpiritPercent3` 33–38<br>T4 Marquess' rl33: `LocalIncreasedSpiritPercent4` 39–44 |
 | 33 | `LocalIncreasedSpiritAndMana`<br>group `LocalIncreasedSpiritAndMana`<br>`local_spirit_+%`, `base_maximum_mana` | P | + Spirit → `spirit` — **adapted**: local % Spirit as above; mana half dropped | T1 Advisor's rl2: `LocalIncreasedSpiritAndMana1` 10–14 / 17–20<br>T2 Counselor's rl11: `LocalIncreasedSpiritAndMana2` 15–18 / 21–24<br>T3 Emissary's rl26: `LocalIncreasedSpiritAndMana3` 19–22 / 25–28<br>T4 Minister's rl36: `LocalIncreasedSpiritAndMana4` 23–26 / 29–33 |
@@ -413,7 +413,7 @@ Defence values are fixed base values from `properties`. ES = energy shield.
 
 ### C.3.4 Body armour and shield affixes
 
-| # | Family (PoE2 type) / mod group / PoE2 stat ids | P/S | KvN stat → appendix-a stat id | Tiers (T1 = weakest): name, required level (rl), `mod id`, values |
+| # | Family (PoE2 type) / mod group / PoE2 stat ids | P/S | MvM stat → appendix-a stat id | Tiers (T1 = weakest): name, required level (rl), `mod id`, values |
 |---|---|---|---|---|
 | 46 | 6 variants by defence type<br>group `BaseLocalDefences`<br>`local_base_physical_damage_reduction_rating`, `local_base_evasion_rating`, `local_energy_shield` | P | local + armour / + evasion / + ES, by base type → `local_armour / local_evasion / local_energy_shield` | **Body Str, Shld Str** `LocalPhysicalDamageReductionRating`:<br>&nbsp;&nbsp;T1 Lacquered rl1: `LocalIncreasedPhysicalDamageReductionRating1` 16–27<br>&nbsp;&nbsp;T2 Studded rl8: `LocalIncreasedPhysicalDamageReductionRating2` 28–56<br>&nbsp;&nbsp;T3 Ribbed rl16: `LocalIncreasedPhysicalDamageReductionRating3` 57–77<br>&nbsp;&nbsp;T4 Fortified rl25: `LocalIncreasedPhysicalDamageReductionRating4` 78–98<br>&nbsp;&nbsp;T5 Plated rl33: `LocalIncreasedPhysicalDamageReductionRating5` 99–127<br>**Body Dex** `LocalEvasionRating`:<br>&nbsp;&nbsp;T1 Agile rl1: `LocalIncreasedEvasionRating1` 11–18<br>&nbsp;&nbsp;T2 Dancer's rl8: `LocalIncreasedEvasionRating2` 19–46<br>&nbsp;&nbsp;T3 Acrobat's rl16: `LocalIncreasedEvasionRating3` 47–66<br>&nbsp;&nbsp;T4 Fleet rl25: `LocalIncreasedEvasionRating4` 67–87<br>&nbsp;&nbsp;T5 Blurred rl33: `LocalIncreasedEvasionRating5` 88–116<br>**Body Int** `LocalEnergyShield`:<br>&nbsp;&nbsp;T1 Shining rl1: `LocalIncreasedEnergyShield1` 10–17<br>&nbsp;&nbsp;T2 Glimmering rl8: `LocalIncreasedEnergyShield2` 18–24<br>&nbsp;&nbsp;T3 Glittering rl16: `LocalIncreasedEnergyShield3` 25–30<br>&nbsp;&nbsp;T4 Glowing rl25: `LocalIncreasedEnergyShield4` 31–35<br>&nbsp;&nbsp;T5 Radiating rl33: `LocalIncreasedEnergyShield5` 36–41<br>**Body Str/Dex, Shld Str/Dex** `LocalBaseArmourAndEvasionRating`:<br>&nbsp;&nbsp;T1 Supple rl1: `LocalBaseArmourAndEvasionRating1` 9–16 / 6–10<br>&nbsp;&nbsp;T2 Pliant rl16: `LocalBaseArmourAndEvasionRating2` 17–46 / 11–41<br>&nbsp;&nbsp;T3 Flexible rl33: `LocalBaseArmourAndEvasionRating3` 47–71 / 42–64<br>**Body Str/Int, Shld Str/Int** `LocalBaseArmourAndEnergyShield`:<br>&nbsp;&nbsp;T1 Blessed rl1: `LocalBaseArmourAndEnergyShield1` 9–16 / 5–8<br>&nbsp;&nbsp;T2 Anointed rl16: `LocalBaseArmourAndEnergyShield2_` 17–46 / 9–15<br>&nbsp;&nbsp;T3 Sanctified rl33: `LocalBaseArmourAndEnergyShield3` 47–71 / 16–21<br>**Body Dex/Int** `LocalBaseEvasionRatingAndEnergyShield`:<br>&nbsp;&nbsp;T1 Will-o-wisp's rl1: `LocalBaseEvasionRatingAndEnergyShield1` 6–10 / 5–8<br>&nbsp;&nbsp;T2 Nymph's rl16: `LocalBaseEvasionRatingAndEnergyShield2` 11–41 / 9–15<br>&nbsp;&nbsp;T3 Sylph's rl33: `LocalBaseEvasionRatingAndEnergyShield3` 42–64 / 16–21 |
 | 47 | 6 variants by defence type<br>group `DefencesPercent`<br>`local_physical_damage_reduction_rating_+%`, `local_evasion_rating_+%`, `local_energy_shield_+%`, `local_armour_and_evasion_+%`, `local_armour_and_energy_shield_+%`, `local_evasion_and_energy_shield_+%` | P | local % increased armour / evasion / ES, or hybrid local defence % → `local_armour_+% / local_evasion_+% / local_energy_shield_+% / local_hybrid_defence_+%` | **Body Str, Shld Str** `LocalPhysicalDamageReductionRatingPercent`:<br>&nbsp;&nbsp;T1 Reinforced rl2: `LocalIncreasedPhysicalDamageReductionRatingPercent1` 15–26<br>&nbsp;&nbsp;T2 Layered rl16: `LocalIncreasedPhysicalDamageReductionRatingPercent2` 27–42<br>&nbsp;&nbsp;T3 Lobstered rl35: `LocalIncreasedPhysicalDamageReductionRatingPercent3` 43–55<br>**Body Dex** `LocalEvasionRatingIncreasePercent`:<br>&nbsp;&nbsp;T1 Shade's rl2: `LocalIncreasedEvasionRatingPercent1` 15–26<br>&nbsp;&nbsp;T2 Ghost's rl16: `LocalIncreasedEvasionRatingPercent2` 27–42<br>&nbsp;&nbsp;T3 Spectre's rl33: `LocalIncreasedEvasionRatingPercent3` 43–55<br>**Body Int** `LocalEnergyShieldPercent`:<br>&nbsp;&nbsp;T1 Protective rl2: `LocalIncreasedEnergyShieldPercent1` 15–26<br>&nbsp;&nbsp;T2 Strong-Willed rl16: `LocalIncreasedEnergyShieldPercent2` 27–42<br>&nbsp;&nbsp;T3 Resolute rl33: `LocalIncreasedEnergyShieldPercent3` 43–55<br>**Body Str/Dex, Shld Str/Dex** `LocalArmourAndEvasion`:<br>&nbsp;&nbsp;T1 Scrapper's rl2: `LocalIncreasedArmourAndEvasion1` 15–26<br>&nbsp;&nbsp;T2 Brawler's rl16: `LocalIncreasedArmourAndEvasion2` 27–42<br>&nbsp;&nbsp;T3 Fencer's rl33: `LocalIncreasedArmourAndEvasion3` 43–55<br>**Body Str/Int, Shld Str/Int** `LocalArmourAndEnergyShield`:<br>&nbsp;&nbsp;T1 Infixed rl2: `LocalIncreasedArmourAndEnergyShield1` 15–26<br>&nbsp;&nbsp;T2 Ingrained rl16: `LocalIncreasedArmourAndEnergyShield2` 27–42<br>&nbsp;&nbsp;T3 Instilled rl33: `LocalIncreasedArmourAndEnergyShield3` 43–55<br>**Body Dex/Int** `LocalEvasionAndEnergyShield`:<br>&nbsp;&nbsp;T1 Shadowy rl2: `LocalIncreasedEvasionAndEnergyShield1` 15–26<br>&nbsp;&nbsp;T2 Ethereal rl16: `LocalIncreasedEvasionAndEnergyShield2` 27–42<br>&nbsp;&nbsp;T3 Unworldly rl33: `LocalIncreasedEvasionAndEnergyShield3` 43–55 |
@@ -428,7 +428,7 @@ Defence values are fixed base values from `properties`. ES = energy shield.
 
 ### C.3.5 Shared and jewellery affixes (life, resists, attributes; Amulet, Ring, Belt)
 
-| # | Family (PoE2 type) / mod group / PoE2 stat ids | P/S | KvN stat → appendix-a stat id | Tiers (T1 = weakest): name, required level (rl), `mod id`, values |
+| # | Family (PoE2 type) / mod group / PoE2 stat ids | P/S | MvM stat → appendix-a stat id | Tiers (T1 = weakest): name, required level (rl), `mod id`, values |
 |---|---|---|---|---|
 | 56 | `IncreasedLife`<br>group `IncreasedLife`<br>`base_maximum_life` | P | + maximum life → `base_maximum_life` | T1 Hale rl1: `IncreasedLife1` 10–19<br>T2 Healthy rl6: `IncreasedLife2` 20–29<br>T3 Sanguine rl16: `IncreasedLife3` 30–39<br>T4 Stalwart rl24: `IncreasedLife4` 40–59<br>T5 Stout rl33: `IncreasedLife5` 60–69<br>T6 Robust rl38: `IncreasedLife6` 70–84 |
 | 57 | `MaximumLifeIncreasePercent`<br>group `MaximumLifeIncreasePercent`<br>`maximum_life_+%` | P | % increased maximum life → `maximum_life_+%` | T1 Hopeful rl33: `MaximumLifeIncrease1` 3–4 |
@@ -588,7 +588,7 @@ Columns:
 | `BeltIncreasedCharmDuration`, `BeltIncreasedCharmChargesGained`, `BeltReducedCharmChargesUsed` | BeltCharmDuration, BeltCharmChargesGained, BeltCharmChargesUsed | Charms are cut. |
 | 13 "+N to Level of all … Skills" types: `GlobalIncrease{Fire,Cold,Lightning,Chaos,Physical}SpellSkillGemLevelWeapon`, `GlobalIncreaseSpellSkillGemLevel(Weapon)`, `GlobalIncreaseProjectileSkillGemLevel(Weapon)`, `GlobalIncreaseMeleeSkillGemLevel(Weapon)`, `GlobalIncreaseMinionSpellSkillGemLevel(Weapon)` (e.g. `GlobalFireSpellGemsLevelWeapon1` … `GlobalFireSpellGemsLevelTwoHandWeapon3`) | IncreaseSocketedGemLevel | Hero level is its own axis (level cap = area level + 2, gem level mapped from character level). +level would bypass the cap and the interpolation. A strong candidate for a later test. |
 | `MinionLife` (`MinionLife1` … `3`) | MinionLife | Minions are out of scope. |
-| `LocalAttributeRequirements` (`ReducedLocalAttributeRequirements1` … `3`) | LocalAttributeRequirements | KvN has no attribute requirements. |
+| `LocalAttributeRequirements` (`ReducedLocalAttributeRequirements1` … `3`) | LocalAttributeRequirements | MvM has no attribute requirements. |
 | `LifeGainPerTargetLocal` (`LifeGainPerTargetLocal1` … `4`) | LifeGainPerTarget | "Life per enemy hit" is not in the vocabulary. Life on kill and leech cover sustain. |
 | `LocalStunDuration` (`StunDuration1` … `3`) | StunDurationIncreasePercent | Stun duration is not in the vocabulary (only buildup and heavy stun). |
 | `ArmourAppliesToElementalDamage` (`…1` … `3`) | ArmourAppliesToElementalDamage | Not in the vocabulary. Would be a good wall stat later. |
@@ -596,7 +596,7 @@ Columns:
 | `DamageTakenGainedAsLife` (`DamageTakenGainedAsLife1___`) | DamageTakenGainedAsLife | Recoup is not in the vocabulary. |
 | `ReducedPhysicalDamageTaken` (`AdditionalPhysicalDamageReduction1`) | ReducedPhysicalDamageTaken | Flat % DR is not in the vocabulary. |
 | `ReducedExtraDamageFromCrits` (`ReducedExtraDamageFromCrits1___`) | ReducedExtraDamageFromCrits | Not in the vocabulary. |
-| Light radius halves of `LocalLightRadiusAndAccuracy` | LightRadiusAndAccuracy | No light radius in KvN. The accuracy half is kept (row 15). |
+| Light radius halves of `LocalLightRadiusAndAccuracy` | LightRadiusAndAccuracy | No light radius in MvM. The accuracy half is kept (row 15). |
 | Movement speed (boots only in PoE2) | MovementVelocity | Heroes don't move. Boots are cut. |
 | Sockets, runes, soul cores, Artificer's Orb | (no prefix/suffix families) | Brief cut list. No socket slot exists. |
 | Flask, charm, minion, totem and jewel item classes | — | Classes cut by the brief, so their pools never load. |
@@ -614,7 +614,7 @@ Columns:
 
 - **Bosses (L5, L10, L15, L20) always drop one unique** (brief). It comes from that boss's pool below.
   - On a first kill it is a unique the player does not own, if one exists.
-  - Uniques new to that pool weigh 3, older ones 1 (**KvN custom**).
+  - Uniques new to that pool weigh 3, older ones 1 (**MvM custom**).
 - **Random drops.** When the rarity roll (C.6 step 3) gives Unique, pick uniformly from every unique whose PoE2 level ≤ ilvl. If none qualifies, the item becomes Rare.
 - **Pools use the unique's PoE2 level requirement.** Boss ilvl = area + 2. `appendix-d-monsters-levels.md` puts the boss levels at area 6, 14, 21 and 29.
 
@@ -628,7 +628,7 @@ Columns:
 ### C.4.2 How to read the unique table
 
 - **PoE2 id** = the `id` in `uniques.json`, then the visual identity id.
-- **Mod lines.** Each line is the PoE2 mod text (poe2db), then its `mods.json` id, then the KvN fate.
+- **Mod lines.** Each line is the PoE2 mod text (poe2db), then its `mods.json` id, then the MvM fate.
   - Where several unique mods share identical text, the stat id is given instead of a guessed mod id.
   - ✓ = kept as-is in vocabulary.
   - **flag** = needs a unique-only mechanic flag (see C.4.4 and Deviations).
@@ -639,18 +639,18 @@ Columns:
 
 **L5 pool (PoE2 level 1–2)**
 
-| Unique | Base (id), PoE2 lvl | PoE2 id | Mods → KvN | TD note |
+| Unique | Base (id), PoE2 lvl | PoE2 id | Mods → MvM | TD note |
 |---|---|---|---|---|
 | **Mist Whisper** | Makeshift Crossbow (`FourCrossbow1`), 1 | `Mist Whisper` / `FourUniqueCrossbow1` | Adds (8–10) to (13–15) Cold `UniqueLocalAddedColdDamage4` ✓<br>Gain 5 Mana per enemy killed `UniqueManaGainedFromEnemyDeath7` → cut (mana)<br>(30–50)% increased Freeze Buildup `UniqueFreezeDamageIncrease3` ✓<br>30% increased Chill Duration on Enemies `UniqueChillDuration1` → **adapted**: % increased ailment duration (Chill only)<br>Attacks Chain 2 additional times `UniqueAdditionalAttackChain1` ✓ chain +2 | Each bolt hits the first monster, then jumps twice to the nearest monster within ~2 tiles in any lane. A day-one crowd-control crossbow that teaches chain plus freeze. |
 | **Splinter of Lorrata** | Hardwood Spear (`FourSpear1`), 1 | `Splinter of Loratta` (data spelling) / `FourUniqueSpear1` | Grants Spear Throw → cut<br>Adds (2–3) to (6–8) Physical `UniqueLocalAddedPhysicalDamage3` ✓<br>Deal no Elemental Damage `DealNoElementalDamageUnique__1` → **flag**<br>20% increased Melee Strike Range `UniqueLocalWeaponRangeIncrease1` → cut (lane-literal melee)<br>Any number of Poisons from this Weapon can affect a target at the same time `UniqueLocalInfinitePoisonStackCount1` → **flag**<br>Always Poison on Hit with this weapon `UniqueLocalPoisonOnHit1` ✓ (100% poison chance) | A poison stacker. Every hit adds another poison, so it melts Brutes (huge life). Several copies in one lane stack fast. |
 | **The Blood Thorn** | Wrapped Quarterstaff (`FourQuarterstaff1`), 1 | `The Blood Thorn` / `FourUniqueQuarterstaff1` | Adds (8–12) to (16–18) Physical `UniqueLocalAddedPhysicalDamage2` ✓<br>+(10–15) to Strength (stat `additional_strength`) ✓<br>Causes Bleeding on Hit `UniqueCausesBleeding1` ✓ (100% bleed chance)<br>(4–5) to (8–10) Physical Thorns damage `UniqueAttackerTakesDamage1` ✓ | A striker that doubles as a mini-wall: it bleeds what it hits and thorns what bites it. |
 | **Sanguine Diviner** | Bone Wand (`FourWand2`), 2 | `Sanguine Diviner` / `FourUniqueWand2` | Grants Bone Blast → cut<br>(80–100)% increased Spell Damage (stat `spell_damage_+%`) ✓<br>Gain (10–15) Life per enemy killed `UniqueLifeGainedFromEnemyDeath7` ✓<br>25% chance to inflict Bleeding on Hit `UniqueGlobalChanceToBleed3` ✓<br>25% of Spell Mana Cost Converted to Life Cost `UniqueSpellLifeCostPercent1` → cut (heroes have no mana cost) | Gives a physical-spell wand hero Bleed. It opens the "bleed caster" build. |
-| **Enfolding Dawn** | Pilgrim Vestments (`FourBodyStrInt1`), 1 | `Enfolding Dawn` / `FourUniqueBodyStrInt1_` | (50–100)% increased Armour and Energy Shield (stat `local_armour_and_energy_shield_+%`) ✓<br>+100 to Spirit (stat `base_spirit_from_equipment`) ✓<br>+(5–15)% to all Elemental Resistances (stat `base_resist_all_elements_%`) ✓<br>Gain no inherent bonus from Intelligence `UniqueNoManaPerIntelligence1` → **flag**: the hero gets no ES% from Int (the KvN Int bonus) | The acolyte armour. A sceptre's 100 + 100 here = 200 Spirit, so 25 × (1 + 200/200) = **50 mana per cycle**, double a bare acolyte. |
+| **Enfolding Dawn** | Pilgrim Vestments (`FourBodyStrInt1`), 1 | `Enfolding Dawn` / `FourUniqueBodyStrInt1_` | (50–100)% increased Armour and Energy Shield (stat `local_armour_and_energy_shield_+%`) ✓<br>+100 to Spirit (stat `base_spirit_from_equipment`) ✓<br>+(5–15)% to all Elemental Resistances (stat `base_resist_all_elements_%`) ✓<br>Gain no inherent bonus from Intelligence `UniqueNoManaPerIntelligence1` → **flag**: the hero gets no ES% from Int (the MvM Int bonus) | The acolyte armour. A sceptre's 100 + 100 here = 200 Spirit, so 25 × (1 + 200/200) = **50 mana per cycle**, double a bare acolyte. |
 | **Bramblejack** | Rusted Cuirass (`FourBodyStr1`), 1 | `Bramblejack` / `FourUniqueBodyStr1` | +(60–100) to maximum Life (stat `base_maximum_life`) ✓<br>+(60–100) to Stun Threshold (stat `stun_threshold_+`) ✓<br>Cannot Evade Enemy Attacks `UniqueCannotEvade1` → **flag** (evasion chance 0)<br>250% of Melee Physical Damage taken reflected to Attacker `UniquePhysicalDamageTakenPercentToReflect1` → **adapted + flag**: thorns-style retaliation equal to 250% of each melee physical hit taken<br>Regenerate 5% of maximum Life per second while Surrounded `UniqueLifeRegenerationWhileSurrounded1` → **adapted**: % of life regenerated per second, condition "Surrounded" = 3+ monsters within 1 tile (**flag**) | The Wall-nut that bites back. Monsters chewing on it take 2.5× their own bite. |
 
 **L10 pool (PoE2 level 10–16)**
 
-| Unique | Base (id), PoE2 lvl | PoE2 id | Mods → KvN | TD note |
+| Unique | Base (id), PoE2 lvl | PoE2 id | Mods → MvM | TD note |
 |---|---|---|---|---|
 | **Frostbreath** | Slim Mace (`FourOneHandMace3`), 10 | `Frostbreath` / `FourUniqueOneHandMace3` | Adds (8–12) to (16–20) Physical `UniqueLocalAddedPhysicalDamage4` ✓<br>Adds (8–12) to (16–20) Cold `UniqueLocalAddedColdDamage2` ✓<br>+5% to Critical Hit Chance (stat `local_critical_strike_chance`) ✓<br>All Damage from Hits with this Weapon Contributes to Freeze Buildup `UniqueLocalAllDamageCanFreeze1` → **flag**<br>Culling Strike against Frozen Enemies `UniqueLocalCullingStrikeFrozenEnemies1` → Culling Strike ✓ with condition Frozen (**flag**) | A melee wall-breaker. It freezes the monster in front of it and culls it. With a shield it is a frontline anchor. |
 | **Brain Rattler** | Studded Greatclub (`FourTwoHandMace4`), 16 | `Brain Rattler` / `FourUniqueTwoHandMace4` | Adds 1 to (110–115) Lightning `UniqueLocalAddedLightningDamage10` ✓<br>(10–15)% increased Attack Speed (stat `local_attack_speed_+%`) ✓<br>All damage with this Weapon causes Electrocution buildup `UniqueLocalAllDamageCanElectrocute1` ✓ (enables Electrocute buildup) | An Electrocuted monster can't act for 5 s (PoE2 glossary). That stalls the head of a lane, so it pairs with heavy-stun bursts. |
@@ -660,7 +660,7 @@ Columns:
 
 **L15 pool (PoE2 level 20–22)**
 
-| Unique | Base (id), PoE2 lvl | PoE2 id | Mods → KvN | TD note |
+| Unique | Base (id), PoE2 lvl | PoE2 id | Mods → MvM | TD note |
 |---|---|---|---|---|
 | **Doomfletch** | Composite Bow (`FourBow5`), 22 | `Doomfletch` / `FourUniqueBow5` | Adds (5–7) to (10–12) Physical `UniqueLocalAddedPhysicalDamage7` ✓<br>+10 to Dexterity (stat `additional_dexterity`) ✓<br>(30–50)% increased Mana Regeneration Rate → cut<br>Attacks with this Weapon gain 100% of Physical damage as Extra damage of each Element (stat `local_non_skill_physical_damage_%_to_gain_as_each_element_with_attacks_while_have_this_two_handed_hand_weapon`) ✓ → gained as extra Fire, Cold and Lightning, 100% each | Every arrow carries Physical + Fire + Cold + Lightning, so it ignites, chills and shocks at once. Physical scaling counts four times. |
 | **Sculpted Suffering** | Warpick (`FourOneHandMace5`), 22 | `Sculpted Suffering` / `FourUniqueOneHandMace5__` | Implicit +(5–10)% Critical Damage Bonus `MaceImplicitCriticalMultiplier1` ✓<br>Adds (21–26) to (25–31) Physical `UniqueLocalAddedPhysicalDamage18` ✓<br>(10–15)% increased Attack Speed ✓<br>Breaks Armour equal to 40% of damage from Hits `UniqueLocalArmourBreakOnDamage1` ✓ Armour Break<br>Fully Armour Broken enemies you kill with Hits Shatter `UniqueFullyArmourBrokenShatterOnKill1` → cut (no corpse mechanics) | The answer to the Armoured archetype. A Fully Broken monster takes 20% increased physical damage from every hero (PoE2 glossary). |
@@ -668,7 +668,7 @@ Columns:
 
 **L20 pool (PoE2 level 24–28)**
 
-| Unique | Base (id), PoE2 lvl | PoE2 id | Mods → KvN | TD note |
+| Unique | Base (id), PoE2 lvl | PoE2 id | Mods → MvM | TD note |
 |---|---|---|---|---|
 | **Fixation of Yix** | Stellar Amulet (`FourAmulet8`), 24 | `Fixation of Yix` / `FourUniqueAmulet16` | Implicit +(5–7) to all Attributes `AmuletImplicitAllAttributes1` ✓<br>+100 to maximum Life (stat `base_maximum_life`) ✓<br>Allies in your Presence have (30–50)% increased Critical Hit Chance `UniqueNearbyAlliesCriticalStrikeChance2` → **deviation**<br>Allies in your Presence have (30–50)% increased Critical Damage Bonus `UniqueNearbyAlliesCriticalMultiplier1` → **deviation**<br>Allies in your Presence have (10–20)% increased Attack Speed `UniqueNearbyAlliesIncreasedAttackSpeed1` → **deviation**<br>Allies in your Presence have (10–20)% increased Cast Speed `UniqueNearbyAlliesIncreasedCastSpeed1` → **deviation**<br>50% reduced Presence Area of Effect (stat `presence_area_+%`) ✓ | Turns an aura hero into a tight-radius force multiplier. Place it in the middle of the firing line. A positional-placement puzzle in one item. |
 | **Death's Harp** | Dualstring Bow (`FourBow6`), 28 | `Death's Harp` / `FourUniqueBow6` | Implicit +50% Surpassing chance to fire an additional Arrow `BowImplicitAdditionalArrows1` ✓ (adapted, see C.2)<br>+(20–25)% to Critical Damage Bonus `UniqueLocalCriticalMultiplier1` ✓<br>Gain (20–30) Life per enemy killed (stat `base_life_gained_on_enemy_death`) ✓<br>Gain (12–18) Mana per enemy killed `UniqueManaGainedFromEnemyDeath6` → cut<br>+(250–330)% Surpassing chance to fire an additional Arrow `UniqueAdditionalArrowChance1` ✓ → **adapted**: + number of projectiles. Total 300–380% = 3 extra arrows, plus a 0–80% chance of a 4th | A Threepeater on steroids: 4–5 arrows per shot. Per the fan rule in `appendix-a-combat.md` §3.4, they hit the lane above, the lane below and the hero's own lane twice or more. The late-demo bow chase item. |
@@ -687,7 +687,7 @@ Columns:
 | `cannot_evade` | Bramblejack | Evasion chance = 0 | Drop the line |
 | `reflect_melee_phys_%` | Bramblejack | Retaliation of 250% of the melee physical damage taken, dealt as thorns | Replace with "(25–35) to (40–55) Physical Thorns" |
 | `surrounded` condition | Bramblejack | True while 3+ monsters are within 1 tile | Drop the regen line |
-| `no_int_bonus` | Enfolding Dawn | Ignore the KvN Int → ES% bonus | Drop the line (a slight buff) |
+| `no_int_bonus` | Enfolding Dawn | Ignore the MvM Int → ES% bonus | Drop the line (a slight buff) |
 
 ---
 
@@ -695,14 +695,14 @@ Columns:
 
 ### C.5.1 The 13 currency families
 
-- "13" counts the brief's list: 9 item orbs, 1 Jeweller's family (3 grades), Gemcutter's Prism, and 2 KvN custom orbs.
+- "13" counts the brief's list: 9 item orbs, 1 Jeweller's family (3 grades), Gemcutter's Prism, and 2 MvM custom orbs.
 - **PoE2 dl** = drop level: research file §1.5 and poe2db. The Jeweller's Orb levels (25/45/65) come from `base_items.json` and poe2db.
-- **KvN dl** and **Weight** match `appendix-e-economy.md` §4.2, which owns the economy. Values that differ from PoE2 are in bold.
-  - Weights are relative: at a given area level, drop every currency whose KvN dl is above it, then normalise.
+- **MvM dl** and **Weight** match `appendix-e-economy.md` §4.2, which owns the economy. Values that differ from PoE2 are in bold.
+  - Weights are relative: at a given area level, drop every currency whose MvM dl is above it, then normalise.
   - Absolute rates are in appendix E.
 - **Fee** = poe2db Currency Exchange gold fee, a proxy for GGG's value ladder.
 
-| # | Currency | PoE2 base id | PoE2 dl | KvN dl | Fee | Weight | Used on |
+| # | Currency | PoE2 base id | PoE2 dl | MvM dl | Fee | Weight | Used on |
 |---|---|---|---|---|---|---|---|
 | 1 | Orb of Transmutation | `Metadata/Items/Currency/CurrencyUpgradeToMagic` | 1 | 1 | 50 | 30 | items |
 | 2 | Orb of Augmentation | `Metadata/Items/Currency/CurrencyAddModToMagic` | 1 | 1 | 20 | 30 | items |
@@ -717,17 +717,17 @@ Columns:
 | 10b | Greater Jeweller's Orb | `Metadata/Items/Currency/CurrencyAddSkillGemSocket4` | 45 | **15** | 600 | 1 | heroes, spells |
 | 10c | Perfect Jeweller's Orb | `Metadata/Items/Currency/CurrencyAddSkillGemSocket5` | 65 | **25** | 1000 | 0.25 | heroes, spells |
 | 11 | Gemcutter's Prism | `Metadata/Items/Currency/CurrencyGemQuality` | 12 | **8** | 1000 | 2 | heroes, spells |
-| 12 | **Orb of Realignment** (KvN custom) | `KvN/Currency/RerollSupport` (no PoE2 id) | — | 12 | — | 1 | heroes, spells |
-| 13 | **Orb of Transference** (KvN custom) | `KvN/Currency/TransferSupports` (no PoE2 id) | — | 15 | — | 0.5 | heroes, spells |
+| 12 | **Orb of Realignment** (MvM custom) | `MvM/Currency/RerollSupport` (no PoE2 id) | — | 12 | — | 1 | heroes, spells |
+| 13 | **Orb of Transference** (MvM custom) | `MvM/Currency/TransferSupports` (no PoE2 id) | — | 15 | — | 0.5 | heroes, spells |
 | S1 | Transmutation Shard | `Metadata/Items/Currency/CurrencyUpgradeToMagicShard` | 1 | salvage and filter only | 4 | — | 10 → Orb of Transmutation |
 | S2 | Regal Shard | `Metadata/Items/Currency/CurrencyUpgradeMagicToRareShard` | 5 | salvage only | 12 | — | 10 → Regal Orb |
-| S3 | **Jeweller's Shard** (KvN custom) | `KvN/Currency/JewellerShard` | — | salvage only | — | — | 10 → Lesser Jeweller's Orb |
+| S3 | **Jeweller's Shard** (MvM custom) | `MvM/Currency/JewellerShard` | — | salvage only | — | — | 10 → Lesser Jeweller's Orb |
 
 **Why these ratios.**
 
 - They keep the research file's Act 1 order: Transmutation ≈ Augmentation ≫ Regal ≈ Exalted > Chaos > Alchemy ≫ Annulment, Vaal, Divine.
 - Appendix E runs currency about 3× PoE2's campaign rate so that crafting happens inside 2 hours.
-- PoE2 shards also drop as loose items. In KvN they come only from salvage and the loot filter (C.5.6, C.7), so that each drop is a whole orb.
+- PoE2 shards also drop as loose items. In MvM they come only from salvage and the loot filter (C.5.6, C.7), so that each drop is a whole orb.
 
 **Cut, per the brief.** Essences, Omens, runes and soul cores, catalysts, Artificer's Orb and Shard, Orb of Chance and Chance Shard, Scroll of Wisdom (auto-identify), Greater and Perfect item orbs (dl 46–79).
 
@@ -735,7 +735,7 @@ Columns:
 
 Descriptions are PoE2 base-item text from `base_items.json`, with poe2db usage notes.
 
-| Currency | PoE2 behaviour | Valid targets | KvN notes |
+| Currency | PoE2 behaviour | Valid targets | MvM notes |
 |---|---|---|---|
 | Transmutation | Upgrades a Normal item to Magic **with 1 modifier** | Normal | The mod rolls from the combined prefix + suffix pool |
 | Augmentation | Augments a Magic item with **one new random modifier** (max 2) | Magic with 1 mod | Adds the missing prefix or suffix |
@@ -760,7 +760,7 @@ Every item currency fails on corrupted items. All item rolls use ilvl gating and
 | 25% | Add a Corrupted enchantment (table below) | Add a Corrupted enchantment | Add a Corrupted enchantment |
 | 25% | +1 socket beyond the cap (armour, martial weapons); wands and staves get quality up to 23% | same | Nothing happens |
 
-**KvN table (adapted).** Sockets are cut, so the socket outcome becomes quality.
+**MvM table (adapted).** Sockets are cut, so the socket outcome becomes quality.
 
 | Roll | Non-unique item | Unique item |
 |---|---|---|
@@ -792,7 +792,7 @@ Every item currency fails on corrupted items. All item rolls use ilvl gating and
 | Greater (`CurrencyAddSkillGemSocket4`) | Sets a Skill Gem to have **4** Support Gem Sockets | Only on gems with fewer than 4 |
 | Perfect (`CurrencyAddSkillGemSocket5`) | Sets a Skill Gem to have **5** Support Gem Sockets | Only on gems with fewer than 5 |
 
-**KvN rule (adapted).** Each orb **adds exactly one support slot**, and only below its ceiling:
+**MvM rule (adapted).** Each orb **adds exactly one support slot**, and only below its ceiling:
 
 | Orb | Usable when hero has | Result |
 |---|---|---|
@@ -810,13 +810,13 @@ Every item currency fails on corrupted items. All item rolls use ilvl gating and
 - What quality does per hero = the gem's PoE2 quality bonus (`appendix-b-heroes.md`).
 - It does nothing on a hero at 20% or above.
 
-**Orb of Realignment** (**KvN custom**, rare). Rerolls one support.
+**Orb of Realignment** (**MvM custom**, rare). Rerolls one support.
 
 - Pick one support on a non-corrupted Magic or Rare hero.
 - It is replaced by a different random compatible support. Same rules as above, and it can't be the removed support or a family already on the hero.
 - Slot count and rarity don't change.
 
-**Orb of Transference** (**KvN custom**, very rare). Moves supports between heroes of the same skill.
+**Orb of Transference** (**MvM custom**, very rare). Moves supports between heroes of the same skill.
 
 - Pick a **donor** and a **recipient** with the same PoE2 skill gem id (e.g. two Lightning Arrow heroes). Both must be non-corrupted.
 - The recipient's supports **and** support slot count are replaced by the donor's.
@@ -825,9 +825,9 @@ Every item currency fails on corrupted items. All item rolls use ilvl gating and
 
 **Example.** Your level 9 Lightning Arrow has 4 great supports. A level 15 Lightning Arrow drops with 1 bad support. Transference gives the level 15 hero the 4 great supports.
 
-### C.5.5 Vaal Orb on heroes and spells (proposal, KvN custom)
+### C.5.5 Vaal Orb on heroes and spells (proposal, MvM custom)
 
-PoE2 gem corruption (COMMUNITY: maxroll, switchbladegaming) has four outcomes: no change; ±1 gem level; ±1 support socket; quality shifted (cap 23%). KvN mirrors it:
+PoE2 gem corruption (COMMUNITY: maxroll, switchbladegaming) has four outcomes: no change; ±1 gem level; ±1 support socket; quality shifted (cap 23%). MvM mirrors it:
 
 | Roll | Outcome |
 |---|---|
@@ -848,18 +848,18 @@ The stash has a **Salvage** action next to **Sell**. Selling gives gold (values 
 
 | Salvaged | Output | Source |
 |---|---|---|
-| Normal item | Nothing; sell it instead. The filter turns hidden normals into gold | KvN custom |
+| Normal item | Nothing; sell it instead. The filter turns hidden normals into gold | MvM custom |
 | Magic item | 1 Transmutation Shard | PoE2 disenchant (COMMUNITY: Mobalytics; research file) |
 | Rare item | 1 Regal Shard; 2 if it has 6 mods | PoE2 disenchant (WIKI via research file §1.5) |
-| Unique item | 4 Regal Shards | **KvN custom**: PoE2's unique disenchant output was not verified |
-| Normal hero or spell | Nothing; sell it | KvN custom |
-| Magic hero or spell | 1 Jeweller's Shard | **KvN custom** |
-| Rare hero or spell | 3 Jeweller's Shards (4 if 4+ supports) | **KvN custom** |
+| Unique item | 4 Regal Shards | **MvM custom**: PoE2's unique disenchant output was not verified |
+| Normal hero or spell | Nothing; sell it | MvM custom |
+| Magic hero or spell | 1 Jeweller's Shard | **MvM custom** |
+| Rare hero or spell | 3 Jeweller's Shards (4 if 4+ supports) | **MvM custom** |
 
 **Stack rules.**
 
 - 10 Transmutation Shards → 1 Orb of Transmutation; 10 Regal Shards → 1 Regal Orb. This is PoE2's stack size and `full_stack_turns_into`.
-- 10 Jeweller's Shards → 1 Lesser Jeweller's Orb (KvN custom). A Lesser Orb is PoE2's 200-gold rung, 4× a Transmutation, and hero drops are rarer than item drops.
+- 10 Jeweller's Shards → 1 Lesser Jeweller's Orb (MvM custom). A Lesser Orb is PoE2's 200-gold rung, 4× a Transmutation, and hero drops are rarer than item drops.
 - Shards merge into orbs automatically in the stash.
 - Quality and corruption don't change salvage output.
 
@@ -875,7 +875,7 @@ The stash has a **Salvage** action next to **Sell**. Selling gives gold (values 
 ilvl = A + (1 if rare monster) + (2 if boss)
 ```
 
-**Step 2: Category, slot, class, base.** The splits are `appendix-e-economy.md` §3.2–3.3; the base tilt is KvN custom.
+**Step 2: Category, slot, class, base.** The splits are `appendix-e-economy.md` §3.2–3.3; the base tilt is MvM custom.
 
 1. **Category:** Gear 85% / Hero 11% / Spell 4%. The rest of this algorithm is for gear. Heroes and spells: `appendix-b-heroes.md`.
 2. **Gear slot:**
@@ -885,7 +885,7 @@ ilvl = A + (1 if rare monster) + (2 if boss)
 3. **Weapon class:**
    - 50%: uniform among the weapon classes the current roster's heroes use.
    - 50%: uniform over all 9 demo classes.
-4. **Base (KvN custom):** among that class's catalog bases with `drop_level ≤ ilvl`, weight the newest 3, the second-newest 2, the rest 1.
+4. **Base (MvM custom):** among that class's catalog bases with `drop_level ≤ ilvl`, weight the newest 3, the second-newest 2, the rest 1.
    - PoE2 drops all eligible bases evenly. The tilt keeps upgrades coming in a 2-hour demo.
 
 **Step 3: Rarity.** This is appendix E's model, repeated here so the algorithm is complete. Rarity bonus `R` is a fraction (+100% = 1.0).
@@ -917,7 +917,7 @@ pick one rarity by weight (normalised)
 
 | Rarity | Distribution | Source |
 |---|---|---|
-| Magic | 1 mod 50%, 2 mods (1P + 1S) 50% | KvN proposal (no PoE2 figure found) |
+| Magic | 1 mod 50%, 2 mods (1P + 1S) 50% | MvM proposal (no PoE2 figure found) |
 | Rare | 4 mods 8/12, 5 mods 3/12, 6 mods 1/12 | PoE1 community figure; PoE1 wiki: found rares "always have at least 4 affixes". PoE2's Alchemy also makes exactly 4 |
 
 **Step 5: Roll the mods.** Repeat N times:
@@ -937,7 +937,7 @@ pick one rarity by weight (normalised)
 - Roll implicit values.
 - Weapons and armour (non-unique) have a 10% chance of 1–20% quality (C.1.4).
 - Magic name = "<prefix name> <base> <suffix name>" (PoE2 affix names, e.g. "Serrated Ironhead Spear of Ease").
-- Rare name = two random words from a PoE-style list (KvN flavour).
+- Rare name = two random words from a PoE-style list (MvM flavour).
 - Mark as identified.
 
 ### C.6.1 Worked example: a rare spear at area level 14
@@ -978,7 +978,7 @@ pick one rarity by weight (normalised)
 
 | Line | Value | How |
 |---|---|---|
-| Implicit | ~~Grants Skill: Spear Throw~~ | cut in KvN |
+| Implicit | ~~Grants Skill: Spear Throw~~ | cut in MvM |
 | Physical damage | **16–21** | (9–12) × (1 + 0.61 + 0.16) = 15.9–21.2, rounded |
 | Fire damage | **1–4** | local added, not scaled by phys % |
 | Attack time | **579 ms (1.73 APS)** | 625 / 1.08 |
@@ -1061,7 +1061,7 @@ Each item says what the data forced, and what happens if the team says no.
    - They are what makes the chosen uniques build-enabling. Each has a fallback if rejected.
 3. **Currency drop levels lowered** (values shared with `appendix-e-economy.md` §4.2). PoE2's drop levels put six of the brief's currencies at or past the end of the demo (area ~29):
 
-   | Currency | PoE2 dl | KvN dl |
+   | Currency | PoE2 dl | MvM dl |
    |---|---|---|
    | Vaal Orb | 35 | 15 |
    | Orb of Annulment | 35 | 15 |
@@ -1073,9 +1073,9 @@ Each item says what the data forced, and what happens if the team says no.
    Appendix E also moves Regal, Exalted and Alchemy (5 → 3), and Chaos and Gemcutter's Prism (12 → 8), earlier.
 
 4. **Item-level bonus read as monster rarity.** The brief's "rares +1, uniques +2" is implemented as PoE2 does it: +1 for a rare **monster**, +2 for a boss. The item's own rarity doesn't matter.
-5. **"13 currencies"** counts the Jeweller's Orb as one family in 3 grades. In total there are 15 orbs plus 3 shards (2 PoE2, 1 KvN custom).
+5. **"13 currencies"** counts the Jeweller's Orb as one family in 3 grades. In total there are 15 orbs plus 3 shards (2 PoE2, 1 MvM custom).
 6. **No item-quality currency.**
-   - The brief keeps PoE2 quality up to 20% but lists no quality orb. KvN gets quality from drops (10% chance of 1–20%, KvN custom) and the Vaal outcome.
+   - The brief keeps PoE2 quality up to 20% but lists no quality orb. MvM gets quality from drops (10% chance of 1–20%, MvM custom) and the Vaal outcome.
    - Option: add Armourer's Scrap (`CurrencyArmourQuality`), Blacksmith's Whetstone (`CurrencyWeaponQuality`) and Arcanist's Etcher (`CurrencyMagicQuality`), all PoE2 dl 5.
 7. **Vocabulary wording corrections from PoE2 data.**
    - Local crit on weapons is a **flat** "+X% to Critical Hit Chance" (`local_critical_strike_chance`), not "% increased". `appendix-a-combat.md` §9.1 lists `local_critical_strike_chance_+%`.
@@ -1085,7 +1085,7 @@ Each item says what the data forced, and what happens if the team says no.
      - "Chill Duration" → ailment duration;
      - "Surpassing chance for an additional arrow" and "chance to Chain" → + projectiles / + chain with a chance;
      - local "% increased Spirit" → flat Spirit on the 100 base.
-8. **Quality on wands, staves and sceptres adapted.** PoE2 quality boosts the skill the item grants, and granted skills are cut. KvN: 1% increased Spell damage (wand, staff) or 1% increased Spirit (sceptre) per 1% quality.
+8. **Quality on wands, staves and sceptres adapted.** PoE2 quality boosts the skill the item grants, and granted skills are cut. MvM: 1% increased Spell damage (wand, staff) or 1% increased Spirit (sceptre) per 1% quality.
 9. **Scope counts slightly over the targets:** 13 jewellery bases (target ~10) and 17 uniques (target ~15). That way every weapon class and slot has at least one unique, and every unique's base is in the catalog.
 
 ---
