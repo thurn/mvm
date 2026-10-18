@@ -11,6 +11,12 @@ describe("the boot decision (P14)", () => {
     ).toEqual({ kind: "title" });
   });
 
+  test("a first-clear pick left unmade, with no round, reopens the level-end pick (1.35)", () => {
+    const account = newAccount("warrior");
+    account.pendingChoices.push({ levelId: "level-1", options: [] });
+    expect(bootDecision({ account, round: null, roundRejected: null })).toEqual({ kind: "pick" });
+  });
+
   test("a valid round means the countdown", () => {
     const account = newAccount("warrior");
     const round = beginLevel(account, LEVEL_1, 1);

@@ -3,11 +3,16 @@ import type { Intent } from "../sim/intents";
 
 /** What the game opens on (P14). */
 export type BootDecision =
-  { kind: "title" } | { kind: "resume" } | { kind: "restart"; reason: string };
+  { kind: "title" } | { kind: "pick" } | { kind: "resume" } | { kind: "restart"; reason: string };
 
-/** No round means the title; a loaded round resumes behind the countdown; a rejected one restarts its level with a banner. */
+/**
+ * No round means the title, or the level-end pick when a first-clear choice
+ * is still pending (1.35); a loaded round resumes behind the countdown; a
+ * rejected one restarts its level with a banner.
+ */
 export function bootDecision(resumed: Resumed | null): BootDecision {
-  if (!resumed || !resumed.round) return { kind: "title" };
+  if (!resumed) return { kind: "title" };
+  if (!resumed.round) return { kind: resumed.account.pendingChoices.length > 0 ? "pick" : "title" };
   if (resumed.roundRejected) return { kind: "restart", reason: resumed.roundRejected };
   return { kind: "resume" };
 }

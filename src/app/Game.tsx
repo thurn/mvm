@@ -135,12 +135,10 @@ export function Game() {
       if (cancelled) return;
       setServices({ store, mirror, logger });
       const decision = bootDecision(resumed);
-      if (decision.kind === "title" || !resumed?.round) {
-        // A first-clear pick left unmade reopens the level-end screen (1.35).
-        const pending = (resumed?.account.pendingChoices.length ?? 0) > 0;
+      if (decision.kind === "title" || decision.kind === "pick" || !resumed?.round) {
         setPhase({
           kind: "menu",
-          screen: pending ? "levelEnd" : "title",
+          screen: decision.kind === "pick" ? "levelEnd" : "title",
           account: resumed?.account ?? null,
         });
       } else {

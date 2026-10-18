@@ -466,6 +466,8 @@ export const LEVEL_END_TUNING = {
   /** The XP bars fill over this long after the last card, ticking every `tickMs`. */
   xpFillMs: 900,
   tickMs: 60,
+  /** The first-clear reveal's flash, before the juice and reduce-flashing settings. */
+  flashAlpha: 0.85,
   /** A level-up's teal burst. */
   burstParticles: 12,
   burstMs: 700,

@@ -6,6 +6,9 @@ import type { AccountState } from "../../account/state";
 import { generateGear } from "../../loot/items";
 import type { Drop } from "../../loot/drops";
 import { createStreams, streamRng } from "../../sim/rng";
+import { DEFAULT_SETTINGS, sharedSettings, type JuiceSettings } from "../../juice/core/settings";
+import { JUICE_TUNING } from "../../tuning/juice";
+import { skillName } from "../cards/HeroCard";
 import { chooseHero } from "./choose";
 import { LevelEnd } from "./LevelEnd";
 import { sortDrops, type CardDrop } from "./sort";
@@ -150,6 +153,59 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
       expect(screen.getAllByText("UPGRADE")).toHaveLength(1);
       expect(screen.getByText("Slot 4 unlocked")).toBeTruthy();
       expect(screen.getByText("+40 XP")).toBeTruthy();
+    });
+
+    test("the juice settings scale the reveal: juice 0 drops the burst, reduced flashing caps the flash", () => {
+      const run = (patch: Partial<JuiceSettings>) => {
+        cleanup();
+        sharedSettings().set({ ...DEFAULT_SETTINGS, ...patch });
+        const account = withChoice();
+        account.player.xp = 600;
+        render(
+          <LevelEnd
+            account={account}
+            summary={{ result: "won", xpGained: 600, firstClear: true, drops: [] }}
+            before={{ player: { level: 1, xp: 0 }, heroes: {} }}
+            onSave={() => {}}
+            onReplay={() => {}}
+            onHideout={() => {}}
+          />,
+        );
+        act(() => {
+          vi.advanceTimersByTime(5000);
+        });
+        return {
+          particles: screen.queryAllByTestId("burst-particle").length,
+          flash: Number(screen.queryByTestId("first-clear-flash")?.dataset.alpha ?? 0),
+        };
+      };
+      try {
+        expect(run({})).toEqual({ particles: 12, flash: 0.85 });
+        expect(run({ juice: 0 })).toEqual({ particles: 0, flash: 0 });
+        expect(run({ reduceFlashing: true }).flash).toBeLessThanOrEqual(
+          JUICE_TUNING.reduceFlashingMaxAlpha,
+        );
+      } finally {
+        sharedSettings().set(DEFAULT_SETTINGS);
+      }
+    });
+
+    test("each offered hero's button is named for the hero", () => {
+      const account = withChoice();
+      render(
+        <LevelEnd
+          account={account}
+          summary={null}
+          before={null}
+          onSave={() => {}}
+          onReplay={() => {}}
+          onHideout={() => {}}
+        />,
+      );
+      const hero = account.pendingChoices[0]!.options[0]!;
+      expect(screen.getByTestId(`choose-${hero.id}`).getAttribute("aria-label")).toBe(
+        `Choose ${skillName(hero.skillId)}`,
+      );
     });
 
     test("a loss shows Defeat and no first-clear reward", () => {
