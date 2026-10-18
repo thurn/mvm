@@ -46,10 +46,11 @@ describe("support types (B §1.10 step 2)", () => {
 });
 
 describe("support roll (B §1.10)", () => {
-  const heroes = heroPool();
+  // Spells roll supports through the same path, so the property covers both.
+  const heroes = [...heroPool(), ...spellPool()];
 
   test("never yields an incompatible, duplicate, same-family or conflicting support (property)", () => {
-    for (let seed = 1; seed <= 200; seed++) {
+    for (let seed = 1; seed <= 400; seed++) {
       const rng = rngFor(seed);
       const skillId = heroes[seed % heroes.length]!;
       const level = 1 + Math.floor(rng() * 32);
