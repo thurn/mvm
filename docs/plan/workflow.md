@@ -253,6 +253,10 @@ any more. A scripted edit that misses its target fails silently.
   found, or uses the editor's exact-match edit, which fails on no match.
 - **Edit JSON as JSON.** Change `tsconfig*.json` and `package.json` by
   parsing and rewriting them, never with text replacement.
+- **Probe tests.** Vitest swallows `console.log` in an ad-hoc probe test, so
+  throw the result or write it to a scratch file instead.
+- **Long browser probes.** Split a Playwright evaluate call that would run
+  past 300 s into several shorter ones.
 
 ### The gate and ci-fix
 
@@ -327,6 +331,10 @@ A review/QA bead:
   title from any screen, mid-round included; `reset({ settings: true })`
   also restores default juice settings. Loading with `?reset=1` (or
   `?reset=settings`) does the same before boot. Dev builds only.
+- **Drag and drop.** A drag-and-drop change needs a check with a real drag
+  in the browser: jsdom drag tests have passed while the real drop failed.
+- **Hover tips** never take pointer events, or they steal the hover that
+  shows them; `HoverTip` in `src/ui/fx.tsx` already does this.
 - **Scenes.** Prefer `?scene=<name>` for feel work. Use `debugSlowmo` to
   capture timing.
 - **Autoplay.** `?autoplay=pvzOpener` plays a level hands-free;
@@ -345,7 +353,8 @@ A review/QA bead:
   `place_thunk` after a placement), not through the speakers.
 - **Screenshots.** Captures go to the primary checkout's gitignored
   `/Users/dthurn/mvm/artifacts/qa/<bead-id>/` and are referenced by filename
-  only. Never commit them.
+  only. Never commit them. Give Playwright screenshot calls that absolute
+  path: a relative one lands in the root of the primary checkout.
 - **Visual changes** add captures at 1280×720 and 1920×1080, plus one
   changed interaction state. New screens add one cold `visual-review` pass.
 

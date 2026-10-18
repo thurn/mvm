@@ -122,7 +122,7 @@ phase page from what the earlier phases taught, then files its beads
   beads right after the scaffold. Semantic edges hold real prerequisites.
   Serialization edges order only incompatible changes to the same seam.
 - **Delivery.** Each bead is one Conventional Commit in a Tollgate worktree,
-  submitted with `tg candidate` and authorized with `tg approve --wait`. This
+  submitted with `tg candidate` and authorized with `tg approve <candidate-id> --wait`. This
   plan grants promotion authority for in-scope plan work
   ([P9](decisions.md#p9-delivery-through-tollgate-worktrees)).
 - **Validation.** Tollgate's one `ci` step runs `scripts/ci` on every

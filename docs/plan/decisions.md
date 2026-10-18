@@ -115,7 +115,8 @@ that is split, with an edge, before it is claimed.
 Each bead is one Conventional Commit in a Tollgate worktree
 (`tg --no-launch worktree create wt/<bead-id>`, based on `staging`). It is
 submitted with `tg candidate HEAD` and authorized with
-`tg approve <id> --wait`. Plan sessions never commit on `master` and never
+`tg approve <candidate-id> --wait`, which takes the candidate's ID, not the
+bead's. Plan sessions never commit on `master` and never
 run `tg push-master`. This plan grants promotion authority for in-scope plan
 work.
 
