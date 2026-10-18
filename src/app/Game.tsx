@@ -4,6 +4,7 @@ import {
   beginLevel,
   finishLevel,
   newAccount,
+  type LevelSummary,
   resumeFromDocument,
   saveDocument,
   type Resumed,
@@ -37,6 +38,7 @@ import { route, type RouteAction, type Screen } from "./router";
 import { acceptsIntent, bootDecision, countdownAt } from "./boot";
 import { Board, useBoardScale, type BoardSource } from "./Board";
 import { DevMenu } from "../ui/dev/DevMenu";
+import { LevelEnd, xpSnapshot, type XpSnapshot } from "../ui/level-end/LevelEnd";
 
 const BUILD = import.meta.env.DEV ? "dev" : "build";
 /** How long the board stays up after a level ends, so its banner and stinger play. */
@@ -53,6 +55,8 @@ interface Playing {
   round: RoundState;
   /** Wall time the resume countdown started, or null when there is none. */
   countdownStartedAt: number | null;
+  /** XP when this session entered the level, for the summary's bars. */
+  before: XpSnapshot;
   banner: string | null;
 }
 
@@ -62,8 +66,9 @@ type Phase =
       kind: "menu";
       screen: Exclude<Screen, "level">;
       account: AccountState | null;
-      /** The last level's result line, for the level-end screen until 1.35's summary. */
-      summary?: string;
+      /** The last level's summary; none after a reload with a hero pick pending. */
+      summary?: LevelSummary;
+      before?: XpSnapshot;
     }
   | ({ kind: "playing" } & Playing);
 
@@ -131,7 +136,13 @@ export function Game() {
       setServices({ store, mirror, logger });
       const decision = bootDecision(resumed);
       if (decision.kind === "title" || !resumed?.round) {
-        setPhase({ kind: "menu", screen: "title", account: resumed?.account ?? null });
+        // A first-clear pick left unmade reopens the level-end screen (1.35).
+        const pending = (resumed?.account.pendingChoices.length ?? 0) > 0;
+        setPhase({
+          kind: "menu",
+          screen: pending ? "levelEnd" : "title",
+          account: resumed?.account ?? null,
+        });
       } else {
         logger.log("resume", { decision: decision.kind, tick: resumed.round.tick });
         setPhase({
@@ -139,6 +150,7 @@ export function Game() {
           account: resumed.account,
           round: resumed.round,
           countdownStartedAt: decision.kind === "resume" ? performance.now() : null,
+          before: xpSnapshot(resumed.account),
           banner: decision.kind === "restart" ? decision.reason : null,
         });
       }
@@ -192,14 +204,14 @@ export function Game() {
           });
           persist(services, playing.account, null);
           // The level-end banner and stinger play on the board first, then the level-end screen.
-          const line = `Level 1 ${summary.result}: ${summary.drops.length} drops, ${summary.xpGained} XP`;
           setTimeout(
             () =>
               setPhase({
                 kind: "menu",
                 screen: "levelEnd",
                 account: playing.account,
-                summary: line,
+                summary,
+                before: playing.before,
               }),
             LEVEL_END_HOLD_MS,
           );
@@ -213,7 +225,14 @@ export function Game() {
     const owner = account ?? newAccount("warrior");
     const round = beginLevel(owner, LEVEL_1);
     services.logger.log("levelStart", { levelId: LEVEL_1.id, wavePlan: round.waves?.plan });
-    setPhase({ kind: "playing", account: owner, round, countdownStartedAt: null, banner: null });
+    setPhase({
+      kind: "playing",
+      account: owner,
+      round,
+      countdownStartedAt: null,
+      banner: null,
+      before: xpSnapshot(owner),
+    });
   };
 
   /** Follows the router from a menu screen (1.34); "level" starts the level. */
@@ -273,15 +292,17 @@ export function Game() {
         />
       ),
       credits: <Credits onBack={() => go("back")} />,
-      // Until 1.35's summary: the result line, Replay and Hideout.
-      levelEnd: (
-        <MenuScreen music="hideout">
-          <h2>{phase.summary ?? "Level over"}</h2>
-          <MenuButton primary onClick={() => go("replay")}>
-            Replay
-          </MenuButton>
-          <MenuButton onClick={() => go("hideout")}>Hideout</MenuButton>
-        </MenuScreen>
+      levelEnd: phase.account ? (
+        <LevelEnd
+          account={phase.account}
+          summary={phase.summary ?? null}
+          before={phase.before ?? null}
+          onSave={() => services && phase.account && persist(services, phase.account, null)}
+          onReplay={() => go("replay")}
+          onHideout={() => go("hideout")}
+        />
+      ) : (
+        <MenuScreen music="hideout">No level to summarise.</MenuScreen>
       ),
       // Until 1.36's hideout: back into Level 1.
       hideout: (

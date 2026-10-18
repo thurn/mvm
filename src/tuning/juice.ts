@@ -451,3 +451,24 @@ export const AILMENT_JUICE = {
   meter: { color: "#7FD4FF", back: "#123040" },
 };
 export type OverlayAilment = (typeof AILMENT_JUICE.priority)[number];
+
+/** The level-end summary's reveal (Appendix H §3.10), in ms from the screen opening. */
+export const LEVEL_END_TUNING = {
+  /** The panel's slide up (`outBack`). */
+  slideMs: 350,
+  /** The first card flips after the slide; the rest follow this far apart, left to right. */
+  cardGapMs: 80,
+  /** Each card's stinger plays quietly. */
+  stingerDb: -9,
+  /** The UPGRADE stamp slams from this scale to 1. */
+  stampScale: 1.6,
+  stampMs: 100,
+  /** The XP bars fill over this long after the last card, ticking every `tickMs`. */
+  xpFillMs: 900,
+  tickMs: 60,
+  /** A level-up's teal burst. */
+  burstParticles: 12,
+  burstMs: 700,
+  /** The first-clear reward reveals this long after the XP has filled. */
+  firstClearDelayMs: 300,
+} as const;

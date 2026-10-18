@@ -21,6 +21,12 @@ export const SFX = {
   mana_charge: [0.25, 0, 300, 0.4, 0.2, 0.2, 0, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0.6, 0, 0],
   /** The short generic "pop" under every kill, on the kill ladder (H §7.2). */
   kill_pop: [0.4, 0, 520, 0, 0.01, 0.06, 1, 1.5, -8, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+  /** The UPGRADE stamp's thunk on the level-end summary (H §3.10). */
+  ui_stamp: [0.6, 0, 140, 0, 0.01, 0.08, 4, 1, -6, 0, 0, 0, 0, 0.3, 0, 0, 0, 1, 0, 0],
+  /** One tick of an XP bar filling (H §3.10). */
+  ui_tick: [0.15, 0, 1800, 0, 0, 0.04, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+  /** The level-up jingle: a rising arpeggio (H §3.10, §9.3). */
+  level_up: [0.5, 0, 523, 0.01, 0.12, 0.3, 0, 1, 0, 0, 262, 0.08, 0.08, 0, 0, 0, 0, 0.8, 0, 0],
   /** A soft thud: the placeholder for any combat sound without a sample. */
   thud: [0.6, 0.05, 90, 0, 0.02, 0.12, 4, 1, -2, 0, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0],
 } satisfies Record<string, ZzfxParams>;

@@ -14,7 +14,7 @@ const CUSTOM_NAMES: Readonly<Record<string, string>> = {
   "MvM/Heroes/EzomyteAcolyte": "Ezomyte Acolyte",
 };
 
-function skillName(skillId: string): string {
+export function skillName(skillId: string): string {
   return (
     CUSTOM_NAMES[skillId] ??
     [...heroGems(), ...spellGems(), ...supportGems()].find((g) => g.id === skillId)?.name ??
