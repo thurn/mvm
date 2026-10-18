@@ -22,6 +22,11 @@ function createTickerStore() {
       lines = [{ ...line, id: nextId++ }, ...lines].slice(0, LOOT_JUICE.tickerLines);
       for (const listener of listeners) listener();
     },
+    /** Empties the ticker: each round starts with none. */
+    clear() {
+      lines = [];
+      for (const listener of listeners) listener();
+    },
     subscribe(listener: Listener) {
       listeners.add(listener);
       return () => void listeners.delete(listener);

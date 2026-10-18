@@ -59,6 +59,8 @@ export const lootSystem: PresentationFactory = ({ stack, settings, director }) =
   let lastFrame: number | null = null;
   if (typeof window !== "undefined" && window.__mvm)
     window.__mvm.fireEvents = (events) => director.handle(events);
+  // A new board is a new round: the ticker starts empty.
+  tickerStore.clear();
 
   /** Turns this frame's new drops into staggered loot, grouped by kill. */
   function flush() {
