@@ -1,5 +1,6 @@
 import type { Actor } from "../combat/actor";
 import type { SkillHit } from "../combat/hit";
+import type { WaveRuntime } from "../monsters/waves";
 import type { Id } from "../types/ids";
 import { id } from "../types/ids";
 import { createStreams, drawUint32, type RngStreams } from "./rng";
@@ -25,6 +26,8 @@ export interface MonsterState {
   actor: Actor;
   /** The monster's attack on a hero blocking it (Appendix A §3.2); none for harmless monsters. */
   attack?: MonsterAttack;
+  /** PoE2 monster affix IDs rolled at spawn (Appendix D §4). */
+  affixes?: string[];
 }
 
 interface MonsterAttack {
@@ -135,6 +138,8 @@ export interface RoundState {
   life: number;
   waveCursor: number;
   rng: RngStreams;
+  /** The level's stored wave plan and its progress (Appendix D §5); null in scenes without waves. */
+  waves: WaveRuntime | null;
   earned: EarnedDrop[];
   result: "won" | "lost" | null;
 }
@@ -159,6 +164,7 @@ export function createRound({ seed, lanes, mana }: RoundOptions): RoundState {
     life: SIM_TUNING.startingLife,
     waveCursor: 0,
     rng: createStreams(seed),
+    waves: null,
     earned: [],
     result: null,
   };
