@@ -115,6 +115,13 @@ export async function bake(options: BakeOptions): Promise<BakeResult> {
           inputs.push(join(lib.root, layer.path));
     }
     for (const tile of Object.values(GRASSLAND_TILES)) inputs.push(join(options.lpcDir, tile.file));
+    // The palette ramps, the custom-animation table and the credits feed the bake too.
+    inputs.push(join(lib.root, "sources/custom-animations.ts"), join(lib.root, "CREDITS.csv"));
+    for (const material of readdirSync(join(lib.root, "palette_definitions"))) {
+      const dir = join(lib.root, "palette_definitions", material);
+      if (statSync(dir).isDirectory())
+        for (const file of readdirSync(dir)) inputs.push(join(dir, file));
+    }
   }
   const soundFiles = Object.fromEntries(
     Object.entries(SOUNDS).map(([soundId, source]) => [
@@ -142,6 +149,7 @@ export async function bake(options: BakeOptions): Promise<BakeResult> {
 
   if (
     existsSync(manifestPath) &&
+    (!options.creditsFile || existsSync(options.creditsFile)) &&
     existsSync(hashPath) &&
     readFileSync(hashPath, "utf8") === inputHash
   ) {
@@ -211,10 +219,8 @@ export async function bake(options: BakeOptions): Promise<BakeResult> {
   const copyAudio = (path: string): string => {
     const { from, to } = audioSource(options, path);
     const dest = join(options.outDir, "audio", to);
-    if (!existsSync(dest) || statSync(dest).size !== statSync(from).size) {
-      mkdirSync(dirname(dest), { recursive: true });
-      copyFileSync(from, dest);
-    }
+    mkdirSync(dirname(dest), { recursive: true });
+    copyFileSync(from, dest);
     if (path.startsWith("lpc/")) creditLpc(path.slice(4));
     else if (!credited.has(`audio:${path}`)) {
       credited.add(`audio:${path}`);
