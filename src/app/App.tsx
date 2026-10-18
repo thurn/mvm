@@ -2,6 +2,7 @@ import { AudioDevPage } from "../audio/DevPage";
 import { findScene } from "../dev/scenes";
 import { TiersDevPage } from "../juice/tiers/DevPage";
 import { LootShowerPage } from "../juice/loot/DevPage";
+import { CardsSheet } from "../ui/cards/CardsSheet";
 import { Board } from "./Board";
 import { Game } from "./Game";
 import { ResumeCheck } from "../ui/resume/ResumeCheck";
@@ -12,6 +13,7 @@ export function App() {
   if (sceneName === "audio") return <AudioDevPage />;
   if (sceneName === "tiers") return <TiersDevPage />;
   if (sceneName === "loot-shower") return <LootShowerPage />;
+  if (sceneName === "cards") return <CardsSheet />;
   if (sceneName) {
     const scene = findScene(sceneName);
     if (scene) return <Board scene={scene} />;
