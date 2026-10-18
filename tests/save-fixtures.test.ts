@@ -1,0 +1,59 @@
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { join } from "node:path";
+import { expect, test } from "vitest";
+import {
+  createRegistry,
+  load,
+  SAVE_SECTIONS,
+  type SaveDocument,
+  type SectionName,
+} from "../src/save/registry";
+
+const root = join(import.meta.dirname, "../src/save/fixtures");
+
+function files(dir: string): string[] {
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir).flatMap((name) => {
+    const path = join(dir, name);
+    return statSync(path).isDirectory() ? files(path) : name.endsWith(".json") ? [path] : [];
+  });
+}
+
+const fixtures = files(root).map((path) => [path.slice(root.length + 1), path] as const);
+const registry = createRegistry(SAVE_SECTIONS);
+
+/** Wraps a single-section fixture in a document; milestone fixtures are whole documents already. */
+function asDocument(relative: string, raw: unknown): SaveDocument {
+  if (relative.startsWith("milestones/")) return raw as SaveDocument;
+  const section = relative.split("/")[0] as SectionName;
+  const base: SaveDocument = {
+    format: 1,
+    savedAt: "",
+    build: "fixture",
+    account: raw as SaveDocument["account"],
+    round: null,
+  };
+  return section === "round"
+    ? { ...base, account: { schemaVersion: 0, data: null }, round: raw as SaveDocument["round"] }
+    : base;
+}
+
+test.each(fixtures)(
+  "golden fixture %s loads through the current registry (P15)",
+  (relative, path) => {
+    const raw = JSON.parse(readFileSync(path, "utf8")) as unknown;
+    const section = relative.startsWith("milestones/")
+      ? null
+      : (relative.split("/")[0] as SectionName);
+    const result = load(asDocument(relative, raw), registry);
+    if (section !== "round") expect(result.account).toMatchObject({ ok: true });
+    if (section !== "account") expect(result.round).toMatchObject({ ok: true });
+  },
+);
+
+test("every fixture directory names a registered section or milestones", () => {
+  for (const [relative] of fixtures) {
+    const dir = relative.split("/")[0]!;
+    expect(dir === "milestones" || registry.sections.has(dir as SectionName), relative).toBe(true);
+  }
+});

@@ -60,7 +60,7 @@ export default tseslint.config(
     rules: reactHooks.configs.recommended.rules,
   },
   {
-    files: ["*.{js,ts}", "scripts/**/*.ts", "tests/**/*.ts"],
+    files: ["*.{js,ts}", "scripts/**/*.ts", "tests/**/*.ts", "vite/**/*.ts"],
     languageOptions: { globals: globals.node },
   },
   {

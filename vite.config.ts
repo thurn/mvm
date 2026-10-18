@@ -1,8 +1,9 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
+import { saveMirror } from "./vite/save-mirror";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), saveMirror(".saves")],
   test: {
     projects: [
       {
@@ -10,7 +11,12 @@ export default defineConfig({
         test: {
           name: "node",
           environment: "node",
-          include: ["src/**/*.test.ts", "tests/**/*.test.ts", "scripts/**/*.test.ts"],
+          include: [
+            "src/**/*.test.ts",
+            "tests/**/*.test.ts",
+            "scripts/**/*.test.ts",
+            "vite/**/*.test.ts",
+          ],
         },
       },
       {

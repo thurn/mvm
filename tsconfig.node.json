@@ -21,7 +21,9 @@
     "eslint.config.js",
     "scripts",
     "tests",
+    "vite",
     "src/data",
+    "src/save/registry.ts",
     "src/combat/stats.ts",
     "src/types"
   ]

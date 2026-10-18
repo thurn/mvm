@@ -1,4 +1,5 @@
 import type { SimEvent } from "../sim/events";
+import { installSaveDebug } from "./save-debug";
 import type { RoundState } from "../sim/state";
 
 const HISTORY = 200;
@@ -41,6 +42,7 @@ export function installQaSurface(): QaSurface {
     caps: [],
   };
   window.__mvm = qa;
+  if (import.meta.env.DEV) installSaveDebug(qa as unknown as Record<string, unknown>);
   window.addEventListener("error", (e) => qa.caps.push(`error: ${describe(e.error ?? e.message)}`));
   window.addEventListener("unhandledrejection", (e) =>
     qa.caps.push(`rejection: ${describe(e.reason)}`),
