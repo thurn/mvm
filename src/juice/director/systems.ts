@@ -2,6 +2,7 @@ import type { LayerStack } from "../../render/layers";
 import { spriteSystem } from "../../render/sprites/system";
 import { hitSystem } from "../hits/system";
 import { killSystem } from "../kills/system";
+import { lootSystem } from "../loot/system";
 import { tierSystem } from "../tiers/system";
 import { musicSystem } from "../../audio/music/system";
 import type { SettingsStore } from "../core/settings";
@@ -30,6 +31,7 @@ export const PRESENTATION_SYSTEMS: PresentationFactory[] = [
   musicSystem,
   hitSystem,
   killSystem,
+  lootSystem,
 ];
 
 export interface PresentationOptions {

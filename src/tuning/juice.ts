@@ -219,3 +219,149 @@ export const KILL_TUNING = {
     shade: "#A87A1E",
   },
 };
+
+/** One loot class's presentation (H §3.2; beam and label colours from G §1.4). */
+export interface LootClassSpec {
+  arcPx: number;
+  holdMs: number;
+  motes: { count: number; color: string; rising: boolean };
+  beam: { color: string; heightPx: number; whiteCore: boolean } | null;
+  label: string;
+  tier: Tier;
+  stinger: string;
+  /** Rank for the stagger: higher lands later (the best drop last). */
+  rank: number;
+}
+
+/** The drop timeline and per-class table (H §3.1–§3.4). Times in ms. */
+export const LOOT_JUICE = {
+  arcMs: 350,
+  bounces: [
+    [6, 80],
+    [2, 80],
+  ] as [number, number][],
+  beamRiseMs: 150,
+  collectMs: 400,
+  beamCollapseMs: 120,
+  staggerMs: 70,
+  /** The landing spot is within this many tiles of the corpse, in its lane band. */
+  scatterTiles: 0.5,
+  laneBandPx: 20,
+  ladderWindowMs: 1500,
+  ladderMaxSteps: 5,
+  uniqueDim: 0.15,
+  uniquePulseMs: 1200,
+  tickerLines: 4,
+  tickerShimmerMs: 8000,
+  classes: {
+    normal: {
+      arcPx: 10,
+      holdMs: 1200,
+      motes: { count: 0, color: "#C8C8C8", rising: false },
+      beam: { color: "rgba(200, 200, 200, 0.3)", heightPx: 32, whiteCore: false },
+      label: "#C8C8C8",
+      tier: 1,
+      stinger: "drop_normal",
+      rank: 0,
+    },
+    magic: {
+      arcPx: 14,
+      holdMs: 1600,
+      motes: { count: 4, color: "#8888FF", rising: false },
+      beam: { color: "#8888FF", heightPx: 48, whiteCore: false },
+      label: "#8888FF",
+      tier: 2,
+      stinger: "drop_magic",
+      rank: 2,
+    },
+    rare: {
+      arcPx: 22,
+      holdMs: 2500,
+      motes: { count: 10, color: "#FFFF77", rising: true },
+      beam: { color: "#FFFF77", heightPx: 96, whiteCore: true },
+      label: "#FFFF77",
+      tier: 3,
+      stinger: "drop_rare",
+      rank: 4,
+    },
+    unique: {
+      arcPx: 36,
+      holdMs: 4000,
+      motes: { count: 24, color: "#E0782F", rising: true },
+      beam: { color: "#E0782F", heightPx: 160, whiteCore: true },
+      label: "#AF6025",
+      tier: 5,
+      stinger: "drop_unique",
+      rank: 8,
+    },
+    currencyLow: {
+      arcPx: 12,
+      holdMs: 1400,
+      motes: { count: 4, color: "#D9B95B", rising: false },
+      beam: { color: "#D9B95B", heightPx: 64, whiteCore: false },
+      label: "#AA9E82",
+      tier: 2,
+      stinger: "drop_currency",
+      rank: 1,
+    },
+    currencyMid: {
+      arcPx: 18,
+      holdMs: 2000,
+      motes: { count: 8, color: "#D9B95B", rising: false },
+      beam: { color: "#D9B95B", heightPx: 64, whiteCore: false },
+      label: "#AA9E82",
+      tier: 3,
+      stinger: "drop_currency",
+      rank: 3,
+    },
+    currencyTop: {
+      arcPx: 28,
+      holdMs: 3000,
+      motes: { count: 16, color: "#D9B95B", rising: false },
+      beam: { color: "#D9B95B", heightPx: 160, whiteCore: true },
+      label: "#AA9E82",
+      tier: 4,
+      stinger: "drop_currency",
+      rank: 6,
+    },
+    hero: {
+      arcPx: 24,
+      holdMs: 3000,
+      motes: { count: 12, color: "#1BA29B", rising: false },
+      beam: { color: "#1BA29B", heightPx: 96, whiteCore: false },
+      label: "#1BA29B",
+      tier: 4,
+      stinger: "drop_hero",
+      rank: 5,
+    },
+    spell: {
+      arcPx: 24,
+      holdMs: 3000,
+      motes: { count: 12, color: "#5FD3C8", rising: false },
+      beam: { color: "#5FD3C8", heightPx: 96, whiteCore: false },
+      label: "#1BA29B",
+      tier: 4,
+      stinger: "drop_spell",
+      rank: 5,
+    },
+  } satisfies Record<string, LootClassSpec>,
+  /** Currency tiers by PoE2 id suffix (H §3.2). */
+  currencyTier: {
+    CurrencyUpgradeToMagic: "currencyLow",
+    CurrencyAddModToMagic: "currencyLow",
+    CurrencyUpgradeToMagicShard: "currencyLow",
+    CurrencyUpgradeMagicToRareShard: "currencyLow",
+    CurrencyUpgradeMagicToRare: "currencyMid",
+    CurrencyAddModToRare: "currencyMid",
+    CurrencyRerollRare: "currencyMid",
+    CurrencyUpgradeToRare: "currencyMid",
+    CurrencyAddSkillGemSocket3: "currencyMid",
+    CurrencyAddSkillGemSocket4: "currencyMid",
+    CurrencyAddSkillGemSocket5: "currencyMid",
+    CurrencyGemQuality: "currencyMid",
+    CurrencyRemoveMod: "currencyTop",
+    CurrencyModValues: "currencyTop",
+    CurrencyCorrupt: "currencyTop",
+  } as Record<string, "currencyLow" | "currencyMid" | "currencyTop">,
+};
+export type LootClass = keyof typeof LOOT_JUICE.classes;

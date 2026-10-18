@@ -17,6 +17,7 @@ import { createLayerStack } from "../render/layers";
 import { registerPlaceholderLayers } from "../render/placeholder";
 import { BOARD_HEIGHT, BOARD_WIDTH, chooseScale } from "../render/scale";
 import { createDriver } from "./driver";
+import { LootTicker, TICKER_HEIGHT } from "../ui/hud/ticker/LootTicker";
 
 /** The board canvas for one round: the time driver, the layer stack and the QA surface. */
 /** The board's integer scale for the window, leaving `reserveHeight` px for HUD bars; follows resizes. */
@@ -46,7 +47,8 @@ export interface BoardProps {
 
 export function Board({ scene, scale: forcedScale, queue, onFrame, isPaused }: BoardProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const ownScale = useBoardScale();
+  // The loot ticker sits below the board, so the board leaves room for it.
+  const ownScale = useBoardScale(TICKER_HEIGHT);
   const scale = forcedScale ?? ownScale;
   // The render loop reads the scale from a ref, so a resize never restarts the round.
   const scaleRef = useRef(scale);
@@ -127,11 +129,14 @@ export function Board({ scene, scale: forcedScale, queue, onFrame, isPaused }: B
   }, [scene, queue]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={BOARD_WIDTH * scale}
-      height={BOARD_HEIGHT * scale}
-      style={{ imageRendering: "pixelated", display: "block", margin: "0 auto" }}
-    />
+    <div style={{ width: BOARD_WIDTH * scale, margin: "0 auto" }}>
+      <canvas
+        ref={canvasRef}
+        width={BOARD_WIDTH * scale}
+        height={BOARD_HEIGHT * scale}
+        style={{ imageRendering: "pixelated", display: "block" }}
+      />
+      <LootTicker />
+    </div>
   );
 }

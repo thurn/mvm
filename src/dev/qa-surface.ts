@@ -20,6 +20,8 @@ export interface QaSurface {
   caps: string[];
   /** Fires a tier's global effects on the running board (`?scene=tiers`). */
   fireTier?: (tier: Tier) => void;
+  /** Feeds synthetic sim events to the running board's director (dev pages). */
+  fireEvents?: (events: SimEvent[]) => void;
 }
 
 declare global {
