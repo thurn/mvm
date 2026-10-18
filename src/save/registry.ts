@@ -1,3 +1,5 @@
+import { ACCOUNT_SECTION, ROUND_SECTION } from "../account/sections";
+
 /**
  * The save document (P13) and its section registry (P15). The save layer
  * knows sections, not game types: 1.19 registers the account and round.
@@ -42,8 +44,11 @@ export interface LoadResult {
   round: SectionResult;
 }
 
-/** The game's sections. 1.19 adds the account and round here. */
-export const SAVE_SECTIONS: SectionDefinition[] = [];
+/** The game's sections. */
+export const SAVE_SECTIONS: SectionDefinition[] = [
+  ACCOUNT_SECTION,
+  ROUND_SECTION,
+] as SectionDefinition[];
 
 export function createRegistry(sections: readonly SectionDefinition[]): Registry {
   return { sections: new Map(sections.map((s) => [s.name, s])) };

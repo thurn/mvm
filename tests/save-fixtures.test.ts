@@ -1,6 +1,8 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { expect, test } from "vitest";
+import { step } from "../src/sim/kernel";
+import type { RoundState } from "../src/sim/state";
 import {
   createRegistry,
   load,
@@ -47,7 +49,12 @@ test.each(fixtures)(
       : (relative.split("/")[0] as SectionName);
     const result = load(asDocument(relative, raw), registry);
     if (section !== "round") expect(result.account).toMatchObject({ ok: true });
-    if (section !== "account") expect(result.round).toMatchObject({ ok: true });
+    if (section !== "account") {
+      expect(result.round).toMatchObject({ ok: true });
+      // A loaded round must keep playing (P15): 600 ticks without throwing.
+      const round = (result.round as { data: RoundState | null }).data;
+      if (round) for (let i = 0; i < 600 && round.result === null; i++) step(round, []);
+    }
   },
 );
 

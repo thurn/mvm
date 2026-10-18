@@ -1,6 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { installQaSurface, recordEvents } from "../dev/qa-surface";
 import type { Scene } from "../dev/scenes";
+import type { SimEvent } from "../sim/events";
+import type { RoundState } from "../sim/state";
+
+/** What the board plays: a scene, or the persisted game. */
+export interface BoardSource extends Scene {
+  /** Called after every step with its events, for the lifecycle and autosave. */
+  onStep?(state: RoundState, events: readonly SimEvent[]): void;
+}
 import { createIntentQueue, drain } from "../sim/intents";
 import { step } from "../sim/kernel";
 import { createLayerStack } from "../render/layers";
@@ -9,7 +17,7 @@ import { BOARD_HEIGHT, BOARD_WIDTH, chooseScale } from "../render/scale";
 import { createDriver } from "./driver";
 
 /** The board canvas for one round: the time driver, the layer stack and the QA surface. */
-export function Board({ scene }: { scene: Scene }) {
+export function Board({ scene }: { scene: BoardSource }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [scale, setScale] = useState(() => chooseScale(window.innerWidth, window.innerHeight));
   // The render loop reads the scale from a ref, so a resize never restarts the round.
@@ -37,7 +45,9 @@ export function Board({ scene }: { scene: Scene }) {
       step() {
         previousX.clear();
         for (const monster of state.monsters) previousX.set(monster.id, monster.x);
-        recordEvents(qa, step(state, [...drain(intents), ...(scene.intents?.(state) ?? [])]));
+        const events = step(state, [...drain(intents), ...(scene.intents?.(state) ?? [])]);
+        recordEvents(qa, events);
+        scene.onStep?.(state, events);
         if (driver.speed() !== state.speed) driver.setSpeed(state.speed);
       },
     });

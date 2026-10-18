@@ -33,7 +33,9 @@ export function createMirrorClient(
     async get() {
       try {
         const response = await fetchFn(base);
-        return response.ok ? ((await response.json()) as SaveDocument) : null;
+        return response.ok && response.status !== 204
+          ? ((await response.json()) as SaveDocument)
+          : null;
       } catch {
         return null;
       }

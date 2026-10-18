@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "data": {
+    "focus": "warrior",
+    "roster": {
+      "slots": [
+        {
+          "hero": {
+            "id": "warrior-0-MvM/Heroes/EzomyteAcolyte",
+            "skillId": "MvM/Heroes/EzomyteAcolyte",
+            "level": 2,
+            "xp": 816,
+            "rarity": "normal",
+            "supports": [],
+            "quality": 0
+          },
+          "weapon": {
+            "id": "warrior-0-MvM/Heroes/EzomyteAcolyte-weapon",
+            "baseId": "Metadata/Items/Weapons/OneHandWeapons/Sceptres/FourSceptre1",
+            "rarity": "normal",
+            "itemLevel": 1,
+            "quality": 0,
+            "mods": [],
+            "implicits": []
+          },
+          "armour": null,
+          "accessory": null
+        },
+        {
+          "hero": {
+            "id": "warrior-1-Metadata/Items/Gems/SkillGemRollingSlam",
+            "skillId": "Metadata/Items/Gems/SkillGemRollingSlam",
+            "level": 2,
+            "xp": 816,
+            "rarity": "normal",
+            "supports": [],
+            "quality": 0
+          },
+          "weapon": {
+            "id": "warrior-1-Metadata/Items/Gems/SkillGemRollingSlam-weapon",
+            "baseId": "Metadata/Items/Weapons/TwoHandWeapons/TwoHandMaces/FourTwoHandMace1",
+            "rarity": "normal",
+            "itemLevel": 1,
+            "quality": 0,
+            "mods": [],
+            "implicits": []
+          },
+          "armour": null,
+          "accessory": null
+        },
+        {
+          "hero": {
+            "id": "warrior-2-Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+            "skillId": "Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+            "level": 2,
+            "xp": 816,
+            "rarity": "normal",
+            "supports": [],
+            "quality": 0
+          },
+          "weapon": {
+            "id": "warrior-2-Metadata/Items/Gem/SkillGemArmourPiercingRounds-weapon",
+            "baseId": "Metadata/Items/Weapons/TwoHandWeapons/Crossbows/FourCrossbow1",
+            "rarity": "normal",
+            "itemLevel": 1,
+            "quality": 0,
+            "mods": [],
+            "implicits": []
+          },
+          "armour": null,
+          "accessory": null
+        },
+        null,
+        null,
+        null
+      ],
+      "unlocked": 3,
+      "spell": {
+        "hero": {
+          "id": "warrior-3-Metadata/Items/Gems/SkillGemEarthquake",
+          "skillId": "Metadata/Items/Gems/SkillGemEarthquake",
+          "level": 2,
+          "xp": 816,
+          "rarity": "normal",
+          "supports": [],
+          "quality": 0
+        },
+        "weapon": null,
+        "armour": null,
+        "accessory": null
+      }
+    },
+    "stash": {
+      "items": [
+        {
+          "id": "207e155e-7f40-4d31-8075-630ae97b71d5",
+          "baseId": "Metadata/Items/Weapons/TwoHandWeapons/Bows/FourBow1",
+          "rarity": "normal",
+          "itemLevel": 2,
+          "quality": 0,
+          "mods": [],
+          "implicits": []
+        },
+        {
+          "id": "be0dd4bc-28b9-4271-a6af-aae63c90f593",
+          "baseId": "Metadata/Items/Weapons/TwoHandWeapons/TwoHandMaces/FourTwoHandMace1",
+          "rarity": "magic",
+          "itemLevel": 2,
+          "quality": 0,
+          "mods": [
+            {
+              "modId": "LifeGainedFromEnemyDeath1",
+              "values": [4]
+            }
+          ],
+          "implicits": []
+        },
+        {
+          "id": "83a161e2-3829-43e8-ab38-1a0846c75632",
+          "baseId": "Metadata/Items/Weapons/OneHandWeapons/Sceptres/FourSceptre1",
+          "rarity": "normal",
+          "itemLevel": 1,
+          "quality": 0,
+          "mods": [],
+          "implicits": []
+        }
+      ],
+      "heroes": [],
+      "unrolled": []
+    },
+    "gold": 11,
+    "currency": {
+      "Metadata/Items/Currency/CurrencyUpgradeToMagic": 1
+    },
+    "player": {
+      "level": 2,
+      "xp": 816
+    },
+    "firstClears": [],
+    "pendingChoices": [],
+    "activeRun": {
+      "levelId": "level-1",
+      "xp": 816
+    },
+    "nextSeed": 1
+  }
+}

@@ -1,4 +1,5 @@
 import type { DamageMap } from "../combat/damage";
+import type { Drop } from "../loot/drops";
 import type { HitResult } from "../combat/resolve";
 import type { EntityId, HeroInstanceId, MonsterInstanceId, Rarity } from "./state";
 
@@ -29,7 +30,14 @@ export type SimEvent =
       x: number;
       rarity: Rarity | null;
     }
-  | { type: "drop"; dropId: string; monsterId: MonsterInstanceId; lane: number; x: number }
+  | {
+      type: "drop";
+      dropId: string;
+      monsterId: MonsterInstanceId;
+      lane: number;
+      x: number;
+      drop: Drop;
+    }
   | {
       type: "manaSpawn";
       orbId: string;

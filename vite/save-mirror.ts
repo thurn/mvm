@@ -31,9 +31,10 @@ export async function handleSaveRequest(
   const path = url.split("?")[0];
   if (method === "GET" && path === "/__mvm/save") {
     const latest = join(dir, "latest.json");
+    // No save yet is not an error: 204 keeps the browser console clean.
     return existsSync(latest)
       ? { status: 200, body: readFileSync(latest, "utf8") }
-      : { status: 404, body: "" };
+      : { status: 204, body: "" };
   }
   if (method !== "POST") return { status: 405, body: "" };
   let parsed: unknown;

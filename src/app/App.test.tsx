@@ -4,7 +4,7 @@ import { App } from "./App";
 
 afterEach(cleanup);
 
-test("renders the title", () => {
+test("the default page loads the persisted game", () => {
   render(<App />);
-  expect(screen.getByRole("heading").textContent).toBe("Mercs vs. Monsters");
+  expect(screen.getByText("Loading…")).toBeTruthy();
 });

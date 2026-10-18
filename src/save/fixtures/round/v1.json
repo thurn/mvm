@@ -1,0 +1,1205 @@
+{
+  "schemaVersion": 1,
+  "data": {
+    "tick": 4800,
+    "lanes": [1, 2, 3],
+    "heroes": [
+      {
+        "id": "d3a2e97f-8650-4dc9-8bd9-bfe81d07cce6",
+        "lane": 2,
+        "column": 1,
+        "actor": {
+          "life": 42,
+          "es": 0,
+          "armour": 0,
+          "evasion": 0,
+          "blockChance": 0,
+          "accuracy": 56,
+          "stunThreshold": 42,
+          "ailmentThreshold": 21,
+          "stats": {},
+          "damageTakenIncreased": {},
+          "ailments": {
+            "shock": null,
+            "chill": null,
+            "freezeBuildup": 0,
+            "freezeIdleSeconds": 0,
+            "frozenSeconds": 0,
+            "flammability": 0,
+            "ignite": null,
+            "heavyStunBuildup": 0,
+            "heavyStunSeconds": 0,
+            "heavyStunRecoverySeconds": 0,
+            "baseArmour": null,
+            "fullyBrokenSeconds": 0
+          },
+          "maxLife": 42,
+          "maxEs": 0,
+          "resist": {
+            "fire": 0,
+            "cold": 0,
+            "lightning": 0,
+            "chaos": 0
+          }
+        },
+        "skillId": "MvM/Heroes/EzomyteAcolyte",
+        "kit": {
+          "behavior": "acolyte",
+          "actionSeconds": 24,
+          "hits": {},
+          "numbers": {
+            "orbValue": 37.5
+          },
+          "counters": {
+            "orbTimer": 23.23591085372057
+          }
+        }
+      },
+      {
+        "id": "a5a9a251-63c3-4aee-8612-967106d29ada",
+        "lane": 1,
+        "column": 1,
+        "actor": {
+          "life": 42,
+          "es": 0,
+          "armour": 0,
+          "evasion": 0,
+          "blockChance": 0,
+          "accuracy": 56,
+          "stunThreshold": 42,
+          "ailmentThreshold": 21,
+          "stats": {},
+          "damageTakenIncreased": {},
+          "ailments": {
+            "shock": null,
+            "chill": null,
+            "freezeBuildup": 0,
+            "freezeIdleSeconds": 0,
+            "frozenSeconds": 0,
+            "flammability": 0,
+            "ignite": null,
+            "heavyStunBuildup": 0,
+            "heavyStunSeconds": 0,
+            "heavyStunRecoverySeconds": 0,
+            "baseArmour": null,
+            "fullyBrokenSeconds": 0
+          },
+          "maxLife": 42,
+          "maxEs": 0,
+          "resist": {
+            "fire": 0,
+            "cold": 0,
+            "lightning": 0,
+            "chaos": 0
+          }
+        },
+        "skillId": "MvM/Heroes/EzomyteAcolyte",
+        "kit": {
+          "behavior": "acolyte",
+          "actionSeconds": 24,
+          "hits": {},
+          "numbers": {
+            "orbValue": 37.5
+          },
+          "counters": {
+            "orbTimer": 6.754202514949182
+          }
+        }
+      },
+      {
+        "id": "0a15d502-15cd-4416-9d48-881ee0f0fb46",
+        "lane": 3,
+        "column": 1,
+        "actor": {
+          "life": 42,
+          "es": 0,
+          "armour": 0,
+          "evasion": 0,
+          "blockChance": 0,
+          "accuracy": 56,
+          "stunThreshold": 42,
+          "ailmentThreshold": 21,
+          "stats": {},
+          "damageTakenIncreased": {},
+          "ailments": {
+            "shock": null,
+            "chill": null,
+            "freezeBuildup": 0,
+            "freezeIdleSeconds": 0,
+            "frozenSeconds": 0,
+            "flammability": 0,
+            "ignite": null,
+            "heavyStunBuildup": 0,
+            "heavyStunSeconds": 0,
+            "heavyStunRecoverySeconds": 0,
+            "baseArmour": null,
+            "fullyBrokenSeconds": 0
+          },
+          "maxLife": 42,
+          "maxEs": 0,
+          "resist": {
+            "fire": 0,
+            "cold": 0,
+            "lightning": 0,
+            "chaos": 0
+          }
+        },
+        "skillId": "MvM/Heroes/EzomyteAcolyte",
+        "kit": {
+          "behavior": "acolyte",
+          "actionSeconds": 24,
+          "hits": {},
+          "numbers": {
+            "orbValue": 37.5
+          },
+          "counters": {
+            "orbTimer": 18.199267338736647
+          }
+        }
+      },
+      {
+        "id": "c35526e9-a280-41c8-91d2-806480bc0840",
+        "lane": 2,
+        "column": 2,
+        "actor": {
+          "life": 62.5,
+          "es": 0,
+          "armour": 0,
+          "evasion": 0,
+          "blockChance": 0,
+          "accuracy": 88,
+          "stunThreshold": 62.5,
+          "ailmentThreshold": 31.25,
+          "stats": {},
+          "damageTakenIncreased": {},
+          "ailments": {
+            "shock": null,
+            "chill": null,
+            "freezeBuildup": 0,
+            "freezeIdleSeconds": 0,
+            "frozenSeconds": 0,
+            "flammability": 0,
+            "ignite": null,
+            "heavyStunBuildup": 0,
+            "heavyStunSeconds": 0,
+            "heavyStunRecoverySeconds": 0,
+            "baseArmour": null,
+            "fullyBrokenSeconds": 0
+          },
+          "maxLife": 62.5,
+          "maxEs": 0,
+          "resist": {
+            "fire": 0,
+            "cold": 0,
+            "lightning": 0,
+            "chaos": 0
+          }
+        },
+        "skillId": "Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+        "kit": {
+          "behavior": "armourPiercingRounds",
+          "actionSeconds": 0.29411764705882354,
+          "hits": {
+            "main": {
+              "kind": "attack",
+              "tags": ["projectile"],
+              "weaponClass": "crossbow",
+              "base": {
+                "physical": {
+                  "min": 1.75,
+                  "max": 3
+                }
+              },
+              "baseCrit": 5,
+              "conversion": {},
+              "more": [],
+              "armourBreak": 1
+            }
+          },
+          "numbers": {
+            "pierce": 0,
+            "fork": 0,
+            "chain": 0,
+            "additionalProjectiles": 0,
+            "clip": 12,
+            "reloadSeconds": 1.2
+          },
+          "counters": {
+            "actionTimer": 1.290196078431385,
+            "clipLeft": 12
+          }
+        }
+      },
+      {
+        "id": "95084d72-b264-4632-960b-8db96e244a25",
+        "lane": 1,
+        "column": 2,
+        "actor": {
+          "life": 62.5,
+          "es": 0,
+          "armour": 0,
+          "evasion": 0,
+          "blockChance": 0,
+          "accuracy": 88,
+          "stunThreshold": 62.5,
+          "ailmentThreshold": 31.25,
+          "stats": {},
+          "damageTakenIncreased": {},
+          "ailments": {
+            "shock": null,
+            "chill": null,
+            "freezeBuildup": 0,
+            "freezeIdleSeconds": 0,
+            "frozenSeconds": 0,
+            "flammability": 0,
+            "ignite": null,
+            "heavyStunBuildup": 0,
+            "heavyStunSeconds": 0,
+            "heavyStunRecoverySeconds": 0,
+            "baseArmour": null,
+            "fullyBrokenSeconds": 0
+          },
+          "maxLife": 62.5,
+          "maxEs": 0,
+          "resist": {
+            "fire": 0,
+            "cold": 0,
+            "lightning": 0,
+            "chaos": 0
+          }
+        },
+        "skillId": "Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+        "kit": {
+          "behavior": "armourPiercingRounds",
+          "actionSeconds": 0.29411764705882354,
+          "hits": {
+            "main": {
+              "kind": "attack",
+              "tags": ["projectile"],
+              "weaponClass": "crossbow",
+              "base": {
+                "physical": {
+                  "min": 1.75,
+                  "max": 3
+                }
+              },
+              "baseCrit": 5,
+              "conversion": {},
+              "more": [],
+              "armourBreak": 1
+            }
+          },
+          "numbers": {
+            "pierce": 0,
+            "fork": 0,
+            "chain": 0,
+            "additionalProjectiles": 0,
+            "clip": 12,
+            "reloadSeconds": 1.2
+          },
+          "counters": {
+            "actionTimer": 0,
+            "clipLeft": 12
+          }
+        }
+      },
+      {
+        "id": "e8a0a962-2d92-4cbb-a971-91f68d8f6aaa",
+        "lane": 3,
+        "column": 2,
+        "actor": {
+          "life": 62.5,
+          "es": 0,
+          "armour": 0,
+          "evasion": 0,
+          "blockChance": 0,
+          "accuracy": 88,
+          "stunThreshold": 62.5,
+          "ailmentThreshold": 31.25,
+          "stats": {},
+          "damageTakenIncreased": {},
+          "ailments": {
+            "shock": null,
+            "chill": null,
+            "freezeBuildup": 0,
+            "freezeIdleSeconds": 0,
+            "frozenSeconds": 0,
+            "flammability": 0,
+            "ignite": null,
+            "heavyStunBuildup": 0,
+            "heavyStunSeconds": 0,
+            "heavyStunRecoverySeconds": 0,
+            "baseArmour": null,
+            "fullyBrokenSeconds": 0
+          },
+          "maxLife": 62.5,
+          "maxEs": 0,
+          "resist": {
+            "fire": 0,
+            "cold": 0,
+            "lightning": 0,
+            "chaos": 0
+          }
+        },
+        "skillId": "Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+        "kit": {
+          "behavior": "armourPiercingRounds",
+          "actionSeconds": 0.29411764705882354,
+          "hits": {
+            "main": {
+              "kind": "attack",
+              "tags": ["projectile"],
+              "weaponClass": "crossbow",
+              "base": {
+                "physical": {
+                  "min": 1.75,
+                  "max": 3
+                }
+              },
+              "baseCrit": 5,
+              "conversion": {},
+              "more": [],
+              "armourBreak": 1
+            }
+          },
+          "numbers": {
+            "pierce": 0,
+            "fork": 0,
+            "chain": 0,
+            "additionalProjectiles": 0,
+            "clip": 12,
+            "reloadSeconds": 1.2
+          },
+          "counters": {
+            "actionTimer": 0,
+            "clipLeft": 12
+          }
+        }
+      },
+      {
+        "id": "125a553b-15a2-409c-ae2c-088b169af763",
+        "lane": 2,
+        "column": 3,
+        "actor": {
+          "life": 62.5,
+          "es": 0,
+          "armour": 0,
+          "evasion": 0,
+          "blockChance": 0,
+          "accuracy": 88,
+          "stunThreshold": 62.5,
+          "ailmentThreshold": 31.25,
+          "stats": {},
+          "damageTakenIncreased": {},
+          "ailments": {
+            "shock": null,
+            "chill": null,
+            "freezeBuildup": 0,
+            "freezeIdleSeconds": 0,
+            "frozenSeconds": 0,
+            "flammability": 0,
+            "ignite": null,
+            "heavyStunBuildup": 0,
+            "heavyStunSeconds": 0,
+            "heavyStunRecoverySeconds": 0,
+            "baseArmour": null,
+            "fullyBrokenSeconds": 0
+          },
+          "maxLife": 62.5,
+          "maxEs": 0,
+          "resist": {
+            "fire": 0,
+            "cold": 0,
+            "lightning": 0,
+            "chaos": 0
+          }
+        },
+        "skillId": "Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+        "kit": {
+          "behavior": "armourPiercingRounds",
+          "actionSeconds": 0.29411764705882354,
+          "hits": {
+            "main": {
+              "kind": "attack",
+              "tags": ["projectile"],
+              "weaponClass": "crossbow",
+              "base": {
+                "physical": {
+                  "min": 1.75,
+                  "max": 3
+                }
+              },
+              "baseCrit": 5,
+              "conversion": {},
+              "more": [],
+              "armourBreak": 1
+            }
+          },
+          "numbers": {
+            "pierce": 0,
+            "fork": 0,
+            "chain": 0,
+            "additionalProjectiles": 0,
+            "clip": 12,
+            "reloadSeconds": 1.2
+          },
+          "counters": {
+            "actionTimer": 0.11470588235294782,
+            "clipLeft": 10
+          }
+        }
+      },
+      {
+        "id": "838dca47-33c2-47ff-ae4c-0d020bea4cfa",
+        "lane": 1,
+        "column": 3,
+        "actor": {
+          "life": 62.5,
+          "es": 0,
+          "armour": 0,
+          "evasion": 0,
+          "blockChance": 0,
+          "accuracy": 88,
+          "stunThreshold": 62.5,
+          "ailmentThreshold": 31.25,
+          "stats": {},
+          "damageTakenIncreased": {},
+          "ailments": {
+            "shock": null,
+            "chill": null,
+            "freezeBuildup": 0,
+            "freezeIdleSeconds": 0,
+            "frozenSeconds": 0,
+            "flammability": 0,
+            "ignite": null,
+            "heavyStunBuildup": 0,
+            "heavyStunSeconds": 0,
+            "heavyStunRecoverySeconds": 0,
+            "baseArmour": null,
+            "fullyBrokenSeconds": 0
+          },
+          "maxLife": 62.5,
+          "maxEs": 0,
+          "resist": {
+            "fire": 0,
+            "cold": 0,
+            "lightning": 0,
+            "chaos": 0
+          }
+        },
+        "skillId": "Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+        "kit": {
+          "behavior": "armourPiercingRounds",
+          "actionSeconds": 0.29411764705882354,
+          "hits": {
+            "main": {
+              "kind": "attack",
+              "tags": ["projectile"],
+              "weaponClass": "crossbow",
+              "base": {
+                "physical": {
+                  "min": 1.75,
+                  "max": 3
+                }
+              },
+              "baseCrit": 5,
+              "conversion": {},
+              "more": [],
+              "armourBreak": 1
+            }
+          },
+          "numbers": {
+            "pierce": 0,
+            "fork": 0,
+            "chain": 0,
+            "additionalProjectiles": 0,
+            "clip": 12,
+            "reloadSeconds": 1.2
+          },
+          "counters": {
+            "actionTimer": 0,
+            "clipLeft": 12
+          }
+        }
+      },
+      {
+        "id": "34d8531d-ce73-44b5-8453-ad9855f403f7",
+        "lane": 3,
+        "column": 3,
+        "actor": {
+          "life": 62.5,
+          "es": 0,
+          "armour": 0,
+          "evasion": 0,
+          "blockChance": 0,
+          "accuracy": 88,
+          "stunThreshold": 62.5,
+          "ailmentThreshold": 31.25,
+          "stats": {},
+          "damageTakenIncreased": {},
+          "ailments": {
+            "shock": null,
+            "chill": null,
+            "freezeBuildup": 0,
+            "freezeIdleSeconds": 0,
+            "frozenSeconds": 0,
+            "flammability": 0,
+            "ignite": null,
+            "heavyStunBuildup": 0,
+            "heavyStunSeconds": 0,
+            "heavyStunRecoverySeconds": 0,
+            "baseArmour": null,
+            "fullyBrokenSeconds": 0
+          },
+          "maxLife": 62.5,
+          "maxEs": 0,
+          "resist": {
+            "fire": 0,
+            "cold": 0,
+            "lightning": 0,
+            "chaos": 0
+          }
+        },
+        "skillId": "Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+        "kit": {
+          "behavior": "armourPiercingRounds",
+          "actionSeconds": 0.29411764705882354,
+          "hits": {
+            "main": {
+              "kind": "attack",
+              "tags": ["projectile"],
+              "weaponClass": "crossbow",
+              "base": {
+                "physical": {
+                  "min": 1.75,
+                  "max": 3
+                }
+              },
+              "baseCrit": 5,
+              "conversion": {},
+              "more": [],
+              "armourBreak": 1
+            }
+          },
+          "numbers": {
+            "pierce": 0,
+            "fork": 0,
+            "chain": 0,
+            "additionalProjectiles": 0,
+            "clip": 12,
+            "reloadSeconds": 1.2
+          },
+          "counters": {
+            "actionTimer": 0,
+            "clipLeft": 12
+          }
+        }
+      }
+    ],
+    "monsters": [
+      {
+        "archetypeId": "Shambler",
+        "rarity": "rare",
+        "lane": 2,
+        "x": 4.095017871149103,
+        "moveSpeed": 1,
+        "affixes": [
+          "MonsterDamageGainedAsCold1",
+          "MonsterLightningResistance1",
+          "MonsterImmuneToStun1"
+        ],
+        "actor": {
+          "life": 0.4184597962148606,
+          "es": 0,
+          "armour": 0,
+          "evasion": 24,
+          "blockChance": 0,
+          "accuracy": 32,
+          "stunThreshold": 303.75,
+          "ailmentThreshold": 303.75,
+          "stats": {
+            "damage_gained_as_cold_%": 40,
+            "maximum_lightning_resistance_%": 10,
+            "cannot_be_stun": 1
+          },
+          "damageTakenIncreased": {
+            "physical": 20,
+            "fire": 0,
+            "cold": 0,
+            "lightning": 0,
+            "chaos": 0
+          },
+          "ailments": {
+            "shock": null,
+            "chill": null,
+            "freezeBuildup": 0,
+            "freezeIdleSeconds": 0,
+            "frozenSeconds": 0,
+            "flammability": 0,
+            "ignite": null,
+            "heavyStunBuildup": 0,
+            "heavyStunSeconds": 0,
+            "heavyStunRecoverySeconds": 0,
+            "baseArmour": 3,
+            "fullyBrokenSeconds": 4.949999999999813
+          },
+          "maxLife": 303.75,
+          "maxEs": 0,
+          "resist": {
+            "fire": 0,
+            "cold": 0,
+            "lightning": 50,
+            "chaos": 0
+          }
+        },
+        "attack": {
+          "seconds": 1,
+          "timer": 1,
+          "hit": {
+            "kind": "attack",
+            "tags": ["melee"],
+            "base": {
+              "physical": {
+                "min": 15.457499742507936,
+                "max": 15.457499742507936
+              }
+            },
+            "baseCrit": 5
+          }
+        },
+        "id": "1703bdaf-6441-44f2-84e0-b5ea664cca69"
+      },
+      {
+        "archetypeId": "Shambler",
+        "rarity": "normal",
+        "lane": 2,
+        "x": 7.983625466550613,
+        "moveSpeed": 1,
+        "affixes": [],
+        "actor": {
+          "life": 67.5,
+          "es": 0,
+          "armour": 3,
+          "evasion": 24,
+          "blockChance": 0,
+          "accuracy": 32,
+          "stunThreshold": 67.5,
+          "ailmentThreshold": 67.5,
+          "stats": {},
+          "damageTakenIncreased": {},
+          "ailments": {
+            "shock": null,
+            "chill": null,
+            "freezeBuildup": 0,
+            "freezeIdleSeconds": 0,
+            "frozenSeconds": 0,
+            "flammability": 0,
+            "ignite": null,
+            "heavyStunBuildup": 0,
+            "heavyStunSeconds": 0,
+            "heavyStunRecoverySeconds": 0,
+            "baseArmour": null,
+            "fullyBrokenSeconds": 0
+          },
+          "maxLife": 67.5,
+          "maxEs": 0,
+          "resist": {
+            "fire": 0,
+            "cold": 0,
+            "lightning": 0,
+            "chaos": 0
+          }
+        },
+        "attack": {
+          "seconds": 1,
+          "timer": 1,
+          "hit": {
+            "kind": "attack",
+            "tags": ["melee"],
+            "base": {
+              "physical": {
+                "min": 11.449999809265137,
+                "max": 11.449999809265137
+              }
+            },
+            "baseCrit": 5
+          }
+        },
+        "id": "ab6d8178-d6f8-4351-bf0e-12f427a43970"
+      }
+    ],
+    "projectiles": [],
+    "groundEffects": [],
+    "spells": [],
+    "scripted": [],
+    "timers": {},
+    "mana": 33,
+    "orbs": [
+      {
+        "amount": 37.5,
+        "source": "acolyte",
+        "lane": 2,
+        "x": 1,
+        "id": "ed5d665a-3559-4f73-ac40-f9ae61f2d288",
+        "collectAtSeconds": 80.18333333333334
+      }
+    ],
+    "sky": {
+      "nextAtSeconds": 83.15557571053193,
+      "count": 12
+    },
+    "roster": [
+      {
+        "cardId": "warrior-0-MvM/Heroes/EzomyteAcolyte",
+        "card": {
+          "hero": {
+            "id": "warrior-0-MvM/Heroes/EzomyteAcolyte",
+            "skillId": "MvM/Heroes/EzomyteAcolyte",
+            "level": 1,
+            "xp": 0,
+            "rarity": "normal",
+            "supports": [],
+            "quality": 0
+          },
+          "weapon": {
+            "id": "warrior-0-MvM/Heroes/EzomyteAcolyte-weapon",
+            "baseId": "Metadata/Items/Weapons/OneHandWeapons/Sceptres/FourSceptre1",
+            "rarity": "normal",
+            "itemLevel": 1,
+            "quality": 0,
+            "mods": [],
+            "implicits": []
+          },
+          "armour": null,
+          "accessory": null
+        },
+        "kind": "hero",
+        "cost": 50,
+        "rechargeSeconds": 7.5,
+        "rechargeLeft": 0
+      },
+      {
+        "cardId": "warrior-1-Metadata/Items/Gems/SkillGemRollingSlam",
+        "card": {
+          "hero": {
+            "id": "warrior-1-Metadata/Items/Gems/SkillGemRollingSlam",
+            "skillId": "Metadata/Items/Gems/SkillGemRollingSlam",
+            "level": 1,
+            "xp": 0,
+            "rarity": "normal",
+            "supports": [],
+            "quality": 0
+          },
+          "weapon": {
+            "id": "warrior-1-Metadata/Items/Gems/SkillGemRollingSlam-weapon",
+            "baseId": "Metadata/Items/Weapons/TwoHandWeapons/TwoHandMaces/FourTwoHandMace1",
+            "rarity": "normal",
+            "itemLevel": 1,
+            "quality": 0,
+            "mods": [],
+            "implicits": []
+          },
+          "armour": null,
+          "accessory": null
+        },
+        "kind": "hero",
+        "cost": 150,
+        "rechargeSeconds": 7.5,
+        "rechargeLeft": 0
+      },
+      {
+        "cardId": "warrior-2-Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+        "card": {
+          "hero": {
+            "id": "warrior-2-Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+            "skillId": "Metadata/Items/Gem/SkillGemArmourPiercingRounds",
+            "level": 1,
+            "xp": 0,
+            "rarity": "normal",
+            "supports": [],
+            "quality": 0
+          },
+          "weapon": {
+            "id": "warrior-2-Metadata/Items/Gem/SkillGemArmourPiercingRounds-weapon",
+            "baseId": "Metadata/Items/Weapons/TwoHandWeapons/Crossbows/FourCrossbow1",
+            "rarity": "normal",
+            "itemLevel": 1,
+            "quality": 0,
+            "mods": [],
+            "implicits": []
+          },
+          "armour": null,
+          "accessory": null
+        },
+        "kind": "hero",
+        "cost": 100,
+        "rechargeSeconds": 7.5,
+        "rechargeLeft": 2.666666666666684
+      },
+      {
+        "cardId": "warrior-3-Metadata/Items/Gems/SkillGemEarthquake",
+        "card": {
+          "hero": {
+            "id": "warrior-3-Metadata/Items/Gems/SkillGemEarthquake",
+            "skillId": "Metadata/Items/Gems/SkillGemEarthquake",
+            "level": 1,
+            "xp": 0,
+            "rarity": "normal",
+            "supports": [],
+            "quality": 0
+          },
+          "weapon": null,
+          "armour": null,
+          "accessory": null
+        },
+        "kind": "spell",
+        "cost": 150,
+        "rechargeSeconds": 35,
+        "rechargeLeft": 0
+      }
+    ],
+    "speed": 1,
+    "life": 20,
+    "waveCursor": 0,
+    "rng": {
+      "waves": [3529746, 2253747785, 629025375, 113],
+      "combat": [1364849998, 1614054232, 1865383167, 1285],
+      "loot": [706002637, 1381183347, 1183106206, 57],
+      "sky": [2869064633, 3319201414, 2011314105, 56],
+      "heroGen": [2989628051, 3326746928, 3937523290, 16],
+      "ids": [2602306046, 3497897649, 124364673, 2432]
+    },
+    "waves": {
+      "plan": {
+        "levelId": "level-1",
+        "levelIndex": 1,
+        "areaLevel": 1,
+        "waves": [
+          {
+            "index": 0,
+            "flag": false,
+            "gapSeconds": 25,
+            "startSeconds": 25,
+            "earlyTriggerFraction": 0.5439465334289707,
+            "monsters": [
+              {
+                "archetypeId": "Shambler",
+                "lane": 2,
+                "x": 9.996123813674785,
+                "spawnOffsetSeconds": 1.9186737388372421
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 3,
+                "x": 9.947679659468122,
+                "spawnOffsetSeconds": 3.9731072513386607
+              }
+            ]
+          },
+          {
+            "index": 1,
+            "flag": false,
+            "gapSeconds": 28.955654544290155,
+            "startSeconds": 53.955654544290155,
+            "earlyTriggerFraction": 0.5353342187590897,
+            "monsters": [
+              {
+                "archetypeId": "Shambler",
+                "lane": 1,
+                "x": 10.10604613716714,
+                "spawnOffsetSeconds": 0.668813806027174
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 2,
+                "x": 10.219131346326321,
+                "spawnOffsetSeconds": 3.0839868281036615
+              }
+            ]
+          },
+          {
+            "index": 2,
+            "flag": false,
+            "gapSeconds": 26.32067731069401,
+            "startSeconds": 80.27633185498416,
+            "earlyTriggerFraction": 0.59686472248286,
+            "monsters": [
+              {
+                "archetypeId": "Shambler",
+                "lane": 1,
+                "x": 10.119776895968243,
+                "spawnOffsetSeconds": 2.450747369788587
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 2,
+                "x": 9.753129012649879,
+                "spawnOffsetSeconds": 2.461938147433102
+              }
+            ]
+          },
+          {
+            "index": 3,
+            "flag": false,
+            "gapSeconds": 26.978870885446668,
+            "startSeconds": 107.25520274043083,
+            "earlyTriggerFraction": 0.6252329564420507,
+            "monsters": [
+              {
+                "archetypeId": "Shambler",
+                "lane": 1,
+                "x": 9.809275694773532,
+                "spawnOffsetSeconds": 2.831628547050059
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 2,
+                "x": 9.920552430441603,
+                "spawnOffsetSeconds": 1.0128027638420463
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 3,
+                "x": 10.020370882935822,
+                "spawnOffsetSeconds": 0.5517853256314993
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 3,
+                "x": 10.077936497051269,
+                "spawnOffsetSeconds": 0.39120766054838896
+              }
+            ]
+          },
+          {
+            "index": 4,
+            "flag": true,
+            "gapSeconds": 25.544406361412257,
+            "startSeconds": 132.7996091018431,
+            "earlyTriggerFraction": 0.5841129227192141,
+            "monsters": [
+              {
+                "archetypeId": "Shambler",
+                "lane": 2,
+                "x": 9.953116232180037,
+                "spawnOffsetSeconds": 2.2280173068866134
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 2,
+                "x": 9.993907476891764,
+                "spawnOffsetSeconds": 2.2422296488657594
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 1,
+                "x": 9.791374136693776,
+                "spawnOffsetSeconds": 3.8402449814602733
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 1,
+                "x": 10.231589080882259,
+                "spawnOffsetSeconds": 1.9043513517826796
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 2,
+                "x": 9.802861259318888,
+                "spawnOffsetSeconds": 1.156522617675364
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 1,
+                "x": 9.83998928021174,
+                "spawnOffsetSeconds": 0.627025319263339
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 1,
+                "x": 10.211011416860856,
+                "spawnOffsetSeconds": 0.17336304858326912
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 3,
+                "x": 9.918475383892655,
+                "spawnOffsetSeconds": 3.681842657737434
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 3,
+                "x": 9.8673614122672,
+                "spawnOffsetSeconds": 2.223449517041445
+              },
+              {
+                "archetypeId": "Shambler",
+                "lane": 3,
+                "x": 10.109993369551376,
+                "spawnOffsetSeconds": 3.259529518894851
+              }
+            ]
+          }
+        ]
+      },
+      "next": 4,
+      "nextAtSeconds": 105.31107302807892,
+      "warned": [],
+      "current": {
+        "index": 3,
+        "startedAtSeconds": 79.76666666666667,
+        "monsterIds": [],
+        "spawnedLife": 0,
+        "remainingLife": 0,
+        "triggered": false
+      },
+      "pending": [
+        {
+          "wave": 3,
+          "atSeconds": 82.59829521371672,
+          "monster": {
+            "archetypeId": "Shambler",
+            "lane": 1,
+            "x": 9.809275694773532,
+            "spawnOffsetSeconds": 2.831628547050059
+          }
+        },
+        {
+          "wave": 3,
+          "atSeconds": 80.77946943050871,
+          "monster": {
+            "archetypeId": "Shambler",
+            "lane": 2,
+            "x": 9.920552430441603,
+            "spawnOffsetSeconds": 1.0128027638420463
+          }
+        },
+        {
+          "wave": 3,
+          "atSeconds": 80.31845199229817,
+          "monster": {
+            "archetypeId": "Shambler",
+            "lane": 3,
+            "x": 10.020370882935822,
+            "spawnOffsetSeconds": 0.5517853256314993
+          }
+        },
+        {
+          "wave": 3,
+          "atSeconds": 80.15787432721505,
+          "monster": {
+            "archetypeId": "Shambler",
+            "lane": 3,
+            "x": 10.077936497051269,
+            "spawnOffsetSeconds": 0.39120766054838896
+          }
+        }
+      ]
+    },
+    "earned": [
+      {
+        "dropId": "7fc28698-2c0c-471c-806b-30bd0fae4259",
+        "monsterId": "419fe4af-cf5f-48a8-bf54-db44bcbc8f28",
+        "tick": 3555,
+        "drop": {
+          "kind": "item",
+          "item": {
+            "id": "207e155e-7f40-4d31-8075-630ae97b71d5",
+            "baseId": "Metadata/Items/Weapons/TwoHandWeapons/Bows/FourBow1",
+            "rarity": "normal",
+            "itemLevel": 2,
+            "quality": 0,
+            "mods": [],
+            "implicits": []
+          }
+        }
+      },
+      {
+        "dropId": "4de9c234-d283-43bd-afbe-da9efe0de66b",
+        "monsterId": "419fe4af-cf5f-48a8-bf54-db44bcbc8f28",
+        "tick": 3555,
+        "drop": {
+          "kind": "item",
+          "item": {
+            "id": "be0dd4bc-28b9-4271-a6af-aae63c90f593",
+            "baseId": "Metadata/Items/Weapons/TwoHandWeapons/TwoHandMaces/FourTwoHandMace1",
+            "rarity": "magic",
+            "itemLevel": 2,
+            "quality": 0,
+            "mods": [
+              {
+                "modId": "LifeGainedFromEnemyDeath1",
+                "values": [4]
+              }
+            ],
+            "implicits": []
+          }
+        }
+      },
+      {
+        "dropId": "0d3a38d6-6edf-427e-9a6a-a048d6d34369",
+        "monsterId": "419fe4af-cf5f-48a8-bf54-db44bcbc8f28",
+        "tick": 3555,
+        "drop": {
+          "kind": "currency",
+          "currencyId": "Metadata/Items/Currency/CurrencyUpgradeToMagic"
+        }
+      },
+      {
+        "dropId": "2bcb8407-22ea-47f9-95fe-ce526dc8f4dd",
+        "monsterId": "419fe4af-cf5f-48a8-bf54-db44bcbc8f28",
+        "tick": 3555,
+        "drop": {
+          "kind": "gold",
+          "amount": 3
+        }
+      },
+      {
+        "dropId": "e62ed062-4e01-49cf-82e4-243e474d3022",
+        "monsterId": "419fe4af-cf5f-48a8-bf54-db44bcbc8f28",
+        "tick": 3555,
+        "drop": {
+          "kind": "gold",
+          "amount": 3
+        }
+      },
+      {
+        "dropId": "cd677268-4497-4fda-a35e-67e5d38117d3",
+        "monsterId": "419fe4af-cf5f-48a8-bf54-db44bcbc8f28",
+        "tick": 3555,
+        "drop": {
+          "kind": "gold",
+          "amount": 2
+        }
+      },
+      {
+        "dropId": "bb2407ca-9153-4e6a-b303-99040d0cc022",
+        "monsterId": "419fe4af-cf5f-48a8-bf54-db44bcbc8f28",
+        "tick": 3555,
+        "drop": {
+          "kind": "gold",
+          "amount": 3
+        }
+      },
+      {
+        "dropId": "94b61277-5085-4ecb-98f2-f6ce0326f62f",
+        "monsterId": "046744f6-0d74-4b47-9dfc-db0812459a6e",
+        "tick": 4710,
+        "drop": {
+          "kind": "item",
+          "item": {
+            "id": "83a161e2-3829-43e8-ab38-1a0846c75632",
+            "baseId": "Metadata/Items/Weapons/OneHandWeapons/Sceptres/FourSceptre1",
+            "rarity": "normal",
+            "itemLevel": 1,
+            "quality": 0,
+            "mods": [],
+            "implicits": []
+          }
+        }
+      }
+    ],
+    "kills": [],
+    "result": null
+  }
+}

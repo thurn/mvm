@@ -1,5 +1,6 @@
 import type { Actor } from "../combat/actor";
 import type { SkillHit } from "../combat/hit";
+import type { Drop } from "../loot/drops";
 import type { WaveRuntime } from "../monsters/waves";
 import type { SpellShape } from "../spells/shapes";
 import type { ManaOrb } from "./economy/orbs";
@@ -129,11 +130,22 @@ interface GroundEffectState {
   secondsLeft: number;
 }
 
-/** A drop credited to the account at kill time (P13). The loot bead fills in its outcome. */
+/** A drop credited at kill time (P13, P16): its full outcome, stored when rolled. */
 interface EarnedDrop {
   dropId: string;
   monsterId: MonsterInstanceId;
   tick: number;
+  drop: Drop;
+}
+
+/** A monster killed this step, waiting for the loot system to roll its drops. */
+interface KillRecord {
+  monsterId: MonsterInstanceId;
+  rarity: Rarity;
+  affixCount: number;
+  killerId: string;
+  lane: number;
+  x: number;
 }
 
 /**
@@ -167,6 +179,8 @@ export interface RoundState {
   /** The level's stored wave plan and its progress (Appendix D §5); null in scenes without waves. */
   waves: WaveRuntime | null;
   earned: EarnedDrop[];
+  /** Kills this step; the loot system rolls and clears them. */
+  kills: KillRecord[];
   result: "won" | "lost" | null;
 }
 
@@ -197,6 +211,7 @@ export function createRound({ seed, lanes, mana }: RoundOptions): RoundState {
     rng: createStreams(seed),
     waves: null,
     earned: [],
+    kills: [],
     result: null,
   };
 }

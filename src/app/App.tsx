@@ -1,5 +1,6 @@
 import { findScene } from "../dev/scenes";
 import { Board } from "./Board";
+import { Game } from "./Game";
 
 export function App() {
   const sceneName = new URLSearchParams(window.location.search).get("scene");
@@ -8,5 +9,5 @@ export function App() {
     if (scene) return <Board scene={scene} />;
     return <p>Unknown scene: {sceneName}</p>;
   }
-  return <h1>Mercs vs. Monsters</h1>;
+  return <Game />;
 }

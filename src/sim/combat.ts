@@ -23,8 +23,19 @@ function targetX(target: HitTarget): number {
 export function killTarget(ctx: StepContext, sourceId: EntityId, target: HitTarget): void {
   const { state } = ctx;
   const entity = target.entity;
-  if (target.kind === "monster") state.monsters = state.monsters.filter((m) => m.id !== entity.id);
-  else state.heroes = state.heroes.filter((h) => h.id !== entity.id);
+  if (target.kind === "monster") {
+    state.monsters = state.monsters.filter((m) => m.id !== entity.id);
+    state.kills.push({
+      monsterId: target.entity.id,
+      rarity: target.entity.rarity,
+      affixCount: target.entity.affixes?.length ?? 0,
+      killerId: sourceId,
+      lane: entity.lane,
+      x: target.entity.x,
+    });
+  } else {
+    state.heroes = state.heroes.filter((h) => h.id !== entity.id);
+  }
   ctx.emit({
     type: "kill",
     sourceId,

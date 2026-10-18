@@ -8,7 +8,7 @@ describe("the save mirror endpoint", () => {
   test("writes latest.json plus a rolling history, and serves the latest back", async () => {
     const dir = mkdtempSync(join(tmpdir(), "mvm-saves-"));
     expect(await handleSaveRequest(dir, "GET", "/__mvm/save", "")).toEqual({
-      status: 404,
+      status: 204,
       body: "",
     });
     for (let i = 0; i < 55; i++) {
