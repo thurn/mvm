@@ -17,11 +17,14 @@ export function gemLevel(heroLevel: number): number {
 
 interface LevelEntry {
   damage_multiplier?: number;
-  stats?: { id: string; value: number }[];
+  /** Values for the static stats whose value is null, by position (RePoE's layout). */
+  stats?: ({ value: number } | null)[];
 }
 
 interface StaticEntry {
-  stats?: { id: string; type?: string; value: number }[];
+  stats?: { id: string; type?: string; value: number | null }[];
+  /** Spell base crit in hundredths of a percent. */
+  crit_chance?: number;
 }
 
 export interface StatSetValues {
@@ -31,10 +34,22 @@ export interface StatSetValues {
   stats: Record<string, number>;
   /** Skill-inherent conversion (`active_skill_base_physical_damage_%_to_convert_to_*`). */
   conversion: Conversion;
+  /** The stat set's own base crit in percent (spells), or null for attacks, which use the weapon's. */
+  critChance: number | null;
 }
 
 function levelValue(set: SkillStatSet, level: number): LevelEntry {
   return (set.perLevel[String(level)] ?? {}) as LevelEntry;
+}
+
+/** A level's per-level stat values, matched to the static stat ids by position. */
+function levelStats(statics: StaticEntry["stats"], entry: LevelEntry): Map<string, number> {
+  const values = new Map<string, number>();
+  (entry.stats ?? []).forEach((value, index) => {
+    const id = statics?.[index]?.id;
+    if (value && id) values.set(id, value.value);
+  });
+  return values;
 }
 
 /**
@@ -50,15 +65,15 @@ export function statSetAt(set: SkillStatSet, gem: number): StatSetValues {
   const dm = (entry: LevelEntry) => entry.damage_multiplier ?? HERO_TUNING.defaultDamageMultiplier;
   const damageMultiplier = frac > 0 ? dm(a) + frac * (dm(b) - dm(a)) : dm(a);
 
+  const statics = (set.static as StaticEntry | null)?.stats;
   const stats: Record<string, number> = {};
-  for (const stat of (set.static as StaticEntry | null)?.stats ?? []) {
-    if (stat.type !== "implicit") stats[stat.id] = stat.value;
+  for (const stat of statics ?? []) {
+    if (stat.type !== "implicit" && stat.value !== null) stats[stat.id] = stat.value;
   }
-  const bValues = new Map((b.stats ?? []).map((s) => [s.id, s.value]));
-  for (const stat of a.stats ?? []) {
-    const next = bValues.get(stat.id);
-    stats[stat.id] =
-      frac > 0 && next !== undefined ? stat.value + frac * (next - stat.value) : stat.value;
+  const bValues = levelStats(statics, b);
+  for (const [id, value] of levelStats(statics, a)) {
+    const next = bValues.get(id);
+    stats[id] = frac > 0 && next !== undefined ? value + frac * (next - value) : value;
   }
 
   const conversion: Conversion = {};
@@ -68,5 +83,11 @@ export function statSetAt(set: SkillStatSet, gem: number): StatSetValues {
       conversion.physical = { ...conversion.physical, [match[1] as DamageType]: value };
     }
   }
-  return { damageMultiplier, stats, conversion };
+  const crit = (set.static as StaticEntry | null)?.crit_chance;
+  return {
+    damageMultiplier,
+    stats,
+    conversion,
+    critChance: crit === undefined ? null : crit / 100,
+  };
 }

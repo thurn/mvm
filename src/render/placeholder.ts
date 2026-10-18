@@ -12,6 +12,7 @@ const COLORS = {
   outline: "#1b1b1b",
   lifeBack: "#3a0d0d",
   life: "#d23c3c",
+  projectile: "#ffe066",
 } as const;
 
 /** Logical px of a continuous board x (1.0 = centre of column 1) and a lane centre. */
@@ -105,8 +106,17 @@ function drawActors(ctx: CanvasRenderingContext2D, frame: Frame) {
   for (const sprite of sprites) sprite.draw();
 }
 
+function drawProjectiles(ctx: CanvasRenderingContext2D, { state }: Frame) {
+  ctx.fillStyle = COLORS.projectile;
+  for (const p of state.projectiles) {
+    if (p.delaySeconds > 0) continue;
+    ctx.fillRect(Math.round(boardX(p.x) - 4), Math.round(laneY(p.lane) - 2), 8, 4);
+  }
+}
+
 /** Placeholder art straight from RoundState, until the sprite layers land. */
 export function registerPlaceholderLayers(stack: LayerStack): void {
   stack.register({ id: "placeholder-lawn", layer: "lawn", draw: drawLawn });
   stack.register({ id: "placeholder-actors", layer: "actors", draw: drawActors });
+  stack.register({ id: "placeholder-projectiles", layer: "projectiles", draw: drawProjectiles });
 }

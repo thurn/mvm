@@ -22,4 +22,42 @@ export const HERO_TUNING = {
   rechargeSeconds: { fast: 7.5, slow: 30, verySlow: 50 },
   /** A missing per-level damage_multiplier means this (§1.5). */
   defaultDamageMultiplier: 100,
+  /** PoE2 units per tile: 1.2 m per tile at 10 units per metre (Appendix A §1.1). */
+  poeUnitsPerTile: 12,
+} as const;
+
+/** Board behavior tunables for heroes (Appendix A §3, Appendix B §2). */
+export const HERO_BOARD_TUNING = {
+  /** Projectiles fly about 8 tiles/s; speed is cosmetic (A §3.3). */
+  projectileSpeed: 8,
+  /** A lane projectile without a range crosses the whole board. */
+  laneProjectileRange: 10,
+  /** Chain redirects to the nearest unhit monster within this many tiles (A §3.4, adapted). */
+  chainRange: 2,
+  /** +3 projectiles stagger by this much (A §3.4). */
+  extraProjectileStaggerSeconds: 0.1,
+  /** A projectile hits a monster within this many tiles of it, in its lane. */
+  projectileHitReach: 0.5,
+  /** Melee strikes reach the hero's own tile plus this many tiles ahead (B §1.2). */
+  meleeReach: 1,
+  acolyte: {
+    orbBase: 25,
+    spiritDivisor: 200,
+    orbSeconds: 24,
+    firstOrbMinSeconds: 3,
+    firstOrbMaxSeconds: 12.5,
+    /** MvM custom: +2 Spirit per hero level above 1 (B H01). */
+    spiritPerLevel: 2,
+  },
+  lightningArrow: { beamRadius: 2.67 },
+  spark: { range: 6, laneReach: 1 },
+  rollingSlam: { reach: 2, firstOffset: 1, secondOffset: 2 },
+  fallingThunder: {
+    reach: 3,
+    /** Own lane from +1 tile; adjacent lanes from +2 tiles; both to +3 (B H10). */
+    ownLaneFrom: 1,
+    adjacentLaneFrom: 2,
+    volleyEvery: 3,
+  },
+  iceStrike: { finalReach: 2, combo: 3 },
 } as const;

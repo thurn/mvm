@@ -23,6 +23,29 @@ export interface MonsterState {
   /** Walk speed multiplier; 1.0 walks one tile per `walkSecondsPerTile`. */
   moveSpeed: number;
   actor: Actor;
+  /** The monster's attack on a hero blocking it (Appendix A §3.2); none for harmless monsters. */
+  attack?: MonsterAttack;
+}
+
+interface MonsterAttack {
+  hit: SkillHit;
+  /** Seconds between attacks. */
+  seconds: number;
+  /** Seconds until the next attack while blocked. */
+  timer: number;
+}
+
+/**
+ * A placed hero's skill, resolved from its card at placement (P16): its
+ * behavior, cadence, named hits and numbers, and its running counters.
+ */
+export interface HeroKit {
+  behavior: string;
+  /** Seconds between actions in play, after `K_heroActionRate`. */
+  actionSeconds: number;
+  hits: Record<string, SkillHit>;
+  numbers: Record<string, number>;
+  counters: Record<string, number>;
 }
 
 export interface HeroState {
@@ -30,6 +53,9 @@ export interface HeroState {
   lane: number;
   column: number;
   actor: Actor;
+  /** The card's skill gem ID; absent for bare blockers. */
+  skillId?: string;
+  kit?: HeroKit;
 }
 
 /**
@@ -48,7 +74,7 @@ export interface ScriptedActorState {
   blocks: boolean;
 }
 
-interface ProjectileState {
+export interface ProjectileState {
   id: string;
   sourceId: EntityId;
   lane: number;
@@ -56,6 +82,21 @@ interface ProjectileState {
   /** Tiles per second; positive travels right. */
   speed: number;
   hit: SkillHit;
+  /** Tiles left before it expires. */
+  rangeLeft: number;
+  /** Seconds before it starts moving (staggered extra projectiles). */
+  delaySeconds: number;
+  /** Monsters it passes through, damaging each (Appendix A §3.4). */
+  pierceLeft: number;
+  /** Whether its first non-pierced hit splits it into the adjacent lanes. */
+  forks: boolean;
+  chainsLeft: number;
+  /** Monsters this projectile, and its cast group, already hit. */
+  hitIds: string[];
+  /** Projectiles from one cast share a group, so they hit a monster once (Spark). */
+  group: string;
+  /** A named on-hit effect the hero system resolves, such as Lightning Arrow's beams. */
+  onHit: string | null;
 }
 
 interface GroundEffectState {
@@ -124,7 +165,7 @@ export function createRound({ seed, lanes, mana }: RoundOptions): RoundState {
 }
 
 /** A UUID v4 drawn from the `ids` stream, so instance IDs are deterministic. */
-function newInstanceId<Kind extends string>(state: RoundState): Id<Kind> {
+export function newInstanceId<Kind extends string>(state: RoundState): Id<Kind> {
   const hex = Array.from({ length: 4 }, () =>
     drawUint32(state.rng, "ids").toString(16).padStart(8, "0"),
   ).join("");
