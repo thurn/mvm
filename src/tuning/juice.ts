@@ -567,3 +567,14 @@ export const VENDOR_FEEDBACK = {
   burstParticles: 20,
   burstMs: 700,
 } as const;
+
+/** Player spells on the ground (H §1.1, hv-7ic2.86): the telegraph under actors and the impact flash. */
+export const SPELL_JUICE = {
+  telegraphColor: "#8cc8ff",
+  /** H §1.1: a telegraph sits under the actors at no more than 45% alpha. */
+  telegraphOutlineAlpha: 0.45,
+  telegraphFillAlpha: 0.18,
+  /** The impact flash, over the actors, finishes within H §1.1's 250 ms. */
+  flashAlpha: 0.55,
+  flashMs: 200,
+} as const;

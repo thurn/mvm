@@ -2,6 +2,7 @@ import type { LayerStack } from "../../render/layers";
 import { spriteSystem } from "../../render/sprites/system";
 import { hitSystem } from "../hits/system";
 import { killSystem } from "../kills/system";
+import { spellSystem } from "../spells/system";
 import { lootSystem } from "../loot/system";
 import { manaSystem } from "../mana/system";
 import { vfxSystem } from "../vfx/system";
@@ -36,6 +37,7 @@ export const PRESENTATION_SYSTEMS: PresentationFactory[] = [
   hitSystem,
   killSystem,
   lootSystem,
+  spellSystem,
   manaSystem,
   vfxSystem,
   ailmentSystem,
