@@ -36,6 +36,7 @@ function useUiJuice(): UiJuice {
 
 const STYLE = `@keyframes mvm-fx-fade { to { opacity: 0; } }
 @keyframes mvm-fx-burst { from { transform: rotate(var(--a)) translateX(0); opacity: 1; } to { transform: rotate(var(--a)) translateX(var(--d)); opacity: 0; } }
+@keyframes mvm-fx-pour { from { transform: translateY(0); opacity: 1; } to { transform: translateY(var(--d)); opacity: 0; } }
 @keyframes mvm-fx-glow { from { opacity: 0.8; transform: scale(0.6); } to { opacity: 0; transform: scale(1.4); } }
 @keyframes mvm-fx-shake { 0% { transform: translate(var(--s), calc(var(--s) * -0.6)); } 20% { transform: translate(calc(var(--s) * -0.8), calc(var(--s) * 0.5)); } 40% { transform: translate(calc(var(--s) * 0.6), calc(var(--s) * -0.4)); } 60% { transform: translate(calc(var(--s) * -0.4), calc(var(--s) * 0.3)); } 80% { transform: translate(calc(var(--s) * 0.2), calc(var(--s) * -0.1)); } 100% { transform: none; } }`;
 
@@ -193,6 +194,37 @@ export function Burst({
               "--a": `${(360 / shown) * i}deg`,
               "--d": `${distance}px`,
               animation: `mvm-fx-burst ${ms}ms ease-out forwards`,
+            } as CSSProperties
+          }
+        />
+      ))}
+    </span>
+  );
+}
+
+/** Gold coins pouring down through their container (H §9.3's buy); scaled by juice, so none at juice 0. */
+export function CoinPour({ count, ms, distance }: { count: number; ms: number; distance: number }) {
+  const shown = useUiJuice().particles(count);
+  if (shown <= 0) return null;
+  return (
+    <span style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "visible" }}>
+      <style>{STYLE}</style>
+      {Array.from({ length: shown }, (_, i) => (
+        <span
+          key={i}
+          data-testid="coin-particle"
+          style={
+            {
+              position: "absolute",
+              left: `${10 + ((i * 37) % 80)}%`,
+              top: -6,
+              width: 6,
+              height: 6,
+              borderRadius: "50%",
+              background: "#E8C048",
+              boxShadow: "0 0 0 1px #7A5A10",
+              "--d": `${distance}px`,
+              animation: `mvm-fx-pour ${ms}ms ease-in ${i * 30}ms both`,
             } as CSSProperties
           }
         />

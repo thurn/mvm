@@ -530,3 +530,26 @@ export const CRAFT_TUNING = {
   /** The Jeweller's socket pops open (0 → 1.4 → 1) over this long. */
   socketMs: 300,
 } as const;
+
+/** The vendor and gamble screens' feedback (Appendix H §9.3). */
+export const VENDOR_FEEDBACK = {
+  /** A buy pours this many coins per `goldPerCoin` of its price, within the bounds. */
+  goldPerCoin: 25,
+  minCoins: 3,
+  maxCoins: 12,
+  pourMs: 500,
+  pourDistance: 90,
+  /** Coins on the ladder this far apart (H §3.5). */
+  coinStaggerMs: 40,
+  /** A sale clinks once per this much gold, at least once, at most `maxClinks`. */
+  goldPerClink: 100,
+  maxClinks: 8,
+  /** The bought card flies to the Stash tab. */
+  flyMs: 450,
+  /** The gamble card shakes face down, then flips. */
+  shakeMs: 400,
+  shakePx: 4,
+  flipMs: 300,
+  burstParticles: 20,
+  burstMs: 700,
+} as const;

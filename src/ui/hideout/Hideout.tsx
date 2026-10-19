@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { CraftTab } from "../craft/CraftTab";
+import { ArmorerTab, GambleTab, RecruiterTab } from "../vendors/VendorTabs";
 import { furthestLevel } from "../../account/lifecycle";
 import { passivePoints } from "../../account/rewards";
 import type { AccountState } from "../../account/state";
@@ -371,23 +372,38 @@ function CurrencyTab({ account }: { account: AccountState }) {
   );
 }
 
-type Tab = "roster" | "stash" | "currency" | "craft";
+type Tab = "roster" | "stash" | "currency" | "craft" | "armorer" | "recruiter" | "gamble";
+
+/** The hideout's tabs in order (GDD §15); the passive tree arrives later. */
+const TABS: readonly [Tab, string][] = [
+  ["roster", "Roster"],
+  ["stash", "Stash"],
+  ["currency", "Currency"],
+  ["craft", "Craft"],
+  ["armorer", "Armorer"],
+  ["recruiter", "Recruiter"],
+  ["gamble", "Gamble"],
+];
 
 function TabButton({
   active,
   disabled = false,
   onClick,
+  tab,
   children,
 }: {
   active?: boolean;
   disabled?: boolean;
   onClick?(): void;
+  /** The tab's name, for effects that fly to it (a bought card flies to the Stash). */
+  tab?: Tab;
   children: ReactNode;
 }) {
   return (
     <button
       type="button"
       role="tab"
+      data-tab={tab}
       aria-selected={active}
       disabled={disabled}
       onClick={onClick}
@@ -606,23 +622,14 @@ export function Hideout({
           </span>
         </div>
         <div role="tablist" style={{ display: "flex", gap: 6, marginBottom: 10 }}>
-          <TabButton active={tab === "roster"} onClick={() => setTab("roster")}>
-            Roster
-          </TabButton>
-          <TabButton active={tab === "stash"} onClick={() => setTab("stash")}>
-            Stash
-          </TabButton>
-          <TabButton active={tab === "currency"} onClick={() => setTab("currency")}>
-            Currency
-          </TabButton>
-          <TabButton active={tab === "craft"} onClick={() => setTab("craft")}>
-            Craft
-          </TabButton>
-          {["Vendors", "Tree"].map((name) => (
-            <TabButton key={name} disabled>
-              {name} <span style={{ fontSize: 10 }}>M2</span>
+          {TABS.map(([name, label]) => (
+            <TabButton key={name} tab={name} active={tab === name} onClick={() => setTab(name)}>
+              {label}
             </TabButton>
           ))}
+          <TabButton disabled>
+            Tree <span style={{ fontSize: 10 }}>M2</span>
+          </TabButton>
         </div>
         <div data-testid="hideout-status" style={{ minHeight: 18, color: "#E0A048", fontSize: 13 }}>
           {status}
@@ -636,6 +643,12 @@ export function Hideout({
           )}
           {tab === "craft" ? (
             <CraftTab store={store} />
+          ) : tab === "armorer" ? (
+            <ArmorerTab store={store} />
+          ) : tab === "recruiter" ? (
+            <RecruiterTab store={store} />
+          ) : tab === "gamble" ? (
+            <GambleTab store={store} />
           ) : tab === "currency" ? (
             <CurrencyTab account={account} />
           ) : (
