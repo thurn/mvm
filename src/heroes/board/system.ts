@@ -1,6 +1,6 @@
 import { effectiveSpeed, forceHeavyStun, isPrimed } from "../../combat/ailments";
 import type { SkillHit } from "../../combat/hit";
-import { dealHit } from "../../sim/combat";
+import { dealDot, dealHit } from "../../sim/combat";
 import {
   newInstanceId,
   type AttackKit,
@@ -299,6 +299,113 @@ function permafrostBolts(ctx: StepContext, hero: HeroState, kit: KitOf<"permafro
   return kit.actionSeconds + kit.numbers.reloadSeconds;
 }
 
+// Fireball's explosion: every other monster within its radius of the struck one (B H20).
+ON_HIT["fireballExplosion"] = (ctx, hero, target) => {
+  const kit = hero.kit;
+  if (kit?.behavior !== "fireball") return;
+  const around = monstersWithin(
+    ctx.state,
+    target.lane,
+    target.x,
+    kit.numbers.explosionRadius,
+  ).filter((m) => m.id !== target.id);
+  hitAll(ctx, hero, around, kit.hits.explosion);
+};
+
+function fireball(ctx: StepContext, hero: HeroState, kit: KitOf<"fireball">) {
+  if (!laneFirst(ctx.state, hero.lane, hero.column, laneRange(hero))) return null;
+  fire(ctx.state, hero, hero.lane, { hit: kit.hits.main, onHit: "fireballExplosion" });
+  return kit.actionSeconds;
+}
+
+/** B H21: wall offsets ahead of the hero, the first free one taken; recast as walls expire. */
+const WALL_OFFSETS = [2, 3, 4];
+
+function flameWall(ctx: StepContext, hero: HeroState, kit: KitOf<"flameWall">) {
+  const { state } = ctx;
+  const walls = state.groundEffects.filter((g) => g.kind === "flameWall" && g.sourceId === hero.id);
+  if (walls.length >= kit.numbers.limit) return null;
+  const reach = Math.floor(kit.numbers.halfLength);
+  const threat = state.monsters.some(
+    (m) => laneGap(m, hero.lane) <= reach && m.x > hero.column && m.x <= SIM_TUNING.columns + 0.5,
+  );
+  if (!threat) return null;
+  const offset = WALL_OFFSETS.find((o) => !walls.some((w) => w.x === hero.column + o));
+  if (offset === undefined || hero.column + offset > SIM_TUNING.columns) return null;
+  state.groundEffects.push({
+    id: newInstanceId<"GroundEffect">(state),
+    sourceId: hero.id,
+    kind: "flameWall",
+    lane: hero.lane,
+    x: hero.column + offset,
+    radius: kit.numbers.halfLength,
+    secondsLeft: kit.numbers.durationSeconds,
+  });
+  return kit.actionSeconds;
+}
+
+/** B H23: a nova around itself, only when a monster is within reach. */
+function iceNova(ctx: StepContext, hero: HeroState, kit: KitOf<"iceNova">) {
+  const around = monstersWithin(ctx.state, hero.lane, hero.column, kit.numbers.radius);
+  if (around.length === 0) return null;
+  hitAll(ctx, hero, around, kit.hits.nova);
+  return kit.actionSeconds;
+}
+
+/** B H25: the first monster in its lane not yet drained, else the first; the hit adds the drain. */
+function essenceDrain(ctx: StepContext, hero: HeroState, kit: KitOf<"essenceDrain">) {
+  const { state } = ctx;
+  const ahead = state.monsters
+    .filter(
+      (m) =>
+        occupies(m, hero.lane) && m.x > hero.column - 0.5 && m.x - hero.column <= laneRange(hero),
+    )
+    .sort((a, b) => a.x - b.x);
+  const target = ahead.find((m) => !m.drain) ?? ahead[0];
+  if (!target) return null;
+  dealHit(ctx, hero, { kind: "monster", entity: target }, kit.hits.main);
+  if (state.monsters.includes(target))
+    target.drain = {
+      dps: kit.numbers.drainDps,
+      secondsLeft: kit.numbers.drainSeconds,
+      sourceId: hero.id,
+    };
+  return kit.actionSeconds;
+}
+
+/** Burning walls and drains tick each step (B H21, H25); a gone caster's effects end. */
+function tickEffects(ctx: StepContext) {
+  const { state } = ctx;
+  for (const wall of state.groundEffects.filter((g) => g.kind === "flameWall")) {
+    wall.secondsLeft -= STEP_SECONDS;
+    const hero = state.heroes.find((h) => h.id === wall.sourceId);
+    if (wall.secondsLeft <= 1e-9 || hero?.kit?.behavior !== "flameWall") {
+      state.groundEffects = state.groundEffects.filter((g) => g !== wall);
+      continue;
+    }
+    const dps = hero.kit.numbers.dps;
+    for (const m of [...state.monsters])
+      if (Math.abs(m.x - wall.x) <= 0.5 && laneGap(m, wall.lane) <= wall.radius)
+        dealDot(ctx, hero, { kind: "monster", entity: m }, "fire", dps * STEP_SECONDS, "flameWall");
+  }
+  for (const m of [...state.monsters]) {
+    const drain = m.drain;
+    if (!drain) continue;
+    drain.secondsLeft -= STEP_SECONDS;
+    if (drain.secondsLeft <= 1e-9) delete m.drain;
+    const hero = state.heroes.find((h) => h.id === drain.sourceId);
+    if (hero)
+      dealDot(
+        ctx,
+        hero,
+        { kind: "monster", entity: m },
+        "chaos",
+        drain.dps * STEP_SECONDS,
+        "drain",
+      );
+  }
+}
+
 /** One action of an attacking kit, by behavior; the switch is exhaustive, so a new behavior must act. */
 function act(ctx: StepContext, hero: HeroState, kit: AttackKit): number | null {
   switch (kit.behavior) {
@@ -326,6 +433,14 @@ function act(ctx: StepContext, hero: HeroState, kit: AttackKit): number | null {
       return explosiveSpear(ctx, hero, kit);
     case "permafrostBolts":
       return permafrostBolts(ctx, hero, kit);
+    case "fireball":
+      return fireball(ctx, hero, kit);
+    case "flameWall":
+      return flameWall(ctx, hero, kit);
+    case "iceNova":
+      return iceNova(ctx, hero, kit);
+    case "essenceDrain":
+      return essenceDrain(ctx, hero, kit);
   }
 }
 
@@ -351,6 +466,7 @@ export const heroSystem: System = {
   phase: "heroes",
   run(ctx) {
     detonate(ctx);
+    tickEffects(ctx);
     for (const hero of [...ctx.state.heroes]) {
       const kit = hero.kit;
       if (!kit || !ctx.state.heroes.includes(hero)) continue;

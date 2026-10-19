@@ -85,6 +85,31 @@ const DESCRIPTIONS: Readonly<Record<string, HeroDescription>> = {
     text: `Casts sparks down its own lane and both neighbouring lanes whenever a monster is within reach of any of them.`,
     range: `${tiles(B.spark.range)} ahead, three lanes`,
   },
+  "Metadata/Items/Gem/SkillGemFireball": {
+    tags: ["Spell", "Projectile", "Area", "Fire"],
+    text: "Hurls a fireball at the first monster in its lane; it explodes on impact, burning every other monster close around the one it hit, in any lane.",
+    range: `${tiles(B.laneProjectileRange)} along its lane`,
+  },
+  "Metadata/Items/Gems/SkillGemFlameWall": {
+    tags: ["Spell", "Area", "Fire", "Duration"],
+    text: "Raises a wall of fire across the column two tiles ahead, reaching two lanes either side; monsters standing in it burn. Keeps up to three walls, further ahead each time.",
+    range: "2–4 tiles ahead, five lanes",
+  },
+  "Metadata/Items/Gems/SkillGemIceNova": {
+    tags: ["Spell", "Area", "Cold", "Nova"],
+    text: "When a monster comes near, blasts a ring of cold all around itself, behind it too, building freeze on everything it hits.",
+    range: "All around, about 2.7 tiles",
+  },
+  "Metadata/Items/Gems/SkillGemEssenceDrain": {
+    tags: ["Spell", "Projectile", "Chaos", "Duration"],
+    text: "Fires at the first monster in its lane that it hasn't drained yet, and leaves it losing chaos damage over time for a few seconds.",
+    range: `${tiles(B.laneProjectileRange)} along its lane`,
+  },
+  "Metadata/Items/Gems/SkillGemFrostBomb": {
+    tags: ["Spell card", "Spell", "Area", "Cold"],
+    text: "Places a frost bomb on the chosen tiles; a few seconds later it detonates, dealing cold damage across them.",
+    range: "3×3 tiles",
+  },
   "Metadata/Items/Gems/SkillGemEarthquake": {
     tags: ["Spell card", "Attack", "Area", "Slam"],
     text: "Smashes one whole column of the board, then an aftershock hits the same column again a moment later.",

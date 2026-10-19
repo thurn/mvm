@@ -7,6 +7,11 @@ export const STARTER_SPELLS = {
   comet: "Metadata/Items/Gems/SkillGemComet",
 } as const;
 
+/** Spells that drop from Phase 2 on (B §6.2). */
+export const GRASSLAND_SPELLS = {
+  frostBomb: "Metadata/Items/Gems/SkillGemFrostBomb",
+} as const;
+
 /** How each spell lands on the grid (Appendix B §6.2). */
 export interface SpellDefinition {
   shape: SpellShape;
@@ -21,4 +26,5 @@ export const SPELL_DEFINITIONS: Readonly<Record<string, SpellDefinition>> = {
     virtualWeapon: "Crossbow",
   },
   [STARTER_SPELLS.comet]: { shape: { kind: "square", size: 3 }, virtualWeapon: null },
+  [GRASSLAND_SPELLS.frostBomb]: { shape: { kind: "square", size: 3 }, virtualWeapon: null },
 };

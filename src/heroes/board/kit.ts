@@ -22,6 +22,10 @@ export const SKILLS = {
   lightningSpear: "Metadata/Items/Gems/SkillGemLightningSpear",
   explosiveSpear: "Metadata/Items/Gem/SkillGemExplosiveSpear",
   permafrostBolts: "Metadata/Items/Gem/SkillGemPermafrostBolts",
+  fireball: "Metadata/Items/Gem/SkillGemFireball",
+  flameWall: "Metadata/Items/Gems/SkillGemFlameWall",
+  iceNova: "Metadata/Items/Gems/SkillGemIceNova",
+  essenceDrain: "Metadata/Items/Gems/SkillGemEssenceDrain",
 } as const;
 
 type Behavior = keyof typeof SKILLS;
@@ -84,6 +88,37 @@ function areaScale(sheet: HeroSheet): number {
 }
 
 const radiusTiles = (units: number | undefined) => (units ?? 0) / HERO_TUNING.poeUnitsPerTile;
+
+/** Seconds per cast with cast speed, after K (A §3.1). */
+function castSeconds(sheet: HeroSheet, skill: SkillData): number {
+  const castSpeed = 1 + stat(sheet.actor.stats, "cast_speed_+%") / 100;
+  return (skill.castTime ?? 1000) / 1000 / castSpeed / K;
+}
+
+/** A spell hit of one damage type from a stat set's base damage at the card's gem level. */
+function spellHit(
+  sheet: HeroSheet,
+  values: ReturnType<typeof statSetAt>,
+  type: "fire" | "cold" | "lightning" | "chaos",
+  tags: SkillTag[],
+): SkillHit {
+  return {
+    kind: "spell",
+    tags,
+    base: spellBase(
+      {
+        [type]: {
+          min: values.stats[`spell_minimum_base_${type}_damage`] ?? 0,
+          max: values.stats[`spell_maximum_base_${type}_damage`] ?? 0,
+        },
+      },
+      values.damageMultiplier,
+      sheet.actor.stats,
+    ),
+    baseCrit: values.critChance ?? 0,
+    more: sheet.more,
+  };
+}
 
 /** A constant from a stat set's static stats (radii, counts, timers), or 0. */
 function staticStat(skill: SkillData, set: number, id: string): number {
@@ -224,6 +259,87 @@ const BUILDERS: Record<Behavior, (inputs: KitInputs, skills: SkillData[]) => Her
         reloadSeconds: (ammo?.castTime ?? 0) / 1000 / K,
       },
       counters: { actionTimer: 0, clipLeft: clip },
+    };
+  },
+
+  fireball({ sheet }, [skill]) {
+    const bolt = setAt(skill!, 0, sheet.gemLevel);
+    const blast = setAt(skill!, 1, sheet.gemLevel);
+    return {
+      behavior: "fireball",
+      actionSeconds: castSeconds(sheet, skill!),
+      hits: {
+        main: spellHit(sheet, bolt, "fire", ["projectile"]),
+        explosion: spellHit(sheet, blast, "fire", ["area"]),
+      },
+      numbers: {
+        explosionRadius:
+          radiusTiles(staticStat(skill!, 1, "active_skill_base_area_of_effect_radius")) *
+          areaScale(sheet),
+      },
+      counters: { actionTimer: 0 },
+    };
+  },
+
+  flameWall({ sheet }, [skill]) {
+    const values = setAt(skill!, 0, sheet.gemLevel);
+    const increased =
+      1 +
+      (stat(sheet.actor.stats, "fire_damage_+%") + stat(sheet.actor.stats, "spell_damage_+%")) /
+        100;
+    return {
+      behavior: "flameWall",
+      actionSeconds: castSeconds(sheet, skill!),
+      hits: {},
+      numbers: {
+        dps: ((values.stats["base_fire_damage_to_deal_per_minute"] ?? 0) / 60) * increased,
+        // The wall's half length in tiles: 5 m = 4.17 tiles long, so it reaches ±2 lanes (B H21).
+        halfLength: radiusTiles(values.stats["wall_maximum_length"]) / 2,
+        durationSeconds: (values.stats["base_skill_effect_duration"] ?? 0) / 1000,
+        limit: staticStat(skill!, 0, "number_of_allowed_firewalls") || 3,
+      },
+      counters: { actionTimer: 0 },
+    };
+  },
+
+  iceNova({ sheet }, [skill]) {
+    const values = setAt(skill!, 0, sheet.gemLevel);
+    return {
+      behavior: "iceNova",
+      actionSeconds: castSeconds(sheet, skill!),
+      hits: {
+        nova: {
+          ...spellHit(sheet, values, "cold", ["area"]),
+          freezeMorePercent:
+            values.stats["active_skill_hit_damage_freeze_multiplier_+%_final"] ?? 0,
+        },
+      },
+      numbers: {
+        radius:
+          radiusTiles(staticStat(skill!, 0, "active_skill_base_area_of_effect_radius")) *
+          areaScale(sheet),
+      },
+      counters: { actionTimer: 0 },
+    };
+  },
+
+  essenceDrain({ sheet }, [skill]) {
+    const bolt = setAt(skill!, 0, sheet.gemLevel);
+    const dot = setAt(skill!, 1, sheet.gemLevel);
+    // Spell damage modifiers apply to the drain (B H25).
+    const increased =
+      1 +
+      (stat(sheet.actor.stats, "chaos_damage_+%") + stat(sheet.actor.stats, "spell_damage_+%")) /
+        100;
+    return {
+      behavior: "essenceDrain",
+      actionSeconds: castSeconds(sheet, skill!),
+      hits: { main: spellHit(sheet, bolt, "chaos", ["projectile"]) },
+      numbers: {
+        drainDps: ((dot.stats["base_chaos_damage_to_deal_per_minute"] ?? 0) / 60) * increased,
+        drainSeconds: staticStat(skill!, 1, "base_skill_effect_duration") / 1000,
+      },
+      counters: { actionTimer: 0 },
     };
   },
 

@@ -2,7 +2,10 @@ import { isAttackKit } from "./state";
 import type { Actor } from "../combat/actor";
 import { applyHitAilments } from "../combat/ailments";
 import type { SkillHit } from "../combat/hit";
+import { damageMap } from "../combat/damage";
+import { mitigate } from "../combat/mitigation";
 import { resolveHit } from "../combat/resolve";
+import type { DamageType } from "../combat/stats";
 import { AILMENT_TUNING } from "../tuning/combat";
 import { streamRng } from "./rng";
 import type { EntityId, HeroState, MonsterState } from "./state";
@@ -111,4 +114,33 @@ export function dealHit(ctx: StepContext, source: HitSource, target: HitTarget, 
     }
   }
   return result;
+}
+
+/**
+ * Damage over time from a skill effect (a burning wall, a drain): resisted
+ * like a hit of its type, applied to life, announced as `dot`, and killing
+ * at zero life (Appendix A §5.2, §6).
+ */
+export function dealDot(
+  ctx: StepContext,
+  source: { id: EntityId; actor: Actor },
+  target: HitTarget,
+  type: DamageType,
+  amount: number,
+  label: string,
+): void {
+  const entity = target.entity;
+  const taken = mitigate(damageMap({ [type]: amount }), source.actor.stats, entity.actor)[type];
+  if (taken <= 0) return;
+  entity.actor.life -= taken;
+  ctx.emit({
+    type: "dot",
+    sourceId: source.id,
+    targetId: entity.id,
+    ailment: label,
+    amount: taken,
+    lane: entity.lane,
+    x: target.kind === "monster" ? target.entity.x : target.entity.column,
+  });
+  if (entity.actor.life <= 0) killTarget(ctx, source.id, target);
 }

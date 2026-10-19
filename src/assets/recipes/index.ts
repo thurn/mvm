@@ -19,6 +19,10 @@ export const HERO_SPRITES: Readonly<Record<string, string>> = {
   "Metadata/Items/Gems/SkillGemLightningSpear": "bow_ranger",
   "Metadata/Items/Gem/SkillGemExplosiveSpear": "bow_ranger",
   "Metadata/Items/Gem/SkillGemPermafrostBolts": "crossbow_arbalist",
+  "Metadata/Items/Gem/SkillGemFireball": "wand_caster",
+  "Metadata/Items/Gems/SkillGemFlameWall": "wand_caster",
+  "Metadata/Items/Gems/SkillGemIceNova": "wand_caster",
+  "Metadata/Items/Gems/SkillGemEssenceDrain": "wand_caster",
 };
 
 /** Each monster archetype's recipe (Appendix D §1). @public (1.21 draws them) */

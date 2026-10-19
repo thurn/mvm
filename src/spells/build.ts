@@ -7,7 +7,12 @@ import { aggregate } from "../heroes/model/aggregate";
 import type { Card } from "../heroes/model/hero";
 import { statSetAt } from "../heroes/model/levels";
 import { SPELL_TUNING } from "../tuning/spells";
-import { SPELL_DEFINITIONS, STARTER_SPELLS, type SpellDefinition } from "./catalog";
+import {
+  GRASSLAND_SPELLS,
+  SPELL_DEFINITIONS,
+  STARTER_SPELLS,
+  type SpellDefinition,
+} from "./catalog";
 import type { SpellShape } from "./shapes";
 import type { Actor } from "../combat/actor";
 
@@ -95,6 +100,37 @@ export function buildSpell(card: Card, team: TeamSheet = {}): SpellKit {
           },
         ],
       };
+    // B S1: the orb sits 4 s on its 3×3, then detonates. Its Exposure pulses wait for Phase 3's Exposure.
+    case GRASSLAND_SPELLS.frostBomb: {
+      const values = statSetAt(skill.statSets[0]!, sheet.gemLevel);
+      return {
+        actor,
+        parts: [
+          {
+            name: "detonation",
+            delaySeconds: staticMs(skill, 0, "base_skill_detonation_time") / 1000,
+            columnOffset: 0,
+            shape: definition.shape,
+            hit: {
+              kind: "spell",
+              tags: ["area"],
+              base: spellBase(
+                {
+                  cold: {
+                    min: values.stats["spell_minimum_base_cold_damage"] ?? 0,
+                    max: values.stats["spell_maximum_base_cold_damage"] ?? 0,
+                  },
+                },
+                values.damageMultiplier,
+                sheet.actor.stats,
+              ),
+              baseCrit: values.critChance ?? 0,
+              more,
+            },
+          },
+        ],
+      };
+    }
     case STARTER_SPELLS.explosiveGrenade:
       return {
         actor,

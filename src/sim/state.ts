@@ -52,6 +52,8 @@ export interface MonsterState {
   affixes?: string[];
   /** A hero blocked its attack: the next Fangs of Frost stab on it explodes (B H11, adapted Parried). */
   offBalance?: boolean;
+  /** Essence Drain's chaos damage over time on this monster (B H25). */
+  drain?: { dps: number; secondsLeft: number; sourceId: HeroInstanceId };
   /** A leaper that has made its one leap (D §2.2). */
   leapt?: boolean;
   /** A boss's lanes, abilities and telegraphs (Appendix D §7); absent for every other monster. */
@@ -129,7 +131,11 @@ export type HeroKit =
       "fragment",
       "fragments" | "pierce" | "clip" | "reloadSeconds",
       "actionTimer" | "clipLeft"
-    >;
+    >
+  | Kit<"fireball", "main" | "explosion", "explosionRadius", "actionTimer">
+  | Kit<"flameWall", never, "dps" | "halfLength" | "durationSeconds" | "limit", "actionTimer">
+  | Kit<"iceNova", "nova", "radius", "actionTimer">
+  | Kit<"essenceDrain", "main", "drainDps" | "drainSeconds", "actionTimer">;
 
 export type KitOf<Behavior extends HeroKit["behavior"]> = Extract<HeroKit, { behavior: Behavior }>;
 

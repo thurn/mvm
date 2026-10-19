@@ -22,6 +22,8 @@ const LAUNCH: Readonly<Record<string, Sound>> = {
   [SKILLS.lightningSpear]: "bow_release",
   [SKILLS.explosiveSpear]: "bow_release",
   [SKILLS.permafrostBolts]: "crossbow_fire",
+  [SKILLS.fireball]: "spark_cast",
+  [SKILLS.essenceDrain]: "spark_cast",
 };
 /** Area heroes whose same-step hits draw a ground ring and dust (H §5.4 striker). */
 const SLAMS = new Set<string>([
@@ -31,6 +33,7 @@ const SLAMS = new Set<string>([
   SKILLS.boneshatter,
   SKILLS.fangsOfFrost,
   SKILLS.explosiveSpear,
+  SKILLS.iceNova,
 ]);
 const IMPACT_SOUND: Readonly<Record<string, Sound>> = {
   [SKILLS.rollingSlam]: "slam",

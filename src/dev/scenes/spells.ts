@@ -4,7 +4,7 @@ import { lockRoster } from "../../sim/economy/roster";
 import type { Intent } from "../../sim/intents";
 import { createRound, spawnMonster } from "../../sim/state";
 import { STEPS_PER_SECOND } from "../../sim/time";
-import { STARTER_SPELLS } from "../../spells/catalog";
+import { GRASSLAND_SPELLS, STARTER_SPELLS } from "../../spells/catalog";
 import { id } from "../../types/ids";
 import type { Scene } from ".";
 
@@ -13,9 +13,10 @@ const CASTS: { at: number; spellId: string; lane: number; column: number }[] = [
   { at: 2, spellId: "comet", lane: 1, column: 7 },
   { at: 5, spellId: "earthquake", lane: 2, column: 6 },
   { at: 8, spellId: "grenade", lane: 3, column: 6 },
+  { at: 10, spellId: "frostBomb", lane: 1, column: 5 },
 ];
 
-/** Packs of level 1 Shamblers walking into a Comet, an Earthquake and an Explosive Grenade. */
+/** Packs of level 1 Shamblers walking into a Comet, an Earthquake, an Explosive Grenade and a Frost Bomb. */
 export const spells: Scene = {
   name: "spells",
   create() {
@@ -24,6 +25,7 @@ export const spells: Scene = {
       starterCard(id<"Gem">(STARTER_SPELLS.comet), 1, "comet"),
       starterCard(id<"Gem">(STARTER_SPELLS.earthquake), 1, "earthquake"),
       starterCard(id<"Gem">(STARTER_SPELLS.explosiveGrenade), 1, "grenade"),
+      starterCard(id<"Gem">(GRASSLAND_SPELLS.frostBomb), 1, "frostBomb"),
     ]);
     for (const slot of state.roster) slot.rechargeLeft = 0;
     for (let i = 0; i < 30; i++) {

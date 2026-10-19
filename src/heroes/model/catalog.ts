@@ -161,6 +161,48 @@ export const HERO_CATALOG: Readonly<Record<string, CatalogEntry>> = {
     recharge: "fast",
     lifeMultiplier: 1,
   },
+  // H20
+  "Metadata/Items/Gem/SkillGemFireball": {
+    role: "spellcaster",
+    weapon: "Wand",
+    baseMana: 150,
+    recharge: "fast",
+    lifeMultiplier: 1,
+  },
+  // H21
+  "Metadata/Items/Gems/SkillGemFlameWall": {
+    role: "spellcaster",
+    weapon: "Staff",
+    baseMana: 175,
+    recharge: "fast",
+    lifeMultiplier: 1,
+  },
+  // H23
+  "Metadata/Items/Gems/SkillGemIceNova": {
+    role: "spellcaster",
+    weapon: "Staff",
+    baseMana: 150,
+    recharge: "fast",
+    lifeMultiplier: 1,
+  },
+  // H25
+  "Metadata/Items/Gems/SkillGemEssenceDrain": {
+    role: "spellcaster",
+    weapon: "Wand",
+    baseMana: 150,
+    recharge: "fast",
+    lifeMultiplier: 1,
+  },
+  // S1
+  "Metadata/Items/Gems/SkillGemFrostBomb": {
+    role: "spell",
+    weapon: null,
+    baseMana: 125,
+    recharge: "fast",
+    lifeMultiplier: 1,
+    cooldownSeconds: 30,
+    startCooldownSeconds: 20,
+  },
   // S2
   "Metadata/Items/Gems/SkillGemEarthquake": {
     role: "spell",

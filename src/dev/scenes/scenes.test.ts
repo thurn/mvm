@@ -18,7 +18,7 @@ test("shamblers-vs-scripted shows Shamblers dying", () => {
   expect(kills.length).toBeGreaterThan(0);
 });
 
-test("the spells scene casts each starter spell", () => {
+test("the spells scene casts each spell", () => {
   const scene = findScene("spells")!;
   const state = scene.create();
   const casts = [];
@@ -29,5 +29,6 @@ test("the spells scene casts each starter spell", () => {
     "comet",
     "earthquake",
     "grenade",
+    "frostBomb",
   ]);
 });
