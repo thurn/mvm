@@ -103,7 +103,12 @@ describe("the loot filter (Appendix C §C.7)", () => {
         expect(account.stash.items.some((i) => i.id === item.id)).toBe(false);
       const gold = account.gold;
       round.result = result;
-      finishLevel(account, round);
+      const summary = finishLevel(account, round);
+      // The level end lists only what reached the stash; hidden drops aren't loot cards.
+      for (const item of hidden)
+        expect(
+          summary.drops.some((d) => d.drop.kind === "item" && d.drop.item.id === item.id),
+        ).toBe(false);
       const value = hidden.reduce((sum, item) => sum + itemSellPrice(item), 0);
       expect(account.gold - gold).toBeCloseTo(value);
     }

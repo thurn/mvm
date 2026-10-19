@@ -191,10 +191,13 @@ export function finishLevel(account: AccountState, round: RoundState): LevelSumm
     result,
     xpGained,
     firstClear,
-    drops: round.earned.map(({ drop }) => ({
-      drop,
-      upgrade: drop.kind === "item" && isUpgrade(account, drop.item),
-    })),
+    // Hidden drops converted above aren't loot cards (C §C.7); 2.22 lists what they became.
+    drops: round.earned
+      .filter(({ drop }) => !(drop.kind === "item" && drop.hidden))
+      .map(({ drop }) => ({
+        drop,
+        upgrade: drop.kind === "item" && isUpgrade(account, drop.item),
+      })),
   };
 }
 
