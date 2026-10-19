@@ -34,6 +34,9 @@ export const SOUNDS = {
   goblin_squeal: { variants: [`${CREATURE}/hurt_0#.ogg`] },
   leap_whoosh: { variants: ["starninjas-swords/sword - StarNinjas/sword.#.ogg"] },
   leap_land: { variants: [`${IMPACT}/impactSoft_heavy_00#.ogg`] },
+  // The Strongbox (H §3.8): the lid's lock rattle and the lid opening; the ambush's brass hit is the flag horn.
+  lock_rattle: { variants: [`${RPG}/lock_0#.ogg`] },
+  chest_open: { variants: ["oiboo-open-chest/open_chest.wav"] },
   // Boss moments (H §7.5).
   boss_rumble: { variants: [`${RPG}/stones_0#.ogg`] },
   boss_whoosh: { variants: ["kenney-digital-audio/Audio/phaserUp#.ogg"] },

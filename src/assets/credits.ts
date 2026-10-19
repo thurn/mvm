@@ -876,6 +876,13 @@ export const CREDITS: readonly Credit[] = [
     urls: ["https://opengameart.org/content/medieval-the-old-tower-inn"],
   },
   {
+    pack: "oiboo-open-chest",
+    file: "open_chest.wav",
+    authors: ["Oiboo"],
+    licenses: ["CC0 (verified on the source page, 2026-10-18)"],
+    urls: ["https://opengameart.org/content/open-chest-sfx"],
+  },
+  {
     pack: "rubberduck-40-water-slime-sfx",
     file: "splash_01.ogg",
     authors: ["rubberduck"],
@@ -1410,6 +1417,27 @@ export const CREDITS: readonly Credit[] = [
   {
     pack: "rubberduck-80-rpg-sfx",
     file: "item_stone_01.ogg",
+    authors: ["rubberduck"],
+    licenses: ["CC0 (verified on the source page, 2026-10-18)"],
+    urls: ["https://opengameart.org/content/80-cc0-rpg-sfx"],
+  },
+  {
+    pack: "rubberduck-80-rpg-sfx",
+    file: "lock_01.ogg",
+    authors: ["rubberduck"],
+    licenses: ["CC0 (verified on the source page, 2026-10-18)"],
+    urls: ["https://opengameart.org/content/80-cc0-rpg-sfx"],
+  },
+  {
+    pack: "rubberduck-80-rpg-sfx",
+    file: "lock_02.ogg",
+    authors: ["rubberduck"],
+    licenses: ["CC0 (verified on the source page, 2026-10-18)"],
+    urls: ["https://opengameart.org/content/80-cc0-rpg-sfx"],
+  },
+  {
+    pack: "rubberduck-80-rpg-sfx",
+    file: "lock_03.ogg",
     authors: ["rubberduck"],
     licenses: ["CC0 (verified on the source page, 2026-10-18)"],
     urls: ["https://opengameart.org/content/80-cc0-rpg-sfx"],

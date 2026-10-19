@@ -4,6 +4,8 @@ import { hitSystem } from "../hits/system";
 import { killSystem } from "../kills/system";
 import { spellSystem } from "../spells/system";
 import { bossSystem } from "../boss/system";
+import { strongboxSystem } from "../strongbox/system";
+import { bannerSystem } from "../banners/system";
 import { lootSystem } from "../loot/system";
 import { manaSystem } from "../mana/system";
 import { vfxSystem } from "../vfx/system";
@@ -40,6 +42,8 @@ export const PRESENTATION_SYSTEMS: PresentationFactory[] = [
   lootSystem,
   spellSystem,
   bossSystem,
+  strongboxSystem,
+  bannerSystem,
   manaSystem,
   vfxSystem,
   ailmentSystem,

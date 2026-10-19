@@ -639,3 +639,23 @@ export const BOSS_JUICE = {
   /** The enrage smoke burst around the boss. */
   smokeBursts: 3,
 } as const;
+
+/** The Strongbox (H §3.8, plan 2.18). Times in ms, sizes in logical px. */
+export const STRONGBOX_JUICE = {
+  /** The idle glow column above the closed chest, and a dust mote this often. */
+  glowColor: "#ffd166",
+  glowAlpha: 0.3,
+  glowHeightPx: 96,
+  moteEveryMs: 700,
+  /** The trigger's lid rattle: ±1 px, three times over 300 ms. */
+  rattleMs: 300,
+  rattles: 3,
+  /** The ambush's dust burst at the chest, scaled up. */
+  ambushDustScale: 3,
+  /** Opening: the opening frame, then open; light rays from the lid. */
+  openingFrameMs: 150,
+  raysMs: 400,
+  rays: 10,
+  /** Banners (the ambush, the flag wave): slide in, hold, fade. */
+  bannerMs: 2200,
+} as const;

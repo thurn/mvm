@@ -1,7 +1,14 @@
 import type { Sound } from "../audio/engine";
 import { DAMAGE_TYPES, type DamageType } from "../combat/stats";
 import type { SimEvent, SimEventOf } from "../sim/events";
-import { BOSS_JUICE, CUE_FEEL, JUICE_TUNING, type PresetName, type Tier } from "../tuning/juice";
+import {
+  BOSS_JUICE,
+  CUE_FEEL,
+  JUICE_TUNING,
+  STRONGBOX_JUICE,
+  type PresetName,
+  type Tier,
+} from "../tuning/juice";
 import { significance } from "./core/significance";
 import type { JuiceSettings } from "./core/settings";
 import type { Cue, CueBatch } from "./director/cue";
@@ -357,8 +364,22 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
     tier: 0,
     cues: [{ kind: "sound", id: "leap_whoosh", bus: "sfx", x: event.fromX }],
   }),
-  // Strongbox presentation is plan 2.18's.
-  strongboxTriggered: () => ({ tier: 0, cues: [] }),
+  // The ambush (H §3.8): the banner, the lid's rattle, a low brass hit and dust as monsters burst out.
+  strongboxTriggered: (event) => ({
+    tier: 4,
+    cues: [
+      { kind: "banner", text: "Strongbox ambush!" },
+      { kind: "sound", id: "lock_rattle", bus: "sfx", x: event.column },
+      { kind: "sound", id: "flag_horn", bus: "sfx" },
+      {
+        kind: "particles",
+        preset: "dust",
+        lane: event.lane,
+        x: event.column,
+        scale: STRONGBOX_JUICE.ambushDustScale,
+      },
+    ],
+  }),
 };
 
 /** The tier's own global effects (H §1.3): shake, global hitstop, slow-mo and music duck. */
