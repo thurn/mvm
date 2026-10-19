@@ -848,6 +848,13 @@ export const CREDITS: readonly Credit[] = [
     urls: ["https://opengameart.org/content/battle-theme-a"],
   },
   {
+    pack: "music-epic-boss-battle",
+    file: "Juhani Junkala - Epic Boss Battle [Seamlessly Looping].wav",
+    authors: ["Juhani Junkala (SubspaceAudio)"],
+    licenses: ["CC0 (verified on the source page, 2026-10-18)"],
+    urls: ["https://opengameart.org/node/55649"],
+  },
+  {
     pack: "music-heartfelt-battle",
     file: "heartfelt-battle_loop.ogg",
     authors: ["request"],

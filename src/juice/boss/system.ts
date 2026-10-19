@@ -8,6 +8,8 @@ import { createParticlePool } from "../core/particles";
 import type { PresentationFactory } from "../director/systems";
 
 const boardX = (x: number) => (x - 0.5) * TILE;
+/** The name card's top: under the HUD boss bar (about 32 px tall at 6 px from the top). */
+const CARD_TOP = 46;
 const laneY = (lane: number) => (lane + 0.5) * TILE;
 
 type Boss = MonsterState & { boss: NonNullable<MonsterState["boss"]> };
@@ -142,13 +144,14 @@ export const bossSystem: PresentationFactory = ({ stack, settings, director }) =
       const w = 240;
       const x = BOARD_WIDTH - w - 12 + out * (w + 12);
       ctx.fillStyle = "rgba(0, 0, 0, 0.75)";
-      ctx.fillRect(x, 16, w, 40);
+      // Below the HUD's boss bar, which sits at the board's top centre.
+      ctx.fillRect(x, CARD_TOP, w, 40);
       ctx.fillStyle = C.color;
       ctx.font = "bold 14px serif";
-      ctx.fillText(names.name, x + 10, 34);
+      ctx.fillText(names.name, x + 10, CARD_TOP + 18);
       ctx.fillStyle = "#c8c8c8";
       ctx.font = "10px serif";
-      ctx.fillText(names.subtitle, x + 10, 49);
+      ctx.fillText(names.subtitle, x + 10, CARD_TOP + 33);
     },
   });
 

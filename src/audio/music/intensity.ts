@@ -17,3 +17,16 @@ export class IntensityState {
     return t - this.lastTrigger < MUSIC_TUNING.intensityHoldSeconds;
   }
 }
+
+/**
+ * The round's track (H §7.5, §10.4): the boss track once a boss's intro cut
+ * has passed and while it lives, null during the cut (the current track
+ * keeps playing under the duck), else Grassland's base or intensity track.
+ */
+export function chooseTrack(
+  intense: boolean,
+  boss: { sinceSpawnSeconds: number; cutSeconds: number } | null,
+): "boss" | "grassland" | "grassland_intensity" | null {
+  if (boss) return boss.sinceSpawnSeconds >= boss.cutSeconds ? "boss" : null;
+  return intense ? "grassland_intensity" : "grassland";
+}

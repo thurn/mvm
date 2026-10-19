@@ -4,6 +4,7 @@ export const MUSIC = {
   hideout: "music-old-tower-inn/The_Old_Tower_Inn.mp3",
   grassland: "music-heartfelt-battle/heartfelt-battle_loop.ogg",
   grassland_intensity: "music-battle-theme-a/battleThemeA.mp3",
+  boss: "music-epic-boss-battle/Juhani Junkala - Epic Boss Battle [Seamlessly Looping].wav",
 } satisfies Record<string, string>;
 
 export type MusicId = keyof typeof MUSIC;

@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { MUSIC_TUNING } from "../../tuning/audio";
 import { crossfadeGains } from "./crossfade";
-import { IntensityState } from "./intensity";
+import { chooseTrack, IntensityState } from "./intensity";
 
 describe("intensity state (H §10.4)", () => {
   test("enters on a flag warning and leaves 6 s after it", () => {
@@ -62,5 +62,14 @@ describe("crossfade (H §10.4)", () => {
       expect(g.from).toBeLessThanOrEqual(last.from);
       last = g;
     }
+  });
+});
+
+describe("the round's track (H §7.5, §10.4)", () => {
+  test("a boss's intro cuts to silence, then the boss track plays while it lives", () => {
+    expect(chooseTrack(false, null)).toBe("grassland");
+    expect(chooseTrack(true, null)).toBe("grassland_intensity");
+    expect(chooseTrack(true, { sinceSpawnSeconds: 0.5, cutSeconds: 1.5 })).toBeNull();
+    expect(chooseTrack(false, { sinceSpawnSeconds: 1.5, cutSeconds: 1.5 })).toBe("boss");
   });
 });
