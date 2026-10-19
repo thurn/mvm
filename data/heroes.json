@@ -3523,5 +3523,8817 @@
     ]
    }
   ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SkillGemArmourBreaker",
+  "name": "Armour Breaker",
+  "gemType": "active",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "strength",
+   "grants_active_skill",
+   "attack",
+   "area",
+   "melee",
+   "strike",
+   "physical"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gem/SupportGemArmourExplosion",
+   "Metadata/Items/Gems/SupportGemDemolisher",
+   "Metadata/Items/Gems/SupportGemMartialTempo",
+   "Metadata/Items/Gem/SupportGemBreakEndurance",
+   "Metadata/Items/Gem/SupportGemVolcanicEruption",
+   "Metadata/Items/Gem/SupportGemCadence",
+   "Metadata/Items/Gem/SupportGemBarbs",
+   "Metadata/Items/Gems/SupportGemDemolisherTwo",
+   "Metadata/Items/Gem/SupportGemAncestralCall",
+   "Metadata/Items/Gems/SupportGemRageTwo",
+   "Metadata/Items/Gems/SupportGemBludgeon",
+   "Metadata/Items/Gem/SupportGemAncestralCallTwo",
+   "Metadata/Items/Gem/SupportGemBarbsTwo",
+   "Metadata/Items/Gems/SupportGemMartialTempoTwo",
+   "Metadata/Items/Gems/SupportGemRageThree",
+   "Metadata/Items/Gems/SupportGemMaim"
+  ],
+  "skills": [
+   {
+    "id": "ArmourBreakerPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Armour Breaker",
+     "id": "armour_breaker",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {
+      "cast_bone_corpses_on_stun_with_heavy_strike_or_boneshatter": "trigger_level_20_bone_corpses_on_stun",
+      "heavy_strike_attack_speed_+%": "attack_speed_+%",
+      "heavy_strike_chance_to_deal_double_damage_%": "chance_to_deal_double_damage_%",
+      "heavy_strike_damage_+%": "damage_+%"
+     },
+     "types": [
+      "Attack",
+      "MeleeSingleTarget",
+      "Melee",
+      "Area",
+      "Physical",
+      "AttackInPlace",
+      "Totemable"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "attack_speed_multiplier": -20
+    },
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 5
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 6
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 7
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 8
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 9
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 12
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 13
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 14
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 16
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "ArmourBreakerPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "[ArmourBreak|Break] {armour_break_amount_+%}% increased [Armour|Armour]",
+         "stats": {
+          "armour_break_amount_+%": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "melee_range_+",
+         "type": "constant",
+         "value": 2
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 17
+        },
+        {
+         "id": "active_skill_attack_speed_+%_final_while_dual_wielding",
+         "type": "constant",
+         "value": 40
+        },
+        {
+         "id": "apply_X_armour_break_on_hit",
+         "type": "additional"
+        },
+        {
+         "id": "global_knockback",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "melee_defer_damage_prediction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 50,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 3 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 3
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "damage_multiplier": 55,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 6 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 6
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "damage_multiplier": 61,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 11 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 11
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "damage_multiplier": 66,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 24 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 24
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "damage_multiplier": 72,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 40 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 40
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "damage_multiplier": 77,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 60 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 60
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "damage_multiplier": 83,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 88 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 88
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "damage_multiplier": 88,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 123 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 123
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "damage_multiplier": 93,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 183 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 183
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "damage_multiplier": 99,
+        "stat_text": {
+         "apply_X_armour_break_on_hit": "Hits [ArmourBreak|Break] 266 [Armour|Armour]"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 266
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SkillGemBoneshatter",
+  "name": "Boneshatter",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Mace"
+  ],
+  "requirementWeights": {
+   "strength": 100,
+   "dexterity": 0,
+   "intelligence": 0
+  },
+  "tags": [
+   "strength",
+   "grants_active_skill",
+   "attack",
+   "area",
+   "melee",
+   "strike"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemImpactShockwave",
+   "Metadata/Items/Gem/SupportGemEnduringImpact",
+   "Metadata/Items/Gems/SupportGemBrutality",
+   "Metadata/Items/Gems/SupportGemBrutalityTwo",
+   "Metadata/Items/Gem/SupportGemDefy",
+   "Metadata/Items/Gems/SupportGemBehead",
+   "Metadata/Items/Gems/SupportGemBeheadTwo",
+   "Metadata/Items/Gems/SupportGemCloseCombat",
+   "Metadata/Items/Gem/SupportGemAncestralCall",
+   "Metadata/Items/Gem/SupportGemEnduringImpactTwo",
+   "Metadata/Items/Gems/SupportGemExecuteTwo",
+   "Metadata/Items/Gem/SupportGemAncestralCallTwo",
+   "Metadata/Items/Gem/SupportGemDefyTwo",
+   "Metadata/Items/Gem/SupportGemHeft",
+   "Metadata/Items/Gem/SupportGemStoicism"
+  ],
+  "skills": [
+   {
+    "id": "BoneshatterPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Boneshatter",
+     "id": "boneshatter",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {
+      "boneshatter_damage_+%": "damage_+%",
+      "boneshatter_stun_duration_+%": "base_stun_duration_+%",
+      "cast_bone_corpses_on_stun_with_heavy_strike_or_boneshatter": "trigger_level_20_bone_corpses_on_stun"
+     },
+     "types": [
+      "Attack",
+      "MeleeSingleTarget",
+      "Melee",
+      "Area",
+      "Totemable"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "attack_speed_multiplier": -40
+    },
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 9
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 13
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 15
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 17
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 19
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 21
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 23
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 26
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "BoneshatterPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{attack_speed_+%}% increased [Attack] Speed",
+         "stats": {
+          "attack_speed_+%": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "melee_range_+",
+         "type": "constant",
+         "value": 2
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 17
+        },
+        {
+         "id": "active_skill_hit_damage_stun_multiplier_+%_final",
+         "type": "constant",
+         "value": -100
+        },
+        {
+         "id": "active_skill_damage_+%_final_while_dual_wielding",
+         "type": "constant",
+         "value": -30
+        },
+        {
+         "id": "active_skill_show_crush_range",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "crushing_blow",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {},
+       "2": {
+        "damage_multiplier": 110
+       },
+       "3": {
+        "damage_multiplier": 121
+       },
+       "4": {
+        "damage_multiplier": 132
+       },
+       "5": {
+        "damage_multiplier": 142
+       },
+       "6": {
+        "damage_multiplier": 153
+       },
+       "7": {
+        "damage_multiplier": 164
+       },
+       "8": {
+        "damage_multiplier": 174
+       },
+       "9": {
+        "damage_multiplier": 182
+       },
+       "10": {
+        "damage_multiplier": 191
+       }
+      }
+     },
+     {
+      "id": "BoneshatterShockwavePlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{attack_speed_+%}% increased [Attack] Speed",
+         "stats": {
+          "attack_speed_+%": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "boneshatter_damage_+%_final_if_created_from_unique",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 17
+        },
+        {
+         "id": "active_skill_damage_+%_final_while_dual_wielding",
+         "type": "constant",
+         "value": -30
+        },
+        {
+         "id": "active_skill_show_crush_range",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 200
+       },
+       "2": {
+        "damage_multiplier": 220
+       },
+       "3": {
+        "damage_multiplier": 242
+       },
+       "4": {
+        "damage_multiplier": 264
+       },
+       "5": {
+        "damage_multiplier": 286
+       },
+       "6": {
+        "damage_multiplier": 309
+       },
+       "7": {
+        "damage_multiplier": 332
+       },
+       "8": {
+        "damage_multiplier": 354
+       },
+       "9": {
+        "damage_multiplier": 374
+       },
+       "10": {
+        "damage_multiplier": 395
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SkillGemFangsOfFrost",
+  "name": "Fangs of Frost",
+  "gemType": "active",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Spear"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "dexterity",
+   "grants_active_skill",
+   "attack",
+   "area",
+   "melee",
+   "strike",
+   "cold"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemIceBite",
+   "Metadata/Items/Gems/SupportGemColdInfusion",
+   "Metadata/Items/Gems/SupportGemPrimalArmament",
+   "Metadata/Items/Gem/SupportGemFrozenSpite",
+   "Metadata/Items/Gem/SupportGemEmbitter",
+   "Metadata/Items/Gems/SupportGemPrimalArmamentTwo",
+   "Metadata/Items/Gems/SupportGemBeheadTwo",
+   "Metadata/Items/Gems/SupportGemComboFinisherTwo",
+   "Metadata/Items/Gem/SupportGemPursuitTwo",
+   "Metadata/Items/Gem/SupportGemAncestralCall",
+   "Metadata/Items/Gems/SupportGemExecuteTwo",
+   "Metadata/Items/Gem/SupportGemAncestralCallTwo",
+   "Metadata/Items/Gem/SupportGemCulminationTwo",
+   "Metadata/Items/Gems/SupportGemCloseCombatTwo"
+  ],
+  "skills": [
+   {
+    "id": "FangsOfFrostPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Fangs of Frost",
+     "id": "fangs_of_frost",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {},
+     "types": [
+      "Attack",
+      "MeleeSingleTarget",
+      "Melee",
+      "Area",
+      "Spear",
+      "Cold",
+      "SkillConsumesParried",
+      "CreatesGroundEffect",
+      "AttackInPlace"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "attack_speed_multiplier": -15
+    },
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 4
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 5
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 6
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 7
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 8
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 9
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 12
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 13
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "FangsOfFrostPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{chance_to_not_consume_parried_%}% chance to not consume [ParriedDebuff|Parried Debuff]",
+         "stats": {
+          "chance_to_not_consume_parried_%": 750
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_cold",
+         "type": "constant",
+         "value": 80
+        },
+        {
+         "id": "melee_range_+",
+         "type": "constant",
+         "value": 4
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 15
+        },
+        {
+         "id": "active_skill_hit_damage_freeze_multiplier_+%_final",
+         "type": "additional"
+        },
+        {
+         "id": "active_skill_chill_effect_+%_final",
+         "type": "additional"
+        },
+        {
+         "id": "melee_defer_damage_prediction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "cannot_cancel_skill_before_contact_point",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "consume_parried_on_hit",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 95,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "100% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "100% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 100
+         },
+         {
+          "value": 100
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "damage_multiplier": 105,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "103% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "103% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 103
+         },
+         {
+          "value": 103
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "damage_multiplier": 115,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "106% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "106% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 106
+         },
+         {
+          "value": 106
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "damage_multiplier": 125,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "109% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "109% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 109
+         },
+         {
+          "value": 109
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "damage_multiplier": 135,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "112% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "112% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 112
+         },
+         {
+          "value": 112
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "damage_multiplier": 145,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "115% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "115% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 115
+         },
+         {
+          "value": 115
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "damage_multiplier": 156,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "118% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "118% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 118
+         },
+         {
+          "value": 118
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "damage_multiplier": 165,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "121% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "121% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 121
+         },
+         {
+          "value": 121
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "damage_multiplier": 173,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "124% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "124% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 124
+         },
+         {
+          "value": 124
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "damage_multiplier": 182,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "127% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "127% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 127
+         },
+         {
+          "value": 127
+         },
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "FangsOfFrostBurstPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{chance_to_not_consume_parried_%}% chance to not consume [ParriedDebuff|Parried Debuff]",
+         "stats": {
+          "chance_to_not_consume_parried_%": 750
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_cold",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 22
+        },
+        {
+         "id": "base_skill_effect_duration",
+         "type": "constant",
+         "value": 8000
+        },
+        {
+         "id": "active_skill_hit_damage_freeze_multiplier_+%_final",
+         "type": "additional"
+        },
+        {
+         "id": "active_skill_chill_effect_+%_final",
+         "type": "additional"
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_skill_show_average_damage_instead_of_dps",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_hide_display_character_panel",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "melee_conditional_step_distance",
+         "type": "constant",
+         "value": 15
+        },
+        {
+         "id": "melee_defer_damage_prediction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "cannot_cancel_skill_before_contact_point",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "consume_parried_on_hit",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 110,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "200% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "200% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 200
+         },
+         {
+          "value": 200
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "damage_multiplier": 121,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "206% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "206% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 206
+         },
+         {
+          "value": 206
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "damage_multiplier": 134,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "212% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "212% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 212
+         },
+         {
+          "value": 212
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "damage_multiplier": 147,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "218% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "218% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 218
+         },
+         {
+          "value": 218
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "damage_multiplier": 160,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "224% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "224% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 224
+         },
+         {
+          "value": 224
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "damage_multiplier": 173,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "230% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "230% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 230
+         },
+         {
+          "value": 230
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "damage_multiplier": 187,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "236% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "236% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 236
+         },
+         {
+          "value": 236
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "damage_multiplier": 200,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "242% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "242% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 242
+         },
+         {
+          "value": 242
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "damage_multiplier": 212,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "248% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "248% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 248
+         },
+         {
+          "value": 248
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "damage_multiplier": 226,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "254% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "254% more [Freeze|Freeze] Buildup"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         {
+          "value": 254
+         },
+         {
+          "value": 254
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SkillGemExplosiveSpear",
+  "name": "Explosive Spear",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Spear"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "dexterity",
+   "grants_active_skill",
+   "attack",
+   "area",
+   "projectile",
+   "fire",
+   "duration",
+   "detonator",
+   "repeatable"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemPrimalArmament",
+   "Metadata/Items/Gems/SupportGemPersistence",
+   "Metadata/Items/Gems/SupportGemMagnifiedEffect",
+   "Metadata/Items/Gem/SupportGemExpedite",
+   "Metadata/Items/Gems/SupportGemRisingTempest",
+   "Metadata/Items/Gems/SupportGemPrimalArmamentTwo",
+   "Metadata/Items/Gem/SupportGemRetreatTwo",
+   "Metadata/Items/Gem/SupportGemDeliberation",
+   "Metadata/Items/Gems/SupportGemOverabundanceTwo",
+   "Metadata/Items/Gems/SupportGemSearingFlameTwo",
+   "Metadata/Items/Gem/SupportGemLongFuse",
+   "Metadata/Items/Gems/SupportGemSearingFlame",
+   "Metadata/Items/Gems/SupportGemIgnitionThree",
+   "Metadata/Items/Gem/SupportGemLongFuseTwo",
+   "Metadata/Items/Gems/SupportGemFirePenetrationTwo"
+  ],
+  "skills": [
+   {
+    "id": "ExplosiveSpearPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Explosive Spear",
+     "id": "explosive_spear",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {},
+     "types": [
+      "Projectile",
+      "ProjectilesFromUser",
+      "Attack",
+      "Area",
+      "UsableWhileMoving",
+      "Spear",
+      "Barrageable",
+      "RangedAttack",
+      "Fire",
+      "UsableWhileMounted",
+      "CreatesGroundEffect",
+      "Duration",
+      "Limit",
+      "CannotChain",
+      "ConsumesCharges",
+      "SkillConsumesFrenzyChargesOnUse",
+      "DetonatesAfterTime",
+      "ProjectilesNumberModifiersNotApplied",
+      "Detonator",
+      "MirageArcherCanUse"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "attack_speed_multiplier": -20
+    },
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 5
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 5
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 6
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 7
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 8
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 9
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 12
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 13
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 14
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "ExplosiveSpearPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "",
+         "stats": {
+          "active_skill_base_area_of_effect_radius": 200
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "base_skill_detonation_time",
+         "type": "constant",
+         "value": 2500
+        },
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_fire",
+         "type": "constant",
+         "value": 60
+        },
+        {
+         "id": "remote_spear_mine_minimum_target_distance",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "base_number_of_remote_spear_mines_allowed",
+         "type": "additional"
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_ballistic_angle_from_target_distance",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "has_modular_projectiles_enabled",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "always_pierce",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_projectiles_cannot_chain",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_display_base_number_of_remove_spear_mines_allowed_is_gem",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_move_with_precise_movement",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "number_of_projectiles_cannot_be_modified",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 50,
+        "stat_text": {
+         "base_number_of_remote_spear_mines_allowed": "[Limit] 1 lodged Spear"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "damage_multiplier": 55,
+        "stat_text": {
+         "base_number_of_remote_spear_mines_allowed": "[Limit] 1 lodged Spear"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "damage_multiplier": 60,
+        "stat_text": {
+         "base_number_of_remote_spear_mines_allowed": "[Limit] 1 lodged Spear"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "damage_multiplier": 66,
+        "stat_text": {
+         "base_number_of_remote_spear_mines_allowed": "[Limit] 1 lodged Spear"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "damage_multiplier": 71,
+        "stat_text": {
+         "base_number_of_remote_spear_mines_allowed": "[Limit] 1 lodged Spear"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "damage_multiplier": 77,
+        "stat_text": {
+         "base_number_of_remote_spear_mines_allowed": "[Limit] 1 lodged Spear"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "damage_multiplier": 82,
+        "stat_text": {
+         "base_number_of_remote_spear_mines_allowed": "[Limit] 1 lodged Spear"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "damage_multiplier": 87,
+        "stat_text": {
+         "base_number_of_remote_spear_mines_allowed": "[Limit] 2 lodged Spears"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "damage_multiplier": 91,
+        "stat_text": {
+         "base_number_of_remote_spear_mines_allowed": "[Limit] 2 lodged Spears"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "damage_multiplier": 96,
+        "stat_text": {
+         "base_number_of_remote_spear_mines_allowed": "[Limit] 2 lodged Spears"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "ExplosiveSpearExplodePlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "Explosion radius is {active_skill_base_area_of_effect_radius/divide_by_ten_1dp_if_required} metres",
+         "stats": {
+          "active_skill_base_area_of_effect_radius": 200
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 28
+        },
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_fire",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "remote_spear_mine_minimum_target_distance",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "base_number_of_remote_spear_mines_allowed",
+         "type": "constant"
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_ballistic_angle_from_target_distance",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "has_modular_projectiles_enabled",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_display_base_number_of_remove_spear_mines_allowed_is_gem",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_move_with_precise_movement",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 135,
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "damage_multiplier": 149,
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "damage_multiplier": 163,
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "damage_multiplier": 179,
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "damage_multiplier": 193,
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "damage_multiplier": 209,
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "damage_multiplier": 224,
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "damage_multiplier": 239,
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "damage_multiplier": 252,
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "damage_multiplier": 267,
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "ExplosiveSpearInfusedExplodePlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "Explosion length is {active_skill_base_area_of_effect_radius/divide_by_ten_1dp_if_required} metres",
+         "stats": {
+          "active_skill_base_area_of_effect_radius": 200
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_secondary_area_of_effect_radius",
+         "type": "constant",
+         "value": 15
+        },
+        {
+         "id": "active_skill_base_tertiary_area_of_effect_radius",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_fire",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "base_skill_effect_duration",
+         "type": "constant",
+         "value": 8000
+        },
+        {
+         "id": "base_ignite_effect_+%",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "additional"
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "display_fake_attack_hit_ignite",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "remote_spear_mine_minimum_target_distance",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "base_number_of_remote_spear_mines_allowed",
+         "type": "constant"
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_ballistic_angle_from_target_distance",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "has_modular_projectiles_enabled",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_display_base_number_of_remove_spear_mines_allowed_is_gem",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_move_with_precise_movement",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 200,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion length is 4 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 40
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "damage_multiplier": 220,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion length is 4.1 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 41
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "damage_multiplier": 242,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion length is 4.2 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 42
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "damage_multiplier": 264,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion length is 4.3 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 43
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "damage_multiplier": 286,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion length is 4.4 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 44
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "damage_multiplier": 309,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion length is 4.5 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 45
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "damage_multiplier": 332,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion length is 4.6 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 46
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 1
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "damage_multiplier": 354,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion length is 4.7 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 47
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "damage_multiplier": 374,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion length is 4.8 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 48
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "damage_multiplier": 395,
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Explosion length is 4.9 metres"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 49
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 2
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SkillGemPermafrostBolts",
+  "name": "Permafrost Bolts",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Crossbow"
+  ],
+  "requirementWeights": {
+   "strength": 50,
+   "dexterity": 50,
+   "intelligence": 0
+  },
+  "tags": [
+   "strength",
+   "dexterity",
+   "grants_active_skill",
+   "attack",
+   "area",
+   "ammunition",
+   "projectile",
+   "cold",
+   "merging"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemPierce",
+   "Metadata/Items/Gems/SupportGemIceBite",
+   "Metadata/Items/Gems/SupportGemPrimalArmament",
+   "Metadata/Items/Gems/SupportGemFrostNexus",
+   "Metadata/Items/Gem/SupportGemEmbitter",
+   "Metadata/Items/Gems/SupportGemGlaciation",
+   "Metadata/Items/Gem/SupportGemStreamlinedRounds",
+   "Metadata/Items/Gem/SupportGemVerglas",
+   "Metadata/Items/Gems/SupportGemPierceTwo",
+   "Metadata/Items/Gems/SupportGemNovaProjectilesTwo",
+   "Metadata/Items/Gem/SupportGemNimbleReload",
+   "Metadata/Items/Gems/SupportGemColdExposure",
+   "Metadata/Items/Gem/SupportGemAmmoConservationThree",
+   "Metadata/Items/Gems/SupportGemAccelerationThree"
+  ],
+  "skills": [
+   {
+    "id": "PermafrostBoltsAmmoPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Load Permafrost Bolts",
+     "id": "permafrost_bolts_ammo",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {},
+     "types": [
+      "CrossbowAmmoSkill",
+      "ReservesManually",
+      "Attack",
+      "UsableWhileMoving",
+      "MirageArcherCanUse"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 800,
+    "static": {},
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 6
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 7
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 8
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 12
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 14
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 15
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 17
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 19
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "PermafrostBoltsAmmoPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "",
+         "stats": {
+          "dummy_stat_display_nothing": 0
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "base_number_of_crossbow_bolts",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "action_allowed_queue_time_override_ms",
+         "type": "constant",
+         "value": 1000
+        },
+        {
+         "id": "action_can_be_used_in_aiming_stance",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_deal_no_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_be_used_instantly_in_any_set",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {},
+       "2": {},
+       "3": {},
+       "4": {},
+       "5": {},
+       "6": {},
+       "7": {},
+       "8": {},
+       "9": {},
+       "10": {}
+      }
+     }
+    ]
+   },
+   {
+    "id": "PermafrostBoltsPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Permafrost Bolts",
+     "id": "permafrost_bolts",
+     "is_manually_casted": false,
+     "is_skill_totem": false,
+     "stat_conversions": {
+      "burst_shot_maximum_action_distance_+": "attack_maximum_action_distance_+"
+     },
+     "types": [
+      "Attack",
+      "RangedAttack",
+      "Projectile",
+      "ProjectilesFromUser",
+      "Area",
+      "CrossbowSkill",
+      "Trappable",
+      "Totemable",
+      "Mineable",
+      "Cold",
+      "UsableWhileMoving",
+      "MirageArcherCanUse"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "costs": {
+      "Mana": 0
+     }
+    },
+    "perLevel": {
+     "1": {},
+     "2": {},
+     "3": {},
+     "4": {},
+     "5": {},
+     "6": {},
+     "7": {},
+     "8": {},
+     "9": {},
+     "10": {}
+    },
+    "statSets": [
+     {
+      "id": "PermafrostBoltsPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "Fires {base_number_of_projectiles} fragments per shot",
+         "stats": {
+          "base_number_of_projectiles": 100
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "projectiles_normal_distribution_height_mean",
+         "type": "constant",
+         "value": 3
+        },
+        {
+         "id": "projectiles_normal_distribution_height_standard_deviation",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "projectiles_normal_distribution_spread_standard_deviation",
+         "type": "constant",
+         "value": 14
+        },
+        {
+         "id": "action_required_target_facing_angle_tolerance_degrees",
+         "type": "constant",
+         "value": 90
+        },
+        {
+         "id": "base_number_of_projectiles",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "projectile_distance_variance",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "active_skill_projectile_speed_+%_variation_final",
+         "type": "constant",
+         "value": 60
+        },
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_cold",
+         "type": "constant",
+         "value": 80
+        },
+        {
+         "id": "base_knockback_distance",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "burst_shot_cone_angle",
+         "type": "constant",
+         "value": 40
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 27
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "active_skill_hit_damage_freeze_multiplier_+%_final",
+         "type": "additional"
+        },
+        {
+         "id": "projectile_base_number_of_targets_to_pierce",
+         "type": "additional"
+        },
+        {
+         "id": "active_skill_chill_effect_+%_final",
+         "type": "additional"
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_can_shotgun",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "has_modular_projectiles_enabled",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "disable_visual_hit_effect",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "action_requires_aiming_stance",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "check_for_targets_between_initiator_and_projectile_source",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "cannot_cancel_skill_before_contact_point",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_skill_show_average_damage_instead_of_dps",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 17,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "200% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "200% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 200
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 200
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "damage_multiplier": 19,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "216% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "216% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 216
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 216
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "damage_multiplier": 21,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "232% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "232% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 232
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 232
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "damage_multiplier": 22,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "248% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "248% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 248
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 248
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "damage_multiplier": 24,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "264% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "264% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 264
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 264
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "damage_multiplier": 26,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "280% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "280% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 280
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 280
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "damage_multiplier": 28,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "296% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "296% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 296
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 296
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "damage_multiplier": 29,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "312% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "312% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 3 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 312
+         },
+         {
+          "value": 3
+         },
+         {
+          "value": 312
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "damage_multiplier": 31,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "328% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "328% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 3 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 328
+         },
+         {
+          "value": 3
+         },
+         {
+          "value": 328
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "damage_multiplier": 32,
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "344% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "344% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 3 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 344
+         },
+         {
+          "value": 3
+         },
+         {
+          "value": 344
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "PermafrostBoltsConePlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "Fires {base_number_of_projectiles} fragments per shot",
+         "stats": {
+          "base_number_of_projectiles": 100
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "is_hazard",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_normal_distribution_height_mean",
+         "type": "constant",
+         "value": 3
+        },
+        {
+         "id": "projectiles_normal_distribution_height_standard_deviation",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "projectiles_normal_distribution_spread_standard_deviation",
+         "type": "constant",
+         "value": 14
+        },
+        {
+         "id": "action_required_target_facing_angle_tolerance_degrees",
+         "type": "constant",
+         "value": 90
+        },
+        {
+         "id": "base_number_of_projectiles",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "projectile_distance_variance",
+         "type": "constant",
+         "value": 10
+        },
+        {
+         "id": "active_skill_projectile_speed_+%_variation_final",
+         "type": "constant",
+         "value": 60
+        },
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_cold",
+         "type": "constant",
+         "value": 80
+        },
+        {
+         "id": "burst_shot_cone_angle",
+         "type": "constant",
+         "value": 40
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 27
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "active_skill_hit_damage_freeze_multiplier_+%_final",
+         "type": "constant"
+        },
+        {
+         "id": "projectile_base_number_of_targets_to_pierce",
+         "type": "constant"
+        },
+        {
+         "id": "active_skill_chill_effect_+%_final",
+         "type": "constant"
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_can_shotgun",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "has_modular_projectiles_enabled",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "disable_visual_hit_effect",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "action_requires_aiming_stance",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "check_for_targets_between_initiator_and_projectile_source",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "cannot_cancel_skill_before_contact_point",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_skill_show_average_damage_instead_of_dps",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "200% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "200% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 200
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 200
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "216% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "216% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 216
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 216
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "232% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "232% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 232
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 232
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "248% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "248% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 248
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 248
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "264% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "264% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 264
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 264
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "280% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "280% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 280
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 280
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "296% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "296% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 2 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 296
+         },
+         {
+          "value": 2
+         },
+         {
+          "value": 296
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "312% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "312% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 3 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 312
+         },
+         {
+          "value": 3
+         },
+         {
+          "value": 312
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "328% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "328% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 3 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 328
+         },
+         {
+          "value": 3
+         },
+         {
+          "value": 328
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "344% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "344% more [Freeze|Freeze] Buildup",
+         "projectile_base_number_of_targets_to_pierce": "[Pierce|Pierces] 3 targets"
+        },
+        "stats": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 344
+         },
+         {
+          "value": 3
+         },
+         {
+          "value": 344
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gem/SkillGemFireball",
+  "name": "Fireball",
+  "gemType": "active",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "intelligence",
+   "grants_active_skill",
+   "spell",
+   "area",
+   "projectile",
+   "fire",
+   "repeatable"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemIgnition",
+   "Metadata/Items/Gems/SupportGemControlledDestruction",
+   "Metadata/Items/Gems/SupportGemUnleash",
+   "Metadata/Items/Gems/SupportGemFieryDeath",
+   "Metadata/Items/Gems/SupportGemScattershotTwo",
+   "Metadata/Items/Gems/SupportGemFirePenetration",
+   "Metadata/Items/Gems/SupportGemIgnitionTwo",
+   "Metadata/Items/Gem/SupportGemDeliberation",
+   "Metadata/Items/Gem/SupportGemWildshards",
+   "Metadata/Items/Gems/SupportGemNovaProjectilesTwo",
+   "Metadata/Items/Gems/SupportGemFireExposure",
+   "Metadata/Items/Gems/SupportGemArcaneTempoTwo",
+   "Metadata/Items/Gems/SupportGemFireMastery",
+   "Metadata/Items/Gems/SupportGemFirePenetrationTwo",
+   "Metadata/Items/Gem/SupportGemWildshardsTwo"
+  ],
+  "skills": [
+   {
+    "id": "FireballPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Fireball",
+     "id": "fireball",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {},
+     "types": [
+      "Spell",
+      "Projectile",
+      "ProjectilesFromUser",
+      "Damage",
+      "Area",
+      "Trappable",
+      "Totemable",
+      "Mineable",
+      "Multicastable",
+      "Triggerable",
+      "Fire",
+      "Unleashable",
+      "AreaSpell",
+      "Invokable",
+      "UsableWhileMoving"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1200,
+    "static": {},
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 12
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 14
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 16
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 18
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 21
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 24
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 28
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 31
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 35
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "FireballPlayer",
+      "static": {
+       "crit_chance": 700,
+       "quality_stats": [
+        {
+         "stat": "{spell_skills_fire_2_additional_projectiles_final_chance_%}% chance to fire 2 additional [Projectile|Projectiles]",
+         "stats": {
+          "spell_skills_fire_2_additional_projectiles_final_chance_%": 500
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "spell_minimum_base_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "projectile_maximum_range_override",
+         "type": "constant",
+         "value": 120
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "maintain_projectile_direction_when_using_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "active_skill_consumes_a_fire_infusion",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 8 to 12 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 8
+         },
+         {
+          "value": 12
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 11 to 16 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 11
+         },
+         {
+          "value": 16
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 15 to 22 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 15
+         },
+         {
+          "value": 22
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 19 to 29 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 19
+         },
+         {
+          "value": 29
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 24 to 36 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 24
+         },
+         {
+          "value": 36
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 30 to 44 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 30
+         },
+         {
+          "value": 44
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 36 to 53 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 36
+         },
+         {
+          "value": 53
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 42 to 64 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 42
+         },
+         {
+          "value": 64
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 50 to 75 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 50
+         },
+         {
+          "value": 75
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 59 to 88 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 59
+         },
+         {
+          "value": 88
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "FireballExplosionPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{spell_skills_fire_2_additional_projectiles_final_chance_%}% chance to fire 2 additional [Projectile|Projectiles]",
+         "stats": {
+          "spell_skills_fire_2_additional_projectiles_final_chance_%": 500
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 17
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "spell_minimum_base_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "projectile_maximum_range_override",
+         "type": "constant",
+         "value": 120
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "maintain_projectile_direction_when_using_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "active_skill_consumes_a_fire_infusion",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 8 to 12 [Fire] Damage"
+        },
+        "stats": [
+         null,
+         null,
+         {
+          "value": 8
+         },
+         {
+          "value": 12
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 11 to 16 [Fire] Damage"
+        },
+        "stats": [
+         null,
+         null,
+         {
+          "value": 11
+         },
+         {
+          "value": 16
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 15 to 22 [Fire] Damage"
+        },
+        "stats": [
+         null,
+         null,
+         {
+          "value": 15
+         },
+         {
+          "value": 22
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 19 to 29 [Fire] Damage"
+        },
+        "stats": [
+         null,
+         null,
+         {
+          "value": 19
+         },
+         {
+          "value": 29
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 24 to 36 [Fire] Damage"
+        },
+        "stats": [
+         null,
+         null,
+         {
+          "value": 24
+         },
+         {
+          "value": 36
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 30 to 44 [Fire] Damage"
+        },
+        "stats": [
+         null,
+         null,
+         {
+          "value": 30
+         },
+         {
+          "value": 44
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 36 to 53 [Fire] Damage"
+        },
+        "stats": [
+         null,
+         null,
+         {
+          "value": 36
+         },
+         {
+          "value": 53
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 42 to 64 [Fire] Damage"
+        },
+        "stats": [
+         null,
+         null,
+         {
+          "value": 42
+         },
+         {
+          "value": 64
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 50 to 75 [Fire] Damage"
+        },
+        "stats": [
+         null,
+         null,
+         {
+          "value": 50
+         },
+         {
+          "value": 75
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 59 to 88 [Fire] Damage"
+        },
+        "stats": [
+         null,
+         null,
+         {
+          "value": 59
+         },
+         {
+          "value": 88
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "FireballSecondaryProjectilePlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{spell_skills_fire_2_additional_projectiles_final_chance_%}% chance to fire 2 additional [Projectile|Projectiles]",
+         "stats": {
+          "spell_skills_fire_2_additional_projectiles_final_chance_%": 500
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "spell_minimum_base_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "base_number_of_projectiles",
+         "type": "constant",
+         "value": 12
+        },
+        {
+         "id": "projectile_maximum_range_override",
+         "type": "constant",
+         "value": 60
+        },
+        {
+         "id": "active_skill_ignite_chance_+%_final",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "number_of_projectiles_cannot_be_modified",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "maintain_projectile_direction_when_using_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "active_skill_consumes_a_fire_infusion",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 8 to 12 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 8
+         },
+         {
+          "value": 12
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 11 to 16 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 11
+         },
+         {
+          "value": 16
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 15 to 22 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 15
+         },
+         {
+          "value": 22
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 19 to 29 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 19
+         },
+         {
+          "value": 29
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 24 to 36 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 24
+         },
+         {
+          "value": 36
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 30 to 44 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 30
+         },
+         {
+          "value": 44
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 36 to 53 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 36
+         },
+         {
+          "value": 53
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 42 to 64 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 42
+         },
+         {
+          "value": 64
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 50 to 75 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 50
+         },
+         {
+          "value": 75
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "Deals 59 to 88 [Fire] Damage"
+        },
+        "stats": [
+         {
+          "value": 59
+         },
+         {
+          "value": 88
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SkillGemFlameWall",
+  "name": "Flame Wall",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "intelligence",
+   "grants_active_skill",
+   "spell",
+   "area",
+   "fire",
+   "duration",
+   "repeatable"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemFortress",
+   "Metadata/Items/Gems/SupportGemPersistence",
+   "Metadata/Items/Gems/SupportGemRisingTempest",
+   "Metadata/Items/Gem/SupportGemConsideredCasting",
+   "Metadata/Items/Gems/SupportGemPersistenceTwo",
+   "Metadata/Items/Gem/SupportGemZenithTwo",
+   "Metadata/Items/Gems/SupportGemFortressTwo",
+   "Metadata/Items/Gem/SupportGemZenith",
+   "Metadata/Items/Gems/SupportGemFireExposure",
+   "Metadata/Items/Gems/SupportGemArcaneTempoTwo",
+   "Metadata/Items/Gems/SupportGemFireMastery",
+   "Metadata/Items/Gems/SupportGemIgnitionThree"
+  ],
+  "skills": [
+   {
+    "id": "FlameWallPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Flame Wall",
+     "id": "flame_wall",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {
+      "flame_wall_damage_+%": "damage_+%"
+     },
+     "types": [
+      "Spell",
+      "DamageOverTime",
+      "Area",
+      "Duration",
+      "Trappable",
+      "Mineable",
+      "Triggerable",
+      "AreaSpell",
+      "Totemable",
+      "Fire",
+      "Unleashable",
+      "Multicastable",
+      "Cascadable",
+      "CausesBurning",
+      "Wall",
+      "UsableWhileMoving",
+      "Damage"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {},
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 12
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 15
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 17
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 20
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 23
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 26
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 30
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 34
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 38
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "FlameWallPlayer",
+      "static": {
+       "crit_chance": 500,
+       "quality_stats": [
+        {
+         "stat": "Inflicts {active_skill_ignite_chance_+%_final}% more [Flammability] [BuffMagnitude|Magnitude]",
+         "stats": {
+          "active_skill_ignite_chance_+%_final": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "spell_minimum_base_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "base_fire_damage_to_deal_per_minute",
+         "type": "float"
+        },
+        {
+         "id": "number_of_allowed_firewalls",
+         "type": "constant",
+         "value": 3
+        },
+        {
+         "id": "firewall_attached_projectile_effect_mtx",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "console_cast_on_self_custom_range",
+         "type": "constant",
+         "value": 15
+        },
+        {
+         "id": "active_skill_energy_generated_+%_final",
+         "type": "constant",
+         "value": -50
+        },
+        {
+         "id": "wall_maximum_length",
+         "type": "additional"
+        },
+        {
+         "id": "base_skill_effect_duration",
+         "type": "additional"
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_hide_display_character_panel",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "active_skill_consumes_a_lightning_infusion",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "base_fire_damage_to_deal_per_minute": "Wall deals 1.8 [Fire] Damage per second",
+         "base_skill_effect_duration": "Wall duration is 4.5 seconds",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 5 to 8 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5 metres"
+        },
+        "stats": [
+         {
+          "value": 5
+         },
+         {
+          "value": 8
+         },
+         {
+          "value": 105
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 50
+         },
+         {
+          "value": 4500
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "base_fire_damage_to_deal_per_minute": "Wall deals 2.4 [Fire] Damage per second",
+         "base_skill_effect_duration": "Wall duration is 4.6 seconds",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 7 to 11 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.1 metres"
+        },
+        "stats": [
+         {
+          "value": 7
+         },
+         {
+          "value": 11
+         },
+         {
+          "value": 141
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 51
+         },
+         {
+          "value": 4600
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "base_fire_damage_to_deal_per_minute": "Wall deals 3.2 [Fire] Damage per second",
+         "base_skill_effect_duration": "Wall duration is 4.7 seconds",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 10 to 15 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.2 metres"
+        },
+        "stats": [
+         {
+          "value": 10
+         },
+         {
+          "value": 15
+         },
+         {
+          "value": 193
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 52
+         },
+         {
+          "value": 4700
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "base_fire_damage_to_deal_per_minute": "Wall deals 4.2 [Fire] Damage per second",
+         "base_skill_effect_duration": "Wall duration is 4.8 seconds",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 13 to 19 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.3 metres"
+        },
+        "stats": [
+         {
+          "value": 13
+         },
+         {
+          "value": 19
+         },
+         {
+          "value": 253
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 53
+         },
+         {
+          "value": 4800
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "base_fire_damage_to_deal_per_minute": "Wall deals 5.3 [Fire] Damage per second",
+         "base_skill_effect_duration": "Wall duration is 4.9 seconds",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 16 to 24 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.4 metres"
+        },
+        "stats": [
+         {
+          "value": 16
+         },
+         {
+          "value": 24
+         },
+         {
+          "value": 320
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 54
+         },
+         {
+          "value": 4900
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "base_fire_damage_to_deal_per_minute": "Wall deals 6.6 [Fire] Damage per second",
+         "base_skill_effect_duration": "Wall duration is 5 seconds",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 20 to 30 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.5 metres"
+        },
+        "stats": [
+         {
+          "value": 20
+         },
+         {
+          "value": 30
+         },
+         {
+          "value": 396
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 55
+         },
+         {
+          "value": 5000
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "base_fire_damage_to_deal_per_minute": "Wall deals 8.1 [Fire] Damage per second",
+         "base_skill_effect_duration": "Wall duration is 5.1 seconds",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 24 to 37 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.6 metres"
+        },
+        "stats": [
+         {
+          "value": 24
+         },
+         {
+          "value": 37
+         },
+         {
+          "value": 483
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 56
+         },
+         {
+          "value": 5100
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "base_fire_damage_to_deal_per_minute": "Wall deals 9.7 [Fire] Damage per second",
+         "base_skill_effect_duration": "Wall duration is 5.2 seconds",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 29 to 44 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.7 metres"
+        },
+        "stats": [
+         {
+          "value": 29
+         },
+         {
+          "value": 44
+         },
+         {
+          "value": 581
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 57
+         },
+         {
+          "value": 5200
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "base_fire_damage_to_deal_per_minute": "Wall deals 11.5 [Fire] Damage per second",
+         "base_skill_effect_duration": "Wall duration is 5.3 seconds",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 35 to 52 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.8 metres"
+        },
+        "stats": [
+         {
+          "value": 35
+         },
+         {
+          "value": 52
+         },
+         {
+          "value": 692
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 58
+         },
+         {
+          "value": 5300
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "base_fire_damage_to_deal_per_minute": "Wall deals 13.7 [Fire] Damage per second",
+         "base_skill_effect_duration": "Wall duration is 5.4 seconds",
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 41 to 62 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.9 metres"
+        },
+        "stats": [
+         {
+          "value": 41
+         },
+         {
+          "value": 62
+         },
+         {
+          "value": 819
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 59
+         },
+         {
+          "value": 5400
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "FlameWallProjectileBuffPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "Inflicts {active_skill_ignite_chance_+%_final}% more [Flammability] [BuffMagnitude|Magnitude]",
+         "stats": {
+          "active_skill_ignite_chance_+%_final": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "flame_wall_minimum_added_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "flame_wall_maximum_added_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "flame_wall_minimum_added_lightning_damage_to_add_to_projectile",
+         "type": "float"
+        },
+        {
+         "id": "flame_wall_maximum_added_lightning_damage_to_add_to_projectile",
+         "type": "float"
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "number_of_allowed_firewalls",
+         "type": "constant",
+         "value": 3
+        },
+        {
+         "id": "firewall_attached_projectile_effect_mtx",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "console_cast_on_self_custom_range",
+         "type": "constant",
+         "value": 15
+        },
+        {
+         "id": "active_skill_energy_generated_+%_final",
+         "type": "constant",
+         "value": -50
+        },
+        {
+         "id": "wall_maximum_length",
+         "type": "constant"
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "active_skill_consumes_a_lightning_infusion",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "flame_wall_minimum_added_fire_damage\nflame_wall_maximum_added_fire_damage": "[Projectile|Projectiles] which pass through the wall deal 2 to 3 Added [Fire] Damage",
+         "flame_wall_minimum_added_lightning_damage_to_add_to_projectile\nflame_wall_maximum_added_lightning_damage_to_add_to_projectile": "[Projectile|Projectiles] which pass through the [ElementalInfusion|Infused] wall deal 1 to 4 Added [Lightning] Damage",
+         "wall_maximum_length": "Wall length is 5 metres"
+        },
+        "stats": [
+         {
+          "value": 2
+         },
+         {
+          "value": 3
+         },
+         {
+          "value": 1
+         },
+         {
+          "value": 4
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 50
+         },
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "flame_wall_minimum_added_fire_damage\nflame_wall_maximum_added_fire_damage": "[Projectile|Projectiles] which pass through the wall deal 2 to 4 Added [Fire] Damage",
+         "flame_wall_minimum_added_lightning_damage_to_add_to_projectile\nflame_wall_maximum_added_lightning_damage_to_add_to_projectile": "[Projectile|Projectiles] which pass through the [ElementalInfusion|Infused] wall deal 1 to 6 Added [Lightning] Damage",
+         "wall_maximum_length": "Wall length is 5.1 metres"
+        },
+        "stats": [
+         {
+          "value": 2
+         },
+         {
+          "value": 4
+         },
+         {
+          "value": 1
+         },
+         {
+          "value": 6
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 51
+         },
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "flame_wall_minimum_added_fire_damage\nflame_wall_maximum_added_fire_damage": "[Projectile|Projectiles] which pass through the wall deal 3 to 5 Added [Fire] Damage",
+         "flame_wall_minimum_added_lightning_damage_to_add_to_projectile\nflame_wall_maximum_added_lightning_damage_to_add_to_projectile": "[Projectile|Projectiles] which pass through the [ElementalInfusion|Infused] wall deal 1 to 8 Added [Lightning] Damage",
+         "wall_maximum_length": "Wall length is 5.2 metres"
+        },
+        "stats": [
+         {
+          "value": 3
+         },
+         {
+          "value": 5
+         },
+         {
+          "value": 1
+         },
+         {
+          "value": 8
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 52
+         },
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "flame_wall_minimum_added_fire_damage\nflame_wall_maximum_added_fire_damage": "[Projectile|Projectiles] which pass through the wall deal 4 to 6 Added [Fire] Damage",
+         "flame_wall_minimum_added_lightning_damage_to_add_to_projectile\nflame_wall_maximum_added_lightning_damage_to_add_to_projectile": "[Projectile|Projectiles] which pass through the [ElementalInfusion|Infused] wall deal 1 to 10 Added [Lightning] Damage",
+         "wall_maximum_length": "Wall length is 5.3 metres"
+        },
+        "stats": [
+         {
+          "value": 4
+         },
+         {
+          "value": 6
+         },
+         {
+          "value": 1
+         },
+         {
+          "value": 10
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 53
+         },
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "flame_wall_minimum_added_fire_damage\nflame_wall_maximum_added_fire_damage": "[Projectile|Projectiles] which pass through the wall deal 5 to 7 Added [Fire] Damage",
+         "flame_wall_minimum_added_lightning_damage_to_add_to_projectile\nflame_wall_maximum_added_lightning_damage_to_add_to_projectile": "[Projectile|Projectiles] which pass through the [ElementalInfusion|Infused] wall deal 1 to 12 Added [Lightning] Damage",
+         "wall_maximum_length": "Wall length is 5.4 metres"
+        },
+        "stats": [
+         {
+          "value": 5
+         },
+         {
+          "value": 7
+         },
+         {
+          "value": 1
+         },
+         {
+          "value": 12
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 54
+         },
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "flame_wall_minimum_added_fire_damage\nflame_wall_maximum_added_fire_damage": "[Projectile|Projectiles] which pass through the wall deal 6 to 9 Added [Fire] Damage",
+         "flame_wall_minimum_added_lightning_damage_to_add_to_projectile\nflame_wall_maximum_added_lightning_damage_to_add_to_projectile": "[Projectile|Projectiles] which pass through the [ElementalInfusion|Infused] wall deal 1 to 14 Added [Lightning] Damage",
+         "wall_maximum_length": "Wall length is 5.5 metres"
+        },
+        "stats": [
+         {
+          "value": 6
+         },
+         {
+          "value": 9
+         },
+         {
+          "value": 1
+         },
+         {
+          "value": 14
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 55
+         },
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "flame_wall_minimum_added_fire_damage\nflame_wall_maximum_added_fire_damage": "[Projectile|Projectiles] which pass through the wall deal 7 to 10 Added [Fire] Damage",
+         "flame_wall_minimum_added_lightning_damage_to_add_to_projectile\nflame_wall_maximum_added_lightning_damage_to_add_to_projectile": "[Projectile|Projectiles] which pass through the [ElementalInfusion|Infused] wall deal 1 to 16 Added [Lightning] Damage",
+         "wall_maximum_length": "Wall length is 5.6 metres"
+        },
+        "stats": [
+         {
+          "value": 7
+         },
+         {
+          "value": 10
+         },
+         {
+          "value": 1
+         },
+         {
+          "value": 16
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 56
+         },
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "flame_wall_minimum_added_fire_damage\nflame_wall_maximum_added_fire_damage": "[Projectile|Projectiles] which pass through the wall deal 8 to 12 Added [Fire] Damage",
+         "flame_wall_minimum_added_lightning_damage_to_add_to_projectile\nflame_wall_maximum_added_lightning_damage_to_add_to_projectile": "[Projectile|Projectiles] which pass through the [ElementalInfusion|Infused] wall deal 1 to 19 Added [Lightning] Damage",
+         "wall_maximum_length": "Wall length is 5.7 metres"
+        },
+        "stats": [
+         {
+          "value": 8
+         },
+         {
+          "value": 12
+         },
+         {
+          "value": 1
+         },
+         {
+          "value": 19
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 57
+         },
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "flame_wall_minimum_added_fire_damage\nflame_wall_maximum_added_fire_damage": "[Projectile|Projectiles] which pass through the wall deal 9 to 14 Added [Fire] Damage",
+         "flame_wall_minimum_added_lightning_damage_to_add_to_projectile\nflame_wall_maximum_added_lightning_damage_to_add_to_projectile": "[Projectile|Projectiles] which pass through the [ElementalInfusion|Infused] wall deal 1 to 22 Added [Lightning] Damage",
+         "wall_maximum_length": "Wall length is 5.8 metres"
+        },
+        "stats": [
+         {
+          "value": 9
+         },
+         {
+          "value": 14
+         },
+         {
+          "value": 1
+         },
+         {
+          "value": 22
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 58
+         },
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "flame_wall_minimum_added_fire_damage\nflame_wall_maximum_added_fire_damage": "[Projectile|Projectiles] which pass through the wall deal 10 to 15 Added [Fire] Damage",
+         "flame_wall_minimum_added_lightning_damage_to_add_to_projectile\nflame_wall_maximum_added_lightning_damage_to_add_to_projectile": "[Projectile|Projectiles] which pass through the [ElementalInfusion|Infused] wall deal 1 to 24 Added [Lightning] Damage",
+         "wall_maximum_length": "Wall length is 5.9 metres"
+        },
+        "stats": [
+         {
+          "value": 10
+         },
+         {
+          "value": 15
+         },
+         {
+          "value": 1
+         },
+         {
+          "value": 24
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 59
+         },
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "FlameWallLingeringIgnitePlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "Inflicts {active_skill_ignite_chance_+%_final}% more [Flammability] [BuffMagnitude|Magnitude]",
+         "stats": {
+          "active_skill_ignite_chance_+%_final": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "spell_minimum_base_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_fire_damage",
+         "type": "float"
+        },
+        {
+         "id": "number_of_allowed_firewalls",
+         "type": "constant",
+         "value": 3
+        },
+        {
+         "id": "firewall_attached_projectile_effect_mtx",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "console_cast_on_self_custom_range",
+         "type": "constant",
+         "value": 15
+        },
+        {
+         "id": "active_skill_energy_generated_+%_final",
+         "type": "constant",
+         "value": -50
+        },
+        {
+         "id": "wall_maximum_length",
+         "type": "constant"
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_hide_display_character_panel",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "active_skill_consumes_a_lightning_infusion",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 5 to 8 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5 metres"
+        },
+        "stats": [
+         null,
+         {
+          "value": 5
+         },
+         {
+          "value": 8
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 50
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 7 to 11 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.1 metres"
+        },
+        "stats": [
+         null,
+         {
+          "value": 7
+         },
+         {
+          "value": 11
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 51
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 10 to 15 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.2 metres"
+        },
+        "stats": [
+         null,
+         {
+          "value": 10
+         },
+         {
+          "value": 15
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 52
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 13 to 19 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.3 metres"
+        },
+        "stats": [
+         null,
+         {
+          "value": 13
+         },
+         {
+          "value": 19
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 53
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 16 to 24 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.4 metres"
+        },
+        "stats": [
+         null,
+         {
+          "value": 16
+         },
+         {
+          "value": 24
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 54
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 20 to 30 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.5 metres"
+        },
+        "stats": [
+         null,
+         {
+          "value": 20
+         },
+         {
+          "value": 30
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 55
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 24 to 37 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.6 metres"
+        },
+        "stats": [
+         null,
+         {
+          "value": 24
+         },
+         {
+          "value": 37
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 56
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 29 to 44 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.7 metres"
+        },
+        "stats": [
+         null,
+         {
+          "value": 29
+         },
+         {
+          "value": 44
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 57
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 35 to 52 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.8 metres"
+        },
+        "stats": [
+         null,
+         {
+          "value": 35
+         },
+         {
+          "value": 52
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 58
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "spell_minimum_base_fire_damage\nspell_maximum_base_fire_damage": "[Ignite|Ignites] as though dealing 41 to 62 [Fire] damage",
+         "wall_maximum_length": "Wall length is 5.9 metres"
+        },
+        "stats": [
+         null,
+         {
+          "value": 41
+         },
+         {
+          "value": 62
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 59
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SkillGemIceNova",
+  "name": "Ice Nova",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "intelligence",
+   "grants_active_skill",
+   "spell",
+   "area",
+   "cold",
+   "duration",
+   "nova",
+   "repeatable"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemHourglass",
+   "Metadata/Items/Gems/SupportGemMagnifiedEffect",
+   "Metadata/Items/Gems/SupportGemDeepFreeze",
+   "Metadata/Items/Gem/SupportGemSuffuse",
+   "Metadata/Items/Gems/SupportGemRisingTempest",
+   "Metadata/Items/Gem/SupportGemConsideredCasting",
+   "Metadata/Items/Gem/SupportGemAstralProjection",
+   "Metadata/Items/Gem/SupportGemExecrate",
+   "Metadata/Items/Gems/SupportGemInevitableCritical",
+   "Metadata/Items/Gems/SupportGemArcaneTempoTwo",
+   "Metadata/Items/Gems/SupportGemColdExposure",
+   "Metadata/Items/Gems/SupportGemColdMastery",
+   "Metadata/Items/Gem/SupportGemDomainThree"
+  ],
+  "skills": [
+   {
+    "id": "IceNovaPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Ice Nova",
+     "id": "ice_nova",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {
+      "ice_nova_chill_minimum_slow_%": "chill_minimum_slow_%_from_skill",
+      "ice_nova_damage_+%": "damage_+%",
+      "ice_nova_freeze_chance_%": "base_chance_to_freeze_%",
+      "ice_nova_radius_+%": "base_skill_area_of_effect_+%"
+     },
+     "types": [
+      "Spell",
+      "Damage",
+      "Area",
+      "Trappable",
+      "Totemable",
+      "Mineable",
+      "Multicastable",
+      "Triggerable",
+      "Cold",
+      "Unleashable",
+      "AreaSpell",
+      "Nova",
+      "Invokable",
+      "UsableWhileMoving",
+      "Cascadable",
+      "Duration",
+      "CreatesGroundEffect"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {},
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 7
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 8
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 13
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 15
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 17
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 20
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 22
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 25
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "IceNovaPlayer",
+      "static": {
+       "crit_chance": 1200,
+       "quality_stats": [
+        {
+         "stat": "{active_skill_damage_+%_final_vs_chilled_enemies}% more Damage with [Hit|Hits] against Enemies that are [Chill|Chilled]",
+         "stats": {
+          "active_skill_damage_+%_final_vs_chilled_enemies": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "spell_minimum_base_cold_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_cold_damage",
+         "type": "float"
+        },
+        {
+         "id": "generic_knockback_+%_final_at_min_distance",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "generic_knockback_+%_final_at_max_distance",
+         "type": "constant",
+         "value": -90
+        },
+        {
+         "id": "generic_knockback_distance_limit",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 32
+        },
+        {
+         "id": "ice_nova_number_of_frost_bolts_to_cast_on",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "base_skill_effect_duration",
+         "type": "constant",
+         "value": 8000
+        },
+        {
+         "id": "active_skill_hit_damage_freeze_multiplier_+%_final",
+         "type": "additional"
+        },
+        {
+         "id": "active_skill_chill_effect_+%_final",
+         "type": "additional"
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "global_knockback",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "active_skill_consumes_a_cold_infusion",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "100% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "100% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 6 to 8 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 6
+         },
+         {
+          "value": 8
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 100
+         },
+         {
+          "value": 100
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "103% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "103% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 7 to 10 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 7
+         },
+         {
+          "value": 10
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 103
+         },
+         {
+          "value": 103
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "106% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "106% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 9 to 13 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 9
+         },
+         {
+          "value": 13
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 106
+         },
+         {
+          "value": 106
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "109% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "109% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 11 to 17 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 11
+         },
+         {
+          "value": 17
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 109
+         },
+         {
+          "value": 109
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "112% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "112% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 14 to 21 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 14
+         },
+         {
+          "value": 21
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 112
+         },
+         {
+          "value": 112
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "115% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "115% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 17 to 26 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 17
+         },
+         {
+          "value": 26
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 115
+         },
+         {
+          "value": 115
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "118% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "118% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 21 to 31 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 21
+         },
+         {
+          "value": 31
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 118
+         },
+         {
+          "value": 118
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "121% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "121% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 25 to 37 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 25
+         },
+         {
+          "value": 37
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 121
+         },
+         {
+          "value": 121
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "124% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "124% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 29 to 44 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 29
+         },
+         {
+          "value": 44
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 124
+         },
+         {
+          "value": 124
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "127% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "127% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 34 to 51 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 34
+         },
+         {
+          "value": 51
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 127
+         },
+         {
+          "value": 127
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "IceNovaPlayerOnFrostbolt",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{active_skill_damage_+%_final_vs_chilled_enemies}% more Damage with [Hit|Hits] against Enemies that are [Chill|Chilled]",
+         "stats": {
+          "active_skill_damage_+%_final_vs_chilled_enemies": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "spell_minimum_base_cold_damage",
+         "type": "float",
+         "value": 6
+        },
+        {
+         "id": "spell_maximum_base_cold_damage",
+         "type": "float",
+         "value": 8
+        },
+        {
+         "id": "generic_knockback_+%_final_at_min_distance",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "generic_knockback_+%_final_at_max_distance",
+         "type": "constant",
+         "value": -90
+        },
+        {
+         "id": "generic_knockback_distance_limit",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 32
+        },
+        {
+         "id": "ice_nova_number_of_frost_bolts_to_cast_on",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "base_skill_effect_duration",
+         "type": "constant",
+         "value": 8000
+        },
+        {
+         "id": "active_skill_hit_damage_freeze_multiplier_+%_final",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "active_skill_chill_effect_+%_final",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "global_knockback",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "active_skill_consumes_a_cold_infusion",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {}
+      }
+     },
+     {
+      "id": "IceNovaColdInfusedPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{active_skill_damage_+%_final_vs_chilled_enemies}% more Damage with [Hit|Hits] against Enemies that are [Chill|Chilled]",
+         "stats": {
+          "active_skill_damage_+%_final_vs_chilled_enemies": 1000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "spell_minimum_base_cold_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_cold_damage",
+         "type": "float"
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 48
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_skill_show_average_damage_instead_of_dps",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "generic_knockback_+%_final_at_min_distance",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "generic_knockback_+%_final_at_max_distance",
+         "type": "constant",
+         "value": -90
+        },
+        {
+         "id": "generic_knockback_distance_limit",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "ice_nova_number_of_frost_bolts_to_cast_on",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "base_skill_effect_duration",
+         "type": "constant",
+         "value": 8000
+        },
+        {
+         "id": "active_skill_hit_damage_freeze_multiplier_+%_final",
+         "type": "constant"
+        },
+        {
+         "id": "active_skill_chill_effect_+%_final",
+         "type": "constant"
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "global_knockback",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "active_skill_consumes_a_cold_infusion",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "100% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "100% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 15 to 22 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 15
+         },
+         {
+          "value": 22
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 100
+         },
+         {
+          "value": 100
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "103% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "103% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 20 to 30 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 20
+         },
+         {
+          "value": 30
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 103
+         },
+         {
+          "value": 103
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "106% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "106% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 27 to 41 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 27
+         },
+         {
+          "value": 41
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 106
+         },
+         {
+          "value": 106
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "109% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "109% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 36 to 54 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 36
+         },
+         {
+          "value": 54
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 109
+         },
+         {
+          "value": 109
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "112% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "112% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 45 to 68 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 45
+         },
+         {
+          "value": 68
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 112
+         },
+         {
+          "value": 112
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "115% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "115% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 55 to 83 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 55
+         },
+         {
+          "value": 83
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 115
+         },
+         {
+          "value": 115
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "118% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "118% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 67 to 101 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 67
+         },
+         {
+          "value": 101
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 118
+         },
+         {
+          "value": 118
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "121% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "121% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 80 to 120 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 80
+         },
+         {
+          "value": 120
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 121
+         },
+         {
+          "value": 121
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "124% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "124% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 95 to 143 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 95
+         },
+         {
+          "value": 143
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 124
+         },
+         {
+          "value": 124
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "active_skill_chill_effect_+%_final": "127% more [BuffMagnitude|Magnitude] of [Chill|Chill] inflicted",
+         "active_skill_hit_damage_freeze_multiplier_+%_final": "127% more [Freeze|Freeze] Buildup",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 112 to 168 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 112
+         },
+         {
+          "value": 168
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 127
+         },
+         {
+          "value": 127
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SkillGemEssenceDrain",
+  "name": "Essence Drain",
+  "gemType": "active",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Occult"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "intelligence",
+   "grants_active_skill",
+   "spell",
+   "projectile",
+   "chaos",
+   "duration",
+   "repeatable"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gem/SupportGemMinionPact",
+   "Metadata/Items/Gems/SupportGemPersistence",
+   "Metadata/Items/Gem/SupportGemSwiftAffliction",
+   "Metadata/Items/Gem/SupportGemAcrimony",
+   "Metadata/Items/Gem/SupportGemIntenseAgony",
+   "Metadata/Items/Gems/SupportGemPersistenceTwo",
+   "Metadata/Items/Gem/SupportGemSwiftAfflictionTwo",
+   "Metadata/Items/Gem/SupportGemZenithTwo",
+   "Metadata/Items/Gem/SupportGemMinionPactTwo",
+   "Metadata/Items/Gem/SupportGemDerange",
+   "Metadata/Items/Gems/SupportGemArcaneTempoTwo",
+   "Metadata/Items/Gems/SupportGemChaosMastery",
+   "Metadata/Items/Gem/SupportGemProfanityTwo"
+  ],
+  "skills": [
+   {
+    "id": "EssenceDrainPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Essence Drain",
+     "id": "essence_drain",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {
+      "essence_drain_damage_+%": "damage_+%",
+      "essence_drain_soulrend_base_projectile_speed_+%": "base_projectile_speed_+%",
+      "essence_drain_soulrend_number_of_additional_projectiles": "number_of_additional_projectiles",
+      "siphon_duration_+%": "skill_effect_duration_+%"
+     },
+     "types": [
+      "Spell",
+      "Projectile",
+      "ProjectilesFromUser",
+      "Duration",
+      "Totemable",
+      "Multicastable",
+      "DamageOverTime",
+      "Chaos",
+      "Damage",
+      "Triggerable",
+      "Unleashable",
+      "Trappable",
+      "Mineable",
+      "UsableWhileMoving"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 800,
+    "static": {},
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 5
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 6
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 7
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 8
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 13
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 15
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 17
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 19
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "EssenceDrainPlayer",
+      "static": {
+       "crit_chance": 700,
+       "quality_stats": [
+        {
+         "stat": "{base_skill_effect_duration/milliseconds_to_seconds_2dp_if_required} seconds to [Debuff] duration",
+         "stats": {
+          "base_skill_effect_duration": 50000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "spell_minimum_base_chaos_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_chaos_damage",
+         "type": "float"
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "pvp_skill_dot_attack_time_override_ms",
+         "type": "constant",
+         "value": 10000
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "check_for_targets_between_initiator_and_projectile_source",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "maintain_projectile_direction_when_using_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "disable_visual_hit_effect",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_display_base_skill_effect_duration_is_gem",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "spell_minimum_base_chaos_damage\nspell_maximum_base_chaos_damage": "Deals 5 to 9 [Chaos|Chaos] Damage"
+        },
+        "stats": [
+         {
+          "value": 5
+         },
+         {
+          "value": 9
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "spell_minimum_base_chaos_damage\nspell_maximum_base_chaos_damage": "Deals 6 to 12 [Chaos|Chaos] Damage"
+        },
+        "stats": [
+         {
+          "value": 6
+         },
+         {
+          "value": 12
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "spell_minimum_base_chaos_damage\nspell_maximum_base_chaos_damage": "Deals 8 to 16 [Chaos|Chaos] Damage"
+        },
+        "stats": [
+         {
+          "value": 8
+         },
+         {
+          "value": 16
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "spell_minimum_base_chaos_damage\nspell_maximum_base_chaos_damage": "Deals 11 to 20 [Chaos|Chaos] Damage"
+        },
+        "stats": [
+         {
+          "value": 11
+         },
+         {
+          "value": 20
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "spell_minimum_base_chaos_damage\nspell_maximum_base_chaos_damage": "Deals 14 to 26 [Chaos|Chaos] Damage"
+        },
+        "stats": [
+         {
+          "value": 14
+         },
+         {
+          "value": 26
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "spell_minimum_base_chaos_damage\nspell_maximum_base_chaos_damage": "Deals 17 to 32 [Chaos|Chaos] Damage"
+        },
+        "stats": [
+         {
+          "value": 17
+         },
+         {
+          "value": 32
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "spell_minimum_base_chaos_damage\nspell_maximum_base_chaos_damage": "Deals 21 to 38 [Chaos|Chaos] Damage"
+        },
+        "stats": [
+         {
+          "value": 21
+         },
+         {
+          "value": 38
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "spell_minimum_base_chaos_damage\nspell_maximum_base_chaos_damage": "Deals 25 to 46 [Chaos|Chaos] Damage"
+        },
+        "stats": [
+         {
+          "value": 25
+         },
+         {
+          "value": 46
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "spell_minimum_base_chaos_damage\nspell_maximum_base_chaos_damage": "Deals 29 to 55 [Chaos|Chaos] Damage"
+        },
+        "stats": [
+         {
+          "value": 29
+         },
+         {
+          "value": 55
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "spell_minimum_base_chaos_damage\nspell_maximum_base_chaos_damage": "Deals 34 to 64 [Chaos|Chaos] Damage"
+        },
+        "stats": [
+         {
+          "value": 34
+         },
+         {
+          "value": 64
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     },
+     {
+      "id": "EssenceDrainDotPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "{base_skill_effect_duration/milliseconds_to_seconds_2dp_if_required} seconds to [Debuff] duration",
+         "stats": {
+          "base_skill_effect_duration": 50000
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "base_chaos_damage_to_deal_per_minute",
+         "type": "float"
+        },
+        {
+         "id": "base_skill_effect_duration",
+         "type": "constant",
+         "value": 4000
+        },
+        {
+         "id": "spell_damage_modifiers_apply_to_skill_dot",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "display_statset_hide_usage_stats",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "pvp_skill_dot_attack_time_override_ms",
+         "type": "constant",
+         "value": 10000
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "check_for_targets_between_initiator_and_projectile_source",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "maintain_projectile_direction_when_using_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "disable_visual_hit_effect",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "should_use_additive_aiming_animation",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_display_base_skill_effect_duration_is_gem",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "base_chaos_damage_to_deal_per_minute": "Deals 9.2 [Chaos|Chaos] damage per second"
+        },
+        "stats": [
+         {
+          "value": 550
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "base_chaos_damage_to_deal_per_minute": "Deals 13.3 [Chaos|Chaos] damage per second"
+        },
+        "stats": [
+         {
+          "value": 800
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "base_chaos_damage_to_deal_per_minute": "Deals 19.3 [Chaos|Chaos] damage per second"
+        },
+        "stats": [
+         {
+          "value": 1158
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "base_chaos_damage_to_deal_per_minute": "Deals 26.1 [Chaos|Chaos] damage per second"
+        },
+        "stats": [
+         {
+          "value": 1568
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "base_chaos_damage_to_deal_per_minute": "Deals 33.9 [Chaos|Chaos] damage per second"
+        },
+        "stats": [
+         {
+          "value": 2036
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "base_chaos_damage_to_deal_per_minute": "Deals 42.9 [Chaos|Chaos] damage per second"
+        },
+        "stats": [
+         {
+          "value": 2571
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "base_chaos_damage_to_deal_per_minute": "Deals 53 [Chaos|Chaos] damage per second"
+        },
+        "stats": [
+         {
+          "value": 3182
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "base_chaos_damage_to_deal_per_minute": "Deals 64.7 [Chaos|Chaos] damage per second"
+        },
+        "stats": [
+         {
+          "value": 3880
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "base_chaos_damage_to_deal_per_minute": "Deals 78 [Chaos|Chaos] damage per second"
+        },
+        "stats": [
+         {
+          "value": 4678
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "base_chaos_damage_to_deal_per_minute": "Deals 93.2 [Chaos|Chaos] damage per second"
+        },
+        "stats": [
+         {
+          "value": 5591
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
  }
 ]

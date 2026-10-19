@@ -2031,5 +2031,616 @@
     ]
    }
   ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SkillGemFrostBomb",
+  "name": "Frost Bomb",
+  "gemType": "active",
+  "craftingLevel": 1,
+  "craftingTypes": [
+   "Elemental"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 0,
+   "intelligence": 100
+  },
+  "tags": [
+   "intelligence",
+   "grants_active_skill",
+   "spell",
+   "area",
+   "cold",
+   "duration",
+   "orb",
+   "remnant"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gems/SupportGemMagnifiedEffect",
+   "Metadata/Items/Gems/SupportGemArcaneTempo",
+   "Metadata/Items/Gem/SupportGemDissipate",
+   "Metadata/Items/Gem/SupportGemStripAway",
+   "Metadata/Items/Gem/SupportGemExpedite",
+   "Metadata/Items/Gems/SupportGemIngenuity",
+   "Metadata/Items/Gems/SupportGemPersistenceTwo",
+   "Metadata/Items/Gem/SupportGemDissipateTwo",
+   "Metadata/Items/Gems/SupportGemIngenuityTwo",
+   "Metadata/Items/Gem/SupportGemExpediteTwo",
+   "Metadata/Items/Gem/SupportGemLongFuse",
+   "Metadata/Items/Gems/SupportGemColdMastery",
+   "Metadata/Items/Gems/SupportGemSecondWindThree",
+   "Metadata/Items/Gem/SupportGemLongFuseTwo",
+   "Metadata/Items/Gems/SupportGemPersistence"
+  ],
+  "skills": [
+   {
+    "id": "FrostBombPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Frost Bomb",
+     "id": "frost_bomb",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {
+      "frost_bomb_buff_duration_+%": "buff_duration_+%",
+      "frost_bomb_cooldown_speed_+%": "base_cooldown_speed_+%",
+      "frost_bomb_damage_+%": "damage_+%",
+      "frost_bomb_radius_+%": "base_skill_area_of_effect_+%"
+     },
+     "types": [
+      "Spell",
+      "Area",
+      "Duration",
+      "Cold",
+      "Damage",
+      "Multicastable",
+      "Totemable",
+      "Trappable",
+      "Mineable",
+      "Triggerable",
+      "Cascadable",
+      "AreaSpell",
+      "Cooldown",
+      "Orb",
+      "Invokable",
+      "UsableWhileMoving",
+      "GeneratesInfusion",
+      "GeneratesRemnants",
+      "DetonatesAfterTime",
+      "Limit"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 800,
+    "static": {
+     "cooldown": 6000,
+     "stored_uses": 1
+    },
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 9
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 13
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 15
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 18
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 20
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 23
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 26
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 30
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 34
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "FrostBombPlayer",
+      "static": {
+       "crit_chance": 1300,
+       "quality_stats": [
+        {
+         "stat": "Initially applies {active_skill_all_elemental_exposure_magnitude}% [ElementalDamage|Elemental] [Exposure] and {active_skill_all_elemental_exposure_compounding_magnitude}% [Exposure] per pulse, up to a maximum of {active_skill_all_elemental_exposure_compounding_magnitude_cap}%",
+         "stats": {
+          "active_skill_all_elemental_exposure_compounding_magnitude_cap": 500
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "spell_minimum_base_cold_damage",
+         "type": "float"
+        },
+        {
+         "id": "spell_maximum_base_cold_damage",
+         "type": "float"
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant"
+        },
+        {
+         "id": "base_skill_detonation_time",
+         "type": "constant",
+         "value": 4000
+        },
+        {
+         "id": "base_secondary_skill_effect_duration",
+         "type": "constant",
+         "value": 8000
+        },
+        {
+         "id": "spell_maximum_action_distance_+%",
+         "type": "constant",
+         "value": 400
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "active_skill_all_elemental_exposure_magnitude",
+         "type": "constant",
+         "value": 20
+        },
+        {
+         "id": "active_skill_all_elemental_exposure_compounding_magnitude",
+         "type": "constant",
+         "value": 2
+        },
+        {
+         "id": "active_skill_all_elemental_exposure_compounding_magnitude_cap",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "active_skill_chill_as_though_damage_+%_final",
+         "type": "constant",
+         "value": 300
+        },
+        {
+         "id": "base_maximum_number_of_frost_bombs",
+         "type": "constant",
+         "value": 1
+        },
+        {
+         "id": "frost_bomb_exposure_does_not_apply_to_enemies_of_level_higher_than_X",
+         "type": "additional"
+        },
+        {
+         "id": "is_area_damage",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_skill_show_average_damage_instead_of_dps",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "cannot_cancel_skill_before_contact_point",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Pulse and explosion radius are 2.4 metres",
+         "frost_bomb_exposure_does_not_apply_to_enemies_of_level_higher_than_X": "Cannot apply [Exposure] to enemies of level higher than 20",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 7 to 11 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 7
+         },
+         {
+          "value": 11
+         },
+         {
+          "value": 24
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 20
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "2": {
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Pulse and explosion radius are 2.4 metres",
+         "frost_bomb_exposure_does_not_apply_to_enemies_of_level_higher_than_X": "Cannot apply [Exposure] to enemies of level higher than 23",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 10 to 15 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 10
+         },
+         {
+          "value": 15
+         },
+         {
+          "value": 24
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 23
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "3": {
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Pulse and explosion radius are 2.5 metres",
+         "frost_bomb_exposure_does_not_apply_to_enemies_of_level_higher_than_X": "Cannot apply [Exposure] to enemies of level higher than 25",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 14 to 21 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 14
+         },
+         {
+          "value": 21
+         },
+         {
+          "value": 25
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 25
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "4": {
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Pulse and explosion radius are 2.5 metres",
+         "frost_bomb_exposure_does_not_apply_to_enemies_of_level_higher_than_X": "Cannot apply [Exposure] to enemies of level higher than 29",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 18 to 27 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 18
+         },
+         {
+          "value": 27
+         },
+         {
+          "value": 25
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 29
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "5": {
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Pulse and explosion radius are 2.5 metres",
+         "frost_bomb_exposure_does_not_apply_to_enemies_of_level_higher_than_X": "Cannot apply [Exposure] to enemies of level higher than 32",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 23 to 34 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 23
+         },
+         {
+          "value": 34
+         },
+         {
+          "value": 25
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 32
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "6": {
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Pulse and explosion radius are 2.6 metres",
+         "frost_bomb_exposure_does_not_apply_to_enemies_of_level_higher_than_X": "Cannot apply [Exposure] to enemies of level higher than 36",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 28 to 42 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 28
+         },
+         {
+          "value": 42
+         },
+         {
+          "value": 26
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 36
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "7": {
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Pulse and explosion radius are 2.6 metres",
+         "frost_bomb_exposure_does_not_apply_to_enemies_of_level_higher_than_X": "Cannot apply [Exposure] to enemies of level higher than 39",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 34 to 51 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 34
+         },
+         {
+          "value": 51
+         },
+         {
+          "value": 26
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 39
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "8": {
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Pulse and explosion radius are 2.7 metres",
+         "frost_bomb_exposure_does_not_apply_to_enemies_of_level_higher_than_X": "Cannot apply [Exposure] to enemies of level higher than 43",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 41 to 61 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 41
+         },
+         {
+          "value": 61
+         },
+         {
+          "value": 27
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 43
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "9": {
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Pulse and explosion radius are 2.7 metres",
+         "frost_bomb_exposure_does_not_apply_to_enemies_of_level_higher_than_X": "Cannot apply [Exposure] to enemies of level higher than 47",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 48 to 73 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 48
+         },
+         {
+          "value": 73
+         },
+         {
+          "value": 27
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 47
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       },
+       "10": {
+        "stat_text": {
+         "active_skill_base_area_of_effect_radius": "Pulse and explosion radius are 2.7 metres",
+         "frost_bomb_exposure_does_not_apply_to_enemies_of_level_higher_than_X": "Cannot apply [Exposure] to enemies of level higher than 52",
+         "spell_minimum_base_cold_damage\nspell_maximum_base_cold_damage": "Deals 57 to 86 [Cold] Damage"
+        },
+        "stats": [
+         {
+          "value": 57
+         },
+         {
+          "value": 86
+         },
+         {
+          "value": 27
+         },
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         {
+          "value": 52
+         },
+         null,
+         null,
+         null,
+         null
+        ]
+       }
+      }
+     }
+    ]
+   }
+  ]
  }
 ]

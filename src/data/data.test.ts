@@ -5,18 +5,22 @@ import { baseItems, currencies, heroGems, mods, monsterLevelStats, spellGems, su
 
 describe("M1 data accessors", () => {
   test("the six PoE2 starter heroes of Appendix B §4 are present", () => {
-    expect(heroGems().map((h) => h.name).sort()).toEqual([
-      "Armour Piercing Rounds",
-      "Falling Thunder",
-      "Ice Strike",
-      "Lightning Arrow",
-      "Rolling Slam",
-      "Spark",
-    ]);
+    expect(heroGems().map((h) => h.name)).toEqual(
+      expect.arrayContaining([
+        "Armour Piercing Rounds",
+        "Falling Thunder",
+        "Ice Strike",
+        "Lightning Arrow",
+        "Rolling Slam",
+        "Spark",
+      ]),
+    );
   });
 
   test("the three starter spells are present", () => {
-    expect(spellGems().map((s) => s.name).sort()).toEqual(["Comet", "Earthquake", "Explosive Grenade"]);
+    expect(spellGems().map((s) => s.name)).toEqual(
+      expect.arrayContaining(["Comet", "Earthquake", "Explosive Grenade"]),
+    );
   });
 
   test("level 1 monster life is 15 (Appendix A §1.3)", () => {
