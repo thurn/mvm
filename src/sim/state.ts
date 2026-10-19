@@ -4,6 +4,7 @@ import type { Drop } from "../loot/drops";
 import type { BossState } from "../monsters/bosses/types";
 import type { BossId } from "../tuning/bosses";
 import type { WaveRuntime } from "../monsters/waves";
+import type { TerrainTile } from "./terrain";
 import type { SpellShape } from "../spells/shapes";
 import type { ManaOrb } from "./economy/orbs";
 import type { RosterSlot } from "./economy/roster";
@@ -202,6 +203,8 @@ export interface RoundState {
   tick: number;
   /** Board lanes in use, from 0 (top) to 4 (bottom). Level 1 uses [1, 2, 3]. */
   lanes: number[];
+  /** The level's special tiles, generated once at level start (D §8, P16). */
+  terrain: TerrainTile[];
   heroes: HeroState[];
   monsters: MonsterState[];
   projectiles: ProjectileState[];
@@ -240,6 +243,7 @@ export function createRound({ seed, lanes, mana }: RoundOptions): RoundState {
   return {
     tick: 0,
     lanes: [...lanes],
+    terrain: [],
     heroes: [],
     monsters: [],
     projectiles: [],

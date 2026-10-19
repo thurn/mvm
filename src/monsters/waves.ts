@@ -1,4 +1,5 @@
 import { createStreams, draw, streamRng } from "../sim/rng";
+import { generateTerrain } from "../sim/terrain";
 import { createRound, spawnMonster, type RoundState } from "../sim/state";
 import type { System } from "../sim/system";
 import { STEPS_PER_SECOND } from "../sim/time";
@@ -172,6 +173,7 @@ export interface WaveRuntime {
 /** A new round for a level, with its wave plan rolled from the `waves` stream. */
 export function startLevel(level: LevelDefinition, seed: number): RoundState {
   const state = createRound({ seed, lanes: level.lanes, mana: level.startingMana });
+  state.terrain = generateTerrain(level, seed);
   const plan = generateWavePlan(level, streamRng(state.rng, "waves"));
   state.waves = {
     plan,

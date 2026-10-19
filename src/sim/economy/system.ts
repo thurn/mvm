@@ -1,4 +1,5 @@
 import { placeHero } from "../../heroes/board/place";
+import { placeableAt } from "../terrain";
 import { ECONOMY_TUNING } from "../../tuning/economy";
 import { SIM_TUNING } from "../../tuning/sim";
 import type { SimEvent } from "../events";
@@ -38,6 +39,7 @@ function place(ctx: StepContext, intent: Extract<Intent, { type: "place" }>): vo
     return refuse("out-of-bounds");
   }
   if (occupied(state, intent.lane, intent.column)) return refuse("occupied");
+  if (!placeableAt(state, intent.lane, intent.column)) return refuse("terrain");
   if (slot.rechargeLeft > 1e-9) return refuse("recharging");
   if (state.mana < slot.cost) return refuse("cost");
   state.mana -= slot.cost;

@@ -57,7 +57,7 @@ export type SimEvent =
       cardId: string;
       lane: number;
       column: number;
-      reason: "unknown-card" | "out-of-bounds" | "occupied" | "recharging" | "cost";
+      reason: "unknown-card" | "out-of-bounds" | "occupied" | "terrain" | "recharging" | "cost";
     }
   | { type: "shovelled"; heroId: HeroInstanceId; lane: number; column: number }
   | {

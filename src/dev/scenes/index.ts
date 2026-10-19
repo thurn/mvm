@@ -10,6 +10,7 @@ import { manaRain } from "./mana-rain";
 import { shamblersVsScripted } from "./shamblers-vs-scripted";
 import { spells } from "./spells";
 import { starterHeroes } from "./starter-heroes";
+import { terrain } from "./terrain";
 
 /** A QA scene: a scripted board state that `?scene=<name>` boots into (P22). */
 export interface Scene {
@@ -31,6 +32,7 @@ export const SCENES: readonly Scene[] = [
   equipAb,
   ailments,
   boss,
+  terrain,
 ];
 
 export function findScene(name: string): Scene | undefined {

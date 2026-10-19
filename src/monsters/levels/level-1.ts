@@ -12,4 +12,7 @@ export const LEVEL_1: LevelDefinition = {
   // Level 1 waits 25 s, to give time to place the first acolytes (§5.1).
   firstWaveSeconds: 25,
   startingMana: 150,
+  specialTiles: 0,
+  terrainTypes: [],
+  newTerrain: null,
 };

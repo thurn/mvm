@@ -1,3 +1,4 @@
+import type { TileKind } from "../../sim/terrain";
 /** A campaign level's definition (Appendix D §6.1). */
 export interface LevelDefinition {
   id: string;
@@ -14,4 +15,9 @@ export interface LevelDefinition {
   /** Seconds before the first wave. */
   firstWaveSeconds: number;
   startingMana: number;
+  /** Special tiles on the map (D §6.1), and the types unlocked so far (D §8.2). */
+  specialTiles: number;
+  terrainTypes: TileKind[];
+  /** The type this level introduces, guaranteed at least once. */
+  newTerrain: TileKind | null;
 }

@@ -1,4 +1,5 @@
 import { catalogEntry } from "../../heroes/model/catalog";
+import { placeableAt } from "../terrain";
 import { laneGap, occupies } from "../targeting";
 import { SIM_TUNING } from "../../tuning/sim";
 import type { Intent } from "../intents";
@@ -21,8 +22,10 @@ function role(slot: RosterSlot): Role {
 const slotFor = (state: RoundState, r: Role) => state.roster.find((s) => role(s) === r);
 const ready = (state: RoundState, slot: RosterSlot | undefined) =>
   slot !== undefined && slot.rechargeLeft <= 1e-9 && state.mana >= slot.cost;
+/** Taken: a hero stands there, or the square is a blocking special tile (D §8.1). */
 const occupied = (state: RoundState, lane: number, column: number) =>
-  state.heroes.some((h) => h.lane === lane && h.column === column);
+  state.heroes.some((h) => h.lane === lane && h.column === column) ||
+  !placeableAt(state, lane, column);
 const count = (state: RoundState, slot: RosterSlot | undefined) =>
   slot ? state.heroes.filter((h) => h.skillId === slot.card.hero.skillId).length : 0;
 
