@@ -1,3 +1,4 @@
+import type { BossId } from "../../tuning/bosses";
 import type { TileKind } from "../../sim/terrain";
 /** A campaign level's definition (Appendix D §6.1). */
 export interface LevelDefinition {
@@ -22,4 +23,6 @@ export interface LevelDefinition {
   newTerrain: TileKind | null;
   /** Whether a Strongbox may appear (D §9: Level 4 on, never a boss level). */
   strongboxes: boolean;
+  /** A boss arrives with the last regular wave (D §6.1, §7). */
+  boss?: BossId;
 }

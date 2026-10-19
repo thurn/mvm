@@ -1,4 +1,6 @@
 import { createStreams, draw, streamRng } from "../sim/rng";
+import type { BossId } from "../tuning/bosses";
+import { spawnBoss } from "./bosses";
 import { rollStrongbox } from "./strongbox";
 import { generateTerrain } from "../sim/terrain";
 import { createRound, type RoundState } from "../sim/state";
@@ -38,6 +40,8 @@ export interface WavePlan {
   levelIndex: number;
   areaLevel: number;
   waves: PlannedWave[];
+  /** The boss that arrives when the last wave starts (D §6.1); absent on most levels. */
+  boss?: BossId;
 }
 
 /** A wave's point budget (Appendix D §5.2); `w` counts from 0. */
@@ -149,7 +153,13 @@ export function generateWavePlan(level: LevelDefinition, seedOrRng: number | Rng
       })),
     });
   }
-  return { levelId: level.id, levelIndex: level.index, areaLevel: level.areaLevel, waves };
+  return {
+    levelId: level.id,
+    levelIndex: level.index,
+    areaLevel: level.areaLevel,
+    waves,
+    ...(level.boss ? { boss: level.boss } : {}),
+  };
 }
 
 /** The wave plan and its progress, stored in the round so a resume continues mid-wave (P14). */
@@ -216,6 +226,14 @@ export const waveSystem: System = {
 
     if (upcoming && now >= runtime.nextAtSeconds - 1e-9) {
       ctx.emit({ type: "waveStart", wave: upcoming.index, flag: upcoming.flag });
+      // The boss arrives with the last regular wave (D §6.1).
+      if (plan.boss && upcoming.index === plan.waves.length - 1)
+        spawnBoss(state, {
+          bossId: plan.boss,
+          areaLevel: plan.areaLevel,
+          levelIndex: plan.levelIndex,
+          x: t.spawnX,
+        });
       for (const monster of upcoming.monsters) {
         runtime.pending.push({
           wave: upcoming.index,

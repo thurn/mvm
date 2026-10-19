@@ -1,12 +1,14 @@
 import type { ReactNode } from "react";
 import { MenuButton, MenuScreen, MENU } from "./layout";
 
-/** The one-card campaign stub (plan 1.34): Level 1 playable, Level 2 "coming soon". */
+/** The campaign stub (plan 1.34): the furthest unlocked level, playable; 2.24's map replaces it. */
 export function Campaign({
+  level,
   cleared,
   onPlay,
   onHideout,
 }: {
+  level: number;
   cleared: boolean;
   onPlay(): void;
   onHideout(): void;
@@ -32,13 +34,18 @@ export function Campaign({
       <h2 style={{ margin: "0 0 16px" }}>The Grassland</h2>
       <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
         {card(
-          "Level 1",
-          cleared ? "Cleared" : "First clear: unlock slot 4, choose 1 of 3 heroes",
+          `Level ${level}`,
+          cleared
+            ? "Cleared"
+            : level === 1
+              ? "First clear: unlock slot 4, choose 1 of 3 heroes"
+              : "First clear reward",
           <MenuButton primary onClick={onPlay}>
-            Play Level 1
+            Play Level {level}
           </MenuButton>,
         )}
-        {card("Level 2", "Coming soon", <MenuButton disabled>Locked</MenuButton>, true)}
+        {level < 5 &&
+          card(`Level ${level + 1}`, "Locked", <MenuButton disabled>Locked</MenuButton>, true)}
       </div>
       {/* Clear of the level cards (1.39 visual review). */}
       <div style={{ marginTop: 16 }}>

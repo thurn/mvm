@@ -3,7 +3,7 @@ import { chooseOneOfThree } from "../heroes/gen/generate";
 import { starterCard } from "../heroes/model/starter";
 import type { GemId } from "../data/types";
 import type { LevelDefinition } from "../monsters/levels/types";
-import { LEVEL_1 } from "../monsters/levels/level-1";
+import { CAMPAIGN } from "../monsters/levels/grassland";
 import { startLevel } from "../monsters/waves";
 import { lockRoster } from "../sim/economy/roster";
 import type { SimEvent } from "../sim/events";
@@ -23,8 +23,21 @@ import { killXp, levelForXp, xpForLevel } from "./xp";
 
 type Log = (line: string) => void;
 
-/** Every level the build knows, by ID. Later phases add theirs. */
-const LEVELS: Readonly<Record<string, LevelDefinition>> = { [LEVEL_1.id]: LEVEL_1 };
+/** Every level the build knows, by ID. */
+const LEVELS: Readonly<Record<string, LevelDefinition>> = Object.fromEntries(
+  CAMPAIGN.map((level) => [level.id, level]),
+);
+
+/** Whether a level can be played: the first always, every other once the one before is cleared (D §6.3). */
+export function isUnlocked(account: AccountState, level: LevelDefinition): boolean {
+  const before = CAMPAIGN[CAMPAIGN.indexOf(level) - 1];
+  return !before || account.firstClears.includes(before.id);
+}
+
+/** The furthest level the account can play: its next first clear, or the last level once all are cleared. */
+export function furthestLevel(account: AccountState): LevelDefinition {
+  return [...CAMPAIGN].reverse().find((level) => isUnlocked(account, level))!;
+}
 
 /** A new account for a focus: its Appendix B §4 kit at level 1 with the normal starter bases. */
 export function newAccount(focus: string): AccountState {
@@ -61,9 +74,9 @@ export function beginLevel(
   return round;
 }
 
-/** The highest area level unlocked: Level 1's, plus one per cleared level (M1's sequential campaign). */
+/** The highest area level unlocked (B §1.6's hero level cap reads it). */
 function unlockedArea(account: AccountState): number {
-  return 1 + account.firstClears.length;
+  return furthestLevel(account).areaLevel;
 }
 
 function grantXp(account: AccountState, xp: number): void {

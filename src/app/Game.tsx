@@ -8,6 +8,7 @@ import {
   resumeFromDocument,
   saveDocument,
   type Resumed,
+  furthestLevel,
 } from "../account/lifecycle";
 import type { AccountState } from "../account/state";
 import {
@@ -17,7 +18,6 @@ import {
   sendToSink,
   type Logger,
 } from "../dev/log";
-import { LEVEL_1 } from "../monsters/levels/level-1";
 import { createMirrorClient } from "../save/mirror-client";
 import { createIndexedDbStore, createMemoryStore, latestOf, type SaveStore } from "../save/storage";
 import type { SimEvent } from "../sim/events";
@@ -251,7 +251,7 @@ export function Game() {
           finished = true;
           const summary = finishLevel(playing.account, round);
           services.logger.log("levelResult", {
-            levelId: LEVEL_1.id,
+            levelId: round.waves?.plan.levelId ?? "",
             result: summary.result,
             xp: summary.xpGained,
             drops: summary.drops.length,
@@ -278,8 +278,10 @@ export function Game() {
     if (!services) return;
     const owner = account ?? newAccount("warrior");
     halt.current = false;
-    const round = beginLevel(owner, LEVEL_1);
-    services.logger.log("levelStart", { levelId: LEVEL_1.id, wavePlan: round.waves?.plan });
+    // The furthest unlocked level (D §6.3); 2.24's campaign map picks any cleared one too.
+    const level = furthestLevel(owner);
+    const round = beginLevel(owner, level);
+    services.logger.log("levelStart", { levelId: level.id, wavePlan: round.waves?.plan });
     setPhase({
       kind: "playing",
       account: owner,
@@ -350,7 +352,8 @@ export function Game() {
         case "campaign":
           return (
             <Campaign
-              cleared={phase.account.firstClears.includes(LEVEL_1.id)}
+              level={furthestLevel(phase.account).index}
+              cleared={phase.account.firstClears.includes(furthestLevel(phase.account).id)}
               onPlay={() => go("playLevel")}
               onHideout={() => go("hideout")}
             />

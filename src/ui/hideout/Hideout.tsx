@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { furthestLevel } from "../../account/lifecycle";
 import { passivePoints } from "../../account/rewards";
 import type { AccountState } from "../../account/state";
 import { currencies } from "../../data";
@@ -558,7 +559,7 @@ export function Hideout({
           </span>
           <span style={{ marginLeft: "auto" }}>
             <MenuButton primary onClick={onPlay}>
-              Play Level 1
+              Play Level {furthestLevel(account).index}
             </MenuButton>
           </span>
         </div>
