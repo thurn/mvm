@@ -9,6 +9,7 @@ import modsData from "../../data/mods.json";
 import monsterStats from "../../data/monster-stats.json";
 import spells from "../../data/spells.json";
 import supports from "../../data/supports.json";
+import { REPLACED_BY_TEAM, TEAM_IMPLICITS, TEAM_MODS } from "./team";
 import type {
   BaseItemData,
   CurrencyData,
@@ -20,8 +21,20 @@ import type {
 const HEROES = heroes as unknown as readonly GemData[];
 const SPELLS = spells as unknown as readonly GemData[];
 const SUPPORTS = supports as unknown as readonly GemData[];
-const BASES = bases as unknown as readonly BaseItemData[];
-const MODS = modsData as unknown as readonly ModData[];
+// Ring resistance implicits are team resistances (Appendix C §C.2.4, §C.3.8).
+const BASES = (bases as unknown as readonly BaseItemData[]).map((base) =>
+  base.implicits.some((i) => i.id in TEAM_IMPLICITS)
+    ? {
+        ...base,
+        implicits: base.implicits.map((i) => ({ ...i, stats: TEAM_IMPLICITS[i.id] ?? i.stats })),
+      }
+    : base,
+);
+// MvM's team mods join the PoE2 catalog, and replace the hero-only resistances.
+const MODS = [
+  ...(modsData as unknown as readonly ModData[]).filter((m) => !REPLACED_BY_TEAM.test(m.id)),
+  ...TEAM_MODS,
+];
 const CURRENCY = currency as unknown as readonly CurrencyData[];
 const MONSTER_STATS = monsterStats as readonly MonsterLevelStats[];
 

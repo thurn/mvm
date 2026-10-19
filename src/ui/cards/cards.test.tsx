@@ -40,7 +40,7 @@ describe("affix lines (Appendix C, H §4.4)", () => {
 
   test("tiers count up from the weakest of the family, shown in the Alt header", () => {
     const family = mods().filter(
-      (m) => m.type === "ColdResistance" && m.generationType === "suffix",
+      (m) => m.type === "TeamColdResistance" && m.generationType === "suffix",
     );
     const weakest = [...family].sort((a, b) => a.requiredLevel - b.requiredLevel)[0]!;
     expect(modTier(weakest)).toBe(1);

@@ -1,4 +1,5 @@
 import { mods } from "../../data";
+import { TEAM_TEXT } from "../../data/team";
 import type { ModData, RawModStat } from "../../data/types";
 
 /**
@@ -121,7 +122,7 @@ export function affixLines(
         return;
       }
     }
-    const template = TEXT[s.id];
+    const template = TEXT[s.id] ?? TEAM_TEXT[s.id];
     const v = value(values[i] ?? s.min, s, alt);
     // Stats without a template (unique-only ones) read as words rather than ids.
     lines.push(template ? template.replace("#", v) : humanize(s.id, v));

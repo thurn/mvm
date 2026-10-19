@@ -18,6 +18,7 @@ import type { Card } from "./hero";
 import type { ItemInstance } from "./item";
 import { gemLevel } from "./levels";
 import { SUPPORT_STAT_MAP } from "./support-stats";
+import type { TeamSheet } from "./team";
 
 type MoreModifier = NonNullable<SkillHit["more"]>[number];
 
@@ -62,6 +63,8 @@ export interface AggregateContext {
   supports?: readonly GemData[];
   bases?: readonly BaseItemData[];
   mods?: readonly ModData[];
+  /** The roster's team stat sheet (A §2.1 step 4); none outside a roster. */
+  team?: TeamSheet;
 }
 
 class Sheet {
@@ -232,6 +235,10 @@ export function aggregate(card: Card, context: AggregateContext = {}): HeroSheet
   if (card.armour) addItemMods(card.armour, armourBase!, modsById, armourLocal, global, unmodelled);
   if (card.accessory)
     addItemMods(card.accessory, baseOf(card.accessory), modsById, new Sheet(), global, unmodelled);
+
+  // Step 4: the team sheet, as unprefixed stats (team_ stats on this card's own items count only through it).
+  for (const [key, value] of Object.entries(context.team ?? {}))
+    global.add(key as ScalarStatKey, value);
 
   const more: MoreModifier[] = [];
   addSupports(hero.supports, context.supports ?? supportGems(), global, more, unmodelled);

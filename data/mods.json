@@ -1020,52 +1020,6 @@
   ]
  },
  {
-  "id": "ColdResist1",
-  "name": "of the Seal",
-  "type": "ColdResistance",
-  "groups": [
-   "ColdResistance"
-  ],
-  "generationType": "suffix",
-  "requiredLevel": 1,
-  "spawnWeights": [
-   {
-    "tag": "armour",
-    "weight": 1
-   },
-   {
-    "tag": "ring",
-    "weight": 1
-   },
-   {
-    "tag": "amulet",
-    "weight": 1
-   },
-   {
-    "tag": "belt",
-    "weight": 1
-   },
-   {
-    "tag": "default",
-    "weight": 0
-   }
-  ],
-  "stats": [
-   {
-    "id": "base_cold_damage_resistance_%",
-    "min": 6,
-    "max": 10
-   }
-  ],
-  "mvmStats": [
-   {
-    "stat": "cold_resistance_%",
-    "min": 6,
-    "max": 10
-   }
-  ]
- },
- {
   "id": "CriticalMultiplier1",
   "name": "of Ire",
   "type": "CriticalStrikeMultiplier",
@@ -1434,52 +1388,6 @@
     "stat": "fire_damage_+%",
     "min": 35,
     "max": 44
-   }
-  ]
- },
- {
-  "id": "FireResist1",
-  "name": "of the Whelpling",
-  "type": "FireResistance",
-  "groups": [
-   "FireResistance"
-  ],
-  "generationType": "suffix",
-  "requiredLevel": 1,
-  "spawnWeights": [
-   {
-    "tag": "armour",
-    "weight": 1
-   },
-   {
-    "tag": "ring",
-    "weight": 1
-   },
-   {
-    "tag": "amulet",
-    "weight": 1
-   },
-   {
-    "tag": "belt",
-    "weight": 1
-   },
-   {
-    "tag": "default",
-    "weight": 0
-   }
-  ],
-  "stats": [
-   {
-    "id": "base_fire_damage_resistance_%",
-    "min": 6,
-    "max": 10
-   }
-  ],
-  "mvmStats": [
-   {
-    "stat": "fire_resistance_%",
-    "min": 6,
-    "max": 10
    }
   ]
  },
@@ -2492,52 +2400,6 @@
     "stat": "lightning_damage_+%",
     "min": 35,
     "max": 44
-   }
-  ]
- },
- {
-  "id": "LightningResist1",
-  "name": "of the Cloud",
-  "type": "LightningResistance",
-  "groups": [
-   "LightningResistance"
-  ],
-  "generationType": "suffix",
-  "requiredLevel": 1,
-  "spawnWeights": [
-   {
-    "tag": "armour",
-    "weight": 1
-   },
-   {
-    "tag": "ring",
-    "weight": 1
-   },
-   {
-    "tag": "amulet",
-    "weight": 1
-   },
-   {
-    "tag": "belt",
-    "weight": 1
-   },
-   {
-    "tag": "default",
-    "weight": 0
-   }
-  ],
-  "stats": [
-   {
-    "id": "base_lightning_damage_resistance_%",
-    "min": 6,
-    "max": 10
-   }
-  ],
-  "mvmStats": [
-   {
-    "stat": "lightning_resistance_%",
-    "min": 6,
-    "max": 10
    }
   ]
  },

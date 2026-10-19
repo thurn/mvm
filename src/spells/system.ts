@@ -1,4 +1,5 @@
 import { dealHit } from "../sim/combat";
+import { roundTeam } from "../heroes/board/place";
 import type { SimEvent } from "../sim/events";
 import type { Intent } from "../sim/intents";
 import { newInstanceId, type PendingSpellPart } from "../sim/state";
@@ -24,7 +25,7 @@ function cast(ctx: StepContext, intent: Extract<Intent, { type: "cast" }>, now: 
   state.mana -= slot.cost;
   slot.rechargeLeft = slot.rechargeSeconds;
   const castId = newInstanceId<"SpellCast">(state);
-  const kit = buildSpell(slot.card);
+  const kit = buildSpell(slot.card, roundTeam(state));
   for (const part of kit.parts) {
     state.spells.push({
       castId,

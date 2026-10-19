@@ -1,4 +1,5 @@
 import { attackBase, spellBase, type SkillHit } from "../combat/hit";
+import type { TeamSheet } from "../heroes/model/team";
 import type { BaseDamage } from "../combat/hit";
 import { baseItems, spellGems } from "../data";
 import type { SkillData } from "../data/types";
@@ -48,12 +49,13 @@ function staticMs(skill: SkillData, index: number, id: string): number {
 }
 
 /** Builds a spell card's cast: its aggregated caster and its timed hits (§6.1–§6.2). */
-export function buildSpell(card: Card): SpellKit {
+export function buildSpell(card: Card, team: TeamSheet = {}): SpellKit {
   const definition = SPELL_DEFINITIONS[card.hero.skillId];
   const gem = spellGems().find((g) => g.id === card.hero.skillId);
   const skill = gem?.skills[0];
   if (!definition || !skill) throw new Error(`no spell definition for ${card.hero.skillId}`);
-  const sheet = aggregate(card);
+  // Team damage reaches the spell too (A §2.1).
+  const sheet = aggregate(card, { team });
   const level = card.hero.level;
   const more = [...sheet.more, spellPower(level)];
   const attack = (index: number, tags: SkillHit["tags"]): SkillHit => {

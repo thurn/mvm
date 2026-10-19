@@ -154,6 +154,46 @@ describe("saves", () => {
     expect(log.some((l) => l.includes("Metadata/Retired/Thing") && l.includes("gold"))).toBe(true);
   });
 
+  test("a save holding a hero-only resistance loads with it dropped, and a Ruby Ring's implicit re-rolled into its team range (C §C.3.8)", () => {
+    const account = newAccount("warrior");
+    const ruby = "Metadata/Items/Rings/FourRing3" as never;
+    account.stash.items.push(
+      {
+        id: id<"Item">("old-resist"),
+        baseId: "Metadata/Items/Rings/FourRing1" as never,
+        rarity: "magic",
+        itemLevel: 10,
+        quality: 0,
+        mods: [
+          { modId: id<"Mod">("FireResist2"), values: [13] },
+          { modId: id<"Mod">("IncreasedLife1"), values: [12] },
+        ],
+      },
+      {
+        id: id<"Item">("old-ruby"),
+        baseId: ruby,
+        rarity: "normal",
+        itemLevel: 10,
+        quality: 0,
+        mods: [],
+        implicits: [{ modId: id<"Mod">("RingImplicitFireResistance1"), values: [27] }],
+      },
+    );
+    const log: string[] = [];
+    const resumed = resumeFromDocument(
+      JSON.parse(JSON.stringify(saveDocument(account, null, "test", "2026-10-18T00:00:00.000Z"))),
+      (line) => log.push(line),
+    ).account;
+    const resist = resumed.stash.items.find((i) => i.id === "old-resist")!;
+    expect(resist.mods.map((m) => m.modId)).toEqual(["IncreasedLife1"]);
+    const rerolled = resumed.stash.items.find((i) => i.id === "old-ruby")!.implicits![0]!
+      .values[0]!;
+    expect(rerolled).toBeGreaterThanOrEqual(10);
+    expect(rerolled).toBeLessThanOrEqual(15);
+    expect(log.some((l) => l.includes("FireResist2"))).toBe(true);
+    expect(log.some((l) => l.includes("old-ruby") && l.includes("implicit"))).toBe(true);
+  });
+
   test("a corrupt round section loads the account and restarts the level", () => {
     const account = newAccount("warrior");
     const round = beginLevel(account, LEVEL_1, 2);

@@ -3,6 +3,7 @@ import type { Card } from "../heroes/model/hero";
 import type { ItemInstance } from "../heroes/model/item";
 import { itemSellPrice } from "../loot/prices";
 import { uniques } from "../data/uniques";
+import { createStreams, streamRng } from "../sim/rng";
 import type { AccountState } from "./state";
 
 type Log = (line: string) => void;
@@ -14,14 +15,50 @@ const knownMods = () =>
     ...uniques().flatMap((u) => u.mods.map((m) => m.id)),
   ]);
 
-/** Drops mods the data no longer has, logging each (P17). */
+/** A stable seed from an item's ID, so a re-roll on load is the same every load. */
+function seedOf(itemId: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < itemId.length; i++) h = Math.imul(h ^ itemId.charCodeAt(i), 16777619);
+  return h >>> 0;
+}
+
+/**
+ * Re-rolls implicit values outside their base's current range, such as a
+ * Ruby Ring's old 20–30% fire resistance that is now 10–15% team fire
+ * resistance (Appendix C §C.3.8), logging each.
+ */
+function reconcileImplicits(item: ItemInstance, log: Log): ItemInstance {
+  const base = baseItems().find((b) => b.id === item.baseId);
+  if (!base || !item.implicits) return item;
+  let changed = false;
+  const implicits = item.implicits.map((rolled) => {
+    const stats = base.implicits.find((i) => i.id === rolled.modId)?.stats;
+    if (
+      !stats ||
+      stats.every(
+        (s, i) => (rolled.values[i] ?? s.min) >= s.min && (rolled.values[i] ?? s.min) <= s.max,
+      )
+    )
+      return rolled;
+    const rng = streamRng(createStreams(seedOf(item.id)), "loot");
+    const values = stats.map((s) => s.min + Math.floor(rng() * (s.max - s.min + 1)));
+    log(
+      `[reconcile] item ${item.id}: implicit ${rolled.modId} ${rolled.values.join("/")} re-rolled to ${values.join("/")}`,
+    );
+    changed = true;
+    return { ...rolled, values };
+  });
+  return changed ? { ...item, implicits } : item;
+}
+
+/** Drops mods the data no longer has, and re-rolls implicits out of range, logging each (P17). */
 function reconcileMods(item: ItemInstance, known: Set<string>, log: Log): ItemInstance {
   const kept = item.mods.filter((m) => {
     if (known.has(m.modId)) return true;
     log(`[reconcile] item ${item.id}: unknown mod ${m.modId} dropped`);
     return false;
   });
-  return kept.length === item.mods.length ? item : { ...item, mods: kept };
+  return reconcileImplicits(kept.length === item.mods.length ? item : { ...item, mods: kept }, log);
 }
 
 /**

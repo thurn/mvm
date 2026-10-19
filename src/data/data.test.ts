@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { STAT_MAP } from "./stat-map";
+import { TEAM_MODS, teamStatOf } from "./team";
 import { baseItems, currencies, heroGems, mods, monsterLevelStats, spellGems, supportGems } from ".";
 
 describe("M1 data accessors", () => {
@@ -23,16 +24,19 @@ describe("M1 data accessors", () => {
     expect(() => monsterLevelStats(0)).toThrow();
   });
 
-  test("every imported mod maps to at least one vocabulary stat", () => {
-    expect(mods().length).toBeGreaterThan(0);
-    for (const mod of mods()) {
+  const imported = () => mods().filter((m) => !TEAM_MODS.includes(m));
+
+  test("every imported mod maps to at least one vocabulary stat, and every team mod to a team stat", () => {
+    expect(imported().length).toBeGreaterThan(0);
+    for (const mod of imported()) {
       expect(mod.mvmStats.length, mod.id).toBeGreaterThan(0);
       for (const stat of mod.stats) expect(STAT_MAP, `${mod.id} ${stat.id}`).toHaveProperty([stat.id]);
     }
+    for (const mod of TEAM_MODS) for (const stat of mod.stats) expect(teamStatOf(stat.id), mod.id).not.toBeNull();
   });
 
-  test("everything stays within M1's item level 10", () => {
-    for (const mod of mods()) expect(mod.requiredLevel).toBeLessThanOrEqual(10);
+  test("the PoE2 import stays within M1's item level 10", () => {
+    for (const mod of imported()) expect(mod.requiredLevel).toBeLessThanOrEqual(10);
     for (const base of baseItems()) expect(base.dropLevel).toBeLessThanOrEqual(10);
   });
 
