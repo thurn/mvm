@@ -15,6 +15,8 @@ export interface Archetype {
   /** A pack archetype spawns this many in one lane, `packSpacing` tiles apart (D §2.2 Swarm). */
   packSize?: number;
   packSpacing?: number;
+  /** A leaper jumps the first non-wall hero it reaches, then walks at this many seconds per tile (D §2.2). */
+  leapSecondsPerTile?: number;
 }
 
 /** The archetypes so far (D §2.1, §5.4). Later phases add the rest. */
@@ -62,10 +64,30 @@ const ARCHETYPES: Readonly<Record<string, Archetype>> = {
     packSize: 3,
     packSpacing: 0.3,
   },
+  // Goblin Leaper: PvZ's Pole Vaulter; walls (life ×5 or more) stop it (D §2.2).
+  Leaper: {
+    id: "Leaper",
+    firstLevel: 4,
+    pointCost: 2,
+    lifeMult: 1,
+    damageMult: 1,
+    armourMult: 1,
+    evasionMult: 1.5,
+    secondsPerTile: 3,
+    attackSeconds: 1,
+    drawWeight: 2000,
+    resist: {},
+    leapSecondsPerTile: 5.5,
+  },
 };
 
 export function archetype(id: string): Archetype {
   const entry = ARCHETYPES[id];
   if (!entry) throw new Error(`unknown monster archetype ${id}`);
   return entry;
+}
+
+/** An archetype by monster, or undefined for bosses and scripted test monsters. */
+export function findArchetype(monster: { archetypeId: string }): Archetype | undefined {
+  return ARCHETYPES[monster.archetypeId];
 }

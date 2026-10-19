@@ -11,20 +11,14 @@ export const archetypes: Scene = {
   name: "archetypes",
   create() {
     const state = createRound({ seed: 21, lanes: [0, 1, 2, 3, 4], mana: 0 });
-    const kinds = ["Shambler", "ArmouredLight", "Swarm", "ArmouredLight", "Swarm"];
+    const kinds = ["Shambler", "ArmouredLight", "Swarm", "Leaper", "Leaper"];
     state.lanes.forEach((lane, i) => {
-      placeHero(
-        state,
-        starterCard(id<"Gem">(SKILLS.rollingSlam), 3, `scene-arch-${lane}`),
-        lane,
-        3,
-      );
-      placeHero(
-        state,
-        starterCard(id<"Gem">(SKILLS.lightningArrow), 3, `scene-arch-la-${lane}`),
-        lane,
-        1,
-      );
+      // Leaper lanes put a harmless acolyte up front, to be leapt, and the striker behind it.
+      const leaper = kinds[i] === "Leaper";
+      const front = leaper ? SKILLS.acolyte : SKILLS.rollingSlam;
+      const back = leaper ? SKILLS.rollingSlam : SKILLS.lightningArrow;
+      placeHero(state, starterCard(id<"Gem">(front), 3, `scene-arch-${lane}`), lane, 3);
+      placeHero(state, starterCard(id<"Gem">(back), 3, `scene-arch-back-${lane}`), lane, 1);
       for (let wave = 0; wave < 4; wave++)
         spawnRoll(state, {
           archetypeId: kinds[i]!,

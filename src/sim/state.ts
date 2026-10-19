@@ -50,6 +50,8 @@ export interface MonsterState {
   attack?: MonsterAttack;
   /** PoE2 monster affix IDs rolled at spawn (Appendix D §4). */
   affixes?: string[];
+  /** A leaper that has made its one leap (D §2.2). */
+  leapt?: boolean;
   /** A boss's lanes, abilities and telegraphs (Appendix D §7); absent for every other monster. */
   boss?: BossState;
 }

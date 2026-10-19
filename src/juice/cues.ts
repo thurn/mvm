@@ -308,6 +308,8 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
   bossEnrage: () => ({ tier: 0, cues: [] }),
   bossPrimed: () => ({ tier: 0, cues: [] }),
   lootBurst: () => ({ tier: 0, cues: [] }),
+  // The leap's whoosh and dust are plan 2.15's.
+  leap: () => ({ tier: 0, cues: [] }),
   // Strongbox presentation is plan 2.18's.
   strongboxTriggered: () => ({ tier: 0, cues: [] }),
 };

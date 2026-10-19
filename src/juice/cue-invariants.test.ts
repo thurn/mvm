@@ -100,6 +100,7 @@ const SAMPLES: { [K in SimEvent["type"]]: SimEventOf<K> } = {
   bossEnrage: { type: "bossEnrage", monsterId: "m" as never },
   bossPrimed: { type: "bossPrimed", monsterId: "m" as never },
   lootBurst: { type: "lootBurst", sourceId: "m", dropIds: ["d"], lane: 2, x: 5 },
+  leap: { type: "leap", monsterId: "m" as never, lane: 2, fromX: 5.5, toX: 4 },
   strongboxTriggered: { type: "strongboxTriggered", lane: 2, column: 6, ambushIds: [] },
 };
 
