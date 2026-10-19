@@ -31,8 +31,7 @@ const NAMES = new Map<string, string>([
   ...Object.entries(CUSTOM_NAMES),
 ]);
 
-const BANNER_STYLE =
-  "@keyframes mvm-hud-banner { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }";
+const BANNER_STYLE = "@keyframes mvm-hud-banner { from { opacity: 0; } to { opacity: 1; } }";
 
 const COLORS = {
   bar: "rgba(10, 12, 16, 0.92)",
@@ -460,17 +459,20 @@ export function Hud({ store, enqueue, scale, countdown, children, onAbandon }: H
           <div
             data-testid="planning-banner"
             style={{
+              // A slim band at the board's top edge: placement is open during the beat (D §6),
+              // so the banner must not hide the lanes and terrain being read.
               position: "absolute",
-              left: 0,
-              right: 0,
-              top: BOARD_HEIGHT * scale * 0.3,
-              padding: `${8 * scale}px 0`,
-              textAlign: "center",
-              fontSize: 22 * scale,
+              left: "50%",
+              top: 6 * scale,
+              transform: "translateX(-50%)",
+              padding: `${4 * scale}px ${14 * scale}px`,
+              fontSize: 15 * scale,
               fontWeight: 700,
               letterSpacing: 1,
+              whiteSpace: "nowrap",
               color: COLORS.picked,
-              background: "rgba(0, 0, 0, 0.45)",
+              background: "rgba(0, 0, 0, 0.55)",
+              borderRadius: 4 * scale,
               pointerEvents: "none",
               animation: "mvm-hud-banner 400ms ease-out",
             }}
