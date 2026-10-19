@@ -19,6 +19,7 @@ describe("monster stat model (Appendix D §1)", () => {
       rarity: "normal",
       affixes: [],
       areaLevel: 1,
+      levelIndex: 1,
       lane: 2,
       x: 9.75,
     });
@@ -37,6 +38,7 @@ describe("monster stat model (Appendix D §1)", () => {
       rarity: "normal",
       affixes: [],
       areaLevel: 10,
+      levelIndex: 1,
       lane: 2,
       x: 9.75,
     });
@@ -55,6 +57,7 @@ describe("monster stat model (Appendix D §1)", () => {
         "MonsterExtraEnergyShield1",
       ],
       areaLevel: 1,
+      levelIndex: 1,
       lane: 2,
       x: 9.75,
     });

@@ -72,6 +72,7 @@ describe("Appendix A §1.3 with the real starter hero and monster", () => {
     rarity: "normal",
     affixes: [],
     areaLevel: 1,
+    levelIndex: 1,
     lane: 2,
     x: 5,
   });

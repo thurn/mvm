@@ -245,6 +245,7 @@ export const waveSystem: System = {
             rarity,
             affixes: rollAffixes(rarity, monster.archetypeId, plan.areaLevel, rng),
             areaLevel: plan.areaLevel,
+            levelIndex: plan.levelIndex,
             lane: monster.lane,
             x: monster.x,
           }),

@@ -28,6 +28,7 @@ function shamblerAt(state: RoundState, lane: number, column: number) {
       rarity: "normal",
       affixes: [],
       areaLevel: 1,
+      levelIndex: 1,
       lane,
       x: column,
     }),

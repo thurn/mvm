@@ -6,6 +6,7 @@ import { COMBAT_KNOBS } from "../tuning/combat";
 import { WAVE_TUNING } from "../tuning/waves";
 import { MONSTER_AFFIXES } from "./affixes";
 import { archetype } from "./archetypes";
+import { monsterConversion } from "./elements";
 import type { SpawnRarity } from "./rarity";
 
 export interface MonsterRoll {
@@ -13,6 +14,8 @@ export interface MonsterRoll {
   rarity: SpawnRarity;
   affixes: string[];
   areaLevel: number;
+  /** The campaign level, whose biome sets the hit's element (D §2.3). */
+  levelIndex: number;
   lane: number;
   x: number;
 }
@@ -51,6 +54,7 @@ export function buildMonster(roll: MonsterRoll): MonsterSpec {
   const damage =
     dms.physicalDamage * type.damageMult * rarity.damage * COMBAT_KNOBS.K_monsterDamage;
   const baseSecondsPerTile = COMBAT_KNOBS.walkSecondsPerTile;
+  const conversion = monsterConversion(roll.archetypeId, roll.levelIndex);
   return {
     archetypeId: roll.archetypeId,
     rarity: roll.rarity,
@@ -75,6 +79,7 @@ export function buildMonster(roll: MonsterRoll): MonsterSpec {
         tags: ["melee"],
         base: { physical: { min: damage, max: damage } },
         baseCrit: WAVE_TUNING.monsterBaseCrit,
+        ...(conversion ? { conversion } : {}),
       },
     },
   };

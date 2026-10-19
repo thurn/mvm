@@ -34,6 +34,7 @@ export const spells: Scene = {
           rarity: "normal",
           affixes: [],
           areaLevel: 1,
+          levelIndex: 1,
           lane: i % 5,
           x: 7 + Math.floor(i / 5) * 0.5,
         }),

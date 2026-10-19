@@ -41,3 +41,26 @@ export const WAVE_TUNING = {
   /** Monster hits' base crit chance in percent (§4.2: "base 5%"). */
   monsterBaseCrit: 5,
 } as const;
+
+/**
+ * Monster hit elements (Appendix D §2.3). Each biome converts this share of
+ * an archetype's physical hit to its element; native elements convert all of
+ * it and replace the biome's. Archetype ids not yet in the game take effect
+ * when they land (Rot Slime is "Splitter", its children included; Orc Shaman
+ * is "Shaman"). Bosses use their own spec.
+ */
+export const MONSTER_ELEMENT_TUNING = {
+  biomeSharePercent: 50,
+  /** The biome element from each campaign level on; null is all physical. */
+  biomes: [
+    { fromLevel: 1, element: null },
+    { fromLevel: 6, element: "lightning" },
+    { fromLevel: 11, element: "fire" },
+    { fromLevel: 16, element: "cold" },
+  ],
+  native: { Splitter: "chaos", Shaman: "fire" },
+} as const satisfies {
+  biomeSharePercent: number;
+  biomes: readonly { fromLevel: number; element: "fire" | "cold" | "lightning" | null }[];
+  native: Readonly<Record<string, "fire" | "cold" | "lightning" | "chaos">>;
+};
