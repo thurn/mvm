@@ -15,6 +15,7 @@ import { createIntentQueue, drain, type IntentQueue } from "../sim/intents";
 import { step } from "../sim/kernel";
 import { createLayerStack } from "../render/layers";
 import { registerPlaceholderLayers } from "../render/placeholder";
+import { registerTerrainLayer } from "../render/terrain";
 import { BOARD_HEIGHT, BOARD_WIDTH, chooseScale } from "../render/scale";
 import { createDriver } from "./driver";
 import { LootTicker, TICKER_HEIGHT } from "../ui/hud/ticker/LootTicker";
@@ -74,6 +75,7 @@ export function Board({ scene, scale: forcedScale, queue, onFrame, isPaused }: B
     const settings = sharedSettings();
     const stack = createLayerStack();
     registerPlaceholderLayers(stack);
+    registerTerrainLayer(stack);
     // The juice director (P12) reads each step's events; its hitstop and slow-mo reach the sim only through the driver.
     const { director } = createPresentation({
       stack,

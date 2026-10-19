@@ -7,7 +7,8 @@ import type { RosterSlot } from "../../sim/economy/roster";
 import type { Intent } from "../../sim/intents";
 import type { RoundState } from "../../sim/state";
 import type { Tile } from "../../sim/targeting";
-import { canUse, rangePreview, tileAt } from "./placement";
+import { blockedTiles, canUse, rangePreview, tileAt } from "./placement";
+import { TERRAIN_ART } from "../../tuning/terrain";
 import { useRound, type HudView, type RoundStore } from "./round-store";
 
 const TILE = 64;
@@ -29,6 +30,9 @@ const NAMES = new Map<string, string>([
   ...[...heroGems(), ...spellGems()].map((g) => [g.id as string, g.name] as const),
   ...Object.entries(CUSTOM_NAMES),
 ]);
+
+const BANNER_STYLE =
+  "@keyframes mvm-hud-banner { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }";
 
 const COLORS = {
   bar: "rgba(10, 12, 16, 0.92)",
@@ -304,6 +308,18 @@ function PlacementOverlay({
         cursor: picked ? "crosshair" : "default",
       }}
     >
+      {/* While a hero is picked, every tile it can't stand on is tinted (plan 2.16). */}
+      {picked &&
+        picked !== "shovel" &&
+        picked.kind === "hero" &&
+        blockedTiles(round).map((tile) =>
+          box(
+            tile,
+            TERRAIN_ART.blockedTint,
+            `blocked-${tile.lane}-${tile.column}`,
+            `blocked-${tile.lane}-${tile.column}`,
+          ),
+        )}
       {preview.map((tile) => box(tile, COLORS.range, `range-${tile.lane}-${tile.column}`))}
       {picked &&
         hover &&
@@ -439,6 +455,30 @@ export function Hud({ store, enqueue, scale, countdown, children, onAbandon }: H
       >
         {children}
         <PlacementOverlay round={round} scale={scale} picked={picked} onUse={use} />
+        {/* The planning beat (plan 2.16): until the first sky orb falls, once per round. */}
+        {round.sky.count === 0 && round.result === null && (
+          <div
+            data-testid="planning-banner"
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: BOARD_HEIGHT * scale * 0.3,
+              padding: `${8 * scale}px 0`,
+              textAlign: "center",
+              fontSize: 22 * scale,
+              fontWeight: 700,
+              letterSpacing: 1,
+              color: COLORS.picked,
+              background: "rgba(0, 0, 0, 0.45)",
+              pointerEvents: "none",
+              animation: "mvm-hud-banner 400ms ease-out",
+            }}
+          >
+            <style>{BANNER_STYLE}</style>
+            Prepare your defence
+          </div>
+        )}
         <div
           data-testid="loot-ticker"
           style={{ position: "absolute", top: 8, right: 8, width: 200, pointerEvents: "none" }}

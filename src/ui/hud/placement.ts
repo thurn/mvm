@@ -1,6 +1,7 @@
 import { catalogEntry } from "../../heroes/model/catalog";
 import type { RosterSlot } from "../../sim/economy/roster";
 import type { RoundState } from "../../sim/state";
+import { placeableAt } from "../../sim/terrain";
 import type { Tile } from "../../sim/targeting";
 import { SPELL_DEFINITIONS } from "../../spells/catalog";
 import { shapeTiles } from "../../spells/shapes";
@@ -21,13 +22,23 @@ const occupied = (round: RoundState, tile: Tile) =>
   round.heroes.some((h) => h.lane === tile.lane && h.column === tile.column) ||
   round.scripted.some((s) => s.lane === tile.lane && s.column === tile.column);
 
+/** Every on-board tile no hero can stand on (Rock, a closed Strongbox), marked while a hero is picked. */
+export function blockedTiles(round: RoundState): Tile[] {
+  return round.lanes.flatMap((lane) =>
+    Array.from({ length: SIM_TUNING.columns }, (_, i) => ({ lane, column: i + 1 })).filter(
+      (tile) => !placeableAt(round, tile.lane, tile.column),
+    ),
+  );
+}
+
 /** Whether the picked card, or the shovel, can act on this tile. */
 export function canUse(round: RoundState, picked: RosterSlot | "shovel", tile: Tile): boolean {
   if (!onBoard(round, tile)) return false;
   if (picked === "shovel")
     return round.heroes.some((h) => h.lane === tile.lane && h.column === tile.column);
   if (picked.kind === "spell") return true;
-  return !occupied(round, tile);
+  // The sim refuses Rock and a closed Strongbox (D §8.1, §9); the preview agrees.
+  return !occupied(round, tile) && placeableAt(round, tile.lane, tile.column);
 }
 
 function laneTiles(round: RoundState, lane: number, from: number, to: number): Tile[] {
