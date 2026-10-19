@@ -219,6 +219,11 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
       };
       try {
         const full = run({});
+        // A transformed ancestor would trap the fixed vignette inside the shaking panel.
+        expect(screen.getByTestId("tier-vignette")).toBeTruthy();
+        expect(
+          screen.getByTestId("tier-4").querySelector("[data-testid=tier-vignette]"),
+        ).toBeNull();
         expect(full.reveal.shake).toBeGreaterThan(0);
         expect(full.reveal.vignette).toBe(JUICE_TUNING.screen[4]!.vignette!.alpha);
         expect(full.after).toMatchObject({ shake: 0, vignette: 0, flash: 0 });

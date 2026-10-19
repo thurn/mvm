@@ -65,7 +65,9 @@ export function menuTier(
 
 /**
  * Wraps a menu panel and plays a tier's package on it once `fired` turns
- * true: hold, shake, flash and vignette, reported to `window.__mvm.fx`.
+ * true: hold, shake, flash and vignette, reported to `window.__mvm.fx`. The
+ * flash and vignette sit beside the panel, not in it: the shake's transform
+ * would make the panel their containing block and shrink them to it.
  */
 export function TierPackage({
   tier,
@@ -87,23 +89,26 @@ export function TierPackage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fired]);
   return (
-    <div
-      data-testid={`tier-${tier}`}
-      style={
-        {
-          "--s": `${pkg.shakePx}px`,
-          animation:
-            fired && pkg.shakePx > 0
-              ? `mvm-fx-shake ${pkg.shakeMs}ms linear ${pkg.holdMs}ms both`
-              : undefined,
-        } as CSSProperties
-      }
-    >
-      <style>{STYLE}</style>
-      {children}
+    <>
+      <div
+        data-testid={`tier-${tier}`}
+        style={
+          {
+            "--s": `${pkg.shakePx}px`,
+            animation:
+              fired && pkg.shakePx > 0
+                ? `mvm-fx-shake ${pkg.shakeMs}ms linear ${pkg.holdMs}ms both`
+                : undefined,
+          } as CSSProperties
+        }
+      >
+        <style>{STYLE}</style>
+        {children}
+      </div>
       {fired && screen?.flash && <Flash screen alpha={screen.flash.alpha} ms={screen.flash.ms} />}
       {fired && pkg.vignette > 0 && (
         <div
+          data-testid="tier-vignette"
           style={{
             position: "fixed",
             inset: 0,
@@ -115,7 +120,7 @@ export function TierPackage({
           }}
         />
       )}
-    </div>
+    </>
   );
 }
 
