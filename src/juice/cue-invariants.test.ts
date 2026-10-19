@@ -82,6 +82,24 @@ const SAMPLES: { [K in SimEvent["type"]]: SimEventOf<K> } = {
     ...at,
   },
   stun: { type: "stun", targetId: "t" as never, kind: "heavy", seconds: 1 },
+  bossSpawned: {
+    type: "bossSpawned",
+    monsterId: "m" as never,
+    bossId: "BloatedMiller",
+    lanes: [2, 3],
+    x: 9,
+  },
+  bossTelegraph: {
+    type: "bossTelegraph",
+    monsterId: "m" as never,
+    ability: "grainSlam",
+    tiles: [{ lane: 2, column: 5 }],
+    seconds: 1.3,
+  },
+  bossAbility: { type: "bossAbility", monsterId: "m" as never, ability: "grainSlam", tiles: [] },
+  bossEnrage: { type: "bossEnrage", monsterId: "m" as never },
+  bossPrimed: { type: "bossPrimed", monsterId: "m" as never },
+  lootBurst: { type: "lootBurst", monsterId: "m" as never, dropIds: ["d"], lane: 2, x: 5 },
 };
 
 describe("every cue row (H §1.3)", () => {

@@ -267,7 +267,10 @@ export function applyHitAilments(
         applied.push({ ailment: "heavyStun", magnitude: 1, seconds: T.heavyStunSeconds });
       }
     }
+    // Bosses (unique rarity) are immune to light stun (D §7).
     if (
+      context.rarity !== "unique" &&
+      context.rarity !== "boss" &&
       !applied.some((x) => x.ailment === "heavyStun") &&
       context.rng() < lightStunChance(result, target.maxLife, context.heroMelee)
     ) {

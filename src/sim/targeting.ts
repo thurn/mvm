@@ -17,6 +17,17 @@ export function distance(a: BoardPoint, b: BoardPoint): number {
   return Math.hypot(a.x - b.x, a.lane - b.lane);
 }
 
+/** Whether a monster stands in a lane: a boss stands in every lane it covers (D §7). */
+export function occupies(monster: MonsterState, lane: number): boolean {
+  return monster.boss ? monster.boss.lanes.includes(lane) : monster.lane === lane;
+}
+
+/** Lanes between a monster and a lane: 0 for any lane a boss covers. */
+export function laneGap(monster: MonsterState, lane: number): number {
+  const lanes = monster.boss?.lanes ?? [monster.lane];
+  return Math.min(...lanes.map((l) => Math.abs(l - lane)));
+}
+
 function mostAdvanced(monsters: MonsterState[]): MonsterState | undefined {
   let best: MonsterState | undefined;
   for (const monster of monsters) if (!best || monster.x < best.x) best = monster;
@@ -31,7 +42,7 @@ export function laneFirst(
   range: number,
 ): MonsterState | undefined {
   return mostAdvanced(
-    state.monsters.filter((m) => m.lane === lane && m.x >= fromX && m.x - fromX <= range),
+    state.monsters.filter((m) => occupies(m, lane) && m.x >= fromX && m.x - fromX <= range),
   );
 }
 
@@ -43,7 +54,7 @@ export function laneMostAdvanced(
   range: number,
 ): MonsterState | undefined {
   return mostAdvanced(
-    state.monsters.filter((m) => m.lane === lane && Math.abs(m.x - fromX) <= range),
+    state.monsters.filter((m) => occupies(m, lane) && Math.abs(m.x - fromX) <= range),
   );
 }
 
@@ -54,7 +65,7 @@ export function monstersWithin(
   x: number,
   radius: number,
 ): MonsterState[] {
-  return state.monsters.filter((m) => distance(m, { lane, x }) <= radius);
+  return state.monsters.filter((m) => Math.hypot(m.x - x, laneGap(m, lane)) <= radius);
 }
 
 /** `NearbyMostAdvanced(radius)`: the most advanced monster in any lane within the radius. */

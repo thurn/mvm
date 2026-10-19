@@ -1,3 +1,4 @@
+import { occupies } from "../sim/targeting";
 import { SIM_TUNING } from "../tuning/sim";
 import type { MonsterState, RoundState } from "../sim/state";
 import type { Tile } from "../sim/targeting";
@@ -26,6 +27,6 @@ export function shapeTiles(
 /** Monsters standing on any of the tiles: same lane, and x within the tile. */
 export function monstersOnTiles(state: RoundState, tiles: readonly Tile[]): MonsterState[] {
   return state.monsters.filter((m) =>
-    tiles.some((t) => t.lane === m.lane && Math.abs(m.x - t.column) <= 0.5),
+    tiles.some((t) => occupies(m, t.lane) && Math.abs(m.x - t.column) <= 0.5),
   );
 }

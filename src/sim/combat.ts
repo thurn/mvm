@@ -33,6 +33,7 @@ export function killTarget(ctx: StepContext, sourceId: EntityId, target: HitTarg
       killerId: sourceId,
       lane: entity.lane,
       x: target.entity.x,
+      ...(target.entity.boss ? { bossId: target.entity.boss.bossId } : {}),
     });
   } else {
     state.heroes = state.heroes.filter((h) => h.id !== entity.id);

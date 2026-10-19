@@ -10,7 +10,7 @@ import {
   type RoundState,
 } from "../../sim/state";
 import type { StepContext, System } from "../../sim/system";
-import { laneFirst, monstersWithin } from "../../sim/targeting";
+import { laneFirst, laneGap, monstersWithin, occupies } from "../../sim/targeting";
 import { STEP_SECONDS } from "../../sim/time";
 import { spawnOrb } from "../../sim/economy/orbs";
 import { HERO_BOARD_TUNING } from "../../tuning/heroes";
@@ -34,7 +34,7 @@ function inLaneAhead(
   lane = hero.lane,
 ) {
   return state.monsters.filter(
-    (m) => m.lane === lane && m.x - hero.column >= from && m.x - hero.column <= to,
+    (m) => occupies(m, lane) && m.x - hero.column >= from && m.x - hero.column <= to,
   );
 }
 
@@ -104,7 +104,7 @@ function spark(ctx: StepContext, hero: HeroState, kit: KitOf<"spark">) {
   const reach = t.spark.laneReach;
   const inRange = state.monsters.some(
     (m) =>
-      Math.abs(m.lane - hero.lane) <= reach &&
+      laneGap(m, hero.lane) <= reach &&
       m.x - hero.column >= 0 &&
       m.x - hero.column <= t.spark.range,
   );

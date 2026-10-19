@@ -1,6 +1,8 @@
 import type { DamageMap } from "../combat/damage";
 import type { Drop } from "../loot/drops";
 import type { HitResult } from "../combat/resolve";
+import type { BossTile } from "../monsters/bosses/types";
+import type { BossAbility, BossId } from "../tuning/bosses";
 import type { EntityId, HeroInstanceId, MonsterInstanceId, Rarity } from "./state";
 
 /**
@@ -103,4 +105,24 @@ export type SimEvent =
       lane: number;
       x: number;
     }
-  | { type: "stun"; targetId: EntityId; kind: "light" | "heavy"; seconds: number };
+  | { type: "stun"; targetId: EntityId; kind: "light" | "heavy"; seconds: number }
+  | {
+      type: "bossSpawned";
+      monsterId: MonsterInstanceId;
+      bossId: BossId;
+      lanes: number[];
+      x: number;
+    }
+  | {
+      type: "bossTelegraph";
+      monsterId: MonsterInstanceId;
+      ability: BossAbility;
+      tiles: BossTile[];
+      seconds: number;
+    }
+  | { type: "bossAbility"; monsterId: MonsterInstanceId; ability: BossAbility; tiles: BossTile[] }
+  | { type: "bossEnrage"; monsterId: MonsterInstanceId }
+  /** The heavy-stun bar reached Primed (D §7, H §7.5). */
+  | { type: "bossPrimed"; monsterId: MonsterInstanceId }
+  /** A boss or Strongbox's drops, in roll order, for the loot fountain (H §3.9). */
+  | { type: "lootBurst"; monsterId: MonsterInstanceId; dropIds: string[]; lane: number; x: number };

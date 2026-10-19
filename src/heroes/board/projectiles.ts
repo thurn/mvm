@@ -8,7 +8,7 @@ import {
   type RoundState,
 } from "../../sim/state";
 import type { StepContext, System } from "../../sim/system";
-import { distance } from "../../sim/targeting";
+import { laneGap, occupies } from "../../sim/targeting";
 import { STEP_SECONDS } from "../../sim/time";
 import { HERO_BOARD_TUNING } from "../../tuning/heroes";
 
@@ -90,7 +90,7 @@ function nearestUnhit(
   let bestDistance = Infinity;
   for (const monster of state.monsters) {
     if (exclude.includes(monster.id)) continue;
-    const d = distance(monster, from);
+    const d = Math.hypot(monster.x - from.x, laneGap(monster, from.lane));
     if (d <= range && d < bestDistance) {
       best = monster;
       bestDistance = d;
@@ -177,7 +177,7 @@ export const projectileSystem: System = {
       const target = state.monsters
         .filter(
           (m) =>
-            m.lane === p.lane &&
+            occupies(m, p.lane) &&
             !p.hitIds.includes(m.id) &&
             Math.abs(m.x - p.x) <= HERO_BOARD_TUNING.projectileHitReach,
         )

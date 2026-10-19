@@ -195,12 +195,15 @@ export interface GearRequest {
   /** Forces the item class; otherwise rolled by slot with roster shaping. */
   itemClass?: string;
   rosterWeaponClasses?: readonly string[];
+  /** Limits a unique to these names (a boss's pool, C §C.4.1). */
+  uniquePool?: readonly string[];
   newId: () => ItemId;
 }
 
 /** A unique at the item level per C.4.1's random rule: uniform over uniques whose base can drop. */
 function rollUnique(ilvl: number, request: GearRequest, rng: Rng): ItemInstance | undefined {
   const eligible = uniques().filter((u) => {
+    if (request.uniquePool && !request.uniquePool.includes(u.name)) return false;
     const base = baseItems().find((b) => b.id === u.baseId);
     return base !== undefined && base.dropLevel <= ilvl;
   });

@@ -1,4 +1,5 @@
 import { catalogEntry } from "../../heroes/model/catalog";
+import { laneGap, occupies } from "../targeting";
 import { SIM_TUNING } from "../../tuning/sim";
 import type { Intent } from "../intents";
 import type { RoundState } from "../state";
@@ -29,7 +30,7 @@ const count = (state: RoundState, slot: RosterSlot | undefined) =>
 function lanesByThreat(state: RoundState): number[] {
   const middle = state.lanes[Math.floor(state.lanes.length / 2)]!;
   const threat = (lane: number) =>
-    state.monsters.filter((m) => m.lane === lane && m.x <= SIM_TUNING.columns + 0.5).length;
+    state.monsters.filter((m) => occupies(m, lane) && m.x <= SIM_TUNING.columns + 0.5).length;
   return [...state.lanes].sort(
     (a, b) => threat(b) - threat(a) || Math.abs(a - middle) - Math.abs(b - middle) || a - b,
   );
@@ -65,7 +66,7 @@ function castSpell(state: RoundState, slot: RosterSlot | undefined, minScore = 3
       const score = state.monsters.filter(
         (m) =>
           Math.abs(m.x - centre) <= (shapeIsColumn ? 0.5 : 1.5) &&
-          (shapeIsColumn || Math.abs(m.lane - lane) <= 1),
+          (shapeIsColumn || laneGap(m, lane) <= 1),
       ).length;
       if (score > best.score) best = { score, lane, column };
     }

@@ -2,6 +2,7 @@ import { catalogEntry } from "../heroes/model/catalog";
 import { streamRng } from "../sim/rng";
 import { newInstanceId } from "../sim/state";
 import type { System } from "../sim/system";
+import { BOSS_TUNING } from "../tuning/bosses";
 import { rollDrops } from "./drops";
 
 /**
@@ -23,7 +24,12 @@ export const lootSystem: System = {
     for (const kill of state.kills) {
       const killer = state.heroes.find((h) => h.id === kill.killerId);
       const drops = rollDrops(
-        { rarity: kill.rarity, affixCount: kill.affixCount, areaLevel },
+        {
+          rarity: kill.rarity,
+          affixCount: kill.affixCount,
+          areaLevel,
+          ...(kill.bossId ? { uniquePool: BOSS_TUNING[kill.bossId].uniquePool } : {}),
+        },
         {
           killerStats: killer?.actor.stats ?? {},
           rosterWeaponClasses,
@@ -31,8 +37,10 @@ export const lootSystem: System = {
         },
         rng,
       );
+      const dropIds: string[] = [];
       for (const drop of drops) {
         const dropId = newInstanceId<"Drop">(state);
+        dropIds.push(dropId);
         state.earned.push({ dropId, monsterId: kill.monsterId, tick: state.tick, drop });
         ctx.emit({
           type: "drop",
@@ -43,6 +51,15 @@ export const lootSystem: System = {
           drop,
         });
       }
+      // A boss's drops also go out as one burst, for the loot fountain (H §3.9).
+      if (kill.bossId)
+        ctx.emit({
+          type: "lootBurst",
+          monsterId: kill.monsterId,
+          dropIds,
+          lane: kill.lane,
+          x: kill.x,
+        });
     }
     state.kills = [];
   },

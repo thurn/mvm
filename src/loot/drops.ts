@@ -18,6 +18,8 @@ export interface KilledMonster {
   rarity: MonsterRarity;
   affixCount: number;
   areaLevel: number;
+  /** A boss's unique pool (names, C §C.4.1): it also drops one of these and a rare hero (D §7). */
+  uniquePool?: readonly string[];
 }
 
 export interface DropContext {
@@ -81,6 +83,17 @@ export function rollDrops(monster: KilledMonster, context: DropContext, rng: Rng
   const drops: Drop[] = [];
   const ilvl = itemLevel(monster.areaLevel, monster.rarity);
   const bonus = rarityBonus(monster, killer);
+
+  if (monster.uniquePool) {
+    drops.push({
+      kind: "item",
+      item: generateGear(
+        { ilvl, rarity: "unique", uniquePool: monster.uniquePool, newId: context.newId },
+        rng,
+      ),
+    });
+    drops.push({ kind: "hero", rarity: "rare", itemLevel: ilvl });
+  }
 
   for (let i = rollCount(itemRolls(monster), rng); i > 0; i--) {
     const category = pickWeighted(

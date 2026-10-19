@@ -2,19 +2,25 @@ import { effectiveSpeed } from "../../combat/ailments";
 import { COMBAT_KNOBS } from "../../tuning/combat";
 import { SIM_TUNING } from "../../tuning/sim";
 import { dealHit } from "../combat";
+import { occupies } from "../targeting";
 import type { HeroState, MonsterState, RoundState } from "../state";
 import type { System } from "../system";
 import { STEP_SECONDS } from "../time";
 
-type Blocker = { kind: "hero"; hero: HeroState } | { kind: "scripted" };
+type Blocker = { kind: "hero"; heroes: HeroState[] } | { kind: "scripted" };
 
-/** The hero, or blocking scripted actor, on the monster's tile (Appendix A §3.2). */
+/**
+ * The heroes, or blocking scripted actor, in front of the monster (Appendix
+ * A §3.2). A boss is blocked by a hero in any lane it covers, and its attack
+ * reaches every one of them (D §7); any other monster takes the first.
+ */
 function blockerOf(state: RoundState, monster: MonsterState): Blocker | null {
   const reach = SIM_TUNING.blockReach;
   const blocks = (lane: number, column: number) =>
-    lane === monster.lane && Math.abs(monster.x - column) <= reach;
-  const hero = state.heroes.find((h) => blocks(h.lane, h.column));
-  if (hero) return { kind: "hero", hero };
+    occupies(monster, lane) && Math.abs(monster.x - column) <= reach;
+  const heroes = state.heroes.filter((h) => blocks(h.lane, h.column));
+  if (heroes.length > 0)
+    return { kind: "hero", heroes: monster.boss ? heroes : heroes.slice(0, 1) };
   return state.scripted.some((s) => s.blocks && blocks(s.lane, s.column))
     ? { kind: "scripted" }
     : null;
@@ -47,12 +53,14 @@ export const locomotionSystem: System = {
       attack.timer -= STEP_SECONDS * speed;
       if (attack.timer > 0) continue;
       attack.timer = attack.seconds;
-      dealHit(ctx, monster, { kind: "hero", entity: blocker.hero }, attack.hit);
+      for (const hero of blocker.heroes)
+        if (state.heroes.includes(hero))
+          dealHit(ctx, monster, { kind: "hero", entity: hero }, attack.hit);
     }
     if (leaked.length === 0) return;
     state.monsters = state.monsters.filter((m) => !leaked.includes(m));
     for (const monster of leaked) {
-      const cost = SIM_TUNING.leakCost[monster.rarity];
+      const cost = SIM_TUNING.leakCost[monster.boss ? "boss" : monster.rarity];
       state.life = Math.max(0, state.life - cost);
       ctx.emit({
         type: "leak",
@@ -62,7 +70,8 @@ export const locomotionSystem: System = {
         cost,
         lifeLeft: state.life,
       });
-      if (state.life === 0) {
+      // A boss reaching the gate loses the level outright (D §7).
+      if (state.life === 0 || monster.boss) {
         state.result = "lost";
         ctx.emit({ type: "levelEnd", result: "lost" });
         return;

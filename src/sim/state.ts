@@ -1,6 +1,8 @@
 import type { Actor } from "../combat/actor";
 import type { SkillHit } from "../combat/hit";
 import type { Drop } from "../loot/drops";
+import type { BossState } from "../monsters/bosses/types";
+import type { BossId } from "../tuning/bosses";
 import type { WaveRuntime } from "../monsters/waves";
 import type { SpellShape } from "../spells/shapes";
 import type { ManaOrb } from "./economy/orbs";
@@ -46,6 +48,8 @@ export interface MonsterState {
   attack?: MonsterAttack;
   /** PoE2 monster affix IDs rolled at spawn (Appendix D §4). */
   affixes?: string[];
+  /** A boss's lanes, abilities and telegraphs (Appendix D §7); absent for every other monster. */
+  boss?: BossState;
 }
 
 interface MonsterAttack {
@@ -186,6 +190,8 @@ interface KillRecord {
   killerId: string;
   lane: number;
   x: number;
+  /** Set for a boss kill, whose loot adds its guaranteed drops and bursts (D §7). */
+  bossId?: BossId;
 }
 
 /**

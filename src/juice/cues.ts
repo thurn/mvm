@@ -301,6 +301,13 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
       { kind: "sound", id: `stun_${event.kind}`, bus: "sfx" },
     ],
   }),
+  // Boss and loot-burst presentation is plan 2.17's; until then these stay quiet.
+  bossSpawned: () => ({ tier: 0, cues: [] }),
+  bossTelegraph: () => ({ tier: 0, cues: [] }),
+  bossAbility: () => ({ tier: 0, cues: [] }),
+  bossEnrage: () => ({ tier: 0, cues: [] }),
+  bossPrimed: () => ({ tier: 0, cues: [] }),
+  lootBurst: () => ({ tier: 0, cues: [] }),
 };
 
 /** The tier's own global effects (H §1.3): shake, global hitstop, slow-mo and music duck. */
