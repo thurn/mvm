@@ -18,6 +18,10 @@ export const heroes: Scene = {
       [SKILLS.fangsOfFrost, "Swarm"],
       [SKILLS.armourBreaker, "Leaper"],
     ];
+    // Ranged heroes stand behind the melee line in lanes 1–3.
+    placeHero(state, starterCard(id<"Gem">(SKILLS.lightningSpear), 5, "scene-heroes-ls"), 1, 1);
+    placeHero(state, starterCard(id<"Gem">(SKILLS.explosiveSpear), 5, "scene-heroes-es"), 2, 1);
+    placeHero(state, starterCard(id<"Gem">(SKILLS.permafrostBolts), 5, "scene-heroes-pb"), 3, 1);
     lanes.forEach(([skill, monster], lane) => {
       placeHero(state, starterCard(id<"Gem">(skill), 5, `scene-heroes-${lane}`), lane, 3);
       for (let i = 0; i < 4; i++)

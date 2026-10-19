@@ -116,7 +116,20 @@ export type HeroKit =
       "shockwaveRadius" | "uniqueMorePercent",
       "actionTimer"
     >
-  | Kit<"fangsOfFrost", "stab" | "burst", "burstRadius", "actionTimer">;
+  | Kit<"fangsOfFrost", "stab" | "burst", "burstRadius", "actionTimer">
+  | Kit<"lightningSpear", "spear" | "bolt", "bolts" | "boltRadius", "actionTimer">
+  | Kit<
+      "explosiveSpear",
+      "spear" | "explosion",
+      "explosionRadius" | "fuseSeconds" | "limit",
+      "actionTimer"
+    >
+  | Kit<
+      "permafrostBolts",
+      "fragment",
+      "fragments" | "pierce" | "clip" | "reloadSeconds",
+      "actionTimer" | "clipLeft"
+    >;
 
 export type KitOf<Behavior extends HeroKit["behavior"]> = Extract<HeroKit, { behavior: Behavior }>;
 

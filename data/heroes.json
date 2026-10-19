@@ -12335,5 +12335,437 @@
     ]
    }
   ]
+ },
+ {
+  "id": "Metadata/Items/Gems/SkillGemLightningSpear",
+  "name": "Lightning Spear",
+  "gemType": "active",
+  "craftingLevel": 3,
+  "craftingTypes": [
+   "Spear"
+  ],
+  "requirementWeights": {
+   "strength": 0,
+   "dexterity": 100,
+   "intelligence": 0
+  },
+  "tags": [
+   "dexterity",
+   "grants_active_skill",
+   "attack",
+   "area",
+   "projectile",
+   "lightning",
+   "repeatable"
+  ],
+  "recommendedSupports": [
+   "Metadata/Items/Gem/SupportGemInnervate",
+   "Metadata/Items/Gems/SupportGemLightningInfusion",
+   "Metadata/Items/Gems/SupportGemPrimalArmament",
+   "Metadata/Items/Gem/SupportGemTwofold",
+   "Metadata/Items/Gems/SupportGemRisingTempest",
+   "Metadata/Items/Gems/SupportGemPrimalArmamentTwo",
+   "Metadata/Items/Gem/SupportGemSalvo",
+   "Metadata/Items/Gems/SupportGemMobility",
+   "Metadata/Items/Gems/SupportGemLongshotTwo",
+   "Metadata/Items/Gem/SupportGemSpectralVolley",
+   "Metadata/Items/Gem/SupportGemLivingLightningTwo",
+   "Metadata/Items/Gems/SupportGemNovaProjectilesTwo",
+   "Metadata/Items/Gems/SupportGemAccelerationThree",
+   "Metadata/Items/Gems/SupportGemLightningMastery"
+  ],
+  "skills": [
+   {
+    "id": "LightningSpearPlayer",
+    "isSupport": false,
+    "activeSkill": {
+     "display_name": "Lightning Spear",
+     "id": "lightning_spear",
+     "is_manually_casted": true,
+     "is_skill_totem": false,
+     "stat_conversions": {},
+     "types": [
+      "Attack",
+      "RangedAttack",
+      "Projectile",
+      "ProjectileSpeed",
+      "ProjectilesFromUser",
+      "Lightning",
+      "Area",
+      "UsableWhileMoving",
+      "Barrageable",
+      "Spear",
+      "UsableWhileMounted",
+      "ConsumesCharges",
+      "SkillConsumesFrenzyChargesOnUse",
+      "MirageArcherCanUse"
+     ],
+     "weapon_restrictions": []
+    },
+    "supportGem": null,
+    "castTime": 1000,
+    "static": {
+     "attack_speed_multiplier": -40
+    },
+    "perLevel": {
+     "1": {
+      "costs": {
+       "Mana": 6
+      }
+     },
+     "2": {
+      "costs": {
+       "Mana": 7
+      }
+     },
+     "3": {
+      "costs": {
+       "Mana": 9
+      }
+     },
+     "4": {
+      "costs": {
+       "Mana": 10
+      }
+     },
+     "5": {
+      "costs": {
+       "Mana": 11
+      }
+     },
+     "6": {
+      "costs": {
+       "Mana": 12
+      }
+     },
+     "7": {
+      "costs": {
+       "Mana": 14
+      }
+     },
+     "8": {
+      "costs": {
+       "Mana": 16
+      }
+     },
+     "9": {
+      "costs": {
+       "Mana": 17
+      }
+     },
+     "10": {
+      "costs": {
+       "Mana": 19
+      }
+     }
+    },
+    "statSets": [
+     {
+      "id": "LightningSpearPlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "Fires {base_number_of_projectiles} [Projectile|Projectiles]",
+         "stats": {
+          "base_number_of_projectiles": 100
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_lightning",
+         "type": "constant",
+         "value": 80
+        },
+        {
+         "id": "active_skill_projectile_speed_+%_variation_final",
+         "type": "constant",
+         "value": 25
+        },
+        {
+         "id": "active_skill_shock_chance_+%_final",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "lightning_spear_additional_number_to_split_when_charged",
+         "type": "constant",
+         "value": 3
+        },
+        {
+         "id": "main_hand_weapon_range_+",
+         "type": "constant",
+         "value": 105
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "check_for_targets_between_initiator_and_projectile_source",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "skill_display_projectile_total_is_limit",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "lightning_burst_display",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_display_base_number_of_projectiles_is_gem",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "cannot_pierce",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "base_projectiles_cannot_chain",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_cannot_fork",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_cannot_return",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectiles_can_split_from_terrain",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 110
+       },
+       "2": {
+        "damage_multiplier": 121
+       },
+       "3": {
+        "damage_multiplier": 133
+       },
+       "4": {
+        "damage_multiplier": 145
+       },
+       "5": {
+        "damage_multiplier": 157
+       },
+       "6": {
+        "damage_multiplier": 168
+       },
+       "7": {
+        "damage_multiplier": 180
+       },
+       "8": {
+        "damage_multiplier": 191
+       },
+       "9": {
+        "damage_multiplier": 201
+       },
+       "10": {
+        "damage_multiplier": 211
+       }
+      }
+     },
+     {
+      "id": "LightningSpearSecondaryProjectilePlayer",
+      "static": {
+       "quality_stats": [
+        {
+         "stat": "Fires {base_number_of_projectiles} [Projectile|Projectiles]\nFires {base_number_of_projectiles} bolts",
+         "stats": {
+          "base_number_of_projectiles": 100
+         }
+        }
+       ],
+       "stats": [
+        {
+         "id": "active_skill_base_physical_damage_%_to_convert_to_lightning",
+         "type": "constant",
+         "value": 100
+        },
+        {
+         "id": "active_skill_shock_chance_+%_final",
+         "type": "constant",
+         "value": 200
+        },
+        {
+         "id": "base_number_of_projectiles",
+         "type": "constant",
+         "value": 5
+        },
+        {
+         "id": "projectiles_cannot_split",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "active_skill_base_area_of_effect_radius",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "active_skill_projectile_speed_+%_variation_final",
+         "type": "constant",
+         "value": 25
+        },
+        {
+         "id": "movement_speed_+%_final_while_performing_action",
+         "type": "constant",
+         "value": -70
+        },
+        {
+         "id": "movement_speed_acceleration_+%_per_second_while_performing_action",
+         "type": "constant",
+         "value": 160
+        },
+        {
+         "id": "movement_speed_while_performing_action_locked_duration_%",
+         "type": "constant",
+         "value": 50
+        },
+        {
+         "id": "lightning_spear_additional_number_to_split_when_charged",
+         "type": "constant",
+         "value": 3
+        },
+        {
+         "id": "main_hand_weapon_range_+",
+         "type": "constant",
+         "value": 105
+        },
+        {
+         "id": "base_is_projectile",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_position",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "projectile_uses_contact_direction",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "check_for_targets_between_initiator_and_projectile_source",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "skill_display_projectile_total_is_limit",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "can_perform_skill_while_moving",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "quality_display_base_number_of_projectiles_is_gem",
+         "type": "implicit",
+         "value": 1
+        },
+        {
+         "id": "precise_cursor_targeting_uses_contact_point_height_offset",
+         "type": "implicit",
+         "value": 1
+        }
+       ]
+      },
+      "perLevel": {
+       "1": {
+        "damage_multiplier": 75
+       },
+       "2": {
+        "damage_multiplier": 82
+       },
+       "3": {
+        "damage_multiplier": 91
+       },
+       "4": {
+        "damage_multiplier": 99
+       },
+       "5": {
+        "damage_multiplier": 107
+       },
+       "6": {
+        "damage_multiplier": 115
+       },
+       "7": {
+        "damage_multiplier": 123
+       },
+       "8": {
+        "damage_multiplier": 130
+       },
+       "9": {
+        "damage_multiplier": 137
+       },
+       "10": {
+        "damage_multiplier": 144
+       }
+      }
+     }
+    ]
+   }
+  ]
  }
 ]

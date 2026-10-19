@@ -48,6 +48,8 @@ export interface SkillHit {
   unblockable?: boolean;
   /** "More" stun buildup from this hit, in percent; −100 builds none (Boneshatter's strike). */
   stunMorePercent?: number;
+  /** "More" freeze buildup from this hit, in percent (Permafrost Bolts, Fangs of Frost). */
+  freezeMorePercent?: number;
   /** Armour this hit breaks (§6.4), before hero multipliers. */
   armourBreak?: number;
 }

@@ -221,6 +221,84 @@ function fangsOfFrost(ctx: StepContext, hero: HeroState, kit: KitOf<"fangsOfFros
   return kit.actionSeconds;
 }
 
+// Lightning Spear's bolts: up to N other monsters near the struck one, each hit once (B H16).
+ON_HIT["lightningSpearBolts"] = (ctx, hero, target) => {
+  const kit = hero.kit;
+  if (kit?.behavior !== "lightningSpear") return;
+  const near = monstersWithin(ctx.state, target.lane, target.x, kit.numbers.boltRadius)
+    .filter((m) => m.id !== target.id)
+    .sort(
+      (a, b) =>
+        Math.hypot(a.x - target.x, laneGap(a, target.lane)) -
+          Math.hypot(b.x - target.x, laneGap(b, target.lane)) || a.id.localeCompare(b.id),
+    )
+    .slice(0, kit.numbers.bolts);
+  hitAll(ctx, hero, near, kit.hits.bolt);
+};
+
+function lightningSpear(ctx: StepContext, hero: HeroState, kit: KitOf<"lightningSpear">) {
+  if (!laneFirst(ctx.state, hero.lane, hero.column, laneRange(hero))) return null;
+  // One spear: it can't pierce, fork or chain; its bolts do the spreading.
+  fire(ctx.state, hero, hero.lane, { hit: kit.hits.spear, onHit: "lightningSpearBolts" });
+  return kit.actionSeconds;
+}
+
+/** B H17: a piercing spear that lodges at the first monster's tile; at its Limit the hero waits. */
+function explosiveSpear(ctx: StepContext, hero: HeroState, kit: KitOf<"explosiveSpear">) {
+  const { state } = ctx;
+  const target = laneFirst(state, hero.lane, hero.column, laneRange(hero));
+  if (!target) return null;
+  const lodged = state.groundEffects.filter(
+    (g) => g.kind === "explosiveSpear" && g.sourceId === hero.id,
+  );
+  if (lodged.length >= kit.numbers.limit) return null;
+  fire(state, hero, hero.lane, {
+    hit: kit.hits.spear,
+    pierce: Number.MAX_SAFE_INTEGER,
+    range: Math.max(0, target.x - hero.column),
+  });
+  state.groundEffects.push({
+    id: newInstanceId<"GroundEffect">(state),
+    sourceId: hero.id,
+    kind: "explosiveSpear",
+    lane: hero.lane,
+    x: target.x,
+    radius: kit.numbers.explosionRadius,
+    secondsLeft: kit.numbers.fuseSeconds,
+  });
+  return kit.actionSeconds;
+}
+
+/** Lodged spears count down and explode around their tile (B H17); one whose hero is gone fizzles. */
+function detonate(ctx: StepContext) {
+  const { state } = ctx;
+  for (const spear of state.groundEffects.filter((g) => g.kind === "explosiveSpear")) {
+    spear.secondsLeft -= STEP_SECONDS;
+    if (spear.secondsLeft > 1e-9) continue;
+    state.groundEffects = state.groundEffects.filter((g) => g !== spear);
+    const hero = state.heroes.find((h) => h.id === spear.sourceId);
+    if (hero?.kit?.behavior !== "explosiveSpear") continue;
+    hitAll(
+      ctx,
+      hero,
+      monstersWithin(state, spear.lane, spear.x, spear.radius),
+      hero.kit.hits.explosion,
+    );
+  }
+}
+
+/** B H19: 10 fragments down its lane, each piercing, each able to hit the same target; clip and reload. */
+function permafrostBolts(ctx: StepContext, hero: HeroState, kit: KitOf<"permafrostBolts">) {
+  const { state } = ctx;
+  if (!laneFirst(state, hero.lane, hero.column, laneRange(hero))) return null;
+  for (let i = 0; i < kit.numbers.fragments; i++)
+    fire(state, hero, hero.lane, { hit: kit.hits.fragment, pierce: kit.numbers.pierce });
+  kit.counters.clipLeft -= 1;
+  if (kit.counters.clipLeft > 0) return kit.actionSeconds;
+  kit.counters.clipLeft = kit.numbers.clip;
+  return kit.actionSeconds + kit.numbers.reloadSeconds;
+}
+
 /** One action of an attacking kit, by behavior; the switch is exhaustive, so a new behavior must act. */
 function act(ctx: StepContext, hero: HeroState, kit: AttackKit): number | null {
   switch (kit.behavior) {
@@ -242,6 +320,12 @@ function act(ctx: StepContext, hero: HeroState, kit: AttackKit): number | null {
       return boneshatter(ctx, hero, kit);
     case "fangsOfFrost":
       return fangsOfFrost(ctx, hero, kit);
+    case "lightningSpear":
+      return lightningSpear(ctx, hero, kit);
+    case "explosiveSpear":
+      return explosiveSpear(ctx, hero, kit);
+    case "permafrostBolts":
+      return permafrostBolts(ctx, hero, kit);
   }
 }
 
@@ -266,6 +350,7 @@ export const heroSystem: System = {
   id: "heroes",
   phase: "heroes",
   run(ctx) {
+    detonate(ctx);
     for (const hero of [...ctx.state.heroes]) {
       const kit = hero.kit;
       if (!kit || !ctx.state.heroes.includes(hero)) continue;

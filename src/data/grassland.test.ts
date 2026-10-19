@@ -12,12 +12,9 @@ import { uniques } from "./uniques";
 describe("Grassland data (plan 2.1)", () => {
   const gems = new Set([...heroGems(), ...spellGems()].map((g) => g.id as string));
 
-  test("every catalog skill resolves, MvM customs and 2.10's Lightning Spear aside", () => {
+  test("every catalog skill resolves, MvM customs aside", () => {
     const missing = Object.keys(HERO_CATALOG).filter(
-      (skill) =>
-        !skill.startsWith("MvM/") &&
-        skill !== "Metadata/Items/Gems/SkillGemLightningSpear" &&
-        !gems.has(skill),
+      (skill) => !skill.startsWith("MvM/") && !gems.has(skill),
     );
     expect(missing).toEqual([]);
   });

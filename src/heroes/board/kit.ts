@@ -19,6 +19,9 @@ export const SKILLS = {
   armourBreaker: "Metadata/Items/Gems/SkillGemArmourBreaker",
   boneshatter: "Metadata/Items/Gems/SkillGemBoneshatter",
   fangsOfFrost: "Metadata/Items/Gem/SkillGemFangsOfFrost",
+  lightningSpear: "Metadata/Items/Gems/SkillGemLightningSpear",
+  explosiveSpear: "Metadata/Items/Gem/SkillGemExplosiveSpear",
+  permafrostBolts: "Metadata/Items/Gem/SkillGemPermafrostBolts",
 } as const;
 
 type Behavior = keyof typeof SKILLS;
@@ -82,6 +85,14 @@ function areaScale(sheet: HeroSheet): number {
 
 const radiusTiles = (units: number | undefined) => (units ?? 0) / HERO_TUNING.poeUnitsPerTile;
 
+/** A constant from a stat set's static stats (radii, counts, timers), or 0. */
+function staticStat(skill: SkillData, set: number, id: string): number {
+  const stats =
+    (skill.statSets[set]?.static as { stats?: { id: string; value: number | null }[] } | null)
+      ?.stats ?? [];
+  return stats.find((s) => s.id === id)?.value ?? 0;
+}
+
 /** An acolyte's orb kit (B H01, H03): a Spirit-scaled orb every `orbSeconds`. */
 function acolyteKit(sheet: HeroSheet, orbSeconds: number): HeroKit {
   const t = HERO_BOARD_TUNING.acolyte;
@@ -141,6 +152,81 @@ const BUILDERS: Record<Behavior, (inputs: KitInputs, skills: SkillData[]) => Her
     };
   },
 
+  lightningSpear({ sheet }, [skill]) {
+    const spear = setAt(skill!, 0, sheet.gemLevel);
+    const bolt = setAt(skill!, 1, sheet.gemLevel);
+    return {
+      behavior: "lightningSpear",
+      actionSeconds: attackSeconds(sheet, skillStatic(skill!).attack_speed_multiplier ?? 0) / K,
+      hits: {
+        spear: attackHit(sheet, spear, ["projectile"]),
+        bolt: attackHit(sheet, bolt, ["projectile"]),
+      },
+      numbers: {
+        // 5 bolts; Multishot-type supports add bolts, not spears (B H16).
+        bolts:
+          (staticStat(skill!, 1, "base_number_of_projectiles") || 5) +
+          stat(sheet.actor.stats, "additional_projectiles"),
+        boltRadius: radiusTiles(staticStat(skill!, 1, "active_skill_base_area_of_effect_radius")),
+      },
+      counters: { actionTimer: 0 },
+    };
+  },
+
+  explosiveSpear({ sheet }, [skill]) {
+    const spear = setAt(skill!, 0, sheet.gemLevel);
+    const explosion = setAt(skill!, 1, sheet.gemLevel);
+    const limit = setAt(skill!, 0, Math.floor(sheet.gemLevel)).stats[
+      "base_number_of_remote_spear_mines_allowed"
+    ];
+    return {
+      behavior: "explosiveSpear",
+      actionSeconds: attackSeconds(sheet, skillStatic(skill!).attack_speed_multiplier ?? 0) / K,
+      hits: {
+        spear: attackHit(sheet, spear, ["projectile"]),
+        explosion: attackHit(sheet, explosion, ["area"]),
+      },
+      numbers: {
+        explosionRadius:
+          radiusTiles(staticStat(skill!, 1, "active_skill_base_area_of_effect_radius")) *
+          areaScale(sheet),
+        fuseSeconds: staticStat(skill!, 0, "base_skill_detonation_time") / 1000,
+        limit: limit ?? 1,
+      },
+      counters: { actionTimer: 0 },
+    };
+  },
+
+  permafrostBolts({ sheet }, skills) {
+    const ammo = skills.find((s) => s.statSets[0]?.id.includes("Ammo"));
+    const shot = skills.find((s) => s !== ammo)!;
+    const fragment = setAt(shot, 0, sheet.gemLevel);
+    const counts = setAt(shot, 0, Math.floor(sheet.gemLevel));
+    const clip = ammo ? staticStat(ammo, 0, "base_number_of_crossbow_bolts") || 1 : 1;
+    return {
+      behavior: "permafrostBolts",
+      actionSeconds: attackSeconds(sheet, skillStatic(shot).attack_speed_multiplier ?? 0) / K,
+      hits: {
+        fragment: {
+          ...attackHit(sheet, fragment, ["projectile"]),
+          freezeMorePercent:
+            fragment.stats["active_skill_hit_damage_freeze_multiplier_+%_final"] ?? 0,
+        },
+      },
+      numbers: {
+        fragments:
+          (staticStat(shot, 0, "base_number_of_projectiles") || 10) +
+          stat(sheet.actor.stats, "additional_projectiles"),
+        pierce:
+          (counts.stats["projectile_base_number_of_targets_to_pierce"] ?? 2) +
+          stat(sheet.actor.stats, "pierce_count"),
+        clip,
+        reloadSeconds: (ammo?.castTime ?? 0) / 1000 / K,
+      },
+      counters: { actionTimer: 0, clipLeft: clip },
+    };
+  },
+
   fangsOfFrost({ sheet }, [skill]) {
     const stab = setAt(skill!, 0, sheet.gemLevel);
     const burst = setAt(skill!, 1, sheet.gemLevel);
@@ -148,8 +234,14 @@ const BUILDERS: Record<Behavior, (inputs: KitInputs, skills: SkillData[]) => Her
       behavior: "fangsOfFrost",
       actionSeconds: attackSeconds(sheet, skillStatic(skill!).attack_speed_multiplier ?? 0) / K,
       hits: {
-        stab: attackHit(sheet, stab, ["melee"]),
-        burst: attackHit(sheet, burst, ["area"]),
+        stab: {
+          ...attackHit(sheet, stab, ["melee"]),
+          freezeMorePercent: stab.stats["active_skill_hit_damage_freeze_multiplier_+%_final"] ?? 0,
+        },
+        burst: {
+          ...attackHit(sheet, burst, ["area"]),
+          freezeMorePercent: burst.stats["active_skill_hit_damage_freeze_multiplier_+%_final"] ?? 0,
+        },
       },
       numbers: { burstRadius: HERO_BOARD_TUNING.fangsOfFrost.burstRadius * areaScale(sheet) },
       counters: { actionTimer: 0 },

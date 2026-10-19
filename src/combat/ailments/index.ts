@@ -241,7 +241,10 @@ export function applyHitAilments(
         ? T.uniqueFreezeBuildupMultiplier
         : 1;
     a.freezeBuildup +=
-      (damage.cold / threshold) * (1 + stat(attackerStats, "freeze_buildup_+%") / 100) * unique;
+      (damage.cold / threshold) *
+      (1 + stat(attackerStats, "freeze_buildup_+%") / 100) *
+      (1 + (hit.freezeMorePercent ?? 0) / 100) *
+      unique;
     a.freezeIdleSeconds = 0;
     if (a.freezeBuildup >= 1 - 1e-9) {
       a.freezeBuildup = 0;

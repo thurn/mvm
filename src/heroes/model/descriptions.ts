@@ -61,9 +61,19 @@ const DESCRIPTIONS: Readonly<Record<string, HeroDescription>> = {
     range: `${tiles(B.laneProjectileRange)} along its lane`,
   },
   "Metadata/Items/Gems/SkillGemLightningSpear": {
-    tags: ["Attack", "Projectile", "Lightning"],
-    text: "Not on the board yet: it can be placed and blocks monsters, but does not attack until its behavior lands.",
-    range: "None yet",
+    tags: ["Attack", "Projectile", "Lightning", "Area"],
+    text: "Throws a spear at the first monster in its lane. On hit it bursts into lightning bolts that strike up to five other monsters nearby, in any lane, never the one it hit.",
+    range: `${tiles(B.laneProjectileRange)} along its lane; bolts around the target`,
+  },
+  "Metadata/Items/Gem/SkillGemExplosiveSpear": {
+    tags: ["Attack", "Projectile", "Area", "Fire", "Detonator"],
+    text: "Throws a spear that pierces everything up to the first monster in its lane and lodges there; a few seconds later it explodes in fire around that spot, reaching two lanes either side. It waits while its spear is lodged.",
+    range: `${tiles(B.laneProjectileRange)} along its lane; explosion around the spear`,
+  },
+  "Metadata/Items/Gem/SkillGemPermafrostBolts": {
+    tags: ["Attack", "Projectile", "Ammunition", "Cold"],
+    text: "Fires a burst of ten cold fragments down its lane that pierce and pile freeze onto what they hit, then reloads.",
+    range: `${tiles(B.laneProjectileRange)} along its lane`,
   },
   "Metadata/Items/Gem/SkillGemArmourPiercingRounds": {
     tags: ["Attack", "Projectile", "Ammunition", "Physical"],

@@ -129,6 +129,22 @@ export const HERO_CATALOG: Readonly<Record<string, CatalogEntry>> = {
     recharge: "fast",
     lifeMultiplier: 1.25,
   },
+  // H17
+  "Metadata/Items/Gem/SkillGemExplosiveSpear": {
+    role: "advancedRanged",
+    weapon: "Spear",
+    baseMana: 125,
+    recharge: "fast",
+    lifeMultiplier: 1.25,
+  },
+  // H19
+  "Metadata/Items/Gem/SkillGemPermafrostBolts": {
+    role: "advancedRanged",
+    weapon: "Crossbow",
+    baseMana: 150,
+    recharge: "fast",
+    lifeMultiplier: 1.25,
+  },
   // H18
   "Metadata/Items/Gem/SkillGemArmourPiercingRounds": {
     role: "basicRanged",
