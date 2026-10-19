@@ -305,3 +305,17 @@ describe("the account store (mason hv-7ic2.98)", () => {
     expect(store.version()).toBe(0);
   });
 });
+
+describe("review fixes (hv-mb9m.51)", () => {
+  test("a stashed spell's tile says Spell, not Hero", () => {
+    const account = warrior();
+    const spell = grantHero(
+      account,
+      { kind: "spell", level: 2, rarity: "normal" },
+      streamRng(createStreams(9), "heroGen"),
+      () => id<"OwnedHero">("granted-spell"),
+    );
+    setup(account);
+    expect(screen.getByTestId(`stash-hero-${spell.id}`).textContent).toContain("Spell · level 2");
+  });
+});

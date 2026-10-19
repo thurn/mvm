@@ -13,6 +13,7 @@ const ATTRIBUTE_COLOR = {
 } as const;
 const CUSTOM_NAMES: Readonly<Record<string, string>> = {
   "MvM/Heroes/EzomyteAcolyte": "Ezomyte Acolyte",
+  "MvM/Heroes/Shrinewarden": "Shrinewarden",
 };
 
 export function skillName(skillId: string): string {

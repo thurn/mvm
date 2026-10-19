@@ -2,7 +2,8 @@ import { cleanup, render } from "@testing-library/react";
 import { afterEach, describe, expect, test } from "vitest";
 import { generateGear } from "../../loot/items";
 import { createStreams, streamRng } from "../../sim/rng";
-import { HeroCard } from "./HeroCard";
+import { HeroCard, skillName } from "./HeroCard";
+import { HERO_CATALOG } from "../../heroes/model/catalog";
 import { ItemCard, itemName } from "./ItemCard";
 import { currencies, mods } from "../../data";
 import { newHero, type Card } from "../../heroes/model/hero";
@@ -133,6 +134,10 @@ describe("currency orbs (H §4.3)", () => {
 });
 
 describe("card components (H §4.1, §5.1)", () => {
+  test("every catalog hero and spell has a display name, not its ID", () => {
+    for (const skillId of Object.keys(HERO_CATALOG)) expect(skillName(skillId)).not.toBe(skillId);
+  });
+
   const rng = streamRng(createStreams(5), "loot");
   let n = 0;
   const newId = () => id<"Item">(`t-${n++}`);

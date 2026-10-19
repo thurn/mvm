@@ -7,6 +7,7 @@ import { RARITY_COLOR } from "../cards/parts";
 import { HoverTip } from "../fx";
 import { MENU } from "../title/layout";
 import { itemSlot } from "../../heroes/model/item";
+import { isSpell } from "../../account/stash";
 import { stashView, type StashEntry, type StashFilter } from "./model";
 import { currencyName } from "./currency";
 import { SHARDS } from "../../loot/craft/heroes";
@@ -34,7 +35,7 @@ function Tile({
   const sub =
     entry.kind === "item"
       ? `${SLOT_LABEL[itemSlot(entry.item)]} · ilvl ${entry.item.itemLevel}`
-      : `Hero · level ${entry.hero.level}`;
+      : `${isSpell(entry.hero) ? "Spell" : "Hero"} · level ${entry.hero.level}`;
   return (
     <div
       style={{ position: "relative" }}
