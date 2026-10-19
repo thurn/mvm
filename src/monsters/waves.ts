@@ -1,4 +1,5 @@
 import { createStreams, draw, streamRng } from "../sim/rng";
+import { rollStrongbox } from "./strongbox";
 import { generateTerrain } from "../sim/terrain";
 import { createRound, spawnMonster, type RoundState } from "../sim/state";
 import type { System } from "../sim/system";
@@ -51,7 +52,7 @@ function between(rng: Rng, min: number, max: number): number {
 }
 
 /** A weighted draw among the archetypes that still fit the remaining budget. */
-function drawArchetype(level: LevelDefinition, remaining: number, rng: Rng): string | null {
+export function drawArchetype(level: LevelDefinition, remaining: number, rng: Rng): string | null {
   const options = level.archetypes.filter((id) => archetype(id).pointCost <= remaining);
   const total = options.reduce((sum, id) => sum + archetype(id).drawWeight, 0);
   if (total === 0) return null;
@@ -183,6 +184,7 @@ export function startLevel(level: LevelDefinition, seed: number): RoundState {
     current: null,
     pending: [],
   };
+  state.strongbox = rollStrongbox(level, state);
   return state;
 }
 

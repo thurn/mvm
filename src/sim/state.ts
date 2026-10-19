@@ -3,6 +3,7 @@ import type { SkillHit } from "../combat/hit";
 import type { Drop } from "../loot/drops";
 import type { BossState } from "../monsters/bosses/types";
 import type { BossId } from "../tuning/bosses";
+import type { StrongboxState } from "../monsters/strongbox";
 import type { WaveRuntime } from "../monsters/waves";
 import type { TerrainTile } from "./terrain";
 import type { SpellShape } from "../spells/shapes";
@@ -205,6 +206,8 @@ export interface RoundState {
   lanes: number[];
   /** The level's special tiles, generated once at level start (D §8, P16). */
   terrain: TerrainTile[];
+  /** The level's Strongbox, if it rolled one (D §9). */
+  strongbox: StrongboxState | null;
   heroes: HeroState[];
   monsters: MonsterState[];
   projectiles: ProjectileState[];
@@ -244,6 +247,7 @@ export function createRound({ seed, lanes, mana }: RoundOptions): RoundState {
     tick: 0,
     lanes: [...lanes],
     terrain: [],
+    strongbox: null,
     heroes: [],
     monsters: [],
     projectiles: [],

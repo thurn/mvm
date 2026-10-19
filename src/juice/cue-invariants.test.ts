@@ -99,7 +99,8 @@ const SAMPLES: { [K in SimEvent["type"]]: SimEventOf<K> } = {
   bossAbility: { type: "bossAbility", monsterId: "m" as never, ability: "grainSlam", tiles: [] },
   bossEnrage: { type: "bossEnrage", monsterId: "m" as never },
   bossPrimed: { type: "bossPrimed", monsterId: "m" as never },
-  lootBurst: { type: "lootBurst", monsterId: "m" as never, dropIds: ["d"], lane: 2, x: 5 },
+  lootBurst: { type: "lootBurst", sourceId: "m", dropIds: ["d"], lane: 2, x: 5 },
+  strongboxTriggered: { type: "strongboxTriggered", lane: 2, column: 6, ambushIds: [] },
 };
 
 describe("every cue row (H §1.3)", () => {

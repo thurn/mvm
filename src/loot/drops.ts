@@ -1,7 +1,7 @@
 import type { StatSheet } from "../combat/stats";
 import { stat } from "../combat/stats";
 import type { ItemId, ItemInstance } from "../heroes/model/item";
-import { LOOT_TUNING } from "../tuning/loot";
+import { LOOT_TUNING, STRONGBOX_TUNING } from "../tuning/loot";
 import { goldPileSize } from "./gold";
 import { generateGear, itemLevel, pickWeighted, rollItemRarity, type MonsterRarity } from "./items";
 
@@ -144,6 +144,38 @@ export function rollDrops(monster: KilledMonster, context: DropContext, rng: Rng
     const goldFound = stat(killer, "gold_found_+%");
     for (let i = 0; i < gold.piles; i++)
       drops.push({ kind: "gold", amount: goldPileSize(monster.areaLevel, goldFound, rng) });
+  }
+  return drops;
+}
+
+/**
+ * A Strongbox's reward (Appendix D §9): a guaranteed rare item, item rolls
+ * at rare-monster rarity, a hero roll and currency rolls, all at area level
+ * + 1. Pure: draws only from `rng`, the `loot` stream.
+ */
+export function rollStrongboxReward(areaLevel: number, context: DropContext, rng: Rng): Drop[] {
+  const r = STRONGBOX_TUNING.reward;
+  const ilvl = areaLevel + r.ilvlBonus;
+  const drops: Drop[] = [];
+  const gear = (rarity?: "rare") =>
+    generateGear(
+      {
+        ilvl,
+        ...(rarity ? { rarity } : { rarityBonus: r.rarityBonus }),
+        rosterWeaponClasses: context.rosterWeaponClasses,
+        newId: context.newId,
+      },
+      rng,
+    );
+  for (let i = 0; i < r.rareItems; i++) drops.push({ kind: "item", item: gear("rare") });
+  for (let i = 0; i < r.itemRolls; i++) drops.push({ kind: "item", item: gear() });
+  for (let i = 0; i < r.heroRolls; i++) {
+    const rarity = rollItemRarity(r.rarityBonus, rng);
+    drops.push({ kind: "hero", rarity: rarity === "unique" ? "rare" : rarity, itemLevel: ilvl });
+  }
+  for (let i = 0; i < r.currencyRolls; i++) {
+    const currencyId = rollCurrency(areaLevel, rng);
+    if (currencyId) drops.push({ kind: "currency", currencyId });
   }
   return drops;
 }

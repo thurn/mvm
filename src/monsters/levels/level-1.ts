@@ -15,4 +15,5 @@ export const LEVEL_1: LevelDefinition = {
   specialTiles: 0,
   terrainTypes: [],
   newTerrain: null,
+  strongboxes: false,
 };

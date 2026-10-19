@@ -20,4 +20,6 @@ export interface LevelDefinition {
   terrainTypes: TileKind[];
   /** The type this level introduces, guaranteed at least once. */
   newTerrain: TileKind | null;
+  /** Whether a Strongbox may appear (D §9: Level 4 on, never a boss level). */
+  strongboxes: boolean;
 }

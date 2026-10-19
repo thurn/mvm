@@ -55,7 +55,7 @@ export const lootSystem: System = {
       if (kill.bossId)
         ctx.emit({
           type: "lootBurst",
-          monsterId: kill.monsterId,
+          sourceId: kill.monsterId,
           dropIds,
           lane: kill.lane,
           x: kill.x,

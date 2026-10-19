@@ -263,3 +263,29 @@ export const LOOT_TUNING = {
   uniqueSellMultiplier: 4,
   sellShare: 0.2,
 } as const;
+
+/** Strongboxes (Appendix D §9). */
+export const STRONGBOX_TUNING = {
+  /** Chance per level that allows one (Level 4 on, never a boss level). */
+  chance: 0.25,
+  /** The chest sits on a placeable tile in these columns, inclusive. */
+  columns: [5, 7],
+  /** The ambush spends this share of the level's flag-wave budget… */
+  budgetShare: 0.6,
+  /** …with at least this many rare, then magic, monsters… */
+  minRare: 1,
+  minMagic: 2,
+  /** …and at least this share of its points in the lanes nearest the box. */
+  nearLanes: 2,
+  nearLaneShare: 0.7,
+  /** The reward once every ambusher is dead, all at area level + `ilvlBonus`. */
+  reward: {
+    rareItems: 1,
+    itemRolls: 3,
+    heroRolls: 1,
+    currencyRolls: 2,
+    ilvlBonus: 1,
+    /** "Rare-monster rarity": a rare monster's rarity bonus R (C.6 step 3) with three affixes. */
+    rarityBonus: 6,
+  },
+} as const;

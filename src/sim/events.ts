@@ -125,4 +125,5 @@ export type SimEvent =
   /** The heavy-stun bar reached Primed (D §7, H §7.5). */
   | { type: "bossPrimed"; monsterId: MonsterInstanceId }
   /** A boss or Strongbox's drops, in roll order, for the loot fountain (H §3.9). */
-  | { type: "lootBurst"; monsterId: MonsterInstanceId; dropIds: string[]; lane: number; x: number };
+  | { type: "lootBurst"; sourceId: string; dropIds: string[]; lane: number; x: number }
+  | { type: "strongboxTriggered"; lane: number; column: number; ambushIds: MonsterInstanceId[] };

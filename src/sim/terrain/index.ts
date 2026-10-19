@@ -85,6 +85,9 @@ export function generateTerrain(level: LevelDefinition, seed: number): TerrainTi
 
 /** Whether a hero may be placed on a square: not on a blocking special tile. */
 export function placeableAt(state: RoundState, lane: number, column: number): boolean {
+  const box = state.strongbox;
+  // A closed Strongbox blocks its tile (D §9).
+  if (box?.phase === "closed" && box.lane === lane && box.column === column) return false;
   const tile = state.terrain.find((x) => x.lane === lane && x.column === column);
   return !tile || TERRAIN_TUNING.placeable[tile.kind];
 }

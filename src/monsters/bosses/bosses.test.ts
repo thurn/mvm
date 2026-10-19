@@ -189,7 +189,7 @@ describe("bosses (Appendix D §7, §7.1)", () => {
       expect(unique && unique.kind === "item" ? pool.has(unique.item.uniqueId!) : false).toBe(true);
       expect(drops.some((d) => d.kind === "hero" && d.rarity === "rare")).toBe(true);
       const burst = events.find((e) => e.type === "lootBurst");
-      expect(burst).toMatchObject({ monsterId: boss.id });
+      expect(burst).toMatchObject({ sourceId: boss.id });
       expect(burst && "dropIds" in burst ? burst.dropIds : []).toEqual(
         state.earned.map((e) => e.dropId),
       );
