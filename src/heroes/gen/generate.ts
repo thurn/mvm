@@ -24,7 +24,7 @@ const pickUniform = <T>(items: readonly T[], rng: Rng): T =>
 
 /** The minimum area level a skill can drop or sell at: max(1, 2 × tier − 3) (B §1.8). */
 export function unlockAreaLevel(skillId: string): number {
-  if (skillId.startsWith("MvM/")) return 1;
+  if (skillId.startsWith("MvM/")) return catalogEntry(skillId).unlockArea ?? 1;
   const gem = [...heroGems(), ...spellGems()].find((g) => g.id === skillId);
   if (!gem) throw new Error(`no gem data for ${skillId}`);
   return Math.max(1, 2 * gem.craftingLevel - 3);

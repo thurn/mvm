@@ -21,11 +21,20 @@ const LAUNCH: Readonly<Record<string, Sound>> = {
   [SKILLS.spark]: "spark_cast",
 };
 /** Area heroes whose same-step hits draw a ground ring and dust (H §5.4 striker). */
-const SLAMS = new Set<string>([SKILLS.rollingSlam, SKILLS.fallingThunder, SKILLS.iceStrike]);
+const SLAMS = new Set<string>([
+  SKILLS.rollingSlam,
+  SKILLS.fallingThunder,
+  SKILLS.iceStrike,
+  SKILLS.boneshatter,
+  SKILLS.fangsOfFrost,
+]);
 const IMPACT_SOUND: Readonly<Record<string, Sound>> = {
   [SKILLS.rollingSlam]: "slam",
   [SKILLS.fallingThunder]: "thunder_crack",
   [SKILLS.iceStrike]: "ice_crack_heavy",
+  [SKILLS.armourBreaker]: "slam",
+  [SKILLS.boneshatter]: "slam",
+  [SKILLS.fangsOfFrost]: "ice_crack_heavy",
 };
 
 interface Trail {

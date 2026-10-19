@@ -1,4 +1,4 @@
-import { effectiveSpeed } from "../../combat/ailments";
+import { effectiveSpeed, forceHeavyStun, isPrimed } from "../../combat/ailments";
 import type { SkillHit } from "../../combat/hit";
 import { dealHit } from "../../sim/combat";
 import {
@@ -164,6 +164,63 @@ function iceStrike(ctx: StepContext, hero: HeroState, kit: KitOf<"iceStrike">) {
   return final ? kit.numbers.finalSeconds : kit.actionSeconds;
 }
 
+/** The most advanced monster on the hero's tile or the one ahead: a melee strike's target (B §1.2). */
+const meleeTarget = (state: RoundState, hero: HeroState) =>
+  mostAdvanced(inLaneAhead(state, hero, -0.5, t.meleeReach + 0.5));
+
+function armourBreaker(ctx: StepContext, hero: HeroState, kit: KitOf<"armourBreaker">) {
+  const target = meleeTarget(ctx.state, hero);
+  if (!target) return null;
+  dealHit(ctx, hero, { kind: "monster", entity: target }, kit.hits.main);
+  return kit.actionSeconds;
+}
+
+/** B H06: the strike builds no stun; on a Primed target it heavy-stuns and releases a Shockwave. */
+function boneshatter(ctx: StepContext, hero: HeroState, kit: KitOf<"boneshatter">) {
+  const { state } = ctx;
+  const target = meleeTarget(state, hero);
+  if (!target) return null;
+  const primed = isPrimed(target.actor, target.rarity);
+  dealHit(ctx, hero, { kind: "monster", entity: target }, kit.hits.strike);
+  if (!primed) return kit.actionSeconds;
+  if (state.monsters.includes(target) && target.actor.ailments.heavyStunSeconds <= 0) {
+    const stun = forceHeavyStun(target.actor);
+    ctx.emit({ type: "stun", targetId: target.id, kind: "heavy", seconds: stun.seconds });
+  }
+  const unique = target.rarity === "unique" || target.rarity === "boss";
+  const wave: SkillHit = unique
+    ? {
+        ...kit.hits.shockwave,
+        more: [...(kit.hits.shockwave.more ?? []), { percent: kit.numbers.uniqueMorePercent }],
+      }
+    : kit.hits.shockwave;
+  hitAll(
+    ctx,
+    hero,
+    monstersWithin(state, target.lane, target.x, kit.numbers.shockwaveRadius),
+    wave,
+  );
+  return kit.actionSeconds;
+}
+
+/** B H11: a stab; on an Off Balance target the stab consumes it for a frost explosion. */
+function fangsOfFrost(ctx: StepContext, hero: HeroState, kit: KitOf<"fangsOfFrost">) {
+  const { state } = ctx;
+  const target = meleeTarget(state, hero);
+  if (!target) return null;
+  const burst = target.offBalance === true;
+  if (burst) target.offBalance = false;
+  dealHit(ctx, hero, { kind: "monster", entity: target }, kit.hits.stab);
+  if (burst)
+    hitAll(
+      ctx,
+      hero,
+      monstersWithin(state, target.lane, target.x, kit.numbers.burstRadius),
+      kit.hits.burst,
+    );
+  return kit.actionSeconds;
+}
+
 /** One action of an attacking kit, by behavior; the switch is exhaustive, so a new behavior must act. */
 function act(ctx: StepContext, hero: HeroState, kit: AttackKit): number | null {
   switch (kit.behavior) {
@@ -179,6 +236,12 @@ function act(ctx: StepContext, hero: HeroState, kit: AttackKit): number | null {
       return fallingThunder(ctx, hero, kit);
     case "iceStrike":
       return iceStrike(ctx, hero, kit);
+    case "armourBreaker":
+      return armourBreaker(ctx, hero, kit);
+    case "boneshatter":
+      return boneshatter(ctx, hero, kit);
+    case "fangsOfFrost":
+      return fangsOfFrost(ctx, hero, kit);
   }
 }
 

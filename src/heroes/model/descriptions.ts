@@ -20,6 +20,26 @@ const DESCRIPTIONS: Readonly<Record<string, HeroDescription>> = {
     text: `Makes a mana orb every ${B.acolyte.orbSeconds} s, the first within ${B.acolyte.firstOrbMaxSeconds} s; Spirit makes the orbs bigger. Deals no damage, but blocks monsters like any hero.`,
     range: "Its own tile",
   },
+  "MvM/Heroes/Shrinewarden": {
+    tags: ["Persistent", "Mana"],
+    text: `Makes a mana orb every ${B.shrinewarden.orbSeconds} s, slower than the Ezomyte Acolyte; Spirit makes the orbs bigger. Four times tougher, so it survives where a basic acolyte would fall.`,
+    range: "Its own tile",
+  },
+  "Metadata/Items/Gems/SkillGemArmourBreaker": {
+    tags: ["Attack", "Melee", "Strike", "Physical"],
+    text: `Strikes the most advanced monster on its tile or the next one, breaking its armour; at zero armour the monster is Fully Broken and takes more physical damage. Very tough: a wall that leapers can't jump.`,
+    range: `${tiles(B.meleeReach)} ahead`,
+  },
+  "Metadata/Items/Gems/SkillGemBoneshatter": {
+    tags: ["Attack", "Melee", "Strike", "Area"],
+    text: `Strikes the most advanced monster on its tile or the next one, building no stun itself. A Primed target is Heavy Stunned and releases a Shockwave that hits everything around it, harder on unique monsters.`,
+    range: `${tiles(B.meleeReach)} ahead; Shockwave around the target`,
+  },
+  "Metadata/Items/Gem/SkillGemFangsOfFrost": {
+    tags: ["Attack", "Melee", "Strike", "Cold"],
+    text: `Stabs the most advanced monster on its tile or the next one, mostly as cold. A monster whose attack it blocked with a shield is Off Balance: the next stab on it explodes in frost around it.`,
+    range: `${tiles(B.meleeReach)} ahead; explosion ${B.fangsOfFrost.burstRadius} tiles`,
+  },
   "Metadata/Items/Gems/SkillGemRollingSlam": {
     tags: ["Attack", "Melee", "Area", "Slam"],
     text: `When a monster comes within ${tiles(B.rollingSlam.reach)} in its lane, slams an area ${tiles(B.rollingSlam.firstOffset)} ahead, then a larger one ${tiles(B.rollingSlam.secondOffset)} ahead. Very tough, so it holds the lane as a wall.`,

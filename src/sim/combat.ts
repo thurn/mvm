@@ -73,6 +73,11 @@ export function dealHit(ctx: StepContext, source: HitSource, target: HitTarget, 
     crit: result.crit,
     avoidedBy: result.avoidedBy,
   });
+  // A hero that blocks a monster's attack leaves it Off Balance (B H11, adapted PoE2 Parried).
+  if (result.avoidedBy === "block" && target.kind === "hero") {
+    const attacker = state.monsters.find((m) => m.id === source.id);
+    if (attacker) attacker.offBalance = true;
+  }
   if (result.killed) {
     killTarget(ctx, source.id, target);
     return result;

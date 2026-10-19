@@ -258,6 +258,7 @@ export function applyHitAilments(
       const recovery = a.heavyStunRecoverySeconds > 0 ? T.heavyStunRecoveryBuildupMultiplier : 1;
       a.heavyStunBuildup +=
         (stunDamage(damage, context.heroMelee) / target.stunThreshold) *
+        Math.max(0, 1 + (hit.stunMorePercent ?? 0) / 100) *
         recovery *
         (1 + stat(attackerStats, "stun_buildup_+%") / 100);
       if (crushing || a.heavyStunBuildup >= 1 - 1e-9) {
@@ -271,6 +272,7 @@ export function applyHitAilments(
     if (
       context.rarity !== "unique" &&
       context.rarity !== "boss" &&
+      (hit.stunMorePercent ?? 0) > -100 &&
       !applied.some((x) => x.ailment === "heavyStun") &&
       context.rng() < lightStunChance(result, target.maxLife, context.heroMelee)
     ) {
@@ -340,4 +342,17 @@ export function tickAilments(actor: Actor, dt: number): AilmentTick {
   }
   if (expired.length > 0) refreshDerived(actor);
   return { expired, dotDamage, dotSourceId };
+}
+
+/**
+ * A heavy stun from a skill effect rather than buildup (Boneshatter on a
+ * Primed target, B H06): the same 3 s and recovery as a built-up one.
+ */
+export function forceHeavyStun(actor: Actor): AppliedAilment {
+  const a = actor.ailments;
+  a.heavyStunBuildup = 0;
+  a.heavyStunSeconds = T.heavyStunSeconds;
+  a.heavyStunRecoverySeconds = T.heavyStunSeconds + T.heavyStunRecoverySeconds;
+  refreshDerived(actor);
+  return { ailment: "heavyStun", magnitude: 1, seconds: T.heavyStunSeconds };
 }

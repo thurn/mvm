@@ -15,6 +15,10 @@ export const SKILLS = {
   lightningArrow: "Metadata/Items/Gems/SkillGemLightningArrow",
   armourPiercingRounds: "Metadata/Items/Gem/SkillGemArmourPiercingRounds",
   spark: "Metadata/Items/Gems/SkillGemSpark",
+  shrinewarden: "MvM/Heroes/Shrinewarden",
+  armourBreaker: "Metadata/Items/Gems/SkillGemArmourBreaker",
+  boneshatter: "Metadata/Items/Gems/SkillGemBoneshatter",
+  fangsOfFrost: "Metadata/Items/Gem/SkillGemFangsOfFrost",
 } as const;
 
 type Behavior = keyof typeof SKILLS;
@@ -78,16 +82,77 @@ function areaScale(sheet: HeroSheet): number {
 
 const radiusTiles = (units: number | undefined) => (units ?? 0) / HERO_TUNING.poeUnitsPerTile;
 
+/** An acolyte's orb kit (B H01, H03): a Spirit-scaled orb every `orbSeconds`. */
+function acolyteKit(sheet: HeroSheet, orbSeconds: number): HeroKit {
+  const t = HERO_BOARD_TUNING.acolyte;
+  const spirit = sheet.spirit + t.spiritPerLevel * (sheet.heroLevel - 1);
+  return {
+    behavior: "acolyte",
+    actionSeconds: orbSeconds,
+    hits: {},
+    numbers: { orbValue: t.orbBase * (1 + spirit / t.spiritDivisor) },
+    counters: { orbTimer: 0 },
+  };
+}
+
 const BUILDERS: Record<Behavior, (inputs: KitInputs, skills: SkillData[]) => HeroKit> = {
-  acolyte({ sheet }) {
-    const t = HERO_BOARD_TUNING.acolyte;
-    const spirit = sheet.spirit + t.spiritPerLevel * (sheet.heroLevel - 1);
+  acolyte: ({ sheet }) => acolyteKit(sheet, HERO_BOARD_TUNING.acolyte.orbSeconds),
+
+  // The sturdy acolyte: the same orbs, 25% slower (B H03).
+  shrinewarden: ({ sheet }) => acolyteKit(sheet, HERO_BOARD_TUNING.shrinewarden.orbSeconds),
+
+  armourBreaker({ sheet }, [skill]) {
+    const values = setAt(skill!, 0, sheet.gemLevel);
     return {
-      behavior: "acolyte",
-      actionSeconds: t.orbSeconds,
-      hits: {},
-      numbers: { orbValue: t.orbBase * (1 + spirit / t.spiritDivisor) },
-      counters: { orbTimer: 0 },
+      behavior: "armourBreaker",
+      actionSeconds: attackSeconds(sheet, skillStatic(skill!).attack_speed_multiplier ?? 0) / K,
+      hits: {
+        main: {
+          ...attackHit(sheet, values, ["melee"]),
+          armourBreak: values.stats["apply_X_armour_break_on_hit"] ?? 0,
+        },
+      },
+      numbers: {},
+      counters: { actionTimer: 0 },
+    };
+  },
+
+  boneshatter({ sheet }, [skill]) {
+    const strike = setAt(skill!, 0, sheet.gemLevel);
+    const wave = setAt(skill!, 1, sheet.gemLevel);
+    const shockStats =
+      (skill!.statSets[1]?.static as { stats?: { id: string; value: number }[] } | null)?.stats ??
+      [];
+    const constant = (id: string) => shockStats.find((s) => s.id === id)?.value ?? 0;
+    return {
+      behavior: "boneshatter",
+      actionSeconds: attackSeconds(sheet, skillStatic(skill!).attack_speed_multiplier ?? 0) / K,
+      hits: {
+        // Boneshatter itself builds no stun (PoE2: −100% stun multiplier).
+        strike: { ...attackHit(sheet, strike, ["melee"]), stunMorePercent: -100 },
+        shockwave: attackHit(sheet, wave, ["area"]),
+      },
+      numbers: {
+        shockwaveRadius:
+          radiusTiles(constant("active_skill_base_area_of_effect_radius")) * areaScale(sheet),
+        uniqueMorePercent: constant("boneshatter_damage_+%_final_if_created_from_unique"),
+      },
+      counters: { actionTimer: 0 },
+    };
+  },
+
+  fangsOfFrost({ sheet }, [skill]) {
+    const stab = setAt(skill!, 0, sheet.gemLevel);
+    const burst = setAt(skill!, 1, sheet.gemLevel);
+    return {
+      behavior: "fangsOfFrost",
+      actionSeconds: attackSeconds(sheet, skillStatic(skill!).attack_speed_multiplier ?? 0) / K,
+      hits: {
+        stab: attackHit(sheet, stab, ["melee"]),
+        burst: attackHit(sheet, burst, ["area"]),
+      },
+      numbers: { burstRadius: HERO_BOARD_TUNING.fangsOfFrost.burstRadius * areaScale(sheet) },
+      counters: { actionTimer: 0 },
     };
   },
 

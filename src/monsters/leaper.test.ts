@@ -1,16 +1,5 @@
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, test } from "vitest";
 
-// No ×5+ wall hero is in the catalog until plan 2.9, so the test adds one.
-vi.mock("../heroes/model/catalog", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("../heroes/model/catalog")>();
-  return {
-    ...actual,
-    HERO_CATALOG: {
-      ...actual.HERO_CATALOG,
-      "MvM/Test/Wall": { ...actual.HERO_CATALOG["MvM/Heroes/EzomyteAcolyte"]!, lifeMultiplier: 8 },
-    },
-  };
-});
 import { makeActor } from "../combat/actor";
 import type { SimEvent } from "../sim/events";
 import { step } from "../sim/kernel";
@@ -21,8 +10,8 @@ import { archetype } from "./archetypes";
 import { spawnRoll } from "./model";
 
 const ROLLING_SLAM = "Metadata/Items/Gems/SkillGemRollingSlam";
-/** A ×8 wall (Armour Breaker, B H05); the catalog's life multiplier decides walls. */
-const WALL = "MvM/Test/Wall";
+/** Armour Breaker, ×8 (B H05): the catalog's life multiplier decides walls. */
+const WALL = "Metadata/Items/Gems/SkillGemArmourBreaker";
 
 function board(): RoundState {
   return createRound({ seed: 1, lanes: [2], mana: 0 });

@@ -46,6 +46,8 @@ export interface SkillHit {
   more?: readonly MoreModifier[];
   /** Boss attacks flagged unblockable (§5.1). */
   unblockable?: boolean;
+  /** "More" stun buildup from this hit, in percent; −100 builds none (Boneshatter's strike). */
+  stunMorePercent?: number;
   /** Armour this hit breaks (§6.4), before hero multipliers. */
   armourBreak?: number;
 }

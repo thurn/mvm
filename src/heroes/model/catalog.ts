@@ -35,6 +35,8 @@ export interface CatalogEntry {
   recharge: RechargeTier;
   /** Archetype life multiplier (§1.4). */
   lifeMultiplier: number;
+  /** MvM custom heroes' unlock area level (B §1.8); gem heroes derive theirs from the gem's tier. */
+  unlockArea?: number;
   /** Attribute weights for MvM custom heroes, which have no gem. */
   attributeWeights?: { strength: number; dexterity: number; intelligence: number };
   /** Spells: cooldown and the cooldown left at level start (§6.1). */
@@ -52,6 +54,40 @@ export const HERO_CATALOG: Readonly<Record<string, CatalogEntry>> = {
     recharge: "fast",
     lifeMultiplier: 1,
     attributeWeights: { strength: 0, dexterity: 0, intelligence: 100 },
+  },
+  // H03
+  "MvM/Heroes/Shrinewarden": {
+    role: "acolyte",
+    weapon: "Sceptre",
+    baseMana: 75,
+    recharge: "slow",
+    lifeMultiplier: 4,
+    unlockArea: 5,
+    attributeWeights: { strength: 50, dexterity: 0, intelligence: 50 },
+  },
+  // H05
+  "Metadata/Items/Gems/SkillGemArmourBreaker": {
+    role: "wall",
+    weapon: "One Hand Mace",
+    baseMana: 50,
+    recharge: "slow",
+    lifeMultiplier: 8,
+  },
+  // H06
+  "Metadata/Items/Gems/SkillGemBoneshatter": {
+    role: "striker",
+    weapon: "Two Hand Mace",
+    baseMana: 125,
+    recharge: "fast",
+    lifeMultiplier: 2.5,
+  },
+  // H11
+  "Metadata/Items/Gem/SkillGemFangsOfFrost": {
+    role: "striker",
+    weapon: "Spear",
+    baseMana: 125,
+    recharge: "fast",
+    lifeMultiplier: 2.5,
   },
   // H07
   "Metadata/Items/Gems/SkillGemRollingSlam": {

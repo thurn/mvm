@@ -11,6 +11,11 @@ export const HERO_SPRITES: Readonly<Record<string, string>> = {
   "Metadata/Items/Gems/SkillGemLightningArrow": "bow_ranger",
   "Metadata/Items/Gem/SkillGemArmourPiercingRounds": "crossbow_arbalist",
   "Metadata/Items/Gems/SkillGemSpark": "wand_caster",
+  // Phase 2 heroes borrow the nearest starter look until they get their own recipes.
+  "MvM/Heroes/Shrinewarden": "acolyte_robed",
+  "Metadata/Items/Gems/SkillGemArmourBreaker": "twohand_hammer",
+  "Metadata/Items/Gems/SkillGemBoneshatter": "twohand_hammer",
+  "Metadata/Items/Gem/SkillGemFangsOfFrost": "quarterstaff_monk_cold",
 };
 
 /** Each monster archetype's recipe (Appendix D §1). @public (1.21 draws them) */

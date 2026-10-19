@@ -60,6 +60,10 @@ export const HERO_BOARD_TUNING = {
     volleyEvery: 3,
   },
   iceStrike: { finalReach: 2, combo: 3 },
+  /** The sturdy acolyte's slower orb cycle (B H03). */
+  shrinewarden: { orbSeconds: 30 },
+  /** The Off Balance explosion: PoE2's 2.2 m = 1.83 tiles (B H11). */
+  fangsOfFrost: { burstRadius: 1.83 },
 } as const;
 
 /** Hero and spell generation (Appendix B §1.8–§1.10, §7; Appendix E §3.2–§3.3, §4.5). */

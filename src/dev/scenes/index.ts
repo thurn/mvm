@@ -5,6 +5,7 @@ import { archetypes } from "./archetypes";
 import { boss } from "./boss";
 import { emptyBoard } from "./empty-board";
 import { equipAb } from "./equip-ab";
+import { heroes } from "./heroes";
 import { hitBands } from "./hit-bands";
 import { kills } from "./kills";
 import { manaRain } from "./mana-rain";
@@ -37,6 +38,7 @@ export const SCENES: readonly Scene[] = [
   terrain,
   strongbox,
   archetypes,
+  heroes,
 ];
 
 export function findScene(name: string): Scene | undefined {

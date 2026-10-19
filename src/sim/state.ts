@@ -50,6 +50,8 @@ export interface MonsterState {
   attack?: MonsterAttack;
   /** PoE2 monster affix IDs rolled at spawn (Appendix D §4). */
   affixes?: string[];
+  /** A hero blocked its attack: the next Fangs of Frost stab on it explodes (B H11, adapted Parried). */
+  offBalance?: boolean;
   /** A leaper that has made its one leap (D §2.2). */
   leapt?: boolean;
   /** A boss's lanes, abilities and telegraphs (Appendix D §7); absent for every other monster. */
@@ -106,7 +108,15 @@ export type HeroKit =
   | Kit<"spark", "main", ProjectileNumbers | "sparks", "actionTimer">
   | Kit<"rollingSlam", "first" | "second", "firstRadius" | "secondRadius", "actionTimer">
   | Kit<"fallingThunder", "slam" | "volley", "volleyProjectiles", "actionTimer" | "slams">
-  | Kit<"iceStrike", "strike" | "final", "finalSeconds", "actionTimer" | "combo">;
+  | Kit<"iceStrike", "strike" | "final", "finalSeconds", "actionTimer" | "combo">
+  | Kit<"armourBreaker", "main", never, "actionTimer">
+  | Kit<
+      "boneshatter",
+      "strike" | "shockwave",
+      "shockwaveRadius" | "uniqueMorePercent",
+      "actionTimer"
+    >
+  | Kit<"fangsOfFrost", "stab" | "burst", "burstRadius", "actionTimer">;
 
 export type KitOf<Behavior extends HeroKit["behavior"]> = Extract<HeroKit, { behavior: Behavior }>;
 
