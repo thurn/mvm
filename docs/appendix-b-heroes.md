@@ -71,7 +71,7 @@ These apply to every hero spec below.
 | Melee | Own tile plus 1 tile ahead. Strikes hit one monster in that zone; slams use their radius. |
 | Square N×N | Player spells only: whole tiles, centred on the target tile. |
 
-Heroes only act when a valid target exists, so they never waste an attack. Attack and cast times below are **raw PoE2** times. In play, appendix A's `K_heroActionRate` (0.5) halves hero attack and cast speed after all modifiers. Durations, delays and cooldowns are not scaled. Targeting helpers such as `LaneFirst` and `NearbyMostAdvanced` are defined in appendix A §3.
+Heroes only act when a valid target exists, so they never waste an attack. Attack and cast times below are **raw PoE2** times. In play, appendix A's `K_heroActionRate` (0.55) scales hero attack and cast speed to 55% after all modifiers. Durations, delays and cooldowns are not scaled. Targeting helpers such as `LaneFirst` and `NearbyMostAdvanced` are defined in appendix A §3.
 
 ### 1.3 Weapon lock
 
@@ -449,7 +449,7 @@ PoE2 tags: strength, attack, area, melee, physical, duration.
 **TD behaviour**
 
 - **Targeting:** Raises an earth **wall segment** on the first empty tile among the 1st and 2nd tiles ahead in its lane. It recasts when fewer than Limit (2) segments exist.
-- **Cadence:** One raise per **2 × attack time** (base attack time 1.0 s, so 2.0 s raw, or 4.0 s in play at appendix A's `K_heroActionRate` 0.5; attack speed shortens it). It never raises onto a tile a monster occupies. **Adapted**: PoE2 has no cooldown here, but an instant re-raise would stall lanes forever.
+- **Cadence:** One raise per **2 × attack time** (base attack time 1.0 s, so 2.0 s raw, or about 3.6 s in play at appendix A's `K_heroActionRate` 0.55; attack speed shortens it). It never raises onto a tile a monster occupies. **Adapted**: PoE2 has no cooldown here, but an instant re-raise would stall lanes forever.
 - **Segment:** Has its own life (table below). It blocks monsters like a hero, so they stop and attack it. It lasts 6 s.
 - **Explosion:** When a segment breaks, it explodes for the skill's hit along its lane: its own tile plus 3 tiles ahead (explosion length 4 m = 3.33 tiles). It deals 80% less if monsters break it within 0.5 s of being raised. When it **expires**, it counts as "destroyed by your skills" and deals 100% more.
 - **Damage source:** Off-hand (shield) damage: the skill's base off-hand Physical damage plus 5–7 Physical per 15 Armour on the shield, times the attack damage %.
@@ -1556,7 +1556,7 @@ Supports: Elemental Armament II · Lightning Attunement · Rapid Attacks I
 -------------------------------------------------------------------------
 Spear hit         30–55   (4–7 Physical, 26–48 Lightning)
 Lightning bolts   5 × 21–39 Lightning  (other monsters within 4.17 tiles)
-Attacks/second    0.59 in play (1.17 PoE2 × K_heroActionRate 0.5)
+Attacks/second    0.64 in play (1.17 PoE2 × K_heroActionRate 0.55)
 Critical chance   5.00%   · Critical damage bonus +100%
 Shock             100% more chance (spear) · 200% more (bolts)
 Average hit       42.5    (44.6 with crits)  →  ~26 single-target DPS in play (~52 raw)
@@ -1565,7 +1565,7 @@ Accuracy from Dex +376
 
 **Where the tooltip numbers come from:**
 
-- **APS:** 1.70 × 60% (skill `attack_speed_multiplier −40`) × 1.15 (Rapid Attacks I) = **1.17** raw. Appendix A's `K_heroActionRate` 0.5 makes that 0.59 in play.
+- **APS:** 1.70 × 60% (skill `attack_speed_multiplier −40`) × 1.15 (Rapid Attacks I) = **1.17** raw. Appendix A's `K_heroActionRate` 0.55 makes that 0.64 in play.
 - **Crit:** the weapon's 5%. PoE2's base critical damage bonus is +100%. Average with crits: 42.5 × (1 + 0.05 × 1.0) = 44.6.
 - **Cost:** 150 × 1.20 × 1.00 × 1.00 = 180, which rounds to **175**.
 - **Life:** (16 + 12 × 17 + 2 × 7 Str) × 1.25 = **292**.
@@ -1585,7 +1585,7 @@ The focus grants 4 cards at hero level 1, all **Normal** (no supports). Slots 4�
 | **Ranger** (Dex) | Ezomyte Acolyte (50) | Falling Thunder (125) | Lightning Arrow (100) | Explosive Grenade (125, 30 s) |
 | **Sorceress** (Int) | Ezomyte Acolyte (50) | Ice Strike (125) | Spark (125) | Comet (175, 45 s) |
 
-**Why each kit clears levels 1–3.** White monster base life is 15 / 20 / 24 at AL 1 / 2 / 3. Appendix A's `K_monsterLife` 4.5 makes that **67.5 / 90 / 108**. Damage per second below is raw PoE2; halve it for play (`K_heroActionRate` 0.5).
+**Why each kit clears levels 1–3.** White monster base life is 15 / 20 / 24 at AL 1 / 2 / 3. Appendix A's `K_monsterLife` 4.5 makes that **67.5 / 90 / 108**. Damage per second below is raw PoE2; multiply it by 0.55 for play (`K_heroActionRate`).
 
 | Hero (level 1, starter weapon) | Hit | Cadence | Damage / s | Shape |
 |---|---|---|---|---|

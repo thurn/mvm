@@ -66,7 +66,7 @@ Four numbers bridge PoE2's scale to PvZ's tempo. Everything else stays PoE2-rela
 |---|---|---|---|
 | `K_monsterLife` | **4.5** | all monster maximum life | A level-appropriate starter ranged hero kills a white Shambler in **8–10 hits** |
 | `K_monsterDamage` | **1.25** | all monster hit damage | A Shambler kills an unarmoured, level-appropriate squishy hero in **~4 s**, and a wall in **~40 s** |
-| `K_heroActionRate` | **0.5** | hero attack and cast speed, *after* all modifiers | A 1.2-aps bow attacks every ~1.7 s, close to PvZ's 1.5 s pea |
+| `K_heroActionRate` | **0.55** | hero attack and cast speed, *after* all modifiers | A 1.2-aps bow attacks every ~1.5 s, PvZ's pea cadence; calibrated so every focus clears Levels 4–5 (plan 2.26) |
 | `walkSecondsPerTile` | **4.7** | base Shambler walk speed; archetypes scale it | A Shambler crosses the lawn in ~45 s (PvZ basic zombie) |
 
 **Calibration worked example: level 1 Ranger**
