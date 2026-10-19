@@ -1,5 +1,5 @@
 import { id } from "../../types/ids";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { Board } from "../../app/Board";
 import { audioEngine } from "../../audio";
 import { baseItems, currencies } from "../../data";
@@ -8,7 +8,6 @@ import type { BaseItemId } from "../../data/types";
 import { findScene } from "../../dev/scenes";
 import type { Drop } from "../../loot/drops";
 import type { SimEvent } from "../../sim/events";
-import { createSettings } from "../core/settings";
 
 let next = 0;
 
@@ -40,6 +39,7 @@ function sampleDrops(): Record<string, Drop> {
     "currency low": currency("CurrencyUpgradeToMagic"),
     "currency mid": currency("CurrencyRerollRare"),
     "currency top": currency("CurrencyModValues"),
+    hidden: { ...item("magic"), hidden: true } as Drop,
     hero: { kind: "hero", rarity: "magic", itemLevel: 1 },
     spell: { kind: "spell", rarity: "magic", itemLevel: 1 },
   };
@@ -60,8 +60,6 @@ function fire(drops: Drop[], lane: number, x: number) {
 /** `?scene=loot-shower`: every drop class on demand, and a mixed shower every 6 s (1.27). */
 export function LootShowerPage() {
   const scene = useMemo(() => findScene("empty-board")!, []);
-  const [store] = useState(() => createSettings());
-  const [showAll, setShowAll] = useState(store.get().showAllLoot);
   useEffect(() => {
     const timer = setInterval(() => {
       const all = Object.values(sampleDrops());
@@ -87,17 +85,6 @@ export function LootShowerPage() {
             {name}
           </button>
         ))}
-        <label style={{ color: "#ddd" }}>
-          <input
-            type="checkbox"
-            checked={showAll}
-            onChange={(e) => {
-              setShowAll(e.target.checked);
-              store.set({ showAllLoot: e.target.checked });
-            }}
-          />{" "}
-          Show all
-        </label>
       </div>
       <Board scene={scene} />
     </div>

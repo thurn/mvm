@@ -141,6 +141,8 @@ export interface LevelSummary {
   xpGained: number;
   firstClear: boolean;
   drops: { drop: Drop; upgrade: boolean }[];
+  /** What the loot filter's hidden drops became (C §C.7): how many, the gold and the Transmutation Shards. */
+  hidden: { count: number; gold: number; shards: number };
 }
 
 /**
@@ -181,11 +183,17 @@ export function finishLevel(account: AccountState, round: RoundState): LevelSumm
     }
   }
   // Hidden drops convert, won or lost (C §C.7): Normal into its sell value, low-tier Magic into a Transmutation Shard.
+  const hidden = { count: 0, gold: 0, shards: 0 };
   for (const { drop } of round.earned) {
     if (drop.kind !== "item" || !drop.hidden) continue;
-    if (drop.item.rarity === "normal") account.gold += itemSellPrice(drop.item);
-    else account.currency[SHARDS.transmutation] = (account.currency[SHARDS.transmutation] ?? 0) + 1;
+    hidden.count++;
+    if (drop.item.rarity === "normal") hidden.gold += itemSellPrice(drop.item);
+    else hidden.shards++;
   }
+  account.gold += hidden.gold;
+  if (hidden.shards > 0)
+    account.currency[SHARDS.transmutation] =
+      (account.currency[SHARDS.transmutation] ?? 0) + hidden.shards;
   mergeShards(account);
   // The vendors restock after every level, won or lost (E §5.3).
   refreshStock(account);
@@ -195,6 +203,7 @@ export function finishLevel(account: AccountState, round: RoundState): LevelSumm
     result,
     xpGained,
     firstClear,
+    hidden,
     // Hidden drops converted above aren't loot cards (C §C.7); 2.22 lists what they became.
     drops: round.earned
       .filter(({ drop }) => !(drop.kind === "item" && drop.hidden))

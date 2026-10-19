@@ -125,7 +125,6 @@ export const KNOBS: readonly Knob[] = [
     patch: (_s, v) => ({ shake: v as JuiceSettings["shake"] }),
   },
   toggle("reduceFlashing", "Reduce flashing"),
-  toggle("showAllLoot", "Loot filter: Show all"),
   volume("master"),
   volume("music"),
   volume("sfx"),

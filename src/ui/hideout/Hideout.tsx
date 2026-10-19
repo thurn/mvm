@@ -29,6 +29,7 @@ import {
 import type { AccountStore } from "../../account/store";
 import { useAccount } from "../account";
 import { StashPanel } from "./StashPanel";
+import { LootFilterTab } from "./LootFilterTab";
 import { currencyName, listedCurrencies } from "./currency";
 import { MERGES_INTO, salvage, salvageYield } from "../../loot/craft/heroes";
 
@@ -372,7 +373,8 @@ function CurrencyTab({ account }: { account: AccountState }) {
   );
 }
 
-type Tab = "roster" | "stash" | "currency" | "craft" | "armorer" | "recruiter" | "gamble";
+type Tab =
+  "roster" | "stash" | "currency" | "craft" | "armorer" | "recruiter" | "gamble" | "filter";
 
 /** The hideout's tabs in order (GDD §15); the passive tree arrives later. */
 const TABS: readonly [Tab, string][] = [
@@ -383,6 +385,7 @@ const TABS: readonly [Tab, string][] = [
   ["armorer", "Armorer"],
   ["recruiter", "Recruiter"],
   ["gamble", "Gamble"],
+  ["filter", "Loot filter"],
 ];
 
 function TabButton({
@@ -649,6 +652,8 @@ export function Hideout({
             <RecruiterTab store={store} />
           ) : tab === "gamble" ? (
             <GambleTab store={store} />
+          ) : tab === "filter" ? (
+            <LootFilterTab store={store} />
           ) : tab === "currency" ? (
             <CurrencyTab account={account} />
           ) : (

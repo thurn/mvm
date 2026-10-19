@@ -163,6 +163,15 @@ function asCard(hero: HeroInstance): Card {
  * clear's reward and any pending choose-1-of-3. With no summary (a reload
  * before the pick) it shows only the pending choice.
  */
+/** What the loot filter's hidden drops became, in one line (C §C.7). */
+function hiddenLine({ count, gold, shards }: LevelSummary["hidden"]): string {
+  const parts = [
+    ...(gold > 0 ? [`${gold} gold`] : []),
+    ...(shards > 0 ? [`${shards} Transmutation Shard${shards === 1 ? "" : "s"}`] : []),
+  ];
+  return `Loot filter: ${count} hidden item${count === 1 ? "" : "s"} became ${parts.join(" and ")}`;
+}
+
 export function LevelEnd({
   store,
   summary,
@@ -275,6 +284,11 @@ export function LevelEnd({
                   ([id, n]) => ` · ${n}× ${currencyNames.get(id) ?? id}`,
                 )}
               </p>
+              {summary.hidden.count > 0 && (
+                <p data-testid="hidden-summary" style={{ margin: "0 0 12px", color: MENU.dim }}>
+                  {hiddenLine(summary.hidden)}
+                </p>
+              )}
               <div
                 style={{
                   display: "flex",

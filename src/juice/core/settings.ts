@@ -15,8 +15,6 @@ export interface JuiceSettings {
   tierLog: boolean;
   shake: "off" | "low" | "full";
   reduceFlashing: boolean;
-  /** The loot filter's "Show all": normal items get beams, labels and stingers (H §3.7). */
-  showAllLoot: boolean;
   /** Dev overlays (GDD §15): hitboxes, ailment meters and per-hero DPS meters. */
   devOverlays: { hitboxes: boolean; ailments: boolean; dps: boolean };
   /** Player volume sliders, 0–1 (H §10.2 options). */
@@ -34,7 +32,6 @@ export const DEFAULT_SETTINGS: JuiceSettings = {
   tierLog: false,
   shake: "full",
   reduceFlashing: false,
-  showAllLoot: false,
   devOverlays: { hitboxes: false, ailments: false, dps: false },
   volume: { master: 1, music: 1, sfx: 1, loot: 1, ui: 1 },
 };

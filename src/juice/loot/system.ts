@@ -81,7 +81,8 @@ export const lootSystem: PresentationFactory = ({ stack, settings, director }) =
           cls,
           spec: lootSpec(cls),
           name: dropName(p.drop),
-          hidden: cls === "normal" && !s.showAllLoot,
+          // The round's locked loot filter decided this when the drop rolled (C §C.7).
+          hidden: p.drop.kind === "item" && p.drop.hidden === true,
           from,
           to: {
             x: Math.max(4, Math.min(BOARD_WIDTH - 4, from.x + dx)),
@@ -122,12 +123,13 @@ export const lootSystem: PresentationFactory = ({ stack, settings, director }) =
 
   function land(l: Loot, t: number) {
     l.landed = true;
-    pool.emit("dust", l.to.x, l.to.y, { scale: 4 / 6, loot: true });
     if (l.hidden) {
-      // Hidden drops: a grey puff and a muted coin tick (H §3.7).
-      audioEngine()?.play("coin", { gainDb: -12 });
+      // Hidden drops: a 3-particle grey puff and a muted coin tick, and nothing more (H §3.7).
+      pool.emit("lootPuff", l.to.x, l.to.y, { loot: true });
+      audioEngine()?.play("coin", { gainDb: L.hiddenCoinDb });
       return;
     }
+    pool.emit("dust", l.to.x, l.to.y, { scale: 4 / 6, loot: true });
     audioEngine()?.play(l.spec.stinger, { x: l.to.x / TILE + 0.5, semitones: ladder.next(t) });
   }
 
@@ -186,7 +188,7 @@ export const lootSystem: PresentationFactory = ({ stack, settings, director }) =
     const w = currency && Math.floor(t / 120) % 2 ? Math.max(1, Math.round(size / 3)) : size;
     ctx.fillStyle = "#1B1B1B";
     ctx.fillRect(Math.round(pos.x - w / 2) - 1, Math.round(pos.y - size / 2) - 1, w + 2, size + 2);
-    ctx.fillStyle = l.hidden ? "#8A8A8A" : l.spec.label;
+    ctx.fillStyle = l.hidden ? L.hiddenColor : l.spec.label;
     ctx.fillRect(Math.round(pos.x - w / 2), Math.round(pos.y - size / 2), w, size);
   }
 
@@ -213,7 +215,8 @@ export const lootSystem: PresentationFactory = ({ stack, settings, director }) =
         const age = t - l.spawnAt;
         if (age < 0) continue;
         if (!l.landed && age >= L.arcMs) land(l, t);
-        if (l.hidden && age > L.arcMs + 600) continue;
+        // A hidden drop is gone once it lands: only its puff stays.
+        if (l.hidden && l.landed) continue;
         drawBeam(ctx, l, age, t);
         drawItem(ctx, l, position(l, age), t);
         if (!l.arrived && age >= l.keys.collected) {
@@ -228,7 +231,7 @@ export const lootSystem: PresentationFactory = ({ stack, settings, director }) =
           if (!l.hidden) audioEngine()?.play("ui_click", { gainDb: -6 });
         }
       }
-      loots = loots.filter((l) => !l.arrived && !(l.hidden && t - l.spawnAt > L.arcMs + 600));
+      loots = loots.filter((l) => !l.arrived && !(l.hidden && l.landed));
     },
   });
 

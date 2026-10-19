@@ -319,3 +319,15 @@ describe("review fixes (hv-mb9m.51)", () => {
     expect(screen.getByTestId(`stash-hero-${spell.id}`).textContent).toContain("Spell · level 2");
   });
 });
+
+describe("the Loot filter tab (C §C.7, GDD §11)", () => {
+  test("picking a preset sets the account's filter and saves it", () => {
+    const account = warrior();
+    const onSave = setup(account);
+    fireEvent.click(screen.getByRole("tab", { name: "Loot filter" }));
+    expect(screen.getByRole("radio", { name: /Show all/ })).toHaveProperty("checked", true);
+    fireEvent.click(screen.getByRole("radio", { name: /Hide normal \+ low-tier magic/ }));
+    expect(account.lootFilter).toBe("hideLowMagic");
+    expect(onSave).toHaveBeenCalledTimes(1);
+  });
+});

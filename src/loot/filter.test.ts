@@ -111,6 +111,7 @@ describe("the loot filter (Appendix C §C.7)", () => {
         ).toBe(false);
       const value = hidden.reduce((sum, item) => sum + itemSellPrice(item), 0);
       expect(account.gold - gold).toBeCloseTo(value);
+      expect(summary.hidden).toEqual({ count: hidden.length, gold: value, shards: 0 });
     }
     const account = newAccount("ranger");
     account.lootFilter = "hideLowMagic";
@@ -122,7 +123,7 @@ describe("the loot filter (Appendix C §C.7)", () => {
       drop: { kind: "item", item: magic(20, "Heavy"), hidden: true },
     });
     round.result = "won";
-    finishLevel(account, round);
+    expect(finishLevel(account, round).hidden).toEqual({ count: 1, gold: 0, shards: 1 });
     expect(account.currency[SHARDS.transmutation]).toBe(1);
   });
 

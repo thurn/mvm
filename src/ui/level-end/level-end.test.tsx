@@ -135,6 +135,7 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
             result: "won",
             xpGained: 40,
             firstClear: true,
+            hidden: { count: 0, gold: 0, shards: 0 },
             drops: [
               { drop: rare, upgrade: true },
               { drop: normal, upgrade: false },
@@ -169,7 +170,13 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
         render(
           <LevelEnd
             store={createAccountStore(account, () => {})}
-            summary={{ result: "won", xpGained: 600, firstClear: true, drops: [] }}
+            summary={{
+              result: "won",
+              xpGained: 600,
+              firstClear: true,
+              drops: [],
+              hidden: { count: 0, gold: 0, shards: 0 },
+            }}
             before={{ player: { level: 1, xp: 0 }, heroes: {} }}
             onReplay={() => {}}
             onHideout={() => {}}
@@ -201,7 +208,13 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
         render(
           <LevelEnd
             store={createAccountStore(withChoice(), () => {})}
-            summary={{ result: "won", xpGained: 0, firstClear: true, drops: [] }}
+            summary={{
+              result: "won",
+              xpGained: 0,
+              firstClear: true,
+              drops: [],
+              hidden: { count: 0, gold: 0, shards: 0 },
+            }}
             before={{ player: { level: 1, xp: 0 }, heroes: {} }}
             onReplay={() => {}}
             onHideout={() => {}}
@@ -250,12 +263,40 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
       );
     });
 
+    test("the summary lists what the loot filter's hidden drops became (C §C.7)", () => {
+      const account = newAccount("warrior");
+      render(
+        <LevelEnd
+          store={createAccountStore(account, () => {})}
+          summary={{
+            result: "lost",
+            xpGained: 3,
+            firstClear: false,
+            drops: [],
+            hidden: { count: 5, gold: 9, shards: 2 },
+          }}
+          before={null}
+          onReplay={() => {}}
+          onHideout={() => {}}
+        />,
+      );
+      expect(screen.getByTestId("hidden-summary").textContent).toBe(
+        "Loot filter: 5 hidden items became 9 gold and 2 Transmutation Shards",
+      );
+    });
+
     test("a loss shows Defeat and no first-clear reward", () => {
       const account = newAccount("warrior");
       render(
         <LevelEnd
           store={createAccountStore(account, () => {})}
-          summary={{ result: "lost", xpGained: 3, firstClear: false, drops: [] }}
+          summary={{
+            result: "lost",
+            xpGained: 3,
+            firstClear: false,
+            drops: [],
+            hidden: { count: 0, gold: 0, shards: 0 },
+          }}
           before={null}
           onReplay={() => {}}
           onHideout={() => {}}

@@ -56,6 +56,17 @@ export const JUICE_TUNING = {
   particleBudget: 0.8,
   bossSignificanceMultiplier: 10,
   presets: {
+    /** A hidden drop's landing (H §3.7): three grey motes. */
+    lootPuff: {
+      count: 3,
+      speed: [15, 30],
+      angle: [200, 340],
+      life: [250, 400],
+      size: [1, 2],
+      color: "#8A8A8A",
+      gravity: 40,
+      drag: 3,
+    },
     dust: {
       count: 6,
       speed: [20, 50],
@@ -248,6 +259,9 @@ export interface LootClassSpec {
 
 /** The drop timeline and per-class table (H §3.1–§3.4). Times in ms. */
 export const LOOT_JUICE = {
+  /** A hidden drop's muted coin tick and its icon's grey while it arcs (H §3.7). */
+  hiddenCoinDb: -12,
+  hiddenColor: "#8A8A8A",
   arcMs: 350,
   bounces: [
     [6, 80],
