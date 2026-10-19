@@ -4,7 +4,8 @@ export const BOSS_TUNING = {
     /** Lanes covered, and the top lanes it may take (rows 1–2, 2–3 or 3–4). */
     span: 2,
     topLanes: [1, 2, 3],
-    lifeMult: 40,
+    /** D §7 lists 40×; calibrated to 10× (plan 2.25): at 40× no campaign board beat Level 5. */
+    lifeMult: 10,
     damageMult: 3,
     secondsPerTile: 7,
     attackSeconds: 1,

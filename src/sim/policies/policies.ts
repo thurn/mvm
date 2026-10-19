@@ -172,7 +172,63 @@ const spellcaster: Policy = (state) => {
   return banking ? [] : pvzOpener(state).filter((intent) => intent.type !== "cast");
 };
 
+const ofRole = (state: RoundState, r: Role) => state.roster.filter((s) => role(s) === r);
+const onBoard = (state: RoundState, r: Role) => {
+  const skills = new Set<string>(ofRole(state, r).map((s) => s.card.hero.skillId));
+  return state.heroes.filter((h) => h.skillId !== undefined && skills.has(h.skillId));
+};
+
+/** Places the first ready card of a role (the whole roster, not just the first card). */
+function placeAny(
+  state: RoundState,
+  r: Role,
+  columns: readonly number[],
+  lanes?: number[],
+): Intent[] {
+  for (const slot of ofRole(state, r).filter((s) => ready(state, s))) {
+    const intents = place(state, slot, columns, lanes);
+    if (intents.length > 0) return intents;
+  }
+  return [];
+}
+
+/**
+ * The campaign player (plan 2.25): the PvZ opener's shape, but drawing on
+ * every card in a six-slot roster. Three acolytes; a shooter in each lane,
+ * thinnest lanes first; melee where a lane is threatened and has none; then,
+ * with mana to spare, acolytes up to one per lane and a second shooter row.
+ */
+const campaign: Policy = (state) => {
+  const spell = castSpell(state, slotFor(state, "spell"));
+  const lanes = state.lanes.length;
+  if (onBoard(state, "acolyte").length < 3) return [...spell, ...placeAny(state, "acolyte", [1])];
+  const shooters = onBoard(state, "ranged");
+  const thinnest = [...lanesByThreat(state)].sort(
+    (a, b) =>
+      shooters.filter((h) => h.lane === a).length - shooters.filter((h) => h.lane === b).length,
+  );
+  if (shooters.length < lanes) {
+    const steps = placeAny(state, "ranged", [2, 3], thinnest);
+    if (steps.length > 0) return [...spell, ...steps];
+  }
+  const melee = onBoard(state, "melee");
+  const threatened = lanesByThreat(state).filter(
+    (lane) =>
+      !melee.some((h) => h.lane === lane) &&
+      state.monsters.some((m) => occupies(m, lane) && m.x <= SIM_TUNING.columns + 0.5),
+  );
+  const front = placeAny(state, "melee", [4], threatened);
+  if (front.length > 0) return [...spell, ...front];
+  if (state.mana < 200) return spell;
+  if (onBoard(state, "acolyte").length < lanes)
+    return [...spell, ...placeAny(state, "acolyte", [1])];
+  if (shooters.length < 2 * lanes)
+    return [...spell, ...placeAny(state, "ranged", [3, 2], thinnest)];
+  return spell;
+};
+
 export const POLICIES: Readonly<Record<string, Policy>> = {
+  campaign,
   pvzOpener,
   rangedHeavy,
   wallFirst,
