@@ -689,7 +689,7 @@ With 18 item slots on the board, capping one element at 75% takes about six good
 
 **Allies in your Presence vs team.** The sceptre presence families (rows 34–44) stay radius-based and sceptre-only. They keep their PoE2 values, about double the team values: a smaller area for a bigger buff. Presence buffs and team buffs stack additively.
 
-**Saves.** No backwards compatibility for removed mods. On load, an item mod whose id is no longer in the catalog (the old `FireResist1` … `AllResistances3`) is dropped. Ring resistance implicits are re-rolled inside their new range. The golden fixtures in `src/save/fixtures/` hold none of these mods, so they keep loading.
+**Saves.** No backwards compatibility for removed mods. On load, an item mod whose id is no longer in the catalog (the old `FireResist1` … `AllResistances3`) is dropped. Ring resistance implicits are re-rolled inside their new range. Every golden fixture in `src/save/fixtures/` keeps loading: the M1 milestone save loses its three hero-only resistance rolls (`ColdResist1` twice, `LightningResist1` once) and nothing else.
 
 ---
 

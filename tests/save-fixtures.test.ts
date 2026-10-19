@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { expect, test } from "vitest";
+import { resumeFromDocument } from "../src/account/lifecycle";
 import { step } from "../src/sim/kernel";
 import type { RoundState } from "../src/sim/state";
 import {
@@ -63,4 +64,15 @@ test("every fixture directory names a registered section or milestones", () => {
     const dir = relative.split("/")[0]!;
     expect(dir === "milestones" || registry.sections.has(dir as SectionName), relative).toBe(true);
   }
+});
+
+/** C §C.3.8: the M1 save's hero-only resistance rolls are dropped on load, and nothing else changes. */
+test("the M1 milestone resumes, losing only its hero-only resistance rolls (hv-7ic2.87)", () => {
+  const raw = JSON.parse(readFileSync(join(root, "milestones/m1.json"), "utf8")) as SaveDocument;
+  const log: string[] = [];
+  resumeFromDocument(raw, (line) => log.push(line));
+  const reconciled = log.filter((line) => line.startsWith("[reconcile]"));
+  expect(reconciled).toHaveLength(3);
+  for (const line of reconciled)
+    expect(line).toMatch(/unknown mod (Cold|Lightning)Resist1 dropped$/);
 });
