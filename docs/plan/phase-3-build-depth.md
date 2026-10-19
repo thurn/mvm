@@ -18,9 +18,10 @@ page is an outline, refined by Phase 2's filing bead.
   Burning Ground and Grave tiles.
 - **The Rust King** (D §7.2) and **Lachlann of Endless Lament** (D §7.3).
 - **Positional and global auras, curses and marks** (Appendix B §2.6–§2.7)
-  as their heroes become droppable.
+  as their heroes become droppable, starting with Herald of Ice (H29) and
+  War Banner (H31), which Phase 2 holds back.
 - **Remaining combat mechanics** as their first users arrive: bleed,
-  poison, electrocute, exposure, culling and leech.
+  poison (with Poisonburst Arrow, H15, which Phase 2 holds back), electrocute, exposure, culling and leech.
 - **Hero currencies:** Gemcutter's Prism, Realignment and Transference.
 - **Music** for Bog, Desert ruins and the boss loop.
 

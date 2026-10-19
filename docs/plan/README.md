@@ -108,8 +108,8 @@ beads, which preempt other ready work.
 
 **Phase pages are refined lazily.** Each phase's filing bead first updates its
 phase page from what the earlier phases taught, then files its beads
-([workflow § Filing a phase](workflow.md#filing-a-phase)). Pages for Phases
-2–5 are outlines until then.
+([workflow § Filing a phase](workflow.md#filing-a-phase)). Pages for later
+phases are outlines until then.
 
 ## Operating model
 
