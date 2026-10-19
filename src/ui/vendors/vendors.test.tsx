@@ -124,4 +124,15 @@ describe("the Gamble tab (E §5.3, B §7.6, H §9.3)", () => {
     expect(account).toEqual(before);
     expect(screen.getByTestId("vendor-status").textContent).toMatch(/gold/i);
   });
+
+  test("the hero pick lists only roles and tags some unlocked hero fits", () => {
+    const account = newAccount("ranger");
+    open("gamble", account);
+    const options = [...(screen.getByLabelText("Hero pick") as HTMLSelectElement).options].map(
+      (o) => o.value,
+    );
+    expect(options).toContain("role:ranged");
+    expect(options).not.toContain("role:curse");
+    expect(options).not.toContain("role:aura");
+  });
 });

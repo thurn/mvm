@@ -7,6 +7,7 @@ import {
   buyOffer,
   gambleHero,
   gambleItem,
+  heroGamblePool,
   sellHero,
   sellItem,
   type HeroGamble,
@@ -525,7 +526,13 @@ export function GambleTab({ store }: { store: AccountStore }) {
     .filter((b) => b.dropLevel <= level)
     .sort((a, b) => a.itemClass.localeCompare(b.itemClass) || a.name.localeCompare(b.name));
   const [baseId, setBaseId] = useState<string>(bases[0]?.id ?? "");
-  const [pick, setPick] = useState(`role:${ROLES[0]}`);
+  // Only picks some unlocked hero fits: the demo has no curse or aura heroes, and chaos unlocks later.
+  const picks = [
+    ...ROLES.map((r) => [`role:${r}`, `Role: ${r}`] as const),
+    ...TAGS.map((t) => [`tag:${t}`, `Damage: ${t}`] as const),
+  ].filter(([value]) => heroGamblePool(account, parsePick(value)).length > 0);
+  const [chosen, setPick] = useState<string>(picks[0]?.[0] ?? "");
+  const pick = picks.some(([value]) => value === chosen) ? chosen : (picks[0]?.[0] ?? "");
   const [reveal, setReveal] = useState<{
     key: number;
     revealed: Revealed;
@@ -613,14 +620,9 @@ export function GambleTab({ store }: { store: AccountStore }) {
               onChange={(e) => setPick(e.target.value)}
               style={select}
             >
-              {ROLES.map((r) => (
-                <option key={r} value={`role:${r}`}>
-                  Role: {r}
-                </option>
-              ))}
-              {TAGS.map((t) => (
-                <option key={t} value={`tag:${t}`}>
-                  Damage: {t}
+              {picks.map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
                 </option>
               ))}
             </select>

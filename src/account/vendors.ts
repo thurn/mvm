@@ -236,6 +236,16 @@ function hasTag(skillId: string, tag: DamageTag): boolean {
   return heroGems().some((g) => g.id === skillId && g.tags.includes(tag));
 }
 
+/** The unlocked heroes a hero gamble's pick can reveal (B §7.6); empty when none fit yet. */
+export function heroGamblePool(account: AccountState, pick: HeroGamble): string[] {
+  const level = vendorLevel(account);
+  const fits = (skill: string) =>
+    "role" in pick
+      ? (T.gambleRoles[pick.role] as readonly string[]).includes(catalogEntry(skill).role)
+      : hasTag(skill, pick.tag);
+  return heroPool().filter((skill) => unlockAreaLevel(skill) <= level && fits(skill));
+}
+
 /**
  * Gambles on a hero of a role or damage tag at the vendor's level (E §5.3):
  * 1.5× the magic hero price for Magic 70% / Rare 30%. Null, changing
@@ -243,11 +253,7 @@ function hasTag(skillId: string, tag: DamageTag): boolean {
  */
 export function gambleHero(account: AccountState, pick: HeroGamble): HeroInstance | null {
   const level = vendorLevel(account);
-  const fits = (skill: string) =>
-    "role" in pick
-      ? (T.gambleRoles[pick.role] as readonly string[]).includes(catalogEntry(skill).role)
-      : hasTag(skill, pick.tag);
-  const pool = heroPool().filter((skill) => unlockAreaLevel(skill) <= level && fits(skill));
+  const pool = heroGamblePool(account, pick);
   const price = heroGamblePrice(level);
   if (pool.length === 0 || account.gold < price) return null;
   account.gold -= price;
