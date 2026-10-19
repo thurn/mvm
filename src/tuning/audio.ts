@@ -30,6 +30,8 @@ export const AUDIO_TUNING = {
     loot: 6,
   } satisfies Record<Category, number>,
   retriggerMs: 30,
+  /** Sounds that play at most once per window: a rat swarm squeaks once, not per rat (H §7.1). */
+  minIntervalMs: { rat_squeak: 1500 } as Readonly<Partial<Record<string, number>>>,
   retriggerBoostDb: 1,
   /** ± fraction of playback rate; loot keeps the key. */
   pitchVariation: { combat: 0.06, loot: 0.02 },
@@ -38,6 +40,15 @@ export const AUDIO_TUNING = {
   pan: { boardColumns: 9, span: 0.6 },
   logSize: 20,
 };
+
+/** Monster and hero death vocals (H §7.1). */
+const MONSTER_VOCALS: ReadonlySet<string> = new Set([
+  "kill",
+  "hero_death",
+  "bone_clatter",
+  "rat_squeak",
+  "goblin_squeal",
+]);
 
 /** Each sound id's category and bus; ids not listed are hits on the sfx bus. */
 export function soundClass(id: string): { category: Category; bus: Bus } {
@@ -48,7 +59,7 @@ export function soundClass(id: string): { category: Category; bus: Bus } {
   if (id.startsWith("level_")) return { category: "loot", bus: "music" };
   if (id.startsWith("spell_") || id === "cast" || id === "riser")
     return { category: "spell", bus: "sfx" };
-  if (id === "kill" || id === "hero_death") return { category: "monsterVocal", bus: "sfx" };
+  if (MONSTER_VOCALS.has(id)) return { category: "monsterVocal", bus: "sfx" };
   if (id.startsWith("ailment_")) return { category: "spell", bus: "sfx" };
   if (id.startsWith("wave_") || id === "flag_horn" || id === "leak")
     return { category: "ui", bus: "sfx" };

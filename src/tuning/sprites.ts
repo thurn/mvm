@@ -17,5 +17,12 @@ export const SPRITE_TUNING = {
   /** G §1.1: a 64 px frame's top-left sits 6 px above its cell. */
   anchorLiftPx: 6,
   rareScale: 1.1,
+  /** The Goblin Leaper's jump: the sim moves it at once; the sprite arcs there over this long (G §4.1). */
+  leapMs: 450,
+  leapArcPx: 26,
+  /** The Helmed Skeleton's helm flies off at Fully Broken (H §7.1): up and back, under gravity. */
+  helmDebris: { ms: 700, vx: 60, vy: -110, gravity: 380, spin: 9 },
+  /** Rats in a swarm stand ±this many px off the lane line (G §4.1). */
+  swarmJitterPx: 3,
   outline: { magic: "#8888FF", rare: "#FFFF77" },
 } as const;

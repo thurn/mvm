@@ -25,6 +25,8 @@ export type SimEvent =
       breakdown: DamageMap;
       crit: boolean;
       avoidedBy: HitResult["avoidedBy"];
+      /** The target monster's archetype, for its hit material (H §7.1); absent for heroes. */
+      targetArchetype?: string;
     }
   | {
       type: "kill";
@@ -33,6 +35,8 @@ export type SimEvent =
       lane: number;
       x: number;
       rarity: Rarity | null;
+      /** The target monster's archetype, for its death vocal (H §7.1); absent for heroes. */
+      targetArchetype?: string;
     }
   | {
       type: "drop";

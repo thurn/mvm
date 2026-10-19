@@ -48,6 +48,7 @@ export function killTarget(ctx: StepContext, sourceId: EntityId, target: HitTarg
     lane: entity.lane,
     x: targetX(target),
     rarity: target.kind === "monster" ? target.entity.rarity : null,
+    ...(target.kind === "monster" ? { targetArchetype: target.entity.archetypeId } : {}),
   });
 }
 
@@ -75,6 +76,7 @@ export function dealHit(ctx: StepContext, source: HitSource, target: HitTarget, 
     breakdown: result.dealt,
     crit: result.crit,
     avoidedBy: result.avoidedBy,
+    ...(target.kind === "monster" ? { targetArchetype: target.entity.archetypeId } : {}),
   });
   // A hero that blocks a monster's attack leaves it Off Balance (B H11, adapted PoE2 Parried).
   if (result.avoidedBy === "block" && target.kind === "hero") {

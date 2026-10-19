@@ -1,8 +1,8 @@
 /** A ULPC body type key in the generator's sheet definitions (G §2.2). */
-type BodyType = "male" | "female" | "teen" | "muscular";
+type BodyType = "male" | "female" | "teen" | "muscular" | "child";
 
-/** The presentation states that need baked frames (G §1.3). Idle holds attack frame 0. */
-export type SpriteState = "attack" | "walk" | "death";
+/** The presentation states that need baked frames (G §1.3). Idle holds attack frame 0; leap is the Goblin Leaper's. */
+export type SpriteState = "attack" | "walk" | "death" | "leap";
 
 /** One layer: a sheet definition under `ulpc-generator/sheet_definitions/` and its colour. */
 export interface RecipeLayer {

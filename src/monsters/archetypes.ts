@@ -81,6 +81,9 @@ const ARCHETYPES: Readonly<Record<string, Archetype>> = {
   },
 };
 
+/** Every archetype's ID, in D §2 order. */
+export const ARCHETYPE_IDS: readonly string[] = Object.keys(ARCHETYPES);
+
 export function archetype(id: string): Archetype {
   const entry = ARCHETYPES[id];
   if (!entry) throw new Error(`unknown monster archetype ${id}`);

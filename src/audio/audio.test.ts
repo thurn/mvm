@@ -186,6 +186,16 @@ describe("voice manager (H §10.3)", () => {
     expect(voice.gain.gain.value).toBeCloseTo(gain * 10 ** (1 / 20));
   });
 
+  test("a sound with a minimum interval plays once per window: one squeak per swarm (H §7.1)", () => {
+    const { engine, register, tick } = setup();
+    register("rat_squeak");
+    expect(engine.play("rat_squeak")).not.toBeNull();
+    tick(200);
+    expect(engine.play("rat_squeak")).toBeNull();
+    tick(2000);
+    expect(engine.play("rat_squeak")).not.toBeNull();
+  });
+
   test("round-robin never repeats a variant twice in a row", () => {
     const { engine, register, tick, sources } = setup();
     register("hit_heavy", 3);

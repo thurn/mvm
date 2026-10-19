@@ -1,7 +1,7 @@
 import type { SpriteEntry } from "../../assets/manifest";
 import { SPRITE_TUNING } from "../../tuning/sprites";
 
-export type SpritePose = "idle" | "walk" | "attack" | "death";
+export type SpritePose = "idle" | "walk" | "attack" | "death" | "leap";
 
 export interface FrameRect {
   sx: number;

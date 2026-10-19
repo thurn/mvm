@@ -6,6 +6,7 @@ import { significance } from "./core/significance";
 import type { JuiceSettings } from "./core/settings";
 import type { Cue, CueBatch } from "./director/cue";
 import { bandEffects, hitSoundId, hitstopMs } from "./hits/bands";
+import { deathVocalOf, materialOf } from "./monsters";
 
 type Row<T extends SimEvent["type"]> = (
   event: SimEventOf<T>,
@@ -109,7 +110,7 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
       },
       {
         kind: "sound",
-        id: hitSoundId(band),
+        id: hitSoundId(band, materialOf(event.targetArchetype)),
         bus: "sfx",
         x: event.x,
         gainDb: bandEffects(band).gainDb,
@@ -166,7 +167,12 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
       ...(event.rarity === null
         ? [{ kind: "sound", id: "hero_death", bus: "sfx", x: event.x } as const]
         : [
-            { kind: "sound", id: "kill", bus: "sfx", x: event.x } as const,
+            {
+              kind: "sound",
+              id: deathVocalOf(event.targetArchetype),
+              bus: "sfx",
+              x: event.x,
+            } as const,
             { kind: "sound", id: "kill_pop", bus: "sfx", x: event.x } as const,
           ]),
     ],
@@ -309,7 +315,11 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
   bossPrimed: () => ({ tier: 0, cues: [] }),
   lootBurst: () => ({ tier: 0, cues: [] }),
   // The leap's whoosh and dust are plan 2.15's.
-  leap: () => ({ tier: 0, cues: [] }),
+  // The take-off whoosh; the sprite system arcs the jump and lands it in dust (H §7.1).
+  leap: (event) => ({
+    tier: 0,
+    cues: [{ kind: "sound", id: "leap_whoosh", bus: "sfx", x: event.fromX }],
+  }),
   // Strongbox presentation is plan 2.18's.
   strongboxTriggered: () => ({ tier: 0, cues: [] }),
 };

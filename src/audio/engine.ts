@@ -186,6 +186,9 @@ export function createAudioEngine(options: EngineOptions) {
         if (playing) playing.gain.gain.value *= dbToGain(AUDIO_TUNING.retriggerBoostDb);
         return null;
       }
+      // A minimum interval: inside its window the sound doesn't start again (one squeak per swarm).
+      const interval = AUDIO_TUNING.minIntervalMs[id];
+      if (interval !== undefined && t - (lastStart.get(id) ?? -Infinity) < interval) return null;
       // Per-sound cap: the oldest voice of this sound makes room.
       const same = voices.filter((v) => v.id === id);
       if (same.length >= AUDIO_TUNING.voiceCap[category]) drop(same[0]!, "sound cap");

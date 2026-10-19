@@ -13,6 +13,7 @@ const IMPACT = "kenney-impact-sounds/Audio";
 const UI = "kenney-interface-sounds/Audio";
 const RPG = "rubberduck-80-rpg-sfx";
 const BREAK = "rubberduck-75-breaking-hit-sfx";
+const CREATURE = "rubberduck-80-creature-sfx";
 const GEM = "bobjt-gem-collect/gem-gather-stereo.wav";
 const BOMB = "lpc/source-of-tales/sfx/bomb.ogg";
 
@@ -26,6 +27,14 @@ export const SOUNDS = {
   hit_evade: { variants: ["starninjas-swords/sword - StarNinjas/sword.#.ogg"] },
   hit_block: { variants: ["starninjas-swords/sword_clash.#.ogg"] },
   kill: { variants: ["artisticdude-zombies/zombies/zombie-#.wav"] },
+  // Phase 2 archetypes (H §7.1): bone hits, and a death vocal per archetype.
+  hit_bone: { variants: [`${BREAK}/bfh1_wood_hit_0#.ogg`] },
+  bone_clatter: { variants: [`${BREAK}/bfh1_wood_falling_0#.ogg`] },
+  rat_squeak: { variants: [`${CREATURE}/cute_0#.ogg`] },
+  goblin_squeal: { variants: [`${CREATURE}/hurt_0#.ogg`] },
+  leap_whoosh: { variants: ["starninjas-swords/sword - StarNinjas/sword.#.ogg"] },
+  leap_land: { variants: [`${IMPACT}/impactSoft_heavy_00#.ogg`] },
+  helm_ping: { variants: [`${IMPACT}/impactMetal_light_00#.ogg`] },
   hero_death: {
     variants: [`${RPG}/creature_die_01.ogg`],
     layers: [`${BREAK}/bfh1_falling_01.ogg`],

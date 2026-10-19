@@ -28,6 +28,14 @@ export const HERO_SPRITES: Readonly<Record<string, string>> = {
 /** Each monster archetype's recipe (Appendix D §1). @public (1.21 draws them) */
 export const MONSTER_SPRITES: Readonly<Record<string, string>> = {
   Shambler: "m01_shambling_corpse",
+  ArmouredLight: "m02a_helmed_skeleton",
+  Swarm: "m12_rat_swarm",
+  Leaper: "m05_goblin_leaper",
+};
+
+/** Sprites an archetype swaps to once Fully Broken (G §4.1: the Helmed Skeleton loses its helm). */
+export const BROKEN_SPRITES: Readonly<Record<string, string>> = {
+  ArmouredLight: "m02a_helmed_skeleton_broken",
 };
 
 /** The hero recipe whose weapon layers stand for each starter weapon class. */

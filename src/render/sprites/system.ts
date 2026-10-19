@@ -1,6 +1,8 @@
 import { isAttackKit } from "../../sim/state";
 import type { SpriteEntry } from "../../assets/manifest";
-import { HERO_SPRITES, MONSTER_SPRITES } from "../../assets/recipes";
+import { BROKEN_SPRITES, HERO_SPRITES, MONSTER_SPRITES } from "../../assets/recipes";
+import { audioEngine } from "../../audio";
+import { createParticlePool } from "../../juice/core/particles";
 import { EASINGS } from "../../juice/core/easing";
 import type { PresentationFactory } from "../../juice/director/systems";
 import type { Rarity, RoundState } from "../../sim/state";
@@ -50,6 +52,26 @@ interface Actor {
   maxLife: number;
   rarity: Rarity | null;
   ailments: AilmentState;
+  /** Monsters: their archetype, for its swaps and quirks (H §7.1). */
+  archetypeId?: string;
+  /** A Helmed Skeleton drawn without its helm. */
+  broken?: boolean;
+  /** A leaper that has made its one leap. */
+  leapt?: boolean;
+}
+
+/** A leaper's jump in flight, from where it was drawn to where the sim put it. */
+interface Leap {
+  fromX: number;
+  toX: number;
+  startedAt: number;
+}
+
+/** A helm knocked off a Helmed Skeleton. */
+interface Debris {
+  lane: number;
+  x: number;
+  startedAt: number;
 }
 
 interface Corpse {
@@ -98,8 +120,17 @@ function actorsOf(state: RoundState, frame: Frame, sprites: Record<string, Sprit
   }
   for (const monster of state.monsters) {
     const before = frame.previousX.get(monster.id) ?? monster.x;
-    const recipe = MONSTER_SPRITES[monster.archetypeId];
+    // A Fully Broken Helmed Skeleton loses its helm until the break wears off (G §4.1).
+    const broken =
+      monster.actor.ailments.fullyBrokenSeconds > 0 &&
+      BROKEN_SPRITES[monster.archetypeId] !== undefined;
+    const recipe = broken
+      ? BROKEN_SPRITES[monster.archetypeId]
+      : MONSTER_SPRITES[monster.archetypeId];
     actors.push({
+      archetypeId: monster.archetypeId,
+      broken,
+      leapt: monster.leapt === true,
       id: monster.id,
       kind: "monster",
       lane: monster.lane,
@@ -121,7 +152,10 @@ function actorsOf(state: RoundState, frame: Frame, sprites: Record<string, Sprit
  * effects the juice cues drive. Presentation only (P12): it reads the round
  * and never writes it.
  */
-export const spriteSystem: PresentationFactory = ({ stack, director }) => {
+export const spriteSystem: PresentationFactory = ({ stack, director, settings }) => {
+  const dust = createParticlePool(settings.get);
+  const leaps = new Map<string, Leap>();
+  const debris: Debris[] = [];
   let assets: SpriteAssets | null = null;
   void loadSpriteAssets().then((loaded) => (assets = loaded));
   const views = new Map<string, View>();
@@ -162,6 +196,15 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
       return { pose: index === 0 ? ("idle" as const) : ("attack" as const), frame: index };
     }
     if (actor.kind === "monster") {
+      const leap = leaps.get(actor.id);
+      const jump = entry?.animations?.leap;
+      if (leap && jump) {
+        const p = Math.min(1, (frame.now - leap.startedAt) / T.leapMs);
+        return {
+          pose: "leap" as const,
+          frame: Math.min(jump.frames - 1, Math.floor(p * jump.frames)),
+        };
+      }
       const monster = state.monsters.find((m) => m.id === actor.id);
       const walk = entry?.animations?.walk;
       const moving = (frame.previousX.get(actor.id) ?? Infinity) > (monster?.x ?? 0) + 1e-9;
@@ -309,6 +352,25 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
       corpses.push({ actor, startedAt: now, sink: shovelled.delete(tile) });
     }
     shovelled.clear();
+    // A leaper that just leapt arcs from where it was drawn; a skeleton that just broke throws its helm (H §7.1).
+    for (const actor of actors) {
+      const before = previous.get(actor.id);
+      if (!before || actor.kind !== "monster") continue;
+      if (actor.leapt && !before.leapt)
+        leaps.set(actor.id, { fromX: before.x, toX: actor.x, startedAt: now });
+      if (actor.broken && !before.broken) {
+        debris.push({ lane: actor.lane, x: actor.x, startedAt: now });
+        audioEngine()?.play("helm_ping", { x: actor.x });
+      }
+    }
+    for (const [id, leap] of leaps) {
+      if (now - leap.startedAt < T.leapMs) continue;
+      leaps.delete(id);
+      const landed = present.get(id);
+      if (!landed) continue;
+      dust.emit("dust", boardX(leap.toX), laneY(landed.lane) + 20);
+      audioEngine()?.play("leap_land", { x: leap.toX });
+    }
     previous = present;
 
     const draws: { lane: number; x: number; run: () => void }[] = [];
@@ -324,6 +386,14 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
       const flash = sinceHit < T.flashMs ? 1 - sinceHit / T.flashMs : 0;
       let cx = boardX(actor.x);
       let cy = laneY(actor.lane);
+      const leap = leaps.get(actor.id);
+      if (leap) {
+        const p = Math.min(1, (now - leap.startedAt) / T.leapMs);
+        cx = boardX(leap.fromX + (leap.toX - leap.fromX) * EASINGS.outQuad(p));
+        cy -= Math.sin(Math.PI * p) * T.leapArcPx;
+      }
+      if (actor.archetypeId === "Swarm")
+        cy += (v.phaseMs % (2 * T.swarmJitterPx + 1)) - T.swarmJitterPx;
       // Monsters are knocked back by band and recover with outQuad; heroes never move, they jitter (H §2.4).
       if (actor.kind !== "hero" && sinceHit < HIT_TUNING.knockbackRecoverMs)
         cx += Math.round(
@@ -394,6 +464,35 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
     // Sorted by lane then x (G §1.1).
     draws.sort((a, b) => a.lane - b.lane || a.x - b.x);
     for (const d of draws) d.run();
+    dust.update(dt / 1000);
+    dust.draw(ctx);
+    drawDebris(ctx, now);
+  }
+
+  /** Each knocked-off helm: a small pointed steel cap tumbling up and back, then falling away. */
+  function drawDebris(ctx: CanvasRenderingContext2D, now: number) {
+    const d = T.helmDebris;
+    for (let i = debris.length - 1; i >= 0; i--) {
+      const piece = debris[i]!;
+      const t = (now - piece.startedAt) / 1000;
+      if (t * 1000 >= d.ms) {
+        debris.splice(i, 1);
+        continue;
+      }
+      const x = boardX(piece.x) + d.vx * t;
+      const y = laneY(piece.lane) - 26 + d.vy * t + (d.gravity * t * t) / 2;
+      ctx.save();
+      ctx.globalAlpha = 1 - (t * 1000) / d.ms;
+      ctx.translate(Math.round(x), Math.round(y));
+      ctx.rotate(d.spin * t);
+      ctx.fillStyle = "#1b1b1b";
+      ctx.fillRect(-6, -2, 12, 6);
+      ctx.fillStyle = "#9aa3ad";
+      ctx.fillRect(-5, -1, 10, 4);
+      ctx.fillRect(-2, -5, 4, 4);
+      ctx.restore();
+    }
+    ctx.globalAlpha = 1;
   }
 
   stack.register({ id: "sprites-actors", layer: "actors", draw });
@@ -402,6 +501,9 @@ export const spriteSystem: PresentationFactory = ({ stack, director }) => {
     id: "sprites",
     consume(cue, batch) {
       if (cue.kind === "flash") flashes.set(cue.targetId, { at: batch.at, band: cue.band });
+      // The leap's take-off whoosh; its arc and landing are drawn above (H §7.1).
+      if (batch.event === "leap" && cue.kind === "sound")
+        audioEngine()?.play(cue.id, cue.x !== undefined ? { x: cue.x } : {});
       if (batch.event === "shovelled" && cue.kind === "particles")
         shovelled.add(`${cue.lane}:${cue.x}`);
     },
