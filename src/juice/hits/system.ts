@@ -1,6 +1,6 @@
 import { audioEngine } from "../../audio";
 import type { DamageType } from "../../combat/stats";
-import { drawPixelText } from "../../render/layers/numbers";
+import { drawPixelText, GLYPH_H, textWidth } from "../../render/layers/numbers";
 import { TILE } from "../../render/scale";
 import { HIT_TUNING, NUMBER_TUNING } from "../../tuning/juice";
 import { createParticlePool } from "../core/particles";
@@ -116,7 +116,12 @@ export const hitSystem: PresentationFactory = ({ stack, settings, now }) => {
     const x = boardX(n.x ?? 0) + (n.jitter ?? 0);
     // From mid-body, so the full rise stays inside the target's own lane.
     const y = laneY(n.lane ?? 0) - NUMBER_BASELINE - motion.rise;
-    if (n.resisted) drawShield(ctx, x - 12 * style.scale * motion.scale, y, motion.alpha);
+    if (n.resisted) {
+      // Just left of the text, centred on its glyphs, however wide the number is.
+      const scale = Math.max(0.5, Math.round(style.scale * motion.scale * 2) / 2);
+      const left = x - textWidth(style.text, scale) / 2;
+      drawShield(ctx, left - 6, y - (GLYPH_H * scale) / 2, motion.alpha);
+    }
     drawPixelText(ctx, style.text, x, y, {
       color: style.color,
       outline: NUMBER_TUNING.outline,

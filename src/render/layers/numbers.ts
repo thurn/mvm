@@ -31,11 +31,12 @@ const GLYPHS: Record<string, string[]> = {
 };
 
 const GLYPH_W = 5;
-const GLYPH_H = 7;
+/** A glyph's height in logical px at scale 1. */
+export const GLYPH_H = 7;
 const SPACING = 1;
 
 /** The width in logical px of `text` at `scale`. */
-function textWidth(text: string, scale: number): number {
+export function textWidth(text: string, scale: number): number {
   return text.length * (GLYPH_W + SPACING) * scale - SPACING * scale;
 }
 
