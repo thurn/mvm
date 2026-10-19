@@ -9,9 +9,9 @@ import type { Card, HeroInstance, OwnedHeroId } from "../../heroes/model/hero";
 import { LEVEL_END_TUNING as T } from "../../tuning/juice";
 import { firstClearReward } from "../../tuning/progression";
 import { HeroCard, skillName } from "../cards/HeroCard";
-import { ItemCard } from "../cards/ItemCard";
-import { Panel, RARITY_COLOR } from "../cards/parts";
-import { Burst, Flash, TierPackage } from "../fx";
+import { ItemCard, itemName } from "../cards/ItemCard";
+import { RARITY_COLOR } from "../cards/parts";
+import { Burst, Flash, HoverTip, TierPackage } from "../fx";
 import { MenuButton, MenuScreen, MENU } from "../title/layout";
 import { chooseHero } from "../../account/stash";
 import type { AccountStore } from "../../account/store";
@@ -109,10 +109,29 @@ function XpBar({
   );
 }
 
+/**
+ * A loot card at the level end (H §3.10): a compact tile — name and type in
+ * the rarity colour, with its Upgrade stamp — that shows the full card on
+ * hover, so a first clear's summary stays above the fold at 1280×720.
+ */
 function LootCard({ drop, upgrade, shown }: { drop: CardDrop; upgrade: boolean; shown: boolean }) {
+  const [hover, setHover] = useState(false);
   const rarity = dropRarity(drop);
+  const title =
+    drop.kind === "item"
+      ? itemName(drop.item).name
+      : `${rarity[0]!.toUpperCase() + rarity.slice(1)} ${drop.kind}`;
+  const named = drop.kind === "item" ? itemName(drop.item) : null;
+  // A normal item's name is its base; say what it is instead.
+  const sub =
+    drop.kind === "item"
+      ? `${named?.base && named.base !== title ? named.base : `${rarity[0]!.toUpperCase() + rarity.slice(1)} item`} · ilvl ${drop.item.itemLevel}`
+      : `Item level ${drop.itemLevel}`;
   return (
     <div
+      data-testid={drop.kind === "item" ? `item-${drop.item.id}` : "loot-card"}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       style={{
         position: "relative",
         visibility: shown ? "visible" : "hidden",
@@ -120,20 +139,37 @@ function LootCard({ drop, upgrade, shown }: { drop: CardDrop; upgrade: boolean; 
         textAlign: "left",
       }}
     >
-      {drop.kind === "item" ? (
-        <ItemCard item={drop.item} upgrade={upgrade} />
-      ) : (
-        <Panel rarity={rarity} width={140}>
-          <div style={{ color: RARITY_COLOR[rarity], fontSize: 13 }}>
-            {rarity[0]!.toUpperCase() + rarity.slice(1)} {drop.kind}
-          </div>
-          <div>Item level {drop.itemLevel}</div>
-        </Panel>
+      <div
+        style={{
+          width: 170,
+          padding: "5px 8px",
+          boxSizing: "border-box",
+          background: "#0c0d10",
+          border: `1px solid ${RARITY_COLOR[rarity]}`,
+          font: "12px/1.35 monospace",
+        }}
+      >
+        <div
+          style={{
+            color: RARITY_COLOR[rarity],
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {title}
+        </div>
+        <div style={{ color: MENU.dim }}>{sub}</div>
+      </div>
+      {hover && drop.kind === "item" && (
+        <HoverTip placement="below">
+          <ItemCard item={drop.item} upgrade={upgrade} />
+        </HoverTip>
       )}
       {upgrade && shown && (
         <span
           style={{
-            // Hung over the top-right corner, clear of the centred name and the affix lines.
+            // Hung over the top-right corner, clear of the name.
             position: "absolute",
             top: -10,
             right: -8,
@@ -157,12 +193,6 @@ function asCard(hero: HeroInstance): Card {
   return { hero, weapon: null, armour: null, accessory: null };
 }
 
-/**
- * The level-end summary (GDD §15, H §3.10): the result, loot flipping in
- * by ascending rarity with Upgrade stamps, XP bars filling, then the first
- * clear's reward and any pending choose-1-of-3. With no summary (a reload
- * before the pick) it shows only the pending choice.
- */
 /** What the loot filter's hidden drops became, in one line (C §C.7). */
 function hiddenLine({ count, gold, shards }: LevelSummary["hidden"]): string {
   const parts = [
@@ -172,6 +202,12 @@ function hiddenLine({ count, gold, shards }: LevelSummary["hidden"]): string {
   return `Loot filter: ${count} hidden item${count === 1 ? "" : "s"} became ${parts.join(" and ")}`;
 }
 
+/**
+ * The level-end summary (GDD §15, H §3.10): the result, loot flipping in
+ * by ascending rarity with Upgrade stamps, XP bars filling, then the first
+ * clear's reward and any pending choose-1-of-3. With no summary (a reload
+ * before the pick) it shows only the pending choice.
+ */
 export function LevelEnd({
   store,
   summary,
