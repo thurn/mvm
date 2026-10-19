@@ -21,7 +21,12 @@ export const archetypes: Scene = {
         : kinds[i] === "ArmouredLight"
           ? SKILLS.armourBreaker
           : SKILLS.rollingSlam;
-      const back = leaper ? SKILLS.rollingSlam : SKILLS.lightningArrow;
+      // The skeleton lane's Armour Breaker works alone, so a skeleton lives long enough to break.
+      const back = leaper
+        ? SKILLS.rollingSlam
+        : kinds[i] === "ArmouredLight"
+          ? SKILLS.acolyte
+          : SKILLS.lightningArrow;
       placeHero(state, starterCard(id<"Gem">(front), 3, `scene-arch-${lane}`), lane, 3);
       placeHero(state, starterCard(id<"Gem">(back), 3, `scene-arch-back-${lane}`), lane, 1);
       for (let wave = 0; wave < 4; wave++)

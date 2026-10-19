@@ -156,6 +156,8 @@ export const spriteSystem: PresentationFactory = ({ stack, director, settings })
   const dust = createParticlePool(settings.get);
   const leaps = new Map<string, Leap>();
   const debris: Debris[] = [];
+  /** Sim time in ms this frame: leaps run on it, so a paused or slowed round holds them mid-air. */
+  let simNow = 0;
   let assets: SpriteAssets | null = null;
   void loadSpriteAssets().then((loaded) => (assets = loaded));
   const views = new Map<string, View>();
@@ -199,7 +201,7 @@ export const spriteSystem: PresentationFactory = ({ stack, director, settings })
       const leap = leaps.get(actor.id);
       const jump = entry?.animations?.leap;
       if (leap && jump) {
-        const p = Math.min(1, (frame.now - leap.startedAt) / T.leapMs);
+        const p = Math.min(1, (simNow - leap.startedAt) / T.leapMs);
         return {
           pose: "leap" as const,
           frame: Math.min(jump.frames - 1, Math.floor(p * jump.frames)),
@@ -330,6 +332,7 @@ export const spriteSystem: PresentationFactory = ({ stack, director, settings })
     const simMs = (state.tick + frame.alpha) * STEP_SECONDS * 1000;
     const dt = firstFrame ? 0 : Math.min(250, Math.max(0, simMs - (lastSimMs ?? simMs)));
     lastSimMs = simMs;
+    simNow = simMs;
     const sprites = assets?.manifest.sprites ?? {};
     const actors = actorsOf(state, frame, sprites);
     const present = new Map(actors.map((a) => [a.id, a]));
@@ -357,14 +360,14 @@ export const spriteSystem: PresentationFactory = ({ stack, director, settings })
       const before = previous.get(actor.id);
       if (!before || actor.kind !== "monster") continue;
       if (actor.leapt && !before.leapt)
-        leaps.set(actor.id, { fromX: before.x, toX: actor.x, startedAt: now });
+        leaps.set(actor.id, { fromX: before.x, toX: actor.x, startedAt: simMs });
       if (actor.broken && !before.broken) {
         debris.push({ lane: actor.lane, x: actor.x, startedAt: now });
         audioEngine()?.play("helm_ping", { x: actor.x });
       }
     }
     for (const [id, leap] of leaps) {
-      if (now - leap.startedAt < T.leapMs) continue;
+      if (simMs - leap.startedAt < T.leapMs) continue;
       leaps.delete(id);
       const landed = present.get(id);
       if (!landed) continue;
@@ -388,7 +391,7 @@ export const spriteSystem: PresentationFactory = ({ stack, director, settings })
       let cy = laneY(actor.lane);
       const leap = leaps.get(actor.id);
       if (leap) {
-        const p = Math.min(1, (now - leap.startedAt) / T.leapMs);
+        const p = Math.min(1, (simMs - leap.startedAt) / T.leapMs);
         cx = boardX(leap.fromX + (leap.toX - leap.fromX) * EASINGS.outQuad(p));
         cy -= Math.sin(Math.PI * p) * T.leapArcPx;
       }
