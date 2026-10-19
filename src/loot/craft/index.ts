@@ -44,7 +44,11 @@ export function orbRefusal(item: ItemInstance, orb: ItemOrb): CraftRefusal | nul
     case "transmutation":
       return r === "normal" ? null : "wrong-rarity";
     case "augmentation":
-      return r !== "magic" ? "wrong-rarity" : item.mods.length >= 2 ? "full" : null;
+      return r !== "magic"
+        ? "wrong-rarity"
+        : item.mods.length >= 2 * capOf("magic")
+          ? "full"
+          : null;
     case "regal":
       return r === "magic" ? null : "wrong-rarity";
     case "exalted":
@@ -63,6 +67,9 @@ export function applyOrb(item: ItemInstance, orb: ItemOrb, rng: Rng): CraftResul
   if (item.corrupted) return { ok: false, reason: "corrupted" };
   const base = baseItems().find((b) => b.id === item.baseId);
   if (!base) return { ok: false, reason: "unknown-item" };
+  // The target rules live in orbRefusal alone, so the Craft tab's pulse always agrees with the craft.
+  const refusal = orbRefusal(item, orb);
+  if (refusal) return { ok: false, reason: refusal };
   const current = affixesOf(item);
   const add = (
     onto: readonly ModData[],
@@ -72,12 +79,10 @@ export function applyOrb(item: ItemInstance, orb: ItemOrb, rng: Rng): CraftResul
     const mod = rollAffix(base, item.itemLevel, onto, capOf(rarity), rng, side);
     return mod ? { ...rollModValues(mod, rng), mod } : null;
   };
-  const rarityIs = (...ok: ItemInstance["rarity"][]) => ok.includes(item.rarity);
 
   switch (orb) {
     case "transmutation": {
       // Normal → Magic with one mod from the combined pool.
-      if (!rarityIs("normal")) return { ok: false, reason: "wrong-rarity" };
       const mod = add([], "magic");
       if (!mod) return { ok: false, reason: "no-legal-mod" };
       return {
@@ -87,8 +92,6 @@ export function applyOrb(item: ItemInstance, orb: ItemOrb, rng: Rng): CraftResul
     }
     case "augmentation": {
       // A 1-mod magic item gains its missing side.
-      if (!rarityIs("magic")) return { ok: false, reason: "wrong-rarity" };
-      if (item.mods.length >= 2) return { ok: false, reason: "full" };
       const missing =
         current[0]?.generationType === "prefix" ? "suffix" : current[0] ? "prefix" : undefined;
       const mod = add(current, "magic", missing);
@@ -100,7 +103,6 @@ export function applyOrb(item: ItemInstance, orb: ItemOrb, rng: Rng): CraftResul
     }
     case "regal": {
       // Magic → Rare, keeping its mods and adding one.
-      if (!rarityIs("magic")) return { ok: false, reason: "wrong-rarity" };
       const mod = add(current, "rare");
       if (!mod) return { ok: false, reason: "no-legal-mod" };
       return {
@@ -114,8 +116,6 @@ export function applyOrb(item: ItemInstance, orb: ItemOrb, rng: Rng): CraftResul
     }
     case "exalted": {
       // A rare under six mods gains one, within 3 prefixes and 3 suffixes.
-      if (!rarityIs("rare")) return { ok: false, reason: "wrong-rarity" };
-      if (item.mods.length >= 2 * capOf("rare")) return { ok: false, reason: "full" };
       const mod = add(current, "rare");
       if (!mod) return { ok: false, reason: "no-legal-mod" };
       return {
@@ -125,7 +125,6 @@ export function applyOrb(item: ItemInstance, orb: ItemOrb, rng: Rng): CraftResul
     }
     case "alchemy": {
       // Normal or Magic → Rare with four new mods; the old ones go.
-      if (!rarityIs("normal", "magic")) return { ok: false, reason: "wrong-rarity" };
       const rolled: NonNullable<ReturnType<typeof add>>[] = [];
       for (let i = 0; i < LOOT_TUNING.alchemyMods; i++) {
         const mod = add(

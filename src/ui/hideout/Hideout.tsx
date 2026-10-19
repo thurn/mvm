@@ -346,7 +346,9 @@ function CurrencyTab({ account }: { account: AccountState }) {
     <section style={{ padding: 10, background: MENU.panel, borderRadius: 6, minWidth: 420 }}>
       <div style={{ color: MENU.gold, marginBottom: 8 }}>Gold: {account.gold}</div>
       {owned.length === 0 ? (
-        <p style={{ color: MENU.dim }}>No orbs yet. Clearing Level 2 gives your first.</p>
+        <p style={{ color: MENU.dim }}>
+          No orbs yet. Monsters drop them, and a first clear of Level 2 gives four.
+        </p>
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 6 }}>
           {owned.map((c) => (
