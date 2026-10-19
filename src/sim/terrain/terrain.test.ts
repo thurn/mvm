@@ -12,6 +12,7 @@ import { id } from "../../types/ids";
 import type { SimEvent } from "../events";
 import type { RoundState } from "../state";
 import { STEPS_PER_SECOND } from "../time";
+import { SIM_TUNING } from "../../tuning/sim";
 import { TERRAIN_TUNING } from "../../tuning/terrain";
 import roundV1 from "../../save/fixtures/round/v1.json";
 import { generateTerrain, type TerrainTile } from ".";
@@ -33,7 +34,7 @@ function violations(tiles: TerrainTile[], lanes: readonly number[]): string[] {
   const out: string[] = [];
   for (const lane of lanes) {
     const blocked = tiles.filter((x) => x.lane === lane && !t.placeable[x.kind]);
-    if (t.columns - blocked.length < t.minPlaceablePerLane)
+    if (SIM_TUNING.columns - blocked.length < t.minPlaceablePerLane)
       out.push(`lane ${lane}: too few placeable`);
     const early = blocked.filter((x) => x.column <= t.earlyColumns).length;
     if (t.earlyColumns - early < t.minPlaceableEarly) out.push(`lane ${lane}: too few early`);
@@ -42,7 +43,8 @@ function violations(tiles: TerrainTile[], lanes: readonly number[]): string[] {
   }
   for (const x of tiles) {
     if (x.column === 1 && x.kind === "rock") out.push("rock in column 1");
-    if (!lanes.includes(x.lane) || x.column < 1 || x.column > t.columns) out.push("off board");
+    if (!lanes.includes(x.lane) || x.column < 1 || x.column > SIM_TUNING.columns)
+      out.push("off board");
   }
   const keys = tiles.map((x) => `${x.lane}:${x.column}`);
   if (new Set(keys).size !== keys.length) out.push("two tiles on one square");

@@ -1,4 +1,5 @@
 import type { LevelDefinition } from "../../monsters/levels/types";
+import { SIM_TUNING } from "../../tuning/sim";
 import { TERRAIN_TUNING } from "../../tuning/terrain";
 import { createStreams, streamRng } from "../rng";
 import type { RoundState } from "../state";
@@ -29,7 +30,7 @@ function fits(tiles: readonly TerrainTile[], lanes: readonly number[]): boolean 
     const blocked = own.filter((x) => !t.placeable[x.kind]);
     const earlyBlocked = blocked.filter((x) => x.column <= t.earlyColumns).length;
     return (
-      t.columns - blocked.length >= t.minPlaceablePerLane &&
+      SIM_TUNING.columns - blocked.length >= t.minPlaceablePerLane &&
       t.earlyColumns - earlyBlocked >= t.minPlaceableEarly &&
       own.filter((x) => x.kind === "rock").length <= t.maxRocksPerLane &&
       !own.some((x) => x.column === 1 && x.kind === "rock")
@@ -46,7 +47,7 @@ function attempt(level: LevelDefinition, count: number, rng: Rng): TerrainTile[]
   const tiles: TerrainTile[] = [];
   for (const kind of kinds) {
     const open = level.lanes.flatMap((lane) =>
-      Array.from({ length: TERRAIN_TUNING.columns }, (_, c) => ({
+      Array.from({ length: SIM_TUNING.columns }, (_, c) => ({
         lane,
         column: c + 1,
         kind,

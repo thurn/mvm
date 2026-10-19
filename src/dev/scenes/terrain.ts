@@ -18,7 +18,7 @@ export const terrain: Scene = {
         newTerrain: "rock",
         startingMana: 500,
       },
-      Math.floor(Math.random() * 1e9),
+      12,
     );
   },
 };
