@@ -432,7 +432,7 @@ A level may use:
 | Property | Value |
 |---|---|
 | Lanes | 2 (picked at random: rows 1–2, 2–3, or 3–4) |
-| Life x / damage x | 40 / 3 |
+| Life x / damage x | 10 / 3 (set by the Grassland calibration so a level-appropriate board can win) |
 | Speed | 7.0 s/tile |
 | Art | Scaled-up zombie (appendix G) |
 
