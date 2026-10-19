@@ -1,14 +1,14 @@
 import { catalogEntry } from "../heroes/model/catalog";
 import { rollStrongboxReward } from "../loot/drops";
 import { streamRng } from "../sim/rng";
-import { newInstanceId, spawnMonster, type MonsterInstanceId, type RoundState } from "../sim/state";
+import { newInstanceId, type MonsterInstanceId, type RoundState } from "../sim/state";
 import type { System } from "../sim/system";
 import { placeableAt } from "../sim/terrain";
 import { STRONGBOX_TUNING } from "../tuning/loot";
 import { WAVE_TUNING } from "../tuning/waves";
 import { archetype } from "./archetypes";
 import type { LevelDefinition } from "./levels/types";
-import { buildMonster } from "./model";
+import { spawnRoll } from "./model";
 import { rollAffixes, rollRarity, type SpawnRarity } from "./rarity";
 import { drawArchetype, waveBudget } from "./waves";
 
@@ -104,19 +104,16 @@ export const strongboxSystem: System = {
       box.phase = "ambush";
       for (const planned of box.ambush) {
         const rarity = planned.rarity ?? rollRarity(plan.levelIndex, rng);
-        const monster = spawnMonster(
-          state,
-          buildMonster({
-            archetypeId: planned.archetypeId,
-            rarity,
-            affixes: rollAffixes(rarity, planned.archetypeId, plan.areaLevel, rng),
-            areaLevel: plan.areaLevel,
-            levelIndex: plan.levelIndex,
-            lane: planned.lane,
-            x: WAVE_TUNING.spawnX + rng() * WAVE_TUNING.spawnJitter,
-          }),
-        );
-        box.ambushIds.push(monster.id);
+        const pack = spawnRoll(state, {
+          archetypeId: planned.archetypeId,
+          rarity,
+          affixes: rollAffixes(rarity, planned.archetypeId, plan.areaLevel, rng),
+          areaLevel: plan.areaLevel,
+          levelIndex: plan.levelIndex,
+          lane: planned.lane,
+          x: WAVE_TUNING.spawnX + rng() * WAVE_TUNING.spawnJitter,
+        });
+        for (const monster of pack) box.ambushIds.push(monster.id);
       }
       ctx.emit({
         type: "strongboxTriggered",

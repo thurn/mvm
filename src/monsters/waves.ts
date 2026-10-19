@@ -1,13 +1,13 @@
 import { createStreams, draw, streamRng } from "../sim/rng";
 import { rollStrongbox } from "./strongbox";
 import { generateTerrain } from "../sim/terrain";
-import { createRound, spawnMonster, type RoundState } from "../sim/state";
+import { createRound, type RoundState } from "../sim/state";
 import type { System } from "../sim/system";
 import { STEPS_PER_SECOND } from "../sim/time";
 import { WAVE_TUNING } from "../tuning/waves";
 import { archetype } from "./archetypes";
 import type { LevelDefinition } from "./levels/types";
-import { buildMonster } from "./model";
+import { spawnRoll } from "./model";
 import { rollAffixes, rollRarity } from "./rarity";
 
 type Rng = () => number;
@@ -242,22 +242,20 @@ export const waveSystem: System = {
       runtime.pending = runtime.pending.filter((p) => !due.includes(p));
       for (const { wave, monster } of due) {
         const rarity = rollRarity(plan.levelIndex, rng);
-        const spawned = spawnMonster(
-          state,
-          buildMonster({
-            archetypeId: monster.archetypeId,
-            rarity,
-            affixes: rollAffixes(rarity, monster.archetypeId, plan.areaLevel, rng),
-            areaLevel: plan.areaLevel,
-            levelIndex: plan.levelIndex,
-            lane: monster.lane,
-            x: monster.x,
-          }),
-        );
-        if (runtime.current?.index === wave) {
-          runtime.current.monsterIds.push(spawned.id);
-          runtime.current.spawnedLife += spawned.actor.maxLife;
-        }
+        const spawned = spawnRoll(state, {
+          archetypeId: monster.archetypeId,
+          rarity,
+          affixes: rollAffixes(rarity, monster.archetypeId, plan.areaLevel, rng),
+          areaLevel: plan.areaLevel,
+          levelIndex: plan.levelIndex,
+          lane: monster.lane,
+          x: monster.x,
+        });
+        if (runtime.current?.index === wave)
+          for (const m of spawned) {
+            runtime.current.monsterIds.push(m.id);
+            runtime.current.spawnedLife += m.actor.maxLife;
+          }
       }
     }
 

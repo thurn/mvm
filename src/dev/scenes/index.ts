@@ -1,6 +1,7 @@
 import type { Intent } from "../../sim/intents";
 import type { RoundState } from "../../sim/state";
 import { ailments } from "./ailments";
+import { archetypes } from "./archetypes";
 import { boss } from "./boss";
 import { emptyBoard } from "./empty-board";
 import { equipAb } from "./equip-ab";
@@ -35,6 +36,7 @@ export const SCENES: readonly Scene[] = [
   boss,
   terrain,
   strongbox,
+  archetypes,
 ];
 
 export function findScene(name: string): Scene | undefined {

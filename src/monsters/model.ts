@@ -1,7 +1,7 @@
 import { makeActor } from "../combat/actor";
 import type { StatSheet } from "../combat/stats";
 import { monsterLevelStats } from "../data";
-import type { MonsterSpec } from "../sim/state";
+import { spawnMonster, type MonsterSpec, type MonsterState, type RoundState } from "../sim/state";
 import { COMBAT_KNOBS } from "../tuning/combat";
 import { WAVE_TUNING } from "../tuning/waves";
 import { MONSTER_AFFIXES } from "./affixes";
@@ -83,4 +83,15 @@ export function buildMonster(roll: MonsterRoll): MonsterSpec {
       },
     },
   };
+}
+
+/**
+ * Spawns one rolled monster, or its whole pack (D §2.2: a Swarm is 3 rats
+ * in the lane, 0.3 tiles apart, sharing the roll's rarity and affixes).
+ */
+export function spawnRoll(state: RoundState, roll: MonsterRoll): MonsterState[] {
+  const type = archetype(roll.archetypeId);
+  return Array.from({ length: type.packSize ?? 1 }, (_, i) =>
+    spawnMonster(state, buildMonster({ ...roll, x: roll.x + i * (type.packSpacing ?? 0) })),
+  );
 }
