@@ -39,15 +39,18 @@ export function MenuButton({
   onClick,
   primary = false,
   disabled = false,
+  testId,
 }: {
   children: ReactNode;
   onClick?(): void;
   primary?: boolean;
   disabled?: boolean;
+  testId?: string;
 }) {
   return (
     <button
       type="button"
+      data-testid={testId}
       onClick={onClick}
       disabled={disabled}
       style={{

@@ -37,6 +37,8 @@ export const SOUNDS = {
   // The Strongbox (H §3.8): the lid's lock rattle and the lid opening; the ambush's brass hit is the flag horn.
   lock_rattle: { variants: [`${RPG}/lock_0#.ogg`] },
   chest_open: { variants: ["oiboo-open-chest/open_chest.wav"] },
+  // The campaign map's parchment rustle as a node is picked (H §9.3).
+  parchment: { variants: ["kenney-rpg-audio/Audio/bookFlip#.ogg"] },
   // Boss moments (H §7.5).
   boss_rumble: { variants: [`${RPG}/stones_0#.ogg`] },
   boss_whoosh: { variants: ["kenney-digital-audio/Audio/phaserUp#.ogg"] },

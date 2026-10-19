@@ -23,9 +23,8 @@ describe("the level element preview (GDD §15 campaign map)", () => {
     expect(preview).toEqual({ label: "Fire", resist: 12, cap: 75 });
     render(
       <Campaign
-        level={1}
-        cleared={false}
-        element={preview}
+        account={account}
+        levels={[{ ...LEVEL_1, element: "fire" }]}
         onPlay={() => {}}
         onHideout={() => {}}
       />,

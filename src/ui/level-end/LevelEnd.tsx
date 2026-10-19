@@ -16,6 +16,7 @@ import { MenuButton, MenuScreen, MENU } from "../title/layout";
 import { chooseHero } from "../../account/stash";
 import type { AccountStore } from "../../account/store";
 import { useAccount } from "../account";
+import { rewardParts } from "../title/rewards";
 import { dropRarity, sortDrops, type CardDrop } from "./sort";
 import { fillProgress, revealTimes } from "./timeline";
 
@@ -231,6 +232,13 @@ export function LevelEnd({
     summary ? (summary.firstClear ? account.firstClears.at(-1) : undefined) : choice?.levelId,
   );
   const reward = rewardLevel ? firstClearReward(rewardLevel) : undefined;
+  // The slot has its own heading and the offer its cards; list the rest.
+  const granted = rewardParts(
+    reward && {
+      ...(reward.currency ? { currency: reward.currency } : {}),
+      ...(reward.passivePoints ? { passivePoints: reward.passivePoints } : {}),
+    },
+  );
   const times = revealTimes(loot.cards.length, summary === null || summary.firstClear);
   const progress = before ? fillProgress(elapsed, times) : 1;
   const firstClearShown = times.firstClear !== null && elapsed >= times.firstClear;
@@ -370,6 +378,12 @@ export function LevelEnd({
                 <h2 style={{ margin: "0 0 8px", color: MENU.gold }}>
                   Slot {reward.unlockSlot} unlocked
                 </h2>
+              )}
+              {/* Everything else the first clear granted (plan 2.24); the offer shows below. */}
+              {granted.length > 0 && (
+                <p data-testid="first-clear-reward" style={{ margin: "0 0 8px", color: MENU.text }}>
+                  First-clear reward: {granted.join(", ")}
+                </p>
               )}
               {choice ? (
                 <>

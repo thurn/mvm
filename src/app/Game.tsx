@@ -9,6 +9,7 @@ import {
   saveDocument,
   type Resumed,
   furthestLevel,
+  isUnlocked,
 } from "../account/lifecycle";
 import type { AccountState } from "../account/state";
 import {
@@ -30,7 +31,7 @@ import { createRoundStore } from "../ui/hud/round-store";
 import { RestartBanner } from "../ui/resume/Banner";
 import { ResumeHud } from "../ui/resume/ResumeHud";
 import { Campaign } from "../ui/title/Campaign";
-import { elementPreview } from "../ui/title/element";
+import { CAMPAIGN } from "../monsters/levels/grassland";
 import { Credits } from "../ui/title/Credits";
 import { FocusSelect } from "../ui/title/FocusSelect";
 import { TitleScreen } from "../ui/title/TitleScreen";
@@ -275,12 +276,16 @@ export function Game() {
     };
   }, [playing, services]);
 
-  const play = (account: AccountState | null) => {
+  /** The level last played, so the level end's Replay repeats it. */
+  const lastLevel = useRef<string | null>(null);
+  const play = (account: AccountState | null, levelId?: string) => {
     if (!services) return;
     const owner = account ?? newAccount("warrior");
     halt.current = false;
-    // The furthest unlocked level (D §6.3); 2.24's campaign map picks any cleared one too.
-    const level = furthestLevel(owner);
+    // A level the map picked, if unlocked; else the furthest unlocked level (D §6.3).
+    const picked = CAMPAIGN.find((l) => l.id === levelId);
+    const level = picked && isUnlocked(owner, picked) ? picked : furthestLevel(owner);
+    lastLevel.current = level.id;
     const round = beginLevel(owner, level);
     services.logger.log("levelStart", { levelId: level.id, wavePlan: round.waves?.plan });
     setPhase({
@@ -294,13 +299,18 @@ export function Game() {
   };
 
   /** Follows the router from a menu screen (1.34); "level" starts the level. */
-  const go = (action: RouteAction) => {
+  const go = (action: RouteAction, levelId?: string) => {
     if (phase.kind !== "menu") return;
     const next = route(phase.screen, action, {
       hasAccount: phase.account !== null,
       hasRound: false,
     });
-    if (next === "level") play(phase.account);
+    // Replay repeats the level just played; the hideout plays the furthest.
+    if (next === "level")
+      play(
+        phase.account,
+        levelId ?? (action === "replay" ? (lastLevel.current ?? undefined) : undefined),
+      );
     else {
       // Hero and spell drops wait unrolled in the stash until the hideout opens (1.18).
       if (next === "hideout") accountStore?.update((a) => rollUnrolled(a) > 0);
@@ -353,10 +363,8 @@ export function Game() {
         case "campaign":
           return (
             <Campaign
-              level={furthestLevel(phase.account).index}
-              cleared={phase.account.firstClears.includes(furthestLevel(phase.account).id)}
-              element={elementPreview(furthestLevel(phase.account), phase.account)}
-              onPlay={() => go("playLevel")}
+              account={phase.account}
+              onPlay={(levelId) => go("playLevel", levelId)}
               onHideout={() => go("hideout")}
             />
           );

@@ -745,6 +745,27 @@ export const CREDITS: readonly Credit[] = [
   },
   {
     pack: "kenney-rpg-audio",
+    file: "Audio/bookFlip1.ogg",
+    authors: ["Kenney"],
+    licenses: ["CC0 (verified on the source page, 2026-10-18)"],
+    urls: ["https://kenney.nl/assets/rpg-audio"],
+  },
+  {
+    pack: "kenney-rpg-audio",
+    file: "Audio/bookFlip2.ogg",
+    authors: ["Kenney"],
+    licenses: ["CC0 (verified on the source page, 2026-10-18)"],
+    urls: ["https://kenney.nl/assets/rpg-audio"],
+  },
+  {
+    pack: "kenney-rpg-audio",
+    file: "Audio/bookFlip3.ogg",
+    authors: ["Kenney"],
+    licenses: ["CC0 (verified on the source page, 2026-10-18)"],
+    urls: ["https://kenney.nl/assets/rpg-audio"],
+  },
+  {
+    pack: "kenney-rpg-audio",
     file: "Audio/cloth1.ogg",
     authors: ["Kenney"],
     licenses: ["CC0 (verified on the source page, 2026-10-18)"],

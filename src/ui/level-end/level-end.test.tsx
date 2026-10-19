@@ -311,3 +311,34 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
     });
   });
 });
+
+describe("the granted first-clear reward (plan 2.24)", () => {
+  beforeEach(() => vi.useFakeTimers());
+  afterEach(() => vi.useRealTimers());
+
+  test("a first clear of Level 2 lists what it granted: the slot and the orbs", () => {
+    const account = newAccount("warrior");
+    account.firstClears = ["level-1", "level-2"];
+    render(
+      <LevelEnd
+        store={createAccountStore(account, () => {})}
+        summary={{
+          result: "won",
+          xpGained: 10,
+          firstClear: true,
+          drops: [],
+          hidden: { count: 0, gold: 0, shards: 0 },
+        }}
+        before={null}
+        onReplay={() => {}}
+        onHideout={() => {}}
+      />,
+    );
+    act(() => {
+      vi.advanceTimersByTime(6000);
+    });
+    const line = screen.getByTestId("first-clear-reward").textContent!;
+    expect(line).toMatch(/Orb of Augmentation/);
+    expect(line).toMatch(/Orb of Transmutation/);
+  });
+});
