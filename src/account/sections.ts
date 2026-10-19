@@ -21,6 +21,7 @@ export function emptyAccount(): AccountState {
     pendingChoices: [],
     activeRun: null,
     nextSeed: 1,
+    lootFilter: "showAll",
   };
 }
 

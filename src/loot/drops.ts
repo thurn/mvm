@@ -9,7 +9,7 @@ type Rng = () => number;
 
 /** One drop from a kill (Appendix E §3–§5). Heroes and spells carry their rolled rarity; 1.18 generates them. */
 export type Drop =
-  | { kind: "item"; item: ItemInstance }
+  | { kind: "item"; item: ItemInstance; hidden?: boolean }
   | { kind: "hero" | "spell"; rarity: "normal" | "magic" | "rare"; itemLevel: number }
   | { kind: "currency"; currencyId: string }
   | { kind: "gold"; amount: number };

@@ -1,3 +1,4 @@
+import type { LootFilter } from "../loot/filter";
 import type { Actor } from "../combat/actor";
 import type { SkillHit } from "../combat/hit";
 import type { Drop } from "../loot/drops";
@@ -237,6 +238,8 @@ export interface RoundState {
   lanes: number[];
   /** The level's special tiles, generated once at level start (D §8, P16). */
   terrain: TerrainTile[];
+  /** The account's loot filter, locked at level start (C §C.7). */
+  lootFilter: LootFilter;
   /** The level's Strongbox, if it rolled one (D §9). */
   strongbox: StrongboxState | null;
   heroes: HeroState[];
@@ -279,6 +282,7 @@ export function createRound({ seed, lanes, mana }: RoundOptions): RoundState {
     lanes: [...lanes],
     terrain: [],
     strongbox: null,
+    lootFilter: "showAll",
     heroes: [],
     monsters: [],
     projectiles: [],

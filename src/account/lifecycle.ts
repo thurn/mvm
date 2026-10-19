@@ -1,4 +1,6 @@
 import { acquireItem } from "./stash";
+import { mergeShards, SHARDS } from "../loot/craft/heroes";
+import { itemSellPrice } from "../loot/prices";
 import { chooseOneOfThree } from "../heroes/gen/generate";
 import { starterCard } from "../heroes/model/starter";
 import type { GemId } from "../data/types";
@@ -69,6 +71,7 @@ export function beginLevel(
   seed = account.nextSeed++,
 ): RoundState {
   const round = startLevel(level, seed);
+  round.lootFilter = account.lootFilter;
   lockRoster(round, activeCards(account));
   account.activeRun = { levelId: level.id, xp: 0 };
   return round;
@@ -97,7 +100,8 @@ function grantXp(account: AccountState, xp: number): void {
 function credit(account: AccountState, drop: Drop): void {
   switch (drop.kind) {
     case "item":
-      acquireItem(account, drop.item);
+      // A hidden drop converts at level end instead (C §C.7).
+      if (!drop.hidden) acquireItem(account, drop.item);
       break;
     case "hero":
     case "spell":
@@ -174,6 +178,13 @@ export function finishLevel(account: AccountState, round: RoundState): LevelSumm
       });
     }
   }
+  // Hidden drops convert, won or lost (C §C.7): Normal into its sell value, low-tier Magic into a Transmutation Shard.
+  for (const { drop } of round.earned) {
+    if (drop.kind !== "item" || !drop.hidden) continue;
+    if (drop.item.rarity === "normal") account.gold += itemSellPrice(drop.item);
+    else account.currency[SHARDS.transmutation] = (account.currency[SHARDS.transmutation] ?? 0) + 1;
+  }
+  mergeShards(account);
   const xpGained = account.activeRun?.xp ?? 0;
   account.activeRun = null;
   return {

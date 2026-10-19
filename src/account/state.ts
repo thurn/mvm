@@ -1,3 +1,4 @@
+import type { LootFilter } from "../loot/filter";
 import type { Drop } from "../loot/drops";
 import type { Card, HeroInstance } from "../heroes/model/hero";
 import type { ItemInstance } from "../heroes/model/item";
@@ -38,5 +39,7 @@ export interface AccountState {
   /** The level being played and the XP earned in it so far; a rejected round restarts that level (P14). */
   activeRun: { levelId: string; xp: number } | null;
   /** Seeds each new level from a counter, so runs are reproducible from a save. */
+  /** The loot filter preset (C §C.7); rounds lock it at level start. */
+  lootFilter: LootFilter;
   nextSeed: number;
 }

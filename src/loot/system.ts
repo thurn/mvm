@@ -3,7 +3,8 @@ import { streamRng } from "../sim/rng";
 import { newInstanceId } from "../sim/state";
 import type { System } from "../sim/system";
 import { BOSS_TUNING } from "../tuning/bosses";
-import { rollDrops } from "./drops";
+import { rollDrops, type Drop } from "./drops";
+import { isHidden } from "./filter";
 
 /**
  * Rolls each kill's drops at kill time (Appendix E §3–§5, P16): every
@@ -38,7 +39,12 @@ export const lootSystem: System = {
         rng,
       );
       const dropIds: string[] = [];
-      for (const drop of drops) {
+      for (const rolled of drops) {
+        // The loot filter hides some gear (C §C.7): it still drops, quietly, and converts at level end.
+        const drop: Drop =
+          rolled.kind === "item" && isHidden(rolled.item, state.lootFilter)
+            ? { ...rolled, hidden: true }
+            : rolled;
         const dropId = newInstanceId<"Drop">(state);
         dropIds.push(dropId);
         state.earned.push({ dropId, monsterId: kill.monsterId, tick: state.tick, drop });
