@@ -147,34 +147,53 @@ function rollValue(stat: RawModStat, rng: Rng): number {
   return stat.min + Math.floor(rng() * (stat.max - stat.min + 1));
 }
 
+/**
+ * Picks one more affix for a base next to `existing` (C.6 step 5): a legal
+ * tier at the item level, by weight, in a group the item doesn't have, on a
+ * side under `cap` (or only `side`). Null when nothing can roll. Its values
+ * roll separately (`rollModValues`), so generation keeps its draw order.
+ */
+export function rollAffix(
+  base: BaseItemData,
+  ilvl: number,
+  existing: readonly ModData[],
+  cap: number,
+  rng: Rng,
+  side?: ModData["generationType"],
+): ModData | null {
+  const groups = new Set(existing.flatMap((m) => m.groups));
+  const count = (kind: ModData["generationType"]) =>
+    existing.filter((m) => m.generationType === kind).length;
+  const options = mods().filter(
+    (m) =>
+      m.requiredLevel <= ilvl &&
+      spawnsOn(m, base) &&
+      tierWeight(m, base) > 0 &&
+      (side === undefined || m.generationType === side) &&
+      count(m.generationType) < cap &&
+      !m.groups.some((g) => groups.has(g)),
+  );
+  if (options.length === 0) return null;
+  return pickWeighted(
+    options.map((value) => ({ value, weight: tierWeight(value, base) })),
+    rng,
+  );
+}
+
+/** A mod's rolled values, one per stat, in range. */
+export function rollModValues(mod: ModData, rng: Rng): { modId: ModId; values: number[] } {
+  return { modId: mod.id as ModId, values: mod.stats.map((s) => rollValue(s, rng)) };
+}
+
 /** Rolls `count` affixes on a base: legal tiers by weight, one per group, prefix and suffix caps (C.6 step 5). */
 function rollAffixes(base: BaseItemData, ilvl: number, count: number, cap: number, rng: Rng) {
-  const pool = mods().filter(
-    (m) => m.requiredLevel <= ilvl && spawnsOn(m, base) && tierWeight(m, base) > 0,
-  );
   const rolled: ModData[] = [];
-  const groups = new Set<string>();
-  const kinds = { prefix: 0, suffix: 0 };
   while (rolled.length < count) {
-    const options = pool.filter(
-      (m) =>
-        kinds[m.generationType] < cap &&
-        !m.groups.some((g) => groups.has(g)) &&
-        !rolled.includes(m),
-    );
-    if (options.length === 0) break;
-    const mod = pickWeighted(
-      options.map((value) => ({ value, weight: tierWeight(value, base) })),
-      rng,
-    );
-    rolled.push(mod);
-    kinds[mod.generationType]++;
-    for (const g of mod.groups) groups.add(g);
+    const next = rollAffix(base, ilvl, rolled, cap, rng);
+    if (!next) break;
+    rolled.push(next);
   }
-  return rolled.map((mod) => ({
-    modId: mod.id as ModId,
-    values: mod.stats.map((s) => rollValue(s, rng)),
-  }));
+  return rolled.map((mod) => rollModValues(mod, rng));
 }
 
 function rollModCount(rarity: ItemRarity, rng: Rng): number {

@@ -221,6 +221,8 @@ export const LOOT_TUNING = {
     { count: 6, weight: 1 },
   ],
   affixCaps: { magic: 1, rare: 3 },
+  /** An Orb of Alchemy makes a rare with this many mods (C §C.5.2). */
+  alchemyMods: 4,
   qualityChance: 0.1,
   qualityMax: 20,
   /** Chance of one currency drop per kill (E §4.1); bosses roll several times. */

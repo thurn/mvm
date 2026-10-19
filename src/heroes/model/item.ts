@@ -24,6 +24,8 @@ export interface ItemInstance {
   implicits?: { modId: string; values: number[] }[];
   /** The unique this item is, when its rarity is unique (C.4). */
   uniqueId?: string;
+  /** Corrupted by a Vaal Orb: no other currency can change it (C §C.5.2). */
+  corrupted?: boolean;
 }
 
 const ACCESSORY_CLASSES = new Set(["Amulet", "Ring", "Belt"]);

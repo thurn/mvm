@@ -1,4 +1,5 @@
 import type { AccountStore } from "../../account/store";
+import { applyOrb, craft, ITEM_ORBS, type ItemOrb } from "../../loot/craft";
 import { useAccount } from "../account";
 import { id } from "../../types/ids";
 import { useEffect, useState, useSyncExternalStore } from "react";
@@ -60,6 +61,7 @@ export function DevMenu({ accountStore, round, store, logger }: DevMenuProps) {
   const [open, setOpen] = useState(false);
   const settingsStore = sharedSettings();
   const settings = useSyncExternalStore(settingsStore.subscribe, settingsStore.get);
+  const [orb, setOrb] = useState<ItemOrb>("transmutation");
   const [grant, setGrant] = useState({
     kind: "item",
     level: 5,
@@ -243,6 +245,42 @@ export function DevMenu({ accountStore, round, store, logger }: DevMenuProps) {
             {account.gold}
           </div>
         )}
+        {/* Item crafting (plan 2.6): grant one orb and apply it to the first stash item it fits. */}
+        <div>
+          craft{" "}
+          <select
+            aria-label="craft orb"
+            value={orb}
+            onChange={(e) => setOrb(e.target.value as ItemOrb)}
+          >
+            {(Object.keys(ITEM_ORBS) as ItemOrb[]).map((o) => (
+              <option key={o} value={o}>
+                {o}
+              </option>
+            ))}
+          </select>{" "}
+          <button
+            type="button"
+            onClick={() => {
+              if (!accountStore) return setStatus("no account yet: press Play first");
+              accountStore.update((account) => {
+                grantCurrency(account, ITEM_ORBS[orb], 1);
+                const target = account.stash.items.find(
+                  (item) => applyOrb(item, orb, () => 0.5).ok,
+                );
+                if (!target) return setStatus(`no stash item takes ${orb}`);
+                const result = craft(account, orb, target.id);
+                setStatus(
+                  result.ok
+                    ? `${orb} → ${target.id}: ${result.item.rarity}`
+                    : `${orb}: ${result.reason}`,
+                );
+              });
+            }}
+          >
+            Craft
+          </button>
+        </div>
       </div>
 
       <div style={box}>
