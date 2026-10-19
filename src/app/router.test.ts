@@ -37,6 +37,11 @@ describe("the M1 flow (1.34)", () => {
     ]);
   });
 
+  test("the hideout opens the campaign map (2.24)", () => {
+    expect(route("hideout", "campaign", { hasAccount: true, hasRound: false })).toBe("campaign");
+    expect(route("title", "campaign", { hasAccount: true, hasRound: false })).toBe("title");
+  });
+
   test("credits and focus go back to the title", () => {
     expect(walk("title", ["credits", "back"])).toEqual(["credits", "title"]);
     expect(route("focus", "back", fresh)).toBe("title");

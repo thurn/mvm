@@ -1,6 +1,6 @@
 /**
  * The M1 screen flow (GDD §15, plan 1.34): title → focus → campaign →
- * Level 1 → level end → hideout → campaign. Pure, so the transitions are
+ * Level 1 → level end → hideout → campaign map. Pure, so the transitions are
  * testable without the UI.
  */
 export type Screen = "title" | "focus" | "campaign" | "level" | "levelEnd" | "hideout" | "credits";
@@ -14,7 +14,8 @@ export type RouteAction =
   | "playLevel"
   | "levelEnded"
   | "replay"
-  | "hideout";
+  | "hideout"
+  | "campaign";
 
 /** What exists in the save: an account, and a round in progress. */
 export interface SaveState {
@@ -50,5 +51,8 @@ export function route(from: Screen, action: RouteAction, save: SaveState): Scree
       return from === "levelEnd" ? "level" : from;
     case "hideout":
       return from === "levelEnd" || from === "campaign" ? "hideout" : from;
+    case "campaign":
+      // The hideout opens the map, to pick any unlocked level (plan 2.24).
+      return from === "hideout" ? "campaign" : from;
   }
 }

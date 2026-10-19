@@ -230,6 +230,8 @@ export function Game() {
     [account, services, round],
   );
 
+  /** The level last played, so the level end's Replay repeats it. */
+  const [lastLevel, setLastLevel] = useState<string | null>(null);
   const queue = useMemo(() => createIntentQueue(), []);
   const scale = useBoardScale(HUD_TOP + HUD_BOTTOM);
   const store = useMemo(() => (playing ? createRoundStore(playing.round) : null), [playing]);
@@ -251,6 +253,9 @@ export function Game() {
         if (round.tick % STEPS_PER_SECOND === 0) persist(services, playing.account, round);
         if (round.result !== null && !finished) {
           finished = true;
+          // Replay repeats this level, resumed from a save or not.
+          const finishedLevel = round.waves?.plan.levelId;
+          if (finishedLevel) setLastLevel(finishedLevel);
           const summary = finishLevel(playing.account, round);
           services.logger.log("levelResult", {
             levelId: round.waves?.plan.levelId ?? "",
@@ -276,8 +281,6 @@ export function Game() {
     };
   }, [playing, services]);
 
-  /** The level last played, so the level end's Replay repeats it. */
-  const lastLevel = useRef<string | null>(null);
   const play = (account: AccountState | null, levelId?: string) => {
     if (!services) return;
     const owner = account ?? newAccount("warrior");
@@ -285,7 +288,6 @@ export function Game() {
     // A level the map picked, if unlocked; else the furthest unlocked level (D §6.3).
     const picked = CAMPAIGN.find((l) => l.id === levelId);
     const level = picked && isUnlocked(owner, picked) ? picked : furthestLevel(owner);
-    lastLevel.current = level.id;
     const round = beginLevel(owner, level);
     services.logger.log("levelStart", { levelId: level.id, wavePlan: round.waves?.plan });
     setPhase({
@@ -307,10 +309,7 @@ export function Game() {
     });
     // Replay repeats the level just played; the hideout plays the furthest.
     if (next === "level")
-      play(
-        phase.account,
-        levelId ?? (action === "replay" ? (lastLevel.current ?? undefined) : undefined),
-      );
+      play(phase.account, levelId ?? (action === "replay" ? (lastLevel ?? undefined) : undefined));
     else {
       // Hero and spell drops wait unrolled in the stash until the hideout opens (1.18).
       if (next === "hideout") accountStore?.update((a) => rollUnrolled(a) > 0);
@@ -382,7 +381,11 @@ export function Game() {
           );
         case "hideout":
           return accountStore ? (
-            <Hideout store={accountStore} onPlay={() => go("playLevel")} />
+            <Hideout
+              store={accountStore}
+              onPlay={() => go("playLevel")}
+              onMap={() => go("campaign")}
+            />
           ) : (
             <p>Loading…</p>
           );

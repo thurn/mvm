@@ -433,10 +433,13 @@ function TabButton({
 export function Hideout({
   store,
   onPlay,
+  onMap,
 }: {
   /** The account; every change goes through the store, which saves it and re-renders. */
   store: AccountStore;
   onPlay(): void;
+  /** Opens the campaign map, to pick any unlocked level (plan 2.24). */
+  onMap?(): void;
 }) {
   const account = useAccount(store);
   const [tab, setTab] = useState<Tab>("roster");
@@ -620,6 +623,7 @@ export function Hideout({
             {passivePoints(account) > 0 && ` · ${passivePoints(account)} unspent passive points`}
           </span>
           <span style={{ marginLeft: "auto" }}>
+            {onMap && <MenuButton onClick={onMap}>Campaign map</MenuButton>}
             <MenuButton primary onClick={onPlay}>
               Play Level {furthestLevel(account).index}
             </MenuButton>
