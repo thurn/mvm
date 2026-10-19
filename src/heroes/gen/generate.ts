@@ -90,7 +90,7 @@ export function rollLevel(base: number, highestUnlocked: number, rng: Rng): numb
 }
 
 /** Rarity follows the support count (B §1.9): small pools drop the rarity to match. */
-function rarityFor(supports: number): Rarity {
+export function rarityFor(supports: number): Rarity {
   return supports === 0 ? "normal" : supports <= 2 ? "magic" : "rare";
 }
 

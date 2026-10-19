@@ -291,3 +291,13 @@ export const STRONGBOX_TUNING = {
     rarityBonus: 6,
   },
 } as const;
+
+/** Salvage and shards (Appendix C §C.5.6). */
+export const SALVAGE_TUNING = {
+  /** Shards per merge into their orb. */
+  shardsPerOrb: 10,
+  item: { magic: 1, rare: 1, rareSixMods: 2, unique: 4 },
+  hero: { magic: 1, rare: 3, rareFourSupports: 4 },
+  /** The Lesser Jeweller's Orb's support ceiling (C §C.5.4). */
+  lesserJewellerCeiling: 3,
+} as const;
