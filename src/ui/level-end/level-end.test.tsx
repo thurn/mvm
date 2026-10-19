@@ -8,6 +8,7 @@ import { generateGear } from "../../loot/items";
 import type { Drop } from "../../loot/drops";
 import { createStreams, streamRng } from "../../sim/rng";
 import { DEFAULT_SETTINGS, sharedSettings, type JuiceSettings } from "../../juice/core/settings";
+import { fxProbe } from "../../juice/core/probe";
 import { JUICE_TUNING } from "../../tuning/juice";
 import { skillName } from "../cards/HeroCard";
 import { chooseHero } from "../../account/stash";
@@ -188,6 +189,40 @@ describe("choose 1 of 3 (Appendix E §4.5)", () => {
         expect(run({ reduceFlashing: true }).flash).toBeLessThanOrEqual(
           JUICE_TUNING.reduceFlashingMaxAlpha,
         );
+      } finally {
+        sharedSettings().set(DEFAULT_SETTINGS);
+      }
+    });
+
+    test("the first-clear reveal fires the T4 package once, and nothing at juice 0 (hv-mb9m.58)", () => {
+      const run = (patch: Partial<JuiceSettings>) => {
+        cleanup();
+        sharedSettings().set({ ...DEFAULT_SETTINGS, ...patch });
+        render(
+          <LevelEnd
+            store={createAccountStore(withChoice(), () => {})}
+            summary={{ result: "won", xpGained: 0, firstClear: true, drops: [] }}
+            before={{ player: { level: 1, xp: 0 }, heroes: {} }}
+            onReplay={() => {}}
+            onHideout={() => {}}
+          />,
+        );
+        fxProbe.peaks();
+        act(() => {
+          vi.advanceTimersByTime(5000);
+        });
+        const reveal = fxProbe.peaks();
+        act(() => {
+          vi.advanceTimersByTime(5000);
+        });
+        return { reveal, after: fxProbe.peaks() };
+      };
+      try {
+        const full = run({});
+        expect(full.reveal.shake).toBeGreaterThan(0);
+        expect(full.reveal.vignette).toBe(JUICE_TUNING.screen[4]!.vignette!.alpha);
+        expect(full.after).toMatchObject({ shake: 0, vignette: 0, flash: 0 });
+        expect(run({ juice: 0 }).reveal).toMatchObject({ shake: 0, vignette: 0, flash: 0 });
       } finally {
         sharedSettings().set(DEFAULT_SETTINGS);
       }

@@ -11,7 +11,7 @@ import { ACCOUNT_TUNING } from "../../tuning/progression";
 import { HeroCard, skillName } from "../cards/HeroCard";
 import { ItemCard } from "../cards/ItemCard";
 import { Panel, RARITY_COLOR } from "../cards/parts";
-import { Burst, Flash } from "../fx";
+import { Burst, Flash, TierPackage } from "../fx";
 import { MenuButton, MenuScreen, MENU } from "../title/layout";
 import { chooseHero } from "../../account/stash";
 import type { AccountStore } from "../../account/store";
@@ -250,127 +250,129 @@ export function LevelEnd({
           testId="first-clear-flash"
         />
       )}
-      <section
-        data-testid="level-end"
-        style={{
-          maxWidth: 1100,
-          padding: 20,
-          background: MENU.panel,
-          border: `1px solid ${MENU.edge}`,
-          borderRadius: 8,
-          animation: `mvm-end-slide ${T.slideMs}ms ${OUT_BACK}`,
-        }}
-      >
-        <h1 style={{ margin: "0 0 4px", color: won || !summary ? MENU.gold : "#e04848" }}>
-          {title}
-        </h1>
-        {summary && (
-          <>
-            <p style={{ margin: "0 0 12px", color: MENU.dim }}>
-              {loot.cards.length === 0
-                ? "No item drops"
-                : `${loot.cards.length} ${loot.cards.length === 1 ? "drop" : "drops"}`}
-              {loot.gold > 0 && ` · ${loot.gold} gold`}
-              {Object.entries(loot.currency).map(
-                ([id, n]) => ` · ${n}× ${currencyNames.get(id) ?? id}`,
-              )}
-            </p>
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 8,
-                justifyContent: "center",
-                alignItems: "flex-start",
-                perspective: 600,
-              }}
-            >
-              {loot.cards.map(({ drop, upgrade }, i) => (
-                <LootCard
-                  key={i}
-                  drop={drop}
-                  upgrade={upgrade}
-                  shown={elapsed >= times.cards[i]!}
-                />
-              ))}
-            </div>
-            <div style={{ margin: "16px auto 0", width: "fit-content" }}>
-              <div style={{ color: MENU.gold, fontWeight: 700 }}>+{summary.xpGained} XP</div>
-              <XpBar
-                label="Player"
-                from={before?.player.xp ?? account.player.xp}
-                to={account.player.xp}
-                progress={progress}
-              />
-              {cards.map(({ hero }) => (
+      <TierPackage tier={4} fired={firstClearShown}>
+        <section
+          data-testid="level-end"
+          style={{
+            maxWidth: 1100,
+            padding: 20,
+            background: MENU.panel,
+            border: `1px solid ${MENU.edge}`,
+            borderRadius: 8,
+            animation: `mvm-end-slide ${T.slideMs}ms ${OUT_BACK}`,
+          }}
+        >
+          <h1 style={{ margin: "0 0 4px", color: won || !summary ? MENU.gold : "#e04848" }}>
+            {title}
+          </h1>
+          {summary && (
+            <>
+              <p style={{ margin: "0 0 12px", color: MENU.dim }}>
+                {loot.cards.length === 0
+                  ? "No item drops"
+                  : `${loot.cards.length} ${loot.cards.length === 1 ? "drop" : "drops"}`}
+                {loot.gold > 0 && ` · ${loot.gold} gold`}
+                {Object.entries(loot.currency).map(
+                  ([id, n]) => ` · ${n}× ${currencyNames.get(id) ?? id}`,
+                )}
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 8,
+                  justifyContent: "center",
+                  alignItems: "flex-start",
+                  perspective: 600,
+                }}
+              >
+                {loot.cards.map(({ drop, upgrade }, i) => (
+                  <LootCard
+                    key={i}
+                    drop={drop}
+                    upgrade={upgrade}
+                    shown={elapsed >= times.cards[i]!}
+                  />
+                ))}
+              </div>
+              <div style={{ margin: "16px auto 0", width: "fit-content" }}>
+                <div style={{ color: MENU.gold, fontWeight: 700 }}>+{summary.xpGained} XP</div>
                 <XpBar
-                  key={hero.id}
-                  label={skillName(hero.skillId)}
-                  from={before?.heroes[hero.id]?.xp ?? hero.xp}
-                  to={hero.xp}
+                  label="Player"
+                  from={before?.player.xp ?? account.player.xp}
+                  to={account.player.xp}
                   progress={progress}
                 />
-              ))}
+                {cards.map(({ hero }) => (
+                  <XpBar
+                    key={hero.id}
+                    label={skillName(hero.skillId)}
+                    from={before?.heroes[hero.id]?.xp ?? hero.xp}
+                    to={hero.xp}
+                    progress={progress}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+          {(firstClearShown || summary === null) && (
+            <div style={{ marginTop: 18 }}>
+              {reward && (
+                <h2 style={{ margin: "0 0 8px", color: MENU.gold }}>
+                  Slot {reward.unlockSlot} unlocked
+                </h2>
+              )}
+              {choice ? (
+                <>
+                  <p style={{ margin: "0 0 8px" }}>Choose 1 of {choice.options.length} heroes</p>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: 10,
+                      justifyContent: "center",
+                      alignItems: "flex-start",
+                    }}
+                  >
+                    {choice.options.map((hero) => (
+                      <button
+                        key={hero.id}
+                        type="button"
+                        data-testid={`choose-${hero.id}`}
+                        aria-label={`Choose ${skillName(hero.skillId)}`}
+                        onClick={() => pick(hero.id)}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          padding: 0,
+                          cursor: "pointer",
+                          textAlign: "left",
+                        }}
+                      >
+                        <HeroCard card={asCard(hero)} />
+                      </button>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                account.stash.heroes.length > 0 &&
+                summary?.firstClear !== false && (
+                  <p style={{ color: MENU.dim }}>
+                    Your new hero and its starter weapon wait in the hideout stash.
+                  </p>
+                )
+              )}
             </div>
-          </>
-        )}
-        {(firstClearShown || summary === null) && (
-          <div style={{ marginTop: 18 }}>
-            {reward && (
-              <h2 style={{ margin: "0 0 8px", color: MENU.gold }}>
-                Slot {reward.unlockSlot} unlocked
-              </h2>
-            )}
-            {choice ? (
-              <>
-                <p style={{ margin: "0 0 8px" }}>Choose 1 of {choice.options.length} heroes</p>
-                <div
-                  style={{
-                    display: "flex",
-                    gap: 10,
-                    justifyContent: "center",
-                    alignItems: "flex-start",
-                  }}
-                >
-                  {choice.options.map((hero) => (
-                    <button
-                      key={hero.id}
-                      type="button"
-                      data-testid={`choose-${hero.id}`}
-                      aria-label={`Choose ${skillName(hero.skillId)}`}
-                      onClick={() => pick(hero.id)}
-                      style={{
-                        background: "none",
-                        border: "none",
-                        padding: 0,
-                        cursor: "pointer",
-                        textAlign: "left",
-                      }}
-                    >
-                      <HeroCard card={asCard(hero)} />
-                    </button>
-                  ))}
-                </div>
-              </>
-            ) : (
-              account.stash.heroes.length > 0 &&
-              summary?.firstClear !== false && (
-                <p style={{ color: MENU.dim }}>
-                  Your new hero and its starter weapon wait in the hideout stash.
-                </p>
-              )
-            )}
+          )}
+          <div style={{ marginTop: 16 }}>
+            <MenuButton primary disabled={choice !== undefined} onClick={onReplay}>
+              Replay
+            </MenuButton>
+            <MenuButton disabled={choice !== undefined} onClick={onHideout}>
+              Hideout
+            </MenuButton>
           </div>
-        )}
-        <div style={{ marginTop: 16 }}>
-          <MenuButton primary disabled={choice !== undefined} onClick={onReplay}>
-            Replay
-          </MenuButton>
-          <MenuButton disabled={choice !== undefined} onClick={onHideout}>
-            Hideout
-          </MenuButton>
-        </div>
-      </section>
+        </section>
+      </TierPackage>
     </MenuScreen>
   );
 }
