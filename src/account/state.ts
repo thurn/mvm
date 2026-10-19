@@ -12,6 +12,18 @@ interface PendingChoice {
   options: HeroInstance[];
 }
 
+/** The vendors' current offers (Appendix E §5.3), rolled once per refresh and stored (P16). */
+interface VendorStock {
+  armorer: ItemInstance[];
+  recruiter: HeroInstance[];
+  spells: HeroInstance[];
+}
+
+/** Something sold, which buyback returns at the price it sold for (E §5.3). */
+export type Sold =
+  | { kind: "item"; item: ItemInstance; price: number }
+  | { kind: "hero"; hero: HeroInstance; price: number };
+
 /**
  * The persistent account (P13): focus, roster, stash, wallet, progress.
  * JSON-safe; saved as the `account` section.
@@ -38,8 +50,14 @@ export interface AccountState {
   pendingChoices: PendingChoice[];
   /** The level being played and the XP earned in it so far; a rejected round restarts that level (P14). */
   activeRun: { levelId: string; xp: number } | null;
-  /** Seeds each new level from a counter, so runs are reproducible from a save. */
   /** The loot filter preset (C §C.7); rounds lock it at level start. */
   lootFilter: LootFilter;
+  /** Seeds each new level from a counter, so runs are reproducible from a save. */
   nextSeed: number;
+  /** The vendors' stock; null until first rolled (saves from before vendors). */
+  vendorStock: VendorStock | null;
+  /** The last things sold, newest first. */
+  buyback: Sold[];
+  /** Seeds each stock refresh and gamble, apart from the level seeds. */
+  vendorSeed: number;
 }

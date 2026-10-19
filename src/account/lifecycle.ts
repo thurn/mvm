@@ -17,6 +17,7 @@ import { catalogEntry } from "../heroes/model/catalog";
 import { firstClearReward, PROGRESSION_TUNING } from "../tuning/progression";
 import type { Drop } from "../loot/drops";
 import { reconcileAccount } from "./reconcile";
+import { ensureStock, refreshStock } from "./vendors";
 import { heroOffer } from "./rewards";
 import { emptyAccount } from "./sections";
 import type { AccountState } from "./state";
@@ -53,6 +54,7 @@ export function newAccount(focus: string): AccountState {
     if (catalogEntry(skill).role === "spell") account.roster.spell = card;
     else account.roster.slots[slot++] = card;
   }
+  refreshStock(account);
   return account;
 }
 
@@ -185,6 +187,8 @@ export function finishLevel(account: AccountState, round: RoundState): LevelSumm
     else account.currency[SHARDS.transmutation] = (account.currency[SHARDS.transmutation] ?? 0) + 1;
   }
   mergeShards(account);
+  // The vendors restock after every level, won or lost (E §5.3).
+  refreshStock(account);
   const xpGained = account.activeRun?.xp ?? 0;
   account.activeRun = null;
   return {
@@ -237,6 +241,7 @@ export function resumeFromDocument(doc: SaveDocument | string, log: Log = () => 
     );
   }
   const account = reconcileAccount(result.account.data as AccountState, log);
+  ensureStock(account);
   if (result.round.ok)
     return {
       account,

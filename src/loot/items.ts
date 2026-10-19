@@ -14,7 +14,8 @@ export type ItemRarity = ItemInstance["rarity"];
 export type MonsterRarity = "normal" | "magic" | "rare" | "unique" | "boss";
 
 /** The demo's weapon classes (Appendix C §C.1.1). */
-const WEAPON_CLASSES = [
+/** Every weapon item class a hero can hold (C §C.1.1). */
+export const WEAPON_CLASSES = [
   "Bow",
   "Crossbow",
   "Spear",
@@ -214,6 +215,8 @@ export interface GearRequest {
   /** Forces the item class; otherwise rolled by slot with roster shaping. */
   itemClass?: string;
   rosterWeaponClasses?: readonly string[];
+  /** Forces the base (a gamble's chosen base, E §5.3); its uniques only, when the rarity is unique. */
+  baseId?: BaseItemId;
   /** Limits a unique to these names (a boss's pool, C §C.4.1). */
   uniquePool?: readonly string[];
   newId: () => ItemId;
@@ -223,6 +226,7 @@ export interface GearRequest {
 function rollUnique(ilvl: number, request: GearRequest, rng: Rng): ItemInstance | undefined {
   const eligible = uniques().filter((u) => {
     if (request.uniquePool && !request.uniquePool.includes(u.name)) return false;
+    if (request.baseId && u.baseId !== request.baseId) return false;
     const base = baseItems().find((b) => b.id === u.baseId);
     return base !== undefined && base.dropLevel <= ilvl;
   });
@@ -250,8 +254,10 @@ export function generateGear(request: GearRequest, rng: Rng): ItemInstance {
     if (unique) return unique;
     rarity = "rare";
   }
-  let itemClass = request.itemClass ?? rollItemClass(request.rosterWeaponClasses ?? [], rng);
-  let base = rollBase(itemClass, request.ilvl, rng);
+  const chosen = request.baseId && baseItems().find((b) => b.id === request.baseId);
+  let itemClass =
+    chosen?.itemClass ?? request.itemClass ?? rollItemClass(request.rosterWeaponClasses ?? [], rng);
+  let base = chosen || rollBase(itemClass, request.ilvl, rng);
   if (!base) {
     // The rolled class has nothing this low: fall back to any weapon class that does.
     const open = WEAPON_CLASSES.filter((c) => rollBase(c, request.ilvl, () => 0));

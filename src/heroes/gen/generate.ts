@@ -94,8 +94,8 @@ export function rarityFor(supports: number): Rarity {
   return supports === 0 ? "normal" : supports <= 2 ? "magic" : "rare";
 }
 
-/** A hero or spell at a level and rarity, with its supports rolled. */
-function build(
+/** A hero or spell at a level and rarity, with its supports rolled; small pools lower the rarity (B §1.9). */
+export function buildHero(
   skillId: string,
   level: number,
   rarity: Rarity,
@@ -130,7 +130,7 @@ interface DropSource {
 export function generateHero(source: DropSource & { roster: readonly string[] }): HeroInstance {
   const skillId = chooseHeroSkill(source.areaLevel, source.roster, source.rng);
   const level = rollLevel(source.areaLevel, source.highestUnlocked, source.rng);
-  return build(
+  return buildHero(
     skillId,
     level,
     source.rarity ?? rollRarity(source.rarityBonus, source.rng),
@@ -144,7 +144,7 @@ export function generateSpell(source: DropSource): HeroInstance {
   const unlocked = spellPool().filter((id) => unlockAreaLevel(id) <= source.areaLevel);
   const skillId = pickUniform(unlocked, source.rng);
   const level = rollLevel(source.areaLevel, source.highestUnlocked, source.rng);
-  return build(
+  return buildHero(
     skillId,
     level,
     source.rarity ?? rollRarity(source.rarityBonus, source.rng),
@@ -185,6 +185,6 @@ export function chooseOneOfThree(options: {
     if (matching.length > 0) picks[picks.length - 1] = pickUniform(matching, rng);
   }
   return picks.map((skillId) =>
-    build(skillId, options.level, options.rarity, rng, options.newId()),
+    buildHero(skillId, options.level, options.rarity, rng, options.newId()),
   );
 }

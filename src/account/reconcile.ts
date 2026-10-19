@@ -4,7 +4,7 @@ import type { ItemInstance } from "../heroes/model/item";
 import { itemSellPrice } from "../loot/prices";
 import { uniques } from "../data/uniques";
 import { createStreams, streamRng } from "../sim/rng";
-import type { AccountState } from "./state";
+import type { AccountState, Sold } from "./state";
 
 type Log = (line: string) => void;
 
@@ -63,8 +63,9 @@ function reconcileMods(item: ItemInstance, known: Set<string>, log: Log): ItemIn
 
 /**
  * Resolves every content reference in an account against the current data
- * (P17): an item with an unknown base is salvaged into gold at its sell
- * price; an unknown mod is dropped. Each change is logged with the old ID.
+ * (P17): an owned item with an unknown base is salvaged into gold at its
+ * sell price, and a vendor offer or buyback item with one is dropped; an
+ * unknown mod is dropped. Each change is logged with the old ID.
  * The retirement table that would map old IDs to new ones starts empty.
  */
 export function reconcileAccount(account: AccountState, log: Log): AccountState {
@@ -92,9 +93,27 @@ export function reconcileAccount(account: AccountState, log: Log): AccountState 
       accessory: slot(card.accessory),
     };
   };
+  // Vendor offers and buyback aren't owned: an unknown base drops them, with no gold.
+  const offered = (item: ItemInstance): boolean => {
+    if (bases.has(item.baseId)) return true;
+    log(`[reconcile] vendor item ${item.id}: unknown base ${item.baseId} dropped`);
+    return false;
+  };
+  const stock = account.vendorStock;
   return {
     ...account,
     gold,
+    vendorStock: stock && {
+      ...stock,
+      armorer: stock.armorer.filter(offered).map((item) => reconcileMods(item, modIds, log)),
+    },
+    buyback: account.buyback.flatMap((sold): Sold[] =>
+      sold.kind === "hero"
+        ? [sold]
+        : offered(sold.item)
+          ? [{ ...sold, item: reconcileMods(sold.item, modIds, log) }]
+          : [],
+    ),
     stash: { ...account.stash, items },
     roster: {
       ...account.roster,

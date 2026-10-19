@@ -22,6 +22,9 @@ export function emptyAccount(): AccountState {
     activeRun: null,
     nextSeed: 1,
     lootFilter: "showAll",
+    vendorStock: null,
+    buyback: [],
+    vendorSeed: 1,
   };
 }
 
@@ -57,6 +60,7 @@ export const ACCOUNT_SECTION: SectionDefinition<AccountState> = {
     if (!Number.isFinite(account.gold) || account.gold < 0)
       problems.push("gold must be a non-negative number");
     if (!isObject(account.currency)) problems.push("currency must be an object");
+    if (!Array.isArray(account.buyback)) problems.push("buyback must be a list");
     if (!Number.isInteger(account.player.level) || account.player.level < 1)
       problems.push("player level must be ≥ 1");
     for (const key of ["items", "heroes", "unrolled"] as const) {
