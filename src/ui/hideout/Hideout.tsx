@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { CraftTab } from "../craft/CraftTab";
 import { furthestLevel } from "../../account/lifecycle";
 import { passivePoints } from "../../account/rewards";
 import type { AccountState } from "../../account/state";
@@ -345,7 +346,7 @@ function CurrencyTab({ account }: { account: AccountState }) {
     <section style={{ padding: 10, background: MENU.panel, borderRadius: 6, minWidth: 420 }}>
       <div style={{ color: MENU.gold, marginBottom: 8 }}>Gold: {account.gold}</div>
       {owned.length === 0 ? (
-        <p style={{ color: MENU.dim }}>No orbs yet. Crafting arrives in M2.</p>
+        <p style={{ color: MENU.dim }}>No orbs yet. Clearing Level 2 gives your first.</p>
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 6 }}>
           {owned.map((c) => (
@@ -367,7 +368,7 @@ function CurrencyTab({ account }: { account: AccountState }) {
   );
 }
 
-type Tab = "roster" | "stash" | "currency";
+type Tab = "roster" | "stash" | "currency" | "craft";
 
 function TabButton({
   active,
@@ -573,7 +574,10 @@ export function Hideout({
           <TabButton active={tab === "currency"} onClick={() => setTab("currency")}>
             Currency
           </TabButton>
-          {["Craft", "Vendors", "Tree"].map((name) => (
+          <TabButton active={tab === "craft"} onClick={() => setTab("craft")}>
+            Craft
+          </TabButton>
+          {["Vendors", "Tree"].map((name) => (
             <TabButton key={name} disabled>
               {name} <span style={{ fontSize: 10 }}>M2</span>
             </TabButton>
@@ -589,7 +593,9 @@ export function Hideout({
               {slot("spell", "Spell")}
             </div>
           )}
-          {tab === "currency" ? (
+          {tab === "craft" ? (
+            <CraftTab store={store} />
+          ) : tab === "currency" ? (
             <CurrencyTab account={account} />
           ) : (
             <StashPanel

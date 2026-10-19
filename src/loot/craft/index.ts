@@ -20,7 +20,7 @@ export const ITEM_ORBS = {
 export type ItemOrb = keyof typeof ITEM_ORBS;
 
 /** Why an orb can't apply (C §C.5.2's valid targets), or why the account can't craft. */
-type CraftRefusal =
+export type CraftRefusal =
   "corrupted" | "wrong-rarity" | "full" | "no-legal-mod" | "no-orb" | "unknown-item";
 
 export type CraftResult = { ok: true; item: ItemInstance } | { ok: false; reason: CraftRefusal };
@@ -32,6 +32,27 @@ const affixesOf = (item: ItemInstance): ModData[] =>
 /** Affix caps per side by rarity (C.6): magic 1 prefix + 1 suffix, rare 3 + 3. */
 const capOf = (rarity: "magic" | "rare") =>
   rarity === "magic" ? LOOT_TUNING.affixCaps.magic : LOOT_TUNING.affixCaps.rare;
+
+/**
+ * Whether an orb can target an item, by C §C.5.2's rules alone (no roll):
+ * the reason it can't, or null. The Craft tab pulses and dims targets with it.
+ */
+export function orbRefusal(item: ItemInstance, orb: ItemOrb): CraftRefusal | null {
+  if (item.corrupted) return "corrupted";
+  const r = item.rarity;
+  switch (orb) {
+    case "transmutation":
+      return r === "normal" ? null : "wrong-rarity";
+    case "augmentation":
+      return r !== "magic" ? "wrong-rarity" : item.mods.length >= 2 ? "full" : null;
+    case "regal":
+      return r === "magic" ? null : "wrong-rarity";
+    case "exalted":
+      return r !== "rare" ? "wrong-rarity" : item.mods.length >= 2 * capOf("rare") ? "full" : null;
+    case "alchemy":
+      return r === "normal" || r === "magic" ? null : "wrong-rarity";
+  }
+}
 
 /**
  * Applies one item orb (C §C.5.2) to an item, returning the new item or the

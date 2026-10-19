@@ -511,3 +511,20 @@ export const CUE_FEEL = {
   /** Three times a preset's count per tile, so a 3×3 reads as one burst (a few motes per tile vanished). */
   spellParticleScale: 3,
 };
+
+/** The Craft tab's reveal (Appendix H §9.2). */
+export const CRAFT_TUNING = {
+  /** The orb slams into the item: scale from this to 0 over `slamMs`. */
+  slamScale: 1.3,
+  slamMs: 100,
+  /** The suspense pause between the slam and the result. */
+  pauseMs: 120,
+  /** New mod lines type in this far apart; an added line stays highlighted this long. */
+  lineMs: 60,
+  highlightMs: 1000,
+  /** The rarity sweep and its burst. */
+  sweepMs: 400,
+  burstParticles: 16,
+  burstMs: 600,
+  flashAlpha: 0.7,
+} as const;
