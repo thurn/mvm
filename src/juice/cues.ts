@@ -1,7 +1,7 @@
 import type { Sound } from "../audio/engine";
 import { DAMAGE_TYPES, type DamageType } from "../combat/stats";
 import type { SimEvent, SimEventOf } from "../sim/events";
-import { CUE_FEEL, JUICE_TUNING, type PresetName, type Tier } from "../tuning/juice";
+import { BOSS_JUICE, CUE_FEEL, JUICE_TUNING, type PresetName, type Tier } from "../tuning/juice";
 import { significance } from "./core/significance";
 import type { JuiceSettings } from "./core/settings";
 import type { Cue, CueBatch } from "./director/cue";
@@ -308,12 +308,49 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
     ],
   }),
   // Boss and loot-burst presentation is plan 2.17's; until then these stay quiet.
-  bossSpawned: () => ({ tier: 0, cues: [] }),
-  bossTelegraph: () => ({ tier: 0, cues: [] }),
-  bossAbility: () => ({ tier: 0, cues: [] }),
-  bossEnrage: () => ({ tier: 0, cues: [] }),
-  bossPrimed: () => ({ tier: 0, cues: [] }),
-  lootBurst: () => ({ tier: 0, cues: [] }),
+  // Boss moments (H §7.5): the boss system draws the name card, the telegraphs and the heavy stun.
+  bossSpawned: (event) => ({
+    tier: 4,
+    cues: [
+      { kind: "duck", db: BOSS_JUICE.musicCutDb, seconds: BOSS_JUICE.musicCutSeconds },
+      { kind: "sound", id: "boss_rumble", bus: "sfx", x: event.x },
+    ],
+  }),
+  // The boss system delays this whoosh so it ends exactly at impact.
+  bossTelegraph: () => ({
+    tier: 1,
+    cues: [{ kind: "sound", id: "boss_whoosh", bus: "sfx" }],
+  }),
+  bossAbility: (event) =>
+    event.ability === "grainSlam"
+      ? {
+          tier: 3,
+          cues: [
+            ...event.tiles.map((tile): Cue => ({
+              kind: "particles",
+              preset: "grain",
+              lane: tile.lane,
+              x: tile.column,
+              scale: CUE_FEEL.spellParticleScale,
+            })),
+            { kind: "sound", id: "spell_impact", bus: "sfx" },
+          ],
+        }
+      : {
+          tier: 3,
+          cues: [
+            ...event.tiles.map((tile): Cue => ({
+              kind: "particles",
+              preset: "dust",
+              lane: tile.lane,
+              x: tile.column,
+            })),
+            { kind: "sound", id: "boss_brood", bus: "sfx" },
+          ],
+        },
+  bossEnrage: () => ({ tier: 4, cues: [{ kind: "sound", id: "boss_roar", bus: "sfx" }] }),
+  bossPrimed: () => ({ tier: 2, cues: [{ kind: "sound", id: "boss_primed", bus: "sfx" }] }),
+  lootBurst: (event) => ({ tier: 0, cues: [{ kind: "fountain", dropIds: event.dropIds }] }),
   // The leap's whoosh and dust are plan 2.15's.
   // The take-off whoosh; the sprite system arcs the jump and lands it in dust (H §7.1).
   leap: (event) => ({

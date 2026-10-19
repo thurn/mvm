@@ -56,6 +56,17 @@ export const JUICE_TUNING = {
   particleBudget: 0.8,
   bossSignificanceMultiplier: 10,
   presets: {
+    /** Grain Slam's burst (H §7.5): tan grain thrown up and falling. */
+    grain: {
+      count: 10,
+      speed: [40, 90],
+      angle: [200, 340],
+      life: [300, 600],
+      size: [1, 2],
+      color: "#d8c08a",
+      gravity: 220,
+      drag: 1,
+    },
     /** A hidden drop's landing (H §3.7): three grey motes. */
     lootPuff: {
       count: 3,
@@ -259,6 +270,26 @@ export interface LootClassSpec {
 
 /** The drop timeline and per-class table (H §3.1–§3.4). Times in ms. */
 export const LOOT_JUICE = {
+  /** A boss or Strongbox burst is a fountain (H §3.9): spaced launches, higher arcs, the unique last. */
+  fountain: {
+    spacingMs: 120,
+    uniqueWaitMs: 600,
+    arcPx: [30, 50] as const,
+    uniqueArcPx: 60,
+    scatterTiles: 1.5,
+    /** H §3.9's launch order: normal, magic, currency, rare, hero, the unique last (gold is the kills system's). */
+    order: [
+      "normal",
+      "magic",
+      "currencyLow",
+      "currencyMid",
+      "currencyTop",
+      "rare",
+      "hero",
+      "spell",
+      "unique",
+    ] as const,
+  },
   /** A hidden drop's muted coin tick and its icon's grey while it arcs (H §3.7). */
   hiddenCoinDb: -12,
   hiddenColor: "#8A8A8A",
@@ -577,4 +608,34 @@ export const SPELL_JUICE = {
   /** The impact flash, over the actors, finishes within H §1.1's 250 ms. */
   flashAlpha: 0.55,
   flashMs: 200,
+} as const;
+
+/** Boss moments (H §7.5, plan 2.17). Times in ms. */
+export const BOSS_JUICE = {
+  /** The intro: the music cuts while a rumble rises, and the name card slides in and holds. */
+  musicCutDb: -40,
+  musicCutSeconds: 1.5,
+  nameCard: { slideMs: 350, holdMs: 2600, color: "#af6025" },
+  /** Each boss's name card: its PoE-style name and subtitle. */
+  names: {
+    BloatedMiller: { name: "The Bloated Miller", subtitle: "Keeper of the Rotten Mill" },
+  } as Readonly<Record<string, { name: string; subtitle: string }>>,
+  /** Telegraph tiles (H §2.8): orange, 25% → 45% alpha, pulsing 4 Hz then 8 Hz, a white edge at the end. */
+  telegraph: {
+    color: "#FF8A00",
+    alpha: [0.25, 0.45] as const,
+    hz: 4,
+    lastHz: 8,
+    lastMs: 300,
+    edgeMs: 150,
+  },
+  /** The telegraph whoosh rises for this long, ending exactly at impact. */
+  whooshMs: 700,
+  /** The heavy-stun moment: big text over the boss for its 3 s. */
+  heavyStunText: "HEAVY STUN",
+  heavyStunMs: 3000,
+  /** Rotting Brood's ground bulge, swelling over the telegraph. */
+  bulgeColor: "#5a4630",
+  /** The enrage smoke burst around the boss. */
+  smokeBursts: 3,
 } as const;

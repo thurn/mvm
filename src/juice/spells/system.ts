@@ -1,9 +1,39 @@
 import type { Frame } from "../../render/layers";
 import { TILE } from "../../render/scale";
 import { shapeTiles } from "../../spells/shapes";
-import { JUICE_TUNING, SPELL_JUICE as S, type PresetName } from "../../tuning/juice";
+import type { RoundState } from "../../sim/state";
+import { BOSS_JUICE, JUICE_TUNING, SPELL_JUICE as S, type PresetName } from "../../tuning/juice";
 import type { PresentationFactory } from "../director/systems";
 import { flashAlpha } from "../tiers/screen";
+
+/**
+ * Boss telegraphs on the same layer (H §2.8): orange tiles pulsing between
+ * 25% and 45% alpha at 4 Hz, quickening to 8 Hz in the last 300 ms, with a
+ * thin white edge in the last 150 ms. Information, so juice doesn't hide them.
+ */
+function drawBossTelegraphs(ctx: CanvasRenderingContext2D, state: RoundState, now: number) {
+  const T = BOSS_JUICE.telegraph;
+  for (const monster of state.monsters)
+    for (const t of monster.boss?.telegraphs ?? []) {
+      const msLeft = t.secondsLeft * 1000;
+      const hz = msLeft < T.lastMs ? T.lastHz : T.hz;
+      const pulse = (1 + Math.sin((now / 1000) * hz * 2 * Math.PI)) / 2;
+      for (const tile of t.tiles) {
+        const x = (tile.column - 1) * TILE;
+        const y = tile.lane * TILE;
+        ctx.globalAlpha = T.alpha[0] + (T.alpha[1] - T.alpha[0]) * pulse;
+        ctx.fillStyle = T.color;
+        ctx.fillRect(x, y, TILE, TILE);
+        if (msLeft < T.edgeMs) {
+          ctx.globalAlpha = 0.9;
+          ctx.strokeStyle = "#ffffff";
+          ctx.lineWidth = 1;
+          ctx.strokeRect(x + 0.5, y + 0.5, TILE - 1, TILE - 1);
+        }
+      }
+    }
+  ctx.globalAlpha = 1;
+}
 
 /** One impact's ground flash: its tiles, colour and start. */
 interface GroundFlash {
@@ -25,7 +55,8 @@ export const spellSystem: PresentationFactory = ({ stack, settings }) => {
   stack.register({
     id: "spell-telegraphs",
     layer: "groundEffects",
-    draw(ctx: CanvasRenderingContext2D, { state }: Frame) {
+    draw(ctx: CanvasRenderingContext2D, { state, now }: Frame) {
+      drawBossTelegraphs(ctx, state, now);
       if (state.spells.length === 0) return;
       const juice = Math.min(1, settings.get().juice);
       for (const part of state.spells) {

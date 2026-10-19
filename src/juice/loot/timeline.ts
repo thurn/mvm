@@ -30,6 +30,42 @@ export function stagger<T>(
     .map(({ drop }, i) => ({ drop, delay: i * L.staggerMs }));
 }
 
+/** A loot class's place in a fountain's launch order. */
+const rankIn = (cls: LootClass) => (L.fountain.order as readonly string[]).indexOf(cls);
+
+/**
+ * A burst as a fountain (H §3.9): non-uniques launch `spacingMs` apart in
+ * H §3.9's order with arcs rising across 30–50 px; the unique waits
+ * `uniqueWaitMs` after the last and launches highest.
+ */
+export function fountain<T>(
+  drops: readonly T[],
+  cls: (drop: T) => LootClass,
+): { drop: T; delay: number; arcPx: number }[] {
+  const F = L.fountain;
+  const ranked = [...drops]
+    .map((drop, i) => ({ drop, i, cls: cls(drop) }))
+    .sort((a, b) => rankIn(a.cls) - rankIn(b.cls) || a.i - b.i);
+  const rest = ranked.filter((d) => d.cls !== "unique");
+  const uniques = ranked.filter((d) => d.cls === "unique");
+  const [low, high] = F.arcPx;
+  const steps = Math.max(1, rest.length - 1);
+  const launched = rest.map(({ drop }, i) => ({
+    drop,
+    delay: i * F.spacingMs,
+    arcPx: low + ((high - low) * i) / steps,
+  }));
+  const last = launched.at(-1)?.delay ?? -F.spacingMs;
+  return [
+    ...launched,
+    ...uniques.map(({ drop }, i) => ({
+      drop,
+      delay: last + F.uniqueWaitMs + i * F.spacingMs,
+      arcPx: F.uniqueArcPx,
+    })),
+  ];
+}
+
 /** D major pentatonic, in semitones above D (H §3.3). */
 const PENTATONIC = [0, 2, 4, 7, 9, 12];
 

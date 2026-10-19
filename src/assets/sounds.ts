@@ -34,6 +34,16 @@ export const SOUNDS = {
   goblin_squeal: { variants: [`${CREATURE}/hurt_0#.ogg`] },
   leap_whoosh: { variants: ["starninjas-swords/sword - StarNinjas/sword.#.ogg"] },
   leap_land: { variants: [`${IMPACT}/impactSoft_heavy_00#.ogg`] },
+  // Boss moments (H §7.5).
+  boss_rumble: { variants: [`${RPG}/stones_0#.ogg`] },
+  boss_whoosh: { variants: ["kenney-digital-audio/Audio/phaserUp#.ogg"] },
+  boss_roar: { variants: [`${RPG}/creature_roar_0#.ogg`] },
+  boss_primed: { variants: ["kenney-digital-audio/Audio/highUp.ogg"] },
+  boss_brood: { variants: [`${RPG}/creature_slime_0#.ogg`] },
+  boss_crack: {
+    variants: [`${BREAK}/bfh1_glass_breaking_0#.ogg`],
+    layers: [`${BREAK}/bfh1_metal_hit_01.ogg`],
+  },
   helm_ping: { variants: [`${IMPACT}/impactMetal_light_00#.ogg`] },
   hero_death: {
     variants: [`${RPG}/creature_die_01.ogg`],

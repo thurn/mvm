@@ -8,6 +8,7 @@ import type { Intent } from "../../sim/intents";
 import type { RoundState } from "../../sim/state";
 import type { Tile } from "../../sim/targeting";
 import { blockedTiles, canUse, rangePreview, tileAt } from "./placement";
+import { BossBar } from "./BossBar";
 import { TERRAIN_ART } from "../../tuning/terrain";
 import { useRound, type HudView, type RoundStore } from "./round-store";
 
@@ -454,6 +455,7 @@ export function Hud({ store, enqueue, scale, countdown, children, onAbandon }: H
       >
         {children}
         <PlacementOverlay round={round} scale={scale} picked={picked} onUse={use} />
+        <BossBar round={round} scale={scale} />
         {/* The planning beat (plan 2.16): until the first sky orb falls, once per round. */}
         {round.sky.count === 0 && round.result === null && (
           <div

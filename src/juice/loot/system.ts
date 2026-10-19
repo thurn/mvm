@@ -8,7 +8,15 @@ import { tickerStore } from "../../ui/hud/ticker/store";
 import { EASINGS } from "../core/easing";
 import { createParticlePool } from "../core/particles";
 import type { PresentationFactory } from "../director/systems";
-import { bounceAt, LootLadder, lootClass, lootKeyframes, lootSpec, stagger } from "./timeline";
+import {
+  bounceAt,
+  fountain,
+  LootLadder,
+  lootClass,
+  lootKeyframes,
+  lootSpec,
+  stagger,
+} from "./timeline";
 
 type ShownDrop = Exclude<Drop, { kind: "gold" }>;
 
@@ -29,6 +37,8 @@ interface Loot {
   seed: number;
   landed: boolean;
   arrived: boolean;
+  /** The arc's height in px: the class's, or a fountain's higher one (H §3.9). */
+  arcPx: number;
 }
 
 function dropName(drop: ShownDrop): string {
@@ -49,12 +59,17 @@ function dropName(drop: ShownDrop): string {
  * Loot choreography (H §3.1–§3.4, §3.7): each drop pops from the corpse,
  * bounces twice, plays its stinger on the loot ladder, raises its beam and
  * label for its hold, then flies to the ticker. Multiple drops from one kill
- * land in ascending rarity. Normal items stay hidden unless "Show all".
+ * land in ascending rarity; a boss or Strongbox burst is a fountain (H §3.9).
+ * Drops the round's loot filter hid stay quiet.
  */
 export const lootSystem: PresentationFactory = ({ stack, settings, director }) => {
   const pool = createParticlePool(settings.get);
   const ladder = new LootLadder();
-  let pending: { drop: ShownDrop; lane: number; x: number; at: number }[] = [];
+  let pending: { dropId: string; drop: ShownDrop; lane: number; x: number; at: number }[] = [];
+  /** Drop IDs a burst marked as one fountain, until they're flushed. */
+  const fountainIds = new Set<string>();
+  /** When to start each fountain's rising riser: the unique's wait (H §3.9). */
+  let risers: number[] = [];
   let loots: Loot[] = [];
   let lastFrame: number | null = null;
   if (typeof window !== "undefined" && window.__mvm)
@@ -72,10 +87,19 @@ export const lootSystem: PresentationFactory = ({ stack, settings, director }) =
     pending = [];
     const s = settings.get();
     for (const group of groups.values()) {
-      for (const { drop: p, delay } of stagger(group, (g) => lootClass(g.drop))) {
+      const isFountain = group.some((g) => fountainIds.has(g.dropId));
+      for (const g of group) fountainIds.delete(g.dropId);
+      const launches = isFountain
+        ? fountain(group, (g) => lootClass(g.drop))
+        : stagger(group, (g) => lootClass(g.drop)).map((l) => ({ ...l, arcPx: null }));
+      const unique = launches.find((l) => lootClass(l.drop.drop) === "unique");
+      if (isFountain && unique)
+        risers.push(unique.drop.at + unique.delay - L.fountain.uniqueWaitMs);
+      for (const { drop: p, delay, arcPx } of launches) {
         const cls = lootClass(p.drop);
         const from = { x: boardX(p.x), y: laneY(p.lane) - 8 };
-        const dx = (Math.random() * 2 - 1) * L.scatterTiles * TILE;
+        const scatter = isFountain ? L.fountain.scatterTiles : L.scatterTiles;
+        const dx = (Math.random() * 2 - 1) * scatter * TILE;
         const dy = (Math.random() * 2 - 1) * (L.laneBandPx / 2);
         loots.push({
           cls,
@@ -94,6 +118,7 @@ export const lootSystem: PresentationFactory = ({ stack, settings, director }) =
           seed: Math.random() * 10,
           landed: false,
           arrived: false,
+          arcPx: arcPx ?? lootSpec(cls).arcPx,
         });
       }
     }
@@ -104,7 +129,7 @@ export const lootSystem: PresentationFactory = ({ stack, settings, director }) =
       const p = age / L.arcMs;
       return {
         x: l.from.x + (l.to.x - l.from.x) * p,
-        y: l.from.y + (l.to.y - l.from.y) * p - Math.sin(Math.PI * p) * l.spec.arcPx,
+        y: l.from.y + (l.to.y - l.from.y) * p - Math.sin(Math.PI * p) * l.arcPx,
         scale: 1,
       };
     }
@@ -200,6 +225,9 @@ export const lootSystem: PresentationFactory = ({ stack, settings, director }) =
       const dt = lastFrame === null ? 0 : Math.min(0.1, (t - lastFrame) / 1000);
       lastFrame = t;
       if (pending.length > 0) flush();
+      // The unique's wait rises into its launch (H §3.9).
+      for (const at of risers) if (t >= at) audioEngine()?.play("riser", { gainDb: -4 });
+      risers = risers.filter((at) => t < at);
       // A unique's hold dims the board under the loot (H §3.2).
       if (
         loots.some(
@@ -263,8 +291,12 @@ export const lootSystem: PresentationFactory = ({ stack, settings, director }) =
   return {
     id: "loot",
     consume(cue, batch) {
+      if (cue.kind === "fountain") {
+        for (const dropId of cue.dropIds) fountainIds.add(dropId);
+        return;
+      }
       if (cue.kind !== "lootTimeline" || cue.drop.kind === "gold") return;
-      pending.push({ drop: cue.drop, lane: cue.lane, x: cue.x, at: batch.at });
+      pending.push({ dropId: cue.dropId, drop: cue.drop, lane: cue.lane, x: cue.x, at: batch.at });
     },
   };
 };

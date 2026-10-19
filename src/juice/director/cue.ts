@@ -53,6 +53,8 @@ export type Cue =
       rarity: "normal" | "magic" | "rare" | "unique" | "boss" | null;
     }
   | { kind: "lootTimeline"; dropId: string; drop: Drop; lane: number; x: number }
+  /** These drops, already cued, launch as one fountain (H §3.9). */
+  | { kind: "fountain"; dropIds: string[] }
   | { kind: "hudBump"; target: "mana" | "life" | "wave" }
   | { kind: "banner"; text: string };
 
