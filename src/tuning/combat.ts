@@ -7,8 +7,8 @@ export const COMBAT_KNOBS = {
   K_monsterLife: 4.5,
   /** Multiplies all monster hit damage. */
   K_monsterDamage: 1.25,
-  /** Multiplies hero attack and cast speed, after all modifiers. */
-  K_heroActionRate: 0.5,
+  /** Multiplies hero attack and cast speed, after all modifiers; 0.55 lets every focus clear Levels 4–5 (plan 2.26). */
+  K_heroActionRate: 0.55,
   /** Seconds a base-speed Shambler takes to walk one tile. */
   walkSecondsPerTile: 4.7,
 } as const;

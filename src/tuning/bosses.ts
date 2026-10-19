@@ -7,7 +7,8 @@ export const BOSS_TUNING = {
     /** Set by the Grassland calibration (plan 2.25, D §7.1) so a campaign board can beat Level 5. */
     lifeMult: 10,
     damageMult: 3,
-    secondsPerTile: 7,
+    /** A slow walk (plan 2.26): every focus's campaign board beats it on ≥80% of seeds, in a 60 s median fight. */
+    secondsPerTile: 12,
     attackSeconds: 1,
     /** Heavy-stun threshold as a share of max life (MvM custom; D §7). */
     stunThresholdOfLife: 0.3,

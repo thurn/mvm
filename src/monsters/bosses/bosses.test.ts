@@ -66,7 +66,8 @@ describe("bosses (Appendix D §7, §7.1)", () => {
     const state = board();
     const boss = miller(state, 6);
     wall(state, 4, 5);
-    run(state, 10);
+    // Unblocked, it walks on: past a tile in one and a half tiles' time.
+    run(state, 1.5 * M.secondsPerTile);
     expect(boss.x).toBeLessThan(5);
   });
 
