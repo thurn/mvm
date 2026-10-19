@@ -24,7 +24,7 @@ export function skillName(skillId: string): string {
 }
 
 /** A support socket's colour: the support's main attribute, as PoE gems are (H §5.1). */
-function socketColor(supportId: string): string {
+export function socketColor(supportId: string): string {
   const w = supportGems().find((s) => s.id === supportId)?.requirementWeights;
   if (!w) return "#888888";
   const top = (Object.keys(ATTRIBUTE_COLOR) as (keyof typeof ATTRIBUTE_COLOR)[]).sort(

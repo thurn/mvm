@@ -527,4 +527,6 @@ export const CRAFT_TUNING = {
   burstParticles: 16,
   burstMs: 600,
   flashAlpha: 0.7,
+  /** The Jeweller's socket pops open (0 → 1.4 → 1) over this long. */
+  socketMs: 300,
 } as const;

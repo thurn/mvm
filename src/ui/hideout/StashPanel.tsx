@@ -8,6 +8,9 @@ import { HoverTip } from "../fx";
 import { MENU } from "../title/layout";
 import { itemSlot } from "../../heroes/model/item";
 import { stashView, type StashEntry, type StashFilter } from "./model";
+import { currencyName } from "./currency";
+import { SHARDS } from "../../loot/craft/heroes";
+import { SALVAGE_TUNING } from "../../tuning/loot";
 import type { Drag } from "./Hideout";
 
 const SLOT_LABEL = { weapon: "Weapon", armour: "Armour", accessory: "Jewellery" } as const;
@@ -91,6 +94,39 @@ function Tile({
   );
 }
 
+/** Salvage (C §C.5.6): a drop zone for stash tiles that names what the dragged tile would make. */
+function SalvageZone({
+  active,
+  preview,
+  onDrop,
+}: {
+  active: boolean;
+  preview: string | null;
+  onDrop(): void;
+}) {
+  return (
+    <div
+      data-testid="stash-salvage"
+      onDragOver={(e) => active && e.preventDefault()}
+      onDrop={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (active) onDrop();
+      }}
+      style={{
+        padding: "6px 10px",
+        minWidth: 120,
+        border: `1px ${active ? "dashed" : "solid"} ${active ? "#1BA29B" : MENU.edge}`,
+        borderRadius: 4,
+        color: active ? MENU.text : MENU.dim,
+        fontSize: 12,
+      }}
+    >
+      Salvage{active && preview ? `: ${preview}` : ""}
+    </div>
+  );
+}
+
 function Select<T extends string>({
   label,
   value,
@@ -123,19 +159,27 @@ function Select<T extends string>({
 
 /**
  * The stash (GDD §15): uniform cards, no Tetris, filtered and sorted. Tiles
- * drag onto roster cards; roster heroes and items drop back here.
+ * drag onto roster cards or onto Salvage, which shows what they'd make and
+ * the shard stacks filling toward their orbs; roster heroes and items drop
+ * back here.
  */
 export function StashPanel({
   account,
   drag,
   setDrag,
   onDropHere,
+  onSalvage,
+  salvagePreview,
   columns,
 }: {
   account: AccountState;
   drag: Drag | null;
   setDrag(drag: Drag | null): void;
   onDropHere(): void;
+  /** A stash tile dropped on Salvage (C §C.5.6). */
+  onSalvage(): void;
+  /** What the dragged tile would salvage into, shown on the Salvage zone. */
+  salvagePreview: string | null;
   columns: number;
 }) {
   const [filter, setFilter] = useState<StashFilter>({
@@ -205,6 +249,27 @@ export function StashPanel({
           />{" "}
           Upgrades
         </label>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 10,
+          alignItems: "center",
+          marginBottom: 8,
+        }}
+      >
+        <SalvageZone active={drag?.from === "stash"} preview={salvagePreview} onDrop={onSalvage} />
+        {(Object.entries(SHARDS) as [keyof typeof SHARDS, string][]).map(([key, shard]) => (
+          <span
+            key={key}
+            data-testid={`shard-${key}`}
+            title={currencyName(shard)}
+            style={{ color: MENU.dim, fontSize: 12 }}
+          >
+            {currencyName(shard)} {account.currency[shard] ?? 0}/{SALVAGE_TUNING.shardsPerOrb}
+          </span>
+        ))}
       </div>
       {entries.length === 0 ? (
         <p style={{ color: MENU.dim, margin: 0 }}>

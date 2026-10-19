@@ -2,7 +2,7 @@ import type { AccountState } from "../../account/state";
 import { rarityFor } from "../../heroes/gen/generate";
 import { rollSupports } from "../../heroes/gen/supports";
 import type { HeroInstance, OwnedHeroId } from "../../heroes/model/hero";
-import type { ItemId } from "../../heroes/model/item";
+import type { ItemId, ItemInstance } from "../../heroes/model/item";
 import { createStreams, streamRng } from "../../sim/rng";
 import { SALVAGE_TUNING } from "../../tuning/loot";
 import { ITEM_ORBS } from ".";
@@ -14,7 +14,7 @@ export const HERO_ORBS = {
   lesser: "Metadata/Items/Currency/CurrencyAddSkillGemSocket3",
 } as const;
 
-type HeroOrb = keyof typeof HERO_ORBS;
+export type HeroOrb = keyof typeof HERO_ORBS;
 
 /** The shards salvage makes, each merging into its orb (C §C.5.6). */
 export const SHARDS = {
@@ -23,7 +23,8 @@ export const SHARDS = {
   jeweller: "MvM/Currency/JewellerShard",
 } as const;
 
-const MERGES_INTO: Readonly<Record<string, string>> = {
+/** The orb each shard merges into. */
+export const MERGES_INTO: Readonly<Record<string, string>> = {
   [SHARDS.transmutation]: ITEM_ORBS.transmutation,
   [SHARDS.regal]: ITEM_ORBS.regal,
   [SHARDS.jeweller]: HERO_ORBS.lesser,
@@ -34,14 +35,24 @@ type HeroCraftResult =
   | { ok: false; reason: "full" | "no-legal-support" | "no-orb" | "unknown-hero" };
 
 /**
+ * Why a Jeweller's Orb can't target a hero before any roll: it's at the
+ * orb's ceiling. The Craft tab pulses and dims heroes with it.
+ */
+export function jewellerRefusal(hero: HeroInstance, orb: HeroOrb): "full" | null {
+  return orb === "lesser" && hero.supports.length >= SALVAGE_TUNING.lesserJewellerCeiling
+    ? "full"
+    : null;
+}
+
+/**
  * A Jeweller's Orb on a hero (C §C.5.4, MvM rule): one more support slot,
  * below the orb's ceiling, filled at once with a compatible support (never
  * a duplicate or a second tier of a family, tier-gated by level); rarity
  * follows the new count. Pure.
  */
 export function applyJeweller(hero: HeroInstance, orb: HeroOrb, rng: Rng): HeroCraftResult {
-  if (orb === "lesser" && hero.supports.length >= SALVAGE_TUNING.lesserJewellerCeiling)
-    return { ok: false, reason: "full" };
+  const refusal = jewellerRefusal(hero, orb);
+  if (refusal) return { ok: false, reason: refusal };
   const [support] = rollSupports(hero.skillId, hero.level, 1, rng, hero.supports);
   if (!support) return { ok: false, reason: "no-legal-support" };
   const supports = [...hero.supports, support];
@@ -101,6 +112,37 @@ export function mergeShards(account: AccountState): void {
 
 type SalvageTarget = { kind: "item"; id: ItemId } | { kind: "hero"; id: OwnedHeroId };
 type SalvageResult = { ok: true } | { ok: false; reason: "normal" | "not-in-stash" };
+/** A stash item or hero, as salvage sees it. */
+type Salvageable = { kind: "item"; item: ItemInstance } | { kind: "hero"; hero: HeroInstance };
+
+/**
+ * What salvaging something yields per C §C.5.6, or null for a normal item or
+ * hero (they sell instead). The stash previews it while dragging to Salvage.
+ */
+export function salvageYield(thing: Salvageable): { shard: string; count: number } | null {
+  const t = SALVAGE_TUNING;
+  if (thing.kind === "item") {
+    const { item } = thing;
+    if (item.rarity === "normal") return null;
+    if (item.rarity === "magic") return { shard: SHARDS.transmutation, count: t.item.magic };
+    const count =
+      item.rarity === "unique"
+        ? t.item.unique
+        : item.mods.length >= 6
+          ? t.item.rareSixMods
+          : t.item.rare;
+    return { shard: SHARDS.regal, count };
+  }
+  const { hero } = thing;
+  if (hero.rarity === "normal") return null;
+  const count =
+    hero.rarity === "magic"
+      ? t.hero.magic
+      : hero.supports.length >= 4
+        ? t.hero.rareFourSupports
+        : t.hero.rare;
+  return { shard: SHARDS.jeweller, count };
+}
 
 /**
  * Salvages a stash item or hero into shards per C §C.5.6, then merges full
@@ -108,39 +150,21 @@ type SalvageResult = { ok: true } | { ok: false; reason: "normal" | "not-in-stas
  * items and roster heroes must go to the stash first.
  */
 export function salvage(account: AccountState, target: SalvageTarget): SalvageResult {
-  const t = SALVAGE_TUNING;
-  let shard: string;
-  let count: number;
-  if (target.kind === "item") {
-    const index = account.stash.items.findIndex((i) => i.id === target.id);
-    const item = account.stash.items[index];
-    if (!item) return { ok: false, reason: "not-in-stash" };
-    if (item.rarity === "normal") return { ok: false, reason: "normal" };
-    shard = item.rarity === "magic" ? SHARDS.transmutation : SHARDS.regal;
-    count =
-      item.rarity === "magic"
-        ? t.item.magic
-        : item.rarity === "unique"
-          ? t.item.unique
-          : item.mods.length >= 6
-            ? t.item.rareSixMods
-            : t.item.rare;
-    account.stash.items.splice(index, 1);
-  } else {
-    const index = account.stash.heroes.findIndex((h) => h.id === target.id);
-    const hero = account.stash.heroes[index];
-    if (!hero) return { ok: false, reason: "not-in-stash" };
-    if (hero.rarity === "normal") return { ok: false, reason: "normal" };
-    shard = SHARDS.jeweller;
-    count =
-      hero.rarity === "magic"
-        ? t.hero.magic
-        : hero.supports.length >= 4
-          ? t.hero.rareFourSupports
-          : t.hero.rare;
-    account.stash.heroes.splice(index, 1);
-  }
-  account.currency[shard] = (account.currency[shard] ?? 0) + count;
+  const { items, heroes } = account.stash;
+  const index =
+    target.kind === "item"
+      ? items.findIndex((i) => i.id === target.id)
+      : heroes.findIndex((h) => h.id === target.id);
+  if (index < 0) return { ok: false, reason: "not-in-stash" };
+  const yielded = salvageYield(
+    target.kind === "item"
+      ? { kind: "item", item: items[index]! }
+      : { kind: "hero", hero: heroes[index]! },
+  );
+  if (!yielded) return { ok: false, reason: "normal" };
+  if (target.kind === "item") items.splice(index, 1);
+  else heroes.splice(index, 1);
+  account.currency[yielded.shard] = (account.currency[yielded.shard] ?? 0) + yielded.count;
   mergeShards(account);
   return { ok: true };
 }

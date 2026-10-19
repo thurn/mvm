@@ -3,11 +3,10 @@ import { CraftTab } from "../craft/CraftTab";
 import { furthestLevel } from "../../account/lifecycle";
 import { passivePoints } from "../../account/rewards";
 import type { AccountState } from "../../account/state";
-import { currencies } from "../../data";
 import type { Card, OwnedHeroId } from "../../heroes/model/hero";
 import type { ItemId, ItemInstance, ItemSlot } from "../../heroes/model/item";
 import { HIDEOUT_TUNING as T } from "../../tuning/juice";
-import { HeroCard } from "../cards/HeroCard";
+import { HeroCard, skillName } from "../cards/HeroCard";
 import { ItemCard, itemName } from "../cards/ItemCard";
 import { drawOrb } from "../cards/orbs";
 import { ELEMENT_COLOR, RARITY_COLOR } from "../cards/parts";
@@ -29,6 +28,8 @@ import {
 import type { AccountStore } from "../../account/store";
 import { useAccount } from "../account";
 import { StashPanel } from "./StashPanel";
+import { currencyName, listedCurrencies } from "./currency";
+import { MERGES_INTO, salvage, salvageYield } from "../../loot/craft/heroes";
 
 /** What is being dragged, and from where. */
 export type Drag =
@@ -341,7 +342,7 @@ function Orb({ currencyId }: { currencyId: string }) {
 }
 
 function CurrencyTab({ account }: { account: AccountState }) {
-  const owned = currencies().filter((c) => (account.currency[c.id] ?? 0) > 0);
+  const owned = listedCurrencies().filter((c) => (account.currency[c.id] ?? 0) > 0);
   return (
     <section style={{ padding: 10, background: MENU.panel, borderRadius: 6, minWidth: 420 }}>
       <div style={{ color: MENU.gold, marginBottom: 8 }}>Gold: {account.gold}</div>
@@ -501,6 +502,44 @@ export function Hideout({
     }
   };
 
+  /** The stash thing being dragged, as salvage sees it. */
+  const dragged = () => {
+    if (!drag || drag.from !== "stash") return null;
+    if (drag.kind === "item") {
+      const item = stashItem(drag.id);
+      return item ? { kind: "item" as const, item, name: itemName(item).name } : null;
+    }
+    const hero = account.stash.heroes.find((h) => h.id === drag.id);
+    return hero ? { kind: "hero" as const, hero, name: skillName(hero.skillId) } : null;
+  };
+  const salvagePreview = () => {
+    const thing = dragged();
+    if (!thing) return null;
+    const yielded = salvageYield(thing);
+    return yielded ? `+${yielded.count} ${currencyName(yielded.shard)}` : "Normal: sell it instead";
+  };
+  /** Salvages the dragged stash thing (C §C.5.6), then says what it made and whether shards merged. */
+  const dropOnSalvage = () => {
+    const thing = dragged();
+    if (!thing) return;
+    const yielded = salvageYield(thing);
+    if (!yielded)
+      return refuse("stash-salvage", `${thing.name} is normal: sell it instead of salvaging.`);
+    const orb = MERGES_INTO[yielded.shard]!;
+    const orbsBefore = account.currency[orb] ?? 0;
+    const target =
+      thing.kind === "item"
+        ? { kind: "item" as const, id: thing.item.id }
+        : { kind: "hero" as const, id: thing.hero.id };
+    if (!change("stash-salvage", "shatter", null, () => salvage(account, target).ok)) return;
+    const merged = (account.currency[orb] ?? 0) - orbsBefore;
+    if (merged > 0) playUi("drop_currency");
+    setStatus(
+      `Salvaged ${thing.name}: +${yielded.count} ${currencyName(yielded.shard)}.` +
+        (merged > 0 ? ` Shards merged: +${merged} ${currencyName(orb)}.` : ""),
+    );
+  };
+
   const validFor = (target: RosterTarget) => (zone: "slot" | ItemSlot) => {
     if (!drag) return false;
     if (zone === "slot") {
@@ -605,6 +644,8 @@ export function Hideout({
               drag={drag}
               setDrag={setDrag}
               onDropHere={dropOnStash}
+              onSalvage={dropOnSalvage}
+              salvagePreview={salvagePreview()}
               columns={tab === "stash" ? 6 : 2}
             />
           )}

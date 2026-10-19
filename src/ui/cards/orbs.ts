@@ -73,6 +73,13 @@ const ORB_RECIPES: Readonly<Record<string, OrbRecipe>> = {
     glyphColor: GOLD,
     shape: "shard",
   },
+  JewellerShard: {
+    color: "#1BA29B",
+    glyph: "dots",
+    glyphColor: "#FFFFFF",
+    dots: 1,
+    shape: "shard",
+  },
 };
 
 const ORB_SIZE = 32;
