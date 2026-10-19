@@ -39,7 +39,9 @@ type Rng = () => number;
 /** E §5.3's gamble roles. */
 type GambleRole = keyof typeof T.gambleRoles;
 /** A hero gamble's pick: a role or a damage tag. */
-export type HeroGamble = { role: GambleRole } | { tag: string };
+export type HeroGamble = { role: GambleRole } | { tag: DamageTag };
+/** The damage tags a hero gamble can pick (E §5.3). */
+type DamageTag = "physical" | "fire" | "cold" | "lightning" | "chaos";
 
 const odds = <R extends string>(table: Readonly<Record<R, number>>, rng: Rng): R =>
   pickWeighted(
@@ -230,7 +232,7 @@ export function gambleItem(account: AccountState, baseId: BaseItemId): ItemInsta
   );
 }
 
-function hasTag(skillId: string, tag: string): boolean {
+function hasTag(skillId: string, tag: DamageTag): boolean {
   return heroGems().some((g) => g.id === skillId && g.tags.includes(tag));
 }
 

@@ -96,6 +96,13 @@ describe("vendor stock (Appendix E §5.3)", () => {
     expect(resumed.gold).toBe(account.gold);
   });
 
+  test("a save with malformed stock loads with fresh stock", () => {
+    const account = newAccount("ranger");
+    const doc = saveDocument(account, null, "test", "2026-10-18T00:00:00.000Z");
+    (doc.account.data as Record<string, unknown>).vendorStock = { armorer: "broken" };
+    expect(resumeFromDocument(doc).account.vendorStock?.armorer).toHaveLength(10);
+  });
+
   test("the M1 fixture loads with fresh stock and an empty buyback", () => {
     const { account } = resumeFromDocument(m1 as unknown as SaveDocument);
     expect(account.vendorStock?.armorer).toHaveLength(10);

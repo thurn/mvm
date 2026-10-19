@@ -47,6 +47,20 @@ export const ACCOUNT_SECTION: SectionDefinition<AccountState> = {
     account.player = withDefaults(account.player, emptyAccount().player, (line) =>
       report(`player: ${line}`),
     );
+    // Stock that isn't three lists can't be bought from: null rolls it afresh on load (E §5.3).
+    const stock: unknown = account.vendorStock;
+    if (
+      stock !== null &&
+      !(
+        isObject(stock) &&
+        ["armorer", "recruiter", "spells"].every((key) =>
+          Array.isArray((stock as Record<string, unknown>)[key]),
+        )
+      )
+    ) {
+      report("vendorStock: malformed, rolled afresh");
+      account.vendorStock = null;
+    }
     return account;
   },
   validate(account) {
