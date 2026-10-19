@@ -10,7 +10,7 @@ import {
   type RoundState,
 } from "../../sim/state";
 import type { StepContext, System } from "../../sim/system";
-import { laneFirst, laneGap, monstersWithin, occupies } from "../../sim/targeting";
+import { laneFirst, laneGap, monstersWithin, nearestLane, occupies } from "../../sim/targeting";
 import { STEP_SECONDS } from "../../sim/time";
 import { spawnOrb } from "../../sim/economy/orbs";
 import { HERO_BOARD_TUNING } from "../../tuning/heroes";
@@ -56,13 +56,13 @@ ON_HIT["lightningArrowBeams"] = (ctx, hero, target) => {
     .filter((m) => m.id !== target.id)
     .sort(
       (a, b) =>
-        Math.hypot(a.x - target.x, a.lane - target.lane) -
-        Math.hypot(b.x - target.x, b.lane - target.lane),
+        Math.hypot(a.x - target.x, laneGap(a, target.lane)) -
+        Math.hypot(b.x - target.x, laneGap(b, target.lane)),
     )
     .slice(0, kit.numbers.extraTargets);
   for (const monster of near) {
     const hitIds = [target.id, monster.id];
-    const at = { lane: monster.lane, x: monster.x };
+    const at = { lane: nearestLane(monster, target.lane), x: monster.x };
     dealHit(ctx, hero, { kind: "monster", entity: monster }, kit.hits.beam);
     chainFrom(ctx, hero, at, kit.hits.beam, kit.numbers.beamChains, hitIds);
   }

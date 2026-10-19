@@ -22,10 +22,15 @@ export function occupies(monster: MonsterState, lane: number): boolean {
   return monster.boss ? monster.boss.lanes.includes(lane) : monster.lane === lane;
 }
 
+/** The lane of the monster nearest a given lane: that lane itself for any lane a boss covers. */
+export function nearestLane(monster: MonsterState, lane: number): number {
+  const lanes = monster.boss?.lanes ?? [monster.lane];
+  return lanes.reduce((best, l) => (Math.abs(l - lane) < Math.abs(best - lane) ? l : best));
+}
+
 /** Lanes between a monster and a lane: 0 for any lane a boss covers. */
 export function laneGap(monster: MonsterState, lane: number): number {
-  const lanes = monster.boss?.lanes ?? [monster.lane];
-  return Math.min(...lanes.map((l) => Math.abs(l - lane)));
+  return Math.abs(nearestLane(monster, lane) - lane);
 }
 
 function mostAdvanced(monsters: MonsterState[]): MonsterState | undefined {

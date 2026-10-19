@@ -92,7 +92,7 @@ function meleeStep(
     (lane) =>
       !state.heroes.some((h) => h.lane === lane && h.skillId === melee!.card.hero.skillId) &&
       (!onlyThreatened ||
-        state.monsters.some((m) => m.lane === lane && m.x <= SIM_TUNING.columns + 0.5)),
+        state.monsters.some((m) => occupies(m, lane) && m.x <= SIM_TUNING.columns + 0.5)),
   );
   return threatened.length > 0 ? place(state, melee!, [4], threatened) : [];
 }

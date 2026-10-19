@@ -8,7 +8,7 @@ import {
   type RoundState,
 } from "../../sim/state";
 import type { StepContext, System } from "../../sim/system";
-import { laneGap, occupies } from "../../sim/targeting";
+import { laneGap, nearestLane, occupies } from "../../sim/targeting";
 import { STEP_SECONDS } from "../../sim/time";
 import { HERO_BOARD_TUNING } from "../../tuning/heroes";
 
@@ -113,7 +113,7 @@ export function chainFrom(
     const next = nearestUnhit(ctx.state, at, HERO_BOARD_TUNING.chainRange, alreadyHit);
     if (!next) return;
     alreadyHit.push(next.id);
-    at = { lane: next.lane, x: next.x };
+    at = { lane: nearestLane(next, at.lane), x: next.x };
     dealHit(ctx, source, { kind: "monster", entity: next }, hit);
   }
 }
@@ -131,7 +131,8 @@ function resolveHit(
 ): "continue" | "remove" {
   const { state } = ctx;
   const hero = state.heroes.find((h) => h.id === p.sourceId);
-  const at = { id: target.id, lane: target.lane, x: target.x };
+  // Where it struck: a boss covers several lanes, and its beams and chains start from this one.
+  const at = { id: target.id, lane: nearestLane(target, p.lane), x: target.x };
   for (const other of state.projectiles) if (other.group === p.group) other.hitIds.push(target.id);
   if (hero) {
     dealHit(ctx, hero, { kind: "monster", entity: target }, p.hit);

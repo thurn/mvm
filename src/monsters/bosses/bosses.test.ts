@@ -8,6 +8,12 @@ import { hashState } from "../../sim/hash";
 import { step } from "../../sim/kernel";
 import { addHero, addScripted, createRound, type RoundState } from "../../sim/state";
 import { STEPS_PER_SECOND } from "../../sim/time";
+import { placeHero } from "../../heroes/board/place";
+import { SKILLS } from "../../heroes/board/kit";
+import { starterCard } from "../../heroes/model/starter";
+import { id } from "../../types/ids";
+import { buildMonster } from "../model";
+import { spawnMonster } from "../../sim/state";
 import { BOSS_TUNING } from "../../tuning/bosses";
 import { spawnBoss, type BossMonster } from ".";
 
@@ -188,6 +194,45 @@ describe("bosses (Appendix D §7, §7.1)", () => {
         state.earned.map((e) => e.dropId),
       );
     }
+  });
+
+  test("a projectile that strikes a boss beams and chains from the lane it struck (2.5r)", () => {
+    const state = board(3);
+    const boss = spawnBoss(state, {
+      bossId: "BloatedMiller",
+      areaLevel: 6,
+      levelIndex: 5,
+      x: 5,
+      topLane: 3,
+    });
+    boss.boss.cooldowns = { grainSlam: 999, rottingBrood: 999 };
+    boss.moveSpeed = 0;
+    boss.actor.life = boss.actor.maxLife = 1e9;
+    const far = spawnMonster(
+      state,
+      buildMonster({
+        archetypeId: "Shambler",
+        rarity: "normal",
+        affixes: [],
+        areaLevel: 1,
+        levelIndex: 1,
+        lane: 1,
+        x: 5.2,
+      }),
+    );
+    far.moveSpeed = 0;
+    const archer = placeHero(
+      state,
+      starterCard(id<"Gem">(SKILLS.lightningArrow), 10, "beam"),
+      4,
+      1,
+    );
+    const events = run(state, 6);
+    expect(
+      events.some((e) => e.type === "hit" && e.sourceId === archer.id && e.targetId === boss.id),
+    ).toBe(true);
+    // Lane 1 is 3 lanes from lane 4, past the 2.67-tile beam radius; it's only 2 from the boss's top lane.
+    expect(events.some((e) => e.type === "hit" && e.targetId === far.id)).toBe(false);
   });
 
   test("a leaked boss loses the level", () => {
