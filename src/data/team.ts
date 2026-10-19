@@ -272,3 +272,12 @@ export const TEAM_IMPLICITS: Readonly<Record<string, RawModStat[]>> = {
   RingImplicitLightningResistance1: [{ id: "team_lightning_resistance_%", min: 10, max: 15 }],
   RingImplicitChaosResistance1: [{ id: "team_chaos_resistance_%", min: 4, max: 6 }],
 };
+
+/** A team stat's tooltip text with its value (C §C.3.8), e.g. "+12% team fire resistance". */
+export function teamStatText(stat: TeamStat, value: number): string {
+  const family = TEAM_FAMILIES.find((f) => f.stat === stat);
+  return family ? family.text.replace("#", String(Math.round(value))) : `${stat} ${value}`;
+}
+
+/** Team stats in their families' order, for listing. */
+export const TEAM_STAT_ORDER: readonly TeamStat[] = [...new Set(TEAM_FAMILIES.map((f) => f.stat))];

@@ -27,6 +27,8 @@ export type SimEvent =
       avoidedBy: HitResult["avoidedBy"];
       /** The target monster's archetype, for its hit material (H §7.1); absent for heroes. */
       targetArchetype?: string;
+      /** A hero's resistances reduced this hit (GDD §15's shield icon); absent for monsters. */
+      resisted?: boolean;
     }
   | {
       type: "kill";

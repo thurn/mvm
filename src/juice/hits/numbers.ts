@@ -11,6 +11,8 @@ export interface NumberInput {
   /** A summed DoT tick (0.8×, ailment colour). */
   dot?: boolean;
   words?: "IMMUNE" | "EVADE" | "BLOCK";
+  /** Resistance reduced it: drawn with a small shield (GDD §15). */
+  resisted?: boolean;
 }
 
 /** How a number reads: its text, colour and size (H §2.5), or null when the mode hides it. */

@@ -29,6 +29,7 @@ import {
 import type { AccountStore } from "../../account/store";
 import { useAccount } from "../account";
 import { StashPanel } from "./StashPanel";
+import { TeamPanel } from "./TeamPanel";
 import { LootFilterTab } from "./LootFilterTab";
 import { currencyName, listedCurrencies } from "./currency";
 import { MERGES_INTO, salvage, salvageYield } from "../../loot/craft/heroes";
@@ -642,6 +643,7 @@ export function Hideout({
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 208px)", gap: 8 }}>
               {account.roster.slots.map((_, i) => slot(i, `Slot ${i + 1}`))}
               {slot("spell", "Spell")}
+              <TeamPanel account={account} />
             </div>
           )}
           {tab === "craft" ? (

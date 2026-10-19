@@ -1,3 +1,4 @@
+import type { HitResult } from "../combat/resolve";
 import { isAttackKit } from "./state";
 import type { Actor } from "../combat/actor";
 import { applyHitAilments } from "../combat/ailments";
@@ -52,6 +53,14 @@ export function killTarget(ctx: StepContext, sourceId: EntityId, target: HitTarg
   });
 }
 
+/** Whether resistance cut any elemental or chaos damage of a hit (A §5.3). */
+export function resisted(result: Pick<HitResult, "preMitigation" | "dealt">): boolean {
+  return (["fire", "cold", "lightning", "chaos"] as const).some(
+    (type) =>
+      result.preMitigation[type] > 0 && result.dealt[type] < result.preMitigation[type] - 1e-9,
+  );
+}
+
 /**
  * The combat seam: resolves one hit through Appendix A's pipeline with the
  * `combat` stream, applies the ES and life loss, and emits `hit`. A
@@ -76,7 +85,9 @@ export function dealHit(ctx: StepContext, source: HitSource, target: HitTarget, 
     breakdown: result.dealt,
     crit: result.crit,
     avoidedBy: result.avoidedBy,
-    ...(target.kind === "monster" ? { targetArchetype: target.entity.archetypeId } : {}),
+    ...(target.kind === "monster"
+      ? { targetArchetype: target.entity.archetypeId }
+      : { resisted: resisted(result) }),
   });
   // A hero that blocks a monster's attack leaves it Off Balance (B H11, adapted PoE2 Parried).
   if (result.avoidedBy === "block" && target.kind === "hero") {

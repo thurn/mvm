@@ -1,15 +1,19 @@
 import type { ReactNode } from "react";
+import type { ElementPreview } from "./element";
 import { MenuButton, MenuScreen, MENU } from "./layout";
 
 /** The campaign stub (plan 1.34): the furthest unlocked level, playable; 2.24's map replaces it. */
 export function Campaign({
   level,
   cleared,
+  element = null,
   onPlay,
   onHideout,
 }: {
   level: number;
   cleared: boolean;
+  /** The biome element against the team's resistance (GDD §15); null for the Grassland. */
+  element?: ElementPreview | null;
   onPlay(): void;
   onHideout(): void;
 }) {
@@ -40,9 +44,16 @@ export function Campaign({
             : level === 1
               ? "First clear: unlock slot 4, choose 1 of 3 heroes"
               : "First clear reward",
-          <MenuButton primary onClick={onPlay}>
-            Play Level {level}
-          </MenuButton>,
+          <>
+            {element && (
+              <div data-testid="level-element" style={{ marginBottom: 8, color: MENU.text }}>
+                {`${element.label} ${element.resist}% / ${element.cap}%`}
+              </div>
+            )}
+            <MenuButton primary onClick={onPlay}>
+              Play Level {level}
+            </MenuButton>
+          </>,
         )}
         {level < 5 &&
           card(`Level ${level + 1}`, "Locked", <MenuButton disabled>Locked</MenuButton>, true)}

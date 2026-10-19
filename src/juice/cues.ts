@@ -107,6 +107,7 @@ const CUE_TABLE: { [K in SimEvent["type"]]: Row<K> } = {
         big: band === "big",
         lane: event.lane,
         x: event.x,
+        ...(event.resisted ? { resisted: true } : {}),
       },
       {
         kind: "particles",

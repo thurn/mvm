@@ -30,6 +30,7 @@ import { createRoundStore } from "../ui/hud/round-store";
 import { RestartBanner } from "../ui/resume/Banner";
 import { ResumeHud } from "../ui/resume/ResumeHud";
 import { Campaign } from "../ui/title/Campaign";
+import { elementPreview } from "../ui/title/element";
 import { Credits } from "../ui/title/Credits";
 import { FocusSelect } from "../ui/title/FocusSelect";
 import { TitleScreen } from "../ui/title/TitleScreen";
@@ -354,6 +355,7 @@ export function Game() {
             <Campaign
               level={furthestLevel(phase.account).index}
               cleared={phase.account.firstClears.includes(furthestLevel(phase.account).id)}
+              element={elementPreview(furthestLevel(phase.account), phase.account)}
               onPlay={() => go("playLevel")}
               onHideout={() => go("hideout")}
             />

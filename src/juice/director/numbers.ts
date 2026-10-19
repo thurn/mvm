@@ -14,6 +14,8 @@ export interface NumberSpec {
   lane: number;
   x: number;
   words?: NumberCue["words"];
+  /** Resistance reduced one of its hits (GDD §15's shield). */
+  resisted?: boolean;
   /** Wall-clock ms of the latest merged hit. */
   lastAt: number;
 }
@@ -38,6 +40,7 @@ export function createNumberAggregator() {
         existing.amount += cue.amount;
         existing.crit ||= cue.crit;
         existing.big ||= cue.big;
+        if (cue.resisted) existing.resisted = true;
         existing.lastAt = now;
         return existing;
       }

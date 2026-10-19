@@ -89,6 +89,20 @@ export const hitSystem: PresentationFactory = ({ stack, settings, now }) => {
     },
   });
 
+  /** A small grey pixel shield left of a resisted number (GDD §15). */
+  function drawShield(ctx: CanvasRenderingContext2D, x: number, y: number, alpha: number) {
+    const rows = ["#####", "#ooo#", "#ooo#", "#ooo#", ".#o#.", "..#.."];
+    ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
+    rows.forEach((row, dy) => {
+      for (let dx = 0; dx < row.length; dx++) {
+        if (row[dx] === ".") continue;
+        ctx.fillStyle = row[dx] === "#" ? "#1b1b1b" : "#b8c0c8";
+        ctx.fillRect(Math.round(x - 3 + dx), Math.round(y - 3 + dy), 1, 1);
+      }
+    });
+    ctx.globalAlpha = 1;
+  }
+
   function drawNumber(
     ctx: CanvasRenderingContext2D,
     n: LiveNumber,
@@ -99,19 +113,16 @@ export const hitSystem: PresentationFactory = ({ stack, settings, now }) => {
     if (!style) return;
     const motion = numberMotion(t - n.bornAt);
     const early = n.fadeFrom === undefined ? 1 : 1 - (t - n.fadeFrom) / NUMBER_TUNING.fadeMs;
-    drawPixelText(
-      ctx,
-      style.text,
-      boardX(n.x ?? 0) + (n.jitter ?? 0),
-      // From mid-body, so the full rise stays inside the target's own lane.
-      laneY(n.lane ?? 0) - NUMBER_BASELINE - motion.rise,
-      {
-        color: style.color,
-        outline: NUMBER_TUNING.outline,
-        scale: style.scale * motion.scale,
-        alpha: Math.max(0, Math.min(motion.alpha, early)),
-      },
-    );
+    const x = boardX(n.x ?? 0) + (n.jitter ?? 0);
+    // From mid-body, so the full rise stays inside the target's own lane.
+    const y = laneY(n.lane ?? 0) - NUMBER_BASELINE - motion.rise;
+    if (n.resisted) drawShield(ctx, x - 12 * style.scale * motion.scale, y, motion.alpha);
+    drawPixelText(ctx, style.text, x, y, {
+      color: style.color,
+      outline: NUMBER_TUNING.outline,
+      scale: style.scale * motion.scale,
+      alpha: Math.max(0, Math.min(motion.alpha, early)),
+    });
   }
 
   return {
@@ -146,6 +157,7 @@ export const hitSystem: PresentationFactory = ({ stack, settings, now }) => {
             crit: spec.crit,
             big: spec.big,
             ...(spec.words ? { words: spec.words } : {}),
+            ...(spec.resisted ? { resisted: true } : {}),
             lane: spec.lane,
             x: spec.x,
             jitter: Math.round((Math.random() * 2 - 1) * NUMBER_TUNING.jitterPx),

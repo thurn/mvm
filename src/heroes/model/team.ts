@@ -25,15 +25,30 @@ function itemTeamStats(item: ItemInstance, add: (stat: TeamStat, value: number) 
 }
 
 /**
+ * Each team stat's sources (GDD §15's Team panel): the roster items that
+ * carry it and how much each adds. Each card's items count once.
+ */
+export function teamSources(
+  roster: readonly Card[],
+): Partial<Record<TeamStat, { item: ItemInstance; value: number }[]>> {
+  const sources: Partial<Record<TeamStat, { item: ItemInstance; value: number }[]>> = {};
+  for (const card of roster)
+    for (const item of [card.weapon, card.armour, card.accessory])
+      if (item) itemTeamStats(item, (stat, value) => (sources[stat] ??= []).push({ item, value }));
+  return sources;
+}
+
+/**
  * Sums the roster's team stats (Appendix A §2.1, C §C.1.7): each roster
  * card's items count once, placed or not, however many copies are out.
  * Pass only roster cards; stashed heroes contribute nothing.
  */
 export function teamSheet(roster: readonly Card[]): TeamSheet {
   const sheet: TeamSheet = {};
-  const add = (stat: TeamStat, value: number) => (sheet[stat] = (sheet[stat] ?? 0) + value);
-  for (const card of roster)
-    for (const item of [card.weapon, card.armour, card.accessory])
-      if (item) itemTeamStats(item, add);
+  for (const [stat, list] of Object.entries(teamSources(roster)) as [
+    TeamStat,
+    { value: number }[],
+  ][])
+    sheet[stat] = list.reduce((sum, s) => sum + s.value, 0);
   return sheet;
 }

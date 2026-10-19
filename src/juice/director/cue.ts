@@ -40,6 +40,8 @@ export type Cue =
       words?: "EVADE" | "BLOCK" | "IMMUNE";
       /** A summed DoT tick. */
       dot?: boolean;
+      /** Resistance reduced this hit on a hero: a small shield icon (GDD §15). */
+      resisted?: boolean;
     }
   | { kind: "flash"; targetId: string; crit: boolean; band: Band }
   /** An ailment applied to or expired from an actor (H §8). */

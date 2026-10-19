@@ -2,6 +2,8 @@ import type { BossId } from "../../tuning/bosses";
 import type { TileKind } from "../../sim/terrain";
 /** A campaign level's definition (Appendix D §6.1). */
 export interface LevelDefinition {
+  /** The biome's element (D §6.3), previewed against team resistance on the campaign map; Grassland has none. */
+  element?: "fire" | "cold" | "lightning" | "chaos";
   id: string;
   /** 1-based campaign index. */
   index: number;
