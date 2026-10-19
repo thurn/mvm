@@ -1,4 +1,5 @@
 import { acquireItem } from "./stash";
+import { chooseOneOfThree } from "../heroes/gen/generate";
 import { starterCard } from "../heroes/model/starter";
 import type { GemId } from "../data/types";
 import type { LevelDefinition } from "../monsters/levels/types";
@@ -11,7 +12,7 @@ import { newInstanceId, type RoundState } from "../sim/state";
 import { createRegistry, load, SAVE_SECTIONS, type SaveDocument } from "../save/registry";
 import { FOCUSES } from "../sim/policies/focus";
 import { catalogEntry } from "../heroes/model/catalog";
-import { ACCOUNT_TUNING, PROGRESSION_TUNING } from "../tuning/progression";
+import { firstClearReward, PROGRESSION_TUNING } from "../tuning/progression";
 import type { Drop } from "../loot/drops";
 import { reconcileAccount } from "./reconcile";
 import { heroOffer } from "./rewards";
@@ -134,16 +135,29 @@ export function finishLevel(account: AccountState, round: RoundState): LevelSumm
   const firstClear = result === "won" && !account.firstClears.includes(levelId);
   if (firstClear) {
     account.firstClears.push(levelId);
-    const reward =
-      ACCOUNT_TUNING.firstClearRewards[levelId as keyof typeof ACCOUNT_TUNING.firstClearRewards];
-    if (reward) {
+    const reward = firstClearReward(levelId);
+    if (reward?.unlockSlot)
       account.roster.unlocked = Math.max(account.roster.unlocked, reward.unlockSlot);
+    for (const [currencyId, count] of Object.entries(reward?.currency ?? {}))
+      account.currency[currencyId] = (account.currency[currencyId] ?? 0) + count;
+    if (reward?.heroOffer) {
       const rng = streamRng(round.rng, "heroGen");
+      const newId = () => newInstanceId<"OwnedHero">(round);
+      const { rarity, level } = reward.heroOffer;
       account.pendingChoices.push({
         levelId,
-        options: heroOffer(account, reward.heroOffer.level, rng, () =>
-          newInstanceId<"OwnedHero">(round),
-        ),
+        options:
+          rarity === "normal"
+            ? heroOffer(account, level, rng, newId)
+            : chooseOneOfThree({
+                kind: "hero",
+                rarity,
+                level,
+                areaLevel: round.waves?.plan.areaLevel ?? 1,
+                roster: activeCards(account).map((c) => c.hero.skillId),
+                rng,
+                newId,
+              }),
       });
     }
   }

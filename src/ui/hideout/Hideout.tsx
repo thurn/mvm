@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { passivePoints } from "../../account/rewards";
 import type { AccountState } from "../../account/state";
 import { currencies } from "../../data";
 import type { Card, OwnedHeroId } from "../../heroes/model/hero";
@@ -553,6 +554,7 @@ export function Hideout({
           <h2 style={{ margin: 0 }}>Hideout</h2>
           <span style={{ color: MENU.dim }}>
             Level {account.player.level} · {account.gold} gold
+            {passivePoints(account) > 0 && ` · ${passivePoints(account)} unspent passive points`}
           </span>
           <span style={{ marginLeft: "auto" }}>
             <MenuButton primary onClick={onPlay}>

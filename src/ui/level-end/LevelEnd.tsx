@@ -7,7 +7,7 @@ import type { Sound } from "../../audio/engine";
 import { currencies } from "../../data";
 import type { Card, HeroInstance, OwnedHeroId } from "../../heroes/model/hero";
 import { LEVEL_END_TUNING as T } from "../../tuning/juice";
-import { ACCOUNT_TUNING } from "../../tuning/progression";
+import { firstClearReward } from "../../tuning/progression";
 import { HeroCard, skillName } from "../cards/HeroCard";
 import { ItemCard } from "../cards/ItemCard";
 import { Panel, RARITY_COLOR } from "../cards/parts";
@@ -185,8 +185,7 @@ export function LevelEnd({
   const [rewardLevel] = useState(() =>
     summary ? (summary.firstClear ? account.firstClears.at(-1) : undefined) : choice?.levelId,
   );
-  const reward =
-    ACCOUNT_TUNING.firstClearRewards[rewardLevel as keyof typeof ACCOUNT_TUNING.firstClearRewards];
+  const reward = rewardLevel ? firstClearReward(rewardLevel) : undefined;
   const times = revealTimes(loot.cards.length, summary === null || summary.firstClear);
   const progress = before ? fillProgress(elapsed, times) : 1;
   const firstClearShown = times.firstClear !== null && elapsed >= times.firstClear;
@@ -317,7 +316,7 @@ export function LevelEnd({
           )}
           {(firstClearShown || summary === null) && (
             <div style={{ marginTop: 18 }}>
-              {reward && (
+              {reward?.unlockSlot && (
                 <h2 style={{ margin: "0 0 8px", color: MENU.gold }}>
                   Slot {reward.unlockSlot} unlocked
                 </h2>

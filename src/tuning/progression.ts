@@ -17,7 +17,18 @@ export const PROGRESSION_TUNING = {
   heroLevelCap: 32,
 } as const;
 
-/** Roster shape and first-clear rewards (GDD §5, Appendix E §4.5), M1's subset. */
+/** One level's first-clear reward (Appendix E §4.5); every part is optional. */
+export interface FirstClearReward {
+  unlockSlot?: number;
+  /** A choose-1-of-3 hero offer at this rarity and level. */
+  heroOffer?: { rarity: "normal" | "magic" | "rare"; level: number };
+  /** Currency by RePoE ID. */
+  currency?: Readonly<Record<string, number>>;
+  /** Passive points, counted while the level stays cleared (spent from Phase 3). */
+  passivePoints?: number;
+}
+
+/** Roster shape and first-clear rewards (GDD §5, Appendix E §4.5) for Levels 1–5. */
 export const ACCOUNT_TUNING = {
   rosterSlots: 6,
   startingUnlockedSlots: 3,
@@ -25,5 +36,26 @@ export const ACCOUNT_TUNING = {
   offerSize: 3,
   firstClearRewards: {
     "level-1": { unlockSlot: 4, heroOffer: { rarity: "normal", level: 3 } },
-  },
+    "level-2": {
+      unlockSlot: 5,
+      currency: {
+        "Metadata/Items/Currency/CurrencyAddModToMagic": 2,
+        "Metadata/Items/Currency/CurrencyUpgradeToMagic": 2,
+      },
+    },
+    "level-3": {
+      unlockSlot: 6,
+      currency: { "Metadata/Items/Currency/CurrencyAddSkillGemSocket3": 1 },
+    },
+    "level-4": { heroOffer: { rarity: "magic", level: 6 } },
+    "level-5": {
+      passivePoints: 2,
+      currency: { "Metadata/Items/Currency/CurrencyUpgradeMagicToRare": 1 },
+    },
+  } satisfies Readonly<Record<string, FirstClearReward>>,
 } as const;
+
+/** A level's first-clear reward, if it has one. */
+export function firstClearReward(levelId: string): FirstClearReward | undefined {
+  return (ACCOUNT_TUNING.firstClearRewards as Readonly<Record<string, FirstClearReward>>)[levelId];
+}

@@ -2,7 +2,7 @@ import { heroGems } from "../data";
 import type { GemId } from "../data/types";
 import { catalogEntry, HERO_CATALOG } from "../heroes/model/catalog";
 import { newHero, type HeroInstance, type OwnedHeroId } from "../heroes/model/hero";
-import { ACCOUNT_TUNING } from "../tuning/progression";
+import { ACCOUNT_TUNING, firstClearReward } from "../tuning/progression";
 import type { AccountState } from "./state";
 
 type Rng = () => number;
@@ -61,4 +61,17 @@ export function heroOffer(
       picks[picks.length - 1] = matching[Math.floor(rng() * matching.length)]!;
   }
   return picks.map((skillId) => newHero(newId(), skillId as GemId, level));
+}
+
+/**
+ * Unspent passive points (Appendix E §6.1): player level − 1, plus each
+ * first-cleared level's passive points (+2 per boss). Derived, never stored;
+ * Phase 3's tree spends them.
+ */
+export function passivePoints(account: AccountState): number {
+  const fromClears = account.firstClears.reduce(
+    (sum, levelId) => sum + (firstClearReward(levelId)?.passivePoints ?? 0),
+    0,
+  );
+  return account.player.level - 1 + fromClears;
 }
